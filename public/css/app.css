@@ -10508,6 +10508,10 @@ section h1 {
   background-color: #333333;
 }
 
+.seller-rating {
+  font-size: 32px;
+}
+
 /*---------------------card---------------------*/
 .card-container {
   gap: 20px;
@@ -10537,7 +10541,7 @@ section h1 {
   width: 320px;
   height: 580px;
   font-size: 15px;
-  border: 1px solid #ececec;
+  border: 1px solid #e6e6eb;
 }
 
 .card-title {
@@ -11033,18 +11037,30 @@ h4 {
 }
 
 .seller-card {
-  border: 2px solid #4e4e4e;
-  width: 50%;
+  border: 1px solid #e6e6eb;
+  width: 100%;
   gap: 10px;
+}
+@media (min-width: 768px) {
+  .seller-card {
+    width: 48%;
+  }
 }
 .seller-card img {
   border-radius: 12px;
 }
+.seller-card .topseller-products {
+  width: 100%;
+  gap: 20px;
+}
 .seller-card .topseller-product-img {
-  width: 100px;
+  width: 25%;
   height: 100px;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
+/*------------------------------image-upload------------------------------*/
 .image-upload-box {
   width: 200px;
   height: 200px;

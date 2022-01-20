@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 class Shop extends Model
 {
     use HasFactory, Notifiable;
+    use \Staudenmeir\EloquentEagerLimit\HasEagerLimit;
 
     protected $table = 'shops';
 
@@ -32,6 +33,12 @@ class Shop extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    //get only 4 products using \Staudenmeir\EloquentEagerLimit\HasEagerLimit package
+    public function products()
+    {
+        return $this->user()->with('latestProducts')->limit(4);
     }
     
     public function scopeFilter($query, array $filters)

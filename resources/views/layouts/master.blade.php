@@ -36,7 +36,13 @@
             href="https://unpkg.com/swiper@7/swiper-bundle.min.css"
         />
 
-        <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+        <!-- Icons -->
+        <link
+            href="{{
+                asset('argon')
+            }}/vendor/@fortawesome/fontawesome-free/css/all.min.css"
+            rel="stylesheet"
+        />
     </head>
     <body>
         <div id="app">
@@ -60,5 +66,6 @@
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
+        <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
     </body>
 </html>

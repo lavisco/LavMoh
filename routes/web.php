@@ -46,13 +46,6 @@ Route::get('/login', function () {
 });
 
 
-Route::get('/seller/register', [UserController::class, 'create']);
-Route::post('/seller/register', [UserController::class, 'store'])->name('seller.register');
-
-Route::get('/seller', [SellerDashboardController::class, 'index'])->name('seller');
-Route::get('/buyer', [BuyerDashboardController::class, 'index'])->name('buyer');
-
-
 Route::get('/lavisco/{path}', function(){
     return view('layouts.master');
 })->where('path', '.*');

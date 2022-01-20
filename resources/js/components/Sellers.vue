@@ -9,21 +9,32 @@
         </div>
 
         <section class="section-best-seller mb-5">
-            <div class="d-flex card-container">
-                <div class="card seller-card d-flex" v-for="seller in sellerprofiles">
-                    <div class="d-flex">
-                        <img
-                            src="/images/lavisco/img-bg.jpg"
-                            class="product-seller-img mr-md-4"
-                            alt=""
-                        />
-                        <div>
-                            <h3 class="text-left">{{ seller.shop.name }}</h3>
-                            <h6>is selling Cakes</h6>
-                            <p>
-                                {{ seller.shop.description }}
-                            </p>
+            <div
+                class="
+                    d-flex
+                    flex-wrap
+                    card-container
+                    align-items-center
+                    justify-content-center
+                "
+            >
+                <div class="card seller-card d-flex" v-for="shop in shops">
+                    <div class="d-flex justify-content-between mb-3">
+                        <div class="d-flex">
+                            <img
+                                :src="shop.path"
+                                class="product-seller-img mr-4"
+                                alt=""
+                            />
+                            <div>
+                                <h3 class="text-left">{{ shop.name }}</h3>
+                                <span v-html="shopRating(shop.rating)"></span>
+                                <p class="mt-3">
+                                    {{ shop.description }}
+                                </p>
+                            </div>
                         </div>
+
                         <a href="">
                             <svg
                                 width="34"
@@ -39,112 +50,35 @@
                             </svg>
                         </a>
                     </div>
-                    <div
-                        class="
-                            d-flex
-                            justify-content-between
-                            align-items-center
-                        "
-                    >
-                        <h6>Top selling products</h6>
-                        <div class="d-flex align-items-center">
-                            <div class="rating mr-2 mb-3">
-                                <svg
-                                    width="24"
-                                    height="22"
-                                    viewBox="0 0 24 22"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <path
-                                        d="M12 0L14.6942 8.2918H23.4127L16.3593 13.4164L19.0534 21.7082L12 16.5836L4.94658 21.7082L7.64074 13.4164L0.587322 8.2918H9.30583L12 0Z"
-                                        fill="#C4C4C4"
-                                    />
-                                </svg>
-                                <svg
-                                    width="24"
-                                    height="22"
-                                    viewBox="0 0 24 22"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <path
-                                        d="M12 0L14.6942 8.2918H23.4127L16.3593 13.4164L19.0534 21.7082L12 16.5836L4.94658 21.7082L7.64074 13.4164L0.587322 8.2918H9.30583L12 0Z"
-                                        fill="#C4C4C4"
-                                    />
-                                </svg>
-                                <svg
-                                    width="24"
-                                    height="22"
-                                    viewBox="0 0 24 22"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <path
-                                        d="M12 0L14.6942 8.2918H23.4127L16.3593 13.4164L19.0534 21.7082L12 16.5836L4.94658 21.7082L7.64074 13.4164L0.587322 8.2918H9.30583L12 0Z"
-                                        fill="#C4C4C4"
-                                    />
-                                </svg>
-                                <svg
-                                    width="24"
-                                    height="22"
-                                    viewBox="0 0 24 22"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <path
-                                        d="M12 0L14.6942 8.2918H23.4127L16.3593 13.4164L19.0534 21.7082L12 16.5836L4.94658 21.7082L7.64074 13.4164L0.587322 8.2918H9.30583L12 0Z"
-                                        fill="#C4C4C4"
-                                    />
-                                </svg>
-                            </div>
-                            <h6>4.2 from ### orders</h6>
-                        </div>
-                    </div>
-                    <div class="d-flex gap align-items-center">
+
+                    <h6>Top selling products</h6>
+                    <div class="d-flex topseller-products">
                         <img
-                            src="/images/lavisco/img-bg.jpg"
-                            class="topseller-product-img mr-md-4"
-                            alt=""
-                        />
-                        <img
-                            src="/images/lavisco/img-bg.jpg"
-                            class="topseller-product-img mr-md-4"
-                            alt=""
-                        />
-                        <img
-                            src="/images/lavisco/img-bg.jpg"
-                            class="topseller-product-img mr-md-4"
-                            alt=""
-                        />
-                        <img
-                            src="/images/lavisco/img-bg.jpg"
-                            class="topseller-product-img mr-md-4"
-                            alt=""
-                        />
-                        <img
-                            src="/images/lavisco/img-bg.jpg"
-                            class="topseller-product-img mr-md-4"
-                            alt=""
+                            :src="productImg(product.product_image)"
+                            class="topseller-product-img"
+                            :alt="product.title"
+                            :title="product.title"
+                            v-for="product in shop.products.latest_products"
+                            :key="product.id"
                         />
                     </div>
-                    <button
-                        class="checkout-btn btn-full checkout-btn-cart mt-2"
+
+                    <router-link
+                        :to="{
+                            name: 'sellers/seller',
+                            params: {
+                                shopId: shop.id,
+                            },
+                        }"
                     >
-                        View Seller
-                    </button>
+                        <button class="btn-sm btn-full btn-sm-cart mt-2">
+                            View Seller
+                        </button>
+                    </router-link>
                 </div>
             </div>
             <div class="d-flex justify-content-center mt-5">
-                <router-link
-                    class="view-more-link"
-                    //  to="{
-                    //     name: 'sellerprofiles/seller',
-                    //     params: {
-                    //         sellerId: seller.id,
-                    //     },
-                    // }"
-                >
+                <a>
                     View More
                     <svg
                         width="70"
@@ -159,7 +93,7 @@
                             fill="black"
                         />
                     </svg>
-                </router-link>
+                </a>
             </div>
         </section>
     </div>
@@ -167,28 +101,45 @@
 <script>
 export default {
     data: () => ({
-        sellerprofiles: [],
+        shops: [],
         searchText: null,
     }),
 
     watch: {
         searchText(after, before) {
-            this.loadSellerProfiles();
+            this.loadShops();
         },
     },
 
     methods: {
-        loadSellerProfiles() {
+        loadShops() {
             axios
-                .get("/api/sellerprofiles")
-                .then(({ data }) => (this.sellerprofiles = data.data))
+                .get("/api/shops")
+                .then(({ data }) => (this.shops = data.data))
                 .catch((error) => console.log(error));
+        },
+        shopRating(rating) {
+            var result = "";
+            if (rating < 1) {
+                return (result = "No rating");
+            } else {
+                for (var j = 1; j <= rating; j++) {
+                    result += `<i class="fas fa-star text-yellow"></i>`;
+                }
+                for (var j = 5; j > rating; j--) {
+                    result += `<i class="fas fa-star text-lighter"></i>`;
+                }
+                return result;
+            }
+        },
+        productImg(image) {
+            return image ? image.path : `/images/lavisco/img-bg.jpg`;
         },
     },
     mounted() {
-        this.loadSellerProfiles();
+        this.loadShops();
         Fire.$on("reloadRecords", () => {
-            this.loadSellerProfiles();
+            this.loadShops();
         });
     },
 };

@@ -95,12 +95,6 @@ class Product extends Model
     }
 
     //product_variations:product M:1
-    // public function product_variations()
-    // {
-    //     return $this->belongsToMany(VariationOption::class);
-    // }
-
-    //product_variations:product M:1
     public function product_variations()
     {
         return $this->hasMany(ProductVariation::class);

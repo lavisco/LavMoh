@@ -35,6 +35,7 @@ use App\Http\Controllers\Api\Website\OccasionController as WebsiteOccasionContro
 use App\Http\Controllers\Api\Website\ProductController as WebsiteProductController;
 use App\Http\Controllers\Api\Website\RecipientController as WebsiteRecipientController;
 use App\Http\Controllers\Api\Website\SellerProfileController as WebsiteSellerProfileController;
+use App\Http\Controllers\Api\Website\ShopController as WebsiteShopController;
 use App\Http\Controllers\Website\HomeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -111,3 +112,4 @@ Route::apiResource('/categories', WebsiteCategoryController::class);
 Route::apiResource('/sellerprofiles', WebsiteSellerProfileController::class);
 Route::apiResource('/occasions', WebsiteOccasionController::class);
 Route::apiResource('/recipients', WebsiteRecipientController::class);
+Route::apiResource('/shops', WebsiteShopController::class);

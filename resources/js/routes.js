@@ -397,6 +397,22 @@ export let routes = [
         },
     },
     {
+        path: "/lavisco/sellers",
+        name: "sellers",
+        component: require("./components/Sellers.vue").default,
+        meta: {
+            title: "Sellers",
+        },
+    },
+    {
+        path: "/lavisco/sellers/:shopId",
+        name: "sellers/seller",
+        component: require("./components/Seller.vue").default,
+        meta: {
+            title: "Seller",
+        },
+    },
+    {
         path: "/lavisco/seller/onboard",
         name: "seller/onboard",
         component: require("./components/SellerOnboard.vue").default,

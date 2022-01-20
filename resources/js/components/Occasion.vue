@@ -37,7 +37,9 @@
                             </router-link>
                         </div>
                         <div class="card-price">{{ product.base_price }}</div>
-                        <div class="card-secondary-text">Made by</div>
+                        <div class="card-secondary-text">
+                            Made by {{ product.user.shop.name }}
+                        </div>
                         <button class="btn-sm btn-full btn-sm-cart mt-auto">
                             Add to Cart
                         </button>

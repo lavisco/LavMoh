@@ -1,15 +1,20 @@
 <template>
     <div class="container-fluid">
-        <div
-            class="hero"
-            v-bind:style="{ 'background-image': 'url(' + recipient.path + ')' }"
-        >
-            <h1 class="title text-center">Browse {{ recipient.name }}</h1>
-            <h1 class="sub-title mb-5 text-center">
-                {{ recipient.description }}
-            </h1>
+        <div class="seller-hero">
+            <div
+                class="seller-hero-img"
+                v-bind:style="{ 'background-image': 'url(' + shop.path + ')' }"
+            ></div>
+            <div class="seller-hero-box container">
+                <h1 class="mb-4 title black">{{ shop.name }}</h1>
+                <span class="seller-rating" v-html="shopRating(shop.rating)"></span>
+                <p class="mt-5">
+                    {{ shop.about }}
+                </p>
+            </div>
         </div>
-        <section class="section-best-seller mb-5">
+
+        <section class="section-best-seller mb-5 mt-0">
             <div class="d-flex flex-wrap justify-content-center card-container">
                 <div v-for="product in products" class="product-list">
                     <div class="card item-card-2">
@@ -37,9 +42,7 @@
                             </router-link>
                         </div>
                         <div class="card-price">{{ product.base_price }}</div>
-                        <div class="card-secondary-text">
-                            Made by {{ product.user.shop.name }}
-                        </div>
+                        <div class="card-secondary-text">Made by {{ shop.name }}</div>
                         <button class="btn-sm btn-full btn-sm-cart mt-auto">
                             Add to Cart
                         </button>
@@ -55,13 +58,13 @@
 <script>
 export default {
     data: () => ({
-        recipient: [],
+        shop: [],
         products: [],
         searchText: null,
     }),
 
     beforeRouteEnter: function (to, from, next) {
-        let uri = "/api/recipients/" + to.params.recipientId;
+        let uri = "/api/shops/" + to.params.shopId;
 
         axios.get(uri).then((response) => {
             next((vm) => {
@@ -71,8 +74,7 @@ export default {
     },
 
     beforeRouteUpdate: function (to, from, next) {
-        let uri = "/api/recipients/" + to.params.recipientId;
-
+        let uri = "/api/shops/" + to.params.shopId;
         axios.get(uri).then((response) => {
             this.setData(response);
             next();
@@ -88,16 +90,30 @@ export default {
     methods: {
         setData(response) {
             this.products = response.data.products.data;
-            this.recipient = response.data.recipient;
+            this.shop = response.data.shop;
         },
         loadData() {
             axios
-                .get("/api/recipients/" + this.$route.params.recipientId)
+                .get("/api/shops/" + this.$route.params.shopId)
                 .then((response) => {
                     this.products = response.data.products.data;
-                    this.recipient = response.data.recipient;
+                    this.shop = response.data.shop;
                 })
                 .catch((error) => console.log(error));
+        },
+        shopRating(rating) {
+            var result = "";
+            if (rating < 1) {
+                return (result = "No rating");
+            } else {
+                for (var j = 1; j <= rating; j++) {
+                    result += `<i class="fas fa-star text-yellow"></i>`;
+                }
+                for (var j = 5; j > rating; j--) {
+                    result += `<i class="fas fa-star text-lighter"></i>`;
+                }
+                return result;
+            }
         },
     },
     mounted() {},

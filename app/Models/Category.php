@@ -33,7 +33,7 @@ class Category extends Model
         return $this->hasMany(Product::class);
     }
 
-    //get only 4 products using \Staudenmeir\EloquentEagerLimit\HasEagerLimit package
+    //get only 3 products using \Staudenmeir\EloquentEagerLimit\HasEagerLimit package
     public function latestProducts()
     {
         return $this->products()->with('product_image')->limit(3);

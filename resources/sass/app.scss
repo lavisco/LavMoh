@@ -476,7 +476,9 @@ section {
         background-color: $black;
     }
 }
-
+.seller-rating{
+    font-size: 32px;
+}
 /*---------------------card---------------------*/
 .card-container {
     gap: 20px;
@@ -505,7 +507,7 @@ section {
     width: 320px;
     height: 580px;
     font-size: 15px;
-    border: 1px solid #ececec;
+    border: 1px solid #e6e6eb;
 }
 .card-title {
     font-weight: 500;
@@ -981,17 +983,27 @@ h4 {
 }
 
 .seller-card {
-    border: 2px solid $dark-grey;
-    width: 50%;
+    border: 1px solid #e6e6eb;
+    width: 100%;
     gap: 10px;
+    @media (min-width: 768px) {
+        width: 48%;
+    }
     img {
         border-radius: 12px;
     }
+    .topseller-products{
+        width: 100%;
+        gap: 20px;
+    }
     .topseller-product-img {
-        width: 100px;
+        width: 25%;
         height: 100px;
+        object-fit: cover;
     }
 }
+
+/*------------------------------image-upload------------------------------*/
 .image-upload-box {
     width: 200px;
     height: 200px;

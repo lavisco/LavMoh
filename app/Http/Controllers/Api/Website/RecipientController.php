@@ -28,7 +28,7 @@ class RecipientController extends Controller
     public function show($recipientId)
     {
         $recipient = Recipient::findOrFail($recipientId);
-        $products = $recipient->products()->with('product_image')->latest()->paginate(25);
+        $products = $recipient->products()->with('product_image')->with('user.shop')->latest()->paginate(25);
 
         return response()->json([
             'products' => $products,

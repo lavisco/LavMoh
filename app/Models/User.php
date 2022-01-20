@@ -12,6 +12,7 @@ use Laravel\Passport\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+    use \Staudenmeir\EloquentEagerLimit\HasEagerLimit;
 
     /**
      * The attributes that are mass assignable.
@@ -69,6 +70,12 @@ class User extends Authenticatable
     public function products()
     {
         return $this->hasMany(Product::class);
+    }
+
+    //product:user M:1
+    public function latestProducts()
+    {
+        return $this->products()->with('product_image')->latest()->limit(4);
     }
 
     //product_variations:user M:1

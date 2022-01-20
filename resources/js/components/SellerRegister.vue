@@ -1,0 +1,775 @@
+<template>
+    <!-- Body -->
+    <div class="container">
+        <h1 class="pb-2">Seller Sign Up</h1>
+        <h5>To start selling your wares today!</h5>
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <ul
+                        class="nav nav-pills mb-3"
+                        id="pills-tab"
+                        role="tablist"
+                    >
+                        <li class="nav-item">
+                            <a
+                                class="nav-link active"
+                                id="pills-home-tab"
+                                data-toggle="pill"
+                                href="#pills-home"
+                                role="tab"
+                                aria-controls="pills-home"
+                                aria-selected="true"
+                                >Home</a
+                            >
+                        </li>
+                        <li class="nav-item">
+                            <a
+                                class="nav-link"
+                                id="pills-profile-tab"
+                                data-toggle="pill"
+                                href="#pills-profile"
+                                role="tab"
+                                aria-controls="pills-profile"
+                                aria-selected="false"
+                                >Profile</a
+                            >
+                        </li>
+                        <li class="nav-item">
+                            <a
+                                class="nav-link"
+                                id="pills-contact-tab"
+                                data-toggle="pill"
+                                href="#pills-contact"
+                                role="tab"
+                                aria-controls="pills-contact"
+                                aria-selected="false"
+                                >Contact</a
+                            >
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="pills-tabContent">
+                        <div
+                            class="tab-pane fade show active"
+                            id="pills-home"
+                            role="tabpanel"
+                            aria-labelledby="pills-home-tab"
+                        >
+                            ...home
+                        </div>
+                        <div
+                            class="tab-pane fade"
+                            id="pills-profile"
+                            role="tabpanel"
+                            aria-labelledby="pills-profile-tab"
+                        >
+                            ...
+                        </div>
+                        <div
+                            class="tab-pane fade"
+                            id="pills-contact"
+                            role="tabpanel"
+                            aria-labelledby="pills-contact-tab"
+                        >
+                            ...
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <!-- Form start -->
+                    <form
+                        class="input-form"
+                        @submit.prevent="updateSellerprofile()"
+                    >
+                        <div class="input-form-compact">
+                            <!-- Account details -->
+                            <h4 class="mt-5 mb-4 text-center">
+                                Account Details
+                            </h4>
+
+                            <div class="form-group row">
+                                <div class="col-md-6">
+                                    <label class="col-form-label" for="name"
+                                        >Name
+                                        <strong class="text-danger"> * </strong>
+                                    </label>
+                                    <input
+                                        id="name"
+                                        v-model="form.name"
+                                        type="text"
+                                        name="name"
+                                        class="form-control"
+                                        required
+                                        placeholder="Name"
+                                    />
+                                    <HasError :form="form" field="name" />
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="col-form-label" for="email"
+                                        >Email
+                                        <strong class="text-danger"> * </strong>
+                                    </label>
+                                    <input
+                                        id="email"
+                                        v-model="form.email"
+                                        type="email"
+                                        name="email"
+                                        class="form-control"
+                                        required
+                                        placeholder="Email"
+                                    />
+                                    <HasError :form="form" field="email" />
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-md-6">
+                                    <label class="col-form-label" for="password"
+                                        >Password
+                                        <strong class="text-danger"> * </strong>
+                                    </label>
+                                    <input
+                                        id="password"
+                                        v-model="form.password"
+                                        type="password"
+                                        name="password"
+                                        class="form-control"
+                                        placeholder="Password"
+                                        required
+                                    />
+                                    <HasError :form="form" field="password" />
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="col-form-label" for="password"
+                                        >Password Confirmation
+                                        <strong class="text-danger"> * </strong>
+                                    </label>
+                                    <input
+                                        id="password-confirm"
+                                        type="password"
+                                        name="password_confirmation"
+                                        class="form-control"
+                                        placeholder="Confirm Password"
+                                        required
+                                    />
+                                </div>
+                            </div>
+
+                            <!-- Seller Profile -->
+                            <h4 class="mt-5 mb-4 text-center">
+                                Seller Profile Information
+                            </h4>
+
+                            <div class="form-group row">
+                                <div class="col-md-4">
+                                    <label
+                                        class="col-form-label"
+                                        for="first_name"
+                                        >First Name
+                                        <strong class="text-danger"> * </strong>
+                                    </label>
+                                    <input
+                                        id="first_name"
+                                        v-model="form.first_name"
+                                        type="text"
+                                        name="first_name"
+                                        class="form-control"
+                                        placeholder="First Name"
+                                    />
+                                    <HasError :form="form" field="first_name" />
+                                </div>
+                                <div class="col-md-4">
+                                    <label
+                                        class="col-form-label"
+                                        for="last_name"
+                                        >Last Name
+                                        <strong class="text-danger"> * </strong>
+                                    </label>
+                                    <input
+                                        id="last_name"
+                                        v-model="form.last_name"
+                                        type="text"
+                                        name="last_name"
+                                        class="form-control"
+                                        placeholder="Last Name"
+                                    />
+                                    <HasError :form="form" field="last_name" />
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="col-form-label" for="phone"
+                                        >Phone
+                                        <strong class="text-danger"> * </strong>
+                                    </label>
+                                    <input
+                                        id="phone"
+                                        v-model="form.phone"
+                                        type="text"
+                                        name="phone"
+                                        class="form-control"
+                                        placeholder="Phone"
+                                    />
+                                    <HasError :form="form" field="phone" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <label class="col-form-label" for="address"
+                                        >Address
+                                        <strong class="text-danger"> * </strong>
+                                    </label>
+                                    <textarea
+                                        id="address"
+                                        class="form-control"
+                                        name="address"
+                                        rows="3"
+                                        cols="50"
+                                        v-model="form.address"
+                                    >
+                                    </textarea>
+                                    <HasError :form="form" field="address" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-4">
+                                    <label class="col-form-label" for="apt_no"
+                                        >Apt No.
+                                    </label>
+                                    <input
+                                        id="apt_no"
+                                        v-model="form.apt_no"
+                                        type="text"
+                                        name="apt_no"
+                                        class="form-control"
+                                        placeholder="Apt no."
+                                    />
+                                    <HasError :form="form" field="apt_no" />
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="col-form-label" for="zipcode"
+                                        >Zip Code
+                                    </label>
+                                    <input
+                                        id="zipcode"
+                                        v-model="form.zipcode"
+                                        type="text"
+                                        name="zipcode"
+                                        class="form-control"
+                                        placeholder="Zip code"
+                                    />
+                                    <HasError :form="form" field="zipcode" />
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="col-form-label" for="state"
+                                        >State
+                                    </label>
+                                    <input
+                                        id="state"
+                                        v-model="form.state"
+                                        type="text"
+                                        name="state"
+                                        class="form-control"
+                                        placeholder="State"
+                                    />
+                                    <HasError :form="form" field="state" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-6">
+                                    <label class="col-form-label" for="city"
+                                        >City
+                                        <strong class="text-danger"> * </strong>
+                                    </label>
+                                    <input
+                                        id="city"
+                                        v-model="form.city"
+                                        type="text"
+                                        name="city"
+                                        class="form-control"
+                                        placeholder="City"
+                                    />
+                                    <HasError :form="form" field="city" />
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="col-form-label" for="country"
+                                        >Country
+                                        <strong class="text-danger"> * </strong>
+                                    </label>
+                                    <input
+                                        id="country"
+                                        v-model="form.country"
+                                        type="text"
+                                        name="country"
+                                        class="form-control"
+                                        placeholder="Country"
+                                    />
+                                    <HasError :form="form" field="country" />
+                                </div>
+                            </div>
+
+                            <!-- Shop setup -->
+                            <h4 class="mt-5 mb-4 text-center">
+                                Shop Setup Information
+                            </h4>
+
+                            <div class="form-group row">
+                                <div class="col-12">
+                                    <label
+                                        class="col-form-label"
+                                        for="shop_name"
+                                        >Shop Name
+                                        <strong class="text-danger"> * </strong>
+                                    </label>
+                                    <input
+                                        id="shop_name"
+                                        v-model="form.shop_name"
+                                        type="text"
+                                        name="shop_name"
+                                        class="form-control"
+                                        placeholder="Shop Name"
+                                    />
+                                    <HasError :form="form" field="shop_name" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-12">
+                                    <label class="col-form-label" for="about"
+                                        >About
+                                        <strong class="text-danger"> * </strong>
+                                    </label>
+                                    <textarea
+                                        id="about"
+                                        class="form-control"
+                                        name="about"
+                                        rows="3"
+                                        cols="50"
+                                        v-model="form.about"
+                                    >
+                                    </textarea>
+                                    <HasError :form="form" field="about" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-12">
+                                    <label class="col-form-label" for="banner"
+                                        >Upload banner
+                                        <strong class="text-danger"> * </strong>
+                                    </label>
+                                    <input
+                                        type="file"
+                                        style="display: none"
+                                        @change.prevent="fileSelected"
+                                        ref="fileInput"
+                                        name="banner"
+                                    />
+                                    <br />
+
+                                    <button
+                                        class="image-upload-box"
+                                        @click.prevent="$refs.fileInput.click()"
+                                    >
+                                        <img
+                                            v-if="url"
+                                            :src="url"
+                                            class="banner-container"
+                                        />
+                                        <img
+                                            v-if="!url"
+                                            src="/images/lavisco/img-bg.jpg"
+                                            class="banner-container"
+                                        />
+                                    </button>
+                                    <p class="image-upload-filename mt-2 mb-0">
+                                        {{
+                                            form.photoName
+                                                ? form.photoName
+                                                : `Change image`
+                                        }}
+                                    </p>
+                                    <HasError :form="form" field="banner" />
+                                </div>
+                            </div>
+
+                            <!-- Billing -->
+                            <h4 class="mt-5 mb-4 text-center">
+                                Billing Address
+                            </h4>
+
+                            <div class="input-form-compact" id="billingSection">
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <label
+                                            class="col-form-label"
+                                            for="billing_address"
+                                            >Address
+                                            <strong class="text-danger">
+                                                *
+                                            </strong>
+                                        </label>
+                                        <textarea
+                                            id="billing_address"
+                                            class="form-control"
+                                            name="billing_address"
+                                            rows="3"
+                                            cols="50"
+                                            v-model="form.billing_address"
+                                        >
+                                        </textarea>
+                                        <HasError
+                                            :form="form"
+                                            field="billing_address"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-4">
+                                        <label
+                                            class="col-form-label"
+                                            for="billing_apt_no"
+                                            >Apt No.
+                                        </label>
+                                        <input
+                                            id="billing_apt_no"
+                                            v-model="form.billing_apt_no"
+                                            type="text"
+                                            name="billing_apt_no"
+                                            class="form-control"
+                                            placeholder="Apt no."
+                                        />
+                                        <HasError
+                                            :form="form"
+                                            field="billing_apt_no"
+                                        />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label
+                                            class="col-form-label"
+                                            for="billing_zipcode"
+                                            >Zip Code
+                                        </label>
+                                        <input
+                                            id="billing_zipcode"
+                                            v-model="form.billing_zipcode"
+                                            type="text"
+                                            name="billing_zipcode"
+                                            class="form-control"
+                                            placeholder="Zip code"
+                                        />
+                                        <HasError
+                                            :form="form"
+                                            field="billing_zipcode"
+                                        />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label
+                                            class="col-form-label"
+                                            for="billing_state"
+                                            >State
+                                        </label>
+                                        <input
+                                            id="billing_state"
+                                            v-model="form.billing_state"
+                                            type="text"
+                                            name="billing_state"
+                                            class="form-control"
+                                            placeholder="State"
+                                        />
+                                        <HasError
+                                            :form="form"
+                                            field="billing_state"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-6">
+                                        <label
+                                            class="col-form-label"
+                                            for="billing_city"
+                                            >City
+                                            <strong class="text-danger">
+                                                *
+                                            </strong>
+                                        </label>
+                                        <input
+                                            id="billing_city"
+                                            v-model="form.billing_city"
+                                            type="text"
+                                            name="billing_city"
+                                            class="form-control"
+                                            placeholder="City"
+                                        />
+                                        <HasError
+                                            :form="form"
+                                            field="billing_city"
+                                        />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label
+                                            class="col-form-label"
+                                            for="billing_country"
+                                            >Country
+                                            <strong class="text-danger">
+                                                *
+                                            </strong>
+                                        </label>
+                                        <input
+                                            id="billing_country"
+                                            v-model="form.billing_country"
+                                            type="text"
+                                            name="billing_country"
+                                            class="form-control"
+                                            placeholder="Country"
+                                        />
+                                        <HasError
+                                            :form="form"
+                                            field="billing_country"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Billing end -->
+
+                            <!-- Account -->
+
+                            <h4 class="mt-5 mb-4 text-center">
+                                Deposit Account
+                            </h4>
+
+                            <div class="form-group row">
+                                <div class="col-md-9">
+                                    <label
+                                        class="col-form-label"
+                                        for="deposit_account"
+                                        >Account no.
+                                        <strong class="text-danger"> * </strong>
+                                    </label>
+                                    <input
+                                        id="deposit_account"
+                                        v-model="form.deposit_account"
+                                        type="text"
+                                        name="deposit_account"
+                                        class="form-control"
+                                        placeholder="deposit account no."
+                                    />
+                                    <HasError
+                                        :form="form"
+                                        field="deposit_account"
+                                    />
+                                </div>
+                                <div class="col-md-3">
+                                    <label
+                                        class="col-form-label"
+                                        for="deposit_account_status"
+                                        >Status
+                                        <strong class="text-danger"> * </strong>
+                                    </label>
+                                    <div>
+                                        <div
+                                            class="
+                                                custom-control
+                                                custom-radio
+                                                custom-control-inline
+                                            "
+                                        >
+                                            <input
+                                                type="radio"
+                                                id="status1"
+                                                name="deposit_account_status"
+                                                class="custom-control-input"
+                                                v-model="
+                                                    form.deposit_account_status
+                                                "
+                                                value="1"
+                                            />
+                                            <label
+                                                class="custom-control-label"
+                                                for="status1"
+                                                >Active</label
+                                            >
+                                        </div>
+                                        <div
+                                            class="
+                                                custom-control
+                                                custom-radio
+                                                custom-control-inline
+                                            "
+                                        >
+                                            <input
+                                                type="radio"
+                                                id="status2"
+                                                name="deposit_account_status"
+                                                class="custom-control-input"
+                                                v-model="
+                                                    form.deposit_account_status
+                                                "
+                                                value="0"
+                                            />
+                                            <label
+                                                class="custom-control-label"
+                                                for="status2"
+                                                >Inactive</label
+                                            >
+                                        </div>
+                                    </div>
+
+                                    <HasError
+                                        :form="form"
+                                        field="deposit_account_status"
+                                    />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <label
+                                        class="col-form-label"
+                                        for="deposit_name"
+                                        >Account Name
+                                        <strong class="text-danger"> * </strong>
+                                    </label>
+                                    <input
+                                        id="deposit_name"
+                                        v-model="form.deposit_name"
+                                        type="text"
+                                        name="deposit_name"
+                                        class="form-control"
+                                        placeholder="deposit account name"
+                                    />
+                                    <HasError
+                                        :form="form"
+                                        field="deposit_name"
+                                    />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-6">
+                                    <label
+                                        class="col-form-label"
+                                        for="deposit_bank"
+                                        >Bank name
+                                        <strong class="text-danger"> * </strong>
+                                    </label>
+                                    <input
+                                        id="deposit_bank"
+                                        v-model="form.deposit_bank"
+                                        type="text"
+                                        name="deposit_bank"
+                                        class="form-control"
+                                        placeholder="Deposit bank name"
+                                    />
+                                    <HasError
+                                        :form="form"
+                                        field="deposit_bank"
+                                    />
+                                </div>
+                                <div class="col-md-6">
+                                    <label
+                                        class="col-form-label"
+                                        for="deposit_bank_branch"
+                                        >Branch name
+                                        <strong class="text-danger"> * </strong>
+                                    </label>
+                                    <input
+                                        id="deposit_bank_branch"
+                                        v-model="form.deposit_bank_branch"
+                                        type="text"
+                                        name="deposit_bank_branch"
+                                        class="form-control"
+                                        placeholder="Deposit bank branch"
+                                    />
+                                    <HasError
+                                        :form="form"
+                                        field="deposit_bank_branch"
+                                    />
+                                </div>
+                            </div>
+
+                            <!-- Account end -->
+                        </div>
+
+                        <div class="d-flex justify-content-center my-5">
+                            <button type="submit" class="btn-full">
+                                Sign up
+                            </button>
+                        </div>
+                    </form>
+                    <!-- Form end -->
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+import Form from "vform";
+import { HasError, AlertError } from "vform/src/components/bootstrap4";
+
+export default {
+    components: {
+        HasError,
+        AlertError,
+    },
+
+    data: () => ({
+        sellerprofile: {},
+        url: "",
+        form: new Form({
+            id: "",
+            //account
+            name: "",
+            email: "",
+            password: "",
+            //shop
+            shop_name: "",
+            banner: "",
+            about: "",
+            //seller profile
+            first_name: "",
+            last_name: "",
+            phone: "",
+            country: "",
+            address: "",
+            apt_no: "",
+            zipcode: "",
+            city: "",
+            state: "",
+            billing_country: "",
+            billing_address: "",
+            billing_apt_no: "",
+            billing_zipcode: "",
+            billing_city: "",
+            billing_state: "",
+            deposit_account: "",
+            deposit_name: "",
+            deposit_bank: "",
+            deposit_bank_branch: "",
+            deposit_account_status: "",
+        }),
+    }),
+
+    methods: {
+        fileSelected(e) {
+            let file = e.target.files[0];
+            let reader = new FileReader();
+            let limit = 1024 * 1024 * 2;
+            if (file["size"] > limit) {
+                alert("File size has crossed maximum limit, which is 2mb!");
+                return false;
+            }
+            reader.onloadend = (file) => {
+                this.form.banner = reader.result;
+                this.form.photoName = e.target.files[0].name;
+                this.url = URL.createObjectURL(e.target.files[0]);
+            };
+            reader.readAsDataURL(file);
+        },
+        updateSellerprofile() {
+            this.form
+                .post("/api/seller/user")
+                .then(() => {})
+                .catch((error) => console.log(error));
+        },
+    },
+
+    mounted() {},
+};
+</script>

@@ -1,0 +1,277 @@
+<template>
+    <div class="container-fluid">
+        <div class="hero hero-swiper">
+            <!-- Swiper -->
+            <swiper
+                class="swiper gallery-top"
+                :options="swiperOptionTop"
+                ref="swiperTop"
+            >
+                <swiper-slide
+                    class="slide-1"
+                    v-for="product in products"
+                    :key="product.id"
+                >
+                    <img
+                        :src="
+                            product.product_image
+                                ? product.product_image.path
+                                : '/images/lavisco/img-bg.jpg'
+                        "
+                    />
+                    <h1 class="title">Delicious Cakes</h1>
+                    <h1 class="sub-title mb-5">
+                        Order cakes from local bakers near you!
+                    </h1>
+                    <a href="/lavisco/products"
+                        ><button>View Products</button></a
+                    >
+                </swiper-slide>
+                <div
+                    class="swiper-button-next swiper-button-black"
+                    slot="button-next"
+                ></div>
+                <div
+                    class="swiper-button-prev swiper-button-black"
+                    slot="button-prev"
+                ></div>
+                <div class="swiper-pagination" slot="pagination"></div>
+            </swiper>
+            <!-- Swiper end -->
+        </div>
+        <section class="section-best-seller">
+            <h1>Our Best Selling Products</h1>
+            <swiper class="swiper swiper-index-product" :options="swiperOption">
+                <swiper-slide v-for="product in products" :key="product.id">
+                    <div class="card item-card">
+                        <div class="card-img">
+                            <img
+                                :src="
+                                    product.product_image
+                                        ? product.product_image.path
+                                        : '/images/lavisco/img-bg.jpg'
+                                "
+                                :class="{
+                                    'img-cover': !product.product_image,
+                                }"
+                            />
+                        </div>
+                        <div class="card-title">{{ product.title }}</div>
+                        <div
+                            class="
+                                d-flex
+                                align-items-start
+                                justify-content-between
+                            "
+                        >
+                            <div class="card-title card-price">
+                                {{ product.base_price }}
+                            </div>
+                            <div class="text-right">
+                                <div class="card-secondary-text white">
+                                    {{ product.category.name }}
+                                </div>
+                                <div class="card-secondary-text white">
+                                    Made by {{ product.user.shop.name }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </swiper-slide>
+                <div class="swiper-pagination" slot="pagination"></div>
+            </swiper>
+            <div class="d-flex justify-content-center mt-5">
+                <a href="/lavisco/products" class="view-more-link"
+                    >View More
+                    <svg
+                        width="70"
+                        height="24"
+                        viewBox="0 0 90 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="ml-3"
+                    >
+                        <path
+                            d="M2 10.5C1.17157 10.5 0.5 11.1716 0.5 12C0.5 12.8284 1.17157 13.5 2 13.5L2 10.5ZM89.0607 13.0607C89.6464 12.4749 89.6464 11.5251 89.0607 10.9393L79.5147 1.39341C78.9289 0.807618 77.9792 0.807618 77.3934 1.3934C76.8076 1.97919 76.8076 2.92894 77.3934 3.51473L85.8787 12L77.3934 20.4853C76.8076 21.0711 76.8076 22.0208 77.3934 22.6066C77.9792 23.1924 78.9289 23.1924 79.5147 22.6066L89.0607 13.0607ZM2 13.5L88 13.5L88 10.5L2 10.5L2 13.5Z"
+                            fill="black"
+                        />
+                    </svg>
+                </a>
+            </div>
+        </section>
+        <section class="section-special">
+            <h1>Gifts and Crafts for Every Occasion & Recipient</h1>
+            <div class="d-flex card-container">
+                <div class="card item-card col-50 item-card-occasion">
+                    <div class="card-img">
+                        <div class="card-img-text-container">
+                            <div class="card-img-text">
+                                <a href="/lavisco/occasions"
+                                    >Order by Occasion</a
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-button-container">
+                        <a href="" v-for="(n, index) in 10">
+                            <button class="bg-black">
+                                {{ occasions[index].name }}
+                            </button>
+                        </a>
+                    </div>
+                </div>
+                <div class="card item-card col-50 item-card-recipient">
+                    <div class="card-img">
+                        <div class="card-img-text-container">
+                            <div class="card-img-text">Order by Recipient</div>
+                        </div>
+                    </div>
+                    <div class="card-button-container">
+                        <a href="" v-for="(n, index) in 10">
+                            <button class="bg-black">
+                                {{ recipients[index].name }}
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section-category"></section>
+        <section class="section-social-slider">
+            <h1>Share the Fun</h1>
+            <h2 class="grey">Use #Luvit #Lavisco to be Featured</h2>
+            <div class="d-flex card-container">
+                <div class="card social-card"></div>
+                <div class="card social-card"></div>
+                <div class="card social-card"></div>
+                <div class="card social-card"></div>
+            </div>
+        </section>
+        <section class="section-instruction">
+            <h1>How Lavisco Works</h1>
+            <div class="d-flex justify-content-center card-container px-4">
+                <div class="card instruction-card instruction-card-1 bg-blue">
+                    <h1>1</h1>
+                    <p>
+                        Browse through our wide range of products for any
+                        occasion and pick your choice.
+                    </p>
+                </div>
+                <div class="card instruction-card instruction-card-2 bg-purple">
+                    <h1>2</h1>
+                    <div>
+                        <p>
+                            Get creative and add a personal touch to your
+                            products by choosing custom options.
+                        </p>
+                        <span class="text-sm"
+                            >Skip this step if you don't want to
+                            personalise</span
+                        >
+                    </div>
+                </div>
+                <div class="card instruction-card instruction-card-3 bg-pink">
+                    <h1>3</h1>
+                    <p>
+                        Choose from one of the many easy payment options &
+                        finalize your order!
+                    </p>
+                </div>
+                <div class="card instruction-card instruction-card-4 bg-orange">
+                    <h1>4</h1>
+                    <p>
+                        Sit back & relax!!! <br />
+                        We will deliver your order right to your door step with
+                        no hustle.
+                    </p>
+                </div>
+            </div>
+        </section>
+        <section class="section-shortcuts row">
+            <div class="col-md-6 py-4">
+                <h1>Want to Learn more?</h1>
+                <a href="/lavisco/seller/onboard"
+                    ><button class="bg-orange">Become a Seller</button>
+                </a>
+            </div>
+            <div class="col-md-6 py-4">
+                <h1>Got any Questions?</h1>
+                <a href=""><button class="bg-green">FAQ</button></a>
+            </div>
+        </section>
+    </div>
+</template>
+
+<script>
+import { Swiper, SwiperSlide, directive } from "vue-awesome-swiper";
+// import style (<= Swiper 5.x)
+import "swiper/css/swiper.css";
+
+export default {
+    components: {
+        Swiper,
+        SwiperSlide,
+    },
+    directives: {
+        swiper: directive,
+    },
+
+    data: () => ({
+        products: [],
+        occasions: [],
+        recipients: [],
+        categories: [],
+        swiperOption: {
+            slidesPerView: 4,
+            spaceBetween: 20,
+            // pagination: {
+            //     el: ".swiper-pagination",
+            //     clickable: true,
+            // },
+        },
+        swiperOptionTop: {
+            loop: true,
+            loopedSlides: 3, // looped slides should be the same
+            spaceBetween: 10,
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            autoplay: {
+                delay: 3500,
+                disableOnInteraction: false,
+            },
+        },
+    }),
+
+    methods: {
+        loadData() {
+            axios
+                .get("/api/home")
+                .then((response) => {
+                    this.products = response.data.products;
+                    this.occasions = response.data.occasions;
+                    this.recipients = response.data.recipients;
+                    this.categories = response.data.categories;
+                })
+                .catch((error) => console.log(error));
+        },
+    },
+    mounted() {
+        this.loadData();
+        Fire.$on("reloadRecords", () => {
+            this.loadData();
+        });
+        this.$nextTick(() => {
+            const swiperTop = this.$refs.swiperTop.$swiper;
+            const swiperThumbs = this.$refs.swiperThumbs.$swiper;
+            swiperTop.controller.control = swiperThumbs;
+            swiperThumbs.controller.control = swiperTop;
+        });
+    },
+};
+</script>

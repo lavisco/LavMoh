@@ -1,0 +1,103 @@
+<template>
+    <div class="container-fluid">
+        <div
+            class="hero"
+            v-bind:style="{ 'background-image': 'url(' + recipient.path + ')' }"
+        >
+            <h1 class="title text-center">Browse {{ recipient.name }}</h1>
+            <h1 class="sub-title mb-5 text-center">
+                {{ recipient.description }}
+            </h1>
+        </div>
+        <section class="section-best-seller mb-5">
+            <div class="d-flex flex-wrap justify-content-center card-container">
+                <div v-for="product in products" class="product-list">
+                    <div class="card item-card-2">
+                        <div class="card-img card-img-2">
+                            <img
+                                :src="
+                                    product.product_image
+                                        ? product.product_image.path
+                                        : '/images/lavisco/img-bg.jpg'
+                                "
+                            />
+                        </div>
+
+                        <div class="card-title-2">
+                            <router-link
+                                class="card-title-2"
+                                :to="{
+                                    name: 'products/product',
+                                    params: {
+                                        productId: product.id,
+                                    },
+                                }"
+                            >
+                                {{ product.title }}
+                            </router-link>
+                        </div>
+                        <div class="card-price">{{ product.base_price }}</div>
+                        <div class="card-secondary-text">Made by</div>
+                        <button class="btn-sm btn-full btn-sm-cart mt-auto">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center mt-5">
+                <a href="" class="view-more-link">View More</a>
+            </div>
+        </section>
+    </div>
+</template>
+<script>
+export default {
+    data: () => ({
+        recipient: [],
+        products: [],
+        searchText: null,
+    }),
+
+    beforeRouteEnter: function (to, from, next) {
+        let uri = "/api/recipients/" + to.params.recipientId;
+
+        axios.get(uri).then((response) => {
+            next((vm) => {
+                vm.setData(response);
+            });
+        });
+    },
+
+    beforeRouteUpdate: function (to, from, next) {
+        let uri = "/api/recipients/" + to.params.recipientId;
+
+        axios.get(uri).then((response) => {
+            this.setData(response);
+            next();
+        });
+    },
+
+    watch: {
+        searchText(after, before) {
+            this.loadData();
+        },
+    },
+
+    methods: {
+        setData(response) {
+            this.products = response.data.products.data;
+            this.recipient = response.data.recipient;
+        },
+        loadData() {
+            axios
+                .get("/api/recipients/" + this.$route.params.recipientId)
+                .then((response) => {
+                    this.products = response.data.products.data;
+                    this.recipient = response.data.recipient;
+                })
+                .catch((error) => console.log(error));
+        },
+    },
+    mounted() {},
+};
+</script>

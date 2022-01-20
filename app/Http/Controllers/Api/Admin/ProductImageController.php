@@ -1,0 +1,101 @@
+<?php
+
+namespace App\Http\Controllers\Api\Admin;
+
+use App\Http\Controllers\Controller;
+use App\Http\Requests\ProductImageRequest;
+use App\Models\Product;
+use App\Models\ProductImage;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Image;
+
+class ProductImageController extends Controller
+{
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
+
+    public function index()
+    {
+        ///$this->authorize('viewAny', ProductImage::class);
+
+        return ProductImage::where('product_id', request('productId'))->get();
+    }
+
+    public function store(ProductImageRequest $request)
+    {
+        ///$this->authorize('create', ProductImage::class);
+        return ProductImage::create($request->all());
+    }
+
+    public function show($id)
+    {
+        ///$this->authorize('view', $productimage);
+        return ProductImage::findOrFail($id);
+    }
+
+    public function update(ProductImageRequest $request, Product $product)
+    {
+        ///$this->authorize('update', $productimage);
+
+        for ($i=0; $i < count($request->id); $i++) { 
+            $productImage = ProductImage::findOrFail($request->id[$i]);
+
+            if ($request->image_path[$i] != $productImage->image_path) {
+
+                $file_name = time().'_'.$request->title[$i];
+                Image::make($request->image_path[$i])->save(storage_path('app/public/products/').$file_name);
+                $productPhoto = 'products/'.$file_name;
+
+                $existingImage = storage_path('app/public/').$productImage->image_path;
+                if(file_exists($existingImage)){@unlink($existingImage);}
+
+                $productImage->update([
+                    'image_path' => $productPhoto,
+                    'title' => $request->title[$i],
+                    'primary_image' => $request->primary_image[$i],
+                ]);
+            }
+        }
+    }
+
+    public function destroy(ProductImage $productimage)
+    {
+        ///$this->authorize('delete', $productimage);
+        $productimage->delete();
+    }
+
+        /**
+     * Store a newly created image in storage, and save the path to db.
+     */
+    
+    public function storeImage($image, $name)
+    {
+        $productPhoto=null;
+        if ($image) {
+            $file_name = time().'_'.$name;
+            Image::make($image)->save(storage_path('app/public/products/').$file_name);
+            $productPhoto = 'products/'.$file_name;
+        }
+
+        return $productPhoto;
+    }
+
+    /**
+     * Update image in storage(delete existing image and save the newly upload one), & save the path to db.
+     */
+
+    public function updateImage($request, $requestImage, $currentImage)
+    {
+        if($requestImage != $currentImage){
+            $request->merge(['image_path' => $this->storeImage($requestImage, $request->photoName)]);
+
+            $existingImage = storage_path('app/public/').$currentImage;
+            if(file_exists($existingImage)){
+                @unlink($existingImage);
+            }
+        }
+    }
+}

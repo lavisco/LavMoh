@@ -18,6 +18,7 @@ class CreateGiftwrapsTable extends Migration
             $table->timestamps();
             $table->string('name', 100);
 			$table->string('image_path');
+            $table->boolean('status')->default(true);
         });
     }
 

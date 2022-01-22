@@ -50,17 +50,35 @@ Route::get('/lavisco/{path}', function(){
     return view('layouts.master');
 })->where('path', '.*');
 
-Route::get('/admin/{path}', function(){
-    return view('layouts.admin_dashboard_master');
-})->where('path', '.*');
+Route::group(['prefix' =>'admin','middleware' => 'is_admin'], function () {
+    Route::get('/{path}', function(){
+        return view('layouts.admin_dashboard_master');
+    })->where('path', '.*');
+});
 
-Route::get('/seller/{path}', function(){
-    return view('layouts.lavisco_dashboard_master');
-})->where('path', '.*');
+Route::group(['prefix' =>'seller','middleware' => 'is_seller'], function () {
+    Route::get('/{path}', function(){
+        return view('layouts.lavisco_dashboard_master');
+    })->where('path', '.*');
+});
 
-Route::get('/buyer/{path}', function(){
-    return view('layouts.lavisco_dashboard_master');
-})->where('path', '.*');
+Route::group(['prefix' =>'buyer','middleware' => 'is_buyer'], function () {
+    Route::get('/{path}', function(){
+        return view('layouts.lavisco_dashboard_master');
+    })->where('path', '.*');
+});
+
+// Route::get('/admin/{path}', function(){
+//     return view('layouts.admin_dashboard_master');
+// })->where('path', '.*');
+
+// Route::get('/seller/{path}', function(){
+//     return view('layouts.lavisco_dashboard_master');
+// })->where('path', '.*');
+
+// Route::get('/buyer/{path}', function(){
+//     return view('layouts.lavisco_dashboard_master');
+// })->where('path', '.*');
 
 
 Auth::routes();

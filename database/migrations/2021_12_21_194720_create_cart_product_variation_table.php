@@ -13,7 +13,7 @@ class CreateCartProductVariationTable extends Migration
      */
     public function up()
     {
-        Schema::create('cart_product_variation', function (Blueprint $table) {
+        Schema::create('cart_product_variations', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->decimal('price', 14, 2);

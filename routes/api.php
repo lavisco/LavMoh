@@ -57,7 +57,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 /*Admin routes*/
 
-Route::prefix('admin')->group(function () {
+Route::group(['prefix' =>'admin','middleware' => 'is_admin'], function () {
     Route::apiResource('/buyerprofiles', BuyerProfileController::class);
     Route::apiResource('/categories', CategoryController::class);
     Route::apiResource('/dashboard', DashboardController::class);
@@ -89,12 +89,12 @@ Route::prefix('admin')->group(function () {
 });
 
 /*Buyer routes*/
-Route::prefix('buyer')->group(function () {
+Route::group(['prefix' =>'buyer','middleware' => 'is_buyer'], function () {
     Route::apiResource('/buyerprofile', BuyerBuyerProfileController::class);
 });
 
 /*Seller routes*/
-Route::prefix('seller')->group(function () {
+Route::group(['prefix' =>'seller','middleware' => 'is_seller'], function () {
     Route::put('/products/updateState/{product}', [ProductController::class, 'updateState']);
     Route::apiResource('/products', SellerProductController::class);
     Route::apiResource('/product_images', SellerProductImageController::class);

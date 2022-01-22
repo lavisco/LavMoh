@@ -18,7 +18,7 @@ class CreateMaterialsTable extends Migration
             $table->timestamps();
             $table->string('name', 100);
 			$table->string('description', 255)->nullable();
-			$table->boolean('status');
+			$table->boolean('status')->default(true);
         });
     }
 

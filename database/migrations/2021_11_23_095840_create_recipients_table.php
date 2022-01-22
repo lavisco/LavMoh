@@ -19,7 +19,7 @@ class CreateRecipientsTable extends Migration
             $table->string('name', 100);
 			$table->string('banner')->nullable();
 			$table->string('description', 255)->nullable();
-			$table->boolean('status');
+			$table->boolean('status')->default(true);
         });
     }
 

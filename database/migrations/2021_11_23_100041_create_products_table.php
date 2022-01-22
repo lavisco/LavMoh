@@ -35,6 +35,8 @@ class CreateProductsTable extends Migration
 			$table->boolean('has_variations')->default(false);
 			$table->boolean('has_inventory');
 			$table->integer('quantity');
+            $table->integer('rating')->nullable();
+            $table->boolean('has_giftwrap')->default(false);
             $table->foreignId('product_state_id')->constrained();
 			$table->foreignId('category_id')->constrained();
 			$table->foreignId('user_id')->constrained();

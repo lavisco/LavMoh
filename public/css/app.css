@@ -10862,6 +10862,9 @@ h4 {
   box-shadow: rgba(51, 51, 51, 0.308) 0 0 0 1px;
   border-radius: 12px;
 }
+.input-form .btn-secondary {
+  background-color: #c9c9c9 !important;
+}
 
 .btn {
   background-color: #836aff;
@@ -10889,10 +10892,6 @@ h4 {
 
 .btn-xs {
   padding: 6px 10px;
-}
-
-.btn-secondary {
-  background-color: #c9c9c9;
 }
 
 .custom-select {
@@ -11060,6 +11059,14 @@ h4 {
      object-fit: cover;
 }
 
+.dropdown-seller-product-edit .dropdown-menu {
+  min-width: auto;
+}
+.dropdown-seller-product-edit .dropdown-item {
+  font-size: 14px;
+  font-weight: 600;
+}
+
 /*------------------------------image-upload------------------------------*/
 .image-upload-box {
   width: 200px;
@@ -11108,6 +11115,13 @@ h4 {
   max-width: 280px;
 }
 
+.seller-banner-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .banner-container {
   width: 180px;
   height: 180px;
@@ -11116,7 +11130,6 @@ h4 {
      object-fit: cover;
   -o-object-position: center;
      object-position: center;
-  z-index: -1;
 }
 
 .banner-container-bg {
@@ -11157,6 +11170,22 @@ h4 {
   -o-object-position: center;
      object-position: center;
   border-radius: 12px;
+}
+
+.variation-display-table thead {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+}
+.variation-display-table tbody {
+  font-size: 17px;
+  font-weight: 400 !important;
+}
+.variation-display-table .table th {
+  border-top: none;
+}
+
+.product-display-card {
+  border: 1px solid rgba(51, 51, 51, 0.125);
 }
 
 /*---------------product cart------------------------*/

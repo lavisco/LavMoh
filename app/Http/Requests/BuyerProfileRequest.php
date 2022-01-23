@@ -46,4 +46,24 @@ class BuyerProfileRequest extends FormRequest
             ],
         ];
     }
+
+    /**
+     * Get custom attributes for validator errors.
+     *
+     * @return array
+     */
+    public function attributes()
+    {
+        return [
+            'first_name' => 'first name',
+            'last_name' => 'last name',
+            'billing_country' => 'billing country',
+            'billing_address' =>  'billing address',
+            'billing_apt_no' => 'billing apt. number',
+            'billing_zipcode' => 'billing zip code',
+            'billing_city' => 'billing city',
+            'billing_state' => 'billing state',
+            'user_id' => 'user',
+        ];
+    }
 }

@@ -255,7 +255,7 @@ export default {
                 .get("/api/admin/productstates", {
                     params: { searchText: this.searchText },
                 })
-                .then(({ data }) => (this.productStates = data.data))
+                .then(({ data }) => (this.productStates = data))
                 .catch((error) => console.log(error));
         },
 

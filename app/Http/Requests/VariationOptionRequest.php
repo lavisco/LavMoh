@@ -28,4 +28,16 @@ class VariationOptionRequest extends FormRequest
             'variation_id' => 'required',
         ];
     }
+
+    /**
+     * Get custom attributes for validator errors.
+     *
+     * @return array
+     */
+    public function attributes()
+    {
+        return [
+            'variation_id' => 'variation',
+        ];
+    }
 }

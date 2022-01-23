@@ -12,7 +12,7 @@ class OccasionController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api');
+        $this->middleware(['auth:api', 'is_admin']);
     }
 
     public function index()

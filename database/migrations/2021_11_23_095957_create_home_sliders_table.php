@@ -21,7 +21,7 @@ class CreateHomeSlidersTable extends Migration
             $table->string('description',300);
             $table->string('link',300);
             $table->string('color',10);
-            $table->string('dispay_picture',300);
+            $table->string('display_picture',300);
             $table->boolean('status')->default(true);
         });
     }

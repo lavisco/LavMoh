@@ -1298,6 +1298,7 @@ export default {
         cancel() {
             this.$router.push("/seller/products");
         },
+
         fileSelected(e, imagenum) {
             let file = e.target.files[0];
             let reader = new FileReader();
@@ -1343,6 +1344,7 @@ export default {
                 this.form.productVariation[count].variationId
             );
         },
+
         delRow(count, i) {
             let variant = this.form.productVariation[count];
             variant.option_list.splice(i, 1);
@@ -1352,6 +1354,7 @@ export default {
             variant.var_quantity_array.splice(i, 1);
             variant.var_description_array.splice(i, 1);
         },
+
         delVariation(count) {
             let variant = this.form.productVariation[count];
             this.variationMode = false;
@@ -1373,15 +1376,6 @@ export default {
         subcategoryModal(mode, count) {
             this[mode] = true;
             switch (true) {
-                case this.materialMode:
-                    this.materials == "" ? this.loadMaterials() : "";
-                    break;
-                case this.occasionMode:
-                    this.occasions == "" ? this.loadOccasions() : "";
-                    break;
-                case this.recipientMode:
-                    this.recipients == "" ? this.loadRecipients() : "";
-                    break;
                 case this.variationMode:
                     this.variationCount = count;
                     break;
@@ -1396,40 +1390,17 @@ export default {
             this.variationMode = false;
             $("#addRecord").modal("hide");
         },
-        loadCategories() {
+
+        loadDetails() {
             axios
-                .get("/api/admin/categories")
-                .then(({ data }) => (this.categories = data.data))
-                .catch((error) => console.log(error));
-        },
-        loadMaterials() {
-            axios
-                .get("/api/admin/materials")
-                .then(({ data }) => (this.materials = data.data))
-                .catch((error) => console.log(error));
-        },
-        loadOccasions() {
-            axios
-                .get("/api/admin/occasions")
-                .then(({ data }) => (this.occasions = data.data))
-                .catch((error) => console.log(error));
-        },
-        loadRecipients() {
-            axios
-                .get("/api/admin/recipients")
-                .then(({ data }) => (this.recipients = data.data))
-                .catch((error) => console.log(error));
-        },
-        loadShippings() {
-            axios
-                .get("/api/admin/shippings")
-                .then(({ data }) => (this.shippings = data.data))
-                .catch((error) => console.log(error));
-        },
-        loadSellers() {
-            axios
-                .get("/api/admin/users/seller")
-                .then(({ data }) => (this.sellers = data))
+                .get("/api/seller/products/details")
+                .then((response) => {
+                    this.categories = response.data.categories;
+                    this.materials = response.data.materials;
+                    this.occasions = response.data.occasions;
+                    this.recipients = response.data.recipients;
+                    this.shippings = response.data.shippings;
+                })
                 .catch((error) => console.log(error));
         },
 
@@ -1447,8 +1418,7 @@ export default {
         },
     },
     mounted() {
-        this.loadShippings();
-        this.loadCategories();
+        this.loadDetails();
         $(this.$refs.vuemodal).on("hidden.bs.modal", this.closeModal);
     },
 };

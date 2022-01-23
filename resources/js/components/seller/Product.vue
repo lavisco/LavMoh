@@ -102,7 +102,72 @@
                                             </select>
                                         </td>
                                         <td class="text-right">
-                                            <div class="">
+                                            <div class="d-flex">
+                                                <div
+                                                    class="
+                                                        dropdown
+                                                        dropdown-seller-product-edit
+                                                        mr-md-3
+                                                    "
+                                                >
+                                                    <a
+                                                        class="btn btn-sm"
+                                                        href="#"
+                                                        role="button"
+                                                        data-toggle="dropdown"
+                                                        aria-haspopup="true"
+                                                        aria-expanded="false"
+                                                    >
+                                                        Edit
+                                                    </a>
+                                                    <div
+                                                        class="
+                                                            dropdown-menu
+                                                            dropdown-menu-right
+                                                            dropdown-menu-arrow
+                                                        "
+                                                    >
+                                                        <router-link
+                                                            class="
+                                                                dropdown-item
+                                                            "
+                                                            :to="{
+                                                                name: 'seller/products/listing/edit',
+                                                                params: {
+                                                                    productId:
+                                                                        product.id,
+                                                                },
+                                                            }"
+                                                            >Details
+                                                        </router-link>
+                                                        <router-link
+                                                            class="
+                                                                dropdown-item
+                                                            "
+                                                            :to="{
+                                                                name: 'seller/products/listing/image/edit',
+                                                                params: {
+                                                                    productId:
+                                                                        product.id,
+                                                                },
+                                                            }"
+                                                            >Images
+                                                        </router-link>
+                                                        <router-link
+                                                            class="
+                                                                dropdown-item
+                                                            "
+                                                            :to="{
+                                                                name: 'seller/products/listing/variation/edit',
+                                                                params: {
+                                                                    productId:
+                                                                        product.id,
+                                                                },
+                                                            }"
+                                                            >Variation
+                                                        </router-link>
+                                                    </div>
+                                                </div>
                                                 <a
                                                     class="btn btn-sm"
                                                     href="#"
@@ -110,28 +175,6 @@
                                                         newModal(product)
                                                     "
                                                     >View
-                                                </a>
-                                                <router-link
-                                                    class="btn btn-sm"
-                                                    :to="{
-                                                        name: 'seller/products/listing/edit',
-                                                        params: {
-                                                            productId:
-                                                                product.id,
-                                                        },
-                                                    }"
-                                                    >Edit
-                                                </router-link>
-                                                <a
-                                                    class="btn btn-sm"
-                                                    href=""
-                                                    @click.prevent="
-                                                        deleteProduct(
-                                                            product.id
-                                                        )
-                                                    "
-                                                >
-                                                    Delete
                                                 </a>
                                             </div>
                                         </td>
@@ -179,20 +222,34 @@
                     <!-- Form start -->
                     <div class="modal-body modal-view">
                         <div class="form-group row">
-                            <label class="col-md-3 col-form-label" for="name"
-                                >Image
-                            </label>
-                            <div class="col-md-9">
-                                <img
-                                    width="150px"
-                                    height="150px"
-                                    class="banner-container-bg"
-                                    :src="
-                                        form.product_image
-                                            ? form.product_image.path
-                                            : '/images/lavisco/img-bg.jpg'
-                                    "
-                                />
+                            <div class="col-md-12">
+                                <label class="col-form-label" for="name"
+                                    >Images
+                                </label>
+                                <div class="card product-display-card">
+                                    <div class="d-flex flex-row gap">
+                                        <div
+                                            class="image-upload-box"
+                                            :class="{
+                                                'image-upload-box-primary':
+                                                    image.primary_image === 1,
+                                            }"
+                                            v-for="image in form.product_images"
+                                        >
+                                            <img
+                                                class="
+                                                    banner-container
+                                                    seller-banner-container
+                                                "
+                                                :src="
+                                                    image
+                                                        ? image.path
+                                                        : '/images/lavisco/img-bg.jpg'
+                                                "
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -245,10 +302,71 @@
                         </div>
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label" for="name"
-                                >category
+                                >Category
                             </label>
                             <div class="col-md-9">
                                 {{ form.category.name }}
+                            </div>
+                        </div>
+                        <div
+                            class="form-group row"
+                            v-show="form.product_variations"
+                        >
+                            <div class="col-md-12">
+                                <label class="col-form-label" for="name"
+                                    >Variations
+                                </label>
+                                <div class="card product-display-card">
+                                    <div
+                                        class="
+                                            table-responsive
+                                            variation-display-table
+                                        "
+                                    >
+                                        <table class="table align-items-center">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Type</th>
+                                                    <th scope="col">Option</th>
+                                                    <th scope="col">SKU</th>
+                                                    <th scope="col">Price</th>
+                                                    <th scope="col">
+                                                        Quantity
+                                                    </th>
+                                                    <th scope="col">
+                                                        Description
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr
+                                                    v-for="variation in form.product_variations"
+                                                >
+                                                    <td>
+                                                        {{ variation.type }}
+                                                    </td>
+                                                    <td>
+                                                        {{
+                                                            variation.type_option
+                                                        }}
+                                                    </td>
+                                                    <td>{{ variation.sku }}</td>
+                                                    <td>
+                                                        {{ variation.price }}
+                                                    </td>
+                                                    <td>
+                                                        {{ variation.quantity }}
+                                                    </td>
+                                                    <td>
+                                                        {{
+                                                            variation.description
+                                                        }}
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -310,6 +428,8 @@ export default {
             category_id: "",
             category: "",
             product_image: null,
+            product_images: null,
+            product_variations: null,
         }),
     }),
 
@@ -336,8 +456,8 @@ export default {
 
         loadProductStates() {
             axios
-                .get("/api/admin/productstates")
-                .then(({ data }) => (this.productStates = data.data))
+                .get("/api/seller/productstates")
+                .then(({ data }) => (this.productStates = data))
                 .catch((error) => console.log(error));
         },
 
@@ -349,17 +469,6 @@ export default {
                     Fire.$emit("reloadRecords");
                 })
                 .catch((error) => console.log(error));
-        },
-
-        deleteProduct(id) {
-            if (confirm("Are you sure you want to delete?")) {
-                axios
-                    .delete("/api/seller/products/" + id)
-                    .then(() => {
-                        Fire.$emit("reloadRecords");
-                    })
-                    .catch((error) => console.log(error));
-            }
         },
     },
     mounted() {

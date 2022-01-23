@@ -3,15 +3,16 @@
 namespace App\Http\Controllers\Api\Seller;
 
 use App\Http\Controllers\Controller;
+use App\Models\ProductState;
 use Illuminate\Http\Request;
 
-class OrderController extends Controller
+class ProductStateController extends Controller
 {
     public function __construct()
     {
         $this->middleware(['auth:api', 'is_seller']);
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -19,7 +20,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        return ProductState::latest()->filter(request(['searchText']))->get();
     }
 
     /**

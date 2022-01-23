@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Buyer\DashboardController as BuyerDashboardController;
 use App\Http\Controllers\Seller\DashboardController as SellerDashboardController;
 use App\Http\Controllers\Seller\UserController;
+use App\Http\Controllers\Website\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,9 +24,6 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/sellers', function () {
-    return view('all_sellers');
-});
 Route::get('/terms_and_conditions', function () {
     return view('policy_terms_condition');
 });
@@ -46,40 +44,10 @@ Route::get('/login', function () {
 });
 
 
-Route::get('/lavisco/{path}', function(){
-    return view('layouts.master');
-})->where('path', '.*');
-
-Route::group(['prefix' =>'admin','middleware' => 'is_admin'], function () {
-    Route::get('/{path}', function(){
-        return view('layouts.admin_dashboard_master');
-    })->where('path', '.*');
-});
-
-Route::group(['prefix' =>'seller','middleware' => 'is_seller'], function () {
-    Route::get('/{path}', function(){
-        return view('layouts.lavisco_dashboard_master');
-    })->where('path', '.*');
-});
-
-Route::group(['prefix' =>'buyer','middleware' => 'is_buyer'], function () {
-    Route::get('/{path}', function(){
-        return view('layouts.lavisco_dashboard_master');
-    })->where('path', '.*');
-});
-
-// Route::get('/admin/{path}', function(){
-//     return view('layouts.admin_dashboard_master');
-// })->where('path', '.*');
-
-// Route::get('/seller/{path}', function(){
-//     return view('layouts.lavisco_dashboard_master');
-// })->where('path', '.*');
-
-// Route::get('/buyer/{path}', function(){
-//     return view('layouts.lavisco_dashboard_master');
-// })->where('path', '.*');
-
+Route::get('/lavisco/{path}', [HomeController::class, 'websiteIndex'])->where('path', '.*');
+Route::get('/admin/{path}', [HomeController::class, 'adminIndex'])->where('path', '.*')->middleware('is_admin');
+Route::get('/seller/{path}', [HomeController::class, 'sellerIndex'])->where('path', '.*')->middleware('is_seller');
+Route::get('/buyer/{path}', [HomeController::class, 'buyerIndex'])->where('path', '.*')->middleware('is_buyer');
 
 Auth::routes();
 

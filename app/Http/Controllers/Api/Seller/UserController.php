@@ -15,6 +15,11 @@ use Image;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth:api', 'is_seller']);
+    }
+    
     public function index()
     {
         //

@@ -4,14 +4,16 @@ namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductVariationRequest;
+use App\Models\Product;
 use App\Models\ProductVariation;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ProductVariationController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api');
+        $this->middleware(['auth:api', 'is_admin']);
     }
 
     public function index()
@@ -27,21 +29,34 @@ class ProductVariationController extends Controller
         return ProductVariation::create($request->all());
     }
 
-    public function show($id)
+    public function show($productId)
     {
         ///$this->authorize('view', $productvariation);
-        return ProductVariation::findOrFail($id);
+        return ProductVariation::where('product_id', $productId)->latest()->get();
     }
 
-    public function update(ProductVariationRequest $request, ProductVariation $productvariation)
+    public function update(ProductVariationRequest $request, $productId)
     {
         ///$this->authorize('update', $productvariation);
-        $productvariation->update($request->all());
+        
+        for ($i=0; $i < count($request->variation_id); $i++) { 
+            $productVariation = ProductVariation::findOrFail($request->variation_id[$i]);
+            $productVariation->update([
+                'product_id' => $productId,
+                'type' => $request->variation_type[$i],
+                'type_option' => $request->variation_type_option[$i],
+                'sku' => $request->variation_sku[$i] ?? null,
+                'description' => $request->variation_description[$i] ?? null,
+                'price' => $request->variation_price[$i] ?? '0.00',
+                'quantity' => $request->variation_quantity[$i] ?? '0',
+            ]);
+        }
     }
 
-    public function destroy(ProductVariation $productvariation)
+    public function destroy($id)
     {
         ///$this->authorize('delete', $productvariation);
+        $productvariation = ProductVariation::findOrFail($id);
         $productvariation->delete();
     }
 }

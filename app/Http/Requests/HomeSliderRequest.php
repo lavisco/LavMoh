@@ -29,7 +29,19 @@ class HomeSliderRequest extends FormRequest
             'description' => 'required|max:300',
             'link' => 'required|max:300',
             'color' => 'required|max:10',
-            'dispay_picture' => 'required|max:300',
+            'display_picture' => 'required|max:300',
+        ];
+    }
+
+    /**
+     * Get custom attributes for validator errors.
+     *
+     * @return array
+     */
+    public function attributes()
+    {
+        return [
+            'display_picture' => 'display picture',
         ];
     }
 }

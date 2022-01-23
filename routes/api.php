@@ -22,8 +22,11 @@ use App\Http\Controllers\Api\Admin\ShopController;
 use App\Http\Controllers\Api\Admin\VariationController;
 use App\Http\Controllers\Api\Admin\VariationOptionController;
 use App\Http\Controllers\Api\Buyer\BuyerProfileController as BuyerBuyerProfileController;
+use App\Http\Controllers\Api\Buyer\OrderController as BuyerOrderController;
+use App\Http\Controllers\Api\Seller\OrderController as SellerOrderController;
 use App\Http\Controllers\Api\Seller\ProductController as SellerProductController;
 use App\Http\Controllers\Api\Seller\ProductImageController as SellerProductImageController;
+use App\Http\Controllers\Api\Seller\ProductStateController as SellerProductStateController;
 use App\Http\Controllers\Api\Seller\ProductVariationController as SellerProductVariationController;
 use App\Http\Controllers\Api\Seller\ProductVideoController as SellerProductVideoController;
 use App\Http\Controllers\Api\Seller\SellerProfileController as SellerSellerProfileController;
@@ -57,7 +60,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 /*Admin routes*/
 
-Route::group(['prefix' =>'admin','middleware' => 'is_admin'], function () {
+Route::prefix('admin')->group(function () {
     Route::apiResource('/buyerprofiles', BuyerProfileController::class);
     Route::apiResource('/categories', CategoryController::class);
     Route::apiResource('/dashboard', DashboardController::class);
@@ -89,19 +92,23 @@ Route::group(['prefix' =>'admin','middleware' => 'is_admin'], function () {
 });
 
 /*Buyer routes*/
-Route::group(['prefix' =>'buyer','middleware' => 'is_buyer'], function () {
+Route::prefix('buyer')->group(function () {
     Route::apiResource('/buyerprofile', BuyerBuyerProfileController::class);
+    Route::apiResource('/orders', BuyerOrderController::class);
 });
 
 /*Seller routes*/
-Route::group(['prefix' =>'seller','middleware' => 'is_seller'], function () {
-    Route::put('/products/updateState/{product}', [ProductController::class, 'updateState']);
+Route::prefix('seller')->group(function () {
+    Route::get('/products/details', [SellerProductController::class, 'getDetails']);
+    Route::put('/products/updateState/{product}', [SellerProductController::class, 'updateState']);
     Route::apiResource('/products', SellerProductController::class);
+    Route::apiResource('/productstates', SellerProductStateController::class);
     Route::apiResource('/product_images', SellerProductImageController::class);
     Route::apiResource('/product_variations', SellerProductVariationController::class);
     Route::apiResource('/product_videos', SellerProductVideoController::class);
     Route::apiResource('/sellerprofile', SellerSellerProfileController::class);
     Route::apiResource('/shop', SellerShopController::class);
+    Route::apiResource('/orders', SellerOrderController::class);
     Route::apiResource('/user', SellerUserController::class);
 });
 

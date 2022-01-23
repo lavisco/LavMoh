@@ -65,4 +65,29 @@ class SellerRegisterRequest extends FormRequest
             'about' => 'required',
         ];
     }
+
+    /**
+     * Get custom attributes for validator errors.
+     *
+     * @return array
+     */
+    public function attributes()
+    {
+        return [
+            'first_name' => 'first name',
+            'last_name' => 'last name',
+            'billing_country' => 'billing country',
+            'billing_address' =>  'billing address',
+            'billing_apt_no' => 'billing apt. number',
+            'billing_zipcode' => 'billing zip code',
+            'billing_city' => 'billing city',
+            'billing_state' => 'billing state',
+            'deposit_account' => 'deposit account no.',
+            'deposit_name' => 'deposit account name',
+            'deposit_bank' => 'deposit bank name',
+            'deposit_bank_branch' => 'deposit bank branch name',
+            'deposit_account_status' => 'deposit bank account status',
+            'user_id' => 'user',
+        ];
+    }
 }

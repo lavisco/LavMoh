@@ -53,12 +53,49 @@ class ProductRequest extends FormRequest
             //'product_state_id' => 'required|sometimes',
             'category_id' => 'required|sometimes',
             //'user_id' => 'required|sometimes',
+
             //product variation request validation
+            'productVariation.*.sku.*' => [
+                'nullable',
+                'max:16',
+                Rule::unique('product_variations')->ignore($this->id),
+            ],
             'productVariation.*.var_option_id_array.*' => 'required|sometimes',
             'productVariation.*.var_quantity_array.*' => 'integer|nullable',
             'productVariation.*.var_price_array.*' => 'numeric|nullable',
             'productVariation.*.description.*' => 'max:500|nullable',
             'image_path.*' => 'required',
+        ];
+    }
+
+
+    /**
+     * Get custom attributes for validator errors.
+     *
+     * @return array
+     */
+    public function attributes()
+    {
+        return [
+            'dimensions_unit' => 'dimension unit',
+            'weight_unit' =>  'weight unit',
+            'base_price' => 'base price',
+            'production_time' => 'production time',
+            'cut_off_time' => 'cut-off time',
+            'processing_time' => 'processing time',
+            'has_custom_text' => 'enabling or disabling custom text',
+            'has_custom_image' => 'enabling or disabling custom image',
+            'has_variations' => 'enabling or disabling variations',
+            'has_inventory' => 'enabling or disabling inventory',
+            'has_giftwrap' => 'enabling or disabling giftwrap',
+            //'product_state_id' => 'product state',
+            'category_id' => 'category',
+            'productVariation.*.sku.*' => 'variation sku',
+            'productVariation.*.description.*' => 'variation description',
+            'productVariation.*.var_price_array.*' => 'variation price',
+            'productVariation.*.var_quantity_array.*' => 'variation quantity',
+            'productVariation.*.var_option_id_array.*' => 'variation type option',
+            'image_path.*' => 'image',
         ];
     }
 }

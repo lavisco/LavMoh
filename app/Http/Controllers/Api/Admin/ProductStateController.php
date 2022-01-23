@@ -11,14 +11,14 @@ class ProductStateController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api');
+        $this->middleware(['auth:api', 'is_admin']);
     }
 
     public function index()
     {
         ///$this->authorize('viewAny', ProductState::class);
 
-        return ProductState::latest()->filter(request(['searchText']))->paginate(25);
+        return ProductState::latest()->filter(request(['searchText']))->get();
     }
 
     public function store(ProductStateRequest $request)

@@ -29,4 +29,17 @@ class ProductImageRequest extends FormRequest
             'primary_image' => 'required',
         ];
     }
+
+    /**
+     * Get custom attributes for validator errors.
+     *
+     * @return array
+     */
+    public function attributes()
+    {
+        return [
+            'image_path' => 'image path',
+            'primary_image' => 'primary image',
+        ];
+    }
 }

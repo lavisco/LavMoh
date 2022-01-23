@@ -144,6 +144,7 @@ export default {
                 if (imagenum == "image0") {
                     this.$set(this.form.image_path, 0, reader.result);
                     this.$set(this.form.title, 0, e.target.files[0].name);
+                    this.$set(this.form.primary_image, 0, 1);
                     this.$set(
                         this.form.path,
                         0,
@@ -152,6 +153,7 @@ export default {
                 } else if (imagenum == "image1") {
                     this.$set(this.form.image_path, 1, reader.result);
                     this.$set(this.form.title, 1, e.target.files[0].name);
+                    this.$set(this.form.primary_image, 1, 0);
                     this.$set(
                         this.form.path,
                         1,
@@ -160,6 +162,7 @@ export default {
                 } else if (imagenum == "image2") {
                     this.$set(this.form.image_path, 2, reader.result);
                     this.$set(this.form.title, 2, e.target.files[0].name);
+                    this.$set(this.form.primary_image, 2, 0);
                     this.$set(
                         this.form.path,
                         2,

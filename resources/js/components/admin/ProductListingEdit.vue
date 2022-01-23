@@ -989,7 +989,7 @@ export default {
         loadProductStates() {
             axios
                 .get("/api/admin/productstates")
-                .then(({ data }) => (this.productStates = data.data))
+                .then(({ data }) => (this.productStates = data))
                 .catch((error) => console.log(error));
         },
         loadCategories() {

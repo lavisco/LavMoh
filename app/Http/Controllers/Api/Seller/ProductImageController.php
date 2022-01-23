@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Api\Admin;
+namespace App\Http\Controllers\Api\Seller;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductImageRequest;
-use App\Models\Product;
 use App\Models\ProductImage;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Image;
 
@@ -14,29 +12,49 @@ class ProductImageController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:api', 'is_admin']);
+        $this->middleware(['auth:api', 'is_seller']);
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-        ///$this->authorize('viewAny', ProductImage::class);
-
         return ProductImage::where('product_id', request('productId'))->get();
     }
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(ProductImageRequest $request)
     {
-        ///$this->authorize('create', ProductImage::class);
         return ProductImage::create($request->all());
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function show($id)
     {
-        ///$this->authorize('view', $productimage);
         return ProductImage::findOrFail($id);
     }
 
-    public function update(ProductImageRequest $request, Product $product)
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(ProductImageRequest $request)
     {
         ///$this->authorize('update', $productimage);
 
@@ -61,9 +79,14 @@ class ProductImageController extends Controller
         }
     }
 
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function destroy(ProductImage $productimage)
     {
-        ///$this->authorize('delete', $productimage);
         $productimage->delete();
     }
 

@@ -112,7 +112,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-button-container">
+                    <div class="card-button-container" v-if="occasions[0]">
                         <a href="" v-for="(n, index) in 10">
                             <button class="bg-black">
                                 {{ occasions[index].name }}
@@ -126,7 +126,7 @@
                             <div class="card-img-text">Order by Recipient</div>
                         </div>
                     </div>
-                    <div class="card-button-container">
+                    <div class="card-button-container" v-if="recipients[0]">
                         <a href="" v-for="(n, index) in 10">
                             <button class="bg-black">
                                 {{ recipients[index].name }}

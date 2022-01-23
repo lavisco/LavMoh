@@ -28,4 +28,16 @@ class GiftwrapRequest extends FormRequest
             'image_path' => 'required',
         ];
     }
+
+    /**
+     * Get custom attributes for validator errors.
+     *
+     * @return array
+     */
+    public function attributes()
+    {
+        return [
+            'image_path' => 'image path',
+        ];
+    }
 }

@@ -526,17 +526,6 @@
                         </div>
                     </div>
 
-                    <!-- Photo -->
-                    <div class="card px-4 py-4 my-4">
-                        <!-- Header -->
-                        <h4 class="mb-4">Product Photo</h4>
-                        <p class="mb-5">
-                            Add atleast 3 photos showcasing your product. The
-                            Primary photo is the first image customers see in
-                            the product page.
-                        </p>
-                    </div>
-
                     <!-- Shipping -->
                     <div class="card px-4 py-4 my-4">
                         <!-- Header -->
@@ -729,8 +718,8 @@
             aria-hidden="true"
         >
             <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content bg-secondary">
-                    <div class="modal-header bg-neutral">
+                <div class="modal-content">
+                    <div class="modal-header">
                         <h4
                             v-show="materialMode"
                             class="modal-title"
@@ -888,7 +877,6 @@ export default {
         occasions: [],
         recipients: [],
         shippings: [],
-        sellers: [],
         product: "",
         images: {},
         form: new Form({
@@ -936,76 +924,46 @@ export default {
         cancel() {
             this.$router.push("/seller/products");
         },
+
         check(event) {
             event.target.value = true;
         },
+
         subcategoryModal(mode) {
             this[mode] = true;
-            switch (true) {
-                case this.materialMode:
-                    this.materials == "" ? this.loadMaterials() : "";
-                    break;
-                case this.occasionMode:
-                    this.occasions == "" ? this.loadOccasions() : "";
-                    break;
-                case this.recipientMode:
-                    this.recipients == "" ? this.loadRecipients() : "";
-                    break;
-            }
             $("#addRecord").modal("show");
         },
+
         closeModal() {
             this.materialMode = false;
             this.occasionMode = false;
             this.recipientMode = false;
             $("#addRecord").modal("hide");
         },
+
         loadProductStates() {
             axios
-                .get("/api/admin/productstates")
-                .then(({ data }) => (this.productStates = data.data))
+                .get("/api/seller/productstates")
+                .then(({ data }) => (this.productStates = data))
                 .catch((error) => console.log(error));
         },
-        loadCategories() {
+
+        loadDetails() {
             axios
-                .get("/api/admin/categories")
-                .then(({ data }) => (this.categories = data.data))
-                .catch((error) => console.log(error));
-        },
-        loadMaterials() {
-            axios
-                .get("/api/admin/materials")
-                .then(({ data }) => (this.materials = data.data))
-                .catch((error) => console.log(error));
-        },
-        loadOccasions() {
-            axios
-                .get("/api/admin/occasions")
-                .then(({ data }) => (this.occasions = data.data))
-                .catch((error) => console.log(error));
-        },
-        loadRecipients() {
-            axios
-                .get("/api/admin/recipients")
-                .then(({ data }) => (this.recipients = data.data))
-                .catch((error) => console.log(error));
-        },
-        loadShippings() {
-            axios
-                .get("/api/admin/shippings")
-                .then(({ data }) => (this.shippings = data.data))
-                .catch((error) => console.log(error));
-        },
-        loadSellers() {
-            axios
-                .get("/api/admin/users/seller")
-                .then(({ data }) => (this.sellers = data))
+                .get("/api/seller/products/details")
+                .then((response) => {
+                    this.categories = response.data.categories;
+                    this.materials = response.data.materials;
+                    this.occasions = response.data.occasions;
+                    this.recipients = response.data.recipients;
+                    this.shippings = response.data.shippings;
+                })
                 .catch((error) => console.log(error));
         },
 
         loadProduct() {
             axios
-                .get("/api/admin/products/" + this.$route.params.productId)
+                .get("/api/seller/products/" + this.$route.params.productId)
                 .then(({ data }) => {
                     this.form.fill(data);
                     this.loadPivotVariables();
@@ -1034,7 +992,7 @@ export default {
 
         // loadProductImages() {
         //     axios
-        //         .get("/api/admin/product_images/", {
+        //         .get("/api/seller/product_images/", {
         //             params: { productId: this.$route.params.productId },
         //         })
         //         .then(({ data }) => {
@@ -1055,7 +1013,7 @@ export default {
                 this.form.quantity == "";
             }
             this.form
-                .put("/api/admin/products/" + this.form.id)
+                .put("/api/seller/products/" + this.form.id)
                 .then(() => {
                     this.$router.push("/seller/products");
                 })
@@ -1065,10 +1023,8 @@ export default {
     mounted() {
         this.loadProduct();
         this.loadProductStates();
-        this.loadSellers();
-        this.loadShippings();
-        this.loadCategories();
-        this.loadProductImages();
+        this.loadDetails();
+        //this.loadProductImages();
     },
 };
 </script>

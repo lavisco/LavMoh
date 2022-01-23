@@ -109,7 +109,7 @@
                                                                     product.id,
                                                             },
                                                         }"
-                                                        >Edit
+                                                        >Edit Details
                                                     </router-link>
                                                     <router-link
                                                         class="dropdown-item"
@@ -121,6 +121,17 @@
                                                             },
                                                         }"
                                                         >Edit Images
+                                                    </router-link>
+                                                    <router-link
+                                                        class="dropdown-item"
+                                                        :to="{
+                                                            name: 'admin/products/listing/variation/edit',
+                                                            params: {
+                                                                productId:
+                                                                    product.id,
+                                                            },
+                                                        }"
+                                                        >Edit Variation
                                                     </router-link>
                                                     <a
                                                         class="dropdown-item"
@@ -212,7 +223,7 @@ export default {
         loadProductStates() {
             axios
                 .get("/api/admin/productstates")
-                .then(({ data }) => (this.productStates = data.data))
+                .then(({ data }) => (this.productStates = data))
                 .catch((error) => console.log(error));
         },
 

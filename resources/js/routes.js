@@ -90,6 +90,15 @@ export let routes = [
         },
     },
     {
+        path: "/admin/products/listing/variation/:productId",
+        name: "admin/products/listing/variation/edit",
+        component: require("./components/admin/ProductVariationEdit.vue")
+            .default,
+        meta: {
+            title: "Product Listing Variation Edit",
+        },
+    },
+    {
         path: "/admin/products/listing/variations",
         component: require("./components/admin/ProductVariation.vue").default,
         meta: {
@@ -245,6 +254,15 @@ export let routes = [
         component: require("./components/seller/ProductImageEdit.vue").default,
         meta: {
             title: "Product Listing Image Edit",
+        },
+    },
+    {
+        path: "/seller/products/listing/variation/:productId",
+        name: "seller/products/listing/variation/edit",
+        component: require("./components/seller/ProductVariationEdit.vue")
+            .default,
+        meta: {
+            title: "Product Listing Variation Edit",
         },
     },
     {

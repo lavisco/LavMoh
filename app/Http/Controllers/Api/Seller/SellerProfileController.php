@@ -11,7 +11,7 @@ class SellerProfileController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api');
+        $this->middleware(['auth:api', 'is_seller']);
     }
 
     public function index()

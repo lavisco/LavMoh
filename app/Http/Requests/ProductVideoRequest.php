@@ -28,4 +28,16 @@ class ProductVideoRequest extends FormRequest
             'title' => 'max:50|required',
         ];
     }
+
+    /**
+     * Get custom attributes for validator errors.
+     *
+     * @return array
+     */
+    public function attributes()
+    {
+        return [
+            'video_path' => 'video path',
+        ];
+    }
 }

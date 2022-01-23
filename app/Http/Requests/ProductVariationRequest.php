@@ -25,16 +25,33 @@ class ProductVariationRequest extends FormRequest
     public function rules()
     {
         return [
-            'productVariation.*.sku.*' => [
+            'variation_sku.*' => [
                 'nullable',
                 'max:16',
                 Rule::unique('product_variations')->ignore($this->id),
             ],
-            'description' => 'max:500|nullable',
-            'productVariation.var_price_array' => 'numeric|nullable',
-            'quantity' => 'integer|nullable',
-            'type' => 'required',
-            'type_option' => 'required',
+            'variation_description.*' => 'max:500|nullable',
+            'variation_price.*' => 'numeric|nullable',
+            'variation_quantity.*' => 'integer|nullable',
+            'variation_type.*' => 'required',
+            'variation_type_option.*' => 'required',
+        ];
+    }
+
+    /**
+     * Get custom attributes for validator errors.
+     *
+     * @return array
+     */
+    public function attributes()
+    {
+        return [
+            'variation_sku.*' => 'variation sku',
+            'variation_description.*' => 'variation description',
+            'variation_price.*' => 'variation price',
+            'variation_quantity.*' => 'variation quantity',
+            'variation_type.*' => 'variation type',
+            'variation_type_option.*' => 'variation type option',
         ];
     }
 }

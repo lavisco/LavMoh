@@ -4,9 +4,14 @@ namespace App\Http\Controllers\Api\Seller;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
+use App\Models\Category;
+use App\Models\Material;
+use App\Models\Occasion;
 use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\ProductVariation;
+use App\Models\Recipient;
+use App\Models\Shipping;
 use App\Models\VariationOption;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -16,13 +21,13 @@ class ProductController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api');
+        $this->middleware(['auth:api', 'is_seller']);
     }
 
     public function index()
     {
         ///$this->authorize('viewAny', Product::class);
-        return Product::where('user_id', auth()->id())->with('product_image')->with('category')->latest()->filter(request(['searchText']))->paginate(25);
+        return Product::where('user_id', auth()->id())->with('product_images')->with('product_image')->with('product_variations')->with('category')->latest()->filter(request(['searchText']))->paginate(25);
     }
 
     public function store(ProductRequest $request)
@@ -108,6 +113,10 @@ class ProductController extends Controller
     {
         ///$this->authorize('update', $product);
         $product->update($request->all());
+        $product->materials()->sync(request('product_material'));
+        $product->occasions()->sync(request('product_occasion'));
+        $product->recipients()->sync(request('product_recipient'));
+        $product->shippings()->sync(request('product_shipping'));
     }
 
     public function updateState(Request $request, Product $product)
@@ -116,12 +125,6 @@ class ProductController extends Controller
         $product->update([
             'product_state_id' => request('product_state_id'),
         ]);
-    }
-
-    public function destroy(Product $product)
-    {
-        ///$this->authorize('delete', $product);
-        $product->delete();
     }
 
     /**
@@ -154,5 +157,16 @@ class ProductController extends Controller
                 @unlink($existingImage);
             }
         }
+    }
+
+    public function getDetails()
+    {
+        return response()->json([
+            'categories' => Category::latest()->get(),
+            'materials' => Material::latest()->get(),
+            'occasions' => Occasion::latest()->get(),
+            'recipients' => Recipient::latest()->get(),
+            'shippings' => Shipping::latest()->get(),
+        ]);
     }
 }

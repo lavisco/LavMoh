@@ -28,16 +28,8 @@ class CreateCartsTable extends Migration
 			$table->foreignId('shipping_id')->constrained();
 			$table->foreignId('order_id')->constrained();
 			$table->foreignId('giftwrap_id')->nullable()->constrained();
-            $table->unsignedBigInteger('seller_id');
-			$table->unsignedBigInteger('buyer_id');
-            $table
-                ->foreign('seller_id')
-                ->references('id')
-                ->on('users');
-			$table
-                ->foreign('buyer_id')
-                ->references('id')
-                ->on('users');
+            $table->foreignId('seller_id')->references('id')->on('users');
+            $table->foreignId('buyer_id')->references('id')->on('users');
         });
     }
 

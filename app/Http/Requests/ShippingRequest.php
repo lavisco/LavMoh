@@ -36,4 +36,17 @@ class ShippingRequest extends FormRequest
             'tracking_opt' => 'nullable',
         ];
     }
+
+    /**
+     * Get custom attributes for validator errors.
+     *
+     * @return array
+     */
+    public function attributes()
+    {
+        return [
+            'delivery_time' => 'delivery time',
+            'tracking_opt' => 'tracking option',
+        ];
+    }
 }

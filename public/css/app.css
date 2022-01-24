@@ -10405,6 +10405,7 @@ button.bg-black:hover {
 /*---------------------hero---------------------*/
 .hero-swiper {
   padding: 0 !important;
+  background-color: #ff5a7c;
 }
 
 .hero {

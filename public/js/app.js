@@ -5246,7 +5246,9 @@ __webpack_require__.r(__webpack_exports__);
       reader.readAsDataURL(file);
     },
     updateSellerprofile: function updateSellerprofile() {
-      this.form.post("/api/seller/user").then(function () {})["catch"](function (error) {
+      this.form.post("/api/seller/user").then(function () {
+        window.location.href = "/login";
+      })["catch"](function (error) {
         return console.log(error);
       });
     }

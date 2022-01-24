@@ -695,7 +695,9 @@ export default {
         updateSellerprofile() {
             this.form
                 .post("/api/seller/user")
-                .then(() => {})
+                .then(() => {
+                    window.location.href = "/login";
+                })
                 .catch((error) => console.log(error));
         },
     },

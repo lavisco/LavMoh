@@ -2,8 +2,7 @@
 <div>
     <!-- navbar section ends -->
 
-    <index-component></index-component>
-
+    <h1>lavisco</h1>
 </div>
 
 @endsection

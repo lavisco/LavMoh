@@ -19,8 +19,8 @@ class CreateCartProductVariationTable extends Migration
             $table->decimal('price', 14, 2);
 			$table->integer('quantity');
 			$table->decimal('total', 14, 2);
-			$table->foreignId('cart_product_id')->constrained()->onDelete('cascade');
 			$table->foreignId('product_variation_id')->constrained()->onDelete('cascade');
+            $table->foreignId('cart_product_id')->references('id')->on('cart_product')->onDelete('cascade');
         });
     }
 

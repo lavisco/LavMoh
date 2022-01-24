@@ -35,7 +35,7 @@
                                             class="fas fa-plus mr-2"
                                             aria-hidden="true"
                                         ></i>
-                                        Add Product
+                                        Add
                                     </button>
                                 </router-link>
                             </div>

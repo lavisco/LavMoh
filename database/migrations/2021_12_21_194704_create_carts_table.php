@@ -19,12 +19,11 @@ class CreateCartsTable extends Migration
             $table->decimal('total', 14, 2);
 			$table->decimal('subtotal', 14, 2);
 			$table->decimal('tax', 14, 2);
-			$table->decimal('giftwrap_price', 14, 2);
+			$table->decimal('giftwrap_price', 14, 2)->nullable()->default('0.00');
 			$table->decimal('shipping_price', 14, 2);
-			$table->decimal('discount_price', 14, 2)->nullable();
+			$table->decimal('discount_price', 14, 2)->nullable()->default('0.00');
 			$table->string('discount_code')->nullable();
 			$table->foreignId('shop_id')->constrained();
-			//$table->foreignId('user_id')->constrained();
 			$table->foreignId('shipping_id')->constrained();
 			$table->foreignId('order_id')->constrained();
 			$table->foreignId('giftwrap_id')->nullable()->constrained();

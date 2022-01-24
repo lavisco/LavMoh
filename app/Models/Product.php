@@ -105,6 +105,12 @@ class Product extends Model
     {
         return $this->hasMany(ProductVideo::class);
     }
+
+    //product:cart M:M
+    public function carts()
+    {
+        return $this->belongsToMany(Cart::class)->using(CartProduct::class)->withTimestamps();
+    }
     
     public function scopeFilter($query, array $filters)
     {

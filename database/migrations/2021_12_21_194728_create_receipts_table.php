@@ -33,22 +33,14 @@ class CreateReceiptsTable extends Migration
 			$table->decimal('total', 14, 2);
 			$table->decimal('subtotal', 14, 2);
 			$table->decimal('tax', 14, 2);
-			$table->decimal('giftwrap_price', 14, 2);
+			$table->decimal('giftwrap_price', 14, 2)->nullable();
 			$table->decimal('shipping_price', 14, 2);
 			$table->decimal('discount_price', 14, 2)->nullable();
 			
 			$table->foreignId('cart_id')->constrained()->onDelete('cascade');
 			$table->foreignId('shop_id')->constrained()->onDelete('cascade');
-			$table->unsignedBigInteger('seller_id');
-			$table->unsignedBigInteger('buyer_id');
-            $table
-                ->foreign('seller_id')
-                ->references('id')
-                ->on('users');
-			$table
-                ->foreign('buyer_id')
-                ->references('id')
-                ->on('users');
+			$table->foreignId('seller_id')->references('id')->on('users');
+            $table->foreignId('buyer_id')->references('id')->on('users');
         });
     }
 

@@ -1,23 +1,11 @@
-<nav class="navbar navbar-expand-lg d-flex justify-content-between">
+<nav class="navbar navbar-expand-lg d-flex justify-content-between align-items-center">
     <div class="container-fluid">
         <router-link to="/seller/dashboard" class="navbar-brand">
             <img src="/images/lavisco/logo.png" />
         </router-link>
 
-        <button
-            class="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-        >
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <h3>@{{ $route.meta.title ? $route.meta.title : "BugTrack" }}</h3>
+        <div class="">
+            <h3 class="mb-0">@{{ $route.meta.title ? $route.meta.title : "BugTrack" }}</h3>
         </div>
 
         <div class="d-flex nav-user-options justify-content-end">

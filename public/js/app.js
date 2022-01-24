@@ -2521,6 +2521,45 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   mounted: function mounted() {}
 });
@@ -2745,6 +2784,59 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
  // import style (<= Swiper 5.x)
 
 
@@ -2764,11 +2856,30 @@ __webpack_require__.r(__webpack_exports__);
       categories: [],
       swiperOption: {
         slidesPerView: 4,
-        spaceBetween: 20 // pagination: {
-        //     el: ".swiper-pagination",
-        //     clickable: true,
-        // },
-
+        spaceBetween: 20,
+        freeMode: true,
+        pagination: {
+          el: ".product-pagination",
+          clickable: true
+        },
+        breakpoints: {
+          1024: {
+            slidesPerView: 4,
+            spaceBetween: 20
+          },
+          768: {
+            slidesPerView: 2,
+            spaceBetween: 10
+          },
+          640: {
+            slidesPerView: 1,
+            spaceBetween: 10
+          },
+          320: {
+            slidesPerView: 1,
+            spaceBetween: 10
+          }
+        }
       },
       swiperOptionTop: {
         loop: true,
@@ -2833,28 +2944,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -17596,9 +17685,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      users: "",
-      sellers: "",
-      buyers: "",
+      revenue: "",
+      orders: "",
       products: ""
     };
   },
@@ -17606,11 +17694,10 @@ __webpack_require__.r(__webpack_exports__);
     loadData: function loadData() {
       var _this = this;
 
-      axios.get("/api/admin/dashboard").then(function (_ref) {
+      axios.get("/api/seller/dashboard").then(function (_ref) {
         var data = _ref.data;
-        _this.users = data.users;
-        _this.sellers = data.sellers;
-        _this.buyers = data.buyers;
+        //this.revenue = data.revenue;
+        _this.orders = data.orders;
         _this.products = data.products;
       })["catch"](function (error) {
         return console.log(error);
@@ -22691,15 +22778,14 @@ var routes = [
 /*
  ** Website Routes
  */
-// {
-//     path: "/lavisco/",
-//     name: "index",
-//     component: require("./components/Index.vue").default,
-//     meta: {
-//         title: "Lavisco",
-//     },
-// },
 {
+  path: "/lavisco/home",
+  name: "index",
+  component: (__webpack_require__(/*! ./components/Index.vue */ "./resources/js/components/Index.vue")["default"]),
+  meta: {
+    title: "Lavisco"
+  }
+}, {
   path: "/lavisco/products",
   name: "products",
   component: (__webpack_require__(/*! ./components/Products.vue */ "./resources/js/components/Products.vue")["default"]),
@@ -22833,13 +22919,10 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_1_
     cartProducts: function cartProducts(state) {
       var sum = 0;
       return state.cart.map(function (cartItem) {
-        var product = state.products.find(function (product) {
-          return product.id === cartItem.id;
-        });
         return {
-          id: product.id,
-          title: product.title,
-          price: product.base_price,
+          id: cartItem.id,
+          title: cartItem.title,
+          price: cartItem.price,
           quantity: cartItem.quantity
         };
       });
@@ -22847,19 +22930,13 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_1_
     cartTotal: function cartTotal(state) {
       var sum = 0;
       state.cart.map(function (cartItem) {
-        var product = state.products.find(function (product) {
-          return product.id === cartItem.id;
-        });
-        sum += product.base_price * cartItem.quantity;
+        sum += cartItem.price * cartItem.quantity;
       });
       return sum.toFixed(2);
     }
   },
   actions: {
     //methods
-    fetchProducts: function fetchProducts() {//make the call
-      //run setProducts mutation
-    },
     addProductToCart: function addProductToCart(context, product) {
       var cartItem = context.state.cart.find(function (item) {
         return item.id === product.id;
@@ -74660,101 +74737,158 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("footer", { staticClass: "footer mt-auto" }, [
+    _c("div", { staticClass: "container-fluid" }, [
+      _c("div", { staticClass: "row" }, [
+        _c(
+          "div",
+          {
+            staticClass:
+              "\n                    col-md-3\n                    d-flex\n                    flex-column\n                    align-items-center\n                    order-md-1 order-2\n                    mb-5 mb-md-0\n                ",
+          },
+          [
+            _c("div", { staticClass: "d-flex footer-link-big mb-2" }, [
+              _c(
+                "svg",
+                {
+                  attrs: {
+                    xmlns: "http://www.w3.org/2000/svg",
+                    fill: "none",
+                    width: "33",
+                    height: "33",
+                    viewBox: "0 0 55000 55000",
+                  },
+                },
+                [
+                  _c("path", {
+                    attrs: {
+                      d: "M44650 8000h-34300a7370 7370 0 00-5197 2142A7293 7293 0 00 3000 15312v24376a7290 7290 0 00 2153 5170A7369 7369 0 00 10350 47000h34300a7370 7370 0 00 5197-2142A7293 7293 0 00 52000 39688V15311a7290 7290 0 00-2153-5170A7370 7370 0 00 44650 8000zm-1642 4875L27500 24453 11992 12875h31016zm1642 29250h-34300c-650 0-1273-257-1732-714a2431 2431 0 01-718-1724V15922L26030 29450a2459 2459 0 00 2940 0L47100 15922v23765a2430 2430 0 01-718 1724 2456 2456 0 01-1732 717",
+                      fill: "#4e4e4e",
+                    },
+                  }),
+                ]
+              ),
+              _vm._v(
+                "\n\n                    help@lavisco.lk\n                "
+              ),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "d-flex footer-link-big" }, [
+              _c(
+                "svg",
+                {
+                  attrs: {
+                    xmlns: "http://www.w3.org/2000/svg",
+                    fill: "none",
+                    width: "33",
+                    height: "33",
+                    viewBox: "0 0 5500 5500",
+                  },
+                },
+                [
+                  _c("path", {
+                    attrs: {
+                      d: "M2945 1970a585 585 0 01 585 585 195 195 0 10 390 0 975 975 0 00-975-975 195 195 0 00 0 390",
+                      fill: "#333",
+                    },
+                  }),
+                  _vm._v(" "),
+                  _c("path", {
+                    attrs: {
+                      d: "M2945 1190A1365 1365 0 01 4310 2555a195 195 0 00 390 0A1755 1755 0 00 2945 800a195 195 0 00 0 390zm1706.2 2322.4a195 195 0 00-140.4-126.7l-1170-267.2a195 195 0 00-179.4 50.7c-27.3 25.4-29.2 27.3-156 269.1a1932.5 1932.5 0 01-949.6-953.5c247.7-124.8 249.6-124.8 275-154a195.1 195.1 0 00 50.6-179.4L2114.4 995a195 195 0 00-126.7-140.4 739.2 739.2 0 00-140.5-35A768.3 768.3 0 00 1697 800 897 897 0 00 800 1697 3006.9 3006.9 0 00 3803 4700 897 897 0 00 4700 3803a930 930 0 00-11.7-148.2 846.8 846.8 0 00-37-142.4",
+                      fill: "#4e4e4e",
+                    },
+                  }),
+                ]
+              ),
+              _vm._v(
+                "\n\n                    +94 77 700 9826\n                "
+              ),
+            ]),
+          ]
+        ),
+        _vm._v(" "),
+        _vm._m(0),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "col-md-3 order-md-3 order-1 mb-5 mb-md-0" },
+          [
+            _c("router-link", { attrs: { to: "/lavisco/home" } }, [
+              _c("img", {
+                staticClass: "footer-logo",
+                attrs: { src: "/images/lavisco/logo.png" },
+              }),
+            ]),
+          ],
+          1
+        ),
+      ]),
+    ]),
+  ])
 }
 var staticRenderFns = [
   function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("footer", { staticClass: "footer mt-auto" }, [
-      _c("div", { staticClass: "container-fluid" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-md-3" }, [
-            _c(
-              "div",
-              { staticClass: "d-flex footer-link-big align-items-center" },
-              [
-                _c("img", { attrs: { src: "/images/lavisco/ic-email.svg" } }),
-                _vm._v(
-                  "\n                    help@lavisco.lk\n                "
-                ),
-              ]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "d-flex footer-link-big" }, [
-              _c("img", { attrs: { src: "/images/lavisco/ic-phone.svg" } }),
-              _vm._v("\n                    +94 77 700 9826\n                "),
-            ]),
+    return _c(
+      "div",
+      { staticClass: "col-md-6 row order-md-2 order-3 mb-5 mb-md-0" },
+      [
+        _c("div", { staticClass: "col-md-4 d-flex flex-column" }, [
+          _c("h6", [_vm._v("Get to know Us")]),
+          _vm._v(" "),
+          _c("a", { attrs: { href: "" } }, [_vm._v("FAQ")]),
+          _vm._v(" "),
+          _c("a", { attrs: { href: "" } }, [_vm._v("About us")]),
+          _vm._v(" "),
+          _c("a", { attrs: { href: "" } }, [_vm._v("Contact us")]),
+          _vm._v(" "),
+          _c("a", { attrs: { href: "" } }, [_vm._v("Partner Vendors")]),
+          _vm._v(" "),
+          _c("a", { attrs: { href: "" } }, [_vm._v("Sell on lavisco")]),
+          _vm._v(" "),
+          _c("a", { attrs: { href: "" } }, [_vm._v("Announcements")]),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-4 d-flex flex-column mt-4 mt-md-0" }, [
+          _c("h6", [_vm._v("Policies")]),
+          _vm._v(" "),
+          _c("a", { attrs: { href: "/terms_and_conditions" } }, [
+            _vm._v("Terms & Conditions"),
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-md-6 d-flex" }, [
-            _c("div", { staticClass: "col-md-4 d-flex flex-column" }, [
-              _c("h6", [_vm._v("Get to know Us")]),
-              _vm._v(" "),
-              _c("a", { attrs: { href: "" } }, [_vm._v("FAQ")]),
-              _vm._v(" "),
-              _c("a", { attrs: { href: "" } }, [_vm._v("About us")]),
-              _vm._v(" "),
-              _c("a", { attrs: { href: "" } }, [_vm._v("Contact us")]),
-              _vm._v(" "),
-              _c("a", { attrs: { href: "" } }, [_vm._v("Partner Vendors")]),
-              _vm._v(" "),
-              _c("a", { attrs: { href: "" } }, [_vm._v("Sell on lavisco")]),
-              _vm._v(" "),
-              _c("a", { attrs: { href: "" } }, [_vm._v("Announcements")]),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-md-4 d-flex flex-column" }, [
-              _c("h6", [_vm._v("Policies")]),
-              _vm._v(" "),
-              _c("a", { attrs: { href: "/terms_and_conditions" } }, [
-                _vm._v("Terms & Conditions"),
-              ]),
-              _vm._v(" "),
-              _c("a", { attrs: { href: "/privacy_policy" } }, [
-                _vm._v("Privacy"),
-              ]),
-              _vm._v(" "),
-              _c("a", { attrs: { href: "/delivery_policy" } }, [
-                _vm._v("Delivery"),
-              ]),
-              _vm._v(" "),
-              _c("a", { attrs: { href: "/cookie_policy" } }, [
-                _vm._v("Cookie"),
-              ]),
-              _vm._v(" "),
-              _c("a", { attrs: { href: "" } }, [_vm._v("Payment")]),
-              _vm._v(" "),
-              _c("a", { attrs: { href: "/returns_refunds_policy" } }, [
-                _vm._v("Return & Refunds"),
-              ]),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-md-4 d-flex flex-column" }, [
-              _c("h6", [_vm._v("Let Us Help You")]),
-              _vm._v(" "),
-              _c("a", { attrs: { href: "" } }, [_vm._v("Size chart")]),
-              _vm._v(" "),
-              _c("a", { attrs: { href: "" } }, [_vm._v("Design services")]),
-              _vm._v(" "),
-              _c("a", { attrs: { href: "" } }, [_vm._v("Order in Bulk")]),
-              _vm._v(" "),
-              _c("a", { attrs: { href: "" } }, [
-                _vm._v("Midnight suprise delivery"),
-              ]),
-            ]),
+          _c("a", { attrs: { href: "/privacy_policy" } }, [_vm._v("Privacy")]),
+          _vm._v(" "),
+          _c("a", { attrs: { href: "/delivery_policy" } }, [
+            _vm._v("Delivery"),
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-md-3" }, [
-            _c("img", {
-              staticClass: "footer-logo",
-              attrs: { src: "/images/lavisco/logo.png" },
-            }),
+          _c("a", { attrs: { href: "/cookie_policy" } }, [_vm._v("Cookie")]),
+          _vm._v(" "),
+          _c("a", { attrs: { href: "" } }, [_vm._v("Payment")]),
+          _vm._v(" "),
+          _c("a", { attrs: { href: "/returns_refunds_policy" } }, [
+            _vm._v("Return & Refunds"),
           ]),
         ]),
-      ]),
-    ])
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-4 d-flex flex-column mt-4 mt-md-0" }, [
+          _c("h6", [_vm._v("Let Us Help You")]),
+          _vm._v(" "),
+          _c("a", { attrs: { href: "" } }, [_vm._v("Size chart")]),
+          _vm._v(" "),
+          _c("a", { attrs: { href: "" } }, [_vm._v("Design services")]),
+          _vm._v(" "),
+          _c("a", { attrs: { href: "" } }, [_vm._v("Order in Bulk")]),
+          _vm._v(" "),
+          _c("a", { attrs: { href: "" } }, [
+            _vm._v("Midnight suprise delivery"),
+          ]),
+        ]),
+      ]
+    )
   },
 ]
 render._withStripped = true
@@ -74926,7 +75060,7 @@ var render = function () {
             }),
             _vm._v(" "),
             _c("div", {
-              staticClass: "swiper-pagination",
+              staticClass: "swiper-pagination product-pagination",
               attrs: { slot: "pagination" },
               slot: "pagination",
             }),
@@ -74974,34 +75108,58 @@ var render = function () {
     _c("section", { staticClass: "section-special" }, [
       _c("h1", [_vm._v("Gifts and Crafts for Every Occasion & Recipient")]),
       _vm._v(" "),
-      _c("div", { staticClass: "d-flex card-container" }, [
-        _c("div", { staticClass: "card item-card col-50 item-card-occasion" }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _vm.occasions[0]
-            ? _c(
-                "div",
-                { staticClass: "card-button-container" },
-                _vm._l(10, function (n, index) {
-                  return _c("a", { attrs: { href: "" } }, [
-                    _c("button", { staticClass: "bg-black" }, [
-                      _vm._v(
-                        "\n                            " +
-                          _vm._s(_vm.occasions[index].name) +
-                          "\n                        "
-                      ),
-                    ]),
-                  ])
-                }),
-                0
-              )
-            : _vm._e(),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-md-6" }, [
+          _c(
+            "div",
+            { staticClass: "card item-card item-card-occasion mb-md-0 mb-5" },
+            [
+              _vm._m(0),
+              _vm._v(" "),
+              _vm.occasions[0]
+                ? _c(
+                    "div",
+                    { staticClass: "card-button-container" },
+                    _vm._l(10, function (n, index) {
+                      return _c(
+                        "a",
+                        { attrs: { href: "" } },
+                        [
+                          _c(
+                            "router-link",
+                            {
+                              attrs: {
+                                to: {
+                                  name: "occasions/occasion",
+                                  params: {
+                                    occasionId: _vm.occasions[index].id,
+                                  },
+                                },
+                              },
+                            },
+                            [
+                              _c("button", { staticClass: "bg-black" }, [
+                                _vm._v(
+                                  "\n                                    " +
+                                    _vm._s(_vm.occasions[index].name) +
+                                    "\n                                "
+                                ),
+                              ]),
+                            ]
+                          ),
+                        ],
+                        1
+                      )
+                    }),
+                    0
+                  )
+                : _vm._e(),
+            ]
+          ),
         ]),
         _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "card item-card col-50 item-card-recipient" },
-          [
+        _c("div", { staticClass: "col-md-6" }, [
+          _c("div", { staticClass: "card item-card item-card-recipient" }, [
             _vm._m(1),
             _vm._v(" "),
             _vm.recipients[0]
@@ -75009,21 +75167,41 @@ var render = function () {
                   "div",
                   { staticClass: "card-button-container" },
                   _vm._l(10, function (n, index) {
-                    return _c("a", { attrs: { href: "" } }, [
-                      _c("button", { staticClass: "bg-black" }, [
-                        _vm._v(
-                          "\n                            " +
-                            _vm._s(_vm.recipients[index].name) +
-                            "\n                        "
+                    return _c(
+                      "a",
+                      { attrs: { href: "" } },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            attrs: {
+                              to: {
+                                name: "recipients/recipient",
+                                params: {
+                                  recipientId: _vm.recipients[index].id,
+                                },
+                              },
+                            },
+                          },
+                          [
+                            _c("button", { staticClass: "bg-black" }, [
+                              _vm._v(
+                                "\n                                    " +
+                                  _vm._s(_vm.recipients[index].name) +
+                                  "\n                                "
+                              ),
+                            ]),
+                          ]
                         ),
-                      ]),
-                    ])
+                      ],
+                      1
+                    )
                   }),
                   0
                 )
               : _vm._e(),
-          ]
-        ),
+          ]),
+        ]),
       ]),
     ]),
     _vm._v(" "),
@@ -75045,7 +75223,9 @@ var staticRenderFns = [
       _c("div", { staticClass: "card-img-text-container" }, [
         _c("div", { staticClass: "card-img-text" }, [
           _c("a", { attrs: { href: "/lavisco/occasions" } }, [
-            _vm._v("Order by Occasion"),
+            _vm._v(
+              "\n                                    Order by Occasion\n                                "
+            ),
           ]),
         ]),
       ]),
@@ -75058,7 +75238,11 @@ var staticRenderFns = [
     return _c("div", { staticClass: "card-img" }, [
       _c("div", { staticClass: "card-img-text-container" }, [
         _c("div", { staticClass: "card-img-text" }, [
-          _vm._v("Order by Recipient"),
+          _c("a", { attrs: { href: "/lavisco/recipients" } }, [
+            _vm._v(
+              "\n                                    Order by Recipient\n                                "
+            ),
+          ]),
         ]),
       ]),
     ])
@@ -75092,10 +75276,8 @@ var staticRenderFns = [
     return _c("section", { staticClass: "section-instruction" }, [
       _c("h1", [_vm._v("How Lavisco Works")]),
       _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "d-flex justify-content-center card-container px-4" },
-        [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-md-3 mb-md-0 mb-5" }, [
           _c(
             "div",
             { staticClass: "card instruction-card instruction-card-1 bg-blue" },
@@ -75104,16 +75286,19 @@ var staticRenderFns = [
               _vm._v(" "),
               _c("p", [
                 _vm._v(
-                  "\n                    Browse through our wide range of products for any\n                    occasion and pick your choice.\n                "
+                  "\n                        Browse through our wide range of products for any\n                        occasion and pick your choice.\n                    "
                 ),
               ]),
             ]
           ),
-          _vm._v(" "),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-3 mb-md-0 mb-5" }, [
           _c(
             "div",
             {
-              staticClass: "card instruction-card instruction-card-2 bg-purple",
+              staticClass:
+                "\n                        card\n                        instruction-card instruction-card-2\n                        bg-purple\n                    ",
             },
             [
               _c("h1", [_vm._v("2")]),
@@ -75121,19 +75306,21 @@ var staticRenderFns = [
               _c("div", [
                 _c("p", [
                   _vm._v(
-                    "\n                        Get creative and add a personal touch to your\n                        products by choosing custom options.\n                    "
+                    "\n                            Get creative and add a personal touch to your\n                            products by choosing custom options.\n                        "
                   ),
                 ]),
                 _vm._v(" "),
                 _c("span", { staticClass: "text-sm" }, [
                   _vm._v(
-                    "Skip this step if you don't want to\n                        personalise"
+                    "Skip this step if you don't want to\n                            personalise"
                   ),
                 ]),
               ]),
             ]
           ),
-          _vm._v(" "),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-3 mb-md-0 mb-5" }, [
           _c(
             "div",
             { staticClass: "card instruction-card instruction-card-3 bg-pink" },
@@ -75142,38 +75329,41 @@ var staticRenderFns = [
               _vm._v(" "),
               _c("p", [
                 _vm._v(
-                  "\n                    Choose from one of the many easy payment options &\n                    finalize your order!\n                "
+                  "\n                        Choose from one of the many easy payment options &\n                        finalize your order!\n                    "
                 ),
               ]),
             ]
           ),
-          _vm._v(" "),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-3" }, [
           _c(
             "div",
             {
-              staticClass: "card instruction-card instruction-card-4 bg-orange",
+              staticClass:
+                "\n                        card\n                        instruction-card instruction-card-4\n                        bg-orange\n                    ",
             },
             [
               _c("h1", [_vm._v("4")]),
               _vm._v(" "),
               _c("p", [
-                _vm._v("\n                    Sit back & relax!!! "),
+                _vm._v("\n                        Sit back & relax!!! "),
                 _c("br"),
                 _vm._v(
-                  "\n                    We will deliver your order right to your door step with\n                    no hustle.\n                "
+                  "\n                        We will deliver your order right to your door step\n                        with no hustle.\n                    "
                 ),
               ]),
             ]
           ),
-        ]
-      ),
+        ]),
+      ]),
     ])
   },
   function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("section", { staticClass: "section-shortcuts row" }, [
+    return _c("section", { staticClass: "section-shortcuts row mb-5" }, [
       _c("div", { staticClass: "col-md-6 py-4" }, [
         _c("h1", [_vm._v("Want to Learn more?")]),
         _vm._v(" "),
@@ -75220,19 +75410,21 @@ var render = function () {
     "nav",
     { staticClass: "navbar navbar-expand-lg d-flex justify-content-between" },
     [
-      _vm._m(0),
-      _vm._v(" "),
-      _vm._m(1),
+      _c(
+        "router-link",
+        { staticClass: "navbar-brand", attrs: { to: "/lavisco/home" } },
+        [_c("img", { attrs: { src: "/images/lavisco/logo.png" } })]
+      ),
       _vm._v(" "),
       _c(
         "div",
         {
-          staticClass: "collapse navbar-collapse",
+          staticClass: "navbar-main-menu",
           attrs: { id: "navbarSupportedContent" },
         },
         [
           _c("ul", { staticClass: "navbar-nav" }, [
-            _c("li", { staticClass: "nav-item" }, [
+            _c("li", { staticClass: "nav-item mr-3" }, [
               _c("div", { staticClass: "dropdown show" }, [
                 _c(
                   "a",
@@ -75269,7 +75461,7 @@ var render = function () {
                           "div",
                           { staticClass: "dropdown-menu-col" },
                           [
-                            _vm._m(2),
+                            _vm._m(0),
                             _vm._v(" "),
                             _vm._l(_vm.categories, function (category) {
                               return _c(
@@ -75312,7 +75504,7 @@ var render = function () {
                           "div",
                           { staticClass: "dropdown-menu-col" },
                           [
-                            _vm._m(3),
+                            _vm._m(1),
                             _vm._v(" "),
                             _vm._l(_vm.recipients, function (recipient) {
                               return _c(
@@ -75357,9 +75549,7 @@ var render = function () {
               ]),
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "nav-item-divider" }),
-            _vm._v(" "),
-            _vm._m(4),
+            _vm._m(2),
           ]),
         ]
       ),
@@ -75386,49 +75576,31 @@ var render = function () {
                   "svg",
                   {
                     attrs: {
+                      xmlns: "http://www.w3.org/2000/svg",
+                      fill: "none",
                       width: "78",
                       height: "79",
-                      viewBox: "0 0 78 79",
-                      fill: "none",
-                      xmlns: "http://www.w3.org/2000/svg",
+                      viewBox: "0 0 78000 79000",
                     },
                   },
                   [
-                    _c(
-                      "g",
-                      { attrs: { filter: "url(#filter0_d_2202_1029)" } },
-                      [
-                        _c("rect", {
-                          attrs: {
-                            x: "10",
-                            y: "10",
-                            width: "58",
-                            height: "59",
-                            rx: "12",
-                            fill: "white",
-                          },
-                        }),
-                      ]
-                    ),
+                    _c("g", { attrs: { filter: "url(#a)" } }, [
+                      _c("rect", {
+                        attrs: {
+                          fill: "#fff",
+                          width: "58000",
+                          height: "59000",
+                          x: "10000",
+                          y: "10000",
+                          rx: "12000",
+                        },
+                      }),
+                    ]),
                     _vm._v(" "),
                     _c("path", {
                       attrs: {
-                        d: "M24.5575 21.52C24.0103 21.52 23.4854 21.7374 23.0985 22.1244C22.7115 22.5113 22.4941 23.0362 22.4941 23.5834C22.4941 24.1306 22.7115 24.6555 23.0985 25.0424C23.4854 25.4294 24.0103 25.6468 24.5575 25.6468H27.0748L27.7042 28.1682C27.7104 28.1973 27.7173 28.2261 27.7248 28.2549L30.5269 39.459L28.6843 41.2996C26.0844 43.8994 27.925 48.3439 31.6019 48.3439H49.318C49.8653 48.3439 50.3901 48.1265 50.7771 47.7396C51.164 47.3526 51.3814 46.8278 51.3814 46.2805C51.3814 45.7333 51.164 45.2085 50.7771 44.8215C50.3901 44.4346 49.8653 44.2172 49.318 44.2172H31.6019L33.6653 42.1538H47.2547C47.6378 42.1536 48.0132 42.0467 48.339 41.8452C48.6648 41.6437 48.9281 41.3554 49.0993 41.0127L55.2895 28.6325C55.4466 28.318 55.5208 27.9685 55.505 27.6173C55.4892 27.2661 55.3839 26.9247 55.1991 26.6256C55.0143 26.3265 54.7561 26.0796 54.4491 25.9083C54.1421 25.737 53.7964 25.647 53.4448 25.6468H31.3254L30.6857 23.082C30.574 22.6358 30.3163 22.2397 29.9537 21.9567C29.5911 21.6737 29.1443 21.52 28.6843 21.52H24.5575Z",
-                        fill: "#333333",
-                      },
-                    }),
-                    _vm._v(" "),
-                    _c("path", {
-                      attrs: {
-                        d: "M51.3814 53.5023C51.3814 54.3232 51.0553 55.1104 50.4749 55.6908C49.8945 56.2713 49.1072 56.5974 48.2863 56.5974C47.4655 56.5974 46.6782 56.2713 46.0978 55.6908C45.5174 55.1104 45.1913 54.3232 45.1913 53.5023C45.1913 52.6814 45.5174 51.8942 46.0978 51.3138C46.6782 50.7333 47.4655 50.4072 48.2863 50.4072C49.1072 50.4072 49.8945 50.7333 50.4749 51.3138C51.0553 51.8942 51.3814 52.6814 51.3814 53.5023Z",
-                        fill: "#333333",
-                      },
-                    }),
-                    _vm._v(" "),
-                    _c("path", {
-                      attrs: {
-                        d: "M31.7794 56.5974C32.6003 56.5974 33.3875 56.2713 33.9679 55.6908C34.5484 55.1104 34.8745 54.3232 34.8745 53.5023C34.8745 52.6814 34.5484 51.8942 33.9679 51.3138C33.3875 50.7333 32.6003 50.4072 31.7794 50.4072C30.9585 50.4072 30.1713 50.7333 29.5908 51.3138C29.0104 51.8942 28.6843 52.6814 28.6843 53.5023C28.6843 54.3232 29.0104 55.1104 29.5908 55.6908C30.1713 56.2713 30.9585 56.5974 31.7794 56.5974V56.5974Z",
-                        fill: "#333333",
+                        d: "M24558 21520a2063 2063 0 10 0 4127h2517l630 2521c5 30 12 58 20 87l2802 11204-1843 1840c-2600 2600-760 7043 2918 7043h17716a2064 2064 0 00 0-4127H31602l2063-2063h13590a2063 2063 0 00 1844-1141l6189-12380a2064 2064 0 00-1845-2986h-22120l-640-2565a2063 2063 0 00-2000-1562h-4127zM51380 53502a3095 3095 0 11-6190 0 3095 3095 0 01 6190 0zm-19600 3095a3095 3095 0 10 0-6189 3095 3095 0 00 0 6190",
+                        fill: "#333",
                       },
                     }),
                     _vm._v(" "),
@@ -75437,13 +75609,13 @@ var render = function () {
                         "filter",
                         {
                           attrs: {
-                            id: "filter0_d_2202_1029",
+                            id: "a",
+                            width: "78000",
+                            height: "79000",
                             x: "0",
                             y: "0",
-                            width: "78",
-                            height: "79",
-                            filterUnits: "userSpaceOnUse",
                             "color-interpolation-filters": "sRGB",
+                            filterUnits: "userSpaceOnUse",
                           },
                         },
                         [
@@ -75457,10 +75629,10 @@ var render = function () {
                           _c("feColorMatrix", {
                             attrs: {
                               in: "SourceAlpha",
+                              result: "hardAlpha",
                               type: "matrix",
                               values:
                                 "0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0",
-                              result: "hardAlpha",
                             },
                           }),
                           _vm._v(" "),
@@ -75480,17 +75652,17 @@ var render = function () {
                           _vm._v(" "),
                           _c("feBlend", {
                             attrs: {
-                              mode: "normal",
                               in2: "BackgroundImageFix",
+                              mode: "normal",
                               result: "effect1_dropShadow_2202_1029",
                             },
                           }),
                           _vm._v(" "),
                           _c("feBlend", {
                             attrs: {
-                              mode: "normal",
                               in: "SourceGraphic",
                               in2: "effect1_dropShadow_2202_1029",
+                              mode: "normal",
                               result: "shape",
                             },
                           }),
@@ -75519,33 +75691,33 @@ var render = function () {
               "svg",
               {
                 attrs: {
+                  xmlns: "http://www.w3.org/2000/svg",
+                  fill: "none",
                   width: "78",
                   height: "79",
-                  viewBox: "0 0 78 79",
-                  fill: "none",
-                  xmlns: "http://www.w3.org/2000/svg",
+                  viewBox: "0 0 780 790",
                 },
               },
               [
-                _c("g", { attrs: { filter: "url(#filter0_d_2202_1045)" } }, [
+                _c("g", { attrs: { filter: "url(#a)" } }, [
                   _c("rect", {
                     attrs: {
-                      x: "10",
-                      y: "10",
-                      width: "58",
-                      height: "59",
-                      rx: "12",
-                      fill: "white",
+                      fill: "#fff",
+                      width: "580",
+                      height: "590",
+                      x: "100",
+                      y: "100",
+                      rx: "120",
                     },
                   }),
                 ]),
                 _vm._v(" "),
                 _c("path", {
                   attrs: {
+                    d: "M246.25 562.5s-28.75 0-28.75-28.75 28.75-115 172.5-115 172.5 86.25 172.5 115-28.75 28.75-28.75 28.75h-287.5zM390 390a86.25 86.25 0 10 0-172.5A86.25 86.25 0 00 390 390",
+                    fill: "#333",
                     "fill-rule": "evenodd",
                     "clip-rule": "evenodd",
-                    d: "M24.625 56.25C24.625 56.25 21.75 56.25 21.75 53.375C21.75 50.5 24.625 41.875 39 41.875C53.375 41.875 56.25 50.5 56.25 53.375C56.25 56.25 53.375 56.25 53.375 56.25H24.625ZM39 39C41.2875 39 43.4813 38.0913 45.0988 36.4738C46.7163 34.8563 47.625 32.6625 47.625 30.375C47.625 28.0875 46.7163 25.8937 45.0988 24.2762C43.4813 22.6587 41.2875 21.75 39 21.75C36.7125 21.75 34.5187 22.6587 32.9012 24.2762C31.2837 25.8937 30.375 28.0875 30.375 30.375C30.375 32.6625 31.2837 34.8563 32.9012 36.4738C34.5187 38.0913 36.7125 39 39 39Z",
-                    fill: "#333333",
                   },
                 }),
                 _vm._v(" "),
@@ -75554,13 +75726,13 @@ var render = function () {
                     "filter",
                     {
                       attrs: {
-                        id: "filter0_d_2202_1045",
+                        id: "a",
+                        width: "780",
+                        height: "790",
                         x: "0",
                         y: "0",
-                        width: "78",
-                        height: "79",
-                        filterUnits: "userSpaceOnUse",
                         "color-interpolation-filters": "sRGB",
+                        filterUnits: "userSpaceOnUse",
                       },
                     },
                     [
@@ -75574,9 +75746,9 @@ var render = function () {
                       _c("feColorMatrix", {
                         attrs: {
                           in: "SourceAlpha",
+                          result: "hardAlpha",
                           type: "matrix",
                           values: "0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0",
-                          result: "hardAlpha",
                         },
                       }),
                       _vm._v(" "),
@@ -75593,17 +75765,17 @@ var render = function () {
                       _vm._v(" "),
                       _c("feBlend", {
                         attrs: {
-                          mode: "normal",
                           in2: "BackgroundImageFix",
+                          mode: "normal",
                           result: "effect1_dropShadow_2202_1045",
                         },
                       }),
                       _vm._v(" "),
                       _c("feBlend", {
                         attrs: {
-                          mode: "normal",
                           in: "SourceGraphic",
                           in2: "effect1_dropShadow_2202_1045",
+                          mode: "normal",
                           result: "shape",
                         },
                       }),
@@ -75616,38 +75788,11 @@ var render = function () {
           ]),
         ]
       ),
-    ]
+    ],
+    1
   )
 }
 var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", { staticClass: "navbar-brand", attrs: { href: "/" } }, [
-      _c("img", { attrs: { src: "/images/lavisco/logo.png" } }),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "navbar-toggler",
-        attrs: {
-          type: "button",
-          "data-toggle": "collapse",
-          "data-target": "#navbarSupportedContent",
-          "aria-controls": "navbarSupportedContent",
-          "aria-expanded": "false",
-          "aria-label": "Toggle navigation",
-        },
-      },
-      [_c("span", { staticClass: "navbar-toggler-icon" })]
-    )
-  },
   function () {
     var _vm = this
     var _h = _vm.$createElement
@@ -99989,52 +100134,45 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("div", { staticClass: "container-fluid mt-5 mb-5" }, [
-        _c("div", { staticClass: "col" }, [
-          _c("div", { staticClass: "row d-flex justify-content-center gap" }, [
-            _c("div", { staticClass: "card dashboard-card" }, [
-              _c("h4", { staticClass: "mb-3" }, [_vm._v("Total Products")]),
-              _vm._v(" "),
-              _c("p", { staticClass: "mb-2" }, [
-                _vm._v("All the listed products"),
-              ]),
-              _vm._v(" "),
-              _c("h2", [_vm._v("7")]),
+  return _c("div", [
+    _c("div", { staticClass: "container-fluid mt-5 mb-5" }, [
+      _c("div", { staticClass: "col" }, [
+        _c("div", { staticClass: "row d-flex justify-content-center gap" }, [
+          _c("div", { staticClass: "card dashboard-card" }, [
+            _c("h4", { staticClass: "mb-3" }, [_vm._v("Total Products")]),
+            _vm._v(" "),
+            _c("p", { staticClass: "mb-2" }, [
+              _vm._v("All the listed products"),
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "card dashboard-card" }, [
-              _c("h4", { staticClass: "mb-3" }, [_vm._v("New Order")]),
-              _vm._v(" "),
-              _c("p", { staticClass: "mb-2" }, [
-                _vm._v("Orders placed this week"),
-              ]),
-              _vm._v(" "),
-              _c("h2", [_vm._v("1")]),
+            _c("h2", [_vm._v(_vm._s(_vm.products))]),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card dashboard-card" }, [
+            _c("h4", { staticClass: "mb-3" }, [_vm._v("New Order")]),
+            _vm._v(" "),
+            _c("p", { staticClass: "mb-2" }, [
+              _vm._v("Orders placed this week"),
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "card dashboard-card" }, [
-              _c("h4", { staticClass: "mb-3" }, [_vm._v("Total Revenue")]),
-              _vm._v(" "),
-              _c("p", { staticClass: "mb-2" }, [
-                _vm._v("Total amount earned this month"),
-              ]),
-              _vm._v(" "),
-              _c("h2", [_vm._v("100,000")]),
+            _c("h2", [_vm._v(_vm._s(_vm.orders))]),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card dashboard-card" }, [
+            _c("h4", { staticClass: "mb-3" }, [_vm._v("Total Revenue")]),
+            _vm._v(" "),
+            _c("p", { staticClass: "mb-2" }, [
+              _vm._v("Total amount earned this month"),
             ]),
+            _vm._v(" "),
+            _c("h2", [_vm._v(_vm._s(_vm.revenue))]),
           ]),
         ]),
       ]),
-    ])
-  },
-]
+    ]),
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -100286,7 +100424,7 @@ var render = function () {
                             attrs: { "aria-hidden": "true" },
                           }),
                           _vm._v(
-                            "\n                                    Add Product\n                                "
+                            "\n                                    Add\n                                "
                           ),
                         ]
                       ),

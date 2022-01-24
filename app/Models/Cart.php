@@ -21,21 +21,52 @@ class Cart extends Model
         'discount_price',
         'discount_code',
         'shop_id',
-        'user_id',
         'shipping_id',
         'order_id',
         'giftwrap_id',
+        'seller_id',
+        'buyer_id',
     ];
 
-    //user:cart 1:M
-    public function user()
+    //seller:cart 1:M
+    public function seller()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'seller_id');
     }
 
-    //user:cart 1:M
+    //buyer:cart 1:M
+    public function buyer()
+    {
+        return $this->belongsTo(User::class, 'buyer_id');
+    }
+
+    //shop:cart 1:M
     public function shop()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Shop::class);
+    }    
+
+    //shipping:cart 1:M
+    public function shipping()
+    {
+        return $this->belongsTo(Shipping::class);
+    }
+
+    //order:cart 1:M
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
+
+    //giftwrap:cart 1:M
+    public function giftwrap()
+    {
+        return $this->belongsTo(Giftwrap::class);
+    }
+
+    //product:cart M:M
+    public function products()
+    {
+        return $this->belongsToMany(Product::class)->using(CartProduct::class)->withTimestamps();
     }
 }

@@ -30,13 +30,5 @@ class OccasionSeeder extends Seeder
         Occasion::create(['id' => '14','name' => 'Magha Puja','status' => 1]);
         Occasion::create(['id' => '15','name' => 'Mahashivaratri','status' => 1]);
         Occasion::create(['id' => '16','name' => 'Duruthu Perahera','status' => 1]);
-        Occasion::create(['name' => 'Thai Pongal','status' => 1]);
-        Occasion::create(['name' => 'Navam Perahera','status' => 1]);
-        Occasion::create(['name' => 'Maha Sivarathri','status' => 1]);
-        Occasion::create(['name' => 'Sinhala & Tamil New Year','status' => 1]);
-        Occasion::create(['name' => 'Vesak Poya','status' => 1]);
-        Occasion::create(['name' => 'Poson Festival','status' => 1]);
-        Occasion::create(['name' => 'Kandy Esala Poya Perahera','status' => 1]);
-        Occasion::create(['name' => 'Diwali','status' => 1]);
     }
 }

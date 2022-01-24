@@ -19,8 +19,8 @@ class CreateCartProductTable extends Migration
             $table->decimal('base_price', 14, 2);
 			$table->integer('quantity');
 			$table->decimal('total', 14, 2);
-			$table->string('custom_text');
-			$table->string('custom_image');
+			$table->string('custom_text')->nullable();
+			$table->string('custom_image')->nullable();
 			$table->boolean('has_variations');
 			$table->foreignId('cart_id')->constrained()->onDelete('cascade');
 			$table->foreignId('product_id')->constrained()->onDelete('cascade');

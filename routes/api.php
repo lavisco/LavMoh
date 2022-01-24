@@ -23,6 +23,7 @@ use App\Http\Controllers\Api\Admin\VariationController;
 use App\Http\Controllers\Api\Admin\VariationOptionController;
 use App\Http\Controllers\Api\Buyer\BuyerProfileController as BuyerBuyerProfileController;
 use App\Http\Controllers\Api\Buyer\OrderController as BuyerOrderController;
+use App\Http\Controllers\Api\Seller\DashboardController as SellerDashboardController;
 use App\Http\Controllers\Api\Seller\OrderController as SellerOrderController;
 use App\Http\Controllers\Api\Seller\ProductController as SellerProductController;
 use App\Http\Controllers\Api\Seller\ProductImageController as SellerProductImageController;
@@ -105,11 +106,12 @@ Route::prefix('seller')->group(function () {
     Route::apiResource('/productstates', SellerProductStateController::class);
     Route::apiResource('/product_images', SellerProductImageController::class);
     Route::apiResource('/product_variations', SellerProductVariationController::class);
-    Route::apiResource('/product_videos', SellerProductVideoController::class);
+    //Route::apiResource('/product_videos', SellerProductVideoController::class);
     Route::apiResource('/sellerprofile', SellerSellerProfileController::class);
     Route::apiResource('/shop', SellerShopController::class);
     Route::apiResource('/orders', SellerOrderController::class);
     Route::apiResource('/user', SellerUserController::class);
+    Route::apiResource('/dashboard', SellerDashboardController::class);
 });
 
 /*Website routes*/

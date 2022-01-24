@@ -20,9 +20,9 @@ use App\Http\Controllers\Website\HomeController;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+// Route::get('/', function () {
+//     return view('index');
+// });
 
 Route::get('/terms_and_conditions', function () {
     return view('policy_terms_condition');

@@ -98,11 +98,10 @@ h6 {
     font-size: 60px;
     line-height: 90px;
     text-transform: uppercase;
-    text-align: left;
     color: $white;
 }
 .sub-title {
-    text-align: left;
+    text-align: center;
     color: $white;
     text-transform: none;
 }
@@ -132,6 +131,11 @@ button.bg-black:hover {
 }
 .btn-full {
     width: 100%;
+}
+.btn-md-full {
+    @media (min-width: 768px) {
+        width: 100%;
+    }
 }
 .checkout-btn {
     background-color: $black;
@@ -191,6 +195,9 @@ button.bg-black:hover {
 .bg-blue {
     background-color: $lav-blue;
 }
+.bg-l-blue {
+    background-color: $lav-blue;
+}
 .bg-green {
     background-color: $lav-green;
 }
@@ -202,6 +209,18 @@ button.bg-black:hover {
 }
 .black {
     color: $black !important;
+}
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 50px;
+    }
+    h1 {
+        font-size: 28px;
+    }
+    h3 {
+        font-size: 20px;
+    }
 }
 /*---------------------top-ribbon---------------------*/
 .top-ribbon {
@@ -223,13 +242,17 @@ button.bg-black:hover {
 .navbar-brand {
     img {
         width: 180px;
+        @media (max-width: 991.98px) {
+            width: 110px;
+        }
     }
 }
+
 .nav-link {
     font-style: normal;
     font-weight: 500;
     font-size: 20px;
-    padding: 5px;
+    padding: 5px 10px !important;
     text-align: center;
     text-transform: capitalize;
     color: $black;
@@ -250,18 +273,62 @@ button.bg-black:hover {
     margin: 6px 15px 0px 15px;
 }
 .nav-user-options {
-    width: 180px;
+    //width: 180px;
     svg {
         height: 50px;
         width: 50px;
+        filter: drop-shadow(0 0 1px $lav-grey);
         &:hover {
             path {
                 fill: $lav-purple;
             }
         }
+        &:hover,
+        &:focus {
+            filter: drop-shadow(0 0 1px $lav-purple);
+        }
     }
 }
 
+.navbar-main-menu {
+    .navbar-nav {
+        flex-direction: row;
+    }
+    .dropdown-menu {
+        position: absolute;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar-main-menu {
+        width: 100%;
+        order: 2;
+        margin-bottom: 30px;
+        .navbar-nav {
+            flex-direction: row;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .nav-link {
+            padding: 5px 10px;
+        }
+    }
+    .nav-user-options {
+        order: 1;
+    }
+}
+.seller-nav {
+    width: 100%;
+}
+.seller-navbar {
+    .navbar-toggler {
+        background-color: $black;
+        padding: 14px 28px;
+        border-radius: 12px;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+}
 /*---------------------navbar dropdown---------------------*/
 .dropdown-menu {
     border: 1px solid $lav-purple;
@@ -386,6 +453,9 @@ section {
     margin-top: -200px;
     border-radius: 12px;
     padding: 100px;
+    @media (max-width: 768px) {
+        padding: 35px;
+    }
     h1 {
         text-align: left;
         font-weight: 700;
@@ -406,6 +476,11 @@ section {
     border-radius: 21px;
     padding: 30px 25px;
     width: 350px;
+    @media (max-width: 768px) {
+        margin-bottom: -106px;
+        padding: 15px 10px;
+        width: auto;
+    }
     p {
         font-size: 15px;
         font-weight: 500;
@@ -448,12 +523,20 @@ section {
             margin-bottom: 40px;
         }
     }
+    @media (max-width: 768px) {
+        button {
+            font-size: 17px;
+        }
+    }
     button {
         background-color: $lav-pink;
         text-transform: uppercase;
         font-size: 20px;
         font-weight: 600;
         letter-spacing: 0.05rem;
+        @media (max-width: 768px) {
+            font-size: 17px;
+        }
     }
     .section-seller-ribbon {
         font-size: 20px;
@@ -559,6 +642,10 @@ section {
             border-bottom-left-radius: 12px;
             border-bottom-right-radius: 12px;
             padding: 0 20px 10px 20px;
+            a:hover,
+            a:focus {
+                color: $black;
+            }
         }
     }
     img {
@@ -582,14 +669,16 @@ section {
 }
 .item-card-occasion {
     background-color: $lav-green;
+    width: 100%;
     .card-img-text {
         background-color: $lav-green;
     }
 }
 .item-card-recipient {
-    background-color: $lav-blue;
+    background-color: $lav-l-blue;
+    width: 100%;
     .card-img-text {
-        background-color: $lav-blue;
+        background-color: $lav-l-blue;
     }
 }
 .card-button-container {
@@ -619,8 +708,11 @@ section {
 .instruction-card {
     justify-content: space-between;
     height: 420px;
-    width: 21%;
     text-align: center;
+    color: $white;
+    @media (max-width: 768px) {
+        height: auto;
+    }
     h1 {
         text-align: left;
         font-weight: 900;
@@ -671,14 +763,19 @@ footer {
 }
 .footer-link-big {
     font-weight: 500;
-    font-size: 22px;
+    font-size: 20px;
     line-height: 37px;
-    img {
-        height: 35px;
-        margin-right: 20px;
+    color: $dark-grey;
+    svg {
+        margin-right: 15px;
     }
 }
-
+@media (max-width: 768px) {
+    footer,
+    .footer-link-big {
+        text-align: center;
+    }
+}
 /*---------------------login---------------------*/
 .main-block {
     display: block;
@@ -758,6 +855,9 @@ h4 {
     border-radius: 12px;
     transition: all 150ms ease;
     width: 15%;
+    @media (max-width: 991.98px) {
+        width: 100%;
+    }
     &:hover {
         color: $lav-purple;
     }
@@ -765,6 +865,13 @@ h4 {
 .dashboard-topnav {
     .active {
         border: 2px solid #616161;
+    }
+    .navbar-toggler {
+        background-color: $black;
+        padding: 14px 28px;
+        border-radius: 12px;
+        margin-bottom: 10px;
+        text-align: center;
     }
 }
 
@@ -1294,6 +1401,15 @@ h4 {
 .swiper-index-product {
     height: auto !important;
     text-align: left !important;
+
+    .item-card {
+        @media (max-width: 640px) {
+            width: 100%;
+        }
+        @media (min-width: 640px) {
+            width: auto;
+        }
+    }
 
     .swiper-pagination-bullet {
         width: 15px;

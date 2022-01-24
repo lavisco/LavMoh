@@ -44,7 +44,7 @@ class RegisterController extends Controller
             break; 
       
           default:
-            return '/home'; 
+            return '/lavisco/home'; 
           break;
         }
     }

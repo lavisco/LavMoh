@@ -19,13 +19,10 @@ export default new Vuex.Store({
         cartProducts(state) {
             let sum = 0;
             return state.cart.map((cartItem) => {
-                const product = state.products.find(
-                    (product) => product.id === cartItem.id
-                );
                 return {
-                    id: product.id,
-                    title: product.title,
-                    price: product.base_price,
+                    id: cartItem.id,
+                    title: cartItem.title,
+                    price: cartItem.price,
                     quantity: cartItem.quantity,
                 };
             });
@@ -34,10 +31,7 @@ export default new Vuex.Store({
         cartTotal(state) {
             let sum = 0;
             state.cart.map((cartItem) => {
-                const product = state.products.find(
-                    (product) => product.id === cartItem.id
-                );
-                sum += product.base_price * cartItem.quantity;
+                sum += cartItem.price * cartItem.quantity;
             });
             return sum.toFixed(2);
         },
@@ -45,11 +39,6 @@ export default new Vuex.Store({
 
     actions: {
         //methods
-        fetchProducts() {
-            //make the call
-            //run setProducts mutation
-        },
-
         addProductToCart(context, product) {
             const cartItem = context.state.cart.find(
                 (item) => item.id === product.id

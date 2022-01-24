@@ -111,7 +111,8 @@ class ProductController extends Controller
 
     public function update(ProductRequest $request, Product $product)
     {
-        ///$this->authorize('update', $product);
+        $this->authorize('update', $product);
+        
         $product->update($request->all());
         $product->materials()->sync(request('product_material'));
         $product->occasions()->sync(request('product_occasion'));
@@ -121,7 +122,7 @@ class ProductController extends Controller
 
     public function updateState(Request $request, Product $product)
     {
-        ///$this->authorize('update', $product);
+        $this->authorize('update', $product);
         $product->update([
             'product_state_id' => request('product_state_id'),
         ]);

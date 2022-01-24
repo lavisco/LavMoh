@@ -78,7 +78,10 @@
                         </div>
                     </div>
                 </swiper-slide>
-                <div class="swiper-pagination" slot="pagination"></div>
+                <div
+                    class="swiper-pagination product-pagination"
+                    slot="pagination"
+                ></div>
             </swiper>
             <div class="d-flex justify-content-center mt-5">
                 <a href="/lavisco/products" class="view-more-link"
@@ -101,37 +104,63 @@
         </section>
         <section class="section-special">
             <h1>Gifts and Crafts for Every Occasion & Recipient</h1>
-            <div class="d-flex card-container">
-                <div class="card item-card col-50 item-card-occasion">
-                    <div class="card-img">
-                        <div class="card-img-text-container">
-                            <div class="card-img-text">
-                                <a href="/lavisco/occasions"
-                                    >Order by Occasion</a
-                                >
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card item-card item-card-occasion mb-md-0 mb-5">
+                        <div class="card-img">
+                            <div class="card-img-text-container">
+                                <div class="card-img-text">
+                                    <a href="/lavisco/occasions">
+                                        Order by Occasion
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="card-button-container" v-if="occasions[0]">
-                        <a href="" v-for="(n, index) in 10">
-                            <button class="bg-black">
-                                {{ occasions[index].name }}
-                            </button>
-                        </a>
-                    </div>
-                </div>
-                <div class="card item-card col-50 item-card-recipient">
-                    <div class="card-img">
-                        <div class="card-img-text-container">
-                            <div class="card-img-text">Order by Recipient</div>
+                        <div class="card-button-container" v-if="occasions[0]">
+                            <a href="" v-for="(n, index) in 10">
+                                <router-link
+                                    :to="{
+                                        name: 'occasions/occasion',
+                                        params: {
+                                            occasionId: occasions[index].id,
+                                        },
+                                    }"
+                                >
+                                    <button class="bg-black">
+                                        {{ occasions[index].name }}
+                                    </button>
+                                </router-link>
+                            </a>
                         </div>
                     </div>
-                    <div class="card-button-container" v-if="recipients[0]">
-                        <a href="" v-for="(n, index) in 10">
-                            <button class="bg-black">
-                                {{ recipients[index].name }}
-                            </button>
-                        </a>
+                </div>
+                <div class="col-md-6">
+                    <div class="card item-card item-card-recipient">
+                        <div class="card-img">
+                            <div class="card-img-text-container">
+                                <div class="card-img-text">
+                                    <a href="/lavisco/recipients">
+                                        Order by Recipient
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-button-container" v-if="recipients[0]">
+                            <a href="" v-for="(n, index) in 10">
+                                <router-link
+                                    :to="{
+                                        name: 'recipients/recipient',
+                                        params: {
+                                            recipientId: recipients[index].id,
+                                        },
+                                    }"
+                                >
+                                    <button class="bg-black">
+                                        {{ recipients[index].name }}
+                                    </button>
+                                </router-link>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -149,45 +178,69 @@
         </section>
         <section class="section-instruction">
             <h1>How Lavisco Works</h1>
-            <div class="d-flex justify-content-center card-container px-4">
-                <div class="card instruction-card instruction-card-1 bg-blue">
-                    <h1>1</h1>
-                    <p>
-                        Browse through our wide range of products for any
-                        occasion and pick your choice.
-                    </p>
-                </div>
-                <div class="card instruction-card instruction-card-2 bg-purple">
-                    <h1>2</h1>
-                    <div>
+            <div class="row">
+                <div class="col-md-3 mb-md-0 mb-5">
+                    <div
+                        class="card instruction-card instruction-card-1 bg-blue"
+                    >
+                        <h1>1</h1>
                         <p>
-                            Get creative and add a personal touch to your
-                            products by choosing custom options.
+                            Browse through our wide range of products for any
+                            occasion and pick your choice.
                         </p>
-                        <span class="text-sm"
-                            >Skip this step if you don't want to
-                            personalise</span
-                        >
                     </div>
                 </div>
-                <div class="card instruction-card instruction-card-3 bg-pink">
-                    <h1>3</h1>
-                    <p>
-                        Choose from one of the many easy payment options &
-                        finalize your order!
-                    </p>
+                <div class="col-md-3 mb-md-0 mb-5">
+                    <div
+                        class="
+                            card
+                            instruction-card instruction-card-2
+                            bg-purple
+                        "
+                    >
+                        <h1>2</h1>
+                        <div>
+                            <p>
+                                Get creative and add a personal touch to your
+                                products by choosing custom options.
+                            </p>
+                            <span class="text-sm"
+                                >Skip this step if you don't want to
+                                personalise</span
+                            >
+                        </div>
+                    </div>
                 </div>
-                <div class="card instruction-card instruction-card-4 bg-orange">
-                    <h1>4</h1>
-                    <p>
-                        Sit back & relax!!! <br />
-                        We will deliver your order right to your door step with
-                        no hustle.
-                    </p>
+                <div class="col-md-3 mb-md-0 mb-5">
+                    <div
+                        class="card instruction-card instruction-card-3 bg-pink"
+                    >
+                        <h1>3</h1>
+                        <p>
+                            Choose from one of the many easy payment options &
+                            finalize your order!
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div
+                        class="
+                            card
+                            instruction-card instruction-card-4
+                            bg-orange
+                        "
+                    >
+                        <h1>4</h1>
+                        <p>
+                            Sit back & relax!!! <br />
+                            We will deliver your order right to your door step
+                            with no hustle.
+                        </p>
+                    </div>
                 </div>
             </div>
         </section>
-        <section class="section-shortcuts row">
+        <section class="section-shortcuts row mb-5">
             <div class="col-md-6 py-4">
                 <h1>Want to Learn more?</h1>
                 <a href="/lavisco/seller/onboard"
@@ -224,10 +277,29 @@ export default {
         swiperOption: {
             slidesPerView: 4,
             spaceBetween: 20,
-            // pagination: {
-            //     el: ".swiper-pagination",
-            //     clickable: true,
-            // },
+            freeMode: true,
+            pagination: {
+                el: ".product-pagination",
+                clickable: true,
+            },
+            breakpoints: {
+                1024: {
+                    slidesPerView: 4,
+                    spaceBetween: 20,
+                },
+                768: {
+                    slidesPerView: 2,
+                    spaceBetween: 10,
+                },
+                640: {
+                    slidesPerView: 1,
+                    spaceBetween: 10,
+                },
+                320: {
+                    slidesPerView: 1,
+                    spaceBetween: 10,
+                },
+            },
         },
         swiperOptionTop: {
             loop: true,

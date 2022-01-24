@@ -326,14 +326,14 @@ export let routes = [
      ** Website Routes
      */
 
-    // {
-    //     path: "/lavisco/",
-    //     name: "index",
-    //     component: require("./components/Index.vue").default,
-    //     meta: {
-    //         title: "Lavisco",
-    //     },
-    // },
+    {
+        path: "/lavisco/home",
+        name: "index",
+        component: require("./components/Index.vue").default,
+        meta: {
+            title: "Lavisco",
+        },
+    },
     {
         path: "/lavisco/products",
         name: "products",

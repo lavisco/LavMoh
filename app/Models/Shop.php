@@ -26,7 +26,7 @@ class Shop extends Model
 
     public function getPathAttribute()
     {
-        return $this->banner ? asset('storage/'.$this->banner) : "/images/lavisco/img-bg.jpg";
+        return $this->banner ? '/storage/'.$this->banner : "/images/lavisco/img-bg.jpg";
     }
 
     //shop:user M:1

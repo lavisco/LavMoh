@@ -59,9 +59,11 @@ class ShopController extends Controller
         $banner=null;
         if ($image) {
             $file_name = time().'_'.$name;
-            Image::make($image)->save(storage_path('app/public/banners/').$file_name);
+            //Image::make($image)->save(storage_path('app/public/banners/').$file_name);
+            Image::make($image)->save(public_path('storage/banners/').$file_name);
             $banner = 'banners/'.$file_name;
         }
+
 
         return $banner;
     }

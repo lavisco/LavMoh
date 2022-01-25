@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ShopRequest;
 use App\Models\Shop;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Image;
 
 class ShopController extends Controller
@@ -58,12 +59,13 @@ class ShopController extends Controller
     {
         $banner=null;
         if ($image) {
+            $img = Image::make($image)->encode();
+
             $file_name = time().'_'.$name;
-            //Image::make($image)->save(storage_path('app/public/banners/').$file_name);
-            Image::make($image)->save(public_path('storage/banners/').$file_name);
+            Storage::put($file_name, $img);
+            Storage::move($file_name, 'banners/' . $file_name);
             $banner = 'banners/'.$file_name;
         }
-
 
         return $banner;
     }

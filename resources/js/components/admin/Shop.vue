@@ -30,6 +30,7 @@
                                                 class="banner-container"
                                                 :src="shop.path"
                                             />
+                                            
                                         </td>
                                         <th>{{ shop.name }}</th>
                                         <td>{{ shop.url }}</td>

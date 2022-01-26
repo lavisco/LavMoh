@@ -22,8 +22,8 @@ class CreateCartProductTable extends Migration
 			$table->string('custom_text')->nullable();
 			$table->string('custom_image')->nullable();
 			$table->boolean('has_variations');
-			$table->foreignId('cart_id')->constrained()->onDelete('cascade');
-			$table->foreignId('product_id')->constrained()->onDelete('cascade');
+			$table->foreignId('cart_id')->constrained();
+			$table->foreignId('product_id')->constrained();
         });
     }
 

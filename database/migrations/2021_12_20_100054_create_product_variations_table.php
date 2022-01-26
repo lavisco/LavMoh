@@ -23,7 +23,7 @@ class CreateProductVariationsTable extends Migration
             $table->string('type', 500);
             $table->string('type_option', 500);
             $table->foreignId('product_state_id')->constrained();
-			$table->foreignId('product_id')->constrained()->onDelete('cascade');
+			$table->foreignId('product_id')->constrained();
 			$table->foreignId('user_id')->constrained();
         });
     }

@@ -17,7 +17,7 @@ class CreateVariationOptionsTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('name', 255);
-            $table->foreignId('variation_id')->constrained()->onDelete('cascade');
+            $table->foreignId('variation_id')->constrained();
         });
     }
 

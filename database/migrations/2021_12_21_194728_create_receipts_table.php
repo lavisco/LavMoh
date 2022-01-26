@@ -37,8 +37,8 @@ class CreateReceiptsTable extends Migration
 			$table->decimal('shipping_price', 14, 2);
 			$table->decimal('discount_price', 14, 2)->nullable();
 			
-			$table->foreignId('cart_id')->constrained()->onDelete('cascade');
-			$table->foreignId('shop_id')->constrained()->onDelete('cascade');
+			$table->foreignId('cart_id')->constrained();
+			$table->foreignId('shop_id')->constrained();
 			$table->foreignId('seller_id')->references('id')->on('users');
             $table->foreignId('buyer_id')->references('id')->on('users');
         });

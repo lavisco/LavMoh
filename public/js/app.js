@@ -16277,6 +16277,94 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -16287,6 +16375,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       editMode: false,
+      passwordMode: false,
       users: [],
       roles: [],
       searchText: null,
@@ -16341,6 +16430,13 @@ __webpack_require__.r(__webpack_exports__);
       $("#addRecord").modal("show");
       this.form.fill(user);
     },
+    editPasswordModal: function editPasswordModal(user) {
+      this.passwordMode = true;
+      this.form.clear();
+      this.form.reset();
+      $("#addRecord").modal("show");
+      this.form.fill(user);
+    },
     loadUsers: function loadUsers() {
       var _this2 = this;
 
@@ -16384,6 +16480,14 @@ __webpack_require__.r(__webpack_exports__);
     },
     updateUser: function updateUser() {
       this.form.put("/api/admin/users/" + this.form.id).then(function () {
+        $("#addRecord").modal("hide");
+        Fire.$emit("reloadRecords");
+      })["catch"](function (error) {
+        return console.log(error);
+      });
+    },
+    updateUserPassword: function updateUserPassword() {
+      this.form.put("/api/admin/users/password_reset/" + this.form.id).then(function () {
         $("#addRecord").modal("hide");
         Fire.$emit("reloadRecords");
       })["catch"](function (error) {
@@ -17921,6 +18025,133 @@ __webpack_require__.r(__webpack_exports__);
       _this3.loadProducts();
     });
   }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/seller/PasswordReset.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/seller/PasswordReset.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var vform__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vform */ "./node_modules/vform/dist/vform.es.js");
+/* harmony import */ var vform_src_components_bootstrap4__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vform/src/components/bootstrap4 */ "./node_modules/vform/src/components/bootstrap4/index.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  components: {
+    HasError: vform_src_components_bootstrap4__WEBPACK_IMPORTED_MODULE_1__.HasError,
+    AlertError: vform_src_components_bootstrap4__WEBPACK_IMPORTED_MODULE_1__.AlertError
+  },
+  data: function data() {
+    return {
+      user: {},
+      form: new vform__WEBPACK_IMPORTED_MODULE_0__["default"]({
+        name: "",
+        password: ""
+      })
+    };
+  },
+  methods: {
+    cancel: function cancel() {
+      this.$router.push("/seller/dashboard");
+    },
+    updateUserPassword: function updateUserPassword() {
+      var _this = this;
+
+      this.form.put("/api/seller/user/password_reset/" + this.form.id).then(function () {
+        _this.$router.push("/seller/dashboard");
+      })["catch"](function (error) {
+        return console.log(error);
+      });
+    }
+  },
+  mounted: function mounted() {}
 });
 
 /***/ }),
@@ -22695,6 +22926,12 @@ var routes = [
   component: (__webpack_require__(/*! ./components/seller/Dashboard.vue */ "./resources/js/components/seller/Dashboard.vue")["default"]),
   meta: {
     title: "Seller Dashboard"
+  }
+}, {
+  path: "/seller/password_reset",
+  component: (__webpack_require__(/*! ./components/seller/PasswordReset.vue */ "./resources/js/components/seller/PasswordReset.vue")["default"]),
+  meta: {
+    title: "Password Reset"
   }
 }, {
   path: "/seller/products",
@@ -71217,6 +71454,45 @@ component.options.__file = "resources/js/components/seller/Order.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/seller/PasswordReset.vue":
+/*!**********************************************************!*\
+  !*** ./resources/js/components/seller/PasswordReset.vue ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _PasswordReset_vue_vue_type_template_id_16a9c0e2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PasswordReset.vue?vue&type=template&id=16a9c0e2& */ "./resources/js/components/seller/PasswordReset.vue?vue&type=template&id=16a9c0e2&");
+/* harmony import */ var _PasswordReset_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PasswordReset.vue?vue&type=script&lang=js& */ "./resources/js/components/seller/PasswordReset.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _PasswordReset_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _PasswordReset_vue_vue_type_template_id_16a9c0e2___WEBPACK_IMPORTED_MODULE_0__.render,
+  _PasswordReset_vue_vue_type_template_id_16a9c0e2___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/seller/PasswordReset.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/seller/Product.vue":
 /*!****************************************************!*\
   !*** ./resources/js/components/seller/Product.vue ***!
@@ -72473,6 +72749,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/seller/PasswordReset.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/seller/PasswordReset.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PasswordReset_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./PasswordReset.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/seller/PasswordReset.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PasswordReset_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/seller/Product.vue?vue&type=script&lang=js&":
 /*!*****************************************************************************!*\
   !*** ./resources/js/components/seller/Product.vue?vue&type=script&lang=js& ***!
@@ -73678,6 +73970,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Order_vue_vue_type_template_id_4308fd2e___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Order_vue_vue_type_template_id_4308fd2e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Order.vue?vue&type=template&id=4308fd2e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/seller/Order.vue?vue&type=template&id=4308fd2e&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/seller/PasswordReset.vue?vue&type=template&id=16a9c0e2&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/seller/PasswordReset.vue?vue&type=template&id=16a9c0e2& ***!
+  \*****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PasswordReset_vue_vue_type_template_id_16a9c0e2___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PasswordReset_vue_vue_type_template_id_16a9c0e2___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PasswordReset_vue_vue_type_template_id_16a9c0e2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./PasswordReset.vue?vue&type=template&id=16a9c0e2& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/seller/PasswordReset.vue?vue&type=template&id=16a9c0e2&");
 
 
 /***/ }),
@@ -97472,6 +97781,25 @@ var render = function () {
                                       on: {
                                         click: function ($event) {
                                           $event.preventDefault()
+                                          return _vm.editPasswordModal(user)
+                                        },
+                                      },
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                                    Edit Password\n                                                "
+                                      ),
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "a",
+                                    {
+                                      staticClass: "dropdown-item",
+                                      attrs: { href: "" },
+                                      on: {
+                                        click: function ($event) {
+                                          $event.preventDefault()
                                           return _vm.deleteUser(user.id)
                                         },
                                       },
@@ -97560,410 +97888,552 @@ var render = function () {
                     ]
                   ),
                   _vm._v(" "),
+                  _c(
+                    "h4",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.editPasswordModal,
+                          expression: "editPasswordModal",
+                        },
+                      ],
+                      staticClass: "modal-title text-uppercase",
+                      attrs: { id: "addRecordLabel" },
+                    },
+                    [
+                      _vm._v(
+                        "\n                        Update User Password\n                    "
+                      ),
+                    ]
+                  ),
+                  _vm._v(" "),
                   _vm._m(3),
                 ]),
                 _vm._v(" "),
-                _c(
-                  "form",
-                  {
-                    staticClass: "input-form",
-                    on: {
-                      submit: function ($event) {
-                        $event.preventDefault()
-                        _vm.editMode ? _vm.updateUser() : _vm.createUser()
-                      },
-                    },
-                  },
-                  [
-                    _c("div", { staticClass: "modal-body" }, [
-                      _c("div", { staticClass: "form-group row" }, [
-                        _vm._m(4),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          { staticClass: "col-md-9" },
-                          [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.form.name,
-                                  expression: "form.name",
-                                },
-                              ],
-                              staticClass:
-                                "\n                                        form-control\n                                        form-control-alternative\n                                    ",
-                              attrs: {
-                                id: "name",
-                                type: "text",
-                                name: "name",
-                                placeholder: "Name",
-                              },
-                              domProps: { value: _vm.form.name },
-                              on: {
-                                input: function ($event) {
-                                  if ($event.target.composing) {
-                                    return
-                                  }
-                                  _vm.$set(
-                                    _vm.form,
-                                    "name",
-                                    $event.target.value
-                                  )
-                                },
-                              },
-                            }),
-                            _vm._v(" "),
-                            _c("HasError", {
-                              attrs: { form: _vm.form, field: "name" },
-                            }),
-                          ],
-                          1
-                        ),
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "form-group row" }, [
-                        _vm._m(5),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          { staticClass: "col-md-9" },
-                          [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.form.email,
-                                  expression: "form.email",
-                                },
-                              ],
-                              staticClass:
-                                "\n                                        form-control\n                                        form-control-alternative\n                                    ",
-                              attrs: {
-                                id: "email",
-                                type: "email",
-                                name: "email",
-                                placeholder: "Email",
-                              },
-                              domProps: { value: _vm.form.email },
-                              on: {
-                                input: function ($event) {
-                                  if ($event.target.composing) {
-                                    return
-                                  }
-                                  _vm.$set(
-                                    _vm.form,
-                                    "email",
-                                    $event.target.value
-                                  )
-                                },
-                              },
-                            }),
-                            _vm._v(" "),
-                            _c("HasError", {
-                              attrs: { form: _vm.form, field: "email" },
-                            }),
-                          ],
-                          1
-                        ),
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value: !_vm.editMode,
-                              expression: "!editMode",
-                            },
-                          ],
-                          staticClass: "form-group row",
+                _vm.editPasswordModal
+                  ? _c(
+                      "form",
+                      {
+                        staticClass: "input-form",
+                        on: {
+                          submit: function ($event) {
+                            $event.preventDefault()
+                            return _vm.updateUserPassword()
+                          },
                         },
-                        [
-                          _vm._m(6),
+                      },
+                      [
+                        _c("div", { staticClass: "modal-body" }, [
+                          _c("div", { staticClass: "form-group row" }, [
+                            _vm._m(4),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "col-md-9" },
+                              [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.form.email,
+                                      expression: "form.email",
+                                    },
+                                  ],
+                                  staticClass:
+                                    "\n                                        form-control\n                                        form-control-alternative\n                                    ",
+                                  attrs: {
+                                    id: "email",
+                                    type: "email",
+                                    name: "email",
+                                    placeholder: "Email",
+                                    disabled: "",
+                                  },
+                                  domProps: { value: _vm.form.email },
+                                  on: {
+                                    input: function ($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.form,
+                                        "email",
+                                        $event.target.value
+                                      )
+                                    },
+                                  },
+                                }),
+                                _vm._v(" "),
+                                _c("HasError", {
+                                  attrs: { form: _vm.form, field: "email" },
+                                }),
+                              ],
+                              1
+                            ),
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-group row" }, [
+                            _vm._m(5),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "col-md-9" },
+                              [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.form.password,
+                                      expression: "form.password",
+                                    },
+                                  ],
+                                  staticClass:
+                                    "\n                                        form-control\n                                        form-control-alternative\n                                    ",
+                                  attrs: {
+                                    id: "password",
+                                    type: "password",
+                                    name: "password",
+                                  },
+                                  domProps: { value: _vm.form.password },
+                                  on: {
+                                    input: function ($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.form,
+                                        "password",
+                                        $event.target.value
+                                      )
+                                    },
+                                  },
+                                }),
+                                _vm._v(" "),
+                                _c("HasError", {
+                                  attrs: { form: _vm.form, field: "password" },
+                                }),
+                              ],
+                              1
+                            ),
+                          ]),
+                        ]),
+                        _vm._v(" "),
+                        _vm._m(6),
+                      ]
+                    )
+                  : _c(
+                      "form",
+                      {
+                        staticClass: "input-form",
+                        on: {
+                          submit: function ($event) {
+                            $event.preventDefault()
+                            _vm.editMode ? _vm.updateUser() : _vm.createUser()
+                          },
+                        },
+                      },
+                      [
+                        _c("div", { staticClass: "modal-body" }, [
+                          _c("div", { staticClass: "form-group row" }, [
+                            _vm._m(7),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "col-md-9" },
+                              [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.form.name,
+                                      expression: "form.name",
+                                    },
+                                  ],
+                                  staticClass:
+                                    "\n                                        form-control\n                                        form-control-alternative\n                                    ",
+                                  attrs: {
+                                    id: "name",
+                                    type: "text",
+                                    name: "name",
+                                    placeholder: "Name",
+                                  },
+                                  domProps: { value: _vm.form.name },
+                                  on: {
+                                    input: function ($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.form,
+                                        "name",
+                                        $event.target.value
+                                      )
+                                    },
+                                  },
+                                }),
+                                _vm._v(" "),
+                                _c("HasError", {
+                                  attrs: { form: _vm.form, field: "name" },
+                                }),
+                              ],
+                              1
+                            ),
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-group row" }, [
+                            _vm._m(8),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "col-md-9" },
+                              [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.form.email,
+                                      expression: "form.email",
+                                    },
+                                  ],
+                                  staticClass:
+                                    "\n                                        form-control\n                                        form-control-alternative\n                                    ",
+                                  attrs: {
+                                    id: "email",
+                                    type: "email",
+                                    name: "email",
+                                    placeholder: "Email",
+                                  },
+                                  domProps: { value: _vm.form.email },
+                                  on: {
+                                    input: function ($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.form,
+                                        "email",
+                                        $event.target.value
+                                      )
+                                    },
+                                  },
+                                }),
+                                _vm._v(" "),
+                                _c("HasError", {
+                                  attrs: { form: _vm.form, field: "email" },
+                                }),
+                              ],
+                              1
+                            ),
+                          ]),
                           _vm._v(" "),
                           _c(
                             "div",
-                            { staticClass: "col-md-9" },
+                            {
+                              directives: [
+                                {
+                                  name: "show",
+                                  rawName: "v-show",
+                                  value: !_vm.editMode,
+                                  expression: "!editMode",
+                                },
+                              ],
+                              staticClass: "form-group row",
+                            },
                             [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.form.password,
-                                    expression: "form.password",
-                                  },
-                                ],
-                                staticClass:
-                                  "\n                                        form-control\n                                        form-control-alternative\n                                    ",
-                                attrs: {
-                                  id: "password",
-                                  type: "password",
-                                  name: "password",
-                                },
-                                domProps: { value: _vm.form.password },
-                                on: {
-                                  input: function ($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.form,
-                                      "password",
-                                      $event.target.value
-                                    )
-                                  },
-                                },
-                              }),
+                              _vm._m(9),
                               _vm._v(" "),
-                              _c("HasError", {
-                                attrs: { form: _vm.form, field: "password" },
-                              }),
-                            ],
-                            1
-                          ),
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "form-group row" }, [
-                        _vm._m(7),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          { staticClass: "col-md-9" },
-                          [
-                            _c(
-                              "select",
-                              {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.form.role_id,
-                                    expression: "form.role_id",
-                                  },
-                                ],
-                                staticClass:
-                                  "\n                                        custom-select\n                                        form-control\n                                        form-control-alternative\n                                    ",
-                                attrs: { name: "role_id", id: "role_id" },
-                                on: {
-                                  change: function ($event) {
-                                    var $$selectedVal = Array.prototype.filter
-                                      .call(
-                                        $event.target.options,
-                                        function (o) {
-                                          return o.selected
+                              _c(
+                                "div",
+                                { staticClass: "col-md-9" },
+                                [
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.form.password,
+                                        expression: "form.password",
+                                      },
+                                    ],
+                                    staticClass:
+                                      "\n                                        form-control\n                                        form-control-alternative\n                                    ",
+                                    attrs: {
+                                      id: "password",
+                                      type: "password",
+                                      name: "password",
+                                    },
+                                    domProps: { value: _vm.form.password },
+                                    on: {
+                                      input: function ($event) {
+                                        if ($event.target.composing) {
+                                          return
                                         }
-                                      )
-                                      .map(function (o) {
-                                        var val =
-                                          "_value" in o ? o._value : o.value
-                                        return val
-                                      })
-                                    _vm.$set(
-                                      _vm.form,
-                                      "role_id",
-                                      $event.target.multiple
-                                        ? $$selectedVal
-                                        : $$selectedVal[0]
-                                    )
-                                  },
-                                },
-                              },
+                                        _vm.$set(
+                                          _vm.form,
+                                          "password",
+                                          $event.target.value
+                                        )
+                                      },
+                                    },
+                                  }),
+                                  _vm._v(" "),
+                                  _c("HasError", {
+                                    attrs: {
+                                      form: _vm.form,
+                                      field: "password",
+                                    },
+                                  }),
+                                ],
+                                1
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-group row" }, [
+                            _vm._m(10),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "col-md-9" },
                               [
                                 _c(
-                                  "option",
+                                  "select",
                                   {
-                                    attrs: {
-                                      value: "",
-                                      disabled: "",
-                                      selected: "",
-                                      hidden: "",
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.form.role_id,
+                                        expression: "form.role_id",
+                                      },
+                                    ],
+                                    staticClass:
+                                      "\n                                        custom-select\n                                        form-control\n                                        form-control-alternative\n                                    ",
+                                    attrs: { name: "role_id", id: "role_id" },
+                                    on: {
+                                      change: function ($event) {
+                                        var $$selectedVal =
+                                          Array.prototype.filter
+                                            .call(
+                                              $event.target.options,
+                                              function (o) {
+                                                return o.selected
+                                              }
+                                            )
+                                            .map(function (o) {
+                                              var val =
+                                                "_value" in o
+                                                  ? o._value
+                                                  : o.value
+                                              return val
+                                            })
+                                        _vm.$set(
+                                          _vm.form,
+                                          "role_id",
+                                          $event.target.multiple
+                                            ? $$selectedVal
+                                            : $$selectedVal[0]
+                                        )
+                                      },
                                     },
                                   },
                                   [
+                                    _c(
+                                      "option",
+                                      {
+                                        attrs: {
+                                          value: "",
+                                          disabled: "",
+                                          selected: "",
+                                          hidden: "",
+                                        },
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                        Select Role\n                                    "
+                                        ),
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _vm._l(_vm.roles, function (role) {
+                                      return _c(
+                                        "option",
+                                        { domProps: { value: role.id } },
+                                        [
+                                          _vm._v(
+                                            "\n                                        " +
+                                              _vm._s(role.name) +
+                                              "\n                                    "
+                                          ),
+                                        ]
+                                      )
+                                    }),
+                                  ],
+                                  2
+                                ),
+                                _vm._v(" "),
+                                _c("HasError", {
+                                  attrs: { form: _vm.form, field: "role_id" },
+                                }),
+                              ],
+                              1
+                            ),
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-group row" }, [
+                            _c(
+                              "label",
+                              {
+                                staticClass: "col-md-3 col-form-label",
+                                attrs: { for: "avatar" },
+                              },
+                              [
+                                _vm._v(
+                                  "Upload avatar\n                            "
+                                ),
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "col-md-9" },
+                              [
+                                _c("input", {
+                                  ref: "fileInput",
+                                  staticStyle: { display: "none" },
+                                  attrs: { type: "file", name: "avatar" },
+                                  on: {
+                                    change: function ($event) {
+                                      $event.preventDefault()
+                                      return _vm.fileSelected.apply(
+                                        null,
+                                        arguments
+                                      )
+                                    },
+                                  },
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "image-upload-box",
+                                    on: {
+                                      click: function ($event) {
+                                        $event.preventDefault()
+                                        return _vm.$refs.fileInput.click()
+                                      },
+                                    },
+                                  },
+                                  [
+                                    _c("i", {
+                                      directives: [
+                                        {
+                                          name: "show",
+                                          rawName: "v-show",
+                                          value: !this.form.avatar,
+                                          expression: "!this.form.avatar",
+                                        },
+                                      ],
+                                      staticClass: "fas fa-plus",
+                                    }),
+                                    _vm._v(" "),
+                                    _c("i", {
+                                      directives: [
+                                        {
+                                          name: "show",
+                                          rawName: "v-show",
+                                          value: this.form.avatar,
+                                          expression: "this.form.avatar",
+                                        },
+                                      ],
+                                      staticClass: "fas fa-check",
+                                    }),
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "p",
+                                  { staticClass: "image-upload-filename mt-2" },
+                                  [
                                     _vm._v(
-                                      "\n                                        Select Role\n                                    "
+                                      "\n                                    " +
+                                        _vm._s(
+                                          this.form.avatar
+                                            ? this.form.photoName
+                                            : "Choose file"
+                                        ) +
+                                        "\n                                "
                                     ),
                                   ]
                                 ),
                                 _vm._v(" "),
-                                _vm._l(_vm.roles, function (role) {
-                                  return _c(
-                                    "option",
-                                    { domProps: { value: role.id } },
-                                    [
-                                      _vm._v(
-                                        "\n                                        " +
-                                          _vm._s(role.name) +
-                                          "\n                                    "
-                                      ),
-                                    ]
-                                  )
+                                _c("HasError", {
+                                  attrs: { form: _vm.form, field: "avatar" },
                                 }),
                               ],
-                              2
+                              1
                             ),
-                            _vm._v(" "),
-                            _c("HasError", {
-                              attrs: { form: _vm.form, field: "role_id" },
-                            }),
-                          ],
-                          1
-                        ),
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "form-group row" }, [
-                        _c(
-                          "label",
-                          {
-                            staticClass: "col-md-3 col-form-label",
-                            attrs: { for: "avatar" },
-                          },
-                          [
-                            _vm._v(
-                              "Upload avatar\n                            "
-                            ),
-                          ]
-                        ),
+                          ]),
+                        ]),
                         _vm._v(" "),
-                        _c(
-                          "div",
-                          { staticClass: "col-md-9" },
-                          [
-                            _c("input", {
-                              ref: "fileInput",
-                              staticStyle: { display: "none" },
-                              attrs: { type: "file", name: "avatar" },
-                              on: {
-                                change: function ($event) {
-                                  $event.preventDefault()
-                                  return _vm.fileSelected.apply(null, arguments)
-                                },
-                              },
-                            }),
-                            _vm._v(" "),
-                            _c(
-                              "button",
-                              {
-                                staticClass: "image-upload-box",
-                                on: {
-                                  click: function ($event) {
-                                    $event.preventDefault()
-                                    return _vm.$refs.fileInput.click()
-                                  },
-                                },
-                              },
-                              [
-                                _c("i", {
-                                  directives: [
-                                    {
-                                      name: "show",
-                                      rawName: "v-show",
-                                      value: !this.form.avatar,
-                                      expression: "!this.form.avatar",
-                                    },
-                                  ],
-                                  staticClass: "fas fa-plus",
-                                }),
-                                _vm._v(" "),
-                                _c("i", {
-                                  directives: [
-                                    {
-                                      name: "show",
-                                      rawName: "v-show",
-                                      value: this.form.avatar,
-                                      expression: "this.form.avatar",
-                                    },
-                                  ],
-                                  staticClass: "fas fa-check",
-                                }),
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "p",
-                              { staticClass: "image-upload-filename mt-2" },
-                              [
-                                _vm._v(
-                                  "\n                                    " +
-                                    _vm._s(
-                                      this.form.avatar
-                                        ? this.form.photoName
-                                        : "Choose file"
-                                    ) +
-                                    "\n                                "
-                                ),
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c("HasError", {
-                              attrs: { form: _vm.form, field: "avatar" },
-                            }),
-                          ],
-                          1
-                        ),
-                      ]),
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "modal-footer pt-0" }, [
-                      _c(
-                        "button",
-                        {
-                          directives: [
+                        _c("div", { staticClass: "modal-footer pt-0" }, [
+                          _c(
+                            "button",
                             {
-                              name: "show",
-                              rawName: "v-show",
-                              value: _vm.editMode,
-                              expression: "editMode",
+                              directives: [
+                                {
+                                  name: "show",
+                                  rawName: "v-show",
+                                  value: _vm.editMode,
+                                  expression: "editMode",
+                                },
+                              ],
+                              staticClass: "btn btn-primary",
+                              attrs: { type: "submit" },
                             },
-                          ],
-                          staticClass: "btn btn-primary",
-                          attrs: { type: "submit" },
-                        },
-                        [
-                          _c("i", {
-                            staticClass: "fas fa-pen-nib mr-2",
-                            attrs: { "aria-hidden": "true" },
-                          }),
-                          _vm._v(
-                            "\n                            Update\n                        "
+                            [
+                              _c("i", {
+                                staticClass: "fas fa-pen-nib mr-2",
+                                attrs: { "aria-hidden": "true" },
+                              }),
+                              _vm._v(
+                                "\n                            Update\n                        "
+                              ),
+                            ]
                           ),
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          directives: [
+                          _vm._v(" "),
+                          _c(
+                            "button",
                             {
-                              name: "show",
-                              rawName: "v-show",
-                              value: !_vm.editMode,
-                              expression: "!editMode",
+                              directives: [
+                                {
+                                  name: "show",
+                                  rawName: "v-show",
+                                  value: !_vm.editMode,
+                                  expression: "!editMode",
+                                },
+                              ],
+                              staticClass: "btn btn-primary",
+                              attrs: { type: "submit" },
                             },
-                          ],
-                          staticClass: "btn btn-primary",
-                          attrs: { type: "submit" },
-                        },
-                        [
-                          _c("i", {
-                            staticClass: "fas fa-save mr-2",
-                            attrs: { "aria-hidden": "true" },
-                          }),
-                          _vm._v(
-                            "\n                            Create\n                        "
+                            [
+                              _c("i", {
+                                staticClass: "fas fa-save mr-2",
+                                attrs: { "aria-hidden": "true" },
+                              }),
+                              _vm._v(
+                                "\n                            Create\n                        "
+                              ),
+                            ]
                           ),
-                        ]
-                      ),
-                    ]),
-                  ]
-                ),
+                        ]),
+                      ]
+                    ),
               ]),
             ]
           ),
@@ -98092,6 +98562,52 @@ var staticRenderFns = [
         }),
       ]
     )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "col-md-3 col-form-label", attrs: { for: "email" } },
+      [
+        _vm._v("Email\n                                "),
+        _c("strong", { staticClass: "text-danger" }, [_vm._v(" *")]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "col-md-3 col-form-label", attrs: { for: "password" } },
+      [
+        _vm._v("Password\n                                "),
+        _c("strong", { staticClass: "text-danger" }, [_vm._v(" *")]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer pt-0" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+        [
+          _c("i", {
+            staticClass: "fas fa-pen-nib mr-2",
+            attrs: { "aria-hidden": "true" },
+          }),
+          _vm._v(
+            "\n                            Update Password\n                        "
+          ),
+        ]
+      ),
+    ])
   },
   function () {
     var _vm = this
@@ -100345,6 +100861,170 @@ var staticRenderFns = [
           ]),
         ]),
       ]),
+    ])
+  },
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/seller/PasswordReset.vue?vue&type=template&id=16a9c0e2&":
+/*!********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/seller/PasswordReset.vue?vue&type=template&id=16a9c0e2& ***!
+  \********************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "container mt-3 mb-5" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col" }, [
+          _c("div", { staticClass: "container" }, [
+            _c("div", { staticClass: "card" }, [
+              _c(
+                "form",
+                {
+                  staticClass: "input-form",
+                  on: {
+                    submit: function ($event) {
+                      $event.preventDefault()
+                      return _vm.updateUserPassword()
+                    },
+                  },
+                },
+                [
+                  _c("div", { staticClass: "input-form-compact" }, [
+                    _c("h4", { staticClass: "mb-4" }, [
+                      _vm._v("Password Reset"),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group row" }, [
+                      _vm._m(0),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "col-md-9" },
+                        [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.password,
+                                expression: "form.password",
+                              },
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              id: "password",
+                              type: "password",
+                              name: "password",
+                            },
+                            domProps: { value: _vm.form.password },
+                            on: {
+                              input: function ($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.form,
+                                  "password",
+                                  $event.target.value
+                                )
+                              },
+                            },
+                          }),
+                          _vm._v(" "),
+                          _c("HasError", {
+                            attrs: { form: _vm.form, field: "password" },
+                          }),
+                        ],
+                        1
+                      ),
+                    ]),
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "\n                                    d-flex\n                                    justify-content-center\n                                    align-items-center\n                                    mt-4\n                                ",
+                    },
+                    [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-secondary mr-3",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function ($event) {
+                              $event.preventDefault()
+                              return _vm.cancel()
+                            },
+                          },
+                        },
+                        [
+                          _c("i", {
+                            staticClass: "fas fa-times mr-2",
+                            attrs: { "aria-hidden": "true" },
+                          }),
+                          _vm._v(
+                            "\n                                    Cancel\n                                "
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _vm._m(1),
+                    ]
+                  ),
+                ]
+              ),
+            ]),
+          ]),
+        ]),
+      ]),
+    ]),
+  ])
+}
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "col-md-3 col-form-label", attrs: { for: "password" } },
+      [
+        _vm._v("Password\n                                        "),
+        _c("strong", { staticClass: "text-danger" }, [
+          _vm._v("\n                                            *"),
+        ]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("button", { staticClass: "btn", attrs: { type: "submit" } }, [
+      _c("i", {
+        staticClass: "fas fa-pen-nib mr-2",
+        attrs: { "aria-hidden": "true" },
+      }),
+      _vm._v(
+        "\n                                    Update Password\n                                "
+      ),
     ])
   },
 ]

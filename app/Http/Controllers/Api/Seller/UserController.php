@@ -17,7 +17,7 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        //$this->middleware(['auth:api', 'is_seller']);
+        //$this->middleware(['auth:api', 'is_seller'])->only('index');
     }
     
     public function index()
@@ -61,11 +61,20 @@ class UserController extends Controller
 
     public function show($id)
     {
-        //
+        return User::findOrFail($id);
     }
 
     public function update(Request $request, $id)
     {
         //
+    }
+
+    public function updatePassword(UserRequest $request, User $model)
+    {
+        //$this->authorize('update', $model);
+        $model->update([
+            'password' => Hash::make($request->input('password')),
+        ]);
+        
     }
 }

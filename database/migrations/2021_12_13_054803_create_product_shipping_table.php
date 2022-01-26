@@ -16,8 +16,8 @@ class CreateProductShippingTable extends Migration
         Schema::create('product_shipping', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->foreignId('product_id')->constrained()->onDelete('cascade');
-			$table->foreignId('shipping_id')->constrained()->onDelete('cascade');
+            $table->foreignId('product_id')->constrained();
+			$table->foreignId('shipping_id')->constrained();
         });
     }
 

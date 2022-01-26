@@ -16,8 +16,8 @@ class CreateProductRecipientTable extends Migration
         Schema::create('product_recipient', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->foreignId('product_id')->constrained()->onDelete('cascade');
-			$table->foreignId('recipient_id')->constrained()->onDelete('cascade');
+            $table->foreignId('product_id')->constrained();
+			$table->foreignId('recipient_id')->constrained();
         });
     }
 

@@ -226,6 +226,13 @@ export let routes = [
         },
     },
     {
+        path: "/seller/password_reset",
+        component: require("./components/seller/PasswordReset.vue").default,
+        meta: {
+            title: "Password Reset",
+        },
+    },
+    {
         path: "/seller/products",
         component: require("./components/seller/Product.vue").default,
         meta: {

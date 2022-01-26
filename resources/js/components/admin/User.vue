@@ -106,6 +106,17 @@
                                                         class="dropdown-item"
                                                         href=""
                                                         @click.prevent="
+                                                            editPasswordModal(
+                                                                user
+                                                            )
+                                                        "
+                                                    >
+                                                        Edit Password
+                                                    </a>
+                                                    <a
+                                                        class="dropdown-item"
+                                                        href=""
+                                                        @click.prevent="
                                                             deleteUser(user.id)
                                                         "
                                                     >
@@ -188,6 +199,13 @@
                         >
                             Add New User
                         </h4>
+                        <h4
+                            v-show="editPasswordModal"
+                            class="modal-title text-uppercase"
+                            id="addRecordLabel"
+                        >
+                            Update User Password
+                        </h4>
                         <button
                             type="button"
                             class="close"
@@ -201,9 +219,79 @@
                         </button>
                     </div>
 
+                    <!-- Form password Reset start -->
+
+                    <form
+                        v-if="editPasswordModal"
+                        class="input-form"
+                        @submit.prevent="updateUserPassword()"
+                    >
+                        <div class="modal-body">
+                            <div class="form-group row">
+                                <label
+                                    class="col-md-3 col-form-label"
+                                    for="email"
+                                    >Email
+                                    <strong class="text-danger"> *</strong>
+                                </label>
+
+                                <div class="col-md-9">
+                                    <input
+                                        id="email"
+                                        v-model="form.email"
+                                        type="email"
+                                        name="email"
+                                        class="
+                                            form-control
+                                            form-control-alternative
+                                        "
+                                        placeholder="Email"
+                                        disabled
+                                    />
+                                    <HasError :form="form" field="email" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label
+                                    class="col-md-3 col-form-label"
+                                    for="password"
+                                    >Password
+                                    <strong class="text-danger"> *</strong>
+                                </label>
+
+                                <div class="col-md-9">
+                                    <input
+                                        id="password"
+                                        v-model="form.password"
+                                        type="password"
+                                        name="password"
+                                        class="
+                                            form-control
+                                            form-control-alternative
+                                        "
+                                    />
+                                    <HasError :form="form" field="password" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer pt-0">
+                            <button type="submit" class="btn btn-primary">
+                                <i
+                                    class="fas fa-pen-nib mr-2"
+                                    aria-hidden="true"
+                                ></i>
+                                Update Password
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Form Password Reset end -->
+
                     <!-- Form start -->
 
                     <form
+                        v-else
                         class="input-form"
                         @submit.prevent="editMode ? updateUser() : createUser()"
                     >
@@ -400,6 +488,7 @@ export default {
 
     data: () => ({
         editMode: false,
+        passwordMode: false,
         users: [],
         roles: [],
         searchText: null,
@@ -451,6 +540,13 @@ export default {
             $("#addRecord").modal("show");
             this.form.fill(user);
         },
+        editPasswordModal(user) {
+            this.passwordMode = true;
+            this.form.clear();
+            this.form.reset();
+            $("#addRecord").modal("show");
+            this.form.fill(user);
+        },
         loadUsers() {
             axios
                 .get("/api/admin/users", {
@@ -489,6 +585,16 @@ export default {
         updateUser() {
             this.form
                 .put("/api/admin/users/" + this.form.id)
+                .then(() => {
+                    $("#addRecord").modal("hide");
+                    Fire.$emit("reloadRecords");
+                })
+                .catch((error) => console.log(error));
+        },
+
+        updateUserPassword() {
+            this.form
+                .put("/api/admin/users/password_reset/" + this.form.id)
                 .then(() => {
                     $("#addRecord").modal("hide");
                     Fire.$emit("reloadRecords");

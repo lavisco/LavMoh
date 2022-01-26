@@ -89,6 +89,7 @@ Route::prefix('admin')->group(function () {
     /* User */
     Route::get('/users/buyer', [UserController::class, 'buyer']);
     Route::get('/users/seller', [UserController::class, 'seller']);
+    Route::put('/users/password_reset/{user}', [UserController::class, 'updatePassword']);
     Route::apiResource('/users', UserController::class);
 });
 
@@ -110,6 +111,7 @@ Route::prefix('seller')->group(function () {
     Route::apiResource('/sellerprofile', SellerSellerProfileController::class);
     Route::apiResource('/shop', SellerShopController::class);
     Route::apiResource('/orders', SellerOrderController::class);
+    Route::put('/user/password_reset/{user}', [SellerUserController::class, 'updatePassword']);
     Route::apiResource('/user', SellerUserController::class);
     Route::apiResource('/dashboard', SellerDashboardController::class);
 });

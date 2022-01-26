@@ -43,14 +43,6 @@ class UserController extends Controller
     public function store(UserRequest $request)
     {
         ///$this->authorize('create', User::class);
-        // return User::create([
-        //     'name' => $request->input('name'),
-        //     'email' => $request->input('email'),
-        //     'password' => Hash::make($request->input('password')),
-        //     'avatar' => $request->input('avatar'),
-        //     'role_id' => $request->input('role_id'),
-        //     'status' => 1,
-        // ]);
 
         $request->merge([
             'avatar' => $this->storeImage($request->avatar, $request->photoName),
@@ -72,6 +64,15 @@ class UserController extends Controller
 
         $this->updateImage($request, $user->avatar);
         $user->update($request->all());
+    }
+
+    public function updatePassword(UserRequest $request, User $user)
+    {
+        ///$this->authorize('update', $user);
+        $user->update([
+            'password' => Hash::make($request->input('password')),
+        ]);
+        
     }
 
     public function destroy(User $user)

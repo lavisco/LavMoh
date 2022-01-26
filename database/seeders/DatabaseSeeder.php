@@ -18,7 +18,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             MaterialSeeder::class, 
             OccasionSeeder::class, 
-            RecipientSeeder::class
+            RecipientSeeder::class,
+            CategorySeeder::class,
         ]);
     }
 }

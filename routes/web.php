@@ -2,11 +2,6 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Buyer\DashboardController as BuyerDashboardController;
-use App\Http\Controllers\Seller\DashboardController as SellerDashboardController;
-use App\Http\Controllers\Seller\UserController;
 use App\Http\Controllers\Website\HomeController;
 
 /*
@@ -20,9 +15,9 @@ use App\Http\Controllers\Website\HomeController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('index');
-// });
+Route::get('/data', function () {
+    abort(401);
+});
 
 Route::get('/terms_and_conditions', function () {
     return view('policy_terms_condition');

@@ -1,12 +1,13 @@
 <nav
     class="
         navbar navbar-expand-lg
+        pt-0
         d-flex
         justify-content-between
         align-items-center
     "
 >
-    <div class="container-fluid dashboard-topnav">
+    <div class="container-fluid dashboard-topnav align-items-center justify-content-center p-0">
         <button
             class="navbar-toggler"
             type="button"

@@ -61,4 +61,15 @@ class Receipt extends Model
     {
         return $this->belongsTo(User::class, 'buyer_id');
     }
+
+    public function scopeFilter($query, array $filters)
+    {
+        $query->when($filters['searchText'] ?? false, fn($query, $searchText) =>
+            $query
+                ->where('name', 'like', '%' . $searchText . '%')
+                ->orWhere('status', 'like', '%' . $searchText . '%')
+                ->orWhere('country', 'like', '%' . $searchText . '%')
+                ->orWhere('city', 'like', '%' . $searchText . '%')
+                ->orWhere('address', 'like', '%' . $searchText . '%'));
+    }
 }

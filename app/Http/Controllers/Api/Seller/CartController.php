@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api\Seller;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CartRequest;
+use App\Models\Cart;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -11,6 +13,7 @@ class CartController extends Controller
     {
         $this->middleware(['auth:api', 'is_seller']);
     }
+    
     /**
      * Display a listing of the resource.
      *
@@ -18,19 +21,9 @@ class CartController extends Controller
      */
     public function index()
     {
-        //
+        return Cart::where('seller_id', auth()->id())->with(['seller.seller_profile', 'buyer', 'shop', 'giftwrap', 'products'])->latest()->paginate(25);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
     /**
      * Display the specified resource.
@@ -40,7 +33,7 @@ class CartController extends Controller
      */
     public function show($id)
     {
-        //
+        //return Cart::findOrFail($id);
     }
 
     /**
@@ -50,19 +43,9 @@ class CartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CartRequest $request, Cart $cart)
     {
-        //
+        //$cart->update($request->all());
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

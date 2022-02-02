@@ -1,7 +1,7 @@
 <template>
     <!-- Body -->
-    <div class="container">
-        <h1 class="pb-2">Seller Sign Up</h1>
+    <div class="container seller-padding">
+        <h1>Seller Sign Up</h1>
         <h5>To start selling your wares today!</h5>
         <div class="row">
             <div class="col">
@@ -13,7 +13,7 @@
                     >
                         <div class="input-form-compact">
                             <!-- Account details -->
-                            <h4 class="mt-5 mb-4 text-center">
+                            <h4 class="mt-3 mb-4 text-center">
                                 Account Details
                             </h4>
 
@@ -282,7 +282,6 @@
                                 <div class="col-12">
                                     <label class="col-form-label" for="banner"
                                         >Upload banner
-                                        <strong class="text-danger"> * </strong>
                                     </label>
                                     <input
                                         type="file"
@@ -312,7 +311,7 @@
                                         {{
                                             form.photoName
                                                 ? form.photoName
-                                                : `Change image`
+                                                : `Upload image`
                                         }}
                                     </p>
                                     <HasError :form="form" field="banner" />

@@ -17,12 +17,10 @@ class IsAdminMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->user()->role_id === Role::IS_ADMIN or auth()->user()->role_id === Role::IS_MANAGER) {
-            return $next($request);
+        if (!auth()->check() or in_array(!auth()->user()->role_id, [Role::IS_ADMIN, Role::IS_MANAGER])) {
+            abort(code: 401);
         }
-        //if(in_array(auth()->user()->role_id, [Role::IS_ADMIN, Role::IS_MANAGER]))
-        //if user isn't admin then abort with code 403
-        abort(code: 403);
-        
+        //if user isn't logged in or admin or manager then abort with code 403
+        return $next($request);
     }
 }

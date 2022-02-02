@@ -169,6 +169,22 @@ button.bg-black:hover {
         border-color: transparent;
     }
 }
+
+.view-more-link {
+    font-size: 24px;
+    font-weight: 500;
+    color: $dark-grey;
+    transition: all 200ms ease;
+    &:hover {
+        color: $lav-purple;
+        svg {
+            path {
+                fill: $lav-purple;
+            }
+        }
+    }
+}
+
 .text-sm {
     font-size: 12px;
 }
@@ -210,16 +226,49 @@ button.bg-black:hover {
 .black {
     color: $black !important;
 }
+.purple {
+    color: $lav-purple;
+}
+.pink {
+    color: $lav-pink;
+}
 
 @media (max-width: 768px) {
+    section {
+        margin-top: 82px !important;
+        margin-left: 10px !important;
+        margin-right: 10px !important;
+    }
     .title {
-        font-size: 50px;
+        font-size: 40px;
+        line-height: 60px;
     }
+    section h1,
     h1 {
-        font-size: 28px;
+        font-size: 26px;
+        line-height: 38px;
+        margin-bottom: 30px !important;
     }
-    h3 {
-        font-size: 20px;
+    h2 {
+        font-size: 21px;
+        line-height: 32px;
+    }
+    h3,
+    .view-more-link {
+        font-size: 18px;
+    }
+    h4 {
+        font-size: 17px !important;
+    }
+    .instruction-card {
+        h1 {
+            font-size: 50px !important;
+        }
+        p {
+            font-size: 18px !important;
+            line-height: 30px !important;
+            letter-spacing: 0.03rem;
+        }
     }
 }
 /*---------------------top-ribbon---------------------*/
@@ -227,7 +276,6 @@ button.bg-black:hover {
     text-transform: uppercase;
     text-align: center;
     padding: 5px;
-    //border-top: 1px solid $lav-grey;
     border-bottom: 1px solid $lav-grey;
 }
 
@@ -243,7 +291,7 @@ button.bg-black:hover {
     img {
         width: 180px;
         @media (max-width: 991.98px) {
-            width: 110px;
+            width: 100px;
         }
     }
 }
@@ -273,7 +321,6 @@ button.bg-black:hover {
     margin: 6px 15px 0px 15px;
 }
 .nav-user-options {
-    //width: 180px;
     svg {
         height: 50px;
         width: 50px;
@@ -300,21 +347,29 @@ button.bg-black:hover {
 }
 
 @media (max-width: 768px) {
+    .top-ribbon {
+        font-size: 14px;
+    }
     .navbar-main-menu {
         width: 100%;
         order: 2;
-        margin-bottom: 30px;
+        margin-bottom: 10px;
         .navbar-nav {
             flex-direction: row;
             justify-content: center;
-            margin-top: 20px;
+            margin-top: 10px;
         }
         .nav-link {
             padding: 5px 10px;
+            font-size: 17px;
         }
     }
     .nav-user-options {
         order: 1;
+        svg {
+            height: 40px;
+            width: 40px;
+        }
     }
 }
 .seller-nav {
@@ -383,11 +438,18 @@ button.bg-black:hover {
     position: relative;
     background-size: cover;
     background-position: center;
-
     background-color: $lav-pink;
     border-radius: 12px;
     min-height: 660px;
     padding: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    @media (max-width: 768px) {
+        padding: 30px 20px;
+    }
 
     .gallery-top {
         height: 660px;
@@ -433,7 +495,7 @@ button.bg-black:hover {
 section {
     margin-left: 35px;
     margin-right: 35px;
-    margin-top: 130px;
+    margin-top: 120px;
     h1 {
         margin-bottom: 50px;
     }
@@ -477,13 +539,9 @@ section {
     border-radius: 21px;
     padding: 30px 25px;
     width: 350px;
-    @media (max-width: 768px) {
-        margin-bottom: -106px;
-        padding: 15px 10px;
-        width: auto;
-    }
+
     p {
-        font-size: 15px;
+        font-size: 15px !important;
         font-weight: 500;
         position: absolute;
         background-color: $white;
@@ -524,19 +582,15 @@ section {
             margin-bottom: 40px;
         }
     }
-    @media (max-width: 768px) {
-        button {
-            font-size: 17px;
-        }
-    }
     button {
         background-color: $lav-pink;
         text-transform: uppercase;
         font-size: 20px;
         font-weight: 600;
         letter-spacing: 0.05rem;
-        @media (max-width: 768px) {
-            font-size: 17px;
+        &:hover,
+        &:focus {
+            background-color: $black;
         }
     }
     .section-seller-ribbon {
@@ -563,9 +617,56 @@ section {
 .seller-rating {
     font-size: 32px;
 }
+.seller-padding {
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+@media (max-width: 768px) {
+    .seller-hero-box {
+        h1 {
+            font-size: 20px;
+        }
+        p {
+            font-size: 18px;
+        }
+    }
+    .seller-join {
+        margin-bottom: 30px;
+        padding: 15px 10px;
+        width: auto;
+    }
+    .seller-onboard {
+        section {
+            padding: 50px 10px;
+        }
+        button {
+            font-size: 16px;
+        }
+        .section-seller-ribbon {
+            font-size: 17px;
+            font-weight: 500;
+        }
+        .gap {
+            gap: 10px;
+        }
+        .section-seller-details-img {
+            width: 80px;
+            height: 80px;
+        }
+        .section-seller-stories-img {
+            width: auto;
+        }
+    }
+    .section-seller {
+        border-top: none;
+    }
+}
 /*---------------------card---------------------*/
 .card-container {
     gap: 20px;
+    @media (max-width: 768px) {
+        flex-direction: column;
+    }
 }
 .card {
     //color: $white;
@@ -630,25 +731,6 @@ section {
     border-radius: 12px;
     background-color: $white;
     margin-bottom: 20px;
-    .card-img-text-container {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-weight: 500;
-        font-size: 20px;
-        text-transform: capitalize;
-        .card-img-text {
-            color: $white;
-            border-bottom-left-radius: 12px;
-            border-bottom-right-radius: 12px;
-            padding: 0 20px 10px 20px;
-            a:hover,
-            a:focus {
-                color: $black;
-            }
-        }
-    }
     img {
         object-fit: contain;
         width: 100%;
@@ -656,11 +738,46 @@ section {
         border-radius: 12px;
     }
 }
+.card-img-text-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+    font-size: 20px;
+    text-transform: capitalize;
+    .card-img-text {
+        color: $white;
+        border-bottom-left-radius: 12px;
+        border-bottom-right-radius: 12px;
+        padding: 0 20px 10px 20px;
+        a:hover,
+        a:focus {
+            color: $black;
+        }
+    }
+}
 .img-cover {
     object-fit: cover !important;
 }
 .card-img-2 {
     height: 320px;
+}
+
+@media (max-width: 768px) {
+    .item-card-2 {
+        width: 100%;
+    }
+    .card-img-text-container {
+        font-size: 18px;
+    }
+    .card-button-container {
+        button {
+            padding: 8px 15px;
+            letter-spacing: 0.03rem;
+            font-size: 14px;
+        }
+    }
 }
 
 /*---------------------section-special---------------------*/
@@ -776,6 +893,9 @@ footer {
     .footer-link-big {
         text-align: center;
     }
+    .footer-logo {
+        height: 50px;
+    }
 }
 /*---------------------login---------------------*/
 .main-block {
@@ -788,9 +908,19 @@ footer {
     align-items: center;
     margin-top: auto;
     margin-bottom: auto;
-    padding: 60px 30px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+
+    @media (max-width: 768px) {
+        .card {
+            width: 100%;
+        }
+    }
+
     .card {
         width: 450px;
+        padding-left: 0;
+        padding-right: 0;
     }
     .forgot-pwd {
         color: $lav-purple;
@@ -826,6 +956,12 @@ footer {
             -ms-transition: all 0.3s ease;
             -o-transition: all 0.3s ease;
         }
+    }
+}
+
+@media (max-width: 768px) {
+    .login {
+        padding: auto;
     }
 }
 
@@ -869,10 +1005,18 @@ h4 {
     }
     .navbar-toggler {
         background-color: $black;
-        padding: 14px 28px;
+        text-transform: uppercase;
+        padding: 13px 22px;
         border-radius: 12px;
         margin-bottom: 10px;
         text-align: center;
+        font-size: 15px;
+        font-weight: 600;
+        letter-spacing: 0.15rem;
+        &:hover,
+        &:focus {
+            background-color: $lav-pink;
+        }
     }
 }
 
@@ -1035,6 +1179,8 @@ h4 {
 
 .breadcrumb {
     background-color: $white;
+    font-size: 14px;
+    padding: 0 1rem;
 }
 .badge {
     font-weight: 400;
@@ -1074,21 +1220,6 @@ h4 {
     width: 100px;
     height: 100px;
     object-fit: cover;
-}
-
-.view-more-link {
-    font-size: 24px;
-    font-weight: 500;
-    color: $dark-grey;
-    transition: all 200ms ease;
-    &:hover {
-        color: $lav-purple;
-        svg {
-            path {
-                fill: $lav-purple;
-            }
-        }
-    }
 }
 
 .seller-card {
@@ -1276,11 +1407,16 @@ h4 {
         padding: 10px;
         color: $lav-purple;
         font-weight: 500;
+        &:hover,
+        &:focus {
+            color: $lav-orange;
+        }
     }
 }
 .cart-table {
     th {
         font-weight: 500;
+        font-size: 13px;
     }
     .cart-title {
         font-size: 20px;
@@ -1318,10 +1454,45 @@ h4 {
         width: 220px;
     }
     .cart-remove-btn {
+        color: $lav-purple;
         cursor: pointer;
         font-size: 14px;
         font-weight: 600;
         letter-spacing: 0.03rem;
+        &:hover,
+        &:focus {
+            color: $lav-orange;
+        }
+    }
+}
+@media (max-width: 768px) {
+    .menu-cart {
+        width: 300px;
+        .menu-cart-item {
+            padding: 0;
+            padding-top: 10px;
+            .menu-cart-item-title,
+            .menu-cart-item-price {
+                font-size: 14px;
+            }
+        }
+        .menu-cart-remove-btn {
+            padding: 0;
+        }
+        h5 {
+            font-size: 16px;
+        }
+    }
+    .cart-table {
+        .cart-title,
+        .cart-price,
+        .cart-qty-body {
+            font-size: 15px;
+        }
+        .cart-qty-control {
+            font-size: 15px;
+            width: 24px;
+        }
     }
 }
 /*---------------product swiper------------------------*/
@@ -1368,6 +1539,9 @@ h4 {
     height: 650px;
     border-radius: 18px;
     width: 100%;
+    @media (max-width: 768px) {
+        height: 400px;
+    }
 }
 
 .gallery-thumbs {
@@ -1376,6 +1550,9 @@ h4 {
     padding: 20px !important;
     --swiper-navigation-color: #333333;
     --swiper-pagination-color: #333333;
+    @media (max-width: 768px) {
+        height: 100px;
+    }
 }
 
 .swiper-pagination {

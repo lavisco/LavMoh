@@ -242,14 +242,14 @@
         </section>
         <section class="section-shortcuts row mb-5">
             <div class="col-md-6 py-4">
-                <h1>Want to Learn more?</h1>
+                <h1>Start selling on Lavisco</h1>
                 <a href="/lavisco/seller/onboard"
                     ><button class="bg-orange">Become a Seller</button>
                 </a>
             </div>
             <div class="col-md-6 py-4">
-                <h1>Got any Questions?</h1>
-                <a href=""><button class="bg-green">FAQ</button></a>
+                <h1>Create an account today!</h1>
+                <a href="/register"><button class="bg-green">Sign up</button></a>
             </div>
         </section>
     </div>

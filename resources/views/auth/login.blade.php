@@ -1,6 +1,6 @@
 @extends('layouts.master') @section('content')
 <div class="container-fluid login">
-    <h1 class="pb-2">Sign In</h1>
+    <h1>Sign In</h1>
     <h5>Welcome back</h5>
     <div class="card">
         <form method="POST" action="{{ route('login') }}">

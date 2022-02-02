@@ -17,10 +17,10 @@ class IsSellerMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->user()->role_id === Role::IS_SELLER) {
-            return $next($request);
-        }
         //if user isn't seller then abort with code 403
-        abort(code: 403);
+        if (!auth()->check() or !auth()->user()->role_id === Role::IS_SELLER) {
+            abort(code: 401);
+        }
+        return $next($request);
     }
 }

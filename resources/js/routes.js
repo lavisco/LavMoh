@@ -2,11 +2,12 @@ export let routes = [
     /*
      ** Admin Routes
      */
+
     {
-        path: "/admin/dashboard",
-        component: require("./components/admin/Dashboard.vue").default,
+        path: "/admin/analytics",
+        component: require("./components/admin/Analytics.vue").default,
         meta: {
-            title: "Dashboard",
+            title: "Analytics",
         },
     },
     {
@@ -21,6 +22,20 @@ export let routes = [
         component: require("./components/admin/Category.vue").default,
         meta: {
             title: "Product Natures",
+        },
+    },
+    {
+        path: "/admin/carts",
+        component: require("./components/admin/Cart.vue").default,
+        meta: {
+            title: "Carts",
+        },
+    },
+    {
+        path: "/admin/dashboard",
+        component: require("./components/admin/Dashboard.vue").default,
+        meta: {
+            title: "Dashboard",
         },
     },
     {
@@ -49,6 +64,13 @@ export let routes = [
         component: require("./components/admin/Occasion.vue").default,
         meta: {
             title: "Occasions",
+        },
+    },
+    {
+        path: "/admin/orders",
+        component: require("./components/admin/Order.vue").default,
+        meta: {
+            title: "Orders",
         },
     },
     {
@@ -141,6 +163,13 @@ export let routes = [
         },
     },
     {
+        path: "/admin/receipts",
+        component: require("./components/admin/Receipt.vue").default,
+        meta: {
+            title: "Receipts",
+        },
+    },
+    {
         path: "/admin/recipients",
         component: require("./components/admin/Recipient.vue").default,
         meta: {
@@ -218,6 +247,14 @@ export let routes = [
     /*
      ** Seller Routes
      */
+
+    {
+        path: "/seller/carts",
+        component: require("./components/seller/Cart.vue").default,
+        meta: {
+            title: "Carts",
+        },
+    },
     {
         path: "/seller/dashboard",
         component: require("./components/seller/Dashboard.vue").default,
@@ -294,10 +331,10 @@ export let routes = [
         },
     },
     {
-        path: "/seller/orders",
-        component: require("./components/seller/Order.vue").default,
+        path: "/seller/receipts",
+        component: require("./components/seller/Receipt.vue").default,
         meta: {
-            title: "Orders",
+            title: "Receipts",
         },
     },
     {

@@ -41,7 +41,7 @@
                             </button>
                             <br />
                             <a
-                                class="cart-remove-btn"
+                                class="cart-remove-btn pt-3"
                                 title="Remove from cart"
                                 @click.prevent="removeProductFromCart(product)"
                             >

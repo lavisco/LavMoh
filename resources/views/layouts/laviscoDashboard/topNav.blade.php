@@ -84,7 +84,6 @@
             </router-link>
             <a
                 id="navbarDropdown"
-                class="dropdown-toggle"
                 href="#"
                 role="button"
                 data-toggle="dropdown"

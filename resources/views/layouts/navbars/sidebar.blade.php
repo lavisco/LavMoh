@@ -245,6 +245,12 @@
                         </ul>
                     </div>
                 </li>
+
+                <li class="nav-item">
+                    <router-link to="/admin/analytics" class="nav-link">
+                        <i class="fas fa-store"></i> Analytics
+                    </router-link>
+                </li>
             </ul>
             <!-- Divider -->
             <hr class="my-3" />

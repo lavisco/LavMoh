@@ -25,7 +25,7 @@
         <section class="section-seller">
             <div class="container">
                 <h1>Simple, transparent, convenient</h1>
-                <div class="d-flex flex-row align-items-center justify-content-center section-seller-ribbon gap mb-5">
+                <div class="d-flex flex-md-row flex-column align-items-center justify-content-center section-seller-ribbon gap mb-5">
                     <div class="d-flex flex-row align-items-center">
                         <img src="/images/lavisco/ic-tick.svg" class="mr-2" />
                         No monthly fees
@@ -68,7 +68,7 @@
         <section class="section-seller-1">
             <div class="container">
                 <h1>Your Own Storefront</h1>
-                <div class="d-flex flex-row align-items-center justify-content-center section-seller-ribbon gap mb-5">
+                <div class="d-flex flex-md-row flex-column align-items-center justify-content-center section-seller-ribbon gap mb-5">
                     <div class="d-flex flex-row align-items-center">
                         <img src="/images/lavisco/ic-tick.svg" class="mr-2" />
                         It's like having your own website
@@ -107,7 +107,7 @@
         <section class="section-seller-2">
             <div class="container">
                 <h1>Help when you need it</h1>
-                <div class="d-flex flex-row align-items-center justify-content-center section-seller-ribbon gap mb-5">
+                <div class="d-flex flex-md-row flex-column align-items-center justify-content-center section-seller-ribbon gap mb-5">
                     <div class="d-flex flex-row align-items-center">
                         <img src="/images/lavisco/ic-tick.svg" class="mr-2" />
                         We help your customers too
@@ -140,29 +140,20 @@
             <div class="container">
                 <h1>Seller Stories</h1>
                 <div class="container">
-                    <div class="d-flex flex-row align-items-top mb-5">
-                        <img src="" class="mr-5 section-seller-stories-img" />
+                    <div class="d-flex flex-md-row flex-column align-items-top mb-5">
+                        <img src="" class="mr-md-5 section-seller-stories-img mb-4 mb-md-0" />
                         <div>
                             <p>Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote .</p>
                             <h4 class="mt-3 text-right">By seller from place</h4>
                         </div>
                     </div>
-                    <div class="d-flex flex-row align-items-top mb-5">
-                        <div>
+                    <div class="d-flex flex-md-row flex-column align-items-top mb-5">
+                        <div class="order-md-1 order-2">
                             <p>Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote .</p>
                             <h4 class="mt-3 text-right">By seller from place</h4>
                         </div>
-                        <img src="" class="ml-5 section-seller-stories-img" />
+                        <img src="" class="ml-md-5 section-seller-stories-img order-md-2 order-1 mb-4 mb-md-0" />
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="pt-0">
-            <div class="container">
-                <h1>FAQ</h1>
-                <div class="container">
-                    <p>Q</p>
                 </div>
             </div>
         </section>
@@ -171,7 +162,9 @@
             <div class="container">
                 <h1>Ready to Start Selling?</h1>
                 <div class="text-center">
-                    <button>Let's setup Shop</button>
+                    <a href="/lavisco/seller/register">
+                        <button>Lets open my shop</button>
+                    </a>
                 </div>
             </div>
         </section>

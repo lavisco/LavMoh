@@ -29,15 +29,11 @@ class HomeController extends Controller
                     ])
                     ->latest()->take(5)->get();
 
-        $occasions = Occasion::latest()->get();
-        $recipients = Recipient::latest()->get();
-        $categories = Category::latest()->get();
-
         return response()->json([
             'products' => $products,
-            'occasions' => $occasions,
-            'recipients' => $recipients,
-            'categories' => $categories,
+            'occasions' => Occasion::latest()->get(),
+            'recipients' => Recipient::latest()->get(),
+            'categories' => Category::latest()->get(),
         ]);
     }
 

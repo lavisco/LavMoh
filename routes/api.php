@@ -1,19 +1,23 @@
 <?php
 
+use App\Http\Controllers\Api\Admin\AnalyticController;
 use App\Http\Controllers\Api\Admin\UserController;
 use App\Http\Controllers\Api\Admin\BuyerProfileController;
+use App\Http\Controllers\Api\Admin\CartController;
 use App\Http\Controllers\Api\Admin\CategoryController;
 use App\Http\Controllers\Api\Admin\DashboardController;
 use App\Http\Controllers\Api\Admin\GiftwrapController;
 use App\Http\Controllers\Api\Admin\HomeSliderController;
 use App\Http\Controllers\Api\Admin\MaterialController;
 use App\Http\Controllers\Api\Admin\OccasionController;
+use App\Http\Controllers\Api\Admin\OrderController;
 use App\Http\Controllers\Api\Admin\PermissionController;
 use App\Http\Controllers\Api\Admin\ProductController;
 use App\Http\Controllers\Api\Admin\ProductImageController;
 use App\Http\Controllers\Api\Admin\ProductStateController;
 use App\Http\Controllers\Api\Admin\ProductVariationController;
 use App\Http\Controllers\Api\Admin\ProductVideoController;
+use App\Http\Controllers\Api\Admin\ReceiptController;
 use App\Http\Controllers\Api\Admin\RecipientController;
 use App\Http\Controllers\Api\Admin\RoleController;
 use App\Http\Controllers\Api\Admin\SellerProfileController;
@@ -23,13 +27,14 @@ use App\Http\Controllers\Api\Admin\VariationController;
 use App\Http\Controllers\Api\Admin\VariationOptionController;
 use App\Http\Controllers\Api\Buyer\BuyerProfileController as BuyerBuyerProfileController;
 use App\Http\Controllers\Api\Buyer\OrderController as BuyerOrderController;
+use App\Http\Controllers\Api\Seller\CartController as SellerCartController;
 use App\Http\Controllers\Api\Seller\DashboardController as SellerDashboardController;
-use App\Http\Controllers\Api\Seller\OrderController as SellerOrderController;
 use App\Http\Controllers\Api\Seller\ProductController as SellerProductController;
 use App\Http\Controllers\Api\Seller\ProductImageController as SellerProductImageController;
 use App\Http\Controllers\Api\Seller\ProductStateController as SellerProductStateController;
 use App\Http\Controllers\Api\Seller\ProductVariationController as SellerProductVariationController;
 use App\Http\Controllers\Api\Seller\ProductVideoController as SellerProductVideoController;
+use App\Http\Controllers\Api\Seller\ReceiptController as SellerReceiptController;
 use App\Http\Controllers\Api\Seller\SellerProfileController as SellerSellerProfileController;
 use App\Http\Controllers\Api\Seller\ShopController as SellerShopController;
 use App\Http\Controllers\Api\Seller\UserController as SellerUserController;
@@ -62,15 +67,17 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 /*Admin routes*/
 
 Route::prefix('admin')->group(function () {
+    Route::apiResource('/analytics', AnalyticController::class);
     Route::apiResource('/buyerprofiles', BuyerProfileController::class);
+    Route::apiResource('/carts', CartController::class);
     Route::apiResource('/categories', CategoryController::class);
     Route::apiResource('/dashboard', DashboardController::class);
     Route::apiResource('/giftwraps', GiftwrapController::class);
     Route::apiResource('/homesliders', HomeSliderController::class);
     Route::apiResource('/materials', MaterialController::class);
     Route::apiResource('/occasions', OccasionController::class);
+    Route::apiResource('/orders', OrderController::class);
     Route::apiResource('/permissions', PermissionController::class);
-    /* Product */
     Route::put('/products/updateState/{product}', [ProductController::class, 'updateState']);
     Route::apiResource('/products', ProductController::class);
     Route::apiResource('/product_images', ProductImageController::class);
@@ -80,7 +87,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/variations/options', [VariationController::class, 'getOptions']);
     Route::apiResource('/variations', VariationController::class);
     Route::apiResource('/variation_options', VariationOptionController::class);
-    
+    Route::apiResource('/receipts', ReceiptController::class);
     Route::apiResource('/recipients', RecipientController::class);
     Route::apiResource('/roles', RoleController::class);
     Route::apiResource('/sellerprofiles', SellerProfileController::class);
@@ -94,13 +101,16 @@ Route::prefix('admin')->group(function () {
 });
 
 /*Buyer routes*/
+
 Route::prefix('buyer')->group(function () {
     Route::apiResource('/buyerprofile', BuyerBuyerProfileController::class);
     Route::apiResource('/orders', BuyerOrderController::class);
 });
 
 /*Seller routes*/
+
 Route::prefix('seller')->group(function () {
+    Route::apiResource('/carts', SellerCartController::class);
     Route::get('/products/details', [SellerProductController::class, 'getDetails']);
     Route::put('/products/updateState/{product}', [SellerProductController::class, 'updateState']);
     Route::apiResource('/products', SellerProductController::class);
@@ -108,15 +118,16 @@ Route::prefix('seller')->group(function () {
     Route::apiResource('/product_images', SellerProductImageController::class);
     Route::apiResource('/product_variations', SellerProductVariationController::class);
     //Route::apiResource('/product_videos', SellerProductVideoController::class);
+    Route::apiResource('/receipts', SellerReceiptController::class);
     Route::apiResource('/sellerprofile', SellerSellerProfileController::class);
     Route::apiResource('/shop', SellerShopController::class);
-    Route::apiResource('/orders', SellerOrderController::class);
     Route::put('/user/password_reset/{user}', [SellerUserController::class, 'updatePassword']);
     Route::apiResource('/user', SellerUserController::class);
     Route::apiResource('/dashboard', SellerDashboardController::class);
 });
 
 /*Website routes*/
+
 Route::apiResource('/home', WebsiteHomeController::class);
 Route::apiResource('/products', WebsiteProductController::class);
 Route::apiResource('/categories', WebsiteCategoryController::class);

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\Seller;
+namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ReceiptRequest;
@@ -11,12 +11,17 @@ class ReceiptController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:api', 'is_seller']);
+        $this->middleware(['auth:api', 'is_admin']);
     }
-    
+
     public function index()
     {
-        return Receipt::where('seller_id', auth()->id())->latest()->paginate(25);
+        return Receipt::latest()->paginate(25);
+    }
+
+    public function store(ReceiptRequest $request)
+    {
+        return Receipt::create($request->all());
     }
 
     public function show($id)
@@ -29,4 +34,8 @@ class ReceiptController extends Controller
         $receipt->update($request->all());
     }
 
+    public function destroy(Receipt $receipt)
+    {
+        $receipt->delete();
+    }
 }

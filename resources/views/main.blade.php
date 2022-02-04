@@ -128,5 +128,6 @@
         </div>
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
+        <script type="text/javascript" src="https://www.payhere.lk/lib/payhere.js"></script>
     </body>
 </html>

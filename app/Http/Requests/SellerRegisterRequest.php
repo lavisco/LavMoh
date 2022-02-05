@@ -25,18 +25,6 @@ class SellerRegisterRequest extends FormRequest
     public function rules()
     {
         return [
-            //user
-            'name' => 'sometimes|required|string|max:255',
-            'email' => [
-                'required',
-                'string',
-                'email',
-                'max:255',
-                Rule::unique('users')->ignore($this->id),
-            ],
-            'password' => 'sometimes|required|string|min:8',
-            //'avatar' => 'nullable',
-
             //seller profile
             'first_name' => 'required|max:100',
             'last_name' => 'required|max:100',

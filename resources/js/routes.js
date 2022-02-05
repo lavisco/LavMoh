@@ -352,6 +352,13 @@ export let routes = [
         },
     },
     {
+        path: "/seller/shop_setup",
+        component: require("./components/seller/ShopSetup.vue").default,
+        meta: {
+            title: "Setup Your Shop",
+        },
+    },
+    {
         path: "/seller/messages",
         component: require("./components/seller/Message.vue").default,
         meta: {
@@ -480,13 +487,6 @@ export let routes = [
         component: require("./components/SellerOnboard.vue").default,
         meta: {
             title: "Seller Onboarding",
-        },
-    },
-    {
-        path: "/lavisco/seller/register",
-        component: require("./components/SellerRegister.vue").default,
-        meta: {
-            title: "Seller Registration",
         },
     },
 ];

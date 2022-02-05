@@ -122,6 +122,7 @@ Route::prefix('seller')->group(function () {
     Route::apiResource('/sellerprofile', SellerSellerProfileController::class);
     Route::apiResource('/shop', SellerShopController::class);
     Route::put('/user/password_reset/{user}', [SellerUserController::class, 'updatePassword']);
+    Route::post('/user/shop_setup', [SellerUserController::class, 'storeShopSetup']);
     Route::apiResource('/user', SellerUserController::class);
     Route::apiResource('/dashboard', SellerDashboardController::class);
 });

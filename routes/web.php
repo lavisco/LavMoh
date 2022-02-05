@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Website\HomeController;
@@ -14,10 +15,6 @@ use App\Http\Controllers\Website\HomeController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/data', function () {
-    abort(401);
-});
 
 Route::get('/terms_and_conditions', function () {
     return view('policy_terms_condition');
@@ -37,7 +34,6 @@ Route::get('/cookie_policy', function () {
 Route::get('/login', function () {
     return view('login');
 });
-
 
 Route::get('/lavisco/{path}', [HomeController::class, 'websiteIndex'])->where('path', '.*');
 Route::get('/admin/{path}', [HomeController::class, 'adminIndex'])->where('path', '.*')->middleware('is_admin');

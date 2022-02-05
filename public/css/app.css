@@ -10323,7 +10323,7 @@ h1 {
 }
 
 .navbar-brand img {
-  width: 180px;
+  width: 160px;
 }
 @media (max-width: 991.98px) {
   .navbar-brand img {
@@ -10339,7 +10339,7 @@ h1 {
   text-align: center;
   text-transform: capitalize;
   color: #333333;
-  border: 1px solid #ffffff;
+  border: 1px solid transparent;
   border-radius: 12px;
   transition: all 150ms ease;
 }
@@ -10369,14 +10369,7 @@ h1 {
   filter: drop-shadow(0 0 1px #836aff);
 }
 
-.navbar-main-menu .navbar-nav {
-  flex-direction: row;
-}
-.navbar-main-menu .dropdown-menu {
-  position: absolute;
-}
-
-@media (max-width: 768px) {
+@media (max-width: 992px) {
   .top-ribbon {
     font-size: 14px;
   }
@@ -10417,15 +10410,37 @@ h1 {
 }
 
 /*---------------------navbar dropdown---------------------*/
-.dropdown-menu {
+.navbar-main-menu a[aria-expanded=true] {
+  color: #836aff;
+  border: 1px solid #836aff;
+  border-bottom: 1px solid #ffffff;
+  border-radius: 12px 12px 0 0;
+  background-color: #ffffff;
+}
+.navbar-main-menu .dropdown {
+  position: inherit;
+}
+.navbar-main-menu .navbar-nav {
+  flex-direction: row;
+}
+.navbar-main-menu .dropdown-menu {
+  z-index: -1 !important;
+  position: absolute;
+  margin-top: -25px;
+  left: 50%;
+  transform: translate(-50%, 0);
   border: 1px solid #836aff;
   border-radius: 12px;
   padding: 10px;
+  width: 730px !important;
 }
-.dropdown-menu-col {
-  width: 50%;
+.navbar-main-menu .dropdown-menu-col-1 {
+  width: 33.33%;
 }
-.dropdown-menu .dropdown-header {
+.navbar-main-menu .dropdown-menu-col-2 {
+  width: 66.66%;
+}
+.navbar-main-menu .dropdown-menu .dropdown-header {
   font-weight: 600;
   font-size: 15px;
   letter-spacing: 0.03rem;
@@ -10434,7 +10449,7 @@ h1 {
   padding-left: 1.3rem;
   padding-right: 1.3rem;
 }
-.dropdown-menu .dropdown-item {
+.navbar-main-menu .dropdown-menu .dropdown-item {
   padding-left: 1.3rem;
   padding-right: 1.3rem;
   display: flex;
@@ -10442,23 +10457,38 @@ h1 {
   align-items: center;
   justify-content: space-between;
 }
-.dropdown-menu .dropdown-item:hover, .dropdown-menu .dropdown-item:focus {
+.navbar-main-menu .dropdown-menu .dropdown-item:hover, .navbar-main-menu .dropdown-menu .dropdown-item:focus {
   background-color: #eaeaea;
   border-radius: 8px;
 }
-.dropdown-menu .dropdown-item.active,
-.dropdown-menu .dropdown-item:active {
+.navbar-main-menu .dropdown-menu .dropdown-item.active,
+.navbar-main-menu .dropdown-menu .dropdown-item:active {
   background-color: #0fb6ff !important;
   border-radius: 8px !important;
 }
-.dropdown-menu .dropdown-item.active .dropdown-item-arrow,
-.dropdown-menu .dropdown-item:active .dropdown-item-arrow {
+.navbar-main-menu .dropdown-menu .dropdown-item.active .dropdown-item-arrow,
+.navbar-main-menu .dropdown-menu .dropdown-item:active .dropdown-item-arrow {
   color: #ffffff;
 }
-.dropdown-menu .dropdown-item-arrow {
+.navbar-main-menu .dropdown-menu .dropdown-item-arrow {
   font-size: 18px;
   font-weight: 600;
   color: #a0a0a0;
+}
+@media (max-width: 992px) {
+  .navbar-main-menu .dropdown-menu {
+    width: 90vw !important;
+    margin-top: -29px;
+  }
+  .navbar-main-menu .dropdown-menu-col-1, .navbar-main-menu .dropdown-menu-col-2 {
+    width: 50%;
+  }
+  .navbar-main-menu .dropdown-menu .dropdown-header {
+    font-size: 13px;
+  }
+  .navbar-main-menu .dropdown-menu .dropdown-item {
+    font-size: 15px;
+  }
 }
 
 /*---------------------hero---------------------*/
@@ -11230,6 +11260,23 @@ h4 {
   text-align: left;
   font-size: 40px !important;
   font-weight: 500;
+}
+
+#pills-tab {
+  justify-content: center;
+  gap: 70px;
+}
+#pills-tab .nav-link {
+  padding: 10px 20px !important;
+  color: #4e4e4e;
+  border: none;
+  border-radius: 12px;
+  background-color: #f0f0f0;
+  font-size: 17px;
+}
+#pills-tab .nav-link.active {
+  background-color: #836aff;
+  color: #ffffff;
 }
 
 /*------------------------------lavisco website------------------------------*/

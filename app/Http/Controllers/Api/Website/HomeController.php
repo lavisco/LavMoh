@@ -31,9 +31,9 @@ class HomeController extends Controller
 
         return response()->json([
             'products' => $products,
-            'occasions' => Occasion::latest()->get(),
-            'recipients' => Recipient::latest()->get(),
-            'categories' => Category::latest()->get(),
+            'occasions' => Occasion::select('id', 'name')->latest()->get(),
+            'recipients' => Recipient::select('id', 'name')->latest()->get(),
+            'categories' => Category::select('id', 'name')->latest()->get(),
         ]);
     }
 

@@ -289,7 +289,7 @@ button.bg-black:hover {
 }
 .navbar-brand {
     img {
-        width: 180px;
+        width: 160px;
         @media (max-width: 991.98px) {
             width: 100px;
         }
@@ -304,7 +304,7 @@ button.bg-black:hover {
     text-align: center;
     text-transform: capitalize;
     color: $black;
-    border: 1px solid #ffffff;
+    border: 1px solid transparent;
     border-radius: 12px;
     transition: all 150ms ease;
     &:hover {
@@ -337,16 +337,7 @@ button.bg-black:hover {
     }
 }
 
-.navbar-main-menu {
-    .navbar-nav {
-        flex-direction: row;
-    }
-    .dropdown-menu {
-        position: absolute;
-    }
-}
-
-@media (max-width: 768px) {
+@media (max-width: 992px) {
     .top-ribbon {
         font-size: 14px;
     }
@@ -385,47 +376,87 @@ button.bg-black:hover {
     }
 }
 /*---------------------navbar dropdown---------------------*/
-.dropdown-menu {
-    border: 1px solid $lav-purple;
-    border-radius: 12px;
-    padding: 10px;
-    &-col {
-        width: 50%;
+.navbar-main-menu {
+    a[aria-expanded="true"] {
+        color: $lav-purple;
+        border: 1px solid $lav-purple;
+        border-bottom: 1px solid $white;
+        border-radius: 12px 12px 0 0;
+        background-color: $white;
     }
-    .dropdown-header {
-        font-weight: 600;
-        font-size: 15px;
-        letter-spacing: 0.03rem;
-        text-transform: capitalize;
-        color: $black;
-        padding-left: 1.3rem;
-        padding-right: 1.3rem;
+    .dropdown {
+        position: inherit;
     }
-    .dropdown-item {
-        padding-left: 1.3rem;
-        padding-right: 1.3rem;
-        display: flex;
-        flex-wrap: nowrap;
-        align-items: center;
-        justify-content: space-between;
-        &:hover,
-        &:focus {
-            background-color: #eaeaea;
-            border-radius: 8px;
+    .navbar-nav {
+        flex-direction: row;
+    }
+    .dropdown-menu {
+        z-index: -1 !important;
+        position: absolute;
+        margin-top: -25px;
+        left: 50%;
+        transform: translate(-50%, 0);
+        border: 1px solid $lav-purple;
+        border-radius: 12px;
+        padding: 10px;
+        width: 730px !important;
+        &-col-1 {
+            width: 33.33%;
         }
-    }
-    .dropdown-item.active,
-    .dropdown-item:active {
-        background-color: $lav-l-blue !important;
-        border-radius: 8px !important;
+        &-col-2 {
+            width: 66.66%;
+        }
+        .dropdown-header {
+            font-weight: 600;
+            font-size: 15px;
+            letter-spacing: 0.03rem;
+            text-transform: capitalize;
+            color: $black;
+            padding-left: 1.3rem;
+            padding-right: 1.3rem;
+        }
+        .dropdown-item {
+            padding-left: 1.3rem;
+            padding-right: 1.3rem;
+            display: flex;
+            flex-wrap: nowrap;
+            align-items: center;
+            justify-content: space-between;
+            &:hover,
+            &:focus {
+                background-color: #eaeaea;
+                border-radius: 8px;
+            }
+        }
+        .dropdown-item.active,
+        .dropdown-item:active {
+            background-color: $lav-l-blue !important;
+            border-radius: 8px !important;
+            .dropdown-item-arrow {
+                color: #ffffff;
+            }
+        }
         .dropdown-item-arrow {
-            color: #ffffff;
+            font-size: 18px;
+            font-weight: 600;
+            color: #a0a0a0;
         }
     }
-    .dropdown-item-arrow {
-        font-size: 18px;
-        font-weight: 600;
-        color: #a0a0a0;
+    @media (max-width: 992px) {
+        .dropdown-menu {
+            width: 90vw !important;
+            margin-top: -29px;
+            &-col-1,
+            &-col-2 {
+                width: 50%;
+            }
+            .dropdown-header {
+                font-size: 13px;
+            }
+            .dropdown-item {
+                font-size: 15px;
+            }
+        }
     }
 }
 
@@ -1171,6 +1202,24 @@ h4 {
         text-align: left;
         font-size: 40px !important;
         font-weight: 500;
+    }
+}
+
+#pills-tab {
+    justify-content: center;
+    gap: 70px;
+
+    .nav-link {
+        padding: 10px 20px !important;
+        color: $dark-grey;
+        border: none;
+        border-radius: 12px;
+        background-color: #f0f0f0;
+        font-size: 17px;
+    }
+    .nav-link.active {
+        background-color: $lav-purple;
+        color: $white;
     }
 }
 

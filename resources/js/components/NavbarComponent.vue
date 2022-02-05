@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar navbar-expand-lg d-flex justify-content-between">
+    <nav class="navbar navbar-expand-lg d-flex justify-content-between" style="z-index:9999;">
         <router-link to="/lavisco/home" class="navbar-brand">
             <img src="/images/lavisco/logo.png" />
         </router-link>
@@ -21,11 +21,12 @@
                         </a>
 
                         <div
+                            style="z-index:-1;"
                             class="dropdown-menu"
                             aria-labelledby="dropdownMenuLink"
                         >
                             <div class="d-flex flex-row align-items-start">
-                                <div class="dropdown-menu-col">
+                                <div class="dropdown-menu-col-1">
                                     <h6 class="dropdown-header">
                                         <a href="/lavisco/categories"
                                             >Browse by Nature</a
@@ -49,28 +50,38 @@
                                         </span>
                                     </router-link>
                                 </div>
-                                <div class="dropdown-menu-col">
+                                <div class="dropdown-menu-col-2">
                                     <h6 class="dropdown-header">
                                         <a href="/lavisco/recipients">
                                             Browse by Recipient
                                         </a>
                                     </h6>
-                                    <router-link
-                                        class="dropdown-item"
-                                        v-for="recipient in recipients"
-                                        :key="recipient.id"
-                                        :to="{
-                                            name: 'recipients/recipient',
-                                            params: {
-                                                recipientId: recipient.id,
-                                            },
-                                        }"
-                                    >
-                                        {{ recipient.name }}
-                                        <span class="dropdown-item-arrow">
+                                    <div class="row">
+                                        <div
+                                            class="col-md-6"
+                                            v-for="chunkRecipient in chunkedRecipients"
+                                        >
+                                            <router-link
+                                                class="dropdown-item"
+                                                v-for="recipient in chunkRecipient"
+                                                :key="recipient.id"
+                                                :to="{
+                                                    name: 'recipients/recipient',
+                                                    params: {
+                                                        recipientId:
+                                                            recipient.id,
+                                                    },
+                                                }"
                                             >
-                                        </span>
-                                    </router-link>
+                                                {{ recipient.name }}
+                                                <span
+                                                    class="dropdown-item-arrow"
+                                                >
+                                                    >
+                                                </span>
+                                            </router-link>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -239,6 +250,12 @@ export default {
         recipients: [],
         categories: [],
     }),
+
+    computed: {
+        chunkedRecipients() {
+            return _.chunk(this.recipients, 11);
+        },
+    },
 
     methods: {
         loadData() {

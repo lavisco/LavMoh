@@ -25,17 +25,19 @@ class UserController extends Controller
         //
     }
 
-    public function store(SellerRegisterRequest $request)
+    public function store(UserRequest $request)
     {
-        $user = new User([
+        return User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'role_id' => Role::IS_SELLER,
         ]);
-        $user->save();
+    }
 
-        $request->merge(['user_id' => $user->id]);
+    public function storeShopSetup(SellerRegisterRequest $request)
+    {
+        $request->merge(['user_id' => auth()->id()]);
         $request->merge(['banner' => $this->storeImage($request->banner, $request->photoName)]);
         $request->merge(['name' => $request->shop_name]);
 

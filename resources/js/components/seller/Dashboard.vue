@@ -31,6 +31,7 @@ export default {
         revenue: "",
         orders: "",
         products: "",
+        has_shop: "",
     }),
 
     methods: {
@@ -38,7 +39,10 @@ export default {
             axios
                 .get("/api/seller/dashboard")
                 .then(({ data }) => {
-                    //this.revenue = data.revenue;
+                    this.has_shop = data.hasShop;
+                    if (this.has_shop === false) {
+                        this.$router.push("/seller/shop_setup");
+                    }
                     this.orders = data.orders;
                     this.products = data.products;
                 })

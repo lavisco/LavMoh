@@ -257,7 +257,6 @@
 
 <script>
 import { Swiper, SwiperSlide, directive } from "vue-awesome-swiper";
-// import style (<= Swiper 5.x)
 import "swiper/css/swiper.css";
 
 export default {
@@ -337,12 +336,6 @@ export default {
         this.loadData();
         Fire.$on("reloadRecords", () => {
             this.loadData();
-        });
-        this.$nextTick(() => {
-            const swiperTop = this.$refs.swiperTop.$swiper;
-            const swiperThumbs = this.$refs.swiperThumbs.$swiper;
-            swiperTop.controller.control = swiperThumbs;
-            swiperThumbs.controller.control = swiperTop;
         });
     },
 };

@@ -48,7 +48,7 @@ class SellerRegisterRequest extends FormRequest
             'deposit_account_status' => 'required|boolean',
 
             //shop
-            'name' => 'required|max:400',
+            'shop_name' => 'required|max:400',
             'banner' => 'nullable',
             'about' => 'required',
         ];

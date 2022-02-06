@@ -31,10 +31,6 @@
 
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet" />
-        <link
-            rel="stylesheet"
-            href="https://unpkg.com/swiper@7/swiper-bundle.min.css"
-        />
     </head>
     <body>
         <div id="app">
@@ -43,6 +39,5 @@
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
-        <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
     </body>
 </html>

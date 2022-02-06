@@ -376,7 +376,7 @@
     @endif
 </nav>
 
-@if(auth()->user()->role_id == 2)
+@if(auth()->user()->role_id == 2 && auth()->user()->shop)
 @include('layouts.laviscoDashboard.sellerTopNav') @endif
 @if(auth()->user()->role_id == 3)
 @include('layouts.laviscoDashboard.buyerTopNav') @endif

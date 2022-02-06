@@ -10,6 +10,7 @@ use App\Models\SellerProfile;
 use App\Models\Shop;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Image;
 
@@ -17,7 +18,7 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        //$this->middleware(['auth:api', 'is_seller'])->only('index');
+        $this->middleware(['auth:api', 'is_seller'])->only('storeShopSetup');
     }
     
     public function index()
@@ -37,7 +38,8 @@ class UserController extends Controller
 
     public function storeShopSetup(SellerRegisterRequest $request)
     {
-        $request->merge(['user_id' => auth()->id()]);
+        $userid = Auth::user()->id;
+        $request->merge(['user_id' => $userid]);
         $request->merge(['banner' => $this->storeImage($request->banner, $request->photoName)]);
         $request->merge(['name' => $request->shop_name]);
 

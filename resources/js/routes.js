@@ -489,4 +489,12 @@ export let routes = [
             title: "Seller Onboarding",
         },
     },
+    {
+        path: "/lavisco/seller/register",
+        name: "seller/register",
+        component: require("./components/SellerRegister.vue").default,
+        meta: {
+            title: "Seller Registration",
+        },
+    },
 ];

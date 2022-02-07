@@ -1,6 +1,12 @@
 <template>
     <div class="container mt-5 mb-5">
-        <div class="row">
+        <div
+            v-if="loading"
+            class="my-5 d-flex align-items-center justify-content-center"
+        >
+            <img src="/images/lavisco/loading.gif" />
+        </div>
+        <div v-else class="row">
             <div class="col">
                 <!-- Form start -->
                 <div class="input-form">
@@ -219,6 +225,7 @@ export default {
     },
     data: () => ({
         variations: {},
+        loading: true,
         form: new Form({
             variation_id: [],
             variation_type: [],
@@ -243,6 +250,7 @@ export default {
                 )
                 .then(({ data }) => {
                     this.variations = data;
+
                     this.variations.forEach((value, index) => {
                         this.$set(this.form.variation_id, index, value.id);
                         this.$set(this.form.variation_type, index, value.type);
@@ -268,6 +276,8 @@ export default {
                             value.quantity
                         );
                     });
+
+                    this.loading = false;
                 })
                 .catch((error) => console.log(error));
         },

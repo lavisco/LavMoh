@@ -6,7 +6,17 @@
                 From cakes to bags, Lavisco has everything you are looking for!
             </h1>
         </div>
-        <section class="section-best-seller mb-5" v-for="occasion in occasions">
+        <section
+            v-if="loading"
+            class="my-5 d-flex align-items-center justify-content-center"
+        >
+            <img src="/images/lavisco/loading.gif" />
+        </section>
+        <section
+            v-else
+            class="section-best-seller mb-5"
+            v-for="occasion in occasions"
+        >
             <h1 class="text-left">{{ occasion.name }}</h1>
             <div class="d-flex card-container align-items-center">
                 <div
@@ -59,6 +69,7 @@ export default {
     data: () => ({
         occasions: [],
         searchText: null,
+        loading: true,
     }),
 
     watch: {
@@ -71,7 +82,10 @@ export default {
         loadOccasions() {
             axios
                 .get("/api/occasions")
-                .then(({ data }) => (this.occasions = data.data))
+                .then(({ data }) => {
+                    this.occasions = data.data;
+                    this.loading = false;
+                })
                 .catch((error) => console.log(error));
         },
     },

@@ -1,6 +1,12 @@
 <template>
     <div class="container-fluid mt-5 mb-5">
-        <div class="row">
+        <div
+            v-if="loading"
+            class="my-5 d-flex align-items-center justify-content-center"
+        >
+            <img src="/images/lavisco/loading.gif" />
+        </div>
+        <div v-else class="row">
             <div class="col">
                 <!-- Form start -->
                 <form class="input-form" @submit.prevent="updateProduct()">
@@ -912,6 +918,7 @@ export default {
         materialMode: false,
         occasionMode: false,
         recipientMode: false,
+        loading: true,
         productStates: [],
         categories: [],
         materials: [],
@@ -1035,6 +1042,7 @@ export default {
                 .then(({ data }) => {
                     this.form.fill(data);
                     this.loadPivotVariables();
+                    this.loading = false;
                 })
                 .catch((error) => console.log(error));
         },

@@ -466,6 +466,14 @@ export let routes = [
         },
     },
     {
+        path: "/lavisco/order_complete",
+        name: "order_complete",
+        component: require("./components/OrderComplete.vue").default,
+        meta: {
+            title: "Order Complete",
+        },
+    },
+    {
         path: "/lavisco/sellers",
         name: "sellers",
         component: require("./components/Sellers.vue").default,

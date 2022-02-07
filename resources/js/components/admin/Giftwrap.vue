@@ -5,7 +5,13 @@
 
         <!-- Body -->
         <div class="container-fluid mt--6 mb-5">
-            <div class="row">
+            <div
+                v-if="loading"
+                class="my-5 d-flex align-items-center justify-content-center"
+            >
+                <img src="/images/lavisco/loading.gif" />
+            </div>
+            <div v-else class="row">
                 <div class="col">
                     <div class="card">
                         <!-- Table start -->
@@ -163,6 +169,43 @@
                             <div class="form-group row">
                                 <label
                                     class="col-md-3 col-form-label"
+                                    for="user_id"
+                                    >Seller
+                                    <strong class="text-danger"> *</strong>
+                                </label>
+
+                                <div class="col-md-9">
+                                    <select
+                                        class="
+                                            custom-select
+                                            form-control
+                                            form-control-alternative
+                                        "
+                                        name="user_id"
+                                        id="user_id"
+                                        v-model="form.user_id"
+                                    >
+                                        <option
+                                            value=""
+                                            disabled
+                                            selected
+                                            hidden
+                                        >
+                                            Select Seller
+                                        </option>
+                                        <option
+                                            v-for="seller in sellers"
+                                            :value="seller.id"
+                                        >
+                                            {{ seller.name }}
+                                        </option>
+                                    </select>
+                                    <HasError :form="form" field="user_id" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label
+                                    class="col-md-3 col-form-label"
                                     for="image_url"
                                     >Upload image
                                     <strong class="text-danger"> *</strong>
@@ -246,12 +289,15 @@ export default {
     },
     data: () => ({
         editMode: false,
+        loading: true,
         giftwraps: [],
         searchText: null,
+        sellers: [],
         form: new Form({
             id: "",
             name: "",
             image_url: "",
+            user_id: "",
         }),
     }),
 
@@ -296,7 +342,16 @@ export default {
                 .get("/api/admin/giftwraps", {
                     params: { searchText: this.searchText },
                 })
-                .then(({ data }) => (this.giftwraps = data.data))
+                .then(({ data }) => {
+                    this.giftwraps = data.data;
+                    this.loading = false;
+                })
+                .catch((error) => console.log(error));
+        },
+        loadSellers() {
+            axios
+                .get("/api/admin/users/seller")
+                .then(({ data }) => (this.sellers = data))
                 .catch((error) => console.log(error));
         },
         createGiftwrap() {

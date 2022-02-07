@@ -1,6 +1,12 @@
 <template>
     <div class="container-fluid mt-5 mb-5">
-        <div class="row">
+        <div
+            v-if="loading"
+            class="my-5 d-flex align-items-center justify-content-center"
+        >
+            <img src="/images/lavisco/loading.gif" />
+        </div>
+        <div v-else class="row">
             <div class="col">
                 <!-- Form start -->
                 <form
@@ -118,6 +124,7 @@ export default {
     },
     data: () => ({
         images: {},
+        loading: true,
         form: new Form({
             id: [],
             image_path: [],
@@ -186,6 +193,7 @@ export default {
                         this.form.path.push(value.path);
                         this.form.title.push(value.title);
                     });
+                    this.loading = false;
                 })
                 .catch((error) => console.log(error));
         },

@@ -1,6 +1,12 @@
 <template>
     <div class="container mt-3 mb-5">
-        <div class="row">
+        <div
+            v-if="loading"
+            class="my-5 d-flex align-items-center justify-content-center"
+        >
+            <img src="/images/lavisco/loading.gif" />
+        </div>
+        <div v-else class="row">
             <div class="col">
                 <!-- Form start -->
                 <form class="input-form" @submit.prevent="updateProduct()">
@@ -871,6 +877,7 @@ export default {
         materialMode: false,
         occasionMode: false,
         recipientMode: false,
+        loading: true,
         productStates: [],
         categories: [],
         materials: [],
@@ -967,6 +974,7 @@ export default {
                 .then(({ data }) => {
                     this.form.fill(data);
                     this.loadPivotVariables();
+                    this.loading = false;
                 })
                 .catch((error) => console.log(error));
         },
@@ -990,24 +998,6 @@ export default {
             });
         },
 
-        // loadProductImages() {
-        //     axios
-        //         .get("/api/seller/product_images/", {
-        //             params: { productId: this.$route.params.productId },
-        //         })
-        //         .then(({ data }) => {
-        //             this.images = data;
-        //             this.images.forEach((value, index) => {
-        //                 this.form.img_id.push(value.id);
-        //                 this.form.image_path.push(value.image_path);
-        //                 this.form.primary_image.push(value.primary_image);
-        //                 this.form.path.push(value.path);
-        //                 this.form.img_title.push(value.title);
-        //             });
-        //         })
-        //         .catch((error) => console.log(error));
-        // },
-
         updateProduct() {
             if (this.form.has_inventory == 0) {
                 this.form.quantity == "";
@@ -1024,7 +1014,6 @@ export default {
         this.loadProduct();
         this.loadProductStates();
         this.loadDetails();
-        //this.loadProductImages();
     },
 };
 </script>

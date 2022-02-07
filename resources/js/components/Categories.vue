@@ -7,6 +7,13 @@
             </h1>
         </div>
         <section
+            v-if="loading"
+            class="my-5 d-flex align-items-center justify-content-center"
+        >
+            <img src="/images/lavisco/loading.gif" />
+        </section>
+        <section
+            v-else
             class="section-best-seller mb-5"
             v-for="category in categories"
         >
@@ -62,6 +69,7 @@ export default {
     data: () => ({
         categories: [],
         searchText: null,
+        loading: true,
     }),
 
     watch: {
@@ -74,7 +82,10 @@ export default {
         loadCategories() {
             axios
                 .get("/api/categories")
-                .then(({ data }) => (this.categories = data.data))
+                .then(({ data }) => {
+                    this.categories = data.data;
+                    this.loading = false;
+                })
                 .catch((error) => console.log(error));
         },
     },

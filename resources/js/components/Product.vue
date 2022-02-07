@@ -11,7 +11,13 @@
                 </li>
             </ol>
         </nav>
-        <div class="col">
+        <div
+            v-if="loading"
+            class="my-5 d-flex align-items-center justify-content-center"
+        >
+            <img src="/images/lavisco/loading.gif" />
+        </div>
+        <div v-else class="col">
             <div class="row">
                 <div class="col-md-6">
                     <!-- Swiper -->
@@ -194,6 +200,7 @@
                                     mt-2 mt-md-0
                                     col-md-6
                                 "
+                                @click.prevent="addProductToCart(product)"
                             >
                                 Add to Cart
                             </button>
@@ -336,6 +343,7 @@ export default {
         product: [],
         shop: [],
         variations: [],
+        loading: true,
         swiperOptionTop: {
             loop: true,
             loopedSlides: 3, // looped slides should be the same
@@ -379,6 +387,7 @@ export default {
             this.product = response.data.product;
             this.shop = response.data.shop;
             this.variations = response.data.variations;
+            this.loading = false;
         },
         loadProduct() {
             axios
@@ -388,6 +397,9 @@ export default {
                     this.shop = response.data.shop;
                 })
                 .catch((error) => console.log(error));
+        },
+        addProductToCart(product) {
+            this.$store.dispatch("addProductToCart", product);
         },
     },
     mounted() {

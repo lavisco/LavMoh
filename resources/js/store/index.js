@@ -6,23 +6,21 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     state: {
         //data
-        products: [],
         cart: [], //{product id, product quantity}
+        currentCart: [], //cart being currently processed
+        total: "",
     },
 
     getters: {
-        //computed properties
-        availableProducts(state, getters) {
-            return state.products.filter((product) => product.category_id == 1);
-        },
-
         cartProducts(state) {
-            let sum = 0;
             return state.cart.map((cartItem) => {
                 return {
                     id: cartItem.id,
                     title: cartItem.title,
                     price: cartItem.price,
+                    user_id: cartItem.user_id,
+                    shop: cartItem.shop,
+                    category: cartItem.category,
                     quantity: cartItem.quantity,
                 };
             });
@@ -33,7 +31,28 @@ export default new Vuex.Store({
             state.cart.map((cartItem) => {
                 sum += cartItem.price * cartItem.quantity;
             });
+
             return sum.toFixed(2);
+        },
+
+        shopCartTotal(state) {
+            return state.total;
+        },
+
+        currentCartProducts(state) {
+            return state.currentCart.map((cartItem) => {
+                return {
+                    id: cartItem.id,
+                    title: cartItem.title,
+                    price: cartItem.price,
+                    shop: cartItem.shop,
+                    quantity: cartItem.quantity,
+                };
+            });
+        },
+
+        cartProductsByShop(state) {
+            return _.groupBy(state.cart, (cartItem) => cartItem.user_id);
         },
     },
 
@@ -64,21 +83,40 @@ export default new Vuex.Store({
                 context.commit("decrementItemQuantity", cartItem);
             }
         },
+
+        saveShopCartTotal(context, total) {
+            context.commit("storeShopCartTotal", total);
+        },
+
+        addProductToCurrentCart(context, shop) {
+            //context.commit("pushProductToCurrentCart", product);
+            shop.map((product) => {
+                context.commit("pushProductToCurrentCart", product);
+            });
+        },
     },
 
     mutations: {
         //alter state
-        setProducts(state, products) {
-            //update products
-            state.products = products;
-        },
-
         pushProductToCart(state, product) {
             state.cart.push({
                 id: product.id,
                 title: product.title,
                 price: product.base_price,
+                user_id: product.user_id,
+                shop: product.user.shop.name,
+                category: product.category.name,
                 quantity: 1,
+            });
+        },
+
+        pushProductToCurrentCart(state, product) {
+            state.currentCart.push({
+                id: product.id,
+                title: product.title,
+                price: product.base_price,
+                shop: product.shop,
+                quantity: product.quantity,
             });
         },
 
@@ -88,6 +126,10 @@ export default new Vuex.Store({
 
         decrementItemQuantity(state, cartItem) {
             cartItem.quantity--;
+        },
+
+        storeShopCartTotal(state, total) {
+            state.total = total;
         },
 
         deleteProductFromCart(state, product) {

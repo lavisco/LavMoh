@@ -2,7 +2,13 @@
     <div>
         <!-- Body -->
         <div class="container-fluid mt-3 mb-5">
-            <div class="row">
+            <div
+                v-if="loading"
+                class="my-5 d-flex align-items-center justify-content-center"
+            >
+                <img src="/images/lavisco/loading.gif" />
+            </div>
+            <div v-else class="row">
                 <div class="col">
                     <div class="card">
                         <div class="row align-items-center">
@@ -404,6 +410,7 @@ export default {
         products: [],
         productStates: [],
         searchText: null,
+        loading: true,
         form: new Form({
             id: "",
             sku: "",
@@ -450,7 +457,10 @@ export default {
                 .get("/api/seller/products", {
                     params: { searchText: this.searchText },
                 })
-                .then(({ data }) => (this.products = data.data))
+                .then(({ data }) => {
+                    this.products = data.data;
+                    this.loading = false;
+                })
                 .catch((error) => console.log(error));
         },
 

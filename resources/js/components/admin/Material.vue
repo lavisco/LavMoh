@@ -5,7 +5,13 @@
 
         <!-- Body -->
         <div class="container-fluid mt--6 mb-5">
-            <div class="row">
+            <div
+                v-if="loading"
+                class="my-5 d-flex align-items-center justify-content-center"
+            >
+                <img src="/images/lavisco/loading.gif" />
+            </div>
+            <div v-else class="row">
                 <div class="col">
                     <div class="card">
                         <!-- Table start -->
@@ -302,6 +308,7 @@ export default {
     },
     data: () => ({
         editMode: false,
+        loading: true,
         materials: [],
         searchText: null,
         form: new Form({
@@ -338,7 +345,10 @@ export default {
                 .get("/api/admin/materials", {
                     params: { searchText: this.searchText },
                 })
-                .then(({ data }) => (this.materials = data.data))
+                .then(({ data }) => {
+                    this.materials = data.data;
+                    this.loading = false;
+                })
                 .catch((error) => console.log(error));
         },
         createMaterial() {

@@ -7,7 +7,10 @@
             ></div>
             <div class="seller-hero-box container">
                 <h1 class="mb-4 title black">{{ shop.name }}</h1>
-                <span class="seller-rating" v-html="shopRating(shop.rating)"></span>
+                <span
+                    class="seller-rating"
+                    v-html="shopRating(shop.rating)"
+                ></span>
                 <p class="mt-5">
                     {{ shop.about }}
                 </p>
@@ -16,7 +19,8 @@
 
         <section class="section-best-seller mb-5 mt-0">
             <div class="d-flex flex-wrap justify-content-center card-container">
-                <div v-for="product in products" class="product-list">
+                <img v-if="loading" src="/images/lavisco/loading.gif" />
+                <div v-else v-for="product in products" class="product-list">
                     <div class="card item-card-2">
                         <div class="card-img card-img-2">
                             <img
@@ -42,7 +46,9 @@
                             </router-link>
                         </div>
                         <div class="card-price">{{ product.base_price }}</div>
-                        <div class="card-secondary-text">Made by {{ shop.name }}</div>
+                        <div class="card-secondary-text">
+                            Made by {{ shop.name }}
+                        </div>
                         <button class="btn-sm btn-full btn-sm-cart mt-auto">
                             Add to Cart
                         </button>
@@ -61,6 +67,7 @@ export default {
         shop: [],
         products: [],
         searchText: null,
+        loading: true,
     }),
 
     beforeRouteEnter: function (to, from, next) {
@@ -91,6 +98,7 @@ export default {
         setData(response) {
             this.products = response.data.products.data;
             this.shop = response.data.shop;
+            this.loading = false;
         },
         loadData() {
             axios

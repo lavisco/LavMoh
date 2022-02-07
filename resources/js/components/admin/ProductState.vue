@@ -5,7 +5,13 @@
 
         <!-- Body -->
         <div class="container-fluid mt--6 mb-5">
-            <div class="row">
+            <div
+                v-if="loading"
+                class="my-5 d-flex align-items-center justify-content-center"
+            >
+                <img src="/images/lavisco/loading.gif" />
+            </div>
+            <div v-else class="row">
                 <div class="col">
                     <div class="card">
                         <div class="table-responsive">
@@ -52,7 +58,9 @@
                                                         class="dropdown-item"
                                                         href=""
                                                         @click.prevent="
-                                                            editModal(productState)
+                                                            editModal(
+                                                                productState
+                                                            )
                                                         "
                                                     >
                                                         Edit
@@ -61,7 +69,9 @@
                                                         class="dropdown-item"
                                                         href=""
                                                         @click.prevent="
-                                                            deleteProductState(productState.id)
+                                                            deleteProductState(
+                                                                productState.id
+                                                            )
                                                         "
                                                     >
                                                         Delete
@@ -121,7 +131,11 @@
 
                     <form
                         class="input-form"
-                        @submit.prevent="editMode ? updateProductState() : createProductState()"
+                        @submit.prevent="
+                            editMode
+                                ? updateProductState()
+                                : createProductState()
+                        "
                     >
                         <div class="modal-body">
                             <div class="form-group row">
@@ -219,6 +233,7 @@ export default {
     },
     data: () => ({
         editMode: false,
+        loading: true,
         productStates: [],
         searchText: null,
         form: new Form({
@@ -255,7 +270,10 @@ export default {
                 .get("/api/admin/productstates", {
                     params: { searchText: this.searchText },
                 })
-                .then(({ data }) => (this.productStates = data))
+                .then(({ data }) => {
+                    this.productStates = data;
+                    this.loading = false;
+                })
                 .catch((error) => console.log(error));
         },
 

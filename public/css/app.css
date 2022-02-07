@@ -10747,6 +10747,26 @@ section h1 {
   border: none;
 }
 
+/*---------------------shipping---------------------*/
+.shipping .card {
+  width: auto !important;
+}
+
+.price-card {
+  width: 350px;
+  border-radius: 12px;
+  border: 2px solid #4e4e4e;
+  padding: 20px;
+}
+.price-card p {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333333;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 /*---------------------section-best-seller---------------------*/
 .product-list > .card {
   padding: 10px 10px 20px 10px !important;
@@ -11515,6 +11535,11 @@ h4 {
 .menu-cart .purple:focus {
   background-color: #333333;
 }
+.menu-cart .menu-cart-shop-title {
+  font-size: 16px;
+  font-weight: 600;
+  padding: 10px;
+}
 .menu-cart .menu-cart-item {
   padding: 10px;
   display: flex;
@@ -11530,7 +11555,7 @@ h4 {
   text-align: right;
   margin-left: 20px;
   font-size: 16px;
-  width: 100px;
+  width: 120px;
 }
 .menu-cart .menu-cart-remove-btn {
   cursor: pointer;
@@ -11543,18 +11568,26 @@ h4 {
   color: #ff834c;
 }
 
+.cart-table thead th {
+  padding: 4px 1rem;
+  background-color: #f2f2f2;
+  color: black;
+  border-bottom: none;
+}
 .cart-table th {
   font-weight: 500;
   font-size: 13px;
 }
 .cart-table .cart-title {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 500;
-  letter-spacing: 0.03rem;
+  color: #333333;
+  width: 70%;
 }
 .cart-table .cart-price {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 600;
+  color: #333333;
 }
 .cart-table .cart-qty-body {
   font-size: 20px;
@@ -11578,9 +11611,10 @@ h4 {
   text-align: center;
 }
 .cart-table .cart-total {
-  width: 220px;
+  width: 150px;
 }
 .cart-table .cart-remove-btn {
+  width: 100%;
   color: #836aff;
   cursor: pointer;
   font-size: 14px;
@@ -11595,13 +11629,19 @@ h4 {
   .menu-cart {
     width: 300px;
   }
+  .menu-cart .menu-cart-shop-title {
+    font-size: 14px;
+  }
   .menu-cart .menu-cart-item {
     padding: 0;
     padding-top: 10px;
   }
-  .menu-cart .menu-cart-item .menu-cart-item-title,
-.menu-cart .menu-cart-item .menu-cart-item-price {
+  .menu-cart .menu-cart-item .menu-cart-item-title {
     font-size: 14px;
+  }
+  .menu-cart .menu-cart-item .menu-cart-item-price {
+    font-size: 14px;
+    width: 90px;
   }
   .menu-cart .menu-cart-remove-btn {
     padding: 0;
@@ -11612,12 +11652,18 @@ h4 {
 
   .cart-table .cart-title,
 .cart-table .cart-price,
-.cart-table .cart-qty-body {
+.cart-table .cart-qty-body,
+.cart-table .cart-qty-control {
     font-size: 15px;
   }
+  .cart-table .cart-qty-body {
+    padding: 3px;
+  }
   .cart-table .cart-qty-control {
-    font-size: 15px;
     width: 24px;
+  }
+  .cart-table .cart-total {
+    width: auto;
   }
 }
 /*---------------product swiper------------------------*/

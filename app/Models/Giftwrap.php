@@ -15,6 +15,7 @@ class Giftwrap extends Model
     protected $fillable = [
         'name',
         'image_path',
+        'user_id',
     ];
 
     protected $appends = ['path'];
@@ -22,6 +23,12 @@ class Giftwrap extends Model
     public function getPathAttribute()
     {
         return $this->image_path ? asset('storage/'.$this->image_path) : "/images/lavisco/img-bg.jpg";
+    }
+    
+    //giftwrap:user M:1
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function scopeFilter($query, array $filters)

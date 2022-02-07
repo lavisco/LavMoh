@@ -8,7 +8,13 @@
             </h1>
         </div>
 
-        <section class="section-best-seller mb-5">
+        <section
+            v-if="loading"
+            class="my-5 d-flex align-items-center justify-content-center"
+        >
+            <img src="/images/lavisco/loading.gif" />
+        </section>
+        <section v-else class="section-best-seller mb-5">
             <div
                 class="
                     d-flex
@@ -52,7 +58,10 @@
                     </div>
 
                     <h6>Top selling products</h6>
-                    <div class="d-flex topseller-products">
+                    <div
+                        class="d-flex topseller-products"
+                        v-if="shop.products"
+                    >
                         <img
                             :src="productImg(product.product_image)"
                             class="topseller-product-img"
@@ -103,6 +112,7 @@ export default {
     data: () => ({
         shops: [],
         searchText: null,
+        loading: true,
     }),
 
     watch: {
@@ -115,7 +125,10 @@ export default {
         loadShops() {
             axios
                 .get("/api/shops")
-                .then(({ data }) => (this.shops = data.data))
+                .then(({ data }) => {
+                    this.shops = data.data;
+                    this.loading = false;
+                })
                 .catch((error) => console.log(error));
         },
         shopRating(rating) {

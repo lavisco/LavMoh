@@ -2,7 +2,13 @@
     <div>
         <!-- Body -->
         <div class="container mt-3 mb-5">
-            <div class="row">
+            <div
+                v-if="loading"
+                class="my-5 d-flex align-items-center justify-content-center"
+            >
+                <img src="/images/lavisco/loading.gif" />
+            </div>
+            <div v-else class="row">
                 <div class="col">
                     <div class="card">
                         <!-- Form start -->
@@ -541,6 +547,7 @@ export default {
 
     data: () => ({
         sellerprofile: {},
+        loading: true,
         form: new Form({
             id: "",
             first_name: "",
@@ -573,6 +580,7 @@ export default {
                 .then(({ data }) => {
                     this.sellerprofile = data;
                     this.form.fill(this.sellerprofile);
+                    this.loading = false;
                 })
                 .catch((error) => console.log(error));
         },

@@ -40,7 +40,7 @@
                             {{ product.category.name }}
                         </div>
                         <div class="card-secondary-text">
-                            Made by {{ product.user.name }}
+                            Made by {{ product.user.shop.name }}
                         </div>
                         <button
                             class="btn-sm btn-full btn-sm-cart mt-auto"
@@ -59,12 +59,11 @@
 </template>
 
 <script>
-
 export default {
     data: () => ({
-        //products: [],
+        products: [],
         searchText: null,
-        loading: false,
+        loading: true,
     }),
 
     watch: {
@@ -74,21 +73,20 @@ export default {
     },
 
     computed: {
-        products() {
-            return this.$store.state.products;
-        },
+        // products() {
+        //     return this.$store.state.products;
+        // },
     },
 
     methods: {
         loadProducts() {
-            this.loading = true;
             axios
                 .get("/api/products", {
                     params: { searchText: this.searchText },
                 })
                 .then(({ data }) => {
-                    //this.products = data.data;
-                    this.$store.commit("setProducts", data.data);
+                    this.products = data.data;
+                    //this.$store.commit("setProducts", data.data);
                     this.loading = false;
                 })
                 .catch((error) => console.log(error));

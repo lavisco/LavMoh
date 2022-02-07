@@ -11,7 +11,8 @@
         </div>
         <section class="section-best-seller mb-5">
             <div class="d-flex flex-wrap justify-content-center card-container">
-                <div v-for="product in products" class="product-list">
+                <img v-if="loading" src="/images/lavisco/loading.gif" />
+                <div v-else v-for="product in products" class="product-list">
                     <div class="card item-card-2">
                         <div class="card-img card-img-2">
                             <img
@@ -58,6 +59,7 @@ export default {
         category: [],
         products: [],
         searchText: null,
+        loading: true,
     }),
 
     beforeRouteEnter: function (to, from, next) {
@@ -88,6 +90,7 @@ export default {
         setData(response) {
             this.products = response.data.products.data;
             this.category = response.data.category;
+            this.loading = false;
         },
         loadData() {
             axios

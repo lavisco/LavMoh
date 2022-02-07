@@ -1,11 +1,15 @@
 <?php
 
 use App\Http\Controllers\Api\Admin\AnalyticController;
+use App\Http\Controllers\Api\Admin\AreaController;
 use App\Http\Controllers\Api\Admin\UserController;
 use App\Http\Controllers\Api\Admin\BuyerProfileController;
 use App\Http\Controllers\Api\Admin\CartController;
 use App\Http\Controllers\Api\Admin\CategoryController;
+use App\Http\Controllers\Api\Admin\CityController;
+use App\Http\Controllers\Api\Admin\CountryController;
 use App\Http\Controllers\Api\Admin\DashboardController;
+use App\Http\Controllers\Api\Admin\DistrictController;
 use App\Http\Controllers\Api\Admin\GiftwrapController;
 use App\Http\Controllers\Api\Admin\HomeSliderController;
 use App\Http\Controllers\Api\Admin\MaterialController;
@@ -17,12 +21,15 @@ use App\Http\Controllers\Api\Admin\ProductImageController;
 use App\Http\Controllers\Api\Admin\ProductStateController;
 use App\Http\Controllers\Api\Admin\ProductVariationController;
 use App\Http\Controllers\Api\Admin\ProductVideoController;
+use App\Http\Controllers\Api\Admin\ProvinceController;
 use App\Http\Controllers\Api\Admin\ReceiptController;
 use App\Http\Controllers\Api\Admin\RecipientController;
 use App\Http\Controllers\Api\Admin\RoleController;
 use App\Http\Controllers\Api\Admin\SellerProfileController;
+use App\Http\Controllers\Api\Admin\SettingController;
 use App\Http\Controllers\Api\Admin\ShippingController;
 use App\Http\Controllers\Api\Admin\ShopController;
+use App\Http\Controllers\Api\Admin\SitetextController;
 use App\Http\Controllers\Api\Admin\VariationController;
 use App\Http\Controllers\Api\Admin\VariationOptionController;
 use App\Http\Controllers\Api\Buyer\BuyerProfileController as BuyerBuyerProfileController;
@@ -45,6 +52,7 @@ use App\Http\Controllers\Api\Website\ProductController as WebsiteProductControll
 use App\Http\Controllers\Api\Website\RecipientController as WebsiteRecipientController;
 use App\Http\Controllers\Api\Website\SellerProfileController as WebsiteSellerProfileController;
 use App\Http\Controllers\Api\Website\ShopController as WebsiteShopController;
+use App\Http\Controllers\Api\Website\SitetextController as WebsiteSitetextController;
 use App\Http\Controllers\Website\HomeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -68,10 +76,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::prefix('admin')->group(function () {
     Route::apiResource('/analytics', AnalyticController::class);
+    Route::apiResource('/areas', AreaController::class);
     Route::apiResource('/buyerprofiles', BuyerProfileController::class);
     Route::apiResource('/carts', CartController::class);
+    Route::apiResource('/cities', CityController::class);
+    Route::apiResource('/countries', CountryController::class);
     Route::apiResource('/categories', CategoryController::class);
     Route::apiResource('/dashboard', DashboardController::class);
+    Route::apiResource('/districts', DistrictController::class);
     Route::apiResource('/giftwraps', GiftwrapController::class);
     Route::apiResource('/homesliders', HomeSliderController::class);
     Route::apiResource('/materials', MaterialController::class);
@@ -84,6 +96,7 @@ Route::prefix('admin')->group(function () {
     Route::apiResource('/product_variations', ProductVariationController::class);
     Route::apiResource('/product_videos', ProductVideoController::class);
     Route::apiResource('/productstates', ProductStateController::class);
+    Route::apiResource('/provinces', ProvinceController::class);
     Route::get('/variations/options', [VariationController::class, 'getOptions']);
     Route::apiResource('/variations', VariationController::class);
     Route::apiResource('/variation_options', VariationOptionController::class);
@@ -91,6 +104,8 @@ Route::prefix('admin')->group(function () {
     Route::apiResource('/recipients', RecipientController::class);
     Route::apiResource('/roles', RoleController::class);
     Route::apiResource('/sellerprofiles', SellerProfileController::class);
+    Route::apiResource('/settings', SettingController::class);
+    Route::apiResource('/sitetexts', SitetextController::class);
     Route::apiResource('/shippings', ShippingController::class);
     Route::apiResource('/shops', ShopController::class);
     /* User */
@@ -136,3 +151,4 @@ Route::apiResource('/sellerprofiles', WebsiteSellerProfileController::class);
 Route::apiResource('/occasions', WebsiteOccasionController::class);
 Route::apiResource('/recipients', WebsiteRecipientController::class);
 Route::apiResource('/shops', WebsiteShopController::class);
+Route::apiResource('/sitetexts', WebsiteSitetextController::class);

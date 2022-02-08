@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Image;
 
 class CategoryController extends Controller
@@ -58,7 +59,9 @@ class CategoryController extends Controller
         $banner=null;
         if ($image) {
             $file_name = time().'_'.$name;
-            Image::make($image)->save(storage_path('app/public/banners/').$file_name);
+            $img = Image::make($image)->encode();
+            Storage::disk('s3')->put('/public/banners/'.$file_name, $img->stream());
+            //Image::make($image)->save(storage_path('app/public/banners/').$file_name);
             $banner = 'banners/'.$file_name;
         }
 

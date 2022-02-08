@@ -7,10 +7,9 @@
                     <!-- Listing -->
                     <div class="card px-4 py-4">
                         <!-- Header -->
-                        <h4 class="mb-4">Listing Details</h4>
+                        <h4 class="mb-4">Add a new product</h4>
                         <p class="mb-5">
-                            Tell the world all about your item and why they will
-                            love it
+                            Setup your product details and other specifications as you require. Remember to tell all about your item to the world and why they will love it.
                         </p>
                         <div class="form-group row mb-md-1">
                             <label class="col-md-3 col-form-label" for="title">

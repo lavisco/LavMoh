@@ -405,6 +405,7 @@ button.bg-black:hover {
         }
         &-col-2 {
             width: 66.66%;
+            border-left: 1px solid $lav-grey;
         }
         .dropdown-header {
             font-weight: 600;
@@ -416,6 +417,7 @@ button.bg-black:hover {
             padding-right: 1.3rem;
         }
         .dropdown-item {
+            margin-top: 5px;
             padding-left: 1.3rem;
             padding-right: 1.3rem;
             display: flex;
@@ -448,7 +450,8 @@ button.bg-black:hover {
             margin-top: -29px;
             &-col-1,
             &-col-2 {
-                width: 50%;
+                width: 100%;
+                border: none;
             }
             .dropdown-header {
                 font-size: 13px;
@@ -710,18 +713,18 @@ section {
 
 /*---------------------shipping---------------------*/
 
-.shipping{
-    .card{
+.shipping {
+    .card {
         width: auto !important;
     }
 }
 
-.price-card{
+.price-card {
     width: 350px;
     border-radius: 12px;
     border: 2px solid $dark-grey;
     padding: 20px;
-    p{
+    p {
         font-size: 16px;
         font-weight: 600;
         color: $black;
@@ -929,6 +932,13 @@ footer {
     padding-bottom: 40px;
     //margin-top: auto;
     width: 100%;
+    background-color: #272a2f;
+    color: #e7e7e7;
+    h5 {
+        text-align: left !important;
+        font-weight: 600;
+        color: $lav-grey;
+    }
 }
 .footer-logo {
     height: 70px;
@@ -937,7 +947,7 @@ footer {
     font-weight: 500;
     font-size: 20px;
     line-height: 37px;
-    color: $dark-grey;
+    color: $lav-grey;
     svg {
         margin-right: 15px;
     }

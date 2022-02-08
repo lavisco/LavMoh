@@ -25,8 +25,8 @@
                             class="dropdown-menu"
                             aria-labelledby="dropdownMenuLink"
                         >
-                            <div class="d-flex flex-row align-items-start">
-                                <div class="dropdown-menu-col-1">
+                            <div class="d-flex flex-md-row flex-column align-items-start">
+                                <div class="dropdown-menu-col-1 pr-md-2">
                                     <h6 class="dropdown-header">
                                         <a href="/lavisco/categories"
                                             >Browse by Nature</a
@@ -50,7 +50,7 @@
                                         </span>
                                     </router-link>
                                 </div>
-                                <div class="dropdown-menu-col-2">
+                                <div class="dropdown-menu-col-2 pl-md-2">
                                     <h6 class="dropdown-header">
                                         <a href="/lavisco/recipients">
                                             Browse by Recipient

@@ -18,7 +18,7 @@ class ProvinceController extends Controller
     {
         ///$this->authorize('viewAny', Province::class);
 
-        return Province::latest()->filter(request(['searchText']))->paginate(25);
+        return Province::with('country')->latest()->filter(request(['searchText']))->paginate(25);
     }
 
     public function store(ProvinceRequest $request)

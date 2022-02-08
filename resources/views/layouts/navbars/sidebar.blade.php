@@ -234,6 +234,78 @@
                                     Giftwraps
                                 </router-link>
                             </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a
+                        class="nav-link"
+                        href="#navbar-website-dropdown"
+                        data-toggle="collapse"
+                        role="button"
+                        aria-expanded="true"
+                        aria-controls="navbar-website-dropdown"
+                    >
+                        <i class="fas fa-swatchbook"></i>
+                        <span class="nav-link-text">Website Control</span>
+                    </a>
+
+                    <div class="collapse" id="navbar-website-dropdown">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <router-link
+                                    to="/admin/settings"
+                                    class="nav-link"
+                                >
+                                    Settings
+                                </router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link
+                                    to="/admin/sitetexts"
+                                    class="nav-link"
+                                >
+                                    Site Content
+                                </router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link
+                                    to="/admin/countries"
+                                    class="nav-link"
+                                >
+                                    Countries
+                                </router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link
+                                    to="/admin/provinces"
+                                    class="nav-link"
+                                >
+                                    Provinces
+                                </router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link
+                                    to="/admin/districts"
+                                    class="nav-link"
+                                >
+                                    Districts
+                                </router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link
+                                    to="/admin/cities"
+                                    class="nav-link"
+                                >
+                                    Cities
+                                </router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link to="/admin/areas" class="nav-link">
+                                    Areas
+                                </router-link>
+                            </li>
                             <li class="nav-item">
                                 <router-link
                                     to="/admin/homesliders"

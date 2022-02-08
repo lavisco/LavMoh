@@ -18,7 +18,7 @@ class DistrictController extends Controller
     {
         ///$this->authorize('viewAny', District::class);
 
-        return District::latest()->filter(request(['searchText']))->paginate(25);
+        return District::with('province')->latest()->filter(request(['searchText']))->paginate(25);
     }
 
     public function store(DistrictRequest $request)

@@ -27,7 +27,7 @@ class HomeController extends Controller
                     'category:id,name',
                     'product_image'
                     ])
-                    ->latest()->take(5)->get();
+                    ->latest()->take(10)->get();
 
         return response()->json([
             'products' => $products,

@@ -18,7 +18,7 @@ class CityController extends Controller
     {
         ///$this->authorize('viewAny', City::class);
 
-        return City::latest()->filter(request(['searchText']))->paginate(25);
+        return City::with('district')->latest()->filter(request(['searchText']))->paginate(25);
     }
 
     public function store(CityRequest $request)

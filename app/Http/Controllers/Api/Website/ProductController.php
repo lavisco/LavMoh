@@ -18,7 +18,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return Product::with('category:id,name')->with('user.shop')->with('product_image')->latest()->filter(request(['searchText']))->paginate(25);
+        return Product::with(['category:id,name', 'user.shop', 'product_image'])->latest()->filter(request(['searchText']))->paginate(25);
         
     }
 
@@ -30,14 +30,11 @@ class ProductController extends Controller
      */
     public function show($productId)
     {
-        $product = Product::with(['user','materials','shippings', 'product_images', 'product_image'])->findOrFail($productId);
+        $product = Product::with(['user.shop', 'category:id,name', 'materials', 'shippings',  'product_images', 'product_image'])->findOrFail($productId);
         $variations = ProductVariation::where('product_id', $productId)->get()->groupBy('type');
-                
-        $shop = Shop::where('user_id', $product->user_id)->first();
 
         return response()->json([
             'product' => $product,
-            'shop' => $shop,
             'variations' => $variations,
         ]);
     }

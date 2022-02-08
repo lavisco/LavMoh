@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AreaRequest;
 use App\Models\Area;
+use App\Models\City;
 use Illuminate\Http\Request;
 
 class AreaController extends Controller
@@ -18,7 +19,10 @@ class AreaController extends Controller
     {
         ///$this->authorize('viewAny', Area::class);
 
-        return Area::latest()->filter(request(['searchText']))->paginate(25);
+        return response()->json([
+            'areas' => Area::with('city')->latest()->filter(request(['searchText']))->paginate(25),
+            'cities' => City::where('has_area', true)->get(),
+        ]);
     }
 
     public function store(AreaRequest $request)

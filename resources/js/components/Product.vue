@@ -241,16 +241,18 @@
                                 </svg>
                             </a>
                         </div>
-
-                        <p class="collapse" id="collapseDesc">
-                            {{ product.description }}
-
-                            <span
-                                class="badge"
-                                v-for="mat in product.materials"
-                                >{{ mat.name }}</span
-                            >
-                        </p>
+                        <div class="collapse" id="collapseDesc">
+                            <p class="mb-2">
+                                {{ product.description }}
+                            </p>
+                            <div>
+                                <span
+                                    class="badge bg-green white"
+                                    v-for="material in product.materials"
+                                    >{{ material.name }}
+                                </span>
+                            </div>
+                        </div>
                     </div>
                     <div class="mt-4">
                         <hr />
@@ -305,12 +307,21 @@
                                 alt=""
                             />
                             <div>
-                                <h4>{{ shop.name }}</h4>
+                                <h4>{{ product.user.shop.name }}</h4>
                                 <p>
-                                    {{ shop.about }}
+                                    {{ product.user.shop.about }}
                                 </p>
                                 <button class="btn-secondary">
-                                    Chat with Seller
+                                    <router-link
+                                        :to="{
+                                            name: 'sellers/seller',
+                                            params: {
+                                                shopId: product.user.shop.id,
+                                            },
+                                        }"
+                                    >
+                                        View Seller
+                                    </router-link>
                                 </button>
                             </div>
                         </div>
@@ -341,7 +352,6 @@ export default {
 
     data: () => ({
         product: [],
-        shop: [],
         variations: [],
         loading: true,
         swiperOptionTop: {
@@ -385,7 +395,6 @@ export default {
     methods: {
         setData(response) {
             this.product = response.data.product;
-            this.shop = response.data.shop;
             this.variations = response.data.variations;
             this.loading = false;
         },
@@ -394,7 +403,6 @@ export default {
                 .get("/api/products/" + this.$route.params.productId)
                 .then((response) => {
                     this.product = response.data.product;
-                    this.shop = response.data.shop;
                 })
                 .catch((error) => console.log(error));
         },

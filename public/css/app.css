@@ -10779,6 +10779,10 @@ section h1 {
   background-color: #836aff;
   width: 340px;
   font-size: 16px;
+  padding: 5px;
+}
+.item-card .card-body {
+  padding: 0 10px 15px 10px;
 }
 
 .item-card-2 {
@@ -10791,12 +10795,17 @@ section h1 {
 
 .card-title {
   font-weight: 500;
-  font-size: 16px;
-  line-height: 30px;
+  font-size: 15px;
+  letter-spacing: 0.02rem;
+  line-height: 25px;
   color: #ffffff;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  margin-bottom: 5px;
+}
+.card-title a:hover {
+  color: #333333;
 }
 
 .card-title-2 {
@@ -10825,9 +10834,9 @@ section h1 {
 }
 
 .card-img {
-  height: 350px;
+  height: 270px;
   width: 100%;
-  border-radius: 12px;
+  border-radius: 8px;
   background-color: #ffffff;
   margin-bottom: 20px;
 }
@@ -10911,6 +10920,7 @@ section h1 {
   align-items: center;
   flex-direction: row;
   justify-content: center;
+  padding: 0px 15px 20px 15px;
 }
 
 /*---------------------section-social-slider---------------------*/
@@ -11687,14 +11697,6 @@ h4 {
   align-items: center;
 }
 
-.swiper-slide img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-
 .swiper {
   width: 100%;
   height: 300px;
@@ -11705,6 +11707,19 @@ h4 {
 .swiper-slide {
   background-size: cover;
   background-position: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 10px;
+}
+
+.swiper-pagination {
+  bottom: 0 !important;
 }
 
 .gallery-top {
@@ -11731,10 +11746,6 @@ h4 {
   }
 }
 
-.swiper-pagination {
-  bottom: 0 !important;
-}
-
 .gallery-thumbs .swiper-slide {
   width: 25%;
   height: 100%;
@@ -11743,15 +11754,6 @@ h4 {
 
 .gallery-thumbs .swiper-slide-active {
   opacity: 1;
-}
-
-.swiper-slide img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
-  border-radius: 10px;
 }
 
 .swiper-index-product {

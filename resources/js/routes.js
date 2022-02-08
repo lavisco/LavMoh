@@ -11,6 +11,13 @@ export let routes = [
         },
     },
     {
+        path: "/admin/areas",
+        component: require("./components/admin/Area.vue").default,
+        meta: {
+            title: "Area",
+        },
+    },
+    {
         path: "/admin/buyerprofiles",
         component: require("./components/admin/BuyerProfile.vue").default,
         meta: {
@@ -32,10 +39,31 @@ export let routes = [
         },
     },
     {
+        path: "/admin/cities",
+        component: require("./components/admin/City.vue").default,
+        meta: {
+            title: "City",
+        },
+    },
+    {
+        path: "/admin/countries",
+        component: require("./components/admin/Country.vue").default,
+        meta: {
+            title: "Country",
+        },
+    },
+    {
         path: "/admin/dashboard",
         component: require("./components/admin/Dashboard.vue").default,
         meta: {
             title: "Dashboard",
+        },
+    },
+    {
+        path: "/admin/districts",
+        component: require("./components/admin/District.vue").default,
+        meta: {
+            title: "District",
         },
     },
     {
@@ -142,6 +170,13 @@ export let routes = [
         },
     },
     {
+        path: "/admin/provinces",
+        component: require("./components/admin/Province.vue").default,
+        meta: {
+            title: "Province",
+        },
+    },
+    {
         path: "/admin/variations",
         component: require("./components/admin/Variation.vue").default,
         meta: {
@@ -191,6 +226,13 @@ export let routes = [
         },
     },
     {
+        path: "/admin/settings",
+        component: require("./components/admin/Setting.vue").default,
+        meta: {
+            title: "Setting",
+        },
+    },
+    {
         path: "/admin/shippings",
         component: require("./components/admin/Shipping.vue").default,
         meta: {
@@ -202,6 +244,13 @@ export let routes = [
         component: require("./components/admin/Shop.vue").default,
         meta: {
             title: "Shops",
+        },
+    },
+    {
+        path: "/admin/sitetexts",
+        component: require("./components/admin/Sitetext.vue").default,
+        meta: {
+            title: "Site Content",
         },
     },
     {

@@ -19,10 +19,7 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.3",
-<<<<<<< HEAD
-=======
         "league/flysystem-aws-s3-v3": "~1.0",
->>>>>>> de95741782d7868c70fc5df492acfa3df7b1b103
         "spatie/laravel-analytics": "v4.0.1",
         "staudenmeir/eloquent-eager-limit": "^1.0"
     },

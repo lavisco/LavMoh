@@ -27,7 +27,7 @@ class ProductController extends Controller
     public function index()
     {
         ///$this->authorize('viewAny', Product::class);
-        return Product::where('user_id', auth()->id())->with('product_images')->with('product_image')->with('product_variations')->with('category')->latest()->filter(request(['searchText']))->paginate(25);
+        return Product::where('user_id', auth()->id())->with(['product_images', 'product_image', 'product_variations', 'category'])->latest()->filter(request(['searchText']))->paginate(25);
     }
 
     public function store(ProductRequest $request)

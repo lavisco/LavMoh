@@ -47,6 +47,7 @@ use App\Http\Controllers\Api\Seller\ShopController as SellerShopController;
 use App\Http\Controllers\Api\Seller\UserController as SellerUserController;
 use App\Http\Controllers\Api\Website\CategoryController as WebsiteCategoryController;
 use App\Http\Controllers\Api\Website\HomeController as WebsiteHomeController;
+use App\Http\Controllers\Api\Website\LocationController;
 use App\Http\Controllers\Api\Website\OccasionController as WebsiteOccasionController;
 use App\Http\Controllers\Api\Website\ProductController as WebsiteProductController;
 use App\Http\Controllers\Api\Website\RecipientController as WebsiteRecipientController;
@@ -146,9 +147,16 @@ Route::prefix('seller')->group(function () {
 
 Route::apiResource('/home', WebsiteHomeController::class);
 Route::apiResource('/products', WebsiteProductController::class);
+Route::get('/categories/products/{id}/{location}', [WebsiteCategoryController::class, 'getLocationWiseProducts']);
 Route::apiResource('/categories', WebsiteCategoryController::class);
 Route::apiResource('/sellerprofiles', WebsiteSellerProfileController::class);
 Route::apiResource('/occasions', WebsiteOccasionController::class);
 Route::apiResource('/recipients', WebsiteRecipientController::class);
 Route::apiResource('/shops', WebsiteShopController::class);
 Route::apiResource('/sitetexts', WebsiteSitetextController::class);
+//location
+Route::get('/locations/countries', [LocationController::class, 'indexCountry']);
+Route::get('/locations/provinces/{country}', [LocationController::class, 'indexProvince']);
+Route::get('/locations/districts/{province}', [LocationController::class, 'indexDistrict']);
+Route::get('/locations/cities/{district}', [LocationController::class, 'indexCity']);
+Route::get('/locations/areas/{city}', [LocationController::class, 'indexArea']);

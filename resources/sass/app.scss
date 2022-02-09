@@ -283,6 +283,7 @@ button.bg-black:hover {
 .navbar {
     padding-top: 18px;
     padding-bottom: 18px;
+    z-index: 999 !important;
 }
 .navbar-collapse {
     flex-grow: 0;
@@ -744,7 +745,7 @@ section {
     width: 340px;
     font-size: 16px;
     padding: 5px;
-    .card-body{
+    .card-body {
         padding: 0 10px 15px 10px;
     }
 }
@@ -765,7 +766,7 @@ section {
     overflow: hidden;
     text-overflow: ellipsis;
     margin-bottom: 5px;
-    a:hover{
+    a:hover {
         color: $black;
     }
 }

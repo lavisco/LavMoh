@@ -25,9 +25,9 @@ class Category extends Model
 
     public function getPathAttribute()
     {
-        return $this->banner ? 
-            Storage::disk('s3')->temporaryUrl('public/' . $this->banner, '+2 minutes') 
-            : "/images/lavisco/img-bg.jpg";
+        // return $this->banner ? 
+        //     Storage::disk('s3')->temporaryUrl('public/' . $this->banner, '+2 minutes') 
+        //     : "/images/lavisco/img-bg.jpg";
     }
 
     //product:category M:1

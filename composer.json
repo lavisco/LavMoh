@@ -19,7 +19,7 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.3",
-        "league/flysystem-aws-s3-v3": "~1.0",
+        "league/flysystem-aws-s3-v3": "^1.0",
         "spatie/laravel-analytics": "v4.0.1",
         "staudenmeir/eloquent-eager-limit": "^1.0"
     },

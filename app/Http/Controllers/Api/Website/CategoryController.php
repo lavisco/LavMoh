@@ -29,11 +29,38 @@ class CategoryController extends Controller
     public function show($categoryId)
     {
         $category = Category::findOrFail($categoryId);
-        $products = Product::where('category_id', $categoryId)->with('user.shop')->with('product_image')->latest()->filter(request(['searchText']))->paginate(25);
+        $products = Product::where('category_id', $categoryId)->with(['user.shop','product_image'])->latest()->filter(request(['searchText']))->paginate(25);
 
         return response()->json([
             'products' => $products,
             'category' => $category,
+        ]);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function getLocationWiseProducts($id, $location)
+    {
+        $products = Product::where('category_id', $id)
+            ->whereHas('user', function($query){
+                $query->whereHas('seller_profile', function($query) {
+                    $query->where('city', 'Kandy');
+                });
+            })
+            ->with(['user' => function($q) {
+                $q->whereHas('seller_profile', function($query) {
+                        $query->where('city', 'Kandy');
+                });
+            }])
+            ->with(['user.shop','product_image'])->latest()->paginate(25);
+
+        return response()->json([
+            'products' => $products,
+            'loc' => $location,
         ]);
     }
 }

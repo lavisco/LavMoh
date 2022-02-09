@@ -553,6 +553,12 @@ export default {
             first_name: "",
             last_name: "",
             phone: "",
+
+        provinces: [],
+        districts: [],
+        areas: [],
+
+
             country: "",
             address: "",
             apt_no: "",

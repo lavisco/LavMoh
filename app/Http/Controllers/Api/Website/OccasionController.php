@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Api\Website;
 
 use App\Http\Controllers\Controller;
 use App\Models\Occasion;
-use App\Models\Product;
-use Illuminate\Http\Request;
 
 class OccasionController extends Controller
 {
@@ -29,7 +27,7 @@ class OccasionController extends Controller
     public function show($occasionId)
     {
         $occasion = Occasion::findOrFail($occasionId);
-        $products = $occasion->products()->with('product_image')->with('user.shop')->latest()->paginate(25);
+        $products = $occasion->products()->with(['product_image', 'user.shop'])->latest()->paginate(25);
 
         return response()->json([
             'products' => $products,

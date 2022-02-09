@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Website\HomeController;
+use App\Models\Product;
 
 /*
 |--------------------------------------------------------------------------

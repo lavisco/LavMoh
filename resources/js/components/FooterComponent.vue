@@ -57,7 +57,7 @@
                         <a href="/lavisco/sellers">Partner Vendors</a>
                         <a href="">Announcements</a>
                     </div>
-                    <div class="col-md-4 d-flex flex-column mt-4 mt-md-0">
+                    <div class="col-md-4 d-flex flex-column mt-5 mt-md-0">
                         <h5>Policies</h5>
                         <a href="/terms_and_conditions">Terms & Conditions</a>
                         <a href="/privacy_policy">Privacy</a>
@@ -66,7 +66,7 @@
                         <a href="">Payment</a>
                         <a href="/returns_refunds_policy">Return & Refunds</a>
                     </div>
-                    <div class="col-md-4 d-flex flex-column mt-4 mt-md-0">
+                    <div class="col-md-4 d-flex flex-column mt-5 mt-md-0">
                         <h5>Let Us Help You</h5>
                         <a href="">Contact Us</a>
                         <a href="">Open Support Ticket</a>

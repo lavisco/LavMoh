@@ -12,6 +12,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Image;
 
 class UserController extends Controller
@@ -37,13 +39,23 @@ class UserController extends Controller
     }
 
     public function storeShopSetup(SellerRegisterRequest $request)
-    {
-        $userid = Auth::user()->id;
-        $request->merge(['user_id' => $userid]);
-        $request->merge(['banner' => $this->storeImage($request->banner, $request->photoName)]);
-        $request->merge(['name' => $request->shop_name]);
-
+    {      
         SellerProfile::create($request->all());
+
+        $request->merge([
+            'user_id' => Auth::user()->id,
+            'name' => $request->shop_name,
+            'slug' => Str::slug($request->title),
+            'country' => $request->shop_country,
+            'province' => $request->shop_province,
+            'district' => $request->shop_district,
+            'city' => $request->shop_city,
+            'area' => $request->shop_area,
+            'address' => $request->shop_address,
+            'zipcode' => $request->shop_zipcode,
+            'banner' => $this->storeImage($request->banner, $request->photoName)
+        ]);
+
         Shop::create($request->all());
     }
 
@@ -56,7 +68,8 @@ class UserController extends Controller
         $banner=null;
         if ($image) {
             $file_name = time().'_'.$name;
-            Image::make($image)->save(storage_path('app/public/banners/').$file_name);
+            $img = Image::make($image)->encode();
+            Storage::disk('s3')->put('/public/banners/'.$file_name, $img->stream());
             $banner = 'banners/'.$file_name;
         }
 

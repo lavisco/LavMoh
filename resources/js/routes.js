@@ -81,13 +81,6 @@ export let routes = [
         },
     },
     {
-        path: "/admin/materials",
-        component: require("./components/admin/Material.vue").default,
-        meta: {
-            title: "Materials",
-        },
-    },
-    {
         path: "/admin/occasions",
         component: require("./components/admin/Occasion.vue").default,
         meta: {
@@ -174,20 +167,6 @@ export let routes = [
         component: require("./components/admin/Province.vue").default,
         meta: {
             title: "Province",
-        },
-    },
-    {
-        path: "/admin/variations",
-        component: require("./components/admin/Variation.vue").default,
-        meta: {
-            title: "Variations",
-        },
-    },
-    {
-        path: "/admin/variation_options",
-        component: require("./components/admin/VariationOption.vue").default,
-        meta: {
-            title: "Variation Options",
         },
     },
     {
@@ -397,7 +376,7 @@ export let routes = [
         path: "/seller/shop",
         component: require("./components/seller/Shop.vue").default,
         meta: {
-            title: "Your Shop",
+            title: "Your Store",
         },
     },
     {
@@ -419,6 +398,13 @@ export let routes = [
         component: require("./components/seller/Statistics.vue").default,
         meta: {
             title: "Statistics",
+        },
+    },
+    {
+        path: "/seller/orders",
+        component: require("./components/seller/Order.vue").default,
+        meta: {
+            title: "Order",
         },
     },
 

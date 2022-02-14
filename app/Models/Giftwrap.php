@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 
 class Giftwrap extends Model
 {
@@ -15,6 +16,7 @@ class Giftwrap extends Model
     protected $fillable = [
         'name',
         'image_path',
+        'status',
         'user_id',
     ];
 
@@ -22,13 +24,19 @@ class Giftwrap extends Model
 
     public function getPathAttribute()
     {
-        return $this->image_path ? asset('storage/'.$this->image_path) : "/images/lavisco/img-bg.jpg";
+        return $this->image_path ? Storage::disk('s3')->temporaryUrl('public/' . $this->image_path, '+2 minutes') : "/images/lavisco/img-bg.jpg";
     }
     
     //giftwrap:user M:1
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    //giftwrap:order 1:M
+    public function order()
+    {
+        return $this->hasMany(Order::class);
     }
 
     public function scopeFilter($query, array $filters)

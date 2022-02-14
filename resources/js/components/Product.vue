@@ -24,7 +24,7 @@
                     <div class="thumb-example">
                         <!-- swiper1 -->
                         <swiper
-                            class="swiper gallery-top"
+                            class="swiper gallery-top product-swiper"
                             :options="swiperOptionTop"
                             ref="swiperTop"
                         >
@@ -245,13 +245,9 @@
                             <p class="mb-2">
                                 {{ product.description }}
                             </p>
-                            <div>
-                                <span
-                                    class="badge bg-green white"
-                                    v-for="material in product.materials"
-                                    >{{ material.name }}
-                                </span>
-                            </div>
+                            <p class="mb-2">
+                                {{ product.material }}
+                            </p>
                         </div>
                     </div>
                     <div class="mt-4">
@@ -352,7 +348,6 @@ export default {
 
     data: () => ({
         product: [],
-        variations: [],
         loading: true,
         swiperOptionTop: {
             loop: true,
@@ -392,10 +387,18 @@ export default {
         });
     },
 
+    computed: {
+        variations() {
+            return _.groupBy(
+                this.product.product_variations,
+                (variation) => variation.type
+            );
+        },
+    },
+
     methods: {
         setData(response) {
-            this.product = response.data.product;
-            this.variations = response.data.variations;
+            this.product = response.data;
             this.loading = false;
         },
         loadProduct() {
@@ -403,6 +406,7 @@ export default {
                 .get("/api/products/" + this.$route.params.productId)
                 .then((response) => {
                     this.product = response.data.product;
+                    this.loading = false;
                 })
                 .catch((error) => console.log(error));
         },

@@ -16,8 +16,20 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('code')->unique()->nullable();
+            $table->string('status');
             $table->decimal('total', 14, 2);
-			$table->foreignId('user_id')->constrained(); //buyer
+			$table->decimal('subtotal', 14, 2);
+			$table->decimal('tax', 14, 2);
+			$table->decimal('giftwrap_price', 14, 2)->nullable()->default('0.00');
+			$table->decimal('shipping_price', 14, 2);
+			$table->decimal('discount_price', 14, 2)->nullable()->default('0.00');
+			$table->foreignId('shop_id')->constrained();
+			$table->foreignId('shipping_id')->constrained();
+			$table->foreignId('discount_id')->constrained();
+			$table->foreignId('giftwrap_id')->nullable()->constrained();
+            $table->foreignId('seller_id')->references('id')->on('users');
+            $table->foreignId('buyer_id')->references('id')->on('users');
         });
     }
 

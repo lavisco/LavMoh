@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
-use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Image;
 
@@ -26,7 +26,10 @@ class CategoryController extends Controller
     public function store(CategoryRequest $request)
     {
         ///$this->authorize('create', Category::class);
-        $request->merge(['banner' => $this->storeImage($request->banner, $request->photoName)]);
+        $request->merge([
+            'slug' => Str::slug($request->name),
+            'banner' => $this->storeImage($request->banner, $request->photoName)
+        ]);
         Category::create($request->all());
     }
 
@@ -61,7 +64,6 @@ class CategoryController extends Controller
             $file_name = time().'_'.$name;
             $img = Image::make($image)->encode();
             Storage::disk('s3')->put('/public/banners/'.$file_name, $img->stream());
-            //Image::make($image)->save(storage_path('app/public/banners/').$file_name);
             $banner = 'banners/'.$file_name;
         }
 

@@ -5,9 +5,18 @@
         d-flex
         justify-content-between
         align-items-center
+        lavisco-dashboard-nav-menu
     "
 >
-    <div class="container-fluid dashboard-topnav align-items-center justify-content-center p-0">
+    <div
+        class="
+            container-fluid
+            dashboard-topnav
+            align-items-center
+            justify-content-center
+            p-0
+        "
+    >
         <button
             class="navbar-toggler"
             type="button"

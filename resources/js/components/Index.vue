@@ -189,12 +189,6 @@
         <section class="section-social-slider">
             <h1>Share the Fun</h1>
             <h2 class="grey">Use #Luvit #Lavisco to be Featured</h2>
-            <div class="d-flex card-container">
-                <div class="card social-card"></div>
-                <div class="card social-card"></div>
-                <div class="card social-card"></div>
-                <div class="card social-card"></div>
-            </div>
         </section>
         <section class="section-instruction">
             <h1>How Lavisco Works</h1>
@@ -260,14 +254,14 @@
                 </div>
             </div>
         </section>
-        <section class="section-shortcuts row mb-5">
-            <div class="col-md-6 py-4">
+        <section class="section-shortcuts row">
+            <div class="col-md-6 shortcut-left py-4">
                 <h1>Start selling on Lavisco</h1>
                 <a href="/lavisco/seller/onboard"
                     ><button class="bg-orange">Become a Seller</button>
                 </a>
             </div>
-            <div class="col-md-6 py-4">
+            <div class="col-md-6 shortcut-right py-4">
                 <h1>Create an account today!</h1>
                 <a href="/register"
                     ><button class="bg-green">Sign up</button></a

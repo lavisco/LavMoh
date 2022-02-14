@@ -77,25 +77,6 @@
                         </div>
                         <div class="form-group row mb-md-1">
                             <label class="col-md-3 col-form-label" for="">
-                                Materials
-                                <p class="text-grey text-xs mt-2">
-                                    Select all materials your item is made of
-                                </p>
-                            </label>
-                            <div class="col-md-9">
-                                <button
-                                    class="btn"
-                                    type="button"
-                                    @click.prevent="
-                                        subcategoryModal('materialMode')
-                                    "
-                                >
-                                    Add Materials
-                                </button>
-                            </div>
-                        </div>
-                        <div class="form-group row mb-md-1">
-                            <label class="col-md-3 col-form-label" for="">
                                 Occasions
                                 <p class="text-grey text-xs mt-2">
                                     Select the occasions your item is suitable
@@ -162,6 +143,32 @@
                                 >
                                 </textarea>
                                 <HasError :form="form" field="description" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label
+                                class="col-md-3 col-form-label"
+                                for="material"
+                            >
+                                Ingredients
+                                <strong class="text-danger"> *</strong>
+                                <p class="text-xs mt-2">
+                                    Ingredients used to make your product
+                                </p>
+                            </label>
+
+                            <div class="col-md-9">
+                                <input
+                                    id="material"
+                                    v-model="form.material"
+                                    type="text"
+                                    name="material"
+                                    class="
+                                        form-control form-control-alternative
+                                    "
+                                    placeholder="Ingredient"
+                                />
+                                <HasError :form="form" field="material" />
                             </div>
                         </div>
                         <div class="form-group row">
@@ -727,13 +734,6 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4
-                            v-show="materialMode"
-                            class="modal-title"
-                            id="addRecordLabel"
-                        >
-                            Add Materials
-                        </h4>
-                        <h4
                             v-show="occasionMode"
                             class="modal-title"
                             id="addRecordLabel"
@@ -754,37 +754,6 @@
                         >
                             <i class="fas fa-times-circle"></i>
                         </button>
-                    </div>
-                    <div v-show="materialMode" class="modal-body">
-                        <div class="card">
-                            <div class="table-responsive">
-                                <table
-                                    class="table align-items-center table-hover"
-                                >
-                                    <thead>
-                                        <tr>
-                                            <th scope="col"></th>
-                                            <th scope="col">Name</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr v-for="material in materials">
-                                            <th scope="row">
-                                                <input
-                                                    type="checkbox"
-                                                    name="product_material"
-                                                    v-model="
-                                                        form.product_material
-                                                    "
-                                                    :value="material.id"
-                                                />
-                                            </th>
-                                            <td>{{ material.name }}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
                     </div>
                     <div v-show="occasionMode" class="modal-body">
                         <div class="card">
@@ -874,13 +843,11 @@ export default {
         AlertError,
     },
     data: () => ({
-        materialMode: false,
         occasionMode: false,
         recipientMode: false,
         loading: true,
         productStates: [],
         categories: [],
-        materials: [],
         occasions: [],
         recipients: [],
         shippings: [],
@@ -891,6 +858,7 @@ export default {
             sku: "",
             title: "",
             description: "",
+            material: "",
             length: "",
             width: "",
             height: "",
@@ -910,11 +878,9 @@ export default {
             product_state_id: "",
             category_id: "",
             user_id: "",
-            materials: [],
             occasions: [],
             recipients: [],
             shippings: [],
-            product_material: [],
             product_occasion: [],
             product_recipient: [],
             product_shipping: [],
@@ -942,7 +908,6 @@ export default {
         },
 
         closeModal() {
-            this.materialMode = false;
             this.occasionMode = false;
             this.recipientMode = false;
             $("#addRecord").modal("hide");
@@ -960,7 +925,6 @@ export default {
                 .get("/api/seller/products/details")
                 .then((response) => {
                     this.categories = response.data.categories;
-                    this.materials = response.data.materials;
                     this.occasions = response.data.occasions;
                     this.recipients = response.data.recipients;
                     this.shippings = response.data.shippings;
@@ -980,15 +944,11 @@ export default {
         },
 
         loadPivotVariables() {
-            this.form.product_material = [];
             this.form.product_occasion = [];
             this.form.product_recipient = [];
             this.form.product_shipping = [];
             this.form.occasions.forEach((value) => {
                 this.form.product_occasion.push(value.id);
-            });
-            this.form.materials.forEach((value) => {
-                this.form.product_material.push(value.id);
             });
             this.form.recipients.forEach((value) => {
                 this.form.product_recipient.push(value.id);

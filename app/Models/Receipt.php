@@ -17,12 +17,13 @@ class Receipt extends Model
         'was_claimed',
         'status',
         'name',
+        'email',
         'country',
         'address',
-        'apt_no',
         'zipcode',
         'city',
-        'state',
+        'district',
+        'province',
         'payment_method',
         'payment_email',
         'has_giftwrap',
@@ -32,16 +33,16 @@ class Receipt extends Model
         'giftwrap_price',
         'shipping_price',
         'discount_price',
-        'cart_id',
+        'order_id',
         'shop_id',
         'seller_id',
         'buyer_id',
     ];
 
-    //cart:receipt 1:M
-    public function cart()
+    //order:receipt 1:1
+    public function order()
     {
-        return $this->belongsTo(Cart::class);
+        return $this->belongsTo(Order::class);
     }    
 
     //shop:receipt 1:M

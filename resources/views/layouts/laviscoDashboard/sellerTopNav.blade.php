@@ -5,9 +5,18 @@
         d-flex
         justify-content-center
         align-items-center
+        lavisco-dashboard-nav-menu
     "
 >
-    <div class="container-fluid dashboard-topnav align-items-center justify-content-center p-0">
+    <div
+        class="
+            container-fluid
+            dashboard-topnav
+            align-items-center
+            justify-content-center
+            p-0
+        "
+    >
         <button
             class="navbar-toggler"
             type="button"
@@ -35,7 +44,7 @@
                 "
             >
                 <router-link to="/seller/shop" class="dashboard-link">
-                    Shop
+                    Store
                 </router-link>
                 <router-link to="/seller/sellerprofile" class="dashboard-link">
                     Account

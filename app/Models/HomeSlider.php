@@ -13,13 +13,11 @@ class HomeSlider extends Model
     protected $table = 'home_sliders';
 
     protected $fillable = [
-        'score',
+        'order',
         'name',
         'description',
         'link',
-        'color',
-        'dispay_picture',
-        'status',
+        'banner',
     ];
 
     public function scopeFilter($query, array $filters)

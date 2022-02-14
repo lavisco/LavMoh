@@ -21,7 +21,9 @@
                                             </h5>
                                             <span
                                                 class="h2 font-weight-bold mb-0"
-                                                >{{ analytics.visitors }}</span
+                                                >{{
+                                                    analytics.visitors[0]
+                                                }}</span
                                             >
                                         </div>
                                         <div class="col-auto">
@@ -67,7 +69,8 @@
                                             <span
                                                 class="h2 font-weight-bold mb-0"
                                                 >{{
-                                                    analytics.mostVisitedPages
+                                                    analytics
+                                                        .mostVisitedPages[0]
                                                 }}</span
                                             >
                                         </div>
@@ -114,7 +117,8 @@
                                             <span
                                                 class="h2 font-weight-bold mb-0"
                                                 >{{
-                                                    analytics.visitorsMonthly
+                                                    analytics.visitorsMonthly[2]
+                                                        .visitors
                                                 }}</span
                                             >
                                         </div>
@@ -160,7 +164,9 @@
                                             </h5>
                                             <span
                                                 class="h2 font-weight-bold mb-0"
-                                                >{{ analytics.userType }}</span
+                                                >{{
+                                                    analytics.userType[0]
+                                                }}</span
                                             >
                                         </div>
                                         <div class="col-auto">
@@ -194,7 +200,62 @@
             </div>
         </div>
         <div class="container-fluid mt--7 mb-5">
-            <div class="row"></div>
+            <div class="row">
+                <div class="col-xl-8 mb-5 mb-xl-0">
+                    <div class="card bg-gradient-default shadow">
+                        <div class="card-header bg-transparent border-0">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <h6
+                                        class="
+                                            text-uppercase text-light
+                                            ls-1
+                                            mb-1
+                                        "
+                                    >
+                                        Overview
+                                    </h6>
+                                    <h2 class="text-white mb-0">
+                                        Monthly Visitors
+                                    </h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table
+                                    class="
+                                        table
+                                        align-items-center
+                                        table-dark table-flush
+                                    "
+                                >
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th scope="col">Page Title</th>
+                                            <th scope="col">Visitors</th>
+                                            <th scope="col">Page Views</th>
+                                            <th scope="col">Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="list">
+                                        <tr
+                                            v-for="visitor in analytics.visitorsMonthly"
+                                        >
+                                            <th scope="row">
+                                                {{ visitor.pageTitle }}
+                                            </th>
+                                            <td>{{ visitor.visitors }}</td>
+                                            <td>{{ visitor.pageViews }}</td>
+                                            <td>{{ visitor.date }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>

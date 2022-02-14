@@ -10188,6 +10188,9 @@ button.bg-black:hover {
   background-color: #333333 !important;
   border-color: transparent;
 }
+.btn-secondary a:hover {
+  color: #ffffff;
+}
 
 .view-more-link {
   font-size: 24px;
@@ -10433,13 +10436,13 @@ h1 {
   border: 1px solid #836aff;
   border-radius: 12px;
   padding: 10px;
-  width: 730px !important;
+  width: 850px !important;
 }
 .navbar-main-menu .dropdown-menu-col-1 {
-  width: 33.33%;
+  width: 25%;
 }
 .navbar-main-menu .dropdown-menu-col-2 {
-  width: 66.66%;
+  width: 75%;
   border-left: 1px solid #c9c9c9;
 }
 .navbar-main-menu .dropdown-menu .dropdown-header {
@@ -10572,14 +10575,14 @@ section h1 {
   background-size: cover;
   background-position: center;
   background-color: #836aff;
-  min-height: 500px;
+  min-height: 660px;
   border-radius: 12px;
   z-index: -1;
 }
 
 .seller-hero-box {
   background-color: #ffffff;
-  margin-top: -200px;
+  margin-top: -270px;
   border-radius: 12px;
   padding: 100px;
 }
@@ -10978,8 +10981,19 @@ section h1 {
 
 /*---------------------section-shortcuts---------------------*/
 .section-shortcuts {
-  min-height: 250px;
   text-align: center;
+  margin-bottom: 120px;
+}
+.section-shortcuts .shortcut-left {
+  border-right: 2px solid #D2D2D2;
+}
+.section-shortcuts .shortcut-right {
+  border-left: 2px solid #D2D2D2;
+}
+@media (max-width: 768px) {
+  .section-shortcuts .shortcut-left, .section-shortcuts .shortcut-right {
+    border: none;
+  }
 }
 
 /*---------------------footer---------------------*/
@@ -11015,6 +11029,10 @@ footer h5 {
   footer,
 .footer-link-big {
     text-align: center;
+  }
+
+  .footer h5 {
+    text-align: center !important;
   }
 
   .footer-logo {
@@ -11087,6 +11105,10 @@ footer h5 {
   }
 }
 /*------------------------------dashboard------------------------------*/
+.lavisco-dashboard-nav-menu {
+  z-index: 998 !important;
+}
+
 h4 {
   color: #4e4e4e;
   font-style: normal;
@@ -11096,8 +11118,9 @@ h4 {
 }
 
 .text-xs {
+  font-size: 0.8rem;
   font-weight: 400 !important;
-  color: #a0a0a0;
+  color: #929292;
 }
 
 .dashboard-link {
@@ -11500,14 +11523,41 @@ h4 {
   color: #c9c9c9;
 }
 
+.large-img-upload-box {
+  position: relative;
+}
+
 .display-banner {
+  z-index: 1;
   width: 100%;
-  height: 150px;
+  height: 250px;
   -o-object-fit: cover;
      object-fit: cover;
   -o-object-position: center;
      object-position: center;
   border-radius: 12px;
+}
+
+.img-upload-btn {
+  position: absolute;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  background-color: #333333;
+  width: 55px;
+  height: 55px;
+  border-radius: 12px;
+  bottom: 1rem;
+  left: 1rem;
+}
+.img-upload-btn svg {
+  width: 35px;
+  height: 35px;
+}
+.img-upload-btn:hover, .img-upload-btn:active {
+  background-color: #836aff;
 }
 
 .variation-display-table thead {
@@ -11708,6 +11758,11 @@ h4 {
 .swiper-slide {
   background-size: cover;
   background-position: center;
+}
+
+.product-swiper .swiper-slide img {
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 
 .swiper-slide img {

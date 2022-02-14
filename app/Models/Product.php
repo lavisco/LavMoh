@@ -18,6 +18,8 @@ class Product extends Model
         'code',
         'title',
         'description',
+        'material',
+        'slug',
         'length',
         'width',
         'height',
@@ -32,9 +34,9 @@ class Product extends Model
         'has_custom_image',
         'has_variations',
         'has_inventory',
+        'has_giftwrap',
         'quantity',
         'rating',
-        'has_giftwrap',
         'product_state_id',
         'category_id',
         'user_id',
@@ -56,12 +58,6 @@ class Product extends Model
     public function product_state()
     {
         return $this->belongsTo(ProductState::class);
-    }
-
-    //products:material M:M
-    public function materials()
-    {
-        return $this->belongsToMany(Material::class)->withTimestamps();
     }
 
     //products:recipients M:M
@@ -106,10 +102,10 @@ class Product extends Model
         return $this->hasMany(ProductVideo::class);
     }
 
-    //product:cart M:M
-    public function carts()
+    //product:order M:M
+    public function orders()
     {
-        return $this->belongsToMany(Cart::class)->using(CartProduct::class)->withTimestamps();
+        return $this->belongsToMany(Order::class)->using(OrderProduct::class)->withTimestamps();
     }
     
     public function scopeFilter($query, array $filters)

@@ -49,6 +49,7 @@ use App\Http\Controllers\Api\Website\CategoryController as WebsiteCategoryContro
 use App\Http\Controllers\Api\Website\HomeController as WebsiteHomeController;
 use App\Http\Controllers\Api\Website\LocationController;
 use App\Http\Controllers\Api\Website\OccasionController as WebsiteOccasionController;
+use App\Http\Controllers\Api\Website\OrderController as WebsiteOrderController;
 use App\Http\Controllers\Api\Website\ProductController as WebsiteProductController;
 use App\Http\Controllers\Api\Website\RecipientController as WebsiteRecipientController;
 use App\Http\Controllers\Api\Website\SellerProfileController as WebsiteSellerProfileController;
@@ -79,7 +80,6 @@ Route::prefix('admin')->group(function () {
     Route::apiResource('/analytics', AnalyticController::class);
     Route::apiResource('/areas', AreaController::class);
     Route::apiResource('/buyerprofiles', BuyerProfileController::class);
-    Route::apiResource('/carts', CartController::class);
     Route::apiResource('/cities', CityController::class);
     Route::apiResource('/countries', CountryController::class);
     Route::apiResource('/categories', CategoryController::class);
@@ -87,7 +87,6 @@ Route::prefix('admin')->group(function () {
     Route::apiResource('/districts', DistrictController::class);
     Route::apiResource('/giftwraps', GiftwrapController::class);
     Route::apiResource('/homesliders', HomeSliderController::class);
-    Route::apiResource('/materials', MaterialController::class);
     Route::apiResource('/occasions', OccasionController::class);
     Route::apiResource('/orders', OrderController::class);
     Route::apiResource('/permissions', PermissionController::class);
@@ -98,9 +97,6 @@ Route::prefix('admin')->group(function () {
     Route::apiResource('/product_videos', ProductVideoController::class);
     Route::apiResource('/productstates', ProductStateController::class);
     Route::apiResource('/provinces', ProvinceController::class);
-    Route::get('/variations/options', [VariationController::class, 'getOptions']);
-    Route::apiResource('/variations', VariationController::class);
-    Route::apiResource('/variation_options', VariationOptionController::class);
     Route::apiResource('/receipts', ReceiptController::class);
     Route::apiResource('/recipients', RecipientController::class);
     Route::apiResource('/roles', RoleController::class);
@@ -151,6 +147,7 @@ Route::get('/categories/products/{id}/{location}', [WebsiteCategoryController::c
 Route::apiResource('/categories', WebsiteCategoryController::class);
 Route::apiResource('/sellerprofiles', WebsiteSellerProfileController::class);
 Route::apiResource('/occasions', WebsiteOccasionController::class);
+Route::apiResource('/orders', WebsiteOrderController::class);
 Route::apiResource('/recipients', WebsiteRecipientController::class);
 Route::apiResource('/shops', WebsiteShopController::class);
 Route::apiResource('/sitetexts', WebsiteSitetextController::class);

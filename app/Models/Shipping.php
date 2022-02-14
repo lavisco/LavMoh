@@ -25,6 +25,12 @@ class Shipping extends Model
     {
         return $this->belongsToMany(Product::class)->withTimestamps();
     }
+    
+    //shipping:order 1:M
+    public function order()
+    {
+        return $this->hasMany(Order::class);
+    }
 
     //scope for searching in table
     public function scopeFilter($query, array $filters)

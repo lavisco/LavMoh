@@ -17,10 +17,18 @@ class CreateShopsTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('name', 400);
+            $table->string('slug')->nullable();
             $table->string('banner')->nullable();
 			$table->string('url')->nullable();
 			$table->string('about');
 			$table->integer('rating')->nullable();
+            $table->string('country', 80);
+            $table->string('province')->nullable();
+            $table->string('district')->nullable();
+            $table->string('city');
+            $table->string('area')->nullable();
+			$table->string('address', 500);
+			$table->string('zipcode', 12)->nullable();
             $table->foreignId('user_id')->constrained();
         });
     }

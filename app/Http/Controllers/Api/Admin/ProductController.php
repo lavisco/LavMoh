@@ -3,18 +3,13 @@
 namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ProductImageRequest;
 use App\Http\Requests\ProductRequest;
-use App\Http\Requests\ProductVariationRequest;
 use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\ProductVariation;
-use App\Models\Variation;
-use App\Models\VariationOption;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
+use Illuminate\Support\Str;
 use Image;
 
 class ProductController extends Controller
@@ -36,27 +31,28 @@ class ProductController extends Controller
     {
         ///$this->authorize('create', Product::class);
 
+        $request->merge([
+            'slug' => Str::slug($request->title),
+        ]);
         $product = new Product($request->all());
         $product->save();
 
-        $product->materials()->sync(request('product_material'));
-        $product->occasions()->sync(request('product_occasion'));
-        $product->recipients()->sync(request('product_recipient'));
-        $product->shippings()->sync(request('product_shipping'));
+        // $product->occasions()->sync(request('product_occasion'));
+        // $product->recipients()->sync(request('product_recipient'));
+        // $product->shippings()->sync(request('product_shipping'));
 
         //sync to pivot tables
-        //$this->syncPivotData($product);
-
-        //product images
-        $this->uploadImage($request, $product->id);
+        $this->syncPivotData($product);
 
         //product variation
         $this->storeVariation($request, $product->id);
+
+        //product images
+        $this->uploadImage($request, $product->id);
     }
 
     public function syncPivotData($product)
     {
-        $product->materials()->sync(request('product_material'));
         $product->occasions()->sync(request('product_occasion'));
         $product->recipients()->sync(request('product_recipient'));
         $product->shippings()->sync(request('product_shipping'));
@@ -114,13 +110,12 @@ class ProductController extends Controller
     public function show($id)
     {
         ///$this->authorize('view', $product);
-        return Product::with(['materials', 'occasions', 'recipients', 'shippings'])->findOrFail($id);
+        return Product::with(['occasions', 'recipients', 'shippings'])->findOrFail($id);
     }
 
     public function update(ProductRequest $request, Product $product)
     {
         ///$this->authorize('update', $product);
-        $product->materials()->sync(request('product_material'));
         $product->occasions()->sync(request('product_occasion'));
         $product->recipients()->sync(request('product_recipient'));
         $product->shippings()->sync(request('product_shipping'));
@@ -150,7 +145,8 @@ class ProductController extends Controller
         $productPhoto=null;
         if ($image) {
             $file_name = time().'_'.$name;
-            Image::make($image)->save(storage_path('app/public/products/').$file_name);
+            $img = Image::make($image)->encode();
+            Storage::disk('s3')->put('/public/products/'.$file_name, $img->stream());
             $productPhoto = 'products/'.$file_name;
         }
 

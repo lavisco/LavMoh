@@ -5,7 +5,13 @@
 
         <!-- Body -->
         <div class="container-fluid mt--6 mb-5">
-            <div class="row">
+            <div
+                v-if="loading"
+                class="my-5 d-flex align-items-center justify-content-center"
+            >
+                <img src="/images/lavisco/loading.gif" />
+            </div>
+            <div v-else class="row">
                 <div class="col">
                     <div class="card">
                         <!-- Table start -->
@@ -48,10 +54,7 @@
                                         </th>
                                         <th>
                                             <p v-for="product in cart.products">
-                                                {{ product.base_price }} x
-                                                {{ product.quantity }}<br />
-                                                {{ product.total }} <br />
-                                                {{ product.custom_text }}
+                                                {{ product.title }}
                                             </p>
                                         </th>
                                         <td class="text-right">
@@ -228,6 +231,7 @@ export default {
         editMode: false,
         carts: [],
         searchText: null,
+        loading: true,
         form: new Form({
             id: "",
             total: "",
@@ -276,7 +280,10 @@ export default {
                 .get("/api/admin/carts", {
                     params: { searchText: this.searchText },
                 })
-                .then(({ data }) => (this.carts = data.data))
+                .then(({ data }) => {
+                    this.carts = data.data;
+                    this.loading = false;
+                })
                 .catch((error) => console.log(error));
         },
         createCart() {

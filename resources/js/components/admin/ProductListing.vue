@@ -125,28 +125,6 @@
                         </div>
                         <div class="form-group row mb-md-1">
                             <label class="col-md-3 col-form-label" for="">
-                                Materials
-                                <p class="text-grey text-xs mt-2">
-                                    Select all materials your item is made of
-                                </p>
-                            </label>
-                            <div class="col-md-9">
-                                <button
-                                    class="btn"
-                                    type="button"
-                                    @click.prevent="
-                                        subcategoryModal('materialMode')
-                                    "
-                                >
-                                    Add Materials
-                                </button>
-                                <div v-for="item in form.product_material">
-                                    <span>{{ item.name }}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group row mb-md-1">
-                            <label class="col-md-3 col-form-label" for="">
                                 Occasions
                                 <p class="text-grey text-xs mt-2">
                                     Select the occasions your item is suitable
@@ -213,6 +191,28 @@
                                 >
                                 </textarea>
                                 <HasError :form="form" field="description" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label" for="material">
+                                Ingredients
+                                <p class="text-grey text-xs mt-2">
+                                    Ingredients used to make your product
+                                </p>
+                            </label>
+
+                            <div class="col-md-9">
+                                <input
+                                    id="material"
+                                    v-model="form.material"
+                                    type="text"
+                                    name="material"
+                                    class="
+                                        form-control form-control-alternative
+                                    "
+                                    placeholder="Ingredients"
+                                />
+                                <HasError :form="form" field="material" />
                             </div>
                         </div>
                         <div class="form-group row">
@@ -891,13 +891,6 @@
                 <div class="modal-content bg-secondary">
                     <div class="modal-header bg-neutral">
                         <h4
-                            v-show="materialMode"
-                            class="modal-title"
-                            id="addRecordLabel"
-                        >
-                            Add Materials
-                        </h4>
-                        <h4
                             v-show="occasionMode"
                             class="modal-title"
                             id="addRecordLabel"
@@ -926,25 +919,6 @@
                         >
                             <i class="fas fa-times-circle"></i>
                         </button>
-                    </div>
-                    <div v-show="materialMode" class="modal-body">
-                        <div class="d-flex flex-wrap badge-container">
-                            <div
-                                class="badge option-badge"
-                                v-for="material in materials"
-                            >
-                                <div class="d-flex align-items-center">
-                                    <input
-                                        type="checkbox"
-                                        class="mr-2"
-                                        name="product_material"
-                                        v-model="form.product_material"
-                                        :value="material.id"
-                                    />
-                                    {{ material.name }}
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     <div v-show="occasionMode" class="modal-body">
                         <div class="d-flex flex-wrap badge-container">
@@ -1244,13 +1218,11 @@ export default {
         AlertError,
     },
     data: () => ({
-        materialMode: false,
         variationMode: false,
         occasionMode: false,
         recipientMode: false,
         productStates: [],
         categories: [],
-        materials: [],
         occasions: [],
         recipients: [],
         shippings: [],
@@ -1262,6 +1234,7 @@ export default {
             sku: "",
             title: "",
             description: "",
+            material: "",
             length: "",
             width: "",
             height: "",
@@ -1285,7 +1258,6 @@ export default {
             photoName: [],
 
             //pivot table arrays
-            product_material: [],
             product_occasion: [],
             product_recipient: [],
             product_shipping: [],
@@ -1411,9 +1383,6 @@ export default {
         subcategoryModal(mode, count) {
             this[mode] = true;
             switch (true) {
-                case this.materialMode:
-                    this.materials == "" ? this.loadMaterials() : "";
-                    break;
                 case this.occasionMode:
                     this.occasions == "" ? this.loadOccasions() : "";
                     break;
@@ -1428,35 +1397,11 @@ export default {
         },
 
         closeModal() {
-            this.materialMode = false;
             this.occasionMode = false;
             this.recipientMode = false;
             this.variationMode = false;
             $("#addRecord").modal("hide");
         },
-        // loadVariations() {
-        //     axios
-        //         .get("/api/admin/variations")
-        //         .then(({ data }) => (this.variations = data.data))
-        //         .catch((error) => console.log(error));
-        // },
-        // loadOptions() {
-        //     axios
-        //         .get("/api/admin/variations/options", {
-        //             params: {
-        //                 variation_id:
-        //                     this.form.productVariation[this.variationCount]
-        //                         .variationId,
-        //             },
-        //         })
-        //         .then(
-        //             ({ data }) =>
-        //                 (this.form.productVariation[
-        //                     this.variationCount
-        //                 ].options = data)
-        //         )
-        //         .catch((error) => console.log(error));
-        // },
         loadProductStates() {
             axios
                 .get("/api/admin/productstates")
@@ -1467,12 +1412,6 @@ export default {
             axios
                 .get("/api/admin/categories")
                 .then(({ data }) => (this.categories = data.data))
-                .catch((error) => console.log(error));
-        },
-        loadMaterials() {
-            axios
-                .get("/api/admin/materials")
-                .then(({ data }) => (this.materials = data.data))
                 .catch((error) => console.log(error));
         },
         loadOccasions() {

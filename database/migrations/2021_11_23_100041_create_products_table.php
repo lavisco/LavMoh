@@ -16,10 +16,12 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('sku', 16)->unique();
+            $table->string('sku', 16)->nullable();
             $table->string('code', 100)->unique()->nullable();
 			$table->string('title', 255);
-			$table->string('description', 500);
+			$table->string('description');
+			$table->string('material')->nullable();
+            $table->string('slug');
 			$table->decimal('length', 14, 2)->nullable();
 			$table->decimal('width', 14, 2)->nullable();
 			$table->decimal('height', 14, 2)->nullable();
@@ -33,10 +35,10 @@ class CreateProductsTable extends Migration
 			$table->boolean('has_custom_text')->default(false);
 			$table->boolean('has_custom_image')->default(false);
 			$table->boolean('has_variations')->default(false);
+            $table->boolean('has_giftwrap')->default(false);
 			$table->boolean('has_inventory');
 			$table->integer('quantity');
             $table->integer('rating')->nullable();
-            $table->boolean('has_giftwrap')->default(false);
             $table->foreignId('product_state_id')->constrained();
 			$table->foreignId('category_id')->constrained();
 			$table->foreignId('user_id')->constrained();

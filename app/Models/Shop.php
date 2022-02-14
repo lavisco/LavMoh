@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 
 class Shop extends Model
 {
@@ -15,10 +16,18 @@ class Shop extends Model
 
     protected $fillable = [
         'name',
+        'slug',
         'banner',
         'url',
         'about',
         'rating',
+        'country',
+        'province',
+        'district',
+        'city',
+        'area',
+        'address',
+        'zipcode',
         'user_id',
     ];
 
@@ -26,7 +35,7 @@ class Shop extends Model
 
     public function getPathAttribute()
     {
-        return $this->banner ? asset('storage/'.$this->banner) : "/images/lavisco/img-bg.jpg";
+        return $this->banner ? Storage::disk('s3')->temporaryUrl('public/' . $this->banner, '+2 minutes') : "/images/lavisco/img-bg.jpg";
     }
 
     //shop:user M:1
@@ -39,6 +48,18 @@ class Shop extends Model
     public function products()
     {
         return $this->user()->with('latestProducts')->limit(4);
+    }
+
+    //shop:receipt 1:M
+    public function receipt()
+    {
+        return $this->hasMany(Receipt::class);
+    }
+    
+    //shop:order 1:M
+    public function order()
+    {
+        return $this->hasMany(Order::class);
     }
     
     public function scopeFilter($query, array $filters)

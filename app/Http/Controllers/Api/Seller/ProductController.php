@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api\Seller;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
 use App\Models\Category;
-use App\Models\Material;
 use App\Models\Occasion;
 use App\Models\Product;
 use App\Models\ProductImage;
@@ -15,6 +14,8 @@ use App\Models\Shipping;
 use App\Models\VariationOption;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Image;
 
 class ProductController extends Controller
@@ -37,12 +38,12 @@ class ProductController extends Controller
         $request->merge([
             'product_state_id' => 1,
             'user_id' => auth()->id(),
+            'slug' => Str::slug($request->title),
         ]);
         $product = new Product($request->all());
 
         $product->save();
 
-        $product->materials()->sync(request('product_material'));
         $product->occasions()->sync(request('product_occasion'));
         $product->recipients()->sync(request('product_recipient'));
         $product->shippings()->sync(request('product_shipping'));
@@ -114,7 +115,6 @@ class ProductController extends Controller
         $this->authorize('update', $product);
         
         $product->update($request->all());
-        $product->materials()->sync(request('product_material'));
         $product->occasions()->sync(request('product_occasion'));
         $product->recipients()->sync(request('product_recipient'));
         $product->shippings()->sync(request('product_shipping'));
@@ -137,7 +137,8 @@ class ProductController extends Controller
         $productPhoto=null;
         if ($image) {
             $file_name = time().'_'.$name;
-            Image::make($image)->save(storage_path('app/public/products/').$file_name);
+            $img = Image::make($image)->encode();
+            Storage::disk('s3')->put('/public/products/'.$file_name, $img->stream());
             $productPhoto = 'products/'.$file_name;
         }
 
@@ -164,7 +165,6 @@ class ProductController extends Controller
     {
         return response()->json([
             'categories' => Category::latest()->get(),
-            'materials' => Material::latest()->get(),
             'occasions' => Occasion::latest()->get(),
             'recipients' => Recipient::latest()->get(),
             'shippings' => Shipping::latest()->get(),

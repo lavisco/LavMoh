@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 
 class Occasion extends Model
 {
@@ -18,13 +19,14 @@ class Occasion extends Model
         'banner',
         'description',
         'status',
+        'slug',
     ];
 
     protected $appends = ['path'];
 
     public function getPathAttribute()
     {
-        return $this->banner ? asset('storage/'.$this->banner) : "/images/lavisco/img-bg.jpg";
+        return $this->banner ? Storage::disk('s3')->temporaryUrl('public/' . $this->banner, '+2 minutes') : "/images/lavisco/img-bg.jpg";
     }
 
     //products:occasions M:M

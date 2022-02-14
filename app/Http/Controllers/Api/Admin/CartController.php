@@ -16,7 +16,7 @@ class CartController extends Controller
 
     public function index()
     {
-        return Cart::with(['seller.seller_profile', 'buyer', 'shop', 'giftwrap', 'products'])->latest()->paginate(25);
+        return Cart::with(['seller.seller_profile', 'buyer', 'shop', 'giftwrap', 'products', 'receipt'])->latest()->paginate(25);
     }
 
     public function store(CartRequest $request)

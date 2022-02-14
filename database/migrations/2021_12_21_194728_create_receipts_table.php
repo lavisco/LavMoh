@@ -20,12 +20,14 @@ class CreateReceiptsTable extends Migration
 			$table->boolean('was_claimed');
 			$table->string('status');
 			$table->string('name');
+			$table->string('email');
+            $table->string('phone', 20);
 			$table->string('country', 80);
-			$table->string('address', 255);
-			$table->string('apt_no', 20)->nullable();
+			$table->string('address');
 			$table->string('zipcode', 12)->nullable();
 			$table->string('city', 100);
-			$table->string('state', 100)->nullable();
+			$table->string('district', 100)->nullable();
+			$table->string('province', 100)->nullable();
 			$table->string('payment_method');
 			$table->string('payment_email');
 			$table->boolean('has_giftwrap');
@@ -37,7 +39,7 @@ class CreateReceiptsTable extends Migration
 			$table->decimal('shipping_price', 14, 2);
 			$table->decimal('discount_price', 14, 2)->nullable();
 			
-			$table->foreignId('cart_id')->constrained();
+			$table->foreignId('order_id')->constrained();
 			$table->foreignId('shop_id')->constrained();
 			$table->foreignId('seller_id')->references('id')->on('users');
             $table->foreignId('buyer_id')->references('id')->on('users');

@@ -25,10 +25,18 @@ class ShopRequest extends FormRequest
     {
         return [
             'name' => 'required|max:400',
+            'slug' => 'nullable',
             'banner' => 'nullable',
             'url' => 'nullable',
-            'about' => 'required',
+            'about' => 'required|max:500',
             'rating' => 'nullable|integer',
+            'country' => 'required|max:80',
+            'province' => 'required',
+            'district' => 'required',
+            'city' => 'required',
+            'area' => 'nullable',
+            'address' => 'required|max:500',
+            'zipcode' => 'max:12|nullable',
         ];
     }
 }

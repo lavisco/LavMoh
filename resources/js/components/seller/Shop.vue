@@ -14,23 +14,58 @@
                         <!-- Form start -->
                         <form class="input-form" @submit.prevent="updateShop()">
                             <div class="">
-                                <h4 class="mb-4">Shop Information</h4>
-                                <img
-                                    width="100%"
-                                    height="150px"
-                                    class="mb-4 display-banner"
-                                    v-show="shop.path"
-                                    :src="
-                                        shop.path
-                                            ? shop.path
-                                            : '/images/lavisco/img-bg.jpg'
-                                    "
+                                <h4 class="mb-4">Store Information</h4>
+                                <div class="mb-4 large-img-upload-box">
+                                    <img
+                                        v-if="url"
+                                        :src="url"
+                                        class="display-banner"
+                                    />
+                                    <img
+                                        v-if="!url"
+                                        :src="shop.path"
+                                        class="display-banner"
+                                    />
+                                    <button
+                                        @click.prevent="$refs.fileInput.click()"
+                                        class="img-upload-btn"
+                                        title="Upload Image"
+                                    >
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                                            aria-hidden="true"
+                                            role="img"
+                                            width="1em"
+                                            height="1em"
+                                            preserveAspectRatio="xMidYMid meet"
+                                            viewBox="0 0 24 24"
+                                            title="Upload Image"
+                                        >
+                                            <path
+                                                fill="white"
+                                                d="M21 6.25A3.25 3.25 0 0 0 17.75 3H6.25A3.25 3.25 0 0 0 3 6.25v12.283c0 1.303 1.57 1.962 2.5 1.048l4.03-3.96a.634.634 0 0 0 .02-.021l1.925-1.885l.083-.071a.75.75 0 0 1 .966.07l2.08 2.037l1.06-1.06l-2.09-2.048l-.129-.116a2.25 2.25 0 0 0-3.02.116l-4.452 4.36h.01L4.5 18.46V6.25c0-.966.784-1.75 1.75-1.75h11.5c.967 0 1.75.784 1.75 1.75v4.982c.48-.19.994-.263 1.5-.22V6.25Zm-3.496 2.502a2.252 2.252 0 1 0-4.505 0a2.252 2.252 0 0 0 4.505 0Zm-3.005 0a.752.752 0 1 1 1.505 0a.752.752 0 0 1-1.505 0Zm-1.302 9.82l5.902-5.902a2.285 2.285 0 1 1 3.233 3.232l-5.903 5.902a2.684 2.684 0 0 1-1.247.707l-1.83.457a.985.985 0 0 1-.15.027c-.59.204-2.979.574-3.827-.088c-.574-.448-.46-1.334-.218-1.818c.04-.078-.02-.18-.105-.166c-.66.103-1.243.45-1.827.799c-.783.468-1.57.936-2.549.815c-.979-.122-1.468-.726-1.71-1.255c-.099-.216.18-.401.388-.287c.469.255 1.106.496 1.631.38c.375-.084.904-.458 1.496-.877c1.066-.753 2.337-1.653 3.292-1.268c.84.337 1.46 1.15 1.03 2.113c-.052.118 0 .264.127.293c.423.097.778.066 1.133-.105l.428-1.712c.118-.472.362-.903.706-1.247Z"
+                                            />
+                                        </svg>
+                                    </button>
+                                </div>
+                                <input
+                                    type="file"
+                                    style="display: none"
+                                    @change.prevent="fileSelected"
+                                    ref="fileInput"
+                                    name="banner"
                                 />
+                                <p class="text-xs mt-1">
+                                    Banner image must be under 2MB. Recommended
+                                    resolution is 1920 x 1080px.
+                                </p>
+
                                 <div class="form-group row">
                                     <label
                                         class="col-md-3 col-form-label"
                                         for="name"
-                                        >Name
+                                        >Store Name
                                         <strong class="text-danger"> *</strong>
                                     </label>
 
@@ -44,7 +79,7 @@
                                                 form-control
                                                 form-control-alternative
                                             "
-                                            placeholder="Name"
+                                            placeholder="Store Name"
                                         />
                                         <HasError :form="form" field="name" />
                                     </div>
@@ -67,6 +102,7 @@
                                                 form-control-alternative
                                             "
                                             placeholder="url"
+                                            disabled
                                         />
                                         <HasError :form="form" field="url" />
                                     </div>
@@ -77,6 +113,9 @@
                                         for="about"
                                         >About
                                         <strong class="text-danger"> *</strong>
+                                        <p class="text-xs mt-2">
+                                            Maximum 500 characters.
+                                        </p>
                                     </label>
 
                                     <div class="col-md-9">
@@ -98,58 +137,253 @@
                                 <div class="form-group row">
                                     <label
                                         class="col-md-3 col-form-label"
-                                        for="rating"
-                                        >Rating
+                                        for="address"
+                                        >Address
                                         <strong class="text-danger"> *</strong>
                                     </label>
 
                                     <div class="col-md-9">
-                                        <span
-                                            v-html="shopRating(shop.rating)"
-                                        ></span>
+                                        <textarea
+                                            id="address"
+                                            class="
+                                                form-control
+                                                form-control-alternative
+                                            "
+                                            name="address"
+                                            rows="3"
+                                            cols="50"
+                                            v-model="form.address"
+                                        >
+                                        </textarea>
+                                        <HasError
+                                            :form="form"
+                                            field="address"
+                                        />
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label
                                         class="col-md-3 col-form-label"
-                                        for="banner"
-                                        >Upload banner
+                                        for="country"
+                                        >Country
+                                        <strong class="text-danger"> *</strong>
                                     </label>
 
-                                    <div class="col-md-9">
-                                        <input
-                                            type="file"
-                                            style="display: none"
-                                            @change.prevent="fileSelected"
-                                            ref="fileInput"
-                                            name="banner"
-                                        />
-
-                                        <button
-                                            class="image-upload-box"
-                                            @click.prevent="
-                                                $refs.fileInput.click()
+                                    <div class="col-md-5">
+                                        <select
+                                            class="
+                                                custom-select
+                                                form-control
+                                                form-control-alternative
                                             "
+                                            name="country"
+                                            id="country"
+                                            v-model="form.country"
+                                            @change.prevent="loadProvinces()"
                                         >
-                                            <img
-                                                v-if="url"
-                                                :src="url"
-                                                class="banner-container"
-                                            />
-                                            <img
-                                                v-if="!url"
-                                                :src="shop.path"
-                                                class="banner-container"
-                                            />
-                                        </button>
-                                        <p class="image-upload-filename mt-2">
-                                            {{
-                                                form.photoName
-                                                    ? form.photoName
-                                                    : `Change image`
-                                            }}
-                                        </p>
-                                        <HasError :form="form" field="banner" />
+                                            <option
+                                                value=""
+                                                disabled
+                                                selected
+                                                hidden
+                                            >
+                                                Select Country
+                                            </option>
+                                            <option
+                                                v-for="country in countries"
+                                                :value="country.name"
+                                            >
+                                                {{ country.name }}
+                                            </option>
+                                        </select>
+                                        <HasError
+                                            :form="form"
+                                            field="country"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label
+                                        class="col-md-3 col-form-label"
+                                        for="province"
+                                        >Province
+                                        <strong class="text-danger"> *</strong>
+                                    </label>
+
+                                    <div class="col-md-5">
+                                        <select
+                                            class="
+                                                custom-select
+                                                form-control
+                                                form-control-alternative
+                                            "
+                                            id="province"
+                                            v-model="form.province"
+                                            name="province"
+                                            @change.prevent="loadDistricts()"
+                                        >
+                                            <option
+                                                value=""
+                                                disabled
+                                                selected
+                                                hidden
+                                            >
+                                                Select Province
+                                            </option>
+                                            <option
+                                                v-for="province in provinces"
+                                                :value="province.name"
+                                            >
+                                                {{ province.name }}
+                                            </option>
+                                        </select>
+                                        <HasError
+                                            :form="form"
+                                            field="province"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label
+                                        class="col-md-3 col-form-label"
+                                        for="district"
+                                        >District
+                                        <strong class="text-danger"> *</strong>
+                                    </label>
+
+                                    <div class="col-md-5">
+                                        <select
+                                            class="
+                                                custom-select
+                                                form-control
+                                                form-control-alternative
+                                            "
+                                            id="district"
+                                            v-model="form.district"
+                                            name="district"
+                                            @change.prevent="loadCities()"
+                                        >
+                                            <option
+                                                value=""
+                                                disabled
+                                                selected
+                                                hidden
+                                            >
+                                                Select District
+                                            </option>
+                                            <option
+                                                v-for="district in districts"
+                                                :value="district.name"
+                                            >
+                                                {{ district.name }}
+                                            </option>
+                                        </select>
+                                        <HasError
+                                            :form="form"
+                                            field="district"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label
+                                        class="col-md-3 col-form-label"
+                                        for="zipcode"
+                                        >Zipcode
+                                    </label>
+
+                                    <div class="col-md-5">
+                                        <input
+                                            id="zipcode"
+                                            v-model="form.zipcode"
+                                            type="text"
+                                            name="zipcode"
+                                            class="
+                                                form-control
+                                                form-control-alternative
+                                            "
+                                            placeholder="zipcode"
+                                        />
+                                        <HasError
+                                            :form="form"
+                                            field="zipcode"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label
+                                        class="col-md-3 col-form-label"
+                                        for="city"
+                                        >City
+                                        <strong class="text-danger"> *</strong>
+                                    </label>
+
+                                    <div class="col-md-5">
+                                        <select
+                                            class="
+                                                custom-select
+                                                form-control
+                                                form-control-alternative
+                                            "
+                                            id="city"
+                                            v-model="form.city"
+                                            name="city"
+                                            @change.prevent="loadAreas()"
+                                        >
+                                            <option
+                                                value=""
+                                                disabled
+                                                selected
+                                                hidden
+                                            >
+                                                Select City
+                                            </option>
+                                            <option
+                                                v-for="city in cities"
+                                                :value="city.name"
+                                            >
+                                                {{ city.name }}
+                                            </option>
+                                        </select>
+                                        <HasError :form="form" field="city" />
+                                    </div>
+                                </div>
+                                <div
+                                    class="form-group row"
+                                    v-show="areas[0] != null"
+                                >
+                                    <label
+                                        class="col-md-3 col-form-label"
+                                        for="area"
+                                        >Area
+                                    </label>
+
+                                    <div class="col-md-5">
+                                        <select
+                                            class="
+                                                custom-select
+                                                form-control
+                                                form-control-alternative
+                                            "
+                                            id="area"
+                                            v-model="form.area"
+                                            name="area"
+                                        >
+                                            <option
+                                                value=""
+                                                disabled
+                                                selected
+                                                hidden
+                                            >
+                                                Select Area
+                                            </option>
+                                            <option
+                                                v-for="area in areas"
+                                                :value="area.name"
+                                            >
+                                                {{ area.name }}
+                                            </option>
+                                        </select>
+                                        <HasError :form="form" field="area" />
                                     </div>
                                 </div>
                             </div>
@@ -159,7 +393,7 @@
                                     d-flex
                                     justify-content-center
                                     align-items-center
-                                    mt-4
+                                    mt-5
                                 "
                             >
                                 <button type="submit" class="btn">
@@ -192,6 +426,12 @@ export default {
     data: () => ({
         shop: {},
         url: "",
+        //location data
+        countries: [],
+        provinces: [],
+        districts: [],
+        cities: [],
+        areas: [],
         loading: true,
         form: new Form({
             id: "",
@@ -199,7 +439,13 @@ export default {
             banner: "",
             url: "",
             about: "",
-            rating: "",
+            country: "",
+            province: "",
+            district: "",
+            city: "",
+            area: "",
+            address: "",
+            zipcode: "",
         }),
     }),
 
@@ -220,29 +466,51 @@ export default {
             reader.readAsDataURL(file);
         },
 
-        shopRating(rating) {
-            var result = "";
-            if (rating < 1) {
-                return (result = "No rating");
-            } else {
-                for (var j = 1; j <= rating; j++) {
-                    result += `<i class="fas fa-star text-yellow"></i>`;
-                }
-                for (var j = 5; j > rating; j--) {
-                    result += `<i class="fas fa-star text-lighter"></i>`;
-                }
-                return result;
-            }
-        },
-
         loadShop() {
             axios
                 .get("/api/seller/shop")
                 .then(({ data }) => {
                     this.shop = data;
                     this.form.fill(this.shop);
+                    this.loadCountries();
+                    this.loadProvinces();
+                    this.loadDistricts();
+                    this.loadCities();
                     this.loading = false;
                 })
+                .catch((error) => console.log(error));
+        },
+
+        loadCountries() {
+            axios
+                .get("/api/locations/countries")
+                .then(({ data }) => (this.countries = data))
+                .catch((error) => console.log(error));
+        },
+
+        loadProvinces() {
+            axios
+                .get("/api/locations/provinces/" + this.form.country)
+                .then(({ data }) => (this.provinces = data))
+                .catch((error) => console.log(error));
+        },
+        loadDistricts() {
+            axios
+                .get("/api/locations/districts/" + this.form.province)
+                .then(({ data }) => (this.districts = data))
+                .catch((error) => console.log(error));
+        },
+        loadCities() {
+            axios
+                .get("/api/locations/cities/" + this.form.district)
+                .then(({ data }) => (this.cities = data))
+                .catch((error) => console.log(error));
+        },
+
+        loadAreas() {
+            axios
+                .get("/api/locations/areas/" + this.form.city)
+                .then(({ data }) => (this.areas = data))
                 .catch((error) => console.log(error));
         },
 

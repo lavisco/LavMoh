@@ -20,7 +20,7 @@
                                     <tr>
                                         <th scope="col">Banner</th>
                                         <th scope="col">Name</th>
-                                        <th scope="col">URL</th>
+                                        <th scope="col">Address</th>
                                         <th scope="col">About</th>
                                         <th scope="col">Seller</th>
                                         <th scope="col">Rating</th>
@@ -38,7 +38,13 @@
                                             />
                                         </td>
                                         <th>{{ shop.name }}</th>
-                                        <td>{{ shop.url }}</td>
+                                        <td>
+                                            {{ shop.address }}<br />
+                                            {{ shop.city }},
+                                            {{ shop.district }},
+                                            {{ shop.province }},
+                                            {{ shop.country }}
+                                        </td>
                                         <td>{{ shop.about }}</td>
                                         <td>{{ shop.user.name }}</td>
                                         <td>
@@ -328,6 +334,241 @@
                                     <HasError :form="form" field="banner" />
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <label
+                                    class="col-md-3 col-form-label"
+                                    for="address"
+                                    >Address
+                                    <strong class="text-danger"> *</strong>
+                                </label>
+
+                                <div class="col-md-9">
+                                    <textarea
+                                        id="address"
+                                        class="
+                                            form-control
+                                            form-control-alternative
+                                        "
+                                        name="address"
+                                        rows="3"
+                                        cols="50"
+                                        v-model="form.address"
+                                    >
+                                    </textarea>
+                                    <HasError :form="form" field="address" />
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label
+                                    class="col-md-3 col-form-label"
+                                    for="country"
+                                    >Country
+                                    <strong class="text-danger"> *</strong>
+                                </label>
+
+                                <div class="col-md-9">
+                                    <select
+                                        class="
+                                            custom-select
+                                            form-control
+                                            form-control-alternative
+                                        "
+                                        name="country"
+                                        id="country"
+                                        v-model="form.country"
+                                        @change.prevent="loadProvinces()"
+                                    >
+                                        <option
+                                            value=""
+                                            disabled
+                                            selected
+                                            hidden
+                                        >
+                                            Select Country
+                                        </option>
+                                        <option
+                                            v-for="country in countries"
+                                            :value="country.name"
+                                        >
+                                            {{ country.name }}
+                                        </option>
+                                    </select>
+                                    <HasError :form="form" field="country" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label
+                                    class="col-md-3 col-form-label"
+                                    for="province"
+                                    >Province
+                                    <strong class="text-danger"> *</strong>
+                                </label>
+
+                                <div class="col-md-9">
+                                    <select
+                                        class="
+                                            custom-select
+                                            form-control
+                                            form-control-alternative
+                                        "
+                                        id="province"
+                                        v-model="form.province"
+                                        name="province"
+                                        @change.prevent="loadDistricts()"
+                                    >
+                                        <option
+                                            value=""
+                                            disabled
+                                            selected
+                                            hidden
+                                        >
+                                            Select Province
+                                        </option>
+                                        <option
+                                            v-for="province in provinces"
+                                            :value="province.name"
+                                        >
+                                            {{ province.name }}
+                                        </option>
+                                    </select>
+                                    <HasError :form="form" field="province" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label
+                                    class="col-md-3 col-form-label"
+                                    for="district"
+                                    >District
+                                    <strong class="text-danger"> *</strong>
+                                </label>
+
+                                <div class="col-md-9">
+                                    <select
+                                        class="
+                                            custom-select
+                                            form-control
+                                            form-control-alternative
+                                        "
+                                        id="district"
+                                        v-model="form.district"
+                                        name="district"
+                                        @change.prevent="loadCities()"
+                                    >
+                                        <option
+                                            value=""
+                                            disabled
+                                            selected
+                                            hidden
+                                        >
+                                            Select District
+                                        </option>
+                                        <option
+                                            v-for="district in districts"
+                                            :value="district.name"
+                                        >
+                                            {{ district.name }}
+                                        </option>
+                                    </select>
+                                    <HasError :form="form" field="district" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label
+                                    class="col-md-3 col-form-label"
+                                    for="zipcode"
+                                    >Zipcode
+                                </label>
+
+                                <div class="col-md-4">
+                                    <input
+                                        id="zipcode"
+                                        v-model="form.zipcode"
+                                        type="text"
+                                        name="zipcode"
+                                        class="
+                                            form-control
+                                            form-control-alternative
+                                        "
+                                        placeholder="zipcode"
+                                    />
+                                    <HasError :form="form" field="zipcode" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label
+                                    class="col-md-3 col-form-label"
+                                    for="city"
+                                    >City
+                                    <strong class="text-danger"> *</strong>
+                                </label>
+
+                                <div class="col-md-9">
+                                    <select
+                                        class="
+                                            custom-select
+                                            form-control
+                                            form-control-alternative
+                                        "
+                                        id="city"
+                                        v-model="form.city"
+                                        name="city"
+                                        @change.prevent="loadAreas()"
+                                    >
+                                        <option
+                                            value=""
+                                            disabled
+                                            selected
+                                            hidden
+                                        >
+                                            Select City
+                                        </option>
+                                        <option
+                                            v-for="city in cities"
+                                            :value="city.name"
+                                        >
+                                            {{ city.name }}
+                                        </option>
+                                    </select>
+                                    <HasError :form="form" field="city" />
+                                </div>
+                            </div>
+                            <div class="form-group row" v-show="areas[0] != null">
+                                <label
+                                    class="col-md-3 col-form-label"
+                                    for="area"
+                                    >Area
+                                </label>
+
+                                <div class="col-md-9">
+                                    <select
+                                        class="
+                                            custom-select
+                                            form-control
+                                            form-control-alternative
+                                        "
+                                        id="area"
+                                        v-model="form.area"
+                                        name="area"
+                                    >
+                                        <option
+                                            value=""
+                                            disabled
+                                            selected
+                                            hidden
+                                        >
+                                            Select Area
+                                        </option>
+                                        <option
+                                            v-for="area in areas"
+                                            :value="area.name"
+                                        >
+                                            {{ area.name }}
+                                        </option>
+                                    </select>
+                                    <HasError :form="form" field="area" />
+                                </div>
+                            </div>
                         </div>
 
                         <div class="modal-footer pt-0">
@@ -378,6 +619,12 @@ export default {
         loading: true,
         shops: [],
         sellers: [],
+        //location data
+        countries: [],
+        provinces: [],
+        districts: [],
+        cities: [],
+        areas: [],
         searchText: null,
         form: new Form({
             id: "",
@@ -386,6 +633,13 @@ export default {
             url: "",
             about: "",
             rating: "",
+            country: "",
+            province: "",
+            district: "",
+            city: "",
+            area: "",
+            address: "",
+            zipcode: "",
             user_id: "",
         }),
     }),
@@ -432,6 +686,7 @@ export default {
             this.form.clear();
             this.form.reset();
             this.loadSellers();
+            this.loadCountries();
             $("#addRecord").modal("show");
         },
 
@@ -440,6 +695,10 @@ export default {
             this.form.clear();
             this.form.reset();
             this.loadSellers();
+            this.loadCountries();
+            this.loadProvinces();
+            this.loadDistricts();
+            this.loadCities();
             $("#addRecord").modal("show");
             this.form.fill(shop);
         },
@@ -460,6 +719,39 @@ export default {
             axios
                 .get("/api/admin/users/seller")
                 .then(({ data }) => (this.sellers = data))
+                .catch((error) => console.log(error));
+        },
+
+        loadCountries() {
+            axios
+                .get("/api/locations/countries")
+                .then(({ data }) => (this.countries = data))
+                .catch((error) => console.log(error));
+        },
+
+        loadProvinces() {
+            axios
+                .get("/api/locations/provinces/" + this.form.country)
+                .then(({ data }) => (this.provinces = data))
+                .catch((error) => console.log(error));
+        },
+        loadDistricts() {
+            axios
+                .get("/api/locations/districts/" + this.form.province)
+                .then(({ data }) => (this.districts = data))
+                .catch((error) => console.log(error));
+        },
+        loadCities() {
+            axios
+                .get("/api/locations/cities/" + this.form.district)
+                .then(({ data }) => (this.cities = data))
+                .catch((error) => console.log(error));
+        },
+
+        loadAreas() {
+            axios
+                .get("/api/locations/areas/" + this.form.city)
+                .then(({ data }) => (this.areas = data))
                 .catch((error) => console.log(error));
         },
 

@@ -168,6 +168,9 @@ button.bg-black:hover {
         background-color: $black !important;
         border-color: transparent;
     }
+    a:hover{
+        color: $white;
+    }
 }
 
 .view-more-link {
@@ -400,12 +403,12 @@ button.bg-black:hover {
         border: 1px solid $lav-purple;
         border-radius: 12px;
         padding: 10px;
-        width: 730px !important;
+        width: 850px !important;
         &-col-1 {
-            width: 33.33%;
+            width: 25%;
         }
         &-col-2 {
-            width: 66.66%;
+            width: 75%;
             border-left: 1px solid $lav-grey;
         }
         .dropdown-header {
@@ -542,13 +545,13 @@ section {
     background-size: cover;
     background-position: center;
     background-color: $lav-purple;
-    min-height: 500px;
+    min-height: 660px;
     border-radius: 12px;
     z-index: -1;
 }
 .seller-hero-box {
     background-color: $white;
-    margin-top: -200px;
+    margin-top: -270px;
     border-radius: 12px;
     padding: 100px;
     @media (max-width: 768px) {
@@ -932,8 +935,19 @@ section {
 /*---------------------section-shortcuts---------------------*/
 
 .section-shortcuts {
-    min-height: 250px;
     text-align: center;
+    margin-bottom: 120px;
+    .shortcut-left{
+        border-right: 2px solid #D2D2D2;
+    }
+    .shortcut-right{
+        border-left: 2px solid #D2D2D2;
+    }
+    @media (max-width: 768px) {
+        .shortcut-left, .shortcut-right{
+            border: none;
+        }
+    }
 }
 
 /*---------------------footer---------------------*/
@@ -967,6 +981,9 @@ footer {
     footer,
     .footer-link-big {
         text-align: center;
+    }
+    .footer h5{
+        text-align: center !important;
     }
     .footer-logo {
         height: 50px;
@@ -1041,6 +1058,9 @@ footer {
 }
 
 /*------------------------------dashboard------------------------------*/
+.lavisco-dashboard-nav-menu{
+    z-index: 998 !important;
+}
 h4 {
     color: $dark-grey;
     font-style: normal;
@@ -1049,8 +1069,9 @@ h4 {
     text-transform: capitalize;
 }
 .text-xs {
+    font-size: 0.8rem;
     font-weight: 400 !important;
-    color: #a0a0a0;
+    color: #929292;
 }
 
 .dashboard-link {
@@ -1426,12 +1447,38 @@ h4 {
 .text-lighter {
     color: $lav-grey;
 }
+
+.large-img-upload-box{
+    position: relative;
+}
 .display-banner {
+    z-index: 1;
     width: 100%;
-    height: 150px;
+    height: 250px;
     object-fit: cover;
     object-position: center;
     border-radius: 12px;
+}
+.img-upload-btn{
+    position: absolute;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    background-color: $black;
+    width: 55px;
+    height: 55px;
+    border-radius: 12px;
+    bottom: 1rem;
+    left: 1rem;
+    svg{
+        width: 35px;
+        height: 35px;
+    }
+    &:hover, &:active{
+        background-color: $lav-purple;
+    }
 }
 .variation-display-table {
     thead {
@@ -1645,6 +1692,12 @@ h4 {
 .swiper-slide {
     background-size: cover;
     background-position: center;
+}
+
+.product-swiper{
+    .swiper-slide img {
+        object-fit: contain;
+    }
 }
 
 .swiper-slide img {

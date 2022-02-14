@@ -2,7 +2,13 @@
     <div>
         <!-- Body -->
         <div class="container-fluid mt-3 mb-5">
-            <div class="row">
+            <div
+                v-if="loading"
+                class="my-5 d-flex align-items-center justify-content-center"
+            >
+                <img src="/images/lavisco/loading.gif" />
+            </div>
+            <div v-else class="row">
                 <div class="col">
                     <div class="card">
                         <div
@@ -30,14 +36,20 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>#82034</td>
-                                        <td>2021-12-11 12:16:56</td>
+                                    <tr v-for="cart in carts">
+                                        <td>#</td>
+                                        <td>{{ cart.created_at }}</td>
                                         <td>
-                                            <div>
-                                                YOP1G3LL38
+                                            <div
+                                                v-for="product in cart.products"
+                                            >
+                                                {{ product.title }}
                                                 <a
-                                                    class="btn btn-sm btn-xs ml-2 mb-2"
+                                                    class="
+                                                        btn btn-sm btn-xs
+                                                        ml-2
+                                                        mb-2
+                                                    "
                                                     href="#"
                                                 >
                                                     <i
@@ -51,7 +63,10 @@
                                             <div>
                                                 YOP1G3LL39
                                                 <a
-                                                    class="btn btn-sm btn-xs ml-2"
+                                                    class="
+                                                        btn btn-sm btn-xs
+                                                        ml-2
+                                                    "
                                                     href="#"
                                                 >
                                                     <i
@@ -63,15 +78,22 @@
                                                 </a>
                                             </div>
                                         </td>
+                                        <td></td>
                                         <td>
-                                            20 <br />
-                                            100
+                                            {{ cart.receipt.address }},
+                                            {{ cart.receipt.country }}
                                         </td>
                                         <td>
-                                            Address: 683, Sudharshana Mawatha,
-                                            Kandy Road
+                                            LKR {{ cart.total }}
+                                            <br />
+                                            LKR {{ cart.subtotal }} +<br />
+                                            LKR {{ cart.tax }} +<br />
+                                            LKR
+                                            {{ cart.shipping_price }} +<br />
+                                            LKR
+                                            {{ cart.giftwrap_price }} -<br />
+                                            LKR {{ cart.discount_price }}
                                         </td>
-                                        <td>LKR 000.00</td>
                                         <td>
                                             <select
                                                 class="
@@ -107,55 +129,27 @@ export default {
         AlertError,
     },
     data: () => ({
-        products: [],
-        productStates: [],
+        carts: [],
         searchText: null,
-        form: new Form({
-            id: "",
-            sku: "",
-            title: "",
-            description: "",
-            length: "",
-            width: "",
-            height: "",
-            dimensions_unit: "",
-            weight: "",
-            weight_unit: "",
-            base_price: "",
-            production_time: "",
-            cut_off_time: "",
-            processing_time: "",
-            has_custom_text: "",
-            has_custom_image: "",
-            has_variations: "",
-            has_inventory: "",
-            quantity: "",
-            product_state_id: "",
-            category_id: "",
-            user_id: "",
-        }),
+        loading: true,
     }),
 
     watch: {
         searchText(after, before) {
-            this.loadProducts();
+            this.loadCarts();
         },
     },
 
     methods: {
-        loadProducts() {
+        loadCarts() {
             axios
-                .get("/api/seller/products", {
+                .get("/api/seller/carts", {
                     params: { searchText: this.searchText },
                 })
-                .then(({ data }) => (this.products = data.data))
-                .catch((error) => console.log(error));
-        },
-
-        loadProductStates() {
-            axios
-                .get("/api/admin/productstates")
-                .then(({ data }) => (this.productStates = data.data))
+                .then(({ data }) => {
+                    this.carts = data.data;
+                    this.loading = false;
+                })
                 .catch((error) => console.log(error));
         },
 
@@ -168,23 +162,11 @@ export default {
                 })
                 .catch((error) => console.log(error));
         },
-
-        deleteProduct(id) {
-            if (confirm("Are you sure you want to delete?")) {
-                axios
-                    .delete("/api/seller/products/" + id)
-                    .then(() => {
-                        Fire.$emit("reloadRecords");
-                    })
-                    .catch((error) => console.log(error));
-            }
-        },
     },
     mounted() {
-        this.loadProducts();
-        this.loadProductStates();
+        this.loadCarts();
         Fire.$on("reloadRecords", () => {
-            this.loadProducts();
+            this.loadCarts();
         });
     },
 };

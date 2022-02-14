@@ -19,6 +19,7 @@ class Category extends Model
         'banner',
         'description',
         'status',
+        'slug',
     ];
 
     protected $appends = ['path'];

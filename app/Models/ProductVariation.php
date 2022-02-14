@@ -55,6 +55,12 @@ class ProductVariation extends Model
         return $this->belongsTo(ProductState::class);
     }
 
+    //product_variations:order_product_variations 1:M
+    public function order_product_variations()
+    {
+        return $this->hasMany(OrderProductVariation::class);
+    }
+
     public function scopeFilter($query, array $filters)
     {
         $query->when($filters['searchText'] ?? false, fn($query, $searchText) =>

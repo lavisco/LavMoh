@@ -17,6 +17,7 @@ class CreateRecipientsTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('name', 100);
+            $table->string('slug')->nullable();
 			$table->string('banner')->nullable();
 			$table->string('description', 255)->nullable();
 			$table->boolean('status')->default(true);

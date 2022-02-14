@@ -14,11 +14,15 @@
                         <div class="input-form-compact">
                             <!-- Seller Profile -->
                             <h4 class="mt-3 mb-4 text-center">
-                                Seller Profile Information
+                                Seller Information
                             </h4>
+                            <p class="mb-4">
+                                Please make sure you add the most recent
+                                address.
+                            </p>
 
                             <div class="form-group row">
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <label
                                         class="col-form-label"
                                         for="first_name"
@@ -35,7 +39,7 @@
                                     />
                                     <HasError :form="form" field="first_name" />
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <label
                                         class="col-form-label"
                                         for="last_name"
@@ -51,21 +55,6 @@
                                         placeholder="Last Name"
                                     />
                                     <HasError :form="form" field="last_name" />
-                                </div>
-                                <div class="col-md-4">
-                                    <label class="col-form-label" for="phone"
-                                        >Phone
-                                        <strong class="text-danger"> * </strong>
-                                    </label>
-                                    <input
-                                        id="phone"
-                                        v-model="form.phone"
-                                        type="text"
-                                        name="phone"
-                                        class="form-control"
-                                        placeholder="Phone"
-                                    />
-                                    <HasError :form="form" field="phone" />
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -86,21 +75,76 @@
                                     <HasError :form="form" field="address" />
                                 </div>
                             </div>
+
                             <div class="form-group row">
-                                <div class="col-md-4">
-                                    <label class="col-form-label" for="apt_no"
-                                        >Apt No.
+                                <div class="col-md-6">
+                                    <label class="col-form-label" for="country"
+                                        >Country
+                                        <strong class="text-danger"> *</strong>
                                     </label>
-                                    <input
-                                        id="apt_no"
-                                        v-model="form.apt_no"
-                                        type="text"
-                                        name="apt_no"
-                                        class="form-control"
-                                        placeholder="Apt no."
-                                    />
-                                    <HasError :form="form" field="apt_no" />
+                                    <select
+                                        class="
+                                            custom-select
+                                            form-control
+                                            form-control-alternative
+                                        "
+                                        name="country"
+                                        id="country"
+                                        v-model="form.country"
+                                        @change.prevent="loadProvinces()"
+                                    >
+                                        <option
+                                            value=""
+                                            disabled
+                                            selected
+                                            hidden
+                                        >
+                                            Select Country
+                                        </option>
+                                        <option
+                                            v-for="country in countries"
+                                            :value="country.name"
+                                        >
+                                            {{ country.name }}
+                                        </option>
+                                    </select>
+                                    <HasError :form="form" field="country" />
                                 </div>
+                                <div class="col-md-6">
+                                    <label class="col-form-label" for="province"
+                                        >Province
+                                        <strong class="text-danger"> *</strong>
+                                    </label>
+                                    <select
+                                        class="
+                                            custom-select
+                                            form-control
+                                            form-control-alternative
+                                        "
+                                        id="province"
+                                        v-model="form.province"
+                                        name="province"
+                                        @change.prevent="loadDistricts()"
+                                    >
+                                        <option
+                                            value=""
+                                            disabled
+                                            selected
+                                            hidden
+                                        >
+                                            Select Province
+                                        </option>
+                                        <option
+                                            v-for="province in provinces"
+                                            :value="province.name"
+                                        >
+                                            {{ province.name }}
+                                        </option>
+                                    </select>
+                                    <HasError :form="form" field="province" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="zipcode"
                                         >Zip Code
@@ -110,62 +154,124 @@
                                         v-model="form.zipcode"
                                         type="text"
                                         name="zipcode"
-                                        class="form-control"
+                                        class="
+                                            form-control
+                                            form-control-alternative
+                                        "
                                         placeholder="Zip code"
                                     />
                                     <HasError :form="form" field="zipcode" />
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="state"
-                                        >State
+                                    <label class="col-form-label" for="district"
+                                        >District
+                                        <strong class="text-danger"> *</strong>
                                     </label>
-                                    <input
-                                        id="state"
-                                        v-model="form.state"
-                                        type="text"
-                                        name="state"
-                                        class="form-control"
-                                        placeholder="State"
-                                    />
-                                    <HasError :form="form" field="state" />
+                                    <select
+                                        class="
+                                            custom-select
+                                            form-control
+                                            form-control-alternative
+                                        "
+                                        id="district"
+                                        v-model="form.district"
+                                        name="district"
+                                        @change.prevent="loadCities()"
+                                    >
+                                        <option
+                                            value=""
+                                            disabled
+                                            selected
+                                            hidden
+                                        >
+                                            Select District
+                                        </option>
+                                        <option
+                                            v-for="district in districts"
+                                            :value="district.name"
+                                        >
+                                            {{ district.name }}
+                                        </option>
+                                    </select>
+                                    <HasError :form="form" field="district" />
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label class="col-form-label" for="city"
                                         >City
-                                        <strong class="text-danger"> * </strong>
+                                        <strong class="text-danger"> *</strong>
                                     </label>
-                                    <input
+                                    <select
+                                        class="
+                                            custom-select
+                                            form-control
+                                            form-control-alternative
+                                        "
                                         id="city"
                                         v-model="form.city"
-                                        type="text"
                                         name="city"
-                                        class="form-control"
-                                        placeholder="City"
-                                    />
+                                        @change.prevent="loadAreas()"
+                                    >
+                                        <option
+                                            value=""
+                                            disabled
+                                            selected
+                                            hidden
+                                        >
+                                            Select City
+                                        </option>
+                                        <option
+                                            v-for="city in cities"
+                                            :value="city.name"
+                                        >
+                                            {{ city.name }}
+                                        </option>
+                                    </select>
                                     <HasError :form="form" field="city" />
                                 </div>
+                            </div>
+
+                            <!-- Contact -->
+                            <h4 class="mt-5 mb-4">Contact Details</h4>
+
+                            <div class="form-group row">
                                 <div class="col-md-6">
-                                    <label class="col-form-label" for="country"
-                                        >Country
+                                    <label class="col-form-label" for="phone"
+                                        >Phone
                                         <strong class="text-danger"> * </strong>
                                     </label>
                                     <input
-                                        id="country"
-                                        v-model="form.country"
+                                        id="phone"
+                                        v-model="form.phone"
                                         type="text"
-                                        name="country"
+                                        name="phone"
                                         class="form-control"
-                                        placeholder="Country"
+                                        placeholder="Phone"
                                     />
-                                    <HasError :form="form" field="country" />
+                                    <HasError :form="form" field="phone" />
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="col-form-label" for="email"
+                                        >Email
+                                        <strong class="text-danger"> *</strong>
+                                    </label>
+                                    <input
+                                        id="email"
+                                        v-model="form.email"
+                                        type="email"
+                                        name="email"
+                                        class="
+                                            form-control
+                                            form-control-alternative
+                                        "
+                                        placeholder="Email"
+                                    />
+                                    <HasError :form="form" field="email" />
                                 </div>
                             </div>
 
                             <!-- Shop setup -->
                             <h4 class="mt-5 mb-4 text-center">
-                                Shop Setup Information
+                                Store Setup Information
                             </h4>
 
                             <div class="form-group row">
@@ -173,7 +279,7 @@
                                     <label
                                         class="col-form-label"
                                         for="shop_name"
-                                        >Shop Name
+                                        >Store Name
                                         <strong class="text-danger"> * </strong>
                                     </label>
                                     <input
@@ -182,7 +288,7 @@
                                         type="text"
                                         name="shop_name"
                                         class="form-control"
-                                        placeholder="Shop Name"
+                                        placeholder="Store Name"
                                     />
                                     <HasError :form="form" field="shop_name" />
                                 </div>
@@ -209,6 +315,11 @@
                                 <div class="col-12">
                                     <label class="col-form-label" for="banner"
                                         >Upload banner
+                                        <p class="text-xs mt-2">
+                                            Banner image must be under 2MB.
+                                            Recommended resolution is 1920 x
+                                            1080px.
+                                        </p>
                                     </label>
                                     <input
                                         type="file"
@@ -245,18 +356,279 @@
                                 </div>
                             </div>
 
+                            <!-- Shop setup -->
+                            <h4 class="mt-5 mb-4 text-center">Store Address</h4>
+                            <p class="mb-4">
+                                Please make sure you add the most recent address
+                                from where you will be operating the business
+                                because this will effect your store visibility
+                                to certain customers
+                            </p>
+
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <label
+                                        class="col-form-label"
+                                        for="shop_address"
+                                        >Address
+                                        <strong class="text-danger"> * </strong>
+                                    </label>
+                                    <textarea
+                                        id="shop_address"
+                                        class="form-control"
+                                        name="shop_address"
+                                        rows="3"
+                                        cols="50"
+                                        v-model="form.shop_address"
+                                    >
+                                    </textarea>
+                                    <HasError
+                                        :form="form"
+                                        field="shop_address"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-md-4">
+                                    <label
+                                        class="col-form-label"
+                                        for="shop_country"
+                                        >Country
+                                        <strong class="text-danger"> *</strong>
+                                    </label>
+                                    <select
+                                        class="
+                                            custom-select
+                                            form-control
+                                            form-control-alternative
+                                        "
+                                        name="shop_country"
+                                        id="shop_country"
+                                        v-model="form.shop_country"
+                                        @change.prevent="loadProvinces()"
+                                    >
+                                        <option
+                                            value=""
+                                            disabled
+                                            selected
+                                            hidden
+                                        >
+                                            Select Country
+                                        </option>
+                                        <option
+                                            v-for="country in countries"
+                                            :value="country.name"
+                                        >
+                                            {{ country.name }}
+                                        </option>
+                                    </select>
+                                    <HasError
+                                        :form="form"
+                                        field="shop_country"
+                                    />
+                                </div>
+                                <div class="col-md-4">
+                                    <label
+                                        class="col-form-label"
+                                        for="shop_province"
+                                        >Province
+                                        <strong class="text-danger"> *</strong>
+                                    </label>
+                                    <select
+                                        class="
+                                            custom-select
+                                            form-control
+                                            form-control-alternative
+                                        "
+                                        id="shop_province"
+                                        v-model="form.shop_province"
+                                        name="shop_province"
+                                        @change.prevent="loadDistricts()"
+                                    >
+                                        <option
+                                            value=""
+                                            disabled
+                                            selected
+                                            hidden
+                                        >
+                                            Select Province
+                                        </option>
+                                        <option
+                                            v-for="province in provinces"
+                                            :value="province.name"
+                                        >
+                                            {{ province.name }}
+                                        </option>
+                                    </select>
+                                    <HasError
+                                        :form="form"
+                                        field="shop_province"
+                                    />
+                                </div>
+                                <div class="col-md-4">
+                                    <label
+                                        class="col-form-label"
+                                        for="shop_zipcode"
+                                        >Zip Code
+                                    </label>
+                                    <input
+                                        id="shop_zipcode"
+                                        v-model="form.shop_zipcode"
+                                        type="text"
+                                        name="shop_zipcode"
+                                        class="
+                                            form-control
+                                            form-control-alternative
+                                        "
+                                        placeholder="Zip code"
+                                    />
+                                    <HasError
+                                        :form="form"
+                                        field="shop_zipcode"
+                                    />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-4">
+                                    <label
+                                        class="col-form-label"
+                                        for="shop_district"
+                                        >District
+                                        <strong class="text-danger"> *</strong>
+                                    </label>
+                                    <select
+                                        class="
+                                            custom-select
+                                            form-control
+                                            form-control-alternative
+                                        "
+                                        id="shop_district"
+                                        v-model="form.shop_district"
+                                        name="shop_district"
+                                        @change.prevent="loadCities()"
+                                    >
+                                        <option
+                                            value=""
+                                            disabled
+                                            selected
+                                            hidden
+                                        >
+                                            Select District
+                                        </option>
+                                        <option
+                                            v-for="district in districts"
+                                            :value="district.name"
+                                        >
+                                            {{ district.name }}
+                                        </option>
+                                    </select>
+                                    <HasError
+                                        :form="form"
+                                        field="shop_district"
+                                    />
+                                </div>
+                                <div class="col-md-4">
+                                    <label
+                                        class="col-form-label"
+                                        for="shop_city"
+                                        >City
+                                        <strong class="text-danger"> *</strong>
+                                    </label>
+                                    <select
+                                        class="
+                                            custom-select
+                                            form-control
+                                            form-control-alternative
+                                        "
+                                        id="shop_city"
+                                        v-model="form.shop_city"
+                                        name="shop_city"
+                                        @change.prevent="loadAreas()"
+                                    >
+                                        <option
+                                            value=""
+                                            disabled
+                                            selected
+                                            hidden
+                                        >
+                                            Select City
+                                        </option>
+                                        <option
+                                            v-for="city in cities"
+                                            :value="city.name"
+                                        >
+                                            {{ city.name }}
+                                        </option>
+                                    </select>
+                                    <HasError :form="form" field="shop_city" />
+                                </div>
+                                <div class="col-md-4" v-show="areas[0] != null">
+                                    <label
+                                        class="col-form-label"
+                                        for="shop_area"
+                                        >Area
+                                        <strong class="text-danger"> *</strong>
+                                    </label>
+                                    <select
+                                        class="
+                                            custom-select
+                                            form-control
+                                            form-control-alternative
+                                        "
+                                        id="shop_area"
+                                        v-model="form.shop_area"
+                                        name="shop_area"
+                                        @change.prevent="loadAreas()"
+                                    >
+                                        <option
+                                            value=""
+                                            disabled
+                                            selected
+                                            hidden
+                                        >
+                                            Select Area
+                                        </option>
+                                        <option
+                                            v-for="area in areas"
+                                            :value="area.name"
+                                        >
+                                            {{ area.name }}
+                                        </option>
+                                    </select>
+                                    <HasError :form="form" field="shop_area" />
+                                </div>
+                            </div>
+
                             <!-- Billing -->
                             <h4 class="mt-5 mb-4 text-center">
                                 Billing Address
                             </h4>
+                            <div class="custom-control custom-checkbox">
+                                <input
+                                    type="checkbox"
+                                    class="custom-control-input"
+                                    id="customCheck1"
+                                    v-model="billingMode"
+                                />
+                                <label
+                                    class="custom-control-label"
+                                    for="customCheck1"
+                                    >Billing Address same as above</label
+                                >
+                            </div>
 
-                            <div class="input-form-compact" id="billingSection">
+                            <div
+                                class="input-form-compact"
+                                id="billingSection"
+                                v-show="!billingMode"
+                            >
                                 <div class="form-group row">
                                     <div class="col-md-12">
                                         <label
                                             class="col-form-label"
                                             for="billing_address"
-                                            >Address
+                                            >Billing Address
                                             <strong class="text-danger">
                                                 *
                                             </strong>
@@ -276,111 +648,6 @@
                                         />
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <div class="col-md-4">
-                                        <label
-                                            class="col-form-label"
-                                            for="billing_apt_no"
-                                            >Apt No.
-                                        </label>
-                                        <input
-                                            id="billing_apt_no"
-                                            v-model="form.billing_apt_no"
-                                            type="text"
-                                            name="billing_apt_no"
-                                            class="form-control"
-                                            placeholder="Apt no."
-                                        />
-                                        <HasError
-                                            :form="form"
-                                            field="billing_apt_no"
-                                        />
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label
-                                            class="col-form-label"
-                                            for="billing_zipcode"
-                                            >Zip Code
-                                        </label>
-                                        <input
-                                            id="billing_zipcode"
-                                            v-model="form.billing_zipcode"
-                                            type="text"
-                                            name="billing_zipcode"
-                                            class="form-control"
-                                            placeholder="Zip code"
-                                        />
-                                        <HasError
-                                            :form="form"
-                                            field="billing_zipcode"
-                                        />
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label
-                                            class="col-form-label"
-                                            for="billing_state"
-                                            >State
-                                        </label>
-                                        <input
-                                            id="billing_state"
-                                            v-model="form.billing_state"
-                                            type="text"
-                                            name="billing_state"
-                                            class="form-control"
-                                            placeholder="State"
-                                        />
-                                        <HasError
-                                            :form="form"
-                                            field="billing_state"
-                                        />
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-md-6">
-                                        <label
-                                            class="col-form-label"
-                                            for="billing_city"
-                                            >City
-                                            <strong class="text-danger">
-                                                *
-                                            </strong>
-                                        </label>
-                                        <input
-                                            id="billing_city"
-                                            v-model="form.billing_city"
-                                            type="text"
-                                            name="billing_city"
-                                            class="form-control"
-                                            placeholder="City"
-                                        />
-                                        <HasError
-                                            :form="form"
-                                            field="billing_city"
-                                        />
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label
-                                            class="col-form-label"
-                                            for="billing_country"
-                                            >Country
-                                            <strong class="text-danger">
-                                                *
-                                            </strong>
-                                        </label>
-                                        <input
-                                            id="billing_country"
-                                            v-model="form.billing_country"
-                                            type="text"
-                                            name="billing_country"
-                                            class="form-control"
-                                            placeholder="Country"
-                                        />
-                                        <HasError
-                                            :form="form"
-                                            field="billing_country"
-                                        />
-                                    </div>
-                                </div>
                             </div>
 
                             <!-- Billing end -->
@@ -388,8 +655,14 @@
                             <!-- Account -->
 
                             <h4 class="mt-5 mb-4 text-center">
-                                Deposit Account
+                                Earnings Deposit Account Information
                             </h4>
+                            <p class="mb-4">
+                                Please make sure the details you provide is
+                                accurate and updated. All payments will be made
+                                weekly into this account and lavisco.lk will not
+                                deposit into any other accounts not stated below
+                            </p>
 
                             <div class="form-group row">
                                 <div class="col-md-9">
@@ -567,28 +840,38 @@ export default {
 
     data: () => ({
         url: "",
+        billingMode: false,
+        //location data
+        countries: [],
+        provinces: [],
+        districts: [],
+        cities: [],
+        areas: [],
         form: new Form({
             id: "",
             //shop
             shop_name: "",
             banner: "",
             about: "",
+            shop_country: "",
+            shop_province: "",
+            shop_district: "",
+            shop_city: "",
+            shop_area: "",
+            shop_address: "",
+            shop_zipcode: "",
             //seller profile
             first_name: "",
             last_name: "",
             phone: "",
+            email: "",
             country: "",
-            address: "",
-            apt_no: "",
-            zipcode: "",
+            province: "",
+            district: "",
             city: "",
-            state: "",
-            billing_country: "",
+            address: "",
+            zipcode: "",
             billing_address: "",
-            billing_apt_no: "",
-            billing_zipcode: "",
-            billing_city: "",
-            billing_state: "",
             deposit_account: "",
             deposit_name: "",
             deposit_bank: "",
@@ -614,11 +897,56 @@ export default {
             reader.readAsDataURL(file);
         },
         updateSellerprofile() {
+            if ((this.billingMode = true)) {
+                this.form.billing_address =
+                    this.form.address +
+                    "," +
+                    this.form.city +
+                    "," +
+                    this.form.district +
+                    "," +
+                    this.form.province +
+                    "," +
+                    this.form.country;
+            }
             this.form
                 .post("/api/seller/user/shop_setup")
                 .then(() => {
                     window.location.replace("/login");
                 })
+                .catch((error) => console.log(error));
+        },
+
+        loadCountries() {
+            axios
+                .get("/api/locations/countries")
+                .then(({ data }) => (this.countries = data))
+                .catch((error) => console.log(error));
+        },
+
+        loadProvinces() {
+            axios
+                .get("/api/locations/provinces/" + this.form.country)
+                .then(({ data }) => (this.provinces = data))
+                .catch((error) => console.log(error));
+        },
+        loadDistricts() {
+            axios
+                .get("/api/locations/districts/" + this.form.province)
+                .then(({ data }) => (this.districts = data))
+                .catch((error) => console.log(error));
+        },
+        loadCities() {
+            axios
+                .get("/api/locations/cities/" + this.form.district)
+                .then(({ data }) => (this.cities = data))
+                .catch((error) => console.log(error));
+        },
+
+        loadAreas() {
+            axios
+                .get("/api/locations/areas/" + this.form.city)
+                .then(({ data }) => (this.areas = data))
                 .catch((error) => console.log(error));
         },
     },

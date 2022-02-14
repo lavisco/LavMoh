@@ -47,6 +47,8 @@ export default new Vuex.Store({
                     price: cartItem.price,
                     shop: cartItem.shop,
                     quantity: cartItem.quantity,
+                    shop_id: cartItem.shop_id,
+                    seller_id: cartItem.seller_id,
                 };
             });
         },
@@ -64,6 +66,17 @@ export default new Vuex.Store({
             );
             if (!cartItem) {
                 context.commit("pushProductToCart", product);
+            } else {
+                context.commit("incrementItemQuantity", cartItem);
+            }
+        },
+
+        addProductVariationToCart(context, product, option) {
+            const cartItem = context.state.cart.find(
+                (item) => item.id === product.id
+            );
+            if (!cartItem) {
+                context.commit("pushProductVariationToCart", product, option);
             } else {
                 context.commit("incrementItemQuantity", cartItem);
             }
@@ -110,6 +123,14 @@ export default new Vuex.Store({
             });
         },
 
+        pushProductVariationToCart(state, product, option) {
+            state.cart.push({
+                id: product.id,
+                option_id_1: option.id,
+                option_price_1: option.price,
+            });
+        },
+
         pushProductToCurrentCart(state, product) {
             state.currentCart.push({
                 id: product.id,
@@ -117,6 +138,8 @@ export default new Vuex.Store({
                 price: product.base_price,
                 shop: product.shop,
                 quantity: product.quantity,
+                shop_id: product.user.shop.id,
+                seller_id: product.user_id,
             });
         },
 

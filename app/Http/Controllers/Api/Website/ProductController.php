@@ -30,12 +30,6 @@ class ProductController extends Controller
      */
     public function show($productId)
     {
-        $product = Product::with(['user.shop', 'category:id,name', 'materials', 'shippings',  'product_images', 'product_image'])->findOrFail($productId);
-        $variations = ProductVariation::where('product_id', $productId)->get()->groupBy('type');
-
-        return response()->json([
-            'product' => $product,
-            'variations' => $variations,
-        ]);
+        return Product::with(['user.shop', 'category:id,name', 'shippings',  'product_images', 'product_image', 'product_variations'])->findOrFail($productId);
     }
 }

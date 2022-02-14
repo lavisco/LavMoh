@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Api\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ShopRequest;
 use App\Models\Shop;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Image;
 
 class ShopController extends Controller
@@ -27,7 +27,10 @@ class ShopController extends Controller
     {
         ///$this->authorize('create', Shop::class);
 
-        $request->merge(['banner' => $this->storeImage($request->banner, $request->photoName)]);
+        $request->merge([
+            'slug' => Str::slug($request->name),
+            'banner' => $this->storeImage($request->banner, $request->photoName)
+        ]);
         return Shop::create($request->all());
     }
 
@@ -60,7 +63,8 @@ class ShopController extends Controller
         $banner=null;
         if ($image) {
             $file_name = time().'_'.$name;
-            Image::make($image)->save(storage_path('app/public/banners/').$file_name);
+            $img = Image::make($image)->encode();
+            Storage::disk('s3')->put('/public/banners/'.$file_name, $img->stream());
             $banner = 'banners/'.$file_name;
         }
 

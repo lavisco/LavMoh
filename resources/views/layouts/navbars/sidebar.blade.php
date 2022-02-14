@@ -247,7 +247,7 @@
                         aria-expanded="true"
                         aria-controls="navbar-website-dropdown"
                     >
-                        <i class="fas fa-swatchbook"></i>
+                        <i class="fas fa-wrench"></i>
                         <span class="nav-link-text">Website Control</span>
                     </a>
 
@@ -320,7 +320,7 @@
 
                 <li class="nav-item">
                     <router-link to="/admin/analytics" class="nav-link">
-                        <i class="fas fa-store"></i> Analytics
+                        <i class="fas fa-chart-line"></i> Analytics
                     </router-link>
                 </li>
             </ul>

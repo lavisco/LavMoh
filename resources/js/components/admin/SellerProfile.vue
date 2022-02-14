@@ -36,20 +36,11 @@
                                         <td>{{ sellerprofile.phone }}</td>
                                         <td>
                                             {{ sellerprofile.address }} <br />
-                                            <span
-                                                v-show="
-                                                    sellerprofile.apt_no != null
-                                                "
-                                            >
-                                                Apt no:
-                                                {{ sellerprofile.apt_no }},
-                                            </span>
                                             {{ sellerprofile.zipcode }}
-                                            {{ sellerprofile.state }}
                                         </td>
                                         <td>{{ sellerprofile.city }}</td>
                                         <td>{{ sellerprofile.country }}</td>
-                                        <td>{{ sellerprofile.user.email }}</td>
+                                        <td>{{ sellerprofile.email }}</td>
                                         <td class="text-right">
                                             <div class="dropdown">
                                                 <a
@@ -200,7 +191,7 @@
                             </div>
                             <hr class="mb-0" />
                             <div class="form-group row">
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <label
                                         class="col-form-label"
                                         for="first_name"
@@ -220,7 +211,7 @@
                                     />
                                     <HasError :form="form" field="first_name" />
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <label
                                         class="col-form-label"
                                         for="last_name"
@@ -240,7 +231,9 @@
                                     />
                                     <HasError :form="form" field="last_name" />
                                 </div>
-                                <div class="col-md-4">
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-6">
                                     <label class="col-form-label" for="phone"
                                         >Phone
                                         <strong class="text-danger"> *</strong>
@@ -257,6 +250,24 @@
                                         placeholder="Phone"
                                     />
                                     <HasError :form="form" field="phone" />
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="col-form-label" for="email"
+                                        >Email
+                                        <strong class="text-danger"> *</strong>
+                                    </label>
+                                    <input
+                                        id="email"
+                                        v-model="form.email"
+                                        type="email"
+                                        name="email"
+                                        class="
+                                            form-control
+                                            form-control-alternative
+                                        "
+                                        placeholder="Email"
+                                    />
+                                    <HasError :form="form" field="email" />
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -281,23 +292,74 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <div class="col-md-4">
-                                    <label class="col-form-label" for="apt_no"
-                                        >Apt No.
+                                <div class="col-md-6">
+                                    <label class="col-form-label" for="country"
+                                        >Country
+                                        <strong class="text-danger"> *</strong>
                                     </label>
-                                    <input
-                                        id="apt_no"
-                                        v-model="form.apt_no"
-                                        type="text"
-                                        name="apt_no"
+                                    <select
                                         class="
+                                            custom-select
                                             form-control
                                             form-control-alternative
                                         "
-                                        placeholder="Apt no."
-                                    />
-                                    <HasError :form="form" field="apt_no" />
+                                        name="country"
+                                        id="country"
+                                        v-model="form.country"
+                                        @change.prevent="loadProvinces()"
+                                    >
+                                        <option
+                                            value=""
+                                            disabled
+                                            selected
+                                            hidden
+                                        >
+                                            Select Country
+                                        </option>
+                                        <option
+                                            v-for="country in countries"
+                                            :value="country.name"
+                                        >
+                                            {{ country.name }}
+                                        </option>
+                                    </select>
+                                    <HasError :form="form" field="country" />
                                 </div>
+                                <div class="col-md-6">
+                                    <label class="col-form-label" for="province"
+                                        >Province
+                                        <strong class="text-danger"> *</strong>
+                                    </label>
+                                    <select
+                                        class="
+                                            custom-select
+                                            form-control
+                                            form-control-alternative
+                                        "
+                                        id="province"
+                                        v-model="form.province"
+                                        name="province"
+                                        @change.prevent="loadDistricts()"
+                                    >
+                                        <option
+                                            value=""
+                                            disabled
+                                            selected
+                                            hidden
+                                        >
+                                            Select Province
+                                        </option>
+                                        <option
+                                            v-for="province in provinces"
+                                            :value="province.name"
+                                        >
+                                            {{ province.name }}
+                                        </option>
+                                    </select>
+                                    <HasError :form="form" field="province" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="zipcode"
                                         >Zip Code
@@ -316,59 +378,70 @@
                                     <HasError :form="form" field="zipcode" />
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="state"
-                                        >State
+                                    <label class="col-form-label" for="district"
+                                        >District
+                                        <strong class="text-danger"> *</strong>
                                     </label>
-                                    <input
-                                        id="state"
-                                        v-model="form.state"
-                                        type="text"
-                                        name="state"
+                                    <select
                                         class="
+                                            custom-select
                                             form-control
                                             form-control-alternative
                                         "
-                                        placeholder="State"
-                                    />
-                                    <HasError :form="form" field="state" />
+                                        id="district"
+                                        v-model="form.district"
+                                        name="district"
+                                        @change.prevent="loadCities()"
+                                    >
+                                        <option
+                                            value=""
+                                            disabled
+                                            selected
+                                            hidden
+                                        >
+                                            Select District
+                                        </option>
+                                        <option
+                                            v-for="district in districts"
+                                            :value="district.name"
+                                        >
+                                            {{ district.name }}
+                                        </option>
+                                    </select>
+                                    <HasError :form="form" field="district" />
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label class="col-form-label" for="city"
                                         >City
                                         <strong class="text-danger"> *</strong>
                                     </label>
-                                    <input
+                                    <select
+                                        class="
+                                            custom-select
+                                            form-control
+                                            form-control-alternative
+                                        "
                                         id="city"
                                         v-model="form.city"
-                                        type="text"
                                         name="city"
-                                        class="
-                                            form-control
-                                            form-control-alternative
-                                        "
-                                        placeholder="City"
-                                    />
+                                        @change.prevent="loadAreas()"
+                                    >
+                                        <option
+                                            value=""
+                                            disabled
+                                            selected
+                                            hidden
+                                        >
+                                            Select City
+                                        </option>
+                                        <option
+                                            v-for="city in cities"
+                                            :value="city.name"
+                                        >
+                                            {{ city.name }}
+                                        </option>
+                                    </select>
                                     <HasError :form="form" field="city" />
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="col-form-label" for="country"
-                                        >Country
-                                        <strong class="text-danger"> *</strong>
-                                    </label>
-                                    <input
-                                        id="country"
-                                        v-model="form.country"
-                                        type="text"
-                                        name="country"
-                                        class="
-                                            form-control
-                                            form-control-alternative
-                                        "
-                                        placeholder="Country"
-                                    />
-                                    <HasError :form="form" field="country" />
                                 </div>
                             </div>
 
@@ -421,126 +494,6 @@
                                         <HasError
                                             :form="form"
                                             field="billing_address"
-                                        />
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-md-4">
-                                        <label
-                                            class="col-form-label"
-                                            for="billing_apt_no"
-                                            >Apt No.
-                                        </label>
-                                        <input
-                                            id="billing_apt_no"
-                                            v-model="form.billing_apt_no"
-                                            type="text"
-                                            name="billing_apt_no"
-                                            class="
-                                                form-control
-                                                form-control-alternative
-                                            "
-                                            placeholder="Apt no."
-                                        />
-                                        <HasError
-                                            :form="form"
-                                            field="billing_apt_no"
-                                        />
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label
-                                            class="col-form-label"
-                                            for="billing_zipcode"
-                                            >Zip Code
-                                        </label>
-                                        <input
-                                            id="billing_zipcode"
-                                            v-model="form.billing_zipcode"
-                                            type="text"
-                                            name="billing_zipcode"
-                                            class="
-                                                form-control
-                                                form-control-alternative
-                                            "
-                                            placeholder="Zip code"
-                                        />
-                                        <HasError
-                                            :form="form"
-                                            field="billing_zipcode"
-                                        />
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label
-                                            class="col-form-label"
-                                            for="billing_state"
-                                            >State
-                                        </label>
-                                        <input
-                                            id="billing_state"
-                                            v-model="form.billing_state"
-                                            type="text"
-                                            name="billing_state"
-                                            class="
-                                                form-control
-                                                form-control-alternative
-                                            "
-                                            placeholder="State"
-                                        />
-                                        <HasError
-                                            :form="form"
-                                            field="billing_state"
-                                        />
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-md-6">
-                                        <label
-                                            class="col-form-label"
-                                            for="billing_city"
-                                            >City
-                                            <strong class="text-danger">
-                                                *</strong
-                                            >
-                                        </label>
-                                        <input
-                                            id="billing_city"
-                                            v-model="form.billing_city"
-                                            type="text"
-                                            name="billing_city"
-                                            class="
-                                                form-control
-                                                form-control-alternative
-                                            "
-                                            placeholder="City"
-                                        />
-                                        <HasError
-                                            :form="form"
-                                            field="billing_city"
-                                        />
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label
-                                            class="col-form-label"
-                                            for="billing_country"
-                                            >Country
-                                            <strong class="text-danger">
-                                                *</strong
-                                            >
-                                        </label>
-                                        <input
-                                            id="billing_country"
-                                            v-model="form.billing_country"
-                                            type="text"
-                                            name="billing_country"
-                                            class="
-                                                form-control
-                                                form-control-alternative
-                                            "
-                                            placeholder="Country"
-                                        />
-                                        <HasError
-                                            :form="form"
-                                            field="billing_country"
                                         />
                                     </div>
                                 </div>
@@ -765,24 +718,26 @@ export default {
         loading: true,
         sellerprofiles: [],
         sellers: [],
+        //location data
+        countries: [],
+        provinces: [],
+        districts: [],
+        cities: [],
+        areas: [],
         searchText: null,
         form: new Form({
             id: "",
             first_name: "",
             last_name: "",
             phone: "",
+            email: "",
             country: "",
-            address: "",
-            apt_no: "",
-            zipcode: "",
+            province: "",
+            district: "",
             city: "",
-            state: "",
-            billing_country: "",
+            address: "",
+            zipcode: "",
             billing_address: "",
-            billing_apt_no: "",
-            billing_zipcode: "",
-            billing_city: "",
-            billing_state: "",
             deposit_account: "",
             deposit_name: "",
             deposit_bank: "",
@@ -804,6 +759,7 @@ export default {
             this.form.clear();
             this.form.reset();
             this.loadSellers();
+            this.loadCountries();
             $("#addRecord").modal("show");
         },
 
@@ -812,6 +768,10 @@ export default {
             this.form.clear();
             this.form.reset();
             this.loadSellers();
+            this.loadCountries();
+            this.loadProvinces();
+            this.loadDistricts();
+            this.loadCities();
             $("#addRecord").modal("show");
             this.form.fill(sellerprofile);
         },
@@ -835,14 +795,46 @@ export default {
                 .catch((error) => console.log(error));
         },
 
+        loadCountries() {
+            axios
+                .get("/api/locations/countries")
+                .then(({ data }) => (this.countries = data))
+                .catch((error) => console.log(error));
+        },
+
+        loadProvinces() {
+            axios
+                .get("/api/locations/provinces/" + this.form.country)
+                .then(({ data }) => (this.provinces = data))
+                .catch((error) => console.log(error));
+        },
+
+        loadDistricts() {
+            axios
+                .get("/api/locations/districts/" + this.form.province)
+                .then(({ data }) => (this.districts = data))
+                .catch((error) => console.log(error));
+        },
+
+        loadCities() {
+            axios
+                .get("/api/locations/cities/" + this.form.district)
+                .then(({ data }) => (this.cities = data))
+                .catch((error) => console.log(error));
+        },
+
         createSellerprofile() {
             if ((this.billingMode = true)) {
-                this.form.billing_country = this.form.country;
-                this.form.billing_address = this.form.address;
-                this.form.billing_apt_no = this.form.apt_no;
-                this.form.billing_zipcode = this.form.zipcode;
-                this.form.billing_city = this.form.city;
-                this.form.billing_state = this.form.state;
+                this.form.billing_address =
+                    this.form.address +
+                    "," +
+                    this.form.city +
+                    "," +
+                    this.form.district +
+                    "," +
+                    this.form.province +
+                    "," +
+                    this.form.country;
             }
             this.form
                 .post("/api/admin/sellerprofiles")
@@ -866,12 +858,16 @@ export default {
 
         updateSellerprofile() {
             if ((this.billingMode = true)) {
-                this.form.billing_country = this.form.country;
-                this.form.billing_address = this.form.address;
-                this.form.billing_apt_no = this.form.apt_no;
-                this.form.billing_zipcode = this.form.zipcode;
-                this.form.billing_city = this.form.city;
-                this.form.billing_state = this.form.state;
+                this.form.billing_address =
+                    this.form.address +
+                    "," +
+                    this.form.city +
+                    "," +
+                    this.form.district +
+                    "," +
+                    this.form.province +
+                    "," +
+                    this.form.country;
             }
             this.form
                 .put("/api/admin/sellerprofiles/" + this.form.id)

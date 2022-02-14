@@ -72,6 +72,12 @@ class User extends Authenticatable
         return $this->hasMany(Giftwrap::class);
     }
 
+    //shop:user M:1
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
     //product:user M:1
     public function products()
     {

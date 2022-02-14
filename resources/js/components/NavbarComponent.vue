@@ -58,7 +58,7 @@
                                     </h6>
                                     <div class="row">
                                         <div
-                                            class="col-md-6"
+                                            class="col-md-4"
                                             v-for="chunkRecipient in chunkedRecipients"
                                         >
                                             <router-link
@@ -253,7 +253,7 @@ export default {
 
     computed: {
         chunkedRecipients() {
-            return _.chunk(this.recipients, 11);
+            return _.chunk(this.recipients, 8);
         },
     },
 

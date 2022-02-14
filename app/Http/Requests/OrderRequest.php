@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class OrderRequest extends FormRequest
 {
@@ -24,7 +25,20 @@ class OrderRequest extends FormRequest
     public function rules()
     {
         return [
+            'name' => 'sometimes|required|string|max:255',
+            'email' => [
+                'required',
+                'sometimes',
+                'string',
+                'email',
+                'max:255',
+                Rule::unique('users')->ignore($this->id),
+            ],
             'total' => 'numeric|required',
+            'subtotal' => 'numeric|required',
+            'giftwrap_price' => 'numeric|nullable',
+            'shipping_price' => 'numeric|required',
+            'discount_price' => 'numeric|nullable',
         ];
     }
 }

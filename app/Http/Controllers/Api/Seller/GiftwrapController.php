@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\GiftwrapRequest;
 use App\Models\Giftwrap;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class GiftwrapController extends Controller
 {
@@ -55,7 +56,8 @@ class GiftwrapController extends Controller
         $image_url=null;
         if ($image) {
             $file_name = time().'_'.$name;
-            Image::make($image)->save(storage_path('app/public/banners/').$file_name);
+            $img = Image::make($image)->encode();
+            Storage::disk('s3')->put('/public/banners/'.$file_name, $img->stream());
             $image_url = 'banners/'.$file_name;
         }
 

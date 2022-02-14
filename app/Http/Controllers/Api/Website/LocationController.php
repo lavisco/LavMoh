@@ -18,18 +18,22 @@ class LocationController extends Controller
     }
     public function indexProvince($country)
     {
-        return Province::where('country_id', $country)->latest()->get();
+        $countryid = Country::select('id')->where('id', $country)->orWhere('name', $country)->first();
+        return Province::where('country_id', $countryid->id)->latest()->get();
     }
     public function indexDistrict($province)
     {
-        return District::where('province_id', $province)->latest()->get();
+        $provinceid = Province::select('id')->where('id', $province)->orWhere('name', $province)->first();
+        return District::where('province_id', $provinceid->id)->latest()->get();
     }
     public function indexCity($district)
     {
-        return City::where('district_id', $district)->latest()->get();
+        $districtid = District::select('id')->where('id', $district)->orWhere('name', $district)->first();
+        return City::where('district_id', $districtid->id)->latest()->get();
     }
     public function indexArea($city)
     {
-        return Area::where('city_id', $city)->latest()->get();
+        $cityid = City::select('id')->where('id', $city)->orWhere('name', $city)->first();
+        return Area::where('city_id', $cityid->id)->latest()->get();
     }
 }

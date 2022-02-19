@@ -168,7 +168,7 @@ button.bg-black:hover {
         background-color: $black !important;
         border-color: transparent;
     }
-    a:hover{
+    a:hover {
         color: $white;
     }
 }
@@ -937,14 +937,15 @@ section {
 .section-shortcuts {
     text-align: center;
     margin-bottom: 120px;
-    .shortcut-left{
-        border-right: 2px solid #D2D2D2;
+    .shortcut-left {
+        border-right: 2px solid #d2d2d2;
     }
-    .shortcut-right{
-        border-left: 2px solid #D2D2D2;
+    .shortcut-right {
+        border-left: 2px solid #d2d2d2;
     }
     @media (max-width: 768px) {
-        .shortcut-left, .shortcut-right{
+        .shortcut-left,
+        .shortcut-right {
             border: none;
         }
     }
@@ -964,6 +965,14 @@ footer {
         font-weight: 600;
         color: $lav-grey;
     }
+    a:hover {
+        color: $lav-pink;
+        svg {
+            path {
+                fill: $lav-pink;
+            }
+        }
+    }
 }
 .footer-logo {
     height: 70px;
@@ -973,6 +982,7 @@ footer {
     font-size: 20px;
     line-height: 37px;
     color: $lav-grey;
+    a,
     svg {
         margin-right: 15px;
     }
@@ -982,7 +992,7 @@ footer {
     .footer-link-big {
         text-align: center;
     }
-    .footer h5{
+    .footer h5 {
         text-align: center !important;
     }
     .footer-logo {
@@ -1058,7 +1068,7 @@ footer {
 }
 
 /*------------------------------dashboard------------------------------*/
-.lavisco-dashboard-nav-menu{
+.lavisco-dashboard-nav-menu {
     z-index: 998 !important;
 }
 h4 {
@@ -1448,7 +1458,7 @@ h4 {
     color: $lav-grey;
 }
 
-.large-img-upload-box{
+.large-img-upload-box {
     position: relative;
 }
 .display-banner {
@@ -1459,7 +1469,7 @@ h4 {
     object-position: center;
     border-radius: 12px;
 }
-.img-upload-btn{
+.img-upload-btn {
     position: absolute;
     padding: 5px;
     display: flex;
@@ -1472,11 +1482,12 @@ h4 {
     border-radius: 12px;
     bottom: 1rem;
     left: 1rem;
-    svg{
+    svg {
         width: 35px;
         height: 35px;
     }
-    &:hover, &:active{
+    &:hover,
+    &:active {
         background-color: $lav-purple;
     }
 }
@@ -1694,7 +1705,7 @@ h4 {
     background-position: center;
 }
 
-.product-swiper{
+.product-swiper {
     .swiper-slide img {
         object-fit: contain;
     }

@@ -37,10 +37,10 @@ class RegisterController extends Controller
         $role = Auth::user()->role_id; 
         switch ($role) {
           case Role::IS_SELLER:
-            return route('seller');
+            return RouteServiceProvider::SELLER_DASHBOARD;
             break; 
           case Role::IS_BUYER:
-            return route('buyer');
+            return RouteServiceProvider::BUYER_DASHBOARD;
             break; 
       
           default:

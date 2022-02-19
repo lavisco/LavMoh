@@ -17,7 +17,7 @@ class BuyerProfileController extends Controller
     public function index()
     {
         ///$this->authorize('viewAny', BuyerProfile::class);
-        return BuyerProfile::where('user_id', auth()->id())->first();
+        return BuyerProfile::with('user')->where('user_id', auth()->id())->first();
     }
 
     public function store(BuyerProfileRequest $request)

@@ -10985,13 +10985,14 @@ section h1 {
   margin-bottom: 120px;
 }
 .section-shortcuts .shortcut-left {
-  border-right: 2px solid #D2D2D2;
+  border-right: 2px solid #d2d2d2;
 }
 .section-shortcuts .shortcut-right {
-  border-left: 2px solid #D2D2D2;
+  border-left: 2px solid #d2d2d2;
 }
 @media (max-width: 768px) {
-  .section-shortcuts .shortcut-left, .section-shortcuts .shortcut-right {
+  .section-shortcuts .shortcut-left,
+.section-shortcuts .shortcut-right {
     border: none;
   }
 }
@@ -11010,6 +11011,12 @@ footer h5 {
   font-weight: 600;
   color: #c9c9c9;
 }
+footer a:hover {
+  color: #ff5a7c;
+}
+footer a:hover svg path {
+  fill: #ff5a7c;
+}
 
 .footer-logo {
   height: 70px;
@@ -11021,6 +11028,7 @@ footer h5 {
   line-height: 37px;
   color: #c9c9c9;
 }
+.footer-link-big a,
 .footer-link-big svg {
   margin-right: 15px;
 }

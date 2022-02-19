@@ -19,7 +19,7 @@
                     <div class="card dashboard-card">
                         <h4 class="mb-3">Your Orders</h4>
                         <p class="mb-2">Orders placed this week</p>
-                        <h2>1</h2>
+                        <h2></h2>
                     </div>
                 </div>
             </div>

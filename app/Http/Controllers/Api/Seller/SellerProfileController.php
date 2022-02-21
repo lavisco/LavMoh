@@ -27,6 +27,9 @@ class SellerProfileController extends Controller
     public function update(SellerProfileRequest $request, SellerProfile $sellerprofile)
     {
         ///$this->authorize('update', $sellerprofile);
+        $request->merge([
+            'country' => "Sri Lanka"
+        ]);
         $sellerprofile->update($request->all());
     }
 }

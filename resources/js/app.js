@@ -44,6 +44,11 @@ Vue.component(
 );
 Vue.component("index-component", require("./components/Index.vue").default);
 Vue.component("menu-cart", require("./components/CartSmall.vue").default);
+Vue.component(
+    "success-toast",
+    require("./components/SuccessToast.vue").default
+);
+Vue.component("fail-toast", require("./components/FailToast.vue").default);
 
 //Fire is a new instance of vue which will be used as a bus
 window.Fire = new Vue();

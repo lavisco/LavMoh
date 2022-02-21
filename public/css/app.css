@@ -10121,6 +10121,53 @@ h6 {
   text-transform: none;
 }
 
+.text-sm {
+  font-size: 12px;
+}
+
+@media (max-width: 768px) {
+  section {
+    margin-top: 82px !important;
+    margin-left: 10px !important;
+    margin-right: 10px !important;
+  }
+
+  .title {
+    font-size: 40px;
+    line-height: 60px;
+  }
+
+  section h1,
+h1 {
+    font-size: 26px;
+    line-height: 38px;
+    margin-bottom: 30px !important;
+  }
+
+  h2 {
+    font-size: 21px;
+    line-height: 32px;
+  }
+
+  h3,
+.view-more-link {
+    font-size: 18px;
+  }
+
+  h4 {
+    font-size: 17px !important;
+  }
+
+  .instruction-card h1 {
+    font-size: 50px !important;
+  }
+  .instruction-card p {
+    font-size: 18px !important;
+    line-height: 30px !important;
+    letter-spacing: 0.03rem;
+  }
+}
+/*---------------------buttons---------------------*/
 button {
   background-color: #836aff;
   border: none;
@@ -10136,7 +10183,7 @@ button:hover {
 }
 
 .close:hover {
-  background-color: none !important;
+  background-color: transparent !important;
 }
 
 button.bg-black:hover {
@@ -10205,20 +10252,13 @@ button.bg-black:hover {
   fill: #836aff;
 }
 
-.text-sm {
-  font-size: 12px;
-}
-
+/*---------------------colors---------------------*/
 .grey {
   color: #c9c9c9;
 }
 
-.header-logo {
-  text-align: center;
-  padding: 20px;
-}
-.header-logo img {
-  height: 35px;
+.darkgrey {
+  color: #909090;
 }
 
 .bg-black {
@@ -10249,6 +10289,10 @@ button.bg-black:hover {
   background-color: #ff834c;
 }
 
+.bg-grey {
+  background-color: #c9c9c9;
+}
+
 .white {
   color: #ffffff !important;
 }
@@ -10265,48 +10309,10 @@ button.bg-black:hover {
   color: #ff5a7c;
 }
 
-@media (max-width: 768px) {
-  section {
-    margin-top: 82px !important;
-    margin-left: 10px !important;
-    margin-right: 10px !important;
-  }
-
-  .title {
-    font-size: 40px;
-    line-height: 60px;
-  }
-
-  section h1,
-h1 {
-    font-size: 26px;
-    line-height: 38px;
-    margin-bottom: 30px !important;
-  }
-
-  h2 {
-    font-size: 21px;
-    line-height: 32px;
-  }
-
-  h3,
-.view-more-link {
-    font-size: 18px;
-  }
-
-  h4 {
-    font-size: 17px !important;
-  }
-
-  .instruction-card h1 {
-    font-size: 50px !important;
-  }
-  .instruction-card p {
-    font-size: 18px !important;
-    line-height: 30px !important;
-    letter-spacing: 0.03rem;
-  }
+.green {
+  color: #1bc894;
 }
+
 /*---------------------top-ribbon---------------------*/
 .top-ribbon {
   text-transform: uppercase;
@@ -10316,6 +10322,14 @@ h1 {
 }
 
 /*---------------------navbar---------------------*/
+.header-logo {
+  text-align: center;
+  padding: 20px;
+}
+.header-logo img {
+  height: 35px;
+}
+
 .navbar {
   padding-top: 18px;
   padding-bottom: 18px;
@@ -11121,14 +11135,15 @@ h4 {
   color: #4e4e4e;
   font-style: normal;
   font-weight: 500;
-  font-size: 19px;
+  font-size: 20px;
   text-transform: capitalize;
 }
 
 .text-xs {
   font-size: 0.8rem;
+  letter-spacing: 0.02rem;
   font-weight: 400 !important;
-  color: #929292;
+  color: #777777;
 }
 
 .dashboard-link {
@@ -11156,7 +11171,9 @@ h4 {
 }
 
 .dashboard-topnav .active {
-  border: 2px solid #616161;
+  background-color: #836aff;
+  color: #ffffff;
+  border-color: #836aff;
 }
 .dashboard-topnav .navbar-toggler {
   background-color: #333333;
@@ -11229,8 +11246,45 @@ h4 {
   background-color: #c9c9c9 !important;
 }
 
+.shop-setup-content .input-form-compact {
+  height: 100%;
+}
+
+.search-input .input-group-text {
+  background-color: #fafafa;
+  color: #836aff;
+  border: none;
+  box-shadow: rgba(226, 226, 226, 0.596) 0 0 0 1px;
+  border-radius: 12px;
+}
+.search-input .form-control {
+  background-color: #fafafa !important;
+  box-shadow: rgba(226, 226, 226, 0.596) 0 0 0 1px !important;
+  color: #333333;
+}
+.search-input .form-control:focus {
+  background-color: #ffffff !important;
+  box-shadow: #836aff9f 0 0 0 1px !important;
+  transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+}
+
+.custom-select {
+  padding: 8px 20px;
+  background-color: #ffffff;
+  border: 1px solid #836aff;
+  color: #333333;
+  font-size: 14px;
+  font-weight: 600;
+  height: auto !important;
+  border-radius: 12px;
+}
+
 .btn {
-  background-color: #836aff;
+  background-color: #1bc894;
   border: none;
   color: #ffffff;
   padding: 15px 30px;
@@ -11255,27 +11309,6 @@ h4 {
 
 .btn-xs {
   padding: 6px 10px;
-}
-
-.custom-select {
-  padding: 8px 20px;
-  background-color: #ffffff;
-  border: 1px solid #836aff;
-  color: #333333;
-  font-size: 14px;
-  font-weight: 600;
-  height: auto !important;
-  border-radius: 12px;
-}
-
-.dashboard-table tbody {
-  font-size: 16px;
-}
-.dashboard-table .table thead th {
-  border: none !important;
-  font-weight: 600;
-  letter-spacing: 0.03rem;
-  color: #4e4e4e;
 }
 
 .modal-header,
@@ -11319,8 +11352,27 @@ h4 {
   gap: 10px;
 }
 
+.dashboard-table {
+  background-color: #fafafa;
+  border: 1px solid #f7f7f7d8;
+  border-radius: 5px;
+}
+.dashboard-table tbody {
+  font-size: 16px;
+  color: #333333;
+}
+.dashboard-table .table thead th {
+  background-color: rgba(240, 239, 239, 0.952);
+  border: none !important;
+  font-weight: 600;
+  letter-spacing: 0.03rem;
+  color: #4e4e4e;
+}
+
 .dashboard-card {
-  background-color: #fafafada;
+  background-color: #fafafa;
+  border: 1px solid #f7f7f7d8;
+  border-radius: 5px;
   color: #1c90ff;
   padding: 40px;
   min-width: 350px;
@@ -11332,6 +11384,21 @@ h4 {
   text-align: left;
   font-size: 40px !important;
   font-weight: 500;
+}
+
+.dashboard-info-card {
+  background-color: #fafafa;
+  border: 1px solid #f7f7f7d8;
+  padding: 30px;
+  padding-bottom: 23px;
+  border-radius: 5px;
+}
+
+.note {
+  color: #8d8d8d;
+  font-style: italic;
+  font-size: 15px;
+  font-weight: 400 !important;
 }
 
 #pills-tab {
@@ -11349,6 +11416,32 @@ h4 {
 #pills-tab .nav-link.active {
   background-color: #836aff;
   color: #ffffff;
+}
+
+.shop-setup {
+  border-radius: 12px;
+}
+.shop-setup .active {
+  background-color: #836aff;
+  color: #ffffff !important;
+}
+.shop-setup h4 {
+  font-size: 18px;
+}
+.shop-setup .dashboard-info-card {
+  padding: 22px;
+  padding-bottom: 14px;
+}
+.shop-setup .modal-body {
+  padding: 0;
+}
+.shop-setup .shop-setup-menu {
+  background-color: #f5f5f5;
+  border-radius: 12px;
+  padding: 34px 28px;
+}
+.shop-setup .shop-setup-content {
+  padding: 30px 24px;
 }
 
 /*------------------------------lavisco website------------------------------*/
@@ -11543,7 +11636,7 @@ h4 {
      object-fit: cover;
   -o-object-position: center;
      object-position: center;
-  border-radius: 12px;
+  border-radius: 5px;
 }
 
 .img-upload-btn {
@@ -11553,19 +11646,19 @@ h4 {
   align-items: center;
   justify-content: center;
   z-index: 2;
-  background-color: #333333;
+  background-color: #1bc894;
   width: 55px;
   height: 55px;
   border-radius: 12px;
   bottom: 1rem;
-  left: 1rem;
+  right: 1rem;
 }
 .img-upload-btn svg {
   width: 35px;
   height: 35px;
 }
 .img-upload-btn:hover, .img-upload-btn:active {
-  background-color: #836aff;
+  background-color: #333333;
 }
 
 .variation-display-table thead {

@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Api\Seller;
 
 use App\Http\Controllers\Controller;
-use App\Models\Cart;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -21,7 +20,7 @@ class DashboardController extends Controller
         //$model->relation()->exists()
         $user = User::FindOrFail(auth()->id());
         return response()->json([
-            'orders' => Cart::where('seller_id', auth()->id())->count(),
+            'orders' => Order::where('seller_id', auth()->id())->count(),
             'products' => Product::where('user_id', auth()->id())->count(),
             'hasShop' => $user->shop()->exists(),
         ]);

@@ -16,7 +16,7 @@
                             <h4 class="mt-3 mb-4 text-center">
                                 Seller Information
                             </h4>
-                            <p class="mb-4">
+                            <p class="mb-4 darkgrey">
                                 Please make sure you add the most recent
                                 address.
                             </p>
@@ -358,7 +358,7 @@
 
                             <!-- Shop setup -->
                             <h4 class="mt-5 mb-4 text-center">Store Address</h4>
-                            <p class="mb-4">
+                            <p class="mb-4 darkgrey">
                                 Please make sure you add the most recent address
                                 from where you will be operating the business
                                 because this will effect your store visibility
@@ -657,7 +657,7 @@
                             <h4 class="mt-5 mb-4 text-center">
                                 Earnings Deposit Account Information
                             </h4>
-                            <p class="mb-4">
+                            <p class="mb-4 darkgrey">
                                 Please make sure the details you provide is
                                 accurate and updated. All payments will be made
                                 weekly into this account and lavisco.lk will not

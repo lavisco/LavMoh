@@ -18,6 +18,7 @@
                                     input-form
                                     input-group
                                     input-group-alternative
+                                    search-input
                                 "
                             >
                                 <div class="input-group-prepend">

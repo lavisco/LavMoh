@@ -30,7 +30,13 @@ class ShopController extends Controller
     {
         ///$this->authorize('update', $shop);
         $this->updateImage($request, $shop->banner);
+
+        $request->merge([
+            'country' => "Sri Lanka"
+        ]);
+        
         $shop->update($request->all());
+        return ['message' => "Update Successful"];
     }
 
     /**

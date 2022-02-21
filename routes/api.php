@@ -133,7 +133,7 @@ Route::prefix('seller')->group(function () {
     Route::apiResource('/receipts', SellerReceiptController::class);
     Route::apiResource('/sellerprofile', SellerSellerProfileController::class);
     Route::apiResource('/shop', SellerShopController::class);
-    Route::put('/user/password_reset/{user}', [SellerUserController::class, 'updatePassword']);
+    Route::post('/user/password_reset', [SellerUserController::class, 'updatePassword']);
     Route::post('/user/shop_setup', [SellerUserController::class, 'storeShopSetup']);
     Route::apiResource('/user', SellerUserController::class);
     Route::apiResource('/dashboard', SellerDashboardController::class);
@@ -153,7 +153,7 @@ Route::apiResource('/shops', WebsiteShopController::class);
 Route::apiResource('/sitetexts', WebsiteSitetextController::class);
 //location
 Route::get('/locations/countries', [LocationController::class, 'indexCountry']);
-Route::get('/locations/provinces/{country}', [LocationController::class, 'indexProvince']);
+Route::get('/locations/provinces', [LocationController::class, 'indexProvince']);
 Route::get('/locations/districts/{province}', [LocationController::class, 'indexDistrict']);
 Route::get('/locations/cities/{district}', [LocationController::class, 'indexCity']);
 Route::get('/locations/areas/{city}', [LocationController::class, 'indexArea']);

@@ -830,6 +830,16 @@
                 </div>
             </div>
         </div>
+
+        <!-- Notification Toast -->
+        <success-toast
+            id="success-toast"
+            msg="Store details have been updated"
+        />
+        <fail-toast
+            id="fail-toast"
+            msg="There are errors in your form input. Please double check."
+        />
     </div>
 </template>
 
@@ -965,9 +975,13 @@ export default {
             this.form
                 .put("/api/seller/products/" + this.form.id)
                 .then(() => {
+                    $("#success-toast").toast("show");
                     this.$router.push("/seller/products");
                 })
-                .catch((error) => console.log(error));
+                .catch((error) => {
+                    console.log(error);
+                    $("#fail-toast").toast("show");
+                });
         },
     },
     mounted() {

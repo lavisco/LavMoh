@@ -30,7 +30,6 @@ class ShopRequest extends FormRequest
             'url' => 'nullable',
             'about' => 'required|max:500',
             'rating' => 'nullable|integer',
-            'country' => 'required|max:80',
             'province' => 'required',
             'district' => 'required',
             'city' => 'required',

@@ -20,7 +20,7 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:api', 'is_seller'])->only('storeShopSetup');
+        $this->middleware(['auth:api', 'is_seller'])->only('storeShopSetup', 'updatePassword');
     }
     
     public function index()
@@ -40,13 +40,17 @@ class UserController extends Controller
 
     public function storeShopSetup(SellerRegisterRequest $request)
     {      
+        $request->merge([
+            'user_id' => Auth::user()->id,
+            'country' => "Sri Lanka"
+        ]);
+
         SellerProfile::create($request->all());
 
         $request->merge([
             'user_id' => Auth::user()->id,
             'name' => $request->shop_name,
             'slug' => Str::slug($request->title),
-            'country' => $request->shop_country,
             'province' => $request->shop_province,
             'district' => $request->shop_district,
             'city' => $request->shop_city,
@@ -86,11 +90,17 @@ class UserController extends Controller
         //
     }
 
-    public function updatePassword(UserRequest $request, User $model)
+    public function updatePassword(Request $request)
     {
         //$this->authorize('update', $model);
-        $model->update([
-            'password' => Hash::make($request->input('password')),
+        $this->validate($request,[
+            'password' => 'required|string|min:8'
+        ]);
+
+        $user = User::findOrFail(Auth::user()->id);
+
+        $user->update([
+            'password' => Hash::make($request['password']),
         ]);
         
     }

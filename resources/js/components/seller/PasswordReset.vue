@@ -74,6 +74,13 @@
                 </div>
             </div>
         </div>
+
+        <!-- Notification Toast -->
+        <success-toast
+            id="success-toast"
+            msg="Your password has been updated"
+            style="margin-bottom: 30px"
+        />
     </div>
 </template>
 
@@ -101,9 +108,9 @@ export default {
         },
         updateUserPassword() {
             this.form
-                .put("/api/seller/user/password_reset/" + this.form.id)
+                .post("/api/seller/user/password_reset")
                 .then(() => {
-                    this.$router.push("/seller/dashboard");
+                    $("#success-toast").toast("show");
                 })
                 .catch((error) => console.log(error));
         },

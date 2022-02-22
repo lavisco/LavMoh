@@ -8,15 +8,30 @@
         </div>
         <div v-else class="row">
             <div class="col">
+                <!-- Breadcrumbs -->
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb pl-0">
+                        <li class="breadcrumb-item">
+                            <router-link to="/seller/products">
+                                Products
+                            </router-link>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">
+                            {{ form.title }}
+                        </li>
+                    </ol>
+                </nav>
+
                 <!-- Form start -->
                 <form class="input-form" @submit.prevent="updateProduct()">
                     <!-- Listing -->
-                    <div class="card px-4 py-4">
+                    <div class="card dashboard-info-card">
                         <!-- Header -->
-                        <h4 class="mb-4">Listing Details {{ form.title }}</h4>
+                        <h4 class="mb-4">
+                            Listing Details of {{ form.title }}
+                        </h4>
                         <p class="mb-5">
-                            Tell the world all about your item and why they will
-                            love it
+                            Update your product's information here.
                         </p>
 
                         <div class="form-group row mb-md-1">
@@ -85,7 +100,7 @@
                             </label>
                             <div class="col-md-9">
                                 <button
-                                    class="btn"
+                                    class="btn btn-sm"
                                     type="button"
                                     @click.prevent="
                                         subcategoryModal('occasionMode')
@@ -105,7 +120,7 @@
                             </label>
                             <div class="col-md-9">
                                 <button
-                                    class="btn"
+                                    class="btn btn-sm"
                                     type="button"
                                     @click.prevent="
                                         subcategoryModal('recipientMode')
@@ -356,8 +371,80 @@
                         </div>
                     </div>
 
+                    <!-- Photo -->
+                    <div class="card dashboard-info-card mt-4">
+                        <!-- Header -->
+                        <h4 class="mb-3">Product Photos</h4>
+                        <hr class="mt-0" />
+                        <p class="mb-4 note">
+                            Add atleast 3 photos showcasing your product. The
+                            Primary photo is the first image customers see in
+                            the product page.
+                        </p>
+
+                        <div class="form-group row">
+                            <div class="col">
+                                <div class="d-flex align-items-start">
+                                    <div
+                                        class="mr-md-3"
+                                        v-for="(image, index) in images"
+                                    >
+                                        <div>
+                                            <input
+                                                type="file"
+                                                style="display: none"
+                                                @change.prevent="
+                                                    fileSelected(
+                                                        $event,
+                                                        `image${index}`
+                                                    )
+                                                "
+                                                ref="fileInput"
+                                                name="product_image_path"
+                                            />
+
+                                            <button
+                                                class="image-upload-box"
+                                                :class="{
+                                                    'image-upload-box-primary':
+                                                        image.primary_image ==
+                                                        '1',
+                                                }"
+                                                @click.prevent="
+                                                    $refs.fileInput[
+                                                        index
+                                                    ].click()
+                                                "
+                                            >
+                                                <img
+                                                    width="150px"
+                                                    height="150px"
+                                                    class="banner-container"
+                                                    :src="
+                                                        form.path[index]
+                                                            ? form.path[index]
+                                                            : '/images/lavisco/img-bg.jpg'
+                                                    "
+                                                />
+                                            </button>
+
+                                            <p
+                                                class="
+                                                    image-upload-filename
+                                                    mt-2
+                                                "
+                                            >
+                                                {{ form.image_title[index] }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Inventory -->
-                    <div class="card px-4 py-4 my-4">
+                    <div class="card dashboard-info-card mt-4">
                         <!-- Header -->
                         <h4 class="mb-4">Inventory & Pricing</h4>
                         <div class="form-group row mb-md-1">
@@ -495,52 +582,184 @@
                     </div>
 
                     <!-- Variation -->
-                    <div class="card px-4 py-4 my-4">
+                    <div class="card dashboard-info-card mt-4">
                         <!-- Header -->
                         <h4 class="mb-4">Variations</h4>
                         <p class="mb-5">
                             Add available options like color or size. Buyers
                             will choose from these during checkout.
                         </p>
-                        <div class="form-group row mb-md-1">
-                            <label class="col-md-3 col-form-label" for="">
-                                Will this item have variations?
-                                <strong class="text-danger"> *</strong>
-                            </label>
-                            <div class="col-md-4">
-                                <div class="custom-control custom-checkbox">
-                                    <input
-                                        type="checkbox"
-                                        class="custom-control-input"
-                                        id="has_variations"
-                                        v-model="form.has_variations"
-                                        name="has_variations"
-                                        @change="check($event)"
-                                    />
-                                    <label
-                                        class="custom-control-label"
-                                        for="has_variations"
-                                        >Yes</label
-                                    >
-                                </div>
-                                <HasError :form="form" field="has_variations" />
+
+                        <div
+                            class="card px-4 pb-4 mb-2"
+                            v-for="(item, i) in variations"
+                        >
+                            <div
+                                class="
+                                    d-flex
+                                    justify-content-between
+                                    align-items-center
+                                "
+                            >
+                                <h5 class="mb-4">Variation {{ i + 1 }}</h5>
+                                <a
+                                    class="btn btn-light btn-sm"
+                                    href=""
+                                    @click.prevent="
+                                        deleteProductVariations(
+                                            form.variation_id[i]
+                                        )
+                                    "
+                                >
+                                    Delete
+                                </a>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-3 col-form-label" for="">
-                                Add new Variations
-                                <strong class="text-danger"> *</strong>
-                            </label>
-                            <div class="col-md-5">
-                                <button class="btn" type="button">
-                                    Edit 1st Variation
-                                </button>
+
+                            <div class="form-group row mb-md-1">
+                                <div class="col-md-4">
+                                    <label
+                                        class="col-form-label"
+                                        for="variation_type"
+                                        >Type
+                                        <strong class="text-danger"> *</strong>
+                                    </label>
+                                    <input
+                                        id="variation_type"
+                                        v-model="form.variation_type[i]"
+                                        type="text"
+                                        name="variation_type"
+                                        class="
+                                            form-control
+                                            form-control-alternative
+                                        "
+                                        placeholder="Type"
+                                    />
+                                    <HasError
+                                        :form="form"
+                                        :field="`variation_type.${i}`"
+                                    />
+                                </div>
+                                <div class="col-md-4">
+                                    <label
+                                        class="col-form-label"
+                                        for="variation_type_option"
+                                        >Type Option
+                                        <strong class="text-danger"> *</strong>
+                                    </label>
+                                    <input
+                                        id="variation_type_option"
+                                        v-model="form.variation_type_option[i]"
+                                        type="text"
+                                        name="variation_type_option"
+                                        class="
+                                            form-control
+                                            form-control-alternative
+                                        "
+                                        placeholder="Option"
+                                    />
+                                    <HasError
+                                        :form="form"
+                                        :field="`variation_type_option.${i}`"
+                                    />
+                                </div>
+                                <div class="col-md-2">
+                                    <label
+                                        class="col-form-label"
+                                        for="variation_price"
+                                        >Price
+                                        <strong class="text-danger"> *</strong>
+                                    </label>
+                                    <input
+                                        id="variation_price"
+                                        v-model="form.variation_price[i]"
+                                        type="text"
+                                        name="variation_price"
+                                        class="
+                                            form-control
+                                            form-control-alternative
+                                        "
+                                        placeholder="Price"
+                                    />
+                                    <HasError
+                                        :form="form"
+                                        :field="`variation_price.${i}`"
+                                    />
+                                </div>
+                                <div class="col-md-2">
+                                    <label
+                                        class="col-form-label"
+                                        for="variation_quantity"
+                                        >Quantity
+                                        <strong class="text-danger"> *</strong>
+                                    </label>
+                                    <input
+                                        id="variation_quantity"
+                                        v-model="form.variation_quantity[i]"
+                                        type="number"
+                                        name="variation_quantity"
+                                        class="
+                                            form-control
+                                            form-control-alternative
+                                        "
+                                        placeholder="Qty"
+                                    />
+                                    <HasError
+                                        :form="form"
+                                        :field="`variation_quantity.${i}`"
+                                    />
+                                </div>
+                            </div>
+                            <div class="form-group row mb-md-1">
+                                <div class="col-md-8">
+                                    <label
+                                        class="col-form-label"
+                                        for="variation_description"
+                                        >Description
+                                    </label>
+                                    <input
+                                        id="variation_description"
+                                        v-model="form.variation_description[i]"
+                                        type="text"
+                                        name="variation_description"
+                                        class="
+                                            form-control
+                                            form-control-alternative
+                                        "
+                                        placeholder="Variation Description"
+                                    />
+                                    <HasError
+                                        :form="form"
+                                        :field="`variation_description.${i}`"
+                                    />
+                                </div>
+                                <div class="col-md-4">
+                                    <label
+                                        class="col-form-label"
+                                        for="variation_sku"
+                                        >SKU
+                                    </label>
+                                    <input
+                                        id="variation_sku"
+                                        v-model="form.variation_sku[i]"
+                                        type="text"
+                                        name="variation_sku"
+                                        class="
+                                            form-control
+                                            form-control-alternative
+                                        "
+                                        placeholder="SKU"
+                                    />
+                                    <HasError
+                                        :form="form"
+                                        :field="`variation_sku.${i}`"
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Shipping -->
-                    <div class="card px-4 py-4 my-4">
+                    <div class="card dashboard-info-card mt-4">
                         <!-- Header -->
                         <h4 class="mb-4">Shipping</h4>
                         <p class="mb-5">
@@ -633,89 +852,76 @@
                                 </p>
                             </label>
                             <div class="col-md-9">
-                                <div class="card">
-                                    <div class="table-responsive">
-                                        <table
-                                            class="
-                                                table
-                                                align-items-center
-                                                table-hover
-                                            "
-                                        >
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col"></th>
-                                                    <th scope="col">Type</th>
-                                                    <th scope="col">Price</th>
-                                                    <th scope="col">
-                                                        Delivery Time
-                                                    </th>
-                                                    <th scope="col">
-                                                        Locations
-                                                    </th>
-                                                    <th scope="col">
-                                                        Tracking opt
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr
-                                                    v-for="shipping in shippings"
-                                                >
-                                                    <th scope="row">
-                                                        <input
-                                                            type="checkbox"
-                                                            name="product_shipping"
-                                                            v-model="
-                                                                form.product_shipping
-                                                            "
-                                                            :value="shipping.id"
-                                                        />
-                                                    </th>
-                                                    <td>{{ shipping.type }}</td>
-                                                    <td>
-                                                        {{ shipping.price }}
-                                                    </td>
-                                                    <td>
-                                                        {{
-                                                            shipping.delivery_time
-                                                        }}
-                                                    </td>
-                                                    <td>
-                                                        {{ shipping.locations }}
-                                                    </td>
-                                                    <td>
-                                                        {{
-                                                            shipping.tracking_opt
-                                                        }}
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                <div
+                                    class="table-responsive form-table mt-md-2"
+                                >
+                                    <table
+                                        class="
+                                            table
+                                            align-items-center
+                                            table-hover
+                                        "
+                                    >
+                                        <thead>
+                                            <tr>
+                                                <th scope="col"></th>
+                                                <th scope="col">Type</th>
+                                                <th scope="col">Price</th>
+                                                <th scope="col">
+                                                    Delivery Time
+                                                </th>
+                                                <th scope="col">Locations</th>
+                                                <th scope="col">
+                                                    Tracking opt
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr v-for="shipping in shippings">
+                                                <th scope="row">
+                                                    <input
+                                                        type="checkbox"
+                                                        name="product_shipping"
+                                                        v-model="
+                                                            form.product_shipping
+                                                        "
+                                                        :value="shipping.id"
+                                                    />
+                                                </th>
+                                                <td>{{ shipping.type }}</td>
+                                                <td>
+                                                    {{ shipping.price }}
+                                                </td>
+                                                <td>
+                                                    {{ shipping.delivery_time }}
+                                                </td>
+                                                <td>
+                                                    {{ shipping.locations }}
+                                                </td>
+                                                <td>
+                                                    {{ shipping.tracking_opt }}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
-                        <div class="input-form text-right">
-                            <button
-                                type="button"
-                                class="btn btn-secondary mr-3"
-                                @click="cancel()"
-                            >
-                                <i
-                                    class="fas fa-times mr-2"
-                                    aria-hidden="true"
-                                ></i>
-                                Cancel
-                            </button>
-                            <button type="submit" class="btn btn-primary">
-                                <i
-                                    class="fas fa-save mr-2"
-                                    aria-hidden="true"
-                                ></i>
-                                Update
-                            </button>
-                        </div>
+                    </div>
+
+                    <div class="input-form text-center mt-4">
+                        <button
+                            type="button"
+                            class="btn btn-secondary mr-3"
+                            @click="cancel()"
+                        >
+                            <i class="fas fa-times mr-2" aria-hidden="true"></i>
+                            Cancel
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save mr-2" aria-hidden="true"></i>
+                            Update
+                        </button>
                     </div>
                 </form>
             </div>
@@ -863,6 +1069,7 @@ export default {
         shippings: [],
         product: "",
         images: {},
+        variations: {},
         form: new Form({
             id: "",
             sku: "",
@@ -894,6 +1101,22 @@ export default {
             product_occasion: [],
             product_recipient: [],
             product_shipping: [],
+
+            //image
+            image_id: [],
+            image_path: [],
+            path: [],
+            image_title: [],
+            primary_image: [],
+
+            //variations
+            variation_id: [],
+            variation_type: [],
+            variation_type_option: [],
+            variation_sku: [],
+            variation_description: [],
+            variation_price: [],
+            variation_quantity: [],
         }),
     }),
 
@@ -947,7 +1170,10 @@ export default {
                 .get("/api/seller/products/" + this.$route.params.productId)
                 .then(({ data }) => {
                     this.form.fill(data);
+
                     this.loadPivotVariables();
+                    this.loadProductImages();
+                    this.loadProductVariations();
                     this.loading = false;
                 })
                 .catch((error) => console.log(error));
@@ -957,26 +1183,184 @@ export default {
             this.form.product_occasion = [];
             this.form.product_recipient = [];
             this.form.product_shipping = [];
-            this.form.occasions.forEach((value) => {
-                this.form.product_occasion.push(value.id);
-            });
-            this.form.recipients.forEach((value) => {
-                this.form.product_recipient.push(value.id);
-            });
-            this.form.shippings.forEach((value) => {
-                this.form.product_shipping.push(value.id);
-            });
+            if (this.form.occasions != null) {
+                this.form.occasions.forEach((value) => {
+                    this.form.product_occasion.push(value.id);
+                });
+            }
+            if (this.form.recipients != null) {
+                this.form.recipients.forEach((value) => {
+                    this.form.product_recipient.push(value.id);
+                });
+            }
+            if (this.form.shippings != null) {
+                this.form.shippings.forEach((value) => {
+                    this.form.product_shipping.push(value.id);
+                });
+            }
+        },
+
+        //image
+
+        fileSelected(e, imagenum) {
+            let file = e.target.files[0];
+            let reader = new FileReader();
+            let limit = 1024 * 1024 * 2;
+            if (file["size"] > limit) {
+                alert("File size has crossed maximum limit, which is 2mb!");
+                return false;
+            }
+            reader.onloadend = (file) => {
+                if (imagenum == "image0") {
+                    this.$set(this.form.image_path, 0, reader.result);
+                    this.$set(this.form.image_title, 0, e.target.files[0].name);
+                    this.$set(this.form.primary_image, 0, 1);
+                    this.$set(
+                        this.form.path,
+                        0,
+                        URL.createObjectURL(e.target.files[0])
+                    );
+                } else if (imagenum == "image1") {
+                    this.$set(this.form.image_path, 1, reader.result);
+                    this.$set(this.form.image_title, 1, e.target.files[0].name);
+                    this.$set(this.form.primary_image, 1, 0);
+                    this.$set(
+                        this.form.path,
+                        1,
+                        URL.createObjectURL(e.target.files[0])
+                    );
+                } else if (imagenum == "image2") {
+                    this.$set(this.form.image_path, 2, reader.result);
+                    this.$set(this.form.image_title, 2, e.target.files[0].name);
+                    this.$set(this.form.primary_image, 2, 0);
+                    this.$set(
+                        this.form.path,
+                        2,
+                        URL.createObjectURL(e.target.files[0])
+                    );
+                }
+            };
+            reader.readAsDataURL(file);
+        },
+
+        loadProductImages() {
+            axios
+                .get("/api/seller/product_images/", {
+                    params: { productId: this.$route.params.productId },
+                })
+                .then(({ data }) => {
+                    this.images = data;
+
+                    this.form.image_id = [];
+                    this.form.image_path = [];
+                    this.form.primary_image = [];
+                    this.form.path = [];
+                    this.form.image_title = [];
+
+                    this.images.forEach((value, index) => {
+                        this.form.image_id.push(value.id);
+                        this.form.image_path.push(value.image_path);
+                        this.form.primary_image.push(value.primary_image);
+                        this.form.path.push(value.path);
+                        this.form.image_title.push(value.title);
+                    });
+                })
+                .catch((error) => console.log(error));
+        },
+
+        updateProductImages() {
+            this.form
+                .put(
+                    "/api/seller/product_images/" + this.$route.params.productId
+                )
+                .then(() => {})
+                .catch((error) => console.log(error));
+        },
+
+        //variation
+
+        loadProductVariations() {
+            this.form.variation_id = [];
+            this.form.variation_type = [];
+            this.form.variation_type_option = [];
+            this.form.variation_sku = [];
+            this.form.variation_description = [];
+            this.form.variation_price = [];
+            this.form.variation_quantity = [];
+
+            axios
+                .get(
+                    "/api/seller/product_variations/" +
+                        this.$route.params.productId
+                )
+                .then(({ data }) => {
+                    this.variations = data;
+
+                    this.variations.forEach((value, index) => {
+                        this.$set(this.form.variation_id, index, value.id);
+                        this.$set(this.form.variation_type, index, value.type);
+                        this.$set(
+                            this.form.variation_type_option,
+                            index,
+                            value.type_option
+                        );
+                        this.$set(this.form.variation_sku, index, value.sku);
+                        this.$set(
+                            this.form.variation_description,
+                            index,
+                            value.description
+                        );
+                        this.$set(
+                            this.form.variation_price,
+                            index,
+                            value.price
+                        );
+                        this.$set(
+                            this.form.variation_quantity,
+                            index,
+                            value.quantity
+                        );
+                    });
+
+                    this.loading = false;
+                })
+                .catch((error) => console.log(error));
+        },
+
+        updateProductVariations() {
+            this.form
+                .put(
+                    "/api/seller/product_variations/" +
+                        this.$route.params.productId
+                )
+                .then(() => {})
+                .catch((error) => console.log(error));
+        },
+
+        deleteProductVariations(id) {
+            if (confirm("Are you sure you want to delete?")) {
+                axios
+                    .delete("/api/seller/product_variations/" + id)
+                    .then(() => {
+                        this.loadProduct();
+                    })
+                    .catch((error) => console.log(error));
+            }
         },
 
         updateProduct() {
             if (this.form.has_inventory == 0) {
                 this.form.quantity == "";
             }
+
+            this.updateProductImages();
+            this.updateProductVariations();
+
             this.form
                 .put("/api/seller/products/" + this.form.id)
                 .then(() => {
                     $("#success-toast").toast("show");
-                    this.$router.push("/seller/products");
+                    //this.$router.push("/seller/products");
                 })
                 .catch((error) => {
                     console.log(error);

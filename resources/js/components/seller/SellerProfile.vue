@@ -130,30 +130,7 @@
                                         Please make sure you add the most recent
                                         address.
                                     </p>
-                                    <div class="form-group row">
-                                        <div class="col-md-12">
-                                            <label
-                                                class="col-form-label"
-                                                for="address"
-                                                >Address
-                                                <strong class="text-danger">
-                                                    *
-                                                </strong>
-                                            </label>
-                                            <input
-                                                id="address"
-                                                v-model="form.address"
-                                                type="text"
-                                                name="address"
-                                                class="form-control"
-                                                placeholder="Address"
-                                            />
-                                            <HasError
-                                                :form="form"
-                                                field="address"
-                                            />
-                                        </div>
-                                    </div>
+
                                     <div class="form-group row">
                                         <div class="col-md-6">
                                             <label
@@ -298,6 +275,30 @@
                                             <HasError
                                                 :form="form"
                                                 field="zipcode"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-12">
+                                            <label
+                                                class="col-form-label"
+                                                for="address"
+                                                >Address
+                                                <strong class="text-danger">
+                                                    *
+                                                </strong>
+                                            </label>
+                                            <input
+                                                id="address"
+                                                v-model="form.address"
+                                                type="text"
+                                                name="address"
+                                                class="form-control"
+                                                placeholder="Address"
+                                            />
+                                            <HasError
+                                                :form="form"
+                                                field="address"
                                             />
                                         </div>
                                     </div>

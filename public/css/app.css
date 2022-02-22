@@ -11197,7 +11197,7 @@ h4 {
 .input-form label {
   letter-spacing: 0.03rem;
   font-size: 0.8rem;
-  color: #4e4e4e;
+  color: #333333;
   font-weight: 500;
 }
 .input-form input[type=text],
@@ -11243,7 +11243,31 @@ h4 {
   border-radius: 12px;
 }
 .input-form .btn-secondary {
-  background-color: #c9c9c9 !important;
+  background-color: #b8b8b8 !important;
+}
+
+.btn-grey {
+  background-color: #b8b8b8 !important;
+}
+
+.form-table {
+  background-color: #ffffff;
+  border: 1px solid #b9b9b9;
+  border-radius: 12px;
+}
+.form-table tbody {
+  font-size: 16px;
+  color: #333333;
+}
+.form-table .table thead th {
+  background-color: rgba(230, 230, 230, 0.952);
+  border: none !important;
+  letter-spacing: 0.03rem;
+  font-size: 0.8rem;
+  color: #333333;
+  font-weight: 500;
+  padding-top: 6px !important;
+  padding-bottom: 6px !important;
 }
 
 .shop-setup-content .input-form-compact {
@@ -11395,7 +11419,7 @@ h4 {
 }
 
 .note {
-  color: #8d8d8d;
+  color: #868686;
   font-style: italic;
   font-size: 15px;
   font-weight: 400 !important;
@@ -11659,18 +11683,6 @@ h4 {
 }
 .img-upload-btn:hover, .img-upload-btn:active {
   background-color: #333333;
-}
-
-.variation-display-table thead {
-  font-size: 14px !important;
-  font-weight: 500 !important;
-}
-.variation-display-table tbody {
-  font-size: 17px;
-  font-weight: 400 !important;
-}
-.variation-display-table .table th {
-  border-top: none;
 }
 
 .product-display-card {

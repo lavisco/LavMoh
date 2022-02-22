@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
             $table->string('sku', 16)->nullable();
             $table->string('code', 100)->unique()->nullable();
 			$table->string('title', 255);
-			$table->string('description');
+			$table->string('description', 2000);
 			$table->string('material')->nullable();
             $table->string('slug');
 			$table->decimal('length', 14, 2)->nullable();

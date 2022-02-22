@@ -321,30 +321,6 @@ export let routes = [
         },
     },
     {
-        path: "/seller/products/listing/image/:productId",
-        name: "seller/products/listing/image/edit",
-        component: require("./components/seller/ProductImageEdit.vue").default,
-        meta: {
-            title: "Product Listing Image Edit",
-        },
-    },
-    {
-        path: "/seller/products/listing/variation/:productId",
-        name: "seller/products/listing/variation/edit",
-        component: require("./components/seller/ProductVariationEdit.vue")
-            .default,
-        meta: {
-            title: "Product Listing Variation Edit",
-        },
-    },
-    {
-        path: "/seller/product_images",
-        component: require("./components/seller/ProductImage.vue").default,
-        meta: {
-            title: "Product Images",
-        },
-    },
-    {
         path: "/seller/product_variations",
         component: require("./components/seller/ProductVariation.vue").default,
         meta: {

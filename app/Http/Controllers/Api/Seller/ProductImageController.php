@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductImageRequest;
 use App\Models\ProductImage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Image;
 
 class ProductImageController extends Controller
@@ -58,21 +59,20 @@ class ProductImageController extends Controller
     {
         ///$this->authorize('update', $productimage);
 
-        for ($i=0; $i < count($request->id); $i++) { 
-            $productImage = ProductImage::findOrFail($request->id[$i]);
+        for ($i=0; $i < count($request->image_id); $i++) { 
+            $productImage = ProductImage::findOrFail($request->image_id[$i]);
 
             if ($request->image_path[$i] != $productImage->image_path) {
 
-                $file_name = time().'_'.$request->title[$i];
-                Image::make($request->image_path[$i])->save(storage_path('app/public/products/').$file_name);
-                $productPhoto = 'products/'.$file_name;
+                $file_name = time().'_'.$request->image_title[$i];
 
-                $existingImage = storage_path('app/public/').$productImage->image_path;
-                if(file_exists($existingImage)){@unlink($existingImage);}
+                $img = Image::make($request->image_path[$i])->encode();
+                Storage::disk('s3')->put('/public/products/'.$file_name, $img->stream());
+                $productPhoto = 'products/'.$file_name;
 
                 $productImage->update([
                     'image_path' => $productPhoto,
-                    'title' => $request->title[$i],
+                    'title' => $request->image_title[$i],
                     'primary_image' => $request->primary_image[$i],
                 ]);
             }

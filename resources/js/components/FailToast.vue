@@ -6,7 +6,7 @@
         aria-live="assertive"
         aria-atomic="true"
         data-delay="5000"
-        style="position: absolute; bottom: 0; right: 30px; z-index: 1000"
+        style="position: absolute; bottom: 0; right: 30px"
     >
         <div class="toast-header">
             <svg

@@ -218,32 +218,7 @@
                                                 Please make sure you add the
                                                 most recent address.
                                             </p>
-                                            <div class="form-group row">
-                                                <div class="col-md-12">
-                                                    <label
-                                                        class="col-form-label"
-                                                        for="address"
-                                                        >Address
-                                                        <strong
-                                                            class="text-danger"
-                                                        >
-                                                            *
-                                                        </strong>
-                                                    </label>
-                                                    <input
-                                                        id="address"
-                                                        v-model="form.address"
-                                                        type="text"
-                                                        name="address"
-                                                        class="form-control"
-                                                        placeholder="Address"
-                                                    />
-                                                    <HasError
-                                                        :form="form"
-                                                        field="address"
-                                                    />
-                                                </div>
-                                            </div>
+
                                             <div class="form-group row">
                                                 <div class="col-md-6">
                                                     <label
@@ -407,6 +382,32 @@
                                                     <HasError
                                                         :form="form"
                                                         field="zipcode"
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-md-12">
+                                                    <label
+                                                        class="col-form-label"
+                                                        for="address"
+                                                        >Address
+                                                        <strong
+                                                            class="text-danger"
+                                                        >
+                                                            *
+                                                        </strong>
+                                                    </label>
+                                                    <input
+                                                        id="address"
+                                                        v-model="form.address"
+                                                        type="text"
+                                                        name="address"
+                                                        class="form-control"
+                                                        placeholder="Address"
+                                                    />
+                                                    <HasError
+                                                        :form="form"
+                                                        field="address"
                                                     />
                                                 </div>
                                             </div>
@@ -588,35 +589,6 @@
                                                 effect your store visibility to
                                                 certain customers
                                             </p>
-                                            <div class="form-group row">
-                                                <div class="col-md-12">
-                                                    <label
-                                                        class="col-form-label"
-                                                        for="shop_address"
-                                                        >Address
-                                                        <strong
-                                                            class="text-danger"
-                                                        >
-                                                            *
-                                                        </strong>
-                                                    </label>
-                                                    <textarea
-                                                        id="shop_address"
-                                                        class="form-control"
-                                                        name="shop_address"
-                                                        rows="3"
-                                                        cols="50"
-                                                        v-model="
-                                                            form.shop_address
-                                                        "
-                                                    >
-                                                    </textarea>
-                                                    <HasError
-                                                        :form="form"
-                                                        field="shop_address"
-                                                    />
-                                                </div>
-                                            </div>
 
                                             <div class="form-group row">
                                                 <div class="col-md-6">
@@ -836,6 +808,35 @@
                                                     <HasError
                                                         :form="form"
                                                         field="shop_area"
+                                                    />
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <div class="col-md-12">
+                                                    <label
+                                                        class="col-form-label"
+                                                        for="shop_address"
+                                                        >Address
+                                                        <strong
+                                                            class="text-danger"
+                                                        >
+                                                            *
+                                                        </strong>
+                                                    </label>
+                                                    <input
+                                                        id="shop_address"
+                                                        v-model="
+                                                            form.shop_address
+                                                        "
+                                                        type="text"
+                                                        name="shop_address"
+                                                        class="form-control"
+                                                        placeholder="Address"
+                                                    />
+                                                    <HasError
+                                                        :form="form"
+                                                        field="shop_address"
                                                     />
                                                 </div>
                                             </div>

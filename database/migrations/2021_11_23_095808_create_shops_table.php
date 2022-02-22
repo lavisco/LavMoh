@@ -20,7 +20,7 @@ class CreateShopsTable extends Migration
             $table->string('slug')->nullable();
             $table->string('banner')->nullable();
 			$table->string('url')->nullable();
-			$table->string('about');
+			$table->string('about', 500);
 			$table->integer('rating')->nullable();
             $table->string('country', 80);
             $table->string('province')->nullable();

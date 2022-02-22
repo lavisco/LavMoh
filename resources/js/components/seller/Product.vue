@@ -110,78 +110,25 @@
                                         </td>
                                         <td class="text-right">
                                             <div class="d-flex">
-                                                <div
-                                                    class="
-                                                        dropdown
-                                                        dropdown-seller-product-edit
-                                                        mr-md-3
-                                                    "
-                                                >
-                                                    <a
-                                                        class="btn btn-sm"
-                                                        href="#"
-                                                        role="button"
-                                                        data-toggle="dropdown"
-                                                        aria-haspopup="true"
-                                                        aria-expanded="false"
-                                                    >
-                                                        Edit
-                                                    </a>
-                                                    <div
-                                                        class="
-                                                            dropdown-menu
-                                                            dropdown-menu-right
-                                                            dropdown-menu-arrow
-                                                        "
-                                                    >
-                                                        <router-link
-                                                            class="
-                                                                dropdown-item
-                                                            "
-                                                            :to="{
-                                                                name: 'seller/products/listing/edit',
-                                                                params: {
-                                                                    productId:
-                                                                        product.id,
-                                                                },
-                                                            }"
-                                                            >Details
-                                                        </router-link>
-                                                        <router-link
-                                                            class="
-                                                                dropdown-item
-                                                            "
-                                                            :to="{
-                                                                name: 'seller/products/listing/image/edit',
-                                                                params: {
-                                                                    productId:
-                                                                        product.id,
-                                                                },
-                                                            }"
-                                                            >Images
-                                                        </router-link>
-                                                        <router-link
-                                                            class="
-                                                                dropdown-item
-                                                            "
-                                                            :to="{
-                                                                name: 'seller/products/listing/variation/edit',
-                                                                params: {
-                                                                    productId:
-                                                                        product.id,
-                                                                },
-                                                            }"
-                                                            >Variation
-                                                        </router-link>
-                                                    </div>
-                                                </div>
+                                                <router-link
+                                                    class="btn btn-sm mr-md-3"
+                                                    :to="{
+                                                        name: 'seller/products/listing/edit',
+                                                        params: {
+                                                            productId:
+                                                                product.id,
+                                                        },
+                                                    }"
+                                                    >Edit
+                                                </router-link>
                                                 <a
                                                     class="btn btn-sm"
                                                     href="#"
                                                     @click.prevent="
                                                         newModal(product)
                                                     "
-                                                    >View
+                                                >
+                                                    View
                                                 </a>
                                             </div>
                                         </td>
@@ -233,28 +180,26 @@
                                 <label class="col-form-label" for="name"
                                     >Images
                                 </label>
-                                <div class="card product-display-card">
-                                    <div class="d-flex flex-row gap">
-                                        <div
-                                            class="image-upload-box"
-                                            :class="{
-                                                'image-upload-box-primary':
-                                                    image.primary_image === 1,
-                                            }"
-                                            v-for="image in form.product_images"
-                                        >
-                                            <img
-                                                class="
-                                                    banner-container
-                                                    seller-banner-container
-                                                "
-                                                :src="
-                                                    image
-                                                        ? image.path
-                                                        : '/images/lavisco/img-bg.jpg'
-                                                "
-                                            />
-                                        </div>
+                                <div class="d-flex flex-row gap">
+                                    <div
+                                        class="image-upload-box"
+                                        :class="{
+                                            'image-upload-box-primary':
+                                                image.primary_image == 1,
+                                        }"
+                                        v-for="image in form.product_images"
+                                    >
+                                        <img
+                                            class="
+                                                banner-container
+                                                seller-banner-container
+                                            "
+                                            :src="
+                                                image
+                                                    ? image.path
+                                                    : '/images/lavisco/img-bg.jpg'
+                                            "
+                                        />
                                     </div>
                                 </div>
                             </div>
@@ -323,56 +268,41 @@
                                 <label class="col-form-label" for="name"
                                     >Variations
                                 </label>
-                                <div class="card product-display-card">
-                                    <div
-                                        class="
-                                            table-responsive
-                                            variation-display-table
-                                        "
-                                    >
-                                        <table class="table align-items-center">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">Type</th>
-                                                    <th scope="col">Option</th>
-                                                    <th scope="col">SKU</th>
-                                                    <th scope="col">Price</th>
-                                                    <th scope="col">
-                                                        Quantity
-                                                    </th>
-                                                    <th scope="col">
-                                                        Description
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr
-                                                    v-for="variation in form.product_variations"
-                                                >
-                                                    <td>
-                                                        {{ variation.type }}
-                                                    </td>
-                                                    <td>
-                                                        {{
-                                                            variation.type_option
-                                                        }}
-                                                    </td>
-                                                    <td>{{ variation.sku }}</td>
-                                                    <td>
-                                                        {{ variation.price }}
-                                                    </td>
-                                                    <td>
-                                                        {{ variation.quantity }}
-                                                    </td>
-                                                    <td>
-                                                        {{
-                                                            variation.description
-                                                        }}
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                <div class="table-responsive form-table">
+                                    <table class="table align-items-center">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Type</th>
+                                                <th scope="col">Option</th>
+                                                <th scope="col">SKU</th>
+                                                <th scope="col">Price</th>
+                                                <th scope="col">Quantity</th>
+                                                <th scope="col">Description</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr
+                                                v-for="variation in form.product_variations"
+                                            >
+                                                <td>
+                                                    {{ variation.type }}
+                                                </td>
+                                                <td>
+                                                    {{ variation.type_option }}
+                                                </td>
+                                                <td>{{ variation.sku }}</td>
+                                                <td>
+                                                    {{ variation.price }}
+                                                </td>
+                                                <td>
+                                                    {{ variation.quantity }}
+                                                </td>
+                                                <td>
+                                                    {{ variation.description }}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>

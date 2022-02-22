@@ -1150,7 +1150,7 @@ h4 {
     label {
         letter-spacing: 0.03rem;
         font-size: 0.8rem;
-        color: $dark-grey;
+        color: $black;
         font-weight: 500;
     }
 
@@ -1193,7 +1193,31 @@ h4 {
     }
 
     .btn-secondary {
-        background-color: $lav-grey !important;
+        background-color: #b8b8b8 !important;
+    }
+}
+
+.btn-grey{
+    background-color: #b8b8b8 !important;
+}
+
+.form-table {
+    background-color: #ffffff;
+    border: 1px solid #b9b9b9;
+    border-radius: 12px;
+    tbody {
+        font-size: 16px;
+        color: $black;
+    }
+    .table thead th {
+        background-color: rgba(230, 230, 230, 0.952);
+        border: none !important;
+        letter-spacing: 0.03rem;
+        font-size: 0.8rem;
+        color: $black;
+        font-weight: 500;
+        padding-top: 6px !important;
+        padding-bottom: 6px !important;
     }
 }
 
@@ -1348,7 +1372,7 @@ h4 {
     border-radius: 5px;
 }
 .note {
-    color: #8d8d8d;
+    color: #868686;
     font-style: italic;
     font-size: 15px;
     font-weight: 400 !important;
@@ -1595,19 +1619,7 @@ h4 {
         background-color: $black;
     }
 }
-.variation-display-table {
-    thead {
-        font-size: 14px !important;
-        font-weight: 500 !important;
-    }
-    tbody {
-        font-size: 17px;
-        font-weight: 400 !important;
-    }
-    .table th {
-        border-top: none;
-    }
-}
+
 .product-display-card {
     border: 1px solid rgba(51, 51, 51, 0.125);
 }

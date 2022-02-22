@@ -26,13 +26,13 @@ class ProductRequest extends FormRequest
     {
         return [
             'sku' => [
-                'required',
+                'nullable',
                 'max:16',
                 Rule::unique('products')->ignore($this->id),
             ],
             'code' => 'nullable',
             'title' => 'max:255|required',
-            'description' => 'max:500|required',
+            'description' => 'max:1000|required',
             'length' => 'numeric|nullable',
             'width' => 'numeric|nullable',
             'height' => 'numeric|nullable',

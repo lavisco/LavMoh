@@ -58,7 +58,7 @@ class ProductController extends Controller
     public function uploadImage($request, $productId)
     {
         for ($i=0; $i < count($request->image_path); $i++) { 
-                $primary = $request->image_path[0] ? 1 : 0;
+                $primary = $request->image_path[$i] == $request->image_path[0] ? true : false;
                 ProductImage::create([
                     'image_path' => $this->storeImage($request->image_path[$i], $request->photoName[$i]),
                     'title' => $request->photoName[$i],
@@ -107,7 +107,7 @@ class ProductController extends Controller
     public function show($id)
     {
         ///$this->authorize('view', $product);
-        return Product::findOrFail($id);
+        return Product::with(['occasions', 'recipients', 'shippings'])->findOrFail($id);
     }
 
     public function update(ProductRequest $request, Product $product)

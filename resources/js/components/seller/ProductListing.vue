@@ -2,13 +2,28 @@
     <div class="container mt-3 mb-5">
         <div class="row">
             <div class="col">
+                <!-- Breadcrumbs -->
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb pl-0">
+                        <li class="breadcrumb-item">
+                            <router-link to="/seller/products">
+                                Products
+                            </router-link>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">
+                            New Product
+                        </li>
+                    </ol>
+                </nav>
+
                 <!-- Form start -->
                 <form class="input-form" @submit.prevent="createProduct()">
                     <!-- Listing -->
-                    <div class="card px-4 py-4">
+                    <div class="card dashboard-info-card">
                         <!-- Header -->
-                        <h4 class="mb-4">Add a new product</h4>
-                        <p class="mb-5">
+                        <h4 class="mb-3">Add a new product</h4>
+                        <hr class="mt-0" />
+                        <p class="mb-4 note">
                             Setup your product details and other specifications
                             as you require. Remember to tell all about your item
                             to the world and why they will love it.
@@ -122,6 +137,9 @@
                                     see the first few lines of your description
                                     at first, so make it count!
                                 </p>
+                                <p class="text-grey text-xs mt-2">
+                                    Maximum 1000 characters
+                                </p>
                             </label>
 
                             <div class="col-md-9">
@@ -140,9 +158,11 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-3 col-form-label" for="material">
+                            <label
+                                class="col-md-3 col-form-label"
+                                for="material"
+                            >
                                 Ingredients
-                                <strong class="text-danger"> *</strong>
                                 <p class="text-xs mt-2">
                                     Ingredients used to make your product
                                 </p>
@@ -347,10 +367,106 @@
                         </div>
                     </div>
 
-                    <!-- Inventory -->
-                    <div class="card px-4 py-4 my-4">
+                    <!-- Photo -->
+                    <div class="card dashboard-info-card mt-4">
                         <!-- Header -->
-                        <h4 class="mb-4">Inventory & Pricing</h4>
+                        <h4 class="mb-3">Product Photos</h4>
+                        <hr class="mt-0" />
+                        <p class="mb-4 note">
+                            Add atleast 3 photos showcasing your product. The
+                            Primary photo is the first image customers see in
+                            the product page.
+                        </p>
+
+                        <div class="form-group row">
+                            <div class="col">
+                                <div class="d-flex align-items-start">
+                                    <div
+                                        class="mr-md-3"
+                                        v-for="(n, index) in 3"
+                                    >
+                                        <div>
+                                            <input
+                                                type="file"
+                                                style="display: none"
+                                                @change.prevent="
+                                                    fileSelected(
+                                                        $event,
+                                                        `image${index}`
+                                                    )
+                                                "
+                                                ref="fileInput"
+                                                name="product_image_path"
+                                            />
+
+                                            <button
+                                                class="image-upload-box"
+                                                :class="{
+                                                    'image-upload-box-primary':
+                                                        index == 0,
+                                                }"
+                                                @click.prevent="
+                                                    $refs.fileInput[
+                                                        index
+                                                    ].click()
+                                                "
+                                            >
+                                                <img
+                                                    v-if="url[index]"
+                                                    :src="url[index]"
+                                                    class="banner-container"
+                                                />
+                                                <svg
+                                                    v-show="
+                                                        !form.image_path[index]
+                                                    "
+                                                    width="45"
+                                                    height="45"
+                                                    viewBox="0 0 58 58"
+                                                    fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                >
+                                                    <path
+                                                        d="M36.25 29C36.25 30.9228 35.4862 32.7669 34.1265 34.1265C32.7669 35.4862 30.9228 36.25 29 36.25C27.0772 36.25 25.2331 35.4862 23.8735 34.1265C22.5138 32.7669 21.75 30.9228 21.75 29C21.75 27.0772 22.5138 25.2331 23.8735 23.8735C25.2331 22.5138 27.0772 21.75 29 21.75C30.9228 21.75 32.7669 22.5138 34.1265 23.8735C35.4862 25.2331 36.25 27.0772 36.25 29ZM19.1255 10.2587C19.5768 9.3548 20.271 8.59445 21.1303 8.06301C21.9896 7.53156 22.9799 7.25003 23.9902 7.25H34.0098C35.0201 7.25003 36.0104 7.53156 36.8697 8.06301C37.729 8.59445 38.4232 9.3548 38.8745 10.2587L40.9951 14.5H43.5C45.4228 14.5 47.2669 15.2638 48.6265 16.6235C49.9862 17.9831 50.75 19.8272 50.75 21.75V39.875C50.75 41.7978 49.9862 43.6419 48.6265 45.0015C47.2669 46.3612 45.4228 47.125 43.5 47.125H14.5C12.5772 47.125 10.7331 46.3612 9.37348 45.0015C8.01384 43.6419 7.25 41.7978 7.25 39.875V21.75C7.25 19.8272 8.01384 17.9831 9.37348 16.6235C10.7331 15.2638 12.5772 14.5 14.5 14.5H17.0049L19.1255 10.2587ZM39.875 29C39.875 26.1158 38.7292 23.3497 36.6898 21.3102C34.6503 19.2708 31.8842 18.125 29 18.125C26.1158 18.125 23.3497 19.2708 21.3102 21.3102C19.2708 23.3497 18.125 26.1158 18.125 29C18.125 31.8842 19.2708 34.6503 21.3102 36.6898C23.3497 38.7292 26.1158 39.875 29 39.875C31.8842 39.875 34.6503 38.7292 36.6898 36.6898C38.7292 34.6503 39.875 31.8842 39.875 29Z"
+                                                        fill="#4e4e4e"
+                                                    />
+                                                </svg>
+                                            </button>
+
+                                            <p
+                                                class="
+                                                    image-upload-filename
+                                                    mt-2
+                                                "
+                                            >
+                                                {{
+                                                    form.photoName[index]
+                                                        ? form.photoName[index]
+                                                        : `Select image`
+                                                }}
+                                                <br />
+                                                {{
+                                                    index == 0
+                                                        ? `Primary Image`
+                                                        : ""
+                                                }}
+                                            </p>
+                                            <HasError
+                                                :form="form"
+                                                field="image_path.0"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Inventory -->
+                    <div class="card dashboard-info-card mt-4">
+                        <!-- Header -->
+                        <h4 class="mb-3">Inventory & Pricing</h4>
+                        <hr class="mt-0" />
                         <div class="form-group row mb-md-1">
                             <label
                                 class="col-md-3 col-form-label"
@@ -462,7 +578,6 @@
                         <div class="form-group row mb-md-1">
                             <label class="col-md-3 col-form-label" for="sku">
                                 SKU
-                                <strong class="text-danger"> *</strong>
                                 <p class="text-grey text-xs mt-2">
                                     SKUs are for your use only, buyers won't see
                                     them.
@@ -486,10 +601,11 @@
                     </div>
 
                     <!-- Variation -->
-                    <div class="card px-4 py-4 my-4">
+                    <div class="card dashboard-info-card mt-4">
                         <!-- Header -->
-                        <h4 class="mb-4">Variations</h4>
-                        <p class="mb-5">
+                        <h4 class="mb-3">Variations</h4>
+                        <hr class="mt-0" />
+                        <p class="mb-4 note">
                             Add available options like color or size. Buyers
                             will choose from these during checkout.
                         </p>
@@ -561,105 +677,12 @@
                         </div>
                     </div>
 
-                    <!-- Photo -->
-                    <div class="card px-4 py-4 my-4">
-                        <!-- Header -->
-                        <h4 class="mb-4">Product Photos</h4>
-                        <p class="mb-5">
-                            Add atleast 3 photos showcasing your product. The
-                            Primary photo is the first image customers see in
-                            the product page.
-                        </p>
-
-                        <div class="form-group row">
-                            <div class="col">
-                                <div class="d-flex align-items-start">
-                                    <div
-                                        class="mr-md-3"
-                                        v-for="(n, index) in 3"
-                                    >
-                                        <div>
-                                            <input
-                                                type="file"
-                                                style="display: none"
-                                                @change.prevent="
-                                                    fileSelected(
-                                                        $event,
-                                                        `image${index}`
-                                                    )
-                                                "
-                                                ref="fileInput"
-                                                name="product_image_path"
-                                            />
-
-                                            <button
-                                                class="image-upload-box"
-                                                :class="{
-                                                    'image-upload-box-primary':
-                                                        index == 0,
-                                                }"
-                                                @click.prevent="
-                                                    $refs.fileInput[
-                                                        index
-                                                    ].click()
-                                                "
-                                            >
-                                                <img
-                                                    v-if="url[index]"
-                                                    :src="url[index]"
-                                                    class="banner-container"
-                                                />
-                                                <svg
-                                                    v-show="
-                                                        !form.image_path[index]
-                                                    "
-                                                    width="45"
-                                                    height="45"
-                                                    viewBox="0 0 58 58"
-                                                    fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                >
-                                                    <path
-                                                        d="M36.25 29C36.25 30.9228 35.4862 32.7669 34.1265 34.1265C32.7669 35.4862 30.9228 36.25 29 36.25C27.0772 36.25 25.2331 35.4862 23.8735 34.1265C22.5138 32.7669 21.75 30.9228 21.75 29C21.75 27.0772 22.5138 25.2331 23.8735 23.8735C25.2331 22.5138 27.0772 21.75 29 21.75C30.9228 21.75 32.7669 22.5138 34.1265 23.8735C35.4862 25.2331 36.25 27.0772 36.25 29ZM19.1255 10.2587C19.5768 9.3548 20.271 8.59445 21.1303 8.06301C21.9896 7.53156 22.9799 7.25003 23.9902 7.25H34.0098C35.0201 7.25003 36.0104 7.53156 36.8697 8.06301C37.729 8.59445 38.4232 9.3548 38.8745 10.2587L40.9951 14.5H43.5C45.4228 14.5 47.2669 15.2638 48.6265 16.6235C49.9862 17.9831 50.75 19.8272 50.75 21.75V39.875C50.75 41.7978 49.9862 43.6419 48.6265 45.0015C47.2669 46.3612 45.4228 47.125 43.5 47.125H14.5C12.5772 47.125 10.7331 46.3612 9.37348 45.0015C8.01384 43.6419 7.25 41.7978 7.25 39.875V21.75C7.25 19.8272 8.01384 17.9831 9.37348 16.6235C10.7331 15.2638 12.5772 14.5 14.5 14.5H17.0049L19.1255 10.2587ZM39.875 29C39.875 26.1158 38.7292 23.3497 36.6898 21.3102C34.6503 19.2708 31.8842 18.125 29 18.125C26.1158 18.125 23.3497 19.2708 21.3102 21.3102C19.2708 23.3497 18.125 26.1158 18.125 29C18.125 31.8842 19.2708 34.6503 21.3102 36.6898C23.3497 38.7292 26.1158 39.875 29 39.875C31.8842 39.875 34.6503 38.7292 36.6898 36.6898C38.7292 34.6503 39.875 31.8842 39.875 29Z"
-                                                        fill="#4e4e4e"
-                                                    />
-                                                </svg>
-                                            </button>
-
-                                            <p
-                                                class="
-                                                    image-upload-filename
-                                                    mt-2
-                                                "
-                                            >
-                                                {{
-                                                    form.photoName[index]
-                                                        ? form.photoName[index]
-                                                        : `Select image`
-                                                }}
-                                                <br />
-                                                {{
-                                                    index == 0
-                                                        ? `Primary Image`
-                                                        : ""
-                                                }}
-                                            </p>
-                                            <HasError
-                                                :form="form"
-                                                field="image_path.0"
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                     <!-- Shipping -->
-                    <div class="card px-4 py-4 my-4">
+                    <div class="card dashboard-info-card mt-4">
                         <!-- Header -->
-                        <h4 class="mb-4">Shipping</h4>
-                        <p class="mb-5">
+                        <h4 class="mb-3">Shipping</h4>
+                        <hr class="mt-0" />
+                        <p class="mb-4 note">
                             Set clear and realistic shipping expectations for
                             shoppers
                         </p>
@@ -749,91 +772,76 @@
                                 </p>
                             </label>
                             <div class="col-md-9">
-                                <div class="card">
-                                    <div
-                                        class="table-responsive dashboard-table"
+                                <div
+                                    class="table-responsive form-table mt-md-2"
+                                >
+                                    <table
+                                        class="
+                                            table
+                                            align-items-center
+                                            table-hover
+                                        "
                                     >
-                                        <table
-                                            class="
-                                                table
-                                                align-items-center
-                                                table-hover
-                                            "
-                                        >
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col"></th>
-                                                    <th scope="col">Type</th>
-                                                    <th scope="col">Price</th>
-                                                    <th scope="col">
-                                                        Delivery Time
-                                                    </th>
-                                                    <th scope="col">
-                                                        Locations
-                                                    </th>
-                                                    <th scope="col">
-                                                        Tracking opt
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr
-                                                    v-for="shipping in shippings"
-                                                >
-                                                    <th scope="row">
-                                                        <input
-                                                            type="checkbox"
-                                                            name="product_shipping"
-                                                            v-model="
-                                                                form.product_shipping
-                                                            "
-                                                            :value="shipping.id"
-                                                        />
-                                                    </th>
-                                                    <td>{{ shipping.type }}</td>
-                                                    <td>
-                                                        {{ shipping.price }}
-                                                    </td>
-                                                    <td>
-                                                        {{
-                                                            shipping.delivery_time
-                                                        }}
-                                                    </td>
-                                                    <td>
-                                                        {{ shipping.locations }}
-                                                    </td>
-                                                    <td>
-                                                        {{
-                                                            shipping.tracking_opt
-                                                        }}
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                        <thead>
+                                            <tr>
+                                                <th scope="col"></th>
+                                                <th scope="col">Type</th>
+                                                <th scope="col">Price</th>
+                                                <th scope="col">
+                                                    Delivery Time
+                                                </th>
+                                                <th scope="col">Locations</th>
+                                                <th scope="col">
+                                                    Tracking opt
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr v-for="shipping in shippings">
+                                                <th scope="row">
+                                                    <input
+                                                        type="checkbox"
+                                                        name="product_shipping"
+                                                        v-model="
+                                                            form.product_shipping
+                                                        "
+                                                        :value="shipping.id"
+                                                    />
+                                                </th>
+                                                <td>{{ shipping.type }}</td>
+                                                <td>
+                                                    {{ shipping.price }}
+                                                </td>
+                                                <td>
+                                                    {{ shipping.delivery_time }}
+                                                </td>
+                                                <td>
+                                                    {{ shipping.locations }}
+                                                </td>
+                                                <td>
+                                                    {{ shipping.tracking_opt }}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
-                        <div class="input-form text-right">
-                            <button
-                                type="button"
-                                class="btn btn-secondary mr-3"
-                                @click="cancel()"
-                            >
-                                <i
-                                    class="fas fa-times mr-2"
-                                    aria-hidden="true"
-                                ></i>
-                                Cancel
-                            </button>
-                            <button type="submit" class="btn">
-                                <i
-                                    class="fas fa-save mr-2"
-                                    aria-hidden="true"
-                                ></i>
-                                Save & Continue
-                            </button>
-                        </div>
+                    </div>
+
+                    <div class="input-form text-right mt-4">
+                        <button
+                            type="button"
+                            class="btn btn-secondary mr-3"
+                            @click="cancel()"
+                        >
+                            <i class="fas fa-times mr-2" aria-hidden="true"></i>
+                            Cancel
+                        </button>
+                        <button type="submit" class="btn">
+                            <i class="fas fa-save mr-2" aria-hidden="true"></i>
+                            Save & Continue
+                        </button>
                     </div>
                 </form>
             </div>
@@ -848,10 +856,12 @@
             role="dialog"
             aria-labelledby="addRecordLabel"
             aria-hidden="true"
+            data-backdrop="static"
+            data-keyboard="false"
         >
             <div
                 class="modal-dialog modal-dialog-centered"
-                :class="{ 'modal-lg': variationMode }"
+                :class="{ 'modal-xl': variationMode }"
                 role="document"
             >
                 <div class="modal-content">
@@ -979,171 +989,174 @@
                                         .option_list[0] != null
                                 "
                             >
-                                <div class="table-responsive dashboard-table">
-                                    <table
+                                <div
+                                    class="card dashboard-info-card p-3 mb-2"
+                                    v-for="(item, i) in form.productVariation[
+                                        variationCount
+                                    ].option_list"
+                                >
+                                    <div
                                         class="
-                                            table
+                                            d-flex
+                                            justify-content-between
                                             align-items-center
-                                            table-hover
                                         "
                                     >
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Option</th>
-                                                <th scope="col">SKU</th>
-                                                <th scope="col">Price</th>
-                                                <th scope="col">Quantity</th>
-                                                <th scope="col">Description</th>
-                                                <th scope="col">Delete</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr
-                                                v-for="(item, i) in form
-                                                    .productVariation[
-                                                    variationCount
-                                                ].option_list"
-                                            >
-                                                <td>
-                                                    <input
-                                                        name="var_option_id_array"
-                                                        id="var_option_id_array"
-                                                        v-model="
-                                                            form
-                                                                .productVariation[
-                                                                variationCount
-                                                            ]
-                                                                .var_option_id_array[
-                                                                i
-                                                            ]
-                                                        "
-                                                        type="text"
-                                                        class="
-                                                            form-control
-                                                            form-control-alternative
-                                                        "
-                                                        placeholder="Option"
-                                                    />
-                                                    <HasError
-                                                        :form="form"
-                                                        field="var_option_id_array"
-                                                    />
-                                                </td>
-                                                <td>
-                                                    <input
-                                                        id="productVariation.sku"
-                                                        v-model="
-                                                            form
-                                                                .productVariation[
-                                                                variationCount
-                                                            ].sku[i]
-                                                        "
-                                                        type="text"
-                                                        name="productVariation.sku"
-                                                        class="
-                                                            form-control
-                                                            form-control-alternative
-                                                        "
-                                                        placeholder="sku"
-                                                    />
-                                                    <HasError
-                                                        :form="form"
-                                                        field="productVariation.0.sku"
-                                                    />
-                                                </td>
-                                                <td>
-                                                    <input
-                                                        id="var_price_array"
-                                                        v-model="
-                                                            form
-                                                                .productVariation[
-                                                                variationCount
-                                                            ].var_price_array[i]
-                                                        "
-                                                        type="text"
-                                                        name="var_price_array"
-                                                        class="
-                                                            form-control
-                                                            form-control-alternative
-                                                        "
-                                                        placeholder="price"
-                                                    />
-                                                    <HasError
-                                                        :form="form"
-                                                        field="var_price_array"
-                                                    />
-                                                </td>
-                                                <td>
-                                                    <input
-                                                        id="var_quantity_array"
-                                                        v-model="
-                                                            form
-                                                                .productVariation[
-                                                                variationCount
-                                                            ]
-                                                                .var_quantity_array[
-                                                                i
-                                                            ]
-                                                        "
-                                                        type="text"
-                                                        name="var_quantity_array"
-                                                        class="
-                                                            form-control
-                                                            form-control-alternative
-                                                        "
-                                                        placeholder="qty"
-                                                    />
-                                                    <HasError
-                                                        :form="form"
-                                                        field="productVariation.0.var_quantity_array.0"
-                                                    />
-                                                </td>
-                                                <td>
-                                                    <input
-                                                        id="var_description_array"
-                                                        v-model="
-                                                            form
-                                                                .productVariation[
-                                                                variationCount
-                                                            ]
-                                                                .var_description_array[
-                                                                i
-                                                            ]
-                                                        "
-                                                        type="text"
-                                                        name="var_description_array"
-                                                        class="
-                                                            form-control
-                                                            form-control-alternative
-                                                        "
-                                                        placeholder="description"
-                                                    />
-                                                    <HasError
-                                                        :form="form"
-                                                        field="var_description_array"
-                                                    />
-                                                </td>
-                                                <td>
-                                                    <button
-                                                        type="button"
-                                                        class="
-                                                            btn btn-light btn-sm
-                                                        "
-                                                        @click.prevent="
-                                                            delRow(
-                                                                variationCount,
-                                                                i
-                                                            )
-                                                        "
-                                                    >
-                                                        <i
-                                                            class="fas fa-times"
-                                                        ></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                        <h5>Option {{ i + 1 }}</h5>
+                                        <a
+                                            class="btn btn-light btn-sm"
+                                            href=""
+                                            @click.prevent="
+                                                delRow(variationCount, i)
+                                            "
+                                        >
+                                            Delete
+                                        </a>
+                                    </div>
+
+                                    <div class="form-group row mb-md-1">
+                                        <div class="col-md-6">
+                                            <label
+                                                class="col-form-label"
+                                                for="var_option_id_array"
+                                                >Option Name
+                                                <strong class="text-danger">
+                                                    *</strong
+                                                >
+                                            </label>
+                                            <input
+                                                name="var_option_id_array"
+                                                id="var_option_id_array"
+                                                v-model="
+                                                    form.productVariation[
+                                                        variationCount
+                                                    ].var_option_id_array[i]
+                                                "
+                                                type="text"
+                                                class="
+                                                    form-control
+                                                    form-control-alternative
+                                                "
+                                                placeholder="Option"
+                                            />
+                                            <HasError
+                                                :form="form"
+                                                field="var_option_id_array"
+                                            />
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label
+                                                class="col-form-label"
+                                                for="var_price_array"
+                                                >Price
+                                                <strong class="text-danger">
+                                                    *
+                                                </strong>
+                                            </label>
+                                            <input
+                                                id="var_price_array"
+                                                v-model="
+                                                    form.productVariation[
+                                                        variationCount
+                                                    ].var_price_array[i]
+                                                "
+                                                type="text"
+                                                name="var_price_array"
+                                                class="
+                                                    form-control
+                                                    form-control-alternative
+                                                "
+                                                placeholder="price"
+                                            />
+                                            <HasError
+                                                :form="form"
+                                                field="var_price_array"
+                                            />
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label
+                                                class="col-form-label"
+                                                for="var_quantity_array"
+                                                >Quantity
+                                                <strong class="text-danger">
+                                                    *
+                                                </strong>
+                                            </label>
+                                            <input
+                                                id="var_quantity_array"
+                                                v-model="
+                                                    form.productVariation[
+                                                        variationCount
+                                                    ].var_quantity_array[i]
+                                                "
+                                                type="text"
+                                                name="var_quantity_array"
+                                                class="
+                                                    form-control
+                                                    form-control-alternative
+                                                "
+                                                placeholder="qty"
+                                            />
+                                            <HasError
+                                                :form="form"
+                                                field="productVariation.0.var_quantity_array.0"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mb-md-1">
+                                        <div class="col-md-8">
+                                            <label
+                                                class="col-form-label"
+                                                for="var_description_array"
+                                                >Description
+                                            </label>
+                                            <input
+                                                id="var_description_array"
+                                                v-model="
+                                                    form.productVariation[
+                                                        variationCount
+                                                    ].var_description_array[i]
+                                                "
+                                                type="text"
+                                                name="var_description_array"
+                                                class="
+                                                    form-control
+                                                    form-control-alternative
+                                                "
+                                                placeholder="description"
+                                            />
+                                            <HasError
+                                                :form="form"
+                                                field="var_description_array"
+                                            />
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label
+                                                class="col-form-label"
+                                                for="productVariation.sku"
+                                                >SKU
+                                            </label>
+                                            <input
+                                                id="productVariation.sku"
+                                                v-model="
+                                                    form.productVariation[
+                                                        variationCount
+                                                    ].sku[i]
+                                                "
+                                                type="text"
+                                                name="productVariation.sku"
+                                                class="
+                                                    form-control
+                                                    form-control-alternative
+                                                "
+                                                placeholder="sku"
+                                            />
+                                            <HasError
+                                                :form="form"
+                                                field="productVariation.0.sku"
+                                            />
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1151,7 +1164,7 @@
                     <div class="modal-footer">
                         <button
                             type="button"
-                            class="btn btn-light mr-2"
+                            class="btn btn-grey mr-2"
                             @click.prevent="delVariation(variationCount)"
                             v-show="variationMode"
                         >
@@ -1391,7 +1404,6 @@ export default {
     },
     mounted() {
         this.loadDetails();
-        $(this.$refs.vuemodal).on("hidden.bs.modal", this.closeModal);
     },
 };
 </script>

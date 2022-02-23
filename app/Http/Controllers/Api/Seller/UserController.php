@@ -57,6 +57,7 @@ class UserController extends Controller
             'area' => $request->shop_area,
             'address' => $request->shop_address,
             'zipcode' => $request->shop_zipcode,
+            'status' => false,
             'banner' => $this->storeImage($request->banner, $request->photoName)
         ]);
 

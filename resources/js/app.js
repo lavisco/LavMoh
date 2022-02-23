@@ -44,6 +44,11 @@ Vue.component(
 );
 Vue.component("index-component", require("./components/Index.vue").default);
 Vue.component("menu-cart", require("./components/CartSmall.vue").default);
+
+Vue.component(
+    "success-modal",
+    require("./components/SuccessModal.vue").default
+);
 Vue.component(
     "success-toast",
     require("./components/SuccessToast.vue").default

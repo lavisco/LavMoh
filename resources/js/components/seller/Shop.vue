@@ -126,7 +126,7 @@
                                         >
                                         </textarea>
                                         <p class="text-xs mt-2 mb-0">
-                                            Maximum 500 characters.
+                                            Maximum 500 characters. Tell buyers more about your store, for example your store history, goals, and what kind of products you sell, this will entice buyers and establish a sense of trust.
                                         </p>
                                         <HasError :form="form" field="about" />
                                     </div>

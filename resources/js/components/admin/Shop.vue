@@ -20,6 +20,7 @@
                                     <tr>
                                         <th scope="col">Banner</th>
                                         <th scope="col">Name</th>
+                                        <th scope="col">Status</th>
                                         <th scope="col">Address</th>
                                         <th scope="col">About</th>
                                         <th scope="col">Seller</th>
@@ -38,6 +39,28 @@
                                             />
                                         </td>
                                         <th>{{ shop.name }}</th>
+                                        <td>
+                                            <span
+                                                v-if="shop.status == 1"
+                                                class="
+                                                    badge
+                                                    badge-pill
+                                                    badge-success
+                                                "
+                                            >
+                                                Active
+                                            </span>
+                                            <span
+                                                v-else-if="shop.status == 0"
+                                                class="
+                                                    badge
+                                                    badge-pill
+                                                    badge-warning
+                                                "
+                                            >
+                                                Inactive
+                                            </span>
+                                        </td>
                                         <td>
                                             {{ shop.address }}<br />
                                             {{ shop.city }},
@@ -196,6 +219,60 @@
                                         placeholder="url"
                                     />
                                     <HasError :form="form" field="url" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label
+                                    class="col-md-3 col-form-label"
+                                    for="status"
+                                >
+                                    Status
+                                    <strong class="text-danger"> *</strong>
+                                </label>
+                                <div class="col-md-9">
+                                    <div
+                                        class="
+                                            custom-control
+                                            custom-radio
+                                            custom-control-inline
+                                        "
+                                    >
+                                        <input
+                                            type="radio"
+                                            id="active"
+                                            name="status"
+                                            class="custom-control-input"
+                                            v-model="form.status"
+                                            value="1"
+                                        />
+                                        <label
+                                            class="custom-control-label"
+                                            for="active"
+                                            >Active</label
+                                        >
+                                    </div>
+                                    <div
+                                        class="
+                                            custom-control
+                                            custom-radio
+                                            custom-control-inline
+                                        "
+                                    >
+                                        <input
+                                            type="radio"
+                                            id="inactive"
+                                            name="status"
+                                            class="custom-control-input"
+                                            v-model="form.status"
+                                            value="0"
+                                        />
+                                        <label
+                                            class="custom-control-label"
+                                            for="inactive"
+                                            >Inactive</label
+                                        >
+                                    </div>
+                                    <HasError :form="form" field="status" />
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -533,7 +610,10 @@
                                     <HasError :form="form" field="city" />
                                 </div>
                             </div>
-                            <div class="form-group row" v-show="areas[0] != null">
+                            <div
+                                class="form-group row"
+                                v-show="areas[0] != null"
+                            >
                                 <label
                                     class="col-md-3 col-form-label"
                                     for="area"
@@ -640,6 +720,7 @@ export default {
             area: "",
             address: "",
             zipcode: "",
+            status: "",
             user_id: "",
         }),
     }),

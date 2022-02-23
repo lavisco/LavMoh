@@ -29,8 +29,6 @@ class CreateProductsTable extends Migration
 			$table->decimal('weight', 14, 2)->nullable();
 			$table->string('weight_unit', 5)->nullable();
 			$table->decimal('base_price', 14, 2)->default('0.00');
-			$table->string('production_time', 20)->nullable();
-			$table->string('cut_off_time', 20)->nullable();
 			$table->string('processing_time', 20)->nullable();
 			$table->boolean('has_custom_text')->default(false);
 			$table->boolean('has_custom_image')->default(false);

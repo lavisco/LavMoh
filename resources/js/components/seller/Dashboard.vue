@@ -3,7 +3,10 @@
         <!-- Body -->
         <div class="container-fluid mt-5 mb-5">
             <div class="col">
-                <div class="row d-flex justify-content-center gap">
+                <div
+                    class="row d-flex justify-content-center gap"
+                    v-if="sellerShop[0] && sellerShop[0].status == true"
+                >
                     <div class="card dashboard-card">
                         <h4 class="mb-3">Total Products</h4>
                         <p class="mb-2">All the listed products</p>
@@ -18,6 +21,16 @@
                         <h4 class="mb-3">Total Revenue</h4>
                         <p class="mb-2">Total amount earned this month</p>
                         <h2>{{ revenue }}</h2>
+                    </div>
+                </div>
+                <div v-else class="row d-flex justify-content-center gap">
+                    <div class="card dashboard-card">
+                        <h4 class="mb-3">Pending Business Activation</h4>
+                        <p class="mb-2">
+                            Once your Business has been approved by our team you
+                            will be able to access all the dashboard functions,
+                            until then we thank you for your patience.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -42,6 +55,7 @@
                                 <h3 class="text-left">Activation Form</h3>
                                 <p>Setup your shop to start selling today!</p>
                                 <hr />
+
                                 <button
                                     type="button"
                                     class="btn-sm btn-sm-cart btn-full"
@@ -500,6 +514,23 @@
                                                         v-model="form.about"
                                                     >
                                                     </textarea>
+                                                    <p
+                                                        class="
+                                                            text-xs
+                                                            mt-2
+                                                            mb-0
+                                                        "
+                                                    >
+                                                        Maximum 500 characters.
+                                                        Tell buyers more about
+                                                        your store, for example
+                                                        your store history,
+                                                        goals, and what kind of
+                                                        products you sell, this
+                                                        will entice buyers and
+                                                        establish a sense of
+                                                        trust.
+                                                    </p>
                                                     <HasError
                                                         :form="form"
                                                         field="about"
@@ -1224,6 +1255,14 @@
                 </div>
             </div>
         </div>
+
+        <!-- Notification Modal -->
+        <success-modal
+            id="success-modal"
+            msgTitle="Business Activation Form Submitted"
+            msg="Your request for selling on Lavisco has been successfully submitted. Please await approval from our team."
+            gotoRoute="login"
+        />
     </div>
 </template>
 
@@ -1241,6 +1280,7 @@ export default {
         revenue: "",
         orders: "",
         products: "",
+        sellerShop: "",
         has_shop: "",
         url: "",
         billingMode: false,
@@ -1312,6 +1352,7 @@ export default {
                     }
                     this.orders = data.orders;
                     this.products = data.products;
+                    this.sellerShop = data.sellerShop;
                 })
                 .catch((error) => console.log(error));
         },
@@ -1332,18 +1373,6 @@ export default {
                 this.url = URL.createObjectURL(e.target.files[0]);
             };
             reader.readAsDataURL(file);
-        },
-
-        updateSellerprofile() {
-            this.form
-                .post("/api/seller/user/shop_setup")
-                .then(() => {
-                    window.location.replace("/login");
-                })
-                .catch((error) => {
-                    console.log(error);
-                    this.failed = true;
-                });
         },
 
         loadProvinces() {
@@ -1377,6 +1406,19 @@ export default {
                 .get("/api/locations/areas/" + this.form.shop_city)
                 .then(({ data }) => (this.areasShop = data))
                 .catch((error) => console.log(error));
+        },
+
+        updateSellerprofile() {
+            this.form
+                .post("/api/seller/user/shop_setup")
+                .then(() => {
+                    $("#addRecord").modal("hide");
+                    $("#success-modal").modal("show");
+                })
+                .catch((error) => {
+                    console.log(error);
+                    this.failed = true;
+                });
         },
     },
 

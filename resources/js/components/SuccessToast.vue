@@ -5,7 +5,7 @@
         role="alert"
         aria-live="assertive"
         aria-atomic="true"
-        data-delay="5000"
+        data-delay="4000"
         style="position: absolute; bottom: 0; right: 30px"
     >
         <div class="toast-header">
@@ -21,14 +21,6 @@
                 <rect fill="#1bc894" width="100%" height="100%" />
             </svg>
             <strong class="mr-auto green">Update Successful</strong>
-            <button
-                type="button"
-                class="ml-2 mb-1 close"
-                aria-label="Close"
-                @click.prevent="closeToast('#success-toast')"
-            >
-                <span aria-hidden="true">&times;</span>
-            </button>
         </div>
         <div class="toast-body">{{ msg }}</div>
     </div>

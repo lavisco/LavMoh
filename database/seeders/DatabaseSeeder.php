@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
             OccasionSeeder::class, 
             RecipientSeeder::class,
             CategorySeeder::class,
+            ProductStateSeeder::class,
+            ShippingSeeder::class,
         ]);
     }
 }

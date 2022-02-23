@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Seller;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\Shop;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -22,6 +23,7 @@ class DashboardController extends Controller
         return response()->json([
             'orders' => Order::where('seller_id', auth()->id())->count(),
             'products' => Product::where('user_id', auth()->id())->count(),
+            'sellerShop' => Shop::where('user_id', auth()->id())->get(),
             'hasShop' => $user->shop()->exists(),
         ]);
     }

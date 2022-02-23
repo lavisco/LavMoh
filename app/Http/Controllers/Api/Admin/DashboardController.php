@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\BuyerProfile;
 use App\Models\Product;
 use App\Models\SellerProfile;
+use App\Models\Shop;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -23,6 +24,7 @@ class DashboardController extends Controller
             'sellers' => SellerProfile::count(),
             'products' => Product::count(),
             'users' => User::count(),
+            'inactiveShops' => Shop::where('status', false)->with('user')->latest()->get(),
             'latestProducts' => Product::with('user')->latest()->take(10)->get(),
         ]);
     }

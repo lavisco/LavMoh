@@ -28,6 +28,7 @@ class Shop extends Model
         'area',
         'address',
         'zipcode',
+        'status',
         'user_id',
     ];
 

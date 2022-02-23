@@ -160,10 +160,6 @@
                 class="dropdown-menu dropdown-menu-right"
                 aria-labelledby="navbarDropdown"
             >
-                <router-link to="/seller/sellerprofile" class="dropdown-item">
-                    <i class="fas fa-user-circle mr-2 link-fa"></i>
-                    Account
-                </router-link>
                 <router-link to="/seller/password_reset" class="dropdown-item">
                     <i class="fas fa-key mr-2 link-fa"></i>
                     Password Reset
@@ -376,7 +372,8 @@
     @endif
 </nav>
 
-@if(auth()->user()->role_id == 2)
+@if(auth()->user()->role_id == 2 && auth()->user()->shop &&
+auth()->user()->shop->status == true)
 @include('layouts.laviscoDashboard.sellerTopNav') @endif
 @if(auth()->user()->role_id == 3)
 @include('layouts.laviscoDashboard.buyerTopNav') @endif

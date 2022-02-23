@@ -20,6 +20,7 @@ class CreateShippingsTable extends Migration
             $table->decimal('price', 14, 2)->default('0.00');
             $table->string('delivery_time', 20);
             $table->string('locations')->nullable();
+            $table->string('categories')->nullable();
             $table->string('tracking_opt')->nullable();
         });
     }

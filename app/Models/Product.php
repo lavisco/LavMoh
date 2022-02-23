@@ -27,8 +27,6 @@ class Product extends Model
         'weight',
         'weight_unit',
         'base_price',
-        'production_time',
-        'cut_off_time',
         'processing_time',
         'has_custom_text',
         'has_custom_image',

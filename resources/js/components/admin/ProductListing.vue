@@ -740,43 +740,6 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label
-                                class="col-md-3 col-form-label"
-                                for="production_time"
-                            >
-                                Production Time
-                            </label>
-                            <div class="col-md-4 col-sm-6">
-                                <input
-                                    id="production_time"
-                                    v-model="form.production_time"
-                                    type="text"
-                                    name="production_time"
-                                    class="
-                                        form-control form-control-alternative
-                                    "
-                                    placeholder="Production time"
-                                />
-                                <HasError
-                                    :form="form"
-                                    field="production_time"
-                                />
-                            </div>
-                            <div class="col-md-4 col-sm-6">
-                                <input
-                                    id="cut_off_time"
-                                    v-model="form.cut_off_time"
-                                    type="text"
-                                    name="cut_off_time"
-                                    class="
-                                        form-control form-control-alternative
-                                    "
-                                    placeholder="Cut-off time"
-                                />
-                                <HasError :form="form" field="cut_off_time" />
-                            </div>
-                        </div>
-                        <div class="form-group row">
                             <label class="col-md-3 col-form-label" for="">
                                 Shipping types
                                 <strong class="text-danger"> *</strong>
@@ -1242,8 +1205,6 @@ export default {
             weight: "",
             weight_unit: "",
             base_price: "",
-            production_time: "",
-            cut_off_time: "",
             processing_time: "",
             has_custom_text: false,
             has_custom_image: false,

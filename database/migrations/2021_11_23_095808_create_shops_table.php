@@ -29,6 +29,7 @@ class CreateShopsTable extends Migration
             $table->string('area')->nullable();
 			$table->string('address', 500);
 			$table->string('zipcode', 12)->nullable();
+            $table->boolean('status')->default(false);
             $table->foreignId('user_id')->constrained();
         });
     }

@@ -1116,8 +1116,8 @@
         <!-- Notification Modal -->
         <success-modal
             id="success-modal"
-            msgTitle="Product Listed Successfully"
-            msg="Your product has been saved. It will now display on the website."
+            msgTitle="Product Listing Update Successful"
+            msg="Your product has been updated. Changes will reflect on the website."
             gotoRoute="/seller/products"
         />
 

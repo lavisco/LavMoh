@@ -956,7 +956,7 @@
                         </div>
                     </div>
 
-                    <div class="input-form text-right mt-4">
+                    <div class="input-form text-center mt-4">
                         <button
                             type="button"
                             class="btn btn-secondary mr-3"

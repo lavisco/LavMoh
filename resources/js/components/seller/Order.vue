@@ -10,14 +10,32 @@
             </div>
             <div v-else class="row">
                 <div class="col">
-                    <div class="card">
-                        <div
-                            class="
-                                d-flex
-                                justify-content-center
-                                align-items-center
-                            "
-                        ></div>
+                    <div class="card pb-3 pb-md-1">
+                        <div class="row align-items-center">
+                            <div
+                                class="
+                                    col-lg-4 col-8
+                                    input-form
+                                    input-group
+                                    input-group-alternative
+                                    search-input
+                                "
+                            >
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-search"></i>
+                                    </span>
+                                </div>
+                                <input
+                                    class="
+                                        form-control form-control-alternative
+                                    "
+                                    placeholder="Search"
+                                    type="text"
+                                    v-model="searchText"
+                                />
+                            </div>
+                        </div>
                     </div>
                     <div class="card">
                         <!-- Table start -->
@@ -36,12 +54,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="cart in carts">
-                                        <td>#</td>
-                                        <td>{{ cart.created_at }}</td>
+                                    <tr v-for="order in orders">
+                                        <td>{{ order.code }}</td>
+                                        <td>{{ order.created_at }}</td>
                                         <td>
                                             <div
-                                                v-for="product in cart.products"
+                                                v-for="product in order.products"
                                             >
                                                 {{ product.title }}
                                                 <a
@@ -80,19 +98,19 @@
                                         </td>
                                         <td></td>
                                         <td>
-                                            {{ cart.receipt.address }},
-                                            {{ cart.receipt.country }}
+                                            {{ order.receipt.address }},
+                                            {{ order.receipt.country }}
                                         </td>
                                         <td>
-                                            LKR {{ cart.total }}
+                                            LKR {{ order.total }}
                                             <br />
-                                            LKR {{ cart.subtotal }} +<br />
-                                            LKR {{ cart.tax }} +<br />
+                                            LKR {{ order.subtotal }} +<br />
+                                            LKR {{ order.tax }} +<br />
                                             LKR
-                                            {{ cart.shipping_price }} +<br />
+                                            {{ order.shipping_price }} +<br />
                                             LKR
-                                            {{ cart.giftwrap_price }} -<br />
-                                            LKR {{ cart.discount_price }}
+                                            {{ order.giftwrap_price }} -<br />
+                                            LKR {{ order.discount_price }}
                                         </td>
                                         <td>
                                             <select
@@ -100,8 +118,18 @@
                                                     custom-select
                                                     form-control
                                                 "
+                                                name="status"
+                                                id="status"
+                                                v-model="order.status"
+                                                @change.prevent="
+                                                    setCurrentState(
+                                                        order.id,
+                                                        $event
+                                                    )
+                                                "
                                             >
-                                                <option>Status</option>
+                                                <option>Confirmed</option>
+                                                <option>Paid</option>
                                                 <option>Shipped</option>
                                                 <option>Delivered</option>
                                             </select>
@@ -129,34 +157,38 @@ export default {
         AlertError,
     },
     data: () => ({
-        carts: [],
+        orders: [],
         searchText: null,
         loading: true,
+        form: new Form({
+            id: "",
+            status: "",
+        }),
     }),
 
     watch: {
-        searchText(after, before) {
-            this.loadCarts();
-        },
+        // searchText(after, before) {
+        //     this.loadOrders();
+        // },
     },
 
     methods: {
-        loadCarts() {
+        loadOrders() {
             axios
-                .get("/api/seller/carts", {
+                .get("/api/seller/orders", {
                     params: { searchText: this.searchText },
                 })
                 .then(({ data }) => {
-                    this.carts = data.data;
+                    this.orders = data.data;
                     this.loading = false;
                 })
                 .catch((error) => console.log(error));
         },
 
-        setCurrentState(product, event) {
-            this.form.product_state_id = event.target.value;
+        setCurrentState(order, event) {
+            this.form.status = event.target.value;
             this.form
-                .put("/api/admin/products/updateState/" + product)
+                .put("/api/seller/orders/" + order)
                 .then(() => {
                     Fire.$emit("reloadRecords");
                 })
@@ -164,9 +196,9 @@ export default {
         },
     },
     mounted() {
-        this.loadCarts();
+        this.loadOrders();
         Fire.$on("reloadRecords", () => {
-            this.loadCarts();
+            this.loadOrders();
         });
     },
 };

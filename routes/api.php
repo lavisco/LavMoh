@@ -36,6 +36,7 @@ use App\Http\Controllers\Api\Buyer\BuyerProfileController as BuyerBuyerProfileCo
 use App\Http\Controllers\Api\Buyer\OrderController as BuyerOrderController;
 use App\Http\Controllers\Api\Seller\CartController as SellerCartController;
 use App\Http\Controllers\Api\Seller\DashboardController as SellerDashboardController;
+use App\Http\Controllers\Api\Seller\OrderController as SellerOrderController;
 use App\Http\Controllers\Api\Seller\ProductController as SellerProductController;
 use App\Http\Controllers\Api\Seller\ProductImageController as SellerProductImageController;
 use App\Http\Controllers\Api\Seller\ProductStateController as SellerProductStateController;
@@ -122,7 +123,9 @@ Route::prefix('buyer')->group(function () {
 /*Seller routes*/
 
 Route::prefix('seller')->group(function () {
-    Route::apiResource('/carts', SellerCartController::class);
+    Route::get('/dashboard/coming_soon', [SellerDashboardController::class, 'indexComingSoon']);
+    Route::apiResource('/dashboard', SellerDashboardController::class);
+    Route::apiResource('/orders', SellerOrderController::class);
     Route::get('/products/details', [SellerProductController::class, 'getDetails']);
     Route::put('/products/updateState/{product}', [SellerProductController::class, 'updateState']);
     Route::apiResource('/products', SellerProductController::class);
@@ -136,7 +139,6 @@ Route::prefix('seller')->group(function () {
     Route::post('/user/password_reset', [SellerUserController::class, 'updatePassword']);
     Route::post('/user/shop_setup', [SellerUserController::class, 'storeShopSetup']);
     Route::apiResource('/user', SellerUserController::class);
-    Route::apiResource('/dashboard', SellerDashboardController::class);
 });
 
 /*Website routes*/

@@ -4,8 +4,8 @@
         <div class="container-fluid mt-5 mb-5">
             <div class="col">
                 <div
-                    class="row d-flex justify-content-center gap"
                     v-if="sellerShop[0] && sellerShop[0].status == true"
+                    class="row d-flex justify-content-center gap"
                 >
                     <div class="card dashboard-card">
                         <h4 class="mb-3">Total Products</h4>
@@ -50,8 +50,8 @@
                 <div class="modal-content shop-setup">
                     <!-- Form start -->
                     <div class="modal-body">
-                        <div class="d-flex flex-row">
-                            <div class="col-3 shop-setup-menu">
+                        <div class="d-flex flex-md-row flex-column">
+                            <div class="col-md-3 shop-setup-menu">
                                 <h3 class="text-left">Activation Form</h3>
                                 <p>Setup your shop to start selling today!</p>
                                 <hr />
@@ -89,7 +89,7 @@
                                     Confirmation
                                 </button>
                             </div>
-                            <div class="col-9 shop-setup-content">
+                            <div class="col-md-9 shop-setup-content">
                                 <!-- Form start -->
                                 <form
                                     class="input-form h-100"
@@ -113,8 +113,10 @@
                                             <h4 class="mb-3">
                                                 Contact Details
                                             </h4>
-                                            <div class="form-group row">
-                                                <div class="col-md-6">
+                                            <div class="row">
+                                                <div
+                                                    class="form-group col-md-6"
+                                                >
                                                     <label
                                                         class="col-form-label"
                                                         for="first_name"
@@ -140,7 +142,9 @@
                                                         field="first_name"
                                                     />
                                                 </div>
-                                                <div class="col-md-6">
+                                                <div
+                                                    class="form-group col-md-6"
+                                                >
                                                     <label
                                                         class="col-form-label"
                                                         for="last_name"
@@ -165,8 +169,10 @@
                                                     />
                                                 </div>
                                             </div>
-                                            <div class="form-group row">
-                                                <div class="col-md-6">
+                                            <div class="row">
+                                                <div
+                                                    class="form-group col-md-6"
+                                                >
                                                     <label
                                                         class="col-form-label"
                                                         for="phone"
@@ -190,7 +196,9 @@
                                                         field="phone"
                                                     />
                                                 </div>
-                                                <div class="col-md-6">
+                                                <div
+                                                    class="form-group col-md-6"
+                                                >
                                                     <label
                                                         class="col-form-label"
                                                         for="email"
@@ -233,8 +241,10 @@
                                                 most recent address.
                                             </p>
 
-                                            <div class="form-group row">
-                                                <div class="col-md-6">
+                                            <div class="row">
+                                                <div
+                                                    class="form-group col-md-6"
+                                                >
                                                     <label
                                                         class="col-form-label"
                                                         for="province"
@@ -284,7 +294,9 @@
                                                         field="province"
                                                     />
                                                 </div>
-                                                <div class="col-md-6">
+                                                <div
+                                                    class="form-group col-md-6"
+                                                >
                                                     <label
                                                         class="col-form-label"
                                                         for="district"
@@ -334,8 +346,10 @@
                                                     />
                                                 </div>
                                             </div>
-                                            <div class="form-group row">
-                                                <div class="col-md-6">
+                                            <div class="row">
+                                                <div
+                                                    class="form-group col-md-6"
+                                                >
                                                     <label
                                                         class="col-form-label"
                                                         for="city"
@@ -376,7 +390,9 @@
                                                         field="city"
                                                     />
                                                 </div>
-                                                <div class="col-md-6">
+                                                <div
+                                                    class="form-group col-md-6"
+                                                >
                                                     <label
                                                         class="col-form-label"
                                                         for="zipcode"
@@ -399,8 +415,10 @@
                                                     />
                                                 </div>
                                             </div>
-                                            <div class="form-group row">
-                                                <div class="col-md-12">
+                                            <div class="row">
+                                                <div
+                                                    class="form-group col-md-12"
+                                                >
                                                     <label
                                                         class="col-form-label"
                                                         for="address"
@@ -467,8 +485,8 @@
                                                 Store Setup Information
                                             </h4>
 
-                                            <div class="form-group row">
-                                                <div class="col-12">
+                                            <div class="row">
+                                                <div class="form-group col-12">
                                                     <label
                                                         class="col-form-label"
                                                         for="shop_name"
@@ -493,8 +511,8 @@
                                                     />
                                                 </div>
                                             </div>
-                                            <div class="form-group row">
-                                                <div class="col-12">
+                                            <div class="row">
+                                                <div class="form-group col-12">
                                                     <label
                                                         class="col-form-label"
                                                         for="about"
@@ -504,7 +522,27 @@
                                                         >
                                                             *
                                                         </strong>
+                                                        <p
+                                                            class="
+                                                                text-xs
+                                                                mt-2
+                                                                mb-1
+                                                            "
+                                                        >
+                                                            Maximum 500
+                                                            characters. Tell
+                                                            buyers more about
+                                                            your store, for
+                                                            example your store
+                                                            history, goals, and
+                                                            what kind of
+                                                            products you sell,
+                                                            this will entice
+                                                            buyers and establish
+                                                            a sense of trust.
+                                                        </p>
                                                     </label>
+
                                                     <textarea
                                                         id="about"
                                                         class="form-control"
@@ -514,36 +552,26 @@
                                                         v-model="form.about"
                                                     >
                                                     </textarea>
-                                                    <p
-                                                        class="
-                                                            text-xs
-                                                            mt-2
-                                                            mb-0
-                                                        "
-                                                    >
-                                                        Maximum 500 characters.
-                                                        Tell buyers more about
-                                                        your store, for example
-                                                        your store history,
-                                                        goals, and what kind of
-                                                        products you sell, this
-                                                        will entice buyers and
-                                                        establish a sense of
-                                                        trust.
-                                                    </p>
+
                                                     <HasError
                                                         :form="form"
                                                         field="about"
                                                     />
                                                 </div>
                                             </div>
-                                            <div class="form-group row">
-                                                <div class="col-12">
+                                            <div class="row">
+                                                <div class="form-group col-12">
                                                     <label
                                                         class="col-form-label"
                                                         for="banner"
                                                         >Upload banner
-                                                        <p class="text-xs mt-2">
+                                                        <p
+                                                            class="
+                                                                text-xs
+                                                                mt-2
+                                                                mb-1
+                                                            "
+                                                        >
                                                             Banner image must be
                                                             under 2MB.
                                                             Recommended
@@ -551,6 +579,53 @@
                                                             1080px.
                                                         </p>
                                                     </label>
+                                                    <div
+                                                        class="
+                                                            mb-2
+                                                            large-img-upload-box
+                                                        "
+                                                    >
+                                                        <img
+                                                            v-if="url"
+                                                            :src="url"
+                                                            class="
+                                                                display-banner
+                                                            "
+                                                        />
+                                                        <img
+                                                            v-if="!url"
+                                                            src="/images/lavisco/img-bg.jpg"
+                                                            class="
+                                                                display-banner
+                                                            "
+                                                        />
+                                                        <button
+                                                            @click.prevent="
+                                                                $refs.fileInput.click()
+                                                            "
+                                                            class="
+                                                                img-upload-btn
+                                                            "
+                                                            title="Upload Image"
+                                                        >
+                                                            <svg
+                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                aria-hidden="true"
+                                                                role="img"
+                                                                width="1em"
+                                                                height="1em"
+                                                                preserveAspectRatio="xMidYMid meet"
+                                                                viewBox="0 0 24 24"
+                                                                title="Upload Image"
+                                                            >
+                                                                <path
+                                                                    fill="white"
+                                                                    d="M21 6.25A3.25 3.25 0 0 0 17.75 3H6.25A3.25 3.25 0 0 0 3 6.25v12.283c0 1.303 1.57 1.962 2.5 1.048l4.03-3.96a.634.634 0 0 0 .02-.021l1.925-1.885l.083-.071a.75.75 0 0 1 .966.07l2.08 2.037l1.06-1.06l-2.09-2.048l-.129-.116a2.25 2.25 0 0 0-3.02.116l-4.452 4.36h.01L4.5 18.46V6.25c0-.966.784-1.75 1.75-1.75h11.5c.967 0 1.75.784 1.75 1.75v4.982c.48-.19.994-.263 1.5-.22V6.25Zm-3.496 2.502a2.252 2.252 0 1 0-4.505 0a2.252 2.252 0 0 0 4.505 0Zm-3.005 0a.752.752 0 1 1 1.505 0a.752.752 0 0 1-1.505 0Zm-1.302 9.82l5.902-5.902a2.285 2.285 0 1 1 3.233 3.232l-5.903 5.902a2.684 2.684 0 0 1-1.247.707l-1.83.457a.985.985 0 0 1-.15.027c-.59.204-2.979.574-3.827-.088c-.574-.448-.46-1.334-.218-1.818c.04-.078-.02-.18-.105-.166c-.66.103-1.243.45-1.827.799c-.783.468-1.57.936-2.549.815c-.979-.122-1.468-.726-1.71-1.255c-.099-.216.18-.401.388-.287c.469.255 1.106.496 1.631.38c.375-.084.904-.458 1.496-.877c1.066-.753 2.337-1.653 3.292-1.268c.84.337 1.46 1.15 1.03 2.113c-.052.118 0 .264.127.293c.423.097.778.066 1.133-.105l.428-1.712c.118-.472.362-.903.706-1.247Z"
+                                                                />
+                                                            </svg>
+                                                        </button>
+                                                    </div>
                                                     <input
                                                         type="file"
                                                         style="display: none"
@@ -560,36 +635,8 @@
                                                         ref="fileInput"
                                                         name="banner"
                                                     />
-                                                    <br />
 
-                                                    <button
-                                                        class="image-upload-box"
-                                                        @click.prevent="
-                                                            $refs.fileInput.click()
-                                                        "
-                                                    >
-                                                        <img
-                                                            v-if="url"
-                                                            :src="url"
-                                                            class="
-                                                                banner-container
-                                                            "
-                                                        />
-                                                        <img
-                                                            v-if="!url"
-                                                            src="/images/lavisco/img-bg.jpg"
-                                                            class="
-                                                                banner-container
-                                                            "
-                                                        />
-                                                    </button>
-                                                    <p
-                                                        class="
-                                                            image-upload-filename
-                                                            mt-2
-                                                            mb-0
-                                                        "
-                                                    >
+                                                    <p class="text-xs mt-0">
                                                         {{
                                                             form.photoName
                                                                 ? form.photoName
@@ -621,8 +668,10 @@
                                                 certain customers
                                             </p>
 
-                                            <div class="form-group row">
-                                                <div class="col-md-6">
+                                            <div class="row">
+                                                <div
+                                                    class="form-group col-md-6"
+                                                >
                                                     <label
                                                         class="col-form-label"
                                                         for="shop_province"
@@ -674,7 +723,9 @@
                                                         field="shop_province"
                                                     />
                                                 </div>
-                                                <div class="col-md-6">
+                                                <div
+                                                    class="form-group col-md-6"
+                                                >
                                                     <label
                                                         class="col-form-label"
                                                         for="shop_district"
@@ -726,8 +777,10 @@
                                                     />
                                                 </div>
                                             </div>
-                                            <div class="form-group row">
-                                                <div class="col-md-6">
+                                            <div class="row">
+                                                <div
+                                                    class="form-group col-md-6"
+                                                >
                                                     <label
                                                         class="col-form-label"
                                                         for="shop_city"
@@ -771,7 +824,9 @@
                                                         field="shop_city"
                                                     />
                                                 </div>
-                                                <div class="col-md-6">
+                                                <div
+                                                    class="form-group col-md-6"
+                                                >
                                                     <label
                                                         class="col-form-label"
                                                         for="shop_zipcode"
@@ -797,10 +852,12 @@
                                                 </div>
                                             </div>
                                             <div
-                                                class="form-group row"
+                                                class="row"
                                                 v-show="areasShop[0] != null"
                                             >
-                                                <div class="col-md-6">
+                                                <div
+                                                    class="form-group col-md-6"
+                                                >
                                                     <label
                                                         class="col-form-label"
                                                         for="shop_area"
@@ -843,8 +900,10 @@
                                                 </div>
                                             </div>
 
-                                            <div class="form-group row">
-                                                <div class="col-md-12">
+                                            <div class="row">
+                                                <div
+                                                    class="form-group col-md-12"
+                                                >
                                                     <label
                                                         class="col-form-label"
                                                         for="shop_address"
@@ -883,7 +942,7 @@
                                         >
                                             <button
                                                 type="button"
-                                                class="btn mr-4 btn-secondary"
+                                                class="btn mr-4 btn-grey"
                                                 @click.prevent="
                                                     toggleForm('part1')
                                                 "
@@ -931,8 +990,10 @@
                                                 accounts not stated below
                                             </p>
 
-                                            <div class="form-group row">
-                                                <div class="col-md-8">
+                                            <div class="row">
+                                                <div
+                                                    class="form-group col-md-8"
+                                                >
                                                     <label
                                                         class="col-form-label"
                                                         for="deposit_account"
@@ -958,7 +1019,9 @@
                                                         field="deposit_account"
                                                     />
                                                 </div>
-                                                <div class="col-md-4">
+                                                <div
+                                                    class="form-group col-md-4"
+                                                >
                                                     <label
                                                         class="col-form-label"
                                                         for="deposit_account_status"
@@ -1032,8 +1095,10 @@
                                                     />
                                                 </div>
                                             </div>
-                                            <div class="form-group row">
-                                                <div class="col-md-12">
+                                            <div class="row">
+                                                <div
+                                                    class="form-group col-md-12"
+                                                >
                                                     <label
                                                         class="col-form-label"
                                                         for="deposit_name"
@@ -1060,8 +1125,10 @@
                                                     />
                                                 </div>
                                             </div>
-                                            <div class="form-group row">
-                                                <div class="col-md-6">
+                                            <div class="row">
+                                                <div
+                                                    class="form-group col-md-6"
+                                                >
                                                     <label
                                                         class="col-form-label"
                                                         for="deposit_bank"
@@ -1087,7 +1154,9 @@
                                                         field="deposit_bank"
                                                     />
                                                 </div>
-                                                <div class="col-md-6">
+                                                <div
+                                                    class="form-group col-md-6"
+                                                >
                                                     <label
                                                         class="col-form-label"
                                                         for="deposit_bank_branch"
@@ -1126,7 +1195,7 @@
                                         >
                                             <button
                                                 type="button"
-                                                class="btn mr-4 btn-secondary"
+                                                class="btn mr-4 btn-grey"
                                                 @click.prevent="
                                                     toggleForm('part2')
                                                 "
@@ -1222,7 +1291,7 @@
                                                         class="
                                                             btn
                                                             mr-4
-                                                            btn-secondary
+                                                            btn-grey
                                                         "
                                                         @click.prevent="
                                                             toggleForm('part3')

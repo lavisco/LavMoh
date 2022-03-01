@@ -10,11 +10,11 @@
             </div>
             <div v-else class="row">
                 <div class="col">
-                    <div class="card">
+                    <div class="card pb-3 pb-md-1">
                         <div class="row align-items-center">
                             <div
                                 class="
-                                    col-lg-4 col-7
+                                    col-lg-4 col-8
                                     input-form
                                     input-group
                                     input-group-alternative
@@ -35,7 +35,7 @@
                                     v-model="searchText"
                                 />
                             </div>
-                            <div class="col-lg-8 col-5 text-right">
+                            <div class="col-lg-8 col-4 text-right">
                                 <router-link to="/seller/products/listing">
                                     <button type="button" class="btn">
                                         <i
@@ -59,7 +59,7 @@
                                         <th scope="col">Title</th>
                                         <th scope="col">Quantity</th>
                                         <th scope="col">Price</th>
-                                        <th scope="col">State</th>
+                                        <th class="table-col-sm">State</th>
                                         <th scope="col"></th>
                                     </tr>
                                 </thead>
@@ -111,7 +111,7 @@
                                         <td class="text-right">
                                             <div class="d-flex">
                                                 <router-link
-                                                    class="btn btn-sm mr-md-3"
+                                                    class="btn btn-sm mr-3"
                                                     :to="{
                                                         name: 'seller/products/listing/edit',
                                                         params: {

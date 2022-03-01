@@ -74,17 +74,17 @@ class ProductController extends Controller
 
     public function storeVariation($request, $productId)
     {
-        if ($request->has('productVariation.0.var_option_id_array.0')) {
-            $var_option_id_array = $request->input('productVariation.*.var_option_id_array.*');
+        if ($request->has('productVariation.0.variation_type_option.0')) {
+            $variation_type_option = $request->input('productVariation.*.variation_type_option.*');
             $sku = $request->input('productVariation.*.sku.*');
-            $var_price_array = $request->input('productVariation.*.var_price_array.*');
-            $var_quantity_array = $request->input('productVariation.*.var_quantity_array.*');
-            $var_description_array = $request->input('productVariation.*.var_description_array.*');
-            $variation_id = $request->input('productVariation.*.variationIds.*');
+            $variation_price = $request->input('productVariation.*.variation_price.*');
+            $variation_quantity = $request->input('productVariation.*.variation_quantity.*');
+            $variation_description = $request->input('productVariation.*.variation_description.*');
+            $variation_type = $request->input('productVariation.*.variation_type.*');
 
             $productVariationArray = []; //array containg data of each variation option
 
-            $length = count($var_option_id_array);
+            $length = count($variation_type_option);
 
             for ($j=0; $j < $length; $j++) { 
                 
@@ -96,12 +96,12 @@ class ProductController extends Controller
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now(),
                     //non-repeating
-                    'type' => $variation_id[$j],
-                    'type_option' => $var_option_id_array[$j],
+                    'type' => $variation_type[$j],
+                    'type_option' => $variation_type_option[$j],
                     'sku' => $sku[$j] ?? null,
-                    'description' => $var_description_array[$j] ?? null,
-                    'price' => $var_price_array[$j] ?? '0.00',
-                    'quantity' => $var_quantity_array[$j] ?? '0',
+                    'description' => $variation_description[$j] ?? null,
+                    'price' => $variation_price[$j] ?? '0.00',
+                    'quantity' => $variation_quantity[$j] ?? '0',
                 ]);
             }
             ProductVariation::insert($productVariationArray); //bulk insert

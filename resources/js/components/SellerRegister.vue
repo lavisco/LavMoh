@@ -77,6 +77,19 @@
             </form>
             <!-- Form end -->
         </div>
+
+        <!-- Notification Modal -->
+        <success-modal
+            id="success-modal"
+            msgTitle="Seller Registration Successful"
+            msg="You have successfully been registered. Please Sign In to complete the rest of the steps."
+            gotoRoute="login"
+        />
+        <fail-modal
+            id="fail-modal"
+            msgTitle="Seller Registration Failed"
+            msg="There are errors in your form input. Please double check."
+        />
     </div>
 </template>
 
@@ -104,9 +117,12 @@ export default {
             this.form
                 .post("/api/seller/user")
                 .then(() => {
-                    window.location.href = "/login";
+                    $("#success-modal").modal("show");
                 })
-                .catch((error) => console.log(error));
+                .catch((error) => {
+                    console.log(error);
+                    $("#fail-modal").toast("show");
+                });
         },
     },
 

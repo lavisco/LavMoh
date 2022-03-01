@@ -1004,14 +1004,14 @@
                                             >
                                                 <td>
                                                     <input
-                                                        name="var_option_id_array"
-                                                        id="var_option_id_array"
+                                                        name="variation_type_option"
+                                                        id="variation_type_option"
                                                         v-model="
                                                             form
                                                                 .productVariation[
                                                                 variationCount
                                                             ]
-                                                                .var_option_id_array[
+                                                                .variation_type_option[
                                                                 i
                                                             ]
                                                         "
@@ -1024,7 +1024,7 @@
                                                     />
                                                     <HasError
                                                         :form="form"
-                                                        field="var_option_id_array"
+                                                        field="variation_type_option"
                                                     />
                                                 </td>
                                                 <td>
@@ -1051,15 +1051,15 @@
                                                 </td>
                                                 <td>
                                                     <input
-                                                        id="var_price_array"
+                                                        id="variation_price"
                                                         v-model="
                                                             form
                                                                 .productVariation[
                                                                 variationCount
-                                                            ].var_price_array[i]
+                                                            ].variation_price[i]
                                                         "
                                                         type="text"
-                                                        name="var_price_array"
+                                                        name="variation_price"
                                                         class="
                                                             form-control
                                                             form-control-alternative
@@ -1068,23 +1068,23 @@
                                                     />
                                                     <HasError
                                                         :form="form"
-                                                        field="var_price_array"
+                                                        field="variation_price"
                                                     />
                                                 </td>
                                                 <td>
                                                     <input
-                                                        id="var_quantity_array"
+                                                        id="variation_quantity"
                                                         v-model="
                                                             form
                                                                 .productVariation[
                                                                 variationCount
                                                             ]
-                                                                .var_quantity_array[
+                                                                .variation_quantity[
                                                                 i
                                                             ]
                                                         "
                                                         type="text"
-                                                        name="var_quantity_array"
+                                                        name="variation_quantity"
                                                         class="
                                                             form-control
                                                             form-control-alternative
@@ -1093,23 +1093,23 @@
                                                     />
                                                     <HasError
                                                         :form="form"
-                                                        field="productVariation.0.var_quantity_array.0"
+                                                        field="productVariation.0.variation_quantity.0"
                                                     />
                                                 </td>
                                                 <td>
                                                     <input
-                                                        id="var_description_array"
+                                                        id="variation_description"
                                                         v-model="
                                                             form
                                                                 .productVariation[
                                                                 variationCount
                                                             ]
-                                                                .var_description_array[
+                                                                .variation_description[
                                                                 i
                                                             ]
                                                         "
                                                         type="text"
-                                                        name="var_description_array"
+                                                        name="variation_description"
                                                         class="
                                                             form-control
                                                             form-control-alternative
@@ -1118,7 +1118,7 @@
                                                     />
                                                     <HasError
                                                         :form="form"
-                                                        field="var_description_array"
+                                                        field="variation_description"
                                                     />
                                                 </td>
                                                 <td>
@@ -1227,33 +1227,33 @@ export default {
             productVariation: [
                 {
                     variationId: "",
-                    variationIds: [],
+                    variation_type: [],
                     option_list: [],
-                    var_option_id_array: [],
+                    variation_type_option: [],
                     sku: [],
-                    var_price_array: [],
-                    var_quantity_array: [],
-                    var_description_array: [],
+                    variation_price: [],
+                    variation_quantity: [],
+                    variation_description: [],
                 },
                 {
                     variationId: "",
-                    variationIds: [],
+                    variation_type: [],
                     option_list: [],
-                    var_option_id_array: [],
+                    variation_type_option: [],
                     sku: [],
-                    var_price_array: [],
-                    var_quantity_array: [],
-                    var_description_array: [],
+                    variation_price: [],
+                    variation_quantity: [],
+                    variation_description: [],
                 },
                 {
                     variationId: "",
-                    variationIds: [],
+                    variation_type: [],
                     option_list: [],
-                    var_option_id_array: [],
+                    variation_type_option: [],
                     sku: [],
-                    var_price_array: [],
-                    var_quantity_array: [],
-                    var_description_array: [],
+                    variation_price: [],
+                    variation_quantity: [],
+                    variation_description: [],
                 },
             ],
         }),
@@ -1310,30 +1310,30 @@ export default {
         },
         addRow(count) {
             this.form.productVariation[count].option_list.push("1");
-            this.form.productVariation[count].variationIds.push(
+            this.form.productVariation[count].variation_type.push(
                 this.form.productVariation[count].variationId
             );
         },
         delRow(count, i) {
             let variant = this.form.productVariation[count];
             variant.option_list.splice(i, 1);
-            variant.var_option_id_array.splice(i, 1);
+            variant.variation_type_option.splice(i, 1);
             variant.sku.splice(i, 1);
-            variant.var_price_array.splice(i, 1);
-            variant.var_quantity_array.splice(i, 1);
-            variant.var_description_array.splice(i, 1);
+            variant.variation_price.splice(i, 1);
+            variant.variation_quantity.splice(i, 1);
+            variant.variation_description.splice(i, 1);
         },
         delVariation(count) {
             let variant = this.form.productVariation[count];
             this.variationMode = false;
             variant.variationId = "";
-            variant.variationIds = [];
+            variant.variation_type = [];
             variant.option_list = [];
-            variant.var_option_id_array = [];
+            variant.variation_type_option = [];
             variant.sku = [];
-            variant.var_price_array = [];
-            variant.var_quantity_array = [];
-            variant.var_description_array = [];
+            variant.variation_price = [];
+            variant.variation_quantity = [];
+            variant.variation_description = [];
             $("#addRecord").modal("hide");
         },
 

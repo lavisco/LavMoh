@@ -12,30 +12,82 @@
                                 @submit.prevent="updateUserPassword()"
                             >
                                 <div class="input-form-compact">
-                                    <h4 class="mb-4">Password Reset</h4>
+                                    <div class="card dashboard-info-card">
+                                        <h4 class="mb-3">Password Reset</h4>
+                                        <hr class="mt-0" />
+                                        <div class="form-group row">
+                                            <label
+                                                class="col-md-3 col-form-label"
+                                                for="old_password"
+                                                >Current Password
+                                                <strong class="text-danger">
+                                                    *
+                                                </strong>
+                                            </label>
 
-                                    <div class="form-group row">
-                                        <label
-                                            class="col-md-3 col-form-label"
-                                            for="password"
-                                            >Password
-                                            <strong class="text-danger">
-                                                *</strong
-                                            >
-                                        </label>
+                                            <div class="col-md-9">
+                                                <input
+                                                    id="old_password"
+                                                    v-model="form.old_password"
+                                                    type="password"
+                                                    name="old_password"
+                                                    class="form-control"
+                                                />
+                                                <HasError
+                                                    :form="form"
+                                                    field="old_password"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label
+                                                class="col-md-3 col-form-label"
+                                                for="password"
+                                                >New Password
+                                                <strong class="text-danger">
+                                                    *</strong
+                                                >
+                                            </label>
 
-                                        <div class="col-md-9">
-                                            <input
-                                                id="password"
-                                                v-model="form.password"
-                                                type="password"
-                                                name="password"
-                                                class="form-control"
-                                            />
-                                            <HasError
-                                                :form="form"
-                                                field="password"
-                                            />
+                                            <div class="col-md-9">
+                                                <input
+                                                    id="password"
+                                                    v-model="form.password"
+                                                    type="password"
+                                                    name="password"
+                                                    class="form-control"
+                                                />
+                                                <HasError
+                                                    :form="form"
+                                                    field="password"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label
+                                                class="col-md-3 col-form-label"
+                                                for="password_confirmation"
+                                                >Confirm Password
+                                                <strong class="text-danger">
+                                                    *
+                                                </strong>
+                                            </label>
+
+                                            <div class="col-md-9">
+                                                <input
+                                                    id="password_confirmation"
+                                                    v-model="
+                                                        form.password_confirmation
+                                                    "
+                                                    type="password"
+                                                    name="password_confirmation"
+                                                    class="form-control"
+                                                />
+                                                <HasError
+                                                    :form="form"
+                                                    field="password_confirmation"
+                                                />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -50,7 +102,7 @@
                                 >
                                     <button
                                         type="button"
-                                        class="btn btn-secondary mr-3"
+                                        class="btn btn-grey mr-3"
                                         @click.prevent="cancel()"
                                     >
                                         <i
@@ -75,11 +127,17 @@
             </div>
         </div>
 
-        <!-- Notification Toast -->
-        <success-toast
-            id="success-toast"
-            msg="Your password has been updated"
-            style="margin-bottom: 30px"
+        <!-- Notification Modal -->
+        <success-modal
+            id="success-modal"
+            msgTitle="Password Reset Successful"
+            msg="Password has been changed."
+            gotoRoute="noroute"
+        />
+        <fail-modal
+            id="fail-modal"
+            msgTitle="Password Reset Fail"
+            msg="There are errors in your form input. Please check again."
         />
     </div>
 </template>
@@ -99,6 +157,8 @@ export default {
         form: new Form({
             name: "",
             password: "",
+            old_password: "",
+            password_confirmation: "",
         }),
     }),
 
@@ -110,9 +170,12 @@ export default {
             this.form
                 .post("/api/seller/user/password_reset")
                 .then(() => {
-                    $("#success-toast").toast("show");
+                    $("#success-modal").modal("show");
                 })
-                .catch((error) => console.log(error));
+                .catch((error) => {
+                    console.log(error);
+                    $("#fail-modal").modal("show");
+                });
         },
     },
 

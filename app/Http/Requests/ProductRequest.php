@@ -45,9 +45,9 @@ class ProductRequest extends FormRequest
             'has_custom_image' => 'boolean|required',
             'has_variations' => 'boolean|required',
             'has_inventory' => 'boolean|required',
+            'has_giftwrap' => 'boolean|required',
             'quantity' => 'integer|required',
             'rating' => 'integer|nullable',
-            'has_giftwrap' => 'boolean|required',
             //'product_state_id' => 'required|sometimes',
             'category_id' => 'required|sometimes',
             //'user_id' => 'required|sometimes',
@@ -58,11 +58,13 @@ class ProductRequest extends FormRequest
                 'max:16',
                 Rule::unique('product_variations')->ignore($this->id),
             ],
-            'productVariation.*.var_option_id_array.*' => 'required|sometimes',
-            'productVariation.*.var_quantity_array.*' => 'integer|nullable',
-            'productVariation.*.var_price_array.*' => 'numeric|nullable',
-            'productVariation.*.description.*' => 'max:500|nullable',
-            'image_path.*' => 'required',
+            'productVariation.*.variation_type_option.*' => 'required|sometimes',
+            'productVariation.*.variation_quantity.*' => 'integer|nullable',
+            'productVariation.*.variation_price.*' => 'numeric|nullable',
+            'productVariation.*.variation_description.*' => 'max:500|nullable',
+            'image_path.0' => 'required',
+            'image_path.1' => 'required',
+            'image_path.2' => 'required',
         ];
     }
 
@@ -89,11 +91,13 @@ class ProductRequest extends FormRequest
             //'product_state_id' => 'product state',
             'category_id' => 'category',
             'productVariation.*.sku.*' => 'variation sku',
-            'productVariation.*.description.*' => 'variation description',
-            'productVariation.*.var_price_array.*' => 'variation price',
-            'productVariation.*.var_quantity_array.*' => 'variation quantity',
-            'productVariation.*.var_option_id_array.*' => 'variation type option',
-            'image_path.*' => 'image',
+            'productVariation.*.variation_description.*' => 'variation description',
+            'productVariation.*.variation_price.*' => 'variation price',
+            'productVariation.*.variation_quantity.*' => 'variation quantity',
+            'productVariation.*.variation_type_option.*' => 'variation type option',
+            'image_path.0' => 'primary image',
+            'image_path.1' => 'second image',
+            'image_path.2' => 'third image',
         ];
     }
 }

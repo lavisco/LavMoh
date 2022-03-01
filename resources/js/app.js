@@ -49,6 +49,7 @@ Vue.component(
     "success-modal",
     require("./components/SuccessModal.vue").default
 );
+Vue.component("fail-modal", require("./components/FailModal.vue").default);
 Vue.component(
     "success-toast",
     require("./components/SuccessToast.vue").default

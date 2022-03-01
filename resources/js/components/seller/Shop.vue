@@ -126,7 +126,12 @@
                                         >
                                         </textarea>
                                         <p class="text-xs mt-2 mb-0">
-                                            Maximum 500 characters. Tell buyers more about your store, for example your store history, goals, and what kind of products you sell, this will entice buyers and establish a sense of trust.
+                                            Maximum 500 characters. Tell buyers
+                                            more about your store, for example
+                                            your store history, goals, and what
+                                            kind of products you sell, this will
+                                            entice buyers and establish a sense
+                                            of trust.
                                         </p>
                                         <HasError :form="form" field="about" />
                                     </div>
@@ -381,13 +386,16 @@
             </div>
         </div>
 
-        <!-- Notification Toast -->
-        <success-toast
-            id="success-toast"
-            msg="Store details have been updated"
+        <!-- Notification Modal -->
+        <success-modal
+            id="success-modal"
+            msgTitle="Update Successful"
+            msg="Your store details have been updated. It will now display on the website."
+            gotoRoute="noroute"
         />
-        <fail-toast
-            id="fail-toast"
+        <fail-modal
+            id="fail-modal"
+            msgTitle="Update Failed"
             msg="There are errors in your form input. Please double check."
         />
     </div>
@@ -428,9 +436,6 @@ export default {
     }),
 
     methods: {
-        closeToast(toastname) {
-            $(toastname).toast("hide");
-        },
         fileSelected(e) {
             let file = e.target.files[0];
             let reader = new FileReader();
@@ -492,11 +497,11 @@ export default {
                 .put("/api/seller/shop/" + this.form.id)
                 .then(() => {
                     this.loadShop();
-                    $("#success-toast").toast("show");
+                    $("#success-modal").modal("show");
                 })
                 .catch((error) => {
                     console.log(error);
-                    $("#fail-toast").toast("show");
+                    $("#fail-modal").modal("show");
                 });
         },
     },

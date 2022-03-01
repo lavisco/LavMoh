@@ -514,13 +514,16 @@
             </div>
         </div>
 
-        <!-- Notification Toast -->
-        <success-toast
-            id="success-toast"
-            msg="Store details have been updated"
+        <!-- Notification Modal -->
+        <success-modal
+            id="success-modal"
+            msgTitle="Update Successful"
+            msg="Your Profile have been updated. It will now display on the website."
+            gotoRoute="noroute"
         />
-        <fail-toast
-            id="fail-toast"
+        <fail-modal
+            id="fail-modal"
+            msgTitle="Update Failed"
             msg="There are errors in your form input. Please double check."
         />
     </div>
@@ -605,11 +608,11 @@ export default {
                 .put("/api/seller/sellerprofile/" + this.form.id)
                 .then(() => {
                     this.loadSellerprofile();
-                    $("#success-toast").toast("show");
+                    $("#success-modal").modal("show");
                 })
                 .catch((error) => {
                     console.log(error);
-                    $("#fail-toast").toast("show");
+                    $("#fail-modal").modal("show");
                 });
         },
     },

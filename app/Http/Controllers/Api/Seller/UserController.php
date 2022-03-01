@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Seller;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PasswordRequest;
 use App\Http\Requests\SellerRegisterRequest;
 use App\Http\Requests\UserRequest;
 use App\Models\Role;
@@ -91,18 +92,12 @@ class UserController extends Controller
         //
     }
 
-    public function updatePassword(Request $request)
+    public function updatePassword(PasswordRequest $request)
     {
         //$this->authorize('update', $model);
-        $this->validate($request,[
-            'password' => 'required|string|min:8'
-        ]);
-
         $user = User::findOrFail(Auth::user()->id);
-
         $user->update([
-            'password' => Hash::make($request['password']),
+            'password' => Hash::make($request->password),
         ]);
-        
     }
 }

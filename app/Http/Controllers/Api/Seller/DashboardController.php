@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\Shop;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class DashboardController extends Controller
 {
@@ -18,13 +19,19 @@ class DashboardController extends Controller
 
     public function index()
     {
-        //$model->relation()->exists()
         $user = User::FindOrFail(auth()->id());
         return response()->json([
             'orders' => Order::where('seller_id', auth()->id())->count(),
             'products' => Product::where('user_id', auth()->id())->count(),
             'sellerShop' => Shop::where('user_id', auth()->id())->get(),
             'hasShop' => $user->shop()->exists(),
+        ]);
+    }
+
+    public function indexComingSoon()
+    {
+        return response()->json([
+            'image_path' => Storage::disk('s3')->temporaryUrl('public/images/Flag_perspective_matte_s.png', '+2 minutes')
         ]);
     }
 

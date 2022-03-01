@@ -8,11 +8,13 @@
                         <div
                             class="
                                 d-flex
+                                flex-column
                                 justify-content-center
                                 align-items-center
                             "
                         >
-                            <h3>Coming soon...</h3>
+                            <img v-if="image_path" :src="image_path" width="350px" class="mb-4" />
+                            <h1>Coming soon</h1>
                         </div>
                     </div>
                 </div>
@@ -23,6 +25,23 @@
 
 <script>
 export default {
-    mounted() {},
+    data: () => ({
+        image_path: "",
+    }),
+
+    methods: {
+        loadData() {
+            axios
+                .get("/api/seller/dashboard/coming_soon")
+                .then(({ data }) => {
+                    this.image_path = data.image_path;
+                })
+                .catch((error) => console.log(error));
+        },
+    },
+
+    mounted() {
+        this.loadData();
+    },
 };
 </script>

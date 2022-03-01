@@ -10388,8 +10388,16 @@ button.bg-black:hover {
 }
 
 @media (max-width: 992px) {
+  .hide-md {
+    display: none !important;
+  }
+
   .top-ribbon {
     font-size: 14px;
+  }
+
+  .seller-nav {
+    padding-top: 15px;
   }
 
   .navbar-main-menu {
@@ -11076,15 +11084,15 @@ footer a:hover svg path {
   padding-top: 40px;
   padding-bottom: 40px;
 }
-@media (max-width: 768px) {
-  .login .card {
-    width: 100%;
-  }
-}
 .login .card {
   width: 450px;
   padding-left: 0;
   padding-right: 0;
+}
+@media (max-width: 768px) {
+  .login .card {
+    width: 100%;
+  }
 }
 .login .forgot-pwd {
   color: #836aff;
@@ -11121,11 +11129,6 @@ footer a:hover svg path {
   -o-transition: all 0.3s ease;
 }
 
-@media (max-width: 768px) {
-  .login {
-    padding: auto;
-  }
-}
 /*------------------------------dashboard------------------------------*/
 .lavisco-dashboard-nav-menu {
   z-index: 998 !important;
@@ -11143,7 +11146,7 @@ h4 {
   font-size: 0.8rem;
   letter-spacing: 0.02rem;
   font-weight: 400 !important;
-  color: #777777;
+  color: #868686;
 }
 
 .dashboard-link {
@@ -11170,24 +11173,86 @@ h4 {
   color: #836aff;
 }
 
+@media (max-width: 768px) {
+  .main-dashboard-content .input-form input[type=text],
+.main-dashboard-content .input-form input[type=email],
+.main-dashboard-content .input-form input[type=password],
+.main-dashboard-content .input-form input[type=date],
+.main-dashboard-content .input-form input[type=number],
+.main-dashboard-content .input-form select,
+.main-dashboard-content .input-form optgroup,
+.main-dashboard-content .input-form textarea {
+    padding: 8px 20px !important;
+  }
+  .main-dashboard-content .input-form .form-group {
+    margin-bottom: 1.2rem;
+  }
+  .main-dashboard-content .search-input .input-group-text {
+    padding: 8px 8px !important;
+  }
+  .main-dashboard-content .search-input .form-control {
+    padding: 8px 20px !important;
+  }
+  .main-dashboard-content .btn {
+    padding: 8px 20px !important;
+    font-weight: 600;
+    font-size: 15px;
+  }
+  .main-dashboard-content .card {
+    padding: 0;
+  }
+  .main-dashboard-content .dashboard-card,
+.main-dashboard-content .modal-header,
+.main-dashboard-content .modal-body {
+    padding: 20px;
+  }
+  .main-dashboard-content .dashboard-info-card {
+    padding: 20px !important;
+    padding-bottom: 10px !important;
+  }
+  .main-dashboard-content .note {
+    font-size: 13px;
+  }
+  .main-dashboard-content label p {
+    margin-top: 0 !important;
+    margin-bottom: 0;
+  }
+}
+
 .dashboard-topnav .active {
   background-color: #836aff;
   color: #ffffff;
   border-color: #836aff;
 }
 .dashboard-topnav .navbar-toggler {
-  background-color: #333333;
+  background-color: #ffffff;
   text-transform: uppercase;
-  padding: 13px 22px;
-  border-radius: 12px;
-  margin-bottom: 10px;
+  box-shadow: 0px 0px 5px rgba(51, 51, 51, 0.21);
+  padding: 8px;
+  border-radius: 6px;
   text-align: center;
   font-size: 15px;
   font-weight: 600;
   letter-spacing: 0.15rem;
 }
-.dashboard-topnav .navbar-toggler:hover, .dashboard-topnav .navbar-toggler:focus {
-  background-color: #ff5a7c;
+.dashboard-topnav .navbar-toggler:hover svg > path, .dashboard-topnav .navbar-toggler:focus svg > path {
+  fill: #836aff;
+}
+@media (min-width: 992px) {
+  .dashboard-topnav h3,
+.dashboard-topnav .nav-user-options {
+    display: none !important;
+  }
+}
+.dashboard-topnav .nav-user-options {
+  order: 0;
+}
+.dashboard-topnav .nav-user-options svg {
+  height: 50px;
+  width: 50px;
+}
+.dashboard-topnav .nav-user-options .active {
+  background-color: transparent;
 }
 
 .gap {
@@ -11242,12 +11307,12 @@ h4 {
   box-shadow: rgba(51, 51, 51, 0.308) 0 0 0 1px;
   border-radius: 12px;
 }
-.input-form .btn-secondary {
-  background-color: #b8b8b8 !important;
-}
 
 .btn-grey {
-  background-color: #b8b8b8 !important;
+  background-color: #c5c5c5 !important;
+}
+.btn-grey:hover {
+  background-color: #adadad !important;
 }
 
 .form-table {
@@ -11332,12 +11397,28 @@ h4 {
 }
 
 .btn-xs {
-  padding: 6px 10px;
+  padding: 6px 16px;
 }
 
 .modal-header,
 .modal-body {
   padding: 20px 30px;
+}
+
+.notif-modal .modal-footer,
+.notif-modal .modal-content {
+  border-radius: 20px;
+  border: none;
+}
+.notif-modal .modal-header {
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  border: none;
+}
+.notif-modal h5 {
+  font-weight: 500;
+  line-height: 150%;
+  margin: 0;
 }
 
 .modal-view {
@@ -11391,6 +11472,13 @@ h4 {
   font-weight: 600;
   letter-spacing: 0.03rem;
   color: #4e4e4e;
+  font-size: 0.8rem;
+}
+.dashboard-table .table-col-sm {
+  min-width: 160px;
+}
+.dashboard-table .col-lg {
+  min-width: 200px;
 }
 
 .dashboard-card {
@@ -11468,92 +11556,7 @@ h4 {
   padding: 30px 24px;
 }
 
-/*------------------------------lavisco website------------------------------*/
-/*------------------------------product------------------------------*/
-.breadcrumb {
-  background-color: #ffffff;
-  font-size: 14px;
-  padding: 0 1rem;
-}
-
-.badge {
-  font-weight: 400;
-  font-size: 0.8rem;
-  letter-spacing: 0.03rem;
-  padding: 5px 10px;
-}
-
-.option-img {
-  border: 2px solid #4e4e4e;
-  border-radius: 12px;
-  -o-object-fit: cover;
-     object-fit: cover;
-  width: 100px;
-  height: 100px;
-}
-
-.website-select {
-  border: 1px solid #c9c9c9;
-  font-size: 16px;
-  font-weight: 500;
-  color: #333333;
-}
-
-.price {
-  font-weight: 600;
-  text-align: left;
-}
-
-.faq-card {
-  background-color: #eeeeee;
-  padding-top: 15px;
-  padding-bottom: 15px;
-}
-.faq-card p {
-  margin-bottom: 0;
-}
-
-.product-seller-img {
-  border-radius: 50%;
-  width: 100px;
-  height: 100px;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-
-.seller-card {
-  border: 1px solid #e6e6eb;
-  width: 100%;
-  gap: 10px;
-}
-@media (min-width: 768px) {
-  .seller-card {
-    width: 48%;
-  }
-}
-.seller-card img {
-  border-radius: 12px;
-}
-.seller-card .topseller-products {
-  width: 100%;
-  gap: 20px;
-}
-.seller-card .topseller-product-img {
-  width: 25%;
-  height: 100px;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-
-.dropdown-seller-product-edit .dropdown-menu {
-  min-width: auto;
-}
-.dropdown-seller-product-edit .dropdown-item {
-  font-size: 14px;
-  font-weight: 600;
-}
-
-/*------------------------------image-upload------------------------------*/
+/*---------------image-upload---------------*/
 .image-upload-box {
   width: 200px;
   height: 200px;
@@ -11576,6 +11579,13 @@ h4 {
   outline: none;
 }
 
+@media (max-width: 768px) {
+  .img-full,
+.image-upload-box,
+.image-upload-filename {
+    width: 100% !important;
+  }
+}
 .image-upload-box-primary {
   border: 2px solid #333333;
 }
@@ -11687,6 +11697,91 @@ h4 {
 
 .product-display-card {
   border: 1px solid rgba(51, 51, 51, 0.125);
+}
+
+/*------------------------------lavisco website------------------------------*/
+/*------------------------------product------------------------------*/
+.breadcrumb {
+  background-color: #ffffff;
+  font-size: 14px;
+  padding: 0 1rem;
+}
+
+.badge {
+  font-weight: 400;
+  font-size: 0.8rem;
+  letter-spacing: 0.03rem;
+  padding: 5px 10px;
+}
+
+.option-img {
+  border: 2px solid #4e4e4e;
+  border-radius: 12px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 100px;
+  height: 100px;
+}
+
+.website-select {
+  border: 1px solid #c9c9c9;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333333;
+}
+
+.price {
+  font-weight: 600;
+  text-align: left;
+}
+
+.faq-card {
+  background-color: #eeeeee;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+.faq-card p {
+  margin-bottom: 0;
+}
+
+.product-seller-img {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.seller-card {
+  border: 1px solid #e6e6eb;
+  width: 100%;
+  gap: 10px;
+}
+@media (min-width: 768px) {
+  .seller-card {
+    width: 48%;
+  }
+}
+.seller-card img {
+  border-radius: 12px;
+}
+.seller-card .topseller-products {
+  width: 100%;
+  gap: 20px;
+}
+.seller-card .topseller-product-img {
+  width: 25%;
+  height: 100px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.dropdown-seller-product-edit .dropdown-menu {
+  min-width: auto;
+}
+.dropdown-seller-product-edit .dropdown-item {
+  font-size: 14px;
+  font-weight: 600;
 }
 
 /*---------------product cart------------------------*/

@@ -43,7 +43,7 @@
         <div id="app">
             @auth() @include('layouts.laviscoDashboard.topNav')
 
-            <div class="main-content">
+            <div class="main-content main-dashboard-content">
                 <router-view></router-view>
             </div>
 

@@ -137,6 +137,15 @@
                                             badge badge-pill badge-secondary
                                             mr-2
                                         "
+                                        v-for="occasion in form.occasions"
+                                    >
+                                        {{ occasion.name }}
+                                    </span>
+                                    <span
+                                        class="
+                                            badge badge-pill badge-secondary
+                                            mr-2
+                                        "
                                         v-for="occasion in occasionName"
                                     >
                                         {{ occasion }}
@@ -280,7 +289,7 @@
                                 </p>
                             </label>
 
-                            <div class="col-md-2 col-sm-3">
+                            <div class="col-md-2 col-6">
                                 <input
                                     id="length"
                                     v-model="form.length"
@@ -293,7 +302,7 @@
                                 />
                                 <HasError :form="form" field="length" />
                             </div>
-                            <div class="col-md-2 col-sm-3">
+                            <div class="col-md-2 col-6">
                                 <input
                                     id="width"
                                     v-model="form.width"
@@ -306,7 +315,7 @@
                                 />
                                 <HasError :form="form" field="width" />
                             </div>
-                            <div class="col-md-2 col-sm-3">
+                            <div class="col-md-2 col-6 mt-2 mt-md-0">
                                 <input
                                     id="height"
                                     v-model="form.height"
@@ -319,7 +328,7 @@
                                 />
                                 <HasError :form="form" field="height" />
                             </div>
-                            <div class="col-md-2 col-sm-3">
+                            <div class="col-md-3 col-6 mt-2 mt-md-0">
                                 <select
                                     class="
                                         custom-select
@@ -349,7 +358,7 @@
                                 Can this item be wrapped for gifting?
                                 <strong class="text-danger"> *</strong>
                             </label>
-                            <div class="col-md-4">
+                            <div class="col-md-9">
                                 <div
                                     class="
                                         custom-control
@@ -429,6 +438,11 @@
                                                 name="product_image_path"
                                             />
 
+                                            <HasError
+                                                :form="form"
+                                                :field="`image_path.${index}`"
+                                            />
+
                                             <button
                                                 class="image-upload-box"
                                                 :class="{
@@ -457,10 +471,15 @@
                                             <p
                                                 class="
                                                     image-upload-filename
-                                                    mt-2
+                                                    my-2
                                                 "
                                             >
                                                 {{ form.image_title[index] }}
+                                                {{
+                                                    image.primary_image == "1"
+                                                        ? `: Primary (shows up on thumbnail)`
+                                                        : ""
+                                                }}
                                             </p>
                                         </div>
                                     </div>
@@ -511,7 +530,7 @@
                                     Select 'No' if this is a made to order item.
                                 </p>
                             </label>
-                            <div class="col-md-5">
+                            <div class="col-md-9">
                                 <div
                                     class="
                                         custom-control
@@ -554,9 +573,8 @@
                                         >No</label
                                     >
                                 </div>
+                                <HasError :form="form" field="has_inventory" />
                             </div>
-
-                            <HasError :form="form" field="has_inventory" />
                         </div>
                         <div class="form-group row">
                             <label
@@ -596,7 +614,7 @@
                             <label class="col-md-3 col-form-label" for="">
                                 Do you allow customization?
                             </label>
-                            <div class="col-md-4">
+                            <div class="col-md-9">
                                 <div class="custom-control custom-checkbox">
                                     <input
                                         type="checkbox"
@@ -977,7 +995,7 @@
                     <div class="input-form text-center mt-4">
                         <button
                             type="button"
-                            class="btn btn-secondary mr-3"
+                            class="btn btn-grey mr-3"
                             @click="cancel()"
                         >
                             <i class="fas fa-times mr-2" aria-hidden="true"></i>
@@ -1112,7 +1130,6 @@
             </div>
         </div>
 
-        
         <!-- Notification Modal -->
         <success-modal
             id="success-modal"
@@ -1120,10 +1137,9 @@
             msg="Your product has been updated. Changes will reflect on the website."
             gotoRoute="/seller/products"
         />
-
-        <!-- Notification Toast -->
-        <fail-toast
-            id="fail-toast"
+        <fail-modal
+            id="fail-modal"
+            msgTitle="Product Listing Update Failed"
             msg="There are errors in your form input. Please double check."
         />
     </div>
@@ -1208,6 +1224,10 @@ export default {
     },
 
     methods: {
+        /*
+         * Form Functions
+         */
+
         cancel() {
             this.$router.push("/seller/products");
         },
@@ -1235,61 +1255,9 @@ export default {
             $("#addRecord").modal("hide");
         },
 
-        loadProductStates() {
-            axios
-                .get("/api/seller/productstates")
-                .then(({ data }) => (this.productStates = data))
-                .catch((error) => console.log(error));
-        },
-
-        loadDetails() {
-            axios
-                .get("/api/seller/products/details")
-                .then((response) => {
-                    this.categories = response.data.categories;
-                    this.occasions = response.data.occasions;
-                    this.recipients = response.data.recipients;
-                    this.shippings = response.data.shippings;
-                })
-                .catch((error) => console.log(error));
-        },
-
-        loadProduct() {
-            axios
-                .get("/api/seller/products/" + this.$route.params.productId)
-                .then(({ data }) => {
-                    this.form.fill(data);
-
-                    this.loadPivotVariables();
-                    this.loadProductImages();
-                    this.loadProductVariations();
-                    this.loading = false;
-                })
-                .catch((error) => console.log(error));
-        },
-
-        loadPivotVariables() {
-            this.form.product_occasion = [];
-            this.form.product_recipient = [];
-            this.form.product_shipping = [];
-            if (this.form.occasions != null) {
-                this.form.occasions.forEach((value) => {
-                    this.form.product_occasion.push(value.id);
-                });
-            }
-            if (this.form.recipients != null) {
-                this.form.recipients.forEach((value) => {
-                    this.form.product_recipient.push(value.id);
-                });
-            }
-            if (this.form.shippings != null) {
-                this.form.shippings.forEach((value) => {
-                    this.form.product_shipping.push(value.id);
-                });
-            }
-        },
-
-        //image
+        /*
+         * Image
+         */
 
         fileSelected(e, imagenum) {
             let file = e.target.files[0];
@@ -1366,7 +1334,9 @@ export default {
                 .catch((error) => console.log(error));
         },
 
-        //variation
+        /*
+         * Variation
+         */
 
         loadProductVariations() {
             this.form.variation_id = [];
@@ -1437,6 +1407,64 @@ export default {
             }
         },
 
+        /*
+         * Product
+         */
+
+        loadProductStates() {
+            axios
+                .get("/api/seller/productstates")
+                .then(({ data }) => (this.productStates = data))
+                .catch((error) => console.log(error));
+        },
+
+        loadDetails() {
+            axios
+                .get("/api/seller/products/details")
+                .then((response) => {
+                    this.categories = response.data.categories;
+                    this.occasions = response.data.occasions;
+                    this.recipients = response.data.recipients;
+                    this.shippings = response.data.shippings;
+                })
+                .catch((error) => console.log(error));
+        },
+
+        loadProduct() {
+            axios
+                .get("/api/seller/products/" + this.$route.params.productId)
+                .then(({ data }) => {
+                    this.form.fill(data);
+                    this.loadPivotVariables();
+                    this.loadProductImages();
+                    this.loadProductVariations();
+                    this.loading = false;
+                })
+                .catch((error) => console.log(error));
+        },
+
+        loadPivotVariables() {
+            this.form.product_occasion = [];
+            this.form.product_recipient = [];
+            this.form.product_shipping = [];
+
+            if (this.form.occasions != null) {
+                this.form.occasions.forEach((value) => {
+                    this.form.product_occasion.push(value.id);
+                });
+            }
+            if (this.form.recipients != null) {
+                this.form.recipients.forEach((value) => {
+                    this.form.product_recipient.push(value.id);
+                });
+            }
+            if (this.form.shippings != null) {
+                this.form.shippings.forEach((value) => {
+                    this.form.product_shipping.push(value.id);
+                });
+            }
+        },
+
         updateProduct() {
             if (this.form.has_inventory == 0) {
                 this.form.quantity == "";
@@ -1452,7 +1480,7 @@ export default {
                 })
                 .catch((error) => {
                     console.log(error);
-                    $("#fail-toast").toast("show");
+                    $("#fail-modal").modal("show");
                 });
         },
     },

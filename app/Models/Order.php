@@ -76,4 +76,13 @@ class Order extends Model
     {
         return $this->hasOne(Receipt::class);
     }
+
+    public function scopeFilter($query, array $filters)
+    {
+        $query->when($filters['searchText'] ?? false, fn($query, $searchText) =>
+            $query
+                ->where('code', 'like', '%' . $searchText . '%')
+                ->orWhere('status', 'like', '%' . $searchText . '%')
+            );
+    }
 }

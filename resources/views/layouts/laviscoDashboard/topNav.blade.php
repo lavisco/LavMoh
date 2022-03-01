@@ -4,6 +4,7 @@
         d-flex
         justify-content-between
         align-items-center
+        hide-md
     "
 >
     @if(auth()->user()->role_id == 2)
@@ -12,11 +13,9 @@
             <img src="/images/lavisco/logo.png" />
         </router-link>
 
-        <div class="">
-            <h3 class="mb-0">
-                @{{ $route.meta.title ? $route.meta.title : "BugTrack" }}
-            </h3>
-        </div>
+        <h3 class="mb-0">
+            @{{ $route.meta.title ? $route.meta.title : "BugTrack" }}
+        </h3>
 
         <div class="d-flex nav-user-options justify-content-end">
             <router-link to="/seller/dashboard">
@@ -372,8 +371,7 @@
     @endif
 </nav>
 
-@if(auth()->user()->role_id == 2 && auth()->user()->shop &&
-auth()->user()->shop->status == true)
+@if(auth()->user()->role_id == 2)
 @include('layouts.laviscoDashboard.sellerTopNav') @endif
 @if(auth()->user()->role_id == 3)
 @include('layouts.laviscoDashboard.buyerTopNav') @endif

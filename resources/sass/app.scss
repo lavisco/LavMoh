@@ -277,6 +277,12 @@ button.bg-black:hover {
 .green {
     color: $lav-green;
 }
+.text-yellow {
+    color: $lav-yellow;
+}
+.text-lighter {
+    color: $lav-grey;
+}
 
 /*---------------------top-ribbon---------------------*/
 .top-ribbon {
@@ -1127,6 +1133,18 @@ h4 {
 }
 
 .main-dashboard-content {
+    .modal-content {
+        border: none;
+    }
+    .bg-black {
+        .btn-primary {
+            background-color: $lav-purple;
+            &:hover,
+            &:focus {
+                background-color: $lav-pink;
+            }
+        }
+    }
     @media (max-width: 768px) {
         .input-form {
             input[type="text"],
@@ -1140,7 +1158,10 @@ h4 {
                 padding: 8px 20px !important;
             }
             .form-group {
-                margin-bottom: 1.2rem;
+                margin-bottom: 1.4rem;
+            }
+            h5 {
+                font-size: 15px;
             }
         }
         .search-input {
@@ -1156,6 +1177,11 @@ h4 {
             font-weight: 600;
             font-size: 15px;
         }
+        .btn-sm {
+            //padding: 8px 20px !important;
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
         .card {
             padding: 0;
         }
@@ -1168,14 +1194,23 @@ h4 {
             padding: 20px !important;
             padding-bottom: 10px !important;
         }
+        .dashboard-var-card {
+            padding: 8px 14px !important;
+            .btn {
+                font-size: 13px;
+            }
+        }
         .note {
             font-size: 13px;
         }
         label {
             p {
-                margin-top: 0 !important;
-                margin-bottom: 0;
+                margin-top: 5px !important;
+                margin-bottom: 5px;
             }
+        }
+        .text-xs {
+            font-size: 0.77rem;
         }
     }
 }
@@ -1273,6 +1308,13 @@ h4 {
         box-shadow: rgba(51, 51, 51, 0.308) 0 0 0 1px;
         border-radius: 12px;
     }
+
+    h5 {
+        font-size: 17px;
+        text-align: left;
+        font-weight: 500;
+        margin-bottom: 0;
+    }
 }
 
 .btn-grey {
@@ -1285,7 +1327,7 @@ h4 {
 .form-table {
     background-color: #ffffff;
     border: 1px solid #b9b9b9;
-    border-radius: 12px;
+    border-radius: 5px;
     tbody {
         font-size: 16px;
         color: $black;
@@ -1299,6 +1341,30 @@ h4 {
         font-weight: 500;
         padding-top: 6px !important;
         padding-bottom: 6px !important;
+        min-width: 200px;
+    }
+    .tiny-col {
+        min-width: auto !important;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="date"],
+    input[type="number"],
+    select,
+    optgroup,
+    textarea {
+        padding: 6px 10px !important;
+        height: auto !important;
+        border-radius: 3px;
+    }
+    .btn {
+        padding: 6px 10px !important;
+        border-radius: 3px;
+    }
+    .smwidth {
+        min-width: 130px !important;
+        width: 130px;
     }
 }
 
@@ -1388,7 +1454,7 @@ h4 {
         border-top-right-radius: 20px;
         border: none;
     }
-    h5{
+    h5 {
         font-weight: 500;
         line-height: 150%;
         margin: 0;
@@ -1398,7 +1464,16 @@ h4 {
 .modal-view {
     font-size: 17px;
     label {
-        font-size: 14px;
+        letter-spacing: 0.03rem;
+        font-size: 0.8rem;
+        color: #6e6e6e;
+        font-weight: 500;
+    }
+    .dashboard-info-card {
+        padding: 23px;
+        h6 {
+            font-size: 16px;
+        }
     }
 }
 
@@ -1450,8 +1525,8 @@ h4 {
     .table-col-sm {
         min-width: 160px;
     }
-    .col-lg {
-        min-width: 200px;
+    .table-col-lg {
+        min-width: 220px;
     }
 }
 
@@ -1477,6 +1552,19 @@ h4 {
     padding: 30px;
     padding-bottom: 23px;
     border-radius: 5px;
+}
+.dashboard-var-card {
+    background-color: #ffffff;
+    border: 1px solid #eaeaead8;
+    padding: 10px 18px;
+
+    .btn {
+        border: none;
+        background-color: #eaeaead8;
+        &:hover {
+            background-color: $black;
+        }
+    }
 }
 .note {
     color: #868686;
@@ -1556,14 +1644,6 @@ h4 {
     }
 }
 
-@media (max-width: 768px) {
-    .img-full,
-    .image-upload-box,
-    .image-upload-filename {
-        width: 100% !important;
-    }
-}
-
 .image-upload-box-primary {
     border: 2px solid $black;
 }
@@ -1615,11 +1695,16 @@ h4 {
     object-position: center;
     z-index: -1;
 }
-.text-yellow {
-    color: $lav-yellow;
-}
-.text-lighter {
-    color: $lav-grey;
+
+@media (max-width: 768px) {
+    .img-full,
+    .image-upload-box,
+    .image-upload-filename {
+        width: 100% !important;
+    }
+    .banner-container {
+        width: calc(100% - 20px) !important;
+    }
 }
 
 .large-img-upload-box {

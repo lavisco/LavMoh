@@ -146,8 +146,8 @@
                                         address.
                                     </p>
 
-                                    <div class="form-group row">
-                                        <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
                                             <label
                                                 class="col-form-label"
                                                 for="province"
@@ -189,7 +189,7 @@
                                                 field="province"
                                             />
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="form-group col-md-6">
                                             <label
                                                 class="col-form-label"
                                                 for="district"
@@ -230,8 +230,8 @@
                                             />
                                         </div>
                                     </div>
-                                    <div class="form-group row">
-                                        <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
                                             <label
                                                 class="col-form-label"
                                                 for="city"
@@ -271,7 +271,7 @@
                                                 field="city"
                                             />
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="form-group col-md-6">
                                             <label
                                                 class="col-form-label"
                                                 for="zipcode"
@@ -295,10 +295,10 @@
                                         </div>
                                     </div>
                                     <div
-                                        class="form-group row"
+                                        class="row"
                                         v-show="areas[0] != null"
                                     >
-                                        <div class="col-md-6">
+                                        <div class="form-group col-md-6">
                                             <label
                                                 class="col-form-label"
                                                 for="area"
@@ -336,8 +336,8 @@
                                             />
                                         </div>
                                     </div>
-                                    <div class="form-group row">
-                                        <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="form-group col-md-12">
                                             <label
                                                 class="col-form-label"
                                                 for="address"

@@ -17,6 +17,7 @@ class Product extends Model
         'sku',
         'code',
         'title',
+        'short_description',
         'description',
         'material',
         'slug',

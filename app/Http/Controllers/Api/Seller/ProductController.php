@@ -48,11 +48,26 @@ class ProductController extends Controller
         $product->recipients()->sync(request('product_recipient'));
         $product->shippings()->sync(request('product_shipping'));
 
-        //product images
-        $this->uploadImage($request, $product->id);
-        
         //product variation
         $this->storeVariation($request, $product->id);
+
+        //product images
+        $this->uploadImage($request, $product->id);
+    }
+
+    public function storeNewImage(Request $request, $productId)
+    {        
+        //product images
+        //$this->uploadImage($request, $productId);
+
+        for ($i=0; $i < count($request->image_path_new); $i++) { 
+            ProductImage::create([
+                'image_path' => $this->storeImage($request->image_path_new[$i], $request->photoName[$i]),
+                'title' => $request->photoName[$i],
+                'primary_image' => false,
+                'product_id' => $productId,
+            ]);
+        }
     }
 
     public function uploadImage($request, $productId)
@@ -71,35 +86,74 @@ class ProductController extends Controller
     public function storeVariation($request, $productId)
     {
         if ($request->has('productVariation.0.variation_type_option.0')) {
-            $variation_type_option = $request->input('productVariation.*.variation_type_option.*');
-            $sku = $request->input('productVariation.*.sku.*');
-            $variation_price = $request->input('productVariation.*.variation_price.*');
-            $variation_quantity = $request->input('productVariation.*.variation_quantity.*');
-            $variation_description = $request->input('productVariation.*.variation_description.*');
-            $variation_type = $request->input('productVariation.*.variation_type.*');
 
-            $productVariationArray = []; //array containg data of each variation option
+            // $variation_type_option = $request->input('productVariation.*.variation_type_option.*');
+            // $sku = $request->input('productVariation.*.sku.*');
+            // $variation_price = $request->input('productVariation.*.variation_price.*');
+            // $variation_quantity = $request->input('productVariation.*.variation_quantity.*');
+            // $variation_description = $request->input('productVariation.*.variation_description.*');
+            // $variation_type = $request->input('productVariation.*.variation_type.*');
 
-            $length = count($variation_type_option);
+            // $productVariationArray = []; //array containg data of each variation option
 
-            for ($j=0; $j < $length; $j++) { 
-                
-                array_push($productVariationArray, [
-                    //repeating
-                    'product_id' => $productId,
-                    'product_state_id' => $request->input('product_state_id'),
-                    'user_id' => auth()->id(),
-                    'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now(),
-                    //non-repeating
-                    'type' => $variation_type[$j],
-                    'type_option' => $variation_type_option[$j],
-                    'sku' => $sku[$j] ?? null,
-                    'description' => $variation_description[$j] ?? null,
-                    'price' => $variation_price[$j] ?? '0.00',
-                    'quantity' => $variation_quantity[$j] ?? '0',
-                ]);
+            // for ($j=0; $j < count($variation_type_option); $j++) { 
+            //     array_push($productVariationArray, [
+            //         //repeating
+            //         'product_id' => $productId,
+            //         'product_state_id' => 1,
+            //         'user_id' => auth()->id(),
+            //         'created_at' => Carbon::now(),
+            //         'updated_at' => Carbon::now(),
+            //         //non-repeating
+            //         'type' => $variation_type[$j],
+            //         'type_option' => $variation_type_option[$j],
+            //         'sku' => $sku[$j] ?? null,
+            //         'description' => $variation_description[$j] ?? null,
+            //         'price' => $variation_price[$j] ?? '0.00',
+            //         'quantity' => $variation_quantity[$j] ?? '0',
+            //     ]);
+            // }
+
+            $variations = $request->input('productVariation.*.variationId');
+            $variationDescriptions = $request->input('productVariation.*.variationDescription');
+            $productVariations = $request->input('productVariation.*');
+    
+            $productVariationArray = [];
+            
+            $counter = 0;
+            for ($i = 0; $i < 3; $i++) {
+                if ($variations[$i]) {
+                    $counter += 1;
+                }
             }
+    
+            for ($i=0; $i < $counter; $i++) { 
+                $variation_type = $variations[$i];
+                $variation_description = $variationDescriptions[$i];
+                $type_option = $productVariations[$i]['variation_type_option'];
+                $sku = $productVariations[$i]['sku'];
+                $variation_price = $productVariations[$i]['variation_price'];
+                $variation_quantity = $productVariations[$i]['variation_quantity'];
+    
+                for ($j=0; $j < count($type_option); $j++) { 
+                    array_push($productVariationArray, [
+                        //repeating
+                        'product_id' => $productId,
+                        'product_state_id' => 1,
+                        'user_id' => auth()->id(),
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now(),
+                        'type' => $variation_type,
+                        'description' => $variation_description,
+                        //non-repeating
+                        'type_option' => $type_option[$j],
+                        'sku' => $sku[$j] ?? null,
+                        'price' => $variation_price[$j] ?? '0.00',
+                        'quantity' => $variation_quantity[$j] ?? '0',
+                    ]);
+                }
+            }
+
             ProductVariation::insert($productVariationArray); //bulk insert
         }
     }

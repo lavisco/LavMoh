@@ -172,6 +172,41 @@
                         <div class="form-group row">
                             <label
                                 class="col-md-3 col-form-label"
+                                for="short_description"
+                            >
+                                Short Description
+                                <strong class="text-danger"> *</strong>
+                                <p class="text-grey text-xs mt-2">
+                                    Write a brief overview that describes your
+                                    item's finest feature. Shoppers will see
+                                    your short description first, so make it
+                                    count!
+                                    <br />
+                                    Maximum <storng>500</storng> characters
+                                </p>
+                            </label>
+
+                            <div class="col-md-9">
+                                <textarea
+                                    id="short_description"
+                                    class="
+                                        form-control form-control-alternative
+                                    "
+                                    name="short_description"
+                                    rows="3"
+                                    cols="50"
+                                    v-model="form.short_description"
+                                >
+                                </textarea>
+                                <HasError
+                                    :form="form"
+                                    field="short_description"
+                                />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label
+                                class="col-md-3 col-form-label"
                                 for="description"
                             >
                                 Description
@@ -200,7 +235,10 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-3 col-form-label" for="material">
+                            <label
+                                class="col-md-3 col-form-label"
+                                for="material"
+                            >
                                 Ingredients
                                 <p class="text-grey text-xs mt-2">
                                     Ingredients used to make your product
@@ -857,6 +895,7 @@ export default {
             id: "",
             sku: "",
             title: "",
+            short_description: "",
             description: "",
             material: "",
             length: "",

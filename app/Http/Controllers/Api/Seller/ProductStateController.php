@@ -20,7 +20,7 @@ class ProductStateController extends Controller
      */
     public function index()
     {
-        return ProductState::latest()->filter(request(['searchText']))->get();
+        return ProductState::where('id', '1')->orWhere('id', '2')->get();
     }
 
     /**

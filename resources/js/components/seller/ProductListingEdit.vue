@@ -27,10 +27,11 @@
                     <!-- Listing -->
                     <div class="card dashboard-info-card">
                         <!-- Header -->
-                        <h4 class="mb-4">
+                        <h4 class="mb-3">
                             Listing Details of {{ form.title }}
                         </h4>
-                        <p class="mb-5">
+                        <hr class="mt-0" />
+                        <p class="mb-3 mb-md-4 note">
                             Update your product's information here.
                         </p>
 
@@ -177,6 +178,15 @@
                                             badge badge-pill badge-secondary
                                             mr-2
                                         "
+                                        v-for="recipient in form.recipients"
+                                    >
+                                        {{ recipient.name }}
+                                    </span>
+                                    <span
+                                        class="
+                                            badge badge-pill badge-secondary
+                                            mr-2
+                                        "
                                         v-for="recipient in recipientName"
                                     >
                                         {{ recipient }}
@@ -187,15 +197,52 @@
                         <div class="form-group row">
                             <label
                                 class="col-md-3 col-form-label"
+                                for="short_description"
+                            >
+                                Short Description
+                                <strong class="text-danger"> *</strong>
+                                <p class="text-grey text-xs mt-2">
+                                    Write a brief overview that describes your
+                                    item's finest feature. Shoppers will see
+                                    your short description first, so make it
+                                    count!
+                                    <br />
+                                    Maximum <strong>500</strong> characters
+                                </p>
+                            </label>
+
+                            <div class="col-md-9">
+                                <textarea
+                                    id="short_description"
+                                    class="
+                                        form-control form-control-alternative
+                                    "
+                                    name="short_description"
+                                    rows="5"
+                                    cols="50"
+                                    v-model="form.short_description"
+                                >
+                                </textarea>
+                                <HasError
+                                    :form="form"
+                                    field="short_description"
+                                />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label
+                                class="col-md-3 col-form-label"
                                 for="description"
                             >
                                 Description
                                 <strong class="text-danger"> *</strong>
                                 <p class="text-grey text-xs mt-2">
-                                    Write a brief overview that describes your
-                                    item's finest feature. Shoppers will only
-                                    see the first few lines of your description
-                                    at first, so make it count!
+                                    Describe your product's features and
+                                    benefits in a concise and honest manner.
+                                    Focus on its unique properties.
+                                </p>
+                                <p class="text-grey text-xs mt-2">
+                                    Maximum <strong>2000</strong> characters
                                 </p>
                             </label>
 
@@ -259,7 +306,7 @@
                                 />
                                 <HasError :form="form" field="weight" />
                             </div>
-                            <div class="col-md-2 col-sm-6">
+                            <div class="col-md-2 col-sm-6 mt-2 mt-md-0">
                                 <select
                                     class="
                                         custom-select
@@ -282,14 +329,16 @@
                         </div>
                         <div class="form-group row mb-md-1">
                             <label class="col-md-3 col-form-label" for="length">
-                                Item size
+                                Item Dimensions
                                 <p class="text-grey text-xs mt-2">
-                                    Enter size of the item plus packaging
-                                    material
+                                    Enter a rough estimation of your item size.
                                 </p>
                             </label>
 
                             <div class="col-md-2 col-6">
+                                <label class="col-form-label" for="length">
+                                    Length
+                                </label>
                                 <input
                                     id="length"
                                     v-model="form.length"
@@ -303,6 +352,9 @@
                                 <HasError :form="form" field="length" />
                             </div>
                             <div class="col-md-2 col-6">
+                                <label class="col-form-label" for="width">
+                                    Width
+                                </label>
                                 <input
                                     id="width"
                                     v-model="form.width"
@@ -316,6 +368,9 @@
                                 <HasError :form="form" field="width" />
                             </div>
                             <div class="col-md-2 col-6 mt-2 mt-md-0">
+                                <label class="col-form-label" for="height">
+                                    Height
+                                </label>
                                 <input
                                     id="height"
                                     v-model="form.height"
@@ -329,6 +384,12 @@
                                 <HasError :form="form" field="height" />
                             </div>
                             <div class="col-md-3 col-6 mt-2 mt-md-0">
+                                <label
+                                    class="col-form-label"
+                                    for="dimensions_unit"
+                                >
+                                    Unit
+                                </label>
                                 <select
                                     class="
                                         custom-select
@@ -355,7 +416,8 @@
 
                         <div class="form-group row mb-md-1">
                             <label class="col-md-3 col-form-label" for="">
-                                Can this item be wrapped for gifting?
+                                Will this product have Lavisco packaging
+                                materials?
                                 <strong class="text-danger"> *</strong>
                             </label>
                             <div class="col-md-9">
@@ -419,9 +481,15 @@
 
                         <div class="form-group row">
                             <div class="col">
-                                <div class="d-flex align-items-start">
+                                <div
+                                    class="
+                                        d-flex
+                                        align-items-start
+                                        flex-column flex-md-row flex-wrap
+                                    "
+                                >
                                     <div
-                                        class="mr-md-3"
+                                        class="mr-md-3 img-full"
                                         v-for="(image, index) in images"
                                     >
                                         <div>
@@ -431,7 +499,7 @@
                                                 @change.prevent="
                                                     fileSelected(
                                                         $event,
-                                                        `image${index}`
+                                                        `${index}`
                                                     )
                                                 "
                                                 ref="fileInput"
@@ -457,8 +525,6 @@
                                                 "
                                             >
                                                 <img
-                                                    width="150px"
-                                                    height="150px"
                                                     class="banner-container"
                                                     :src="
                                                         form.path[index]
@@ -471,7 +537,7 @@
                                             <p
                                                 class="
                                                     image-upload-filename
-                                                    my-2
+                                                    my-0
                                                 "
                                             >
                                                 {{ form.image_title[index] }}
@@ -479,6 +545,69 @@
                                                     image.primary_image == "1"
                                                         ? `: Primary (shows up on thumbnail)`
                                                         : ""
+                                                }}
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div
+                                        class="mr-md-3 img-full"
+                                        v-for="(n, index) in emptyImageSlot"
+                                    >
+                                        <div>
+                                            <input
+                                                type="file"
+                                                style="display: none"
+                                                @change.prevent="
+                                                    fileSelectedNew(
+                                                        $event,
+                                                        `${index}`
+                                                    )
+                                                "
+                                                ref="fileInput2"
+                                                name="product_image_path2"
+                                            />
+
+                                            <button
+                                                class="image-upload-box"
+                                                @click.prevent="
+                                                    $refs.fileInput2[
+                                                        index
+                                                    ].click()
+                                                "
+                                            >
+                                                <img
+                                                    v-if="url[index]"
+                                                    :src="url[index]"
+                                                    class="banner-container"
+                                                />
+                                                <svg
+                                                    v-show="
+                                                        !form.image_path[index]
+                                                    "
+                                                    width="45"
+                                                    height="45"
+                                                    viewBox="0 0 58 58"
+                                                    fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                >
+                                                    <path
+                                                        d="M36.25 29C36.25 30.9228 35.4862 32.7669 34.1265 34.1265C32.7669 35.4862 30.9228 36.25 29 36.25C27.0772 36.25 25.2331 35.4862 23.8735 34.1265C22.5138 32.7669 21.75 30.9228 21.75 29C21.75 27.0772 22.5138 25.2331 23.8735 23.8735C25.2331 22.5138 27.0772 21.75 29 21.75C30.9228 21.75 32.7669 22.5138 34.1265 23.8735C35.4862 25.2331 36.25 27.0772 36.25 29ZM19.1255 10.2587C19.5768 9.3548 20.271 8.59445 21.1303 8.06301C21.9896 7.53156 22.9799 7.25003 23.9902 7.25H34.0098C35.0201 7.25003 36.0104 7.53156 36.8697 8.06301C37.729 8.59445 38.4232 9.3548 38.8745 10.2587L40.9951 14.5H43.5C45.4228 14.5 47.2669 15.2638 48.6265 16.6235C49.9862 17.9831 50.75 19.8272 50.75 21.75V39.875C50.75 41.7978 49.9862 43.6419 48.6265 45.0015C47.2669 46.3612 45.4228 47.125 43.5 47.125H14.5C12.5772 47.125 10.7331 46.3612 9.37348 45.0015C8.01384 43.6419 7.25 41.7978 7.25 39.875V21.75C7.25 19.8272 8.01384 17.9831 9.37348 16.6235C10.7331 15.2638 12.5772 14.5 14.5 14.5H17.0049L19.1255 10.2587ZM39.875 29C39.875 26.1158 38.7292 23.3497 36.6898 21.3102C34.6503 19.2708 31.8842 18.125 29 18.125C26.1158 18.125 23.3497 19.2708 21.3102 21.3102C19.2708 23.3497 18.125 26.1158 18.125 29C18.125 31.8842 19.2708 34.6503 21.3102 36.6898C23.3497 38.7292 26.1158 39.875 29 39.875C31.8842 39.875 34.6503 38.7292 36.6898 36.6898C38.7292 34.6503 39.875 31.8842 39.875 29Z"
+                                                        fill="#4e4e4e"
+                                                    />
+                                                </svg>
+                                            </button>
+
+                                            <p
+                                                class="
+                                                    image-upload-filename
+                                                    my-0
+                                                "
+                                            >
+                                                {{
+                                                    form.photoName[index]
+                                                        ? form.photoName[index]
+                                                        : `Select Image`
                                                 }}
                                             </p>
                                         </div>
@@ -491,7 +620,8 @@
                     <!-- Inventory -->
                     <div class="card dashboard-info-card mt-4">
                         <!-- Header -->
-                        <h4 class="mb-4">Inventory & Pricing</h4>
+                        <h4 class="mb-3">Inventory & Pricing</h4>
+                        <hr class="mt-0" />
                         <div class="form-group row mb-md-1">
                             <label
                                 class="col-md-3 col-form-label"
@@ -604,10 +734,12 @@
                     <!-- Variation -->
                     <div class="card dashboard-info-card mt-4">
                         <!-- Header -->
-                        <h4 class="mb-4">Variations</h4>
-                        <p class="mb-5">
-                            Add available options like color or size. Buyers
-                            will choose from these during checkout.
+                        <h4 class="mb-3">Variations</h4>
+                        <hr class="mt-0" />
+                        <p class="mb-3 mb-md-4 note">
+                            Add available options like color or size, and give
+                            your customers the opportunity to customize their
+                            products.
                         </p>
 
                         <div class="form-group row">
@@ -881,8 +1013,9 @@
                     <!-- Shipping -->
                     <div class="card dashboard-info-card mt-4">
                         <!-- Header -->
-                        <h4 class="mb-4">Shipping</h4>
-                        <p class="mb-5">
+                        <h4 class="mb-3">Shipping</h4>
+                        <hr class="mt-0" />
+                        <p class="mb-3 mb-md-4 note">
                             Set clear and realistic shipping expectations for
                             shoppers
                         </p>
@@ -1165,14 +1298,17 @@ export default {
         shippings: [],
         product: "",
         images: {},
+        emptyImageSlot: "",
         variations: {},
         occasionName: [],
         recipientName: [],
+        url: [],
 
         form: new Form({
             id: "",
             sku: "",
             title: "",
+            short_description: "",
             description: "",
             material: "",
             length: "",
@@ -1198,6 +1334,9 @@ export default {
             product_occasion: [],
             product_recipient: [],
             product_shipping: [],
+
+            image_path_new: [],
+            photoName: [],
 
             //image
             image_id: [],
@@ -1268,34 +1407,43 @@ export default {
                 return false;
             }
             reader.onloadend = (file) => {
-                if (imagenum == "image0") {
-                    this.$set(this.form.image_path, 0, reader.result);
-                    this.$set(this.form.image_title, 0, e.target.files[0].name);
-                    this.$set(this.form.primary_image, 0, 1);
-                    this.$set(
-                        this.form.path,
-                        0,
-                        URL.createObjectURL(e.target.files[0])
-                    );
-                } else if (imagenum == "image1") {
-                    this.$set(this.form.image_path, 1, reader.result);
-                    this.$set(this.form.image_title, 1, e.target.files[0].name);
-                    this.$set(this.form.primary_image, 1, 0);
-                    this.$set(
-                        this.form.path,
-                        1,
-                        URL.createObjectURL(e.target.files[0])
-                    );
-                } else if (imagenum == "image2") {
-                    this.$set(this.form.image_path, 2, reader.result);
-                    this.$set(this.form.image_title, 2, e.target.files[0].name);
-                    this.$set(this.form.primary_image, 2, 0);
-                    this.$set(
-                        this.form.path,
-                        2,
-                        URL.createObjectURL(e.target.files[0])
-                    );
-                }
+                this.$set(this.form.image_path, imagenum, reader.result);
+                this.$set(
+                    this.form.image_title,
+                    imagenum,
+                    e.target.files[0].name
+                );
+                this.$set(this.form.primary_image, imagenum, 0);
+                this.$set(
+                    this.form.path,
+                    imagenum,
+                    URL.createObjectURL(e.target.files[0])
+                );
+            };
+            reader.readAsDataURL(file);
+        },
+
+        fileSelectedNew(e, imagenum) {
+            let file = e.target.files[0];
+            let reader = new FileReader();
+            let limit = 1024 * 1024 * 2;
+            if (file["size"] > limit) {
+                alert("File size has crossed maximum limit, which is 2mb!");
+                return false;
+            }
+
+            reader.onloadend = (file) => {
+                this.$set(this.form.image_path_new, imagenum, reader.result);
+                this.$set(
+                    this.form.photoName,
+                    imagenum,
+                    e.target.files[0].name
+                );
+                this.$set(
+                    this.url,
+                    imagenum,
+                    URL.createObjectURL(e.target.files[0])
+                );
             };
             reader.readAsDataURL(file);
         },
@@ -1307,6 +1455,11 @@ export default {
                 })
                 .then(({ data }) => {
                     this.images = data;
+
+                    this.emptyImageSlot = 6 - this.images.length;
+
+                    this.form.image_path_new = [];
+                    this.form.photoName = [];
 
                     this.form.image_id = [];
                     this.form.image_path = [];
@@ -1330,6 +1483,13 @@ export default {
                 .put(
                     "/api/seller/product_images/" + this.$route.params.productId
                 )
+                .then(() => {})
+                .catch((error) => console.log(error));
+        },
+
+        storeNewImage() {
+            this.form
+                .put("/api/seller/products/storeNewImage/" + this.form.id)
                 .then(() => {})
                 .catch((error) => console.log(error));
         },
@@ -1471,6 +1631,7 @@ export default {
             }
 
             this.updateProductImages();
+            this.storeNewImage();
             this.updateProductVariations();
 
             this.form

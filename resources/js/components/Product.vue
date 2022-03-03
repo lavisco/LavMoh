@@ -184,6 +184,18 @@
                         <h6>Price</h6>
                         <h3 class="price">LKR {{ product.base_price }}</h3>
                     </div>
+                    <div class="mt-4" v-show="has_custom_text">
+                        <h6>Custom message</h6>
+
+                        <input
+                            id="custom_text"
+                            v-model="form.custom_text"
+                            type="text"
+                            name="custom_text"
+                            class="form-control form-control-alternative"
+                            placeholder="Custom message"
+                        />
+                    </div>
                     <div class="mt-4">
                         <h6>Checkout</h6>
                         <div class="d-md-flex">
@@ -349,6 +361,10 @@ export default {
     data: () => ({
         product: [],
         loading: true,
+        form: new Form({
+            id: "",
+            custom_text: "",
+        }),
         swiperOptionTop: {
             loop: true,
             loopedSlides: 3, // looped slides should be the same

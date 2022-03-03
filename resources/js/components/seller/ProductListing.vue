@@ -172,18 +172,53 @@
                         <div class="form-group row">
                             <label
                                 class="col-md-3 col-form-label"
+                                for="short_description"
+                            >
+                                Short Description
+                                <strong class="text-danger"> *</strong>
+                                <p class="text-grey text-xs mt-2">
+                                    Write a brief overview that describes your
+                                    item's finest feature. Shoppers will see
+                                    your short description first, so make it
+                                    count!
+                                </p>
+                                <p class="text-grey text-xs">
+                                    Maximum <strong>500</strong> characters
+                                </p>
+                            </label>
+
+                            <div class="col-md-9">
+                                <textarea
+                                    id="short_description"
+                                    class="
+                                        form-control form-control-alternative
+                                    "
+                                    name="short_description"
+                                    rows="5"
+                                    cols="50"
+                                    v-model="form.short_description"
+                                >
+                                </textarea>
+                                <HasError
+                                    :form="form"
+                                    field="short_description"
+                                />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label
+                                class="col-md-3 col-form-label"
                                 for="description"
                             >
                                 Description
                                 <strong class="text-danger"> *</strong>
                                 <p class="text-grey text-xs mt-2">
-                                    Write a brief overview that describes your
-                                    item's finest feature. Shoppers will only
-                                    see the first few lines of your description
-                                    at first, so make it count!
+                                    Describe your product's features and
+                                    benefits in a concise and honest manner.
+                                    Focus on its unique properties.
                                 </p>
-                                <p class="text-grey text-xs mt-2">
-                                    Maximum 1000 characters
+                                <p class="text-grey text-xs">
+                                    Maximum <strong>2000</strong> characters
                                 </p>
                             </label>
 
@@ -202,7 +237,7 @@
                                 <HasError :form="form" field="description" />
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group row mb-md-1">
                             <label
                                 class="col-md-3 col-form-label"
                                 for="material"
@@ -229,55 +264,22 @@
                                 <HasError :form="form" field="material" />
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-md-3 col-form-label" for="weight">
-                                Item weight
-                            </label>
-
-                            <div class="col-md-2 col-6">
-                                <input
-                                    id="weight"
-                                    v-model="form.weight"
-                                    type="text"
-                                    name="weight"
-                                    class="
-                                        form-control form-control-alternative
-                                    "
-                                    placeholder="Weight"
-                                />
-                                <HasError :form="form" field="weight" />
-                            </div>
-                            <div class="col-md-2 col-6">
-                                <select
-                                    class="
-                                        custom-select
-                                        form-control form-control-alternative
-                                    "
-                                    name="weight_unit"
-                                    id="weight_unit"
-                                    v-model="form.weight_unit"
-                                >
-                                    <option value="" disabled selected hidden>
-                                        Select unit
-                                    </option>
-                                    <option>lb</option>
-                                    <option>kg</option>
-                                    <option>gm</option>
-                                    <option>oz</option>
-                                </select>
-                                <HasError :form="form" field="weight_unit" />
-                            </div>
-                        </div>
                         <div class="form-group row mb-md-1">
                             <label class="col-md-3 col-form-label" for="length">
-                                Item size
+                                Item Dimensions
                                 <p class="text-grey text-xs mt-2">
-                                    Enter size of the item plus packaging
-                                    material
+                                    Enter a rough estimation of your product
+                                    size.
                                 </p>
                             </label>
 
                             <div class="col-md-2 col-6">
+                                <label
+                                    class="col-form-label pt-md-auto pt-0"
+                                    for="length"
+                                >
+                                    Length
+                                </label>
                                 <input
                                     id="length"
                                     v-model="form.length"
@@ -291,6 +293,12 @@
                                 <HasError :form="form" field="length" />
                             </div>
                             <div class="col-md-2 col-6">
+                                <label
+                                    class="col-form-label pt-md-auto pt-0"
+                                    for="width"
+                                >
+                                    Breadth
+                                </label>
                                 <input
                                     id="width"
                                     v-model="form.width"
@@ -299,11 +307,14 @@
                                     class="
                                         form-control form-control-alternative
                                     "
-                                    placeholder="Width"
+                                    placeholder="Breadth"
                                 />
                                 <HasError :form="form" field="width" />
                             </div>
                             <div class="col-md-2 col-6 mt-2 mt-md-0">
+                                <label class="col-form-label" for="height">
+                                    Height
+                                </label>
                                 <input
                                     id="height"
                                     v-model="form.height"
@@ -317,6 +328,12 @@
                                 <HasError :form="form" field="height" />
                             </div>
                             <div class="col-md-3 col-6 mt-2 mt-md-0">
+                                <label
+                                    class="col-form-label"
+                                    for="dimensions_unit"
+                                >
+                                    Unit
+                                </label>
                                 <select
                                     class="
                                         custom-select
@@ -343,7 +360,8 @@
 
                         <div class="form-group row mb-md-1">
                             <label class="col-md-3 col-form-label" for="">
-                                Can this item be wrapped for gifting?
+                                Will this product have Lavisco packaging
+                                materials?
                                 <strong class="text-danger"> *</strong>
                             </label>
                             <div class="col-md-9">
@@ -411,12 +429,12 @@
                                     class="
                                         d-flex
                                         align-items-start
-                                        flex-column flex-md-row
+                                        flex-column flex-md-row flex-wrap
                                     "
                                 >
                                     <div
                                         class="mr-md-3 img-full"
-                                        v-for="(n, index) in 3"
+                                        v-for="(n, index) in 6"
                                     >
                                         <div>
                                             <input
@@ -425,7 +443,7 @@
                                                 @change.prevent="
                                                     fileSelected(
                                                         $event,
-                                                        `image${index}`
+                                                        `${index}`
                                                     )
                                                 "
                                                 ref="fileInput"
@@ -618,55 +636,157 @@
                         <h4 class="mb-3">Variations</h4>
                         <hr class="mt-0" />
                         <p class="mb-3 mb-md-4 note">
-                            Add available options like color or size. Buyers
-                            will choose from these during checkout.
+                            Add available options like color or size, and give
+                            your customers the opportunity to customize their
+                            products.
                         </p>
 
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label" for="">
-                                Do you allow customization?
+                                Do you allow the buyers to add a small message
+                                on your product?
                             </label>
-                            <div class="col-md-4">
-                                <div class="custom-control custom-checkbox">
+                            <div class="col-md-9">
+                                <div
+                                    class="
+                                        custom-control
+                                        custom-radio
+                                        custom-control-inline
+                                    "
+                                >
                                     <input
-                                        type="checkbox"
-                                        class="custom-control-input"
-                                        id="has_custom_text"
-                                        v-model="form.has_custom_text"
+                                        type="radio"
+                                        id="has_custom_text1"
                                         name="has_custom_text"
-                                        @change="check($event)"
+                                        class="custom-control-input"
+                                        v-model="form.has_custom_text"
+                                        value="1"
                                     />
                                     <label
                                         class="custom-control-label"
-                                        for="has_custom_text"
-                                        >Custom Text Available</label
-                                    >
+                                        for="has_custom_text1"
+                                        >Yes
+                                    </label>
+                                </div>
+                                <div
+                                    class="
+                                        custom-control
+                                        custom-radio
+                                        custom-control-inline
+                                    "
+                                >
+                                    <input
+                                        type="radio"
+                                        id="has_custom_text2"
+                                        name="has_custom_text"
+                                        class="custom-control-input"
+                                        v-model="form.has_custom_text"
+                                        value="0"
+                                    />
+                                    <label
+                                        class="custom-control-label"
+                                        for="has_custom_text2"
+                                        >No
+                                    </label>
                                 </div>
                                 <HasError
                                     :form="form"
                                     field="has_custom_text"
                                 />
                             </div>
-                            <div class="col-md-4">
-                                <div class="custom-control custom-checkbox">
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label" for="">
+                                Will this item have weight as a variation?
+                                <strong class="text-danger"> *</strong>
+                            </label>
+                            <div class="col-md-9">
+                                <div
+                                    class="
+                                        custom-control
+                                        custom-radio
+                                        custom-control-inline
+                                    "
+                                >
                                     <input
-                                        type="checkbox"
+                                        type="radio"
+                                        id="has_weight1"
+                                        name="has_weight"
                                         class="custom-control-input"
-                                        id="has_custom_image"
-                                        v-model="form.has_custom_image"
-                                        name="has_custom_image"
-                                        @change="check($event)"
+                                        v-model="has_weight"
+                                        :value="true"
                                     />
                                     <label
                                         class="custom-control-label"
-                                        for="has_custom_image"
-                                        >Custom Image Available</label
-                                    >
+                                        for="has_weight1"
+                                        >Yes
+                                    </label>
                                 </div>
-                                <HasError
-                                    :form="form"
-                                    field="has_custom_image"
+                                <div
+                                    class="
+                                        custom-control
+                                        custom-radio
+                                        custom-control-inline
+                                    "
+                                >
+                                    <input
+                                        type="radio"
+                                        id="has_weight2"
+                                        name="has_weight"
+                                        class="custom-control-input"
+                                        v-model="has_weight"
+                                        :value="false"
+                                    />
+                                    <label
+                                        class="custom-control-label"
+                                        for="has_weight2"
+                                        >No
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div
+                            class="form-group row"
+                            v-show="has_weight === false"
+                        >
+                            <label class="col-md-3 col-form-label" for="weight">
+                                Item weight
+                            </label>
+
+                            <div class="col-md-4 col-6">
+                                <input
+                                    id="weight"
+                                    v-model="form.weight"
+                                    type="text"
+                                    name="weight"
+                                    class="
+                                        form-control form-control-alternative
+                                    "
+                                    placeholder="Weight"
                                 />
+                                <HasError :form="form" field="weight" />
+                            </div>
+                            <div class="col-md-4 col-6">
+                                <select
+                                    class="
+                                        custom-select
+                                        form-control form-control-alternative
+                                    "
+                                    name="weight_unit"
+                                    id="weight_unit"
+                                    v-model="form.weight_unit"
+                                >
+                                    <option value="" disabled selected hidden>
+                                        Select unit
+                                    </option>
+                                    <option>lb</option>
+                                    <option>kg</option>
+                                    <option>gm</option>
+                                    <option>oz</option>
+                                </select>
+                                <HasError :form="form" field="weight_unit" />
                             </div>
                         </div>
 
@@ -725,124 +845,297 @@
                             <label class="col-md-3 col-form-label" for="">
                                 Add new Variations
                                 <strong class="text-danger"> *</strong>
+                                <p class="text-grey text-xs mt-2 mb-0">
+                                    You may add upto
+                                    <strong>3</strong> variation types. Each
+                                    type may have upto
+                                    <strong>3</strong> options.
+                                </p>
                             </label>
                             <div class="col-md-9">
                                 <button
                                     class="btn btn-sm"
                                     type="button"
-                                    @click.prevent="
-                                        subcategoryModal('variationMode', 0)
-                                    "
+                                    @click.prevent="setVariationMode"
                                 >
                                     Add a Variation
-                                </button>
-                                <button
-                                    class="btn btn-sm"
-                                    type="button"
-                                    @click.prevent="
-                                        subcategoryModal('variationMode', 1)
-                                    "
-                                    v-show="
-                                        form.productVariation[0]
-                                            .variation_type[0]
-                                    "
-                                >
-                                    Add 2nd Variations
-                                </button>
-                                <button
-                                    class="btn btn-sm"
-                                    type="button"
-                                    @click.prevent="
-                                        subcategoryModal('variationMode', 2)
-                                    "
-                                    v-show="
-                                        form.productVariation[1]
-                                            .variation_type[0]
-                                    "
-                                >
-                                    Add 3rd Variations
                                 </button>
                             </div>
                         </div>
                         <div
-                            class="form-group row"
-                            v-show="form.productVariation[0].variation_type[0]"
+                            class="
+                                card
+                                dashboard-info-card dashboard-var-card
+                                mt-2
+                                mb-3
+                            "
+                            v-show="variation.variationMode"
+                            v-for="(variation, index) in form.productVariation"
                         >
-                            <label class="col-md-3 col-form-label" for="">
-                                Product Variations
-                            </label>
-                            <div class="col-md-9">
-                                <div
-                                    class="table-responsive form-table mt-md-2"
+                            <!-- Header -->
+                            <div
+                                class="
+                                    d-flex
+                                    flex-row
+                                    align-items-center
+                                    justify-content-between
+                                "
+                            >
+                                <h5>
+                                    Variation
+                                    {{ variation.variationId }}
+                                </h5>
+                                <button
+                                    type="button"
+                                    class="btn btn-light btn-sm"
+                                    @click.prevent="delVariation(index)"
                                 >
-                                    <table
+                                    <i class="fas fa-times mr-2"></i>
+                                    Remove
+                                </button>
+                            </div>
+
+                            <hr class="mt-2" />
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label" for="">
+                                    Type
+                                    <strong class="text-danger"> *</strong>
+                                </label>
+                                <div class="col-md-4">
+                                    <input
+                                        id="productVariation.variation_id"
+                                        v-model="variation.variationId"
+                                        type="text"
+                                        name="productVariation.variation_id"
                                         class="
-                                            table
-                                            align-items-center
-                                            table-hover
+                                            form-control
+                                            form-control-alternative
+                                        "
+                                        placeholder="Variation Type"
+                                        @change.prevent="
+                                            changeVariationType(index)
+                                        "
+                                    />
+                                    <HasError
+                                        :form="form"
+                                        :field="`productVariation.${index}.variationId`"
+                                    />
+                                </div>
+                            </div>
+                            <div class="form-group row mb-md-1">
+                                <label
+                                    class="col-md-3 col-form-label"
+                                    for="variationDescription"
+                                >
+                                    Description
+                                    <p class="text-grey text-xs mt-2 mb-0">
+                                        Explain your variation shortly if
+                                        neccessary.
+                                    </p>
+                                </label>
+                                <div class="col-md-9">
+                                    <input
+                                        id="variationDescription"
+                                        v-model="variation.variationDescription"
+                                        type="text"
+                                        name="variationDescription"
+                                        class="
+                                            form-control
+                                            form-control-alternative
+                                        "
+                                        placeholder="Description"
+                                        @change.prevent="
+                                            changeVariationDesc(index)
+                                        "
+                                    />
+                                    <HasError
+                                        :form="form"
+                                        :field="`productVariation.${index}.variationDescription`"
+                                    />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label" for="">
+                                    Variation Options
+                                    <strong class="text-danger"> *</strong>
+                                    <p class="text-grey text-xs mt-2 mb-0">
+                                        Variation will not be saved if no
+                                        options are given.
+                                    </p>
+                                </label>
+                                <div class="col-md-9">
+                                    <div
+                                        class="
+                                            table-responsive
+                                            form-table
+                                            mt-md-2
                                         "
                                     >
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Type</th>
-                                                <th>Option</th>
-                                                <th>Price</th>
-                                                <th>Inventory</th>
-                                                <th>SKU</th>
-                                                <th>Description</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr
-                                                v-for="variation in form.productVariation"
-                                                v-show="
-                                                    variation.variation_type[0]
-                                                "
-                                            >
-                                                <td>
-                                                    {{
-                                                        variation
-                                                            .variation_type[0]
-                                                    }}
-                                                </td>
-                                                <td>
-                                                    <div
-                                                        v-for="varOption in variation.variation_type_option"
-                                                    >
-                                                        {{ varOption }}
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div
-                                                        v-for="varPrice in variation.variation_price"
-                                                    >
-                                                        {{ varPrice }}
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div
-                                                        v-for="varInventory in variation.variation_quantity"
-                                                    >
-                                                        {{ varInventory }}
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div
-                                                        v-for="varsku in variation.sku"
-                                                    >
-                                                        {{ varsku }}
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div
-                                                        v-for="varDesc in variation.variation_description"
-                                                    >
-                                                        {{ varDesc }}
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                        <table class="table align-items-center">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        Option
+                                                        <strong
+                                                            class="text-danger"
+                                                        >
+                                                            *
+                                                        </strong>
+                                                    </th>
+                                                    <th class="smwidth">
+                                                        Price
+                                                        <strong
+                                                            class="text-danger"
+                                                        >
+                                                            *
+                                                        </strong>
+                                                    </th>
+                                                    <th class="smwidth">
+                                                        Inventory
+                                                    </th>
+                                                    <th>SKU</th>
+                                                    <th class="tiny-col"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr
+                                                    v-for="(
+                                                        item, i
+                                                    ) in variation.option_list"
+                                                >
+                                                    <td>
+                                                        <input
+                                                            name="variation_type_option"
+                                                            id="variation_type_option"
+                                                            v-model="
+                                                                variation
+                                                                    .variation_type_option[
+                                                                    i
+                                                                ]
+                                                            "
+                                                            type="text"
+                                                            class="
+                                                                form-control
+                                                                form-control-alternative
+                                                            "
+                                                            placeholder="Option"
+                                                        />
+                                                        <HasError
+                                                            :form="form"
+                                                            :field="`productVariation.${index}.variation_type_option.${i}`"
+                                                        />
+                                                    </td>
+                                                    <td>
+                                                        <input
+                                                            id="variation_price"
+                                                            v-model="
+                                                                variation
+                                                                    .variation_price[
+                                                                    i
+                                                                ]
+                                                            "
+                                                            type="text"
+                                                            name="variation_price"
+                                                            class="
+                                                                form-control
+                                                                form-control-alternative
+                                                            "
+                                                            placeholder="price"
+                                                        />
+                                                        <HasError
+                                                            :form="form"
+                                                            :field="`productVariation.${index}.variation_price.${i}`"
+                                                        />
+                                                    </td>
+                                                    <td>
+                                                        <input
+                                                            id="variation_quantity"
+                                                            v-model="
+                                                                variation
+                                                                    .variation_quantity[
+                                                                    i
+                                                                ]
+                                                            "
+                                                            type="text"
+                                                            name="variation_quantity"
+                                                            class="
+                                                                form-control
+                                                                form-control-alternative
+                                                            "
+                                                            placeholder="qty"
+                                                        />
+                                                        <HasError
+                                                            :form="form"
+                                                            :field="`productVariation.${index}.variation_quantity.${i}`"
+                                                        />
+                                                    </td>
+                                                    <td>
+                                                        <input
+                                                            id="productVariation.sku"
+                                                            v-model="
+                                                                variation.sku[i]
+                                                            "
+                                                            type="text"
+                                                            name="productVariation.sku"
+                                                            class="
+                                                                form-control
+                                                                form-control-alternative
+                                                            "
+                                                            placeholder="sku"
+                                                        />
+                                                        <HasError
+                                                            :form="form"
+                                                            :field="`productVariation.${index}.sku.${i}`"
+                                                        />
+                                                    </td>
+                                                    <td>
+                                                        <a
+                                                            class="
+                                                                btn
+                                                                btn-light
+                                                                btn-sm
+                                                            "
+                                                            href=""
+                                                            @click.prevent="
+                                                                delRow(index, i)
+                                                            "
+                                                        >
+                                                            <i
+                                                                class="
+                                                                    fas
+                                                                    fa-times
+                                                                "
+                                                            ></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="5">
+                                                        <button
+                                                            type="button"
+                                                            class="btn btn-sm"
+                                                            @click.prevent="
+                                                                addRow(index)
+                                                            "
+                                                            v-show="
+                                                                variation.variationId &&
+                                                                variation
+                                                                    .option_list
+                                                                    .length < 3
+                                                            "
+                                                        >
+                                                            <i
+                                                                class="
+                                                                    fas
+                                                                    fa-plus
+                                                                "
+                                                            ></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -864,6 +1157,7 @@
                                 for="processing_time"
                             >
                                 Processing Time
+                                <strong class="text-danger"> *</strong>
                                 <p class="text-grey text-xs mt-2">
                                     Once order has been placed, how long does it
                                     take you to prepare, package & ship?
@@ -918,10 +1212,15 @@
                                     >
                                         <thead>
                                             <tr>
-                                                <th scope="col"></th>
+                                                <th
+                                                    scope="col"
+                                                    class="tiny-col"
+                                                ></th>
                                                 <th scope="col">Type</th>
-                                                <th scope="col">Price</th>
-                                                <th scope="col">
+                                                <th scope="col" class="smwidth">
+                                                    Price
+                                                </th>
+                                                <th scope="col" class="smwidth">
                                                     Delivery Time
                                                 </th>
                                                 <th scope="col">Locations</th>
@@ -993,11 +1292,7 @@
             data-backdrop="static"
             data-keyboard="false"
         >
-            <div
-                class="modal-dialog modal-dialog-centered"
-                :class="{ 'modal-xl': variationMode }"
-                role="document"
-            >
+            <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4
@@ -1014,21 +1309,6 @@
                         >
                             Add Recipients
                         </h4>
-                        <h4
-                            v-show="variationMode"
-                            class="modal-title"
-                            id="addRecordLabel"
-                        >
-                            Add a Variation
-                        </h4>
-                        <button
-                            type="button"
-                            class="close"
-                            @click.prevent="closeModal"
-                            v-show="!variationMode"
-                        >
-                            <i class="fas fa-times-circle"></i>
-                        </button>
                     </div>
                     <div v-show="occasionMode" class="modal-body">
                         <div class="d-flex flex-wrap gap">
@@ -1074,243 +1354,7 @@
                             </div>
                         </div>
                     </div>
-                    <div v-if="variationMode" class="modal-body input-form">
-                        <div class="form-group">
-                            <label class="col-form-label" for="variation_id">
-                                Select Variation Type
-                            </label>
-                            <input
-                                id="productVariation.variation_id"
-                                v-model="
-                                    form.productVariation[variationCount]
-                                        .variationId
-                                "
-                                type="text"
-                                name="productVariation.variation_id"
-                                class="form-control form-control-alternative"
-                                placeholder="variation type"
-                                :disabled="
-                                    form.productVariation[variationCount]
-                                        .option_list[0] != null
-                                "
-                            />
-                        </div>
-                        <div class="form-group">
-                            <div
-                                class="
-                                    d-flex
-                                    align-items-center
-                                    justify-content-between
-                                "
-                            >
-                                <label class="col-form-label" for="">
-                                    Add Option Details
-                                    <p class="text-grey text-xs mt-2">
-                                        Add any extra information for the
-                                        options you provide.
-                                    </p>
-                                </label>
-                                <button
-                                    type="button"
-                                    class="btn btn-sm ml-2"
-                                    @click.prevent="addRow(variationCount)"
-                                    v-show="
-                                        form.productVariation[variationCount]
-                                            .variationId
-                                    "
-                                >
-                                    <i class="fas fa-plus"></i>
-                                </button>
-                            </div>
-
-                            <div
-                                v-show="
-                                    form.productVariation[variationCount]
-                                        .option_list[0] != null
-                                "
-                            >
-                                <div
-                                    class="card dashboard-info-card p-3 mb-2"
-                                    v-for="(item, i) in form.productVariation[
-                                        variationCount
-                                    ].option_list"
-                                >
-                                    <div
-                                        class="
-                                            d-flex
-                                            justify-content-between
-                                            align-items-center
-                                        "
-                                    >
-                                        <h4>Option {{ i + 1 }}</h4>
-                                        <a
-                                            class="btn btn-light btn-sm"
-                                            href=""
-                                            @click.prevent="
-                                                delRow(variationCount, i)
-                                            "
-                                        >
-                                            Delete
-                                        </a>
-                                    </div>
-
-                                    <div class="form-group row mb-md-1">
-                                        <div class="col-md-6 mb-md-0 mb-3">
-                                            <label
-                                                class="col-form-label"
-                                                for="variation_type_option"
-                                                >Option Name
-                                                <strong class="text-danger">
-                                                    *</strong
-                                                >
-                                            </label>
-                                            <input
-                                                name="variation_type_option"
-                                                id="variation_type_option"
-                                                v-model="
-                                                    form.productVariation[
-                                                        variationCount
-                                                    ].variation_type_option[i]
-                                                "
-                                                type="text"
-                                                class="
-                                                    form-control
-                                                    form-control-alternative
-                                                "
-                                                placeholder="Option"
-                                            />
-                                            <HasError
-                                                :form="form"
-                                                :field="`productVariation.${variationCount}.variation_type_option.${i}`"
-                                            />
-                                        </div>
-                                        <div class="col-md-3 mb-md-0 mb-3">
-                                            <label
-                                                class="col-form-label"
-                                                for="variation_price"
-                                                >Price
-                                                <strong class="text-danger">
-                                                    *
-                                                </strong>
-                                            </label>
-                                            <input
-                                                id="variation_price"
-                                                v-model="
-                                                    form.productVariation[
-                                                        variationCount
-                                                    ].variation_price[i]
-                                                "
-                                                type="text"
-                                                name="variation_price"
-                                                class="
-                                                    form-control
-                                                    form-control-alternative
-                                                "
-                                                placeholder="price"
-                                            />
-                                            <HasError
-                                                :form="form"
-                                                :field="`productVariation.${variationCount}.variation_price.${i}`"
-                                            />
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label
-                                                class="col-form-label"
-                                                for="variation_quantity"
-                                                >Inventory
-                                                <strong class="text-danger">
-                                                    *
-                                                </strong>
-                                            </label>
-                                            <input
-                                                id="variation_quantity"
-                                                v-model="
-                                                    form.productVariation[
-                                                        variationCount
-                                                    ].variation_quantity[i]
-                                                "
-                                                type="text"
-                                                name="variation_quantity"
-                                                class="
-                                                    form-control
-                                                    form-control-alternative
-                                                "
-                                                placeholder="qty"
-                                            />
-                                            <HasError
-                                                :form="form"
-                                                :field="`productVariation.${variationCount}.variation_quantity.${i}`"
-                                            />
-                                        </div>
-                                    </div>
-                                    <div class="form-group row mb-md-1">
-                                        <div class="col-md-8 mb-md-0 mb-3">
-                                            <label
-                                                class="col-form-label"
-                                                for="variation_description"
-                                                >Description
-                                            </label>
-                                            <input
-                                                id="variation_description"
-                                                v-model="
-                                                    form.productVariation[
-                                                        variationCount
-                                                    ].variation_description[i]
-                                                "
-                                                type="text"
-                                                name="variation_description"
-                                                class="
-                                                    form-control
-                                                    form-control-alternative
-                                                "
-                                                placeholder="description"
-                                            />
-                                            <HasError
-                                                :form="form"
-                                                :field="`productVariation.${variationCount}.variation_description.${i}`"
-                                            />
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label
-                                                class="col-form-label"
-                                                for="productVariation.sku"
-                                                >SKU
-                                            </label>
-                                            <input
-                                                id="productVariation.sku"
-                                                v-model="
-                                                    form.productVariation[
-                                                        variationCount
-                                                    ].sku[i]
-                                                "
-                                                type="text"
-                                                name="productVariation.sku"
-                                                class="
-                                                    form-control
-                                                    form-control-alternative
-                                                "
-                                                placeholder="sku"
-                                            />
-                                            <HasError
-                                                :form="form"
-                                                :field="`productVariation.${variationCount}.sku.${i}`"
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="modal-footer">
-                        <button
-                            type="button"
-                            class="btn btn-grey mr-2"
-                            @click.prevent="delVariation(variationCount)"
-                            v-show="variationMode"
-                        >
-                            <i class="fas fa-times mr-2"></i>
-                            Remove
-                        </button>
                         <button
                             type="button"
                             class="btn btn-primary"
@@ -1349,7 +1393,6 @@ export default {
         AlertError,
     },
     data: () => ({
-        variationMode: false,
         occasionMode: false,
         recipientMode: false,
         categories: [],
@@ -1357,15 +1400,16 @@ export default {
         recipients: [],
         shippings: [],
         sellers: [],
-        variationCount: "0",
         url: [],
         occasionName: [],
         recipientName: [],
+        has_weight: "",
 
         form: new Form({
             id: "",
             sku: "",
             title: "",
+            short_description: "",
             description: "",
             material: "",
             length: "",
@@ -1396,34 +1440,37 @@ export default {
             //variation fields
             productVariation: [
                 {
+                    variationMode: false,
                     variationId: "",
+                    variationDescription: "",
                     option_list: [],
                     variation_type: [],
                     variation_type_option: [],
                     sku: [],
                     variation_price: [],
                     variation_quantity: [],
-                    variation_description: [],
                 },
                 {
+                    variationMode: false,
                     variationId: "",
+                    variationDescription: "",
                     option_list: [],
                     variation_type: [],
                     variation_type_option: [],
                     sku: [],
                     variation_price: [],
                     variation_quantity: [],
-                    variation_description: [],
                 },
                 {
+                    variationMode: false,
                     variationId: "",
+                    variationDescription: "",
                     option_list: [],
                     variation_type: [],
                     variation_type_option: [],
                     sku: [],
                     variation_price: [],
                     variation_quantity: [],
-                    variation_description: [],
                 },
             ],
         }),
@@ -1450,31 +1497,17 @@ export default {
             }
 
             reader.onloadend = (file) => {
-                if (imagenum == "image0") {
-                    this.$set(this.form.image_path, 0, reader.result);
-                    this.$set(this.form.photoName, 0, e.target.files[0].name);
-                    this.$set(
-                        this.url,
-                        0,
-                        URL.createObjectURL(e.target.files[0])
-                    );
-                } else if (imagenum == "image1") {
-                    this.$set(this.form.image_path, 1, reader.result);
-                    this.$set(this.form.photoName, 1, e.target.files[0].name);
-                    this.$set(
-                        this.url,
-                        1,
-                        URL.createObjectURL(e.target.files[0])
-                    );
-                } else if (imagenum == "image2") {
-                    this.$set(this.form.image_path, 2, reader.result);
-                    this.$set(this.form.photoName, 2, e.target.files[0].name);
-                    this.$set(
-                        this.url,
-                        2,
-                        URL.createObjectURL(e.target.files[0])
-                    );
-                }
+                this.$set(this.form.image_path, imagenum, reader.result);
+                this.$set(
+                    this.form.photoName,
+                    imagenum,
+                    e.target.files[0].name
+                );
+                this.$set(
+                    this.url,
+                    imagenum,
+                    URL.createObjectURL(e.target.files[0])
+                );
             };
             reader.readAsDataURL(file);
         },
@@ -1482,12 +1515,37 @@ export default {
         /*
          * Variation
          */
+        setVariationMode() {
+            switch (false) {
+                case this.form.productVariation[0].variationMode:
+                    this.form.productVariation[0].variationMode = true;
+                    break;
+                case this.form.productVariation[1].variationMode:
+                    this.form.productVariation[1].variationMode = true;
+                    break;
+                case this.form.productVariation[2].variationMode:
+                    this.form.productVariation[2].variationMode = true;
+                    break;
+            }
+        },
 
         addRow(count) {
             this.form.productVariation[count].option_list.push("1");
             this.form.productVariation[count].variation_type.push(
                 this.form.productVariation[count].variationId
             );
+        },
+
+        changeVariationType(count) {
+            for (var i = 0; i < 3; i++) {
+                if (this.form.productVariation[count].variation_type[i]) {
+                    this.$set(
+                        this.form.productVariation[count].variation_type,
+                        i,
+                        this.form.productVariation[count].variationId
+                    );
+                }
+            }
         },
 
         delRow(count, i) {
@@ -1497,20 +1555,19 @@ export default {
             variant.sku.splice(i, 1);
             variant.variation_price.splice(i, 1);
             variant.variation_quantity.splice(i, 1);
-            variant.variation_description.splice(i, 1);
         },
 
         delVariation(count) {
             let variant = this.form.productVariation[count];
-            this.variationMode = false;
+            variant.variationMode = false;
             variant.variationId = "";
+            variant.variationDescription = "";
             variant.option_list = [];
             variant.variation_type = [];
             variant.variation_type_option = [];
             variant.sku = [];
             variant.variation_price = [];
             variant.variation_quantity = [];
-            variant.variation_description = [];
             $("#addRecord").modal("hide");
         },
 
@@ -1534,20 +1591,14 @@ export default {
             event.target.value = true;
         },
 
-        subcategoryModal(mode, count) {
+        subcategoryModal(mode) {
             this[mode] = true;
-            switch (true) {
-                case this.variationMode:
-                    this.variationCount = count;
-                    break;
-            }
             $("#addRecord").modal("show");
         },
 
         closeModal() {
             this.occasionMode = false;
             this.recipientMode = false;
-            this.variationMode = false;
             $("#addRecord").modal("hide");
         },
 
@@ -1566,6 +1617,10 @@ export default {
         createProduct() {
             if (this.form.has_inventory == "0") {
                 this.form.quantity = "0";
+            }
+            if (this.has_weight === true) {
+                this.form.weight = "";
+                this.form.weight_unit = "";
             }
 
             this.form

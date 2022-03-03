@@ -127,6 +127,7 @@ Route::prefix('seller')->group(function () {
     Route::apiResource('/dashboard', SellerDashboardController::class);
     Route::apiResource('/orders', SellerOrderController::class);
     Route::get('/products/details', [SellerProductController::class, 'getDetails']);
+    Route::put('/products/storeNewImage/{productId}', [SellerProductController::class, 'storeNewImage']);
     Route::put('/products/updateState/{product}', [SellerProductController::class, 'updateState']);
     Route::apiResource('/products', SellerProductController::class);
     Route::apiResource('/productstates', SellerProductStateController::class);

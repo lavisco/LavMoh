@@ -54,24 +54,27 @@
                         <h5>Get to know Us</h5>
                         <a href="">About us</a>
                         <a href="">FAQ</a>
-                        <a href="/lavisco/sellers">Partner Vendors</a>
+                        <a href="/seller_all"> Partner Vendors </a>
                         <a href="">Announcements</a>
                     </div>
                     <div class="col-md-4 d-flex flex-column mt-5 mt-md-0">
                         <h5>Policies</h5>
-                        <a href="/terms_and_conditions">Terms & Conditions</a>
+                        <a href="/terms_and_conditions"> Terms & Conditions </a>
                         <a href="/privacy_policy">Privacy</a>
-                        <a href="/delivery_policy">Delivery</a>
+                        <a href="/delivery_policy"> Delivery </a>
                         <a href="/cookie_policy">Cookie</a>
-                        <a href="">Payment</a>
-                        <a href="/returns_refunds_policy">Return & Refunds</a>
+                        <a href="/payment_policy">Payment</a>
+                        <a href="/returns_refunds_policy"> Return & Refunds </a>
                     </div>
                     <div class="col-md-4 d-flex flex-column mt-5 mt-md-0">
                         <h5>Let Us Help You</h5>
                         <a href="">Contact Us</a>
                         <a href="">Open Support Ticket</a>
                         <div class="d-flex flex-row mt-3">
-                            <a href="https://www.facebook.com/laviscosl" class="mr-4">
+                            <a
+                                href="https://www.facebook.com/laviscosl"
+                                class="mr-4"
+                            >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -109,12 +112,12 @@
                     </div>
                 </div>
                 <div class="col-md-3 order-md-3 order-1 mb-5 mb-md-0">
-                    <router-link to="/lavisco/home">
+                    <a href="/">
                         <img
-                            src="/images/lavisco/logo.png"
+                            src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/e3cd7bef-f9fa-4855-b479-c560b660f92e/new_lavisco.lk_Logo_PNG.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220308%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220308T193723Z&X-Amz-Expires=86400&X-Amz-Signature=43f679dd8720bc5b30d0a83eb78b20c2e60fc7be4d94ad053325db1887c2d150&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22new%2520lavisco.lk%2520Logo%2520PNG.png%22&x-id=GetObject"
                             class="footer-logo"
                         />
-                    </router-link>
+                    </a>
                 </div>
             </div>
         </div>

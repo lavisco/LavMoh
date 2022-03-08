@@ -1,7 +1,9 @@
 export let routes = [
     /*
-     ** Admin Routes
-     */
+    |--------------------------------------------------------------------------
+    | Admin Routes
+    |--------------------------------------------------------------------------
+    */
 
     {
         path: "/admin/analytics",
@@ -241,8 +243,11 @@ export let routes = [
     },
 
     /*
-     ** Buyer Routes
-     */
+    |--------------------------------------------------------------------------
+    | Buyer Routes
+    |--------------------------------------------------------------------------
+    */
+
     {
         path: "/buyer/dashboard",
         component: require("./components/buyer/Dashboard.vue").default,
@@ -273,8 +278,10 @@ export let routes = [
     },
 
     /*
-     ** Seller Routes
-     */
+    |--------------------------------------------------------------------------
+    | Seller Routes
+    |--------------------------------------------------------------------------
+    */
 
     {
         path: "/seller/carts",
@@ -385,11 +392,13 @@ export let routes = [
     },
 
     /*
-     ** Website Routes
-     */
+    |--------------------------------------------------------------------------
+    | Website Routes
+    |--------------------------------------------------------------------------
+    */
 
     {
-        path: "/lavisco/home",
+        path: "/",
         name: "index",
         component: require("./components/Index.vue").default,
         meta: {
@@ -397,7 +406,7 @@ export let routes = [
         },
     },
     {
-        path: "/lavisco/products",
+        path: "/products",
         name: "products",
         component: require("./components/Products.vue").default,
         meta: {
@@ -405,7 +414,7 @@ export let routes = [
         },
     },
     {
-        path: "/lavisco/products/:productId",
+        path: "/products/:productId",
         name: "products/product",
         component: require("./components/Product.vue").default,
         meta: {
@@ -413,7 +422,7 @@ export let routes = [
         },
     },
     {
-        path: "/lavisco/categories",
+        path: "/categories",
         name: "categories",
         component: require("./components/Categories.vue").default,
         meta: {
@@ -421,7 +430,7 @@ export let routes = [
         },
     },
     {
-        path: "/lavisco/categories/:categoryId",
+        path: "/categories/:categoryId",
         name: "categories/category",
         component: require("./components/Category.vue").default,
         meta: {
@@ -429,7 +438,7 @@ export let routes = [
         },
     },
     {
-        path: "/lavisco/occasions",
+        path: "/occasions",
         name: "occasions",
         component: require("./components/Occasions.vue").default,
         meta: {
@@ -437,7 +446,7 @@ export let routes = [
         },
     },
     {
-        path: "/lavisco/occasions/:occasionId",
+        path: "/occasions/:occasionId",
         name: "occasions/occasion",
         component: require("./components/Occasion.vue").default,
         meta: {
@@ -445,7 +454,7 @@ export let routes = [
         },
     },
     {
-        path: "/lavisco/recipients",
+        path: "/recipients",
         name: "recipients",
         component: require("./components/Recipients.vue").default,
         meta: {
@@ -453,7 +462,7 @@ export let routes = [
         },
     },
     {
-        path: "/lavisco/recipients/:recipientId",
+        path: "/recipients/:recipientId",
         name: "recipients/recipient",
         component: require("./components/Recipient.vue").default,
         meta: {
@@ -461,7 +470,7 @@ export let routes = [
         },
     },
     {
-        path: "/lavisco/cart",
+        path: "/cart",
         name: "cart",
         component: require("./components/Cart.vue").default,
         meta: {
@@ -469,7 +478,7 @@ export let routes = [
         },
     },
     {
-        path: "/lavisco/shipping",
+        path: "/shipping",
         name: "shipping",
         component: require("./components/Shipping.vue").default,
         meta: {
@@ -477,7 +486,7 @@ export let routes = [
         },
     },
     {
-        path: "/lavisco/order_complete",
+        path: "/order_complete",
         name: "order_complete",
         component: require("./components/OrderComplete.vue").default,
         meta: {
@@ -485,35 +494,88 @@ export let routes = [
         },
     },
     {
-        path: "/lavisco/sellers",
-        name: "sellers",
+        path: "/seller_all",
+        name: "seller_all",
         component: require("./components/Sellers.vue").default,
         meta: {
             title: "Sellers",
         },
     },
     {
-        path: "/lavisco/sellers/:shopId",
-        name: "sellers/seller",
+        path: "/seller_shop/:shopId",
+        name: "seller_shop",
         component: require("./components/Seller.vue").default,
         meta: {
             title: "Seller",
         },
     },
     {
-        path: "/lavisco/seller/onboard",
-        name: "seller/onboard",
+        path: "/seller_onboard",
+        name: "seller_onboard",
         component: require("./components/SellerOnboard.vue").default,
         meta: {
             title: "Seller Onboarding",
         },
     },
     {
-        path: "/lavisco/seller/register",
-        name: "seller/register",
+        path: "/seller_register",
+        name: "seller_register",
         component: require("./components/SellerRegister.vue").default,
         meta: {
             title: "Seller Registration",
+        },
+    },
+
+    /*
+     Website Policies Routes
+    */
+
+    {
+        path: "/terms_and_conditions",
+        name: "terms_and_conditions",
+        component: require("./components/PolicyTermsConditions.vue").default,
+        meta: {
+            title: "Terms And Conditions",
+        },
+    },
+    {
+        path: "/privacy_policy",
+        name: "privacy_policy",
+        component: require("./components/PolicyPrivacy.vue").default,
+        meta: {
+            title: "Privacy Policy",
+        },
+    },
+    {
+        path: "/returns_refunds_policy",
+        name: "returns_refunds_policy",
+        component: require("./components/PolicyReturnsRefunds.vue").default,
+        meta: {
+            title: "Returns & Refunds Policy",
+        },
+    },
+    {
+        path: "/delivery_policy",
+        name: "delivery_policy",
+        component: require("./components/PolicyDelivery.vue").default,
+        meta: {
+            title: "Delivery Policy",
+        },
+    },
+    {
+        path: "/cookie_policy",
+        name: "cookie_policy",
+        component: require("./components/PolicyCookie.vue").default,
+        meta: {
+            title: "Cookie Policy",
+        },
+    },
+    {
+        path: "/payment_policy",
+        name: "payment_policy",
+        component: require("./components/PolicyPayment.vue").default,
+        meta: {
+            title: "Payment Policy",
         },
     },
 ];

@@ -15,9 +15,9 @@
                 </p>
                 <div class="seller-join">
                     <p>JOIN as a SELLER</p>
-                    <a href="/lavisco/seller/register">
+                    <router-link to="/seller_register">
                         <button>Lets open my shop</button>
-                    </a>
+                    </router-link>
                 </div>
             </div>
         </div>
@@ -162,9 +162,9 @@
             <div class="container">
                 <h1>Ready to Start Selling?</h1>
                 <div class="text-center">
-                    <a href="/lavisco/seller/register">
+                    <router-link to="/seller_register">
                         <button>Lets open my shop</button>
-                    </a>
+                    </router-link>
                 </div>
             </div>
         </section>

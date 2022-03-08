@@ -1,4 +1,4 @@
-@extends('layouts.master') @section('content')
+<template>
     <div class="container-fluid">
         <div class="hero">
             <h1 class="title text-center">Returns and Refunds</h1>
@@ -62,4 +62,10 @@
             </section>
         </div>
     </div>
-@endsection
+</template>
+
+<script>
+export default {
+    mounted() {},
+};
+</script>

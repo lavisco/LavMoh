@@ -166,15 +166,26 @@ export default {
         cancel() {
             this.$router.push("/seller/dashboard");
         },
+
         updateUserPassword() {
             this.form
                 .post("/api/seller/user/password_reset")
                 .then(() => {
                     $("#success-modal").modal("show");
+                    this.sendProductListingConfirmedMail();
                 })
                 .catch((error) => {
                     console.log(error);
                     $("#fail-modal").modal("show");
+                });
+        },
+
+        sendProductListingConfirmedMail() {
+            axios
+                .get("/api/email/password_reset")
+                .then(() => {})
+                .catch((error) => {
+                    console.log(error);
                 });
         },
     },

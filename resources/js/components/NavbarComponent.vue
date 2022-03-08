@@ -1,8 +1,13 @@
 <template>
-    <nav class="navbar navbar-expand-lg d-flex justify-content-between" style="z-index:9999;">
-        <router-link to="/lavisco/home" class="navbar-brand">
-            <img src="/images/lavisco/logo.png" />
-        </router-link>
+    <nav
+        class="navbar navbar-expand-lg d-flex justify-content-between"
+        style="z-index: 9999"
+    >
+        <a href="/" class="navbar-brand">
+            <img
+                src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/e3cd7bef-f9fa-4855-b479-c560b660f92e/new_lavisco.lk_Logo_PNG.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220308%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220308T193723Z&X-Amz-Expires=86400&X-Amz-Signature=43f679dd8720bc5b30d0a83eb78b20c2e60fc7be4d94ad053325db1887c2d150&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22new%2520lavisco.lk%2520Logo%2520PNG.png%22&x-id=GetObject"
+            />
+        </a>
 
         <div class="navbar-main-menu" id="navbarSupportedContent">
             <ul class="navbar-nav">
@@ -21,14 +26,20 @@
                         </a>
 
                         <div
-                            style="z-index:-1;"
+                            style="z-index: -1"
                             class="dropdown-menu"
                             aria-labelledby="dropdownMenuLink"
                         >
-                            <div class="d-flex flex-md-row flex-column align-items-start">
+                            <div
+                                class="
+                                    d-flex
+                                    flex-md-row flex-column
+                                    align-items-start
+                                "
+                            >
                                 <div class="dropdown-menu-col-1 pr-md-2">
                                     <h6 class="dropdown-header">
-                                        <a href="/lavisco/categories"
+                                        <a href="/categories"
                                             >Browse by Nature</a
                                         >
                                     </h6>
@@ -52,7 +63,7 @@
                                 </div>
                                 <div class="dropdown-menu-col-2 pl-md-2">
                                     <h6 class="dropdown-header">
-                                        <a href="/lavisco/recipients">
+                                        <a href="/recipients">
                                             Browse by Recipient
                                         </a>
                                     </h6>
@@ -88,9 +99,9 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/lavisco/seller/onboard"
-                        >Sell on Lavisco</a
-                    >
+                    <a class="nav-link" href="/seller_onboard"
+                        >Sell on Lavisco
+                    </a>
                 </li>
             </ul>
         </div>

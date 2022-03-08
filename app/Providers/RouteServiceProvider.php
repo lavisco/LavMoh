@@ -17,7 +17,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/lavisco/home';
+    public const HOME = '/';
     public const ADMIN_DASHBOARD = '/admin/dashboard';
     public const SELLER_DASHBOARD = '/seller/dashboard';
     public const BUYER_DASHBOARD = '/buyer/dashboard';

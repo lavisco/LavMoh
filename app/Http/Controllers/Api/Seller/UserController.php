@@ -10,6 +10,7 @@ use App\Models\Role;
 use App\Models\SellerProfile;
 use App\Models\Shop;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -29,14 +30,23 @@ class UserController extends Controller
         //
     }
 
-    public function store(UserRequest $request)
+    public function store(Request $request)
     {
-        return User::create([
+        $this->validate($request,[
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password_confirmation' => ['required', 'min:8'],
+        ]);
+
+        $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'role_id' => Role::IS_SELLER,
         ]);
+
+        event(new Registered($user));
     }
 
     public function storeShopSetup(SellerRegisterRequest $request)

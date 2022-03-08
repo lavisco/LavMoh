@@ -23,9 +23,7 @@
                     <h1 class="sub-title mb-5">
                         Order cakes from local bakers near you!
                     </h1>
-                    <a href="/lavisco/products"
-                        ><button>View Products</button></a
-                    >
+                    <a href="/products"><button>View Products</button></a>
                 </swiper-slide>
                 <div
                     class="swiper-button-next swiper-button-black"
@@ -104,7 +102,7 @@
                 ></div>
             </swiper>
             <div class="d-flex justify-content-center mt-5">
-                <a href="/lavisco/products" class="view-more-link"
+                <a href="/products" class="view-more-link"
                     >View More
                     <svg
                         width="70"
@@ -130,9 +128,7 @@
                         <div class="card-img">
                             <div class="card-img-text-container">
                                 <div class="card-img-text">
-                                    <a href="/lavisco/occasions">
-                                        Order by Occasion
-                                    </a>
+                                    <a href="/occasions"> Order by Occasion </a>
                                 </div>
                             </div>
                         </div>
@@ -159,7 +155,7 @@
                         <div class="card-img">
                             <div class="card-img-text-container">
                                 <div class="card-img-text">
-                                    <a href="/lavisco/recipients">
+                                    <a href="/recipients">
                                         Order by Recipient
                                     </a>
                                 </div>
@@ -257,15 +253,15 @@
         <section class="section-shortcuts row">
             <div class="col-md-6 shortcut-left py-4">
                 <h1>Start selling on Lavisco</h1>
-                <a href="/lavisco/seller/onboard"
-                    ><button class="bg-orange">Become a Seller</button>
-                </a>
+                <router-link to="/seller_onboard">
+                    <button class="bg-orange">Become a Seller</button>
+                </router-link>
             </div>
             <div class="col-md-6 shortcut-right py-4">
                 <h1>Create an account today!</h1>
-                <a href="/register"
-                    ><button class="bg-green">Sign up</button></a
-                >
+                <a href="/register">
+                    <button class="bg-green">Sign up</button>
+                </a>
             </div>
         </section>
     </div>

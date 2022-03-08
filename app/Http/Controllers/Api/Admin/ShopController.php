@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ShopRequest;
 use App\Models\Shop;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Image;
@@ -85,5 +86,13 @@ class ShopController extends Controller
                 @unlink($existingImage);
             }
         }
+    }
+
+    public function updateState(Request $request, Shop $shop)
+    {
+        ///$this->authorize('update', $shop);
+        $shop->update([
+            'status' => request('status'),
+        ]);
     }
 }

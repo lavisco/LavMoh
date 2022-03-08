@@ -2,7 +2,10 @@
 <div class="container-fluid login">
     <h1>Sign In</h1>
     <h5>Welcome back</h5>
-    <p>Don't have an account? <a class="pink" href="/lavisco/seller/register">Become a Seller</a></p>
+    <p>
+        Don't have an account?
+        <a class="pink" href="/lavisco/seller/register">Become a Seller</a>
+    </p>
     <div class="card">
         <form method="POST" action="{{ route('login') }}">
             @csrf
@@ -35,20 +38,26 @@
 
             <div class="form-group">
                 <div class="">
-                    <input
-                        id="password"
-                        type="password"
-                        class="
-                            form-control
-                            @error('password')
-                            is-invalid
-                            @enderror
-                        "
-                        name="password"
-                        required
-                        autocomplete="new-password"
-                        placeholder="Password"
-                    />
+                    <div class="password-input">
+                        <input
+                            id="password"
+                            type="password"
+                            class="
+                                form-control
+                                @error('password')
+                                is-invalid
+                                @enderror
+                            "
+                            name="password"
+                            required
+                            autocomplete="new-password"
+                            placeholder="Password"
+                        />
+                        <i
+                            class="fas fa-eye"
+                            onclick="showPasswordFunction()"
+                        ></i>
+                    </div>
 
                     @error('password')
                     <span class="invalid-feedback" role="alert">

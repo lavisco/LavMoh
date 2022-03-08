@@ -73,10 +73,12 @@ export default {
         closeModal() {
             $("#success-modal").modal("hide");
             if (this.gotoRoute != "noroute") {
-                if (this.gotoRoute != "login") {
-                    this.$router.push(this.gotoRoute);
-                } else {
+                if (this.gotoRoute === "login") {
                     window.location.replace("/login");
+                } else if (this.gotoRoute === "verify-email") {
+                    window.location.replace("/email/verify");
+                } else {
+                    this.$router.push(this.gotoRoute);
                 }
             }
         },

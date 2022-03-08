@@ -3,7 +3,7 @@
         <h1 class="mb-4">Your Cart</h1>
         <h5 v-show="!products[0]">
             Add
-            <router-link to="/lavisco/products">
+            <router-link to="/products">
                 <u>Products</u>
             </router-link>
         </h5>
@@ -126,7 +126,7 @@ export default {
         saveShopCartTotal(shop) {
             this.$store.dispatch("saveShopCartTotal", this.cartTotal(shop));
             this.$store.dispatch("addProductToCurrentCart", shop);
-            this.$router.push("/lavisco/shipping");
+            this.$router.push("/shipping");
         },
 
         cartTotal(shop) {

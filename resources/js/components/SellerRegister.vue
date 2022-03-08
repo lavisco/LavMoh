@@ -8,8 +8,8 @@
             <!-- Form start -->
             <form class="input-form" @submit.prevent="createSellerUser()">
                 <div class="form-group">
-                    <label class="col-form-label" for="name"
-                        >Name
+                    <label class="col-form-label" for="name">
+                        Name
                         <strong class="text-danger"> * </strong>
                     </label>
                     <input
@@ -18,14 +18,13 @@
                         type="text"
                         name="name"
                         class="form-control"
-                        required
                         placeholder="Name"
                     />
                     <HasError :form="form" field="name" />
                 </div>
                 <div class="form-group">
-                    <label class="col-form-label" for="email"
-                        >Email
+                    <label class="col-form-label" for="email">
+                        Email
                         <strong class="text-danger"> * </strong>
                     </label>
                     <input
@@ -34,45 +33,57 @@
                         type="email"
                         name="email"
                         class="form-control"
-                        required
                         placeholder="Email"
                     />
                     <HasError :form="form" field="email" />
                 </div>
 
                 <div class="form-group">
-                    <label class="col-form-label" for="password"
-                        >Password
+                    <label class="col-form-label" for="password">
+                        Password
                         <strong class="text-danger"> * </strong>
                     </label>
-                    <input
-                        id="password"
-                        v-model="form.password"
-                        type="password"
-                        name="password"
-                        class="form-control"
-                        placeholder="Password"
-                        required
-                    />
+                    <div class="password-input">
+                        <input
+                            id="password"
+                            v-model="form.password"
+                            type="password"
+                            name="password"
+                            class="form-control"
+                            placeholder="Password"
+                        />
+                        <i
+                            class="fas fa-eye"
+                            onclick="showPasswordFunction()"
+                        ></i>
+                    </div>
+
                     <HasError :form="form" field="password" />
                 </div>
                 <div class="form-group">
-                    <label class="col-form-label" for="password"
-                        >Confirm Password
+                    <label class="col-form-label" for="password_confirmation">
+                        Confirm Password
                         <strong class="text-danger"> * </strong>
                     </label>
                     <input
-                        id="password-confirm"
+                        id="password_confirmation"
+                        v-model="form.password_confirmation"
                         type="password"
                         name="password_confirmation"
                         class="form-control"
                         placeholder="Confirm Password"
-                        required
                     />
+                    <HasError :form="form" field="password_confirmation" />
                 </div>
 
                 <div class="d-flex justify-content-center my-5">
-                    <button type="submit" class="btn-full">Sign up</button>
+                    <button
+                        type="submit"
+                        class="btn-full"
+                        :disabled="submitButtonDisabled"
+                    >
+                        {{ submitButtonText }}
+                    </button>
                 </div>
             </form>
             <!-- Form end -->
@@ -81,9 +92,9 @@
         <!-- Notification Modal -->
         <success-modal
             id="success-modal"
-            msgTitle="Seller Registration Successful"
-            msg="You have successfully been registered. Please Sign In to complete the rest of the steps."
-            gotoRoute="login"
+            msgTitle="Verify Your Email Address"
+            msg="Before proceeding, please check your email for a verification link."
+            gotoRoute="verify-email"
         />
         <fail-modal
             id="fail-modal"
@@ -104,24 +115,33 @@ export default {
     },
 
     data: () => ({
+        submitButtonText: "Sign Up",
+        submitButtonDisabled: false,
         form: new Form({
             id: "",
             name: "",
             email: "",
             password: "",
+            password_confirmation: "",
         }),
     }),
 
     methods: {
         createSellerUser() {
+            this.submitButtonText = "In Progress...";
+            this.submitButtonDisabled = true;
             this.form
                 .post("/api/seller/user")
                 .then(() => {
+                    this.submitButtonText = "Submitted";
+                    this.submitButtonDisabled = false;
                     $("#success-modal").modal("show");
                 })
                 .catch((error) => {
+                    this.submitButtonText = "Submit";
+                    this.submitButtonDisabled = false;
                     console.log(error);
-                    $("#fail-modal").toast("show");
+                    $("#fail-modal").modal("show");
                 });
         },
     },

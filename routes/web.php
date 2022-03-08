@@ -1,10 +1,12 @@
 <?php
 
-use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Website\HomeController;
-use App\Models\Product;
+use App\Mail\StoreActiveApplicationMail;
+use App\Mail\WelcomeMail;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,29 +19,57 @@ use App\Models\Product;
 |
 */
 
-Route::get('/terms_and_conditions', function () {
-    return view('policy_terms_condition');
-});
-Route::get('/privacy_policy', function () {
-    return view('policy_privacy');
-});
-Route::get('/returns_refunds_policy', function () {
-    return view('policy_returns');
-});
-Route::get('/delivery_policy', function () {
-    return view('policy_delivery');
-});
-Route::get('/cookie_policy', function () {
-    return view('policy_cookie');
-});
+
+/*
+|--------------------------------------------------------------------------
+| Email & Auth Routes
+|--------------------------------------------------------------------------
+*/
 Route::get('/login', function () {
     return view('login');
 });
 
-Route::get('/lavisco/{path}', [HomeController::class, 'websiteIndex'])->where('path', '.*');
-Route::get('/admin/{path}', [HomeController::class, 'adminIndex'])->where('path', '.*')->middleware('is_admin');
-Route::get('/seller/{path}', [HomeController::class, 'sellerIndex'])->where('path', '.*')->middleware('is_seller');
-Route::get('/buyer/{path}', [HomeController::class, 'buyerIndex'])->where('path', '.*')->middleware('is_buyer');
+//Route::get('/email', [EmailController::class, 'sendWelcomeEmail']);
 
-Auth::routes();
+Route::get('/email', function() {
+    
+    return new StoreActiveApplicationMail();
+});
+
+Auth::routes(['verify' => true]);
+
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
+
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+    return redirect('/');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+    return back()->with('message', 'Verification link sent!');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+
+/*
+|--------------------------------------------------------------------------
+| Main Routes
+|--------------------------------------------------------------------------
+*/
+
+
+Route::group(['middleware' => 'auth'],function () {
+
+    Route::get('/admin/{path}', [HomeController::class, 'adminIndex'])->where('path', '.*')->middleware('is_admin');
+    Route::get('/seller/{path}', [HomeController::class, 'sellerIndex'])->where('path', '.*')->middleware(['is_seller']);
+    Route::get('/buyer/{path}', [HomeController::class, 'buyerIndex'])->where('path', '.*')->middleware(['is_buyer', 'verified']);
+
+});
+
+Route::get('/{path}', [HomeController::class, 'websiteIndex'])->where('path', '.*');
+
+
+
 

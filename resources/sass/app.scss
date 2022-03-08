@@ -215,6 +215,18 @@ button.bg-black:hover {
         color: $white;
     }
 }
+.link-type-btn {
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+    color: $pink;
+    &:hover {
+        color: $lav-purple;
+        background-color: transparent;
+    }
+}
 
 .view-more-link {
     font-size: 24px;
@@ -283,6 +295,9 @@ button.bg-black:hover {
 .text-lighter {
     color: $lav-grey;
 }
+.border-grey {
+    border: 1px solid #dfdfdf !important;
+}
 
 /*---------------------top-ribbon---------------------*/
 .top-ribbon {
@@ -312,9 +327,9 @@ button.bg-black:hover {
 }
 .navbar-brand {
     img {
-        width: 160px;
+        width: 180px;
         @media (max-width: 991.98px) {
-            width: 100px;
+            width: 120px;
         }
     }
 }
@@ -1085,10 +1100,22 @@ footer {
     }
 }
 
-@media (max-width: 768px) {
-    // .login {
-    //     //padding: auto;
-    // }
+.password-input {
+    position: relative;
+    input{
+        width: 100%;
+    }
+    .fas {
+        //width: 10%;
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translate(0, -50%);
+        z-index: 2;
+        font-size: 26px;
+        cursor: pointer;
+        color: $lav-dark-purple;
+    }
 }
 
 /*------------------------------dashboard------------------------------*/
@@ -1316,6 +1343,9 @@ h4 {
         margin-bottom: 0;
     }
 }
+.invalid-feedback {
+    font-weight: 500;
+}
 
 .btn-grey {
     background-color: #c5c5c5 !important;
@@ -1534,7 +1564,7 @@ h4 {
     background-color: #fafafa;
     border: 1px solid #f7f7f7d8;
     border-radius: 5px;
-    color: $lav-blue;
+    color: $dark-grey;
     padding: 40px;
     min-width: 350px;
     h4 {

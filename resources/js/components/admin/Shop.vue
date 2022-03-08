@@ -20,9 +20,10 @@
                                     <tr>
                                         <th scope="col">Banner</th>
                                         <th scope="col">Name</th>
-                                        <th scope="col">Status</th>
+                                        <th scope="col" class="table-col-sm">
+                                            Status
+                                        </th>
                                         <th scope="col">Address</th>
-                                        <th scope="col">About</th>
                                         <th scope="col">Seller</th>
                                         <th scope="col">Rating</th>
                                         <th scope="col"></th>
@@ -40,26 +41,29 @@
                                         </td>
                                         <th>{{ shop.name }}</th>
                                         <td>
-                                            <span
-                                                v-if="shop.status == 1"
+                                            <select
                                                 class="
-                                                    badge
-                                                    badge-pill
-                                                    badge-success
+                                                    custom-select
+                                                    form-control
+                                                    form-control-alternative
+                                                "
+                                                name="status"
+                                                id="status"
+                                                v-model="shop.status"
+                                                @change.prevent="
+                                                    setCurrentState(
+                                                        shop.id,
+                                                        $event
+                                                    )
                                                 "
                                             >
-                                                Active
-                                            </span>
-                                            <span
-                                                v-else-if="shop.status == 0"
-                                                class="
-                                                    badge
-                                                    badge-pill
-                                                    badge-warning
-                                                "
-                                            >
-                                                Inactive
-                                            </span>
+                                                <option value="1">
+                                                    Active
+                                                </option>
+                                                <option value="0">
+                                                    Inactive
+                                                </option>
+                                            </select>
                                         </td>
                                         <td>
                                             {{ shop.address }}<br />
@@ -68,7 +72,6 @@
                                             {{ shop.province }},
                                             {{ shop.country }}
                                         </td>
-                                        <td>{{ shop.about }}</td>
                                         <td>{{ shop.user.name }}</td>
                                         <td>
                                             <span
@@ -865,6 +868,29 @@ export default {
                     Fire.$emit("reloadRecords");
                 })
                 .catch((error) => console.log(error));
+        },
+
+        setCurrentState(shop, event) {
+            this.form.status = event.target.value;
+
+            this.form
+                .put("/api/admin/shops/updateState/" + shop)
+                .then(() => {
+                    if (this.form.status == 1) {
+                        this.sendStoreActiveMail();
+                    }
+                    Fire.$emit("reloadRecords");
+                })
+                .catch((error) => console.log(error));
+        },
+
+        sendStoreActiveMail() {
+            axios
+                .get("/api/email/store_active")
+                .then(() => {})
+                .catch((error) => {
+                    console.log(error);
+                });
         },
     },
 

@@ -172,34 +172,10 @@
                             </li>
                             <li class="nav-item">
                                 <router-link
-                                    to="/admin/variations"
-                                    class="nav-link"
-                                >
-                                    Variations
-                                </router-link>
-                            </li>
-                            <li class="nav-item">
-                                <router-link
-                                    to="/admin/variation_options"
-                                    class="nav-link"
-                                >
-                                    Variation options
-                                </router-link>
-                            </li>
-                            <li class="nav-item">
-                                <router-link
                                     to="/admin/categories"
                                     class="nav-link"
                                 >
                                     Categories
-                                </router-link>
-                            </li>
-                            <li class="nav-item">
-                                <router-link
-                                    to="/admin/materials"
-                                    class="nav-link"
-                                >
-                                    Materials
                                 </router-link>
                             </li>
                             <li class="nav-item">

@@ -20,11 +20,18 @@ class DashboardController extends Controller
     public function index()
     {
         $user = User::FindOrFail(auth()->id());
+
+        $shopActive = false;
+        if($user->shop()->exists()){
+            $user->shop->status === false ? $shopActive = false : $shopActive = true;
+        }
+        
         return response()->json([
             'orders' => Order::where('seller_id', auth()->id())->count(),
             'products' => Product::where('user_id', auth()->id())->count(),
             'sellerShop' => Shop::where('user_id', auth()->id())->get(),
             'hasShop' => $user->shop()->exists(),
+            'shopActive' => $shopActive,
         ]);
     }
 

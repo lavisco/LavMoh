@@ -6,7 +6,7 @@
     <div class="container-fluid">
         <!-- Brand -->
         <div class="h3 mb-0 text-white text-uppercase d-none d-lg-inline-block">
-            @{{ $route.meta.title ? $route.meta.title : "BugTrack" }}
+            @{{ $route.meta.title ? $route.meta.title : "Lavisco" }}
         </div>
 
         <!-- User -->

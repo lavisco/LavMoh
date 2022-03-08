@@ -39,6 +39,7 @@ class ProductController extends Controller
             'product_state_id' => 1,
             'user_id' => auth()->id(),
             'slug' => Str::slug($request->title),
+            'base_price' => $request->base_price ?? '0.00',
         ]);
         $product = new Product($request->all());
 
@@ -86,33 +87,6 @@ class ProductController extends Controller
     public function storeVariation($request, $productId)
     {
         if ($request->has('productVariation.0.variation_type_option.0')) {
-
-            // $variation_type_option = $request->input('productVariation.*.variation_type_option.*');
-            // $sku = $request->input('productVariation.*.sku.*');
-            // $variation_price = $request->input('productVariation.*.variation_price.*');
-            // $variation_quantity = $request->input('productVariation.*.variation_quantity.*');
-            // $variation_description = $request->input('productVariation.*.variation_description.*');
-            // $variation_type = $request->input('productVariation.*.variation_type.*');
-
-            // $productVariationArray = []; //array containg data of each variation option
-
-            // for ($j=0; $j < count($variation_type_option); $j++) { 
-            //     array_push($productVariationArray, [
-            //         //repeating
-            //         'product_id' => $productId,
-            //         'product_state_id' => 1,
-            //         'user_id' => auth()->id(),
-            //         'created_at' => Carbon::now(),
-            //         'updated_at' => Carbon::now(),
-            //         //non-repeating
-            //         'type' => $variation_type[$j],
-            //         'type_option' => $variation_type_option[$j],
-            //         'sku' => $sku[$j] ?? null,
-            //         'description' => $variation_description[$j] ?? null,
-            //         'price' => $variation_price[$j] ?? '0.00',
-            //         'quantity' => $variation_quantity[$j] ?? '0',
-            //     ]);
-            // }
 
             $variations = $request->input('productVariation.*.variationId');
             $variationDescriptions = $request->input('productVariation.*.variationDescription');

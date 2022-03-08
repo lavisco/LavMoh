@@ -57,15 +57,23 @@
                     >Password
                     <strong class="text-danger"> * </strong>
                 </label>
-                <input
-                    id="password"
-                    type="password"
-                    class="form-control @error('password') is-invalid @enderror"
-                    name="password"
-                    required
-                    autocomplete="new-password"
-                    placeholder="Password"
-                />
+                <div class="password-input">
+                    <input
+                        id="password"
+                        type="password"
+                        class="
+                            form-control
+                            @error('password')
+                            is-invalid
+                            @enderror
+                        "
+                        name="password"
+                        required
+                        autocomplete="new-password"
+                        placeholder="Password"
+                    />
+                    <i class="fas fa-eye" onclick="showPasswordFunction()"></i>
+                </div>
 
                 @error('password')
                 <span class="invalid-feedback" role="alert">

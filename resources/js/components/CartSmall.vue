@@ -37,7 +37,7 @@
             <button class="btn-sm btn-full btn-sm-cart green mt-auto mb-2">
                 Checkout
             </button>
-            <router-link to="/lavisco/cart">
+            <router-link to="/cart">
                 <button class="btn-sm btn-full btn-sm-cart purple mt-auto">
                     Open Cart Page
                 </button>

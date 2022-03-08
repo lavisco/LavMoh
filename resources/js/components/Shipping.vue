@@ -248,7 +248,7 @@ export default {
             this.form
                 .post("/api/orders")
                 .then(() => {
-                    this.$router.push("/lavisco/products");
+                    this.$router.push("/products");
                 })
                 .catch((error) => console.log(error));
         },

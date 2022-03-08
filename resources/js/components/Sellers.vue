@@ -58,10 +58,7 @@
                     </div>
 
                     <h6>Top selling products</h6>
-                    <div
-                        class="d-flex topseller-products"
-                        v-if="shop.products"
-                    >
+                    <div class="d-flex topseller-products" v-if="shop.products">
                         <img
                             :src="productImg(product.product_image)"
                             class="topseller-product-img"
@@ -74,7 +71,7 @@
 
                     <router-link
                         :to="{
-                            name: 'sellers/seller',
+                            name: 'seller_shop',
                             params: {
                                 shopId: shop.id,
                             },

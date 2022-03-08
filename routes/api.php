@@ -4,7 +4,6 @@ use App\Http\Controllers\Api\Admin\AnalyticController;
 use App\Http\Controllers\Api\Admin\AreaController;
 use App\Http\Controllers\Api\Admin\UserController;
 use App\Http\Controllers\Api\Admin\BuyerProfileController;
-use App\Http\Controllers\Api\Admin\CartController;
 use App\Http\Controllers\Api\Admin\CategoryController;
 use App\Http\Controllers\Api\Admin\CityController;
 use App\Http\Controllers\Api\Admin\CountryController;
@@ -12,7 +11,6 @@ use App\Http\Controllers\Api\Admin\DashboardController;
 use App\Http\Controllers\Api\Admin\DistrictController;
 use App\Http\Controllers\Api\Admin\GiftwrapController;
 use App\Http\Controllers\Api\Admin\HomeSliderController;
-use App\Http\Controllers\Api\Admin\MaterialController;
 use App\Http\Controllers\Api\Admin\OccasionController;
 use App\Http\Controllers\Api\Admin\OrderController;
 use App\Http\Controllers\Api\Admin\PermissionController;
@@ -30,18 +28,15 @@ use App\Http\Controllers\Api\Admin\SettingController;
 use App\Http\Controllers\Api\Admin\ShippingController;
 use App\Http\Controllers\Api\Admin\ShopController;
 use App\Http\Controllers\Api\Admin\SitetextController;
-use App\Http\Controllers\Api\Admin\VariationController;
-use App\Http\Controllers\Api\Admin\VariationOptionController;
 use App\Http\Controllers\Api\Buyer\BuyerProfileController as BuyerBuyerProfileController;
 use App\Http\Controllers\Api\Buyer\OrderController as BuyerOrderController;
-use App\Http\Controllers\Api\Seller\CartController as SellerCartController;
+use App\Http\Controllers\Api\Email\EmailController;
 use App\Http\Controllers\Api\Seller\DashboardController as SellerDashboardController;
 use App\Http\Controllers\Api\Seller\OrderController as SellerOrderController;
 use App\Http\Controllers\Api\Seller\ProductController as SellerProductController;
 use App\Http\Controllers\Api\Seller\ProductImageController as SellerProductImageController;
 use App\Http\Controllers\Api\Seller\ProductStateController as SellerProductStateController;
 use App\Http\Controllers\Api\Seller\ProductVariationController as SellerProductVariationController;
-use App\Http\Controllers\Api\Seller\ProductVideoController as SellerProductVideoController;
 use App\Http\Controllers\Api\Seller\ReceiptController as SellerReceiptController;
 use App\Http\Controllers\Api\Seller\SellerProfileController as SellerSellerProfileController;
 use App\Http\Controllers\Api\Seller\ShopController as SellerShopController;
@@ -56,7 +51,6 @@ use App\Http\Controllers\Api\Website\RecipientController as WebsiteRecipientCont
 use App\Http\Controllers\Api\Website\SellerProfileController as WebsiteSellerProfileController;
 use App\Http\Controllers\Api\Website\ShopController as WebsiteShopController;
 use App\Http\Controllers\Api\Website\SitetextController as WebsiteSitetextController;
-use App\Http\Controllers\Website\HomeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -75,7 +69,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-/*Admin routes*/
+/*
+|--------------------------------------------------------------------------
+| Admin Routes
+|--------------------------------------------------------------------------
+*/
 
 Route::prefix('admin')->group(function () {
     Route::apiResource('/analytics', AnalyticController::class);
@@ -105,6 +103,7 @@ Route::prefix('admin')->group(function () {
     Route::apiResource('/settings', SettingController::class);
     Route::apiResource('/sitetexts', SitetextController::class);
     Route::apiResource('/shippings', ShippingController::class);
+    Route::put('/shops/updateState/{shop}', [ShopController::class, 'updateState']);
     Route::apiResource('/shops', ShopController::class);
     /* User */
     Route::get('/users/buyer', [UserController::class, 'buyer']);
@@ -113,14 +112,22 @@ Route::prefix('admin')->group(function () {
     Route::apiResource('/users', UserController::class);
 });
 
-/*Buyer routes*/
+/*
+|--------------------------------------------------------------------------
+| Buyer Routes
+|--------------------------------------------------------------------------
+*/
 
 Route::prefix('buyer')->group(function () {
     Route::apiResource('/buyerprofile', BuyerBuyerProfileController::class);
     Route::apiResource('/orders', BuyerOrderController::class);
 });
 
-/*Seller routes*/
+/*
+|--------------------------------------------------------------------------
+| Seller Routes
+|--------------------------------------------------------------------------
+*/
 
 Route::prefix('seller')->group(function () {
     Route::get('/dashboard/coming_soon', [SellerDashboardController::class, 'indexComingSoon']);
@@ -142,7 +149,25 @@ Route::prefix('seller')->group(function () {
     Route::apiResource('/user', SellerUserController::class);
 });
 
-/*Website routes*/
+/*
+|--------------------------------------------------------------------------
+| Email Routes
+|--------------------------------------------------------------------------
+*/
+
+Route::prefix('email')->group(function () {
+    Route::get('/store_active_application', [EmailController::class, 'sendStoreActiveApplicationMail']);
+    Route::get('/store_active', [EmailController::class, 'sendStoreActiveMail']);
+    Route::get('/new_product_listed', [EmailController::class, 'sendProductListingConfirmedMail']);
+    Route::get('/password_reset', [EmailController::class, 'sendPasswordResetMail']);
+    Route::get('/new_order', [EmailController::class, 'sendOrderMail']);
+});
+
+/*
+|--------------------------------------------------------------------------
+| Website Routes
+|--------------------------------------------------------------------------
+*/
 
 Route::apiResource('/home', WebsiteHomeController::class);
 Route::apiResource('/products', WebsiteProductController::class);

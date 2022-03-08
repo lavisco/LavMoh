@@ -4,7 +4,7 @@
         <div class="container-fluid mt-5 mb-5">
             <div class="col">
                 <div
-                    v-if="sellerShop[0] && sellerShop[0].status == true"
+                    v-if="shop_active === true"
                     class="row d-flex justify-content-center gap"
                 >
                     <div class="card dashboard-card">
@@ -93,7 +93,7 @@
                                 <!-- Form start -->
                                 <form
                                     class="input-form h-100"
-                                    @submit.prevent="updateSellerprofile()"
+                                    @submit.prevent="createSellerprofile()"
                                 >
                                     <div
                                         class="input-form-compact"
@@ -1302,6 +1302,9 @@
                                                     <button
                                                         type="submit"
                                                         class="btn"
+                                                        :disabled="
+                                                            submitButtonDisabled
+                                                        "
                                                     >
                                                         <i
                                                             class="
@@ -1311,7 +1314,7 @@
                                                             "
                                                             aria-hidden="true"
                                                         ></i>
-                                                        Save
+                                                        {{ submitButtonText }}
                                                     </button>
                                                 </div>
                                             </div>
@@ -1330,7 +1333,7 @@
             id="success-modal"
             msgTitle="Business Activation Form Submitted"
             msg="Your request for selling on Lavisco has been successfully submitted. Please await approval from our team."
-            gotoRoute="login"
+            gotoRoute="noroute"
         />
     </div>
 </template>
@@ -1346,11 +1349,15 @@ export default {
     },
 
     data: () => ({
+        submitButtonText: "Submit",
+        submitButtonDisabled: false,
+
         revenue: "",
         orders: "",
         products: "",
         sellerShop: "",
         has_shop: "",
+        shop_active: "",
         url: "",
         billingMode: false,
 
@@ -1415,6 +1422,7 @@ export default {
                 .get("/api/seller/dashboard")
                 .then(({ data }) => {
                     this.has_shop = data.hasShop;
+                    this.shop_active = data.shopActive;
                     if (this.has_shop === false) {
                         $("#addRecord").modal("show");
                         this.loadProvinces();
@@ -1477,16 +1485,31 @@ export default {
                 .catch((error) => console.log(error));
         },
 
-        updateSellerprofile() {
+        createSellerprofile() {
+            this.submitButtonText = "In Progress...";
+            this.submitButtonDisabled = true;
             this.form
                 .post("/api/seller/user/shop_setup")
                 .then(() => {
+                    this.submitButtonDisabled = false;
                     $("#addRecord").modal("hide");
                     $("#success-modal").modal("show");
+                    this.sendStoreActiveApplicationMail();
                 })
                 .catch((error) => {
+                    this.submitButtonText = "Submit";
+                    this.submitButtonDisabled = false;
                     console.log(error);
                     this.failed = true;
+                });
+        },
+
+        sendStoreActiveApplicationMail() {
+            axios
+                .get("/api/email/store_active_application")
+                .then(() => {})
+                .catch((error) => {
+                    console.log(error);
                 });
         },
     },

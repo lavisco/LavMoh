@@ -3,7 +3,7 @@
         <h1>Thank You For Your Order</h1>
         <h5>
             Browse more
-            <router-link to="/lavisco/products">
+            <router-link to="/products">
                 <u>products</u>
             </router-link>
         </h5>

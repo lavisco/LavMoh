@@ -4,7 +4,7 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Home</a></li>
                 <li class="breadcrumb-item">
-                    <router-link to="/lavisco/products"> Products </router-link>
+                    <router-link to="/products"> Products </router-link>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">
                     {{ product.title }}
@@ -322,7 +322,7 @@
                                 <button class="btn-secondary">
                                     <router-link
                                         :to="{
-                                            name: 'sellers/seller',
+                                            name: 'seller_shop',
                                             params: {
                                                 shopId: product.user.shop.id,
                                             },

@@ -173,7 +173,7 @@
 
                         <select class="custom-select website-select col-md-6">
                             <option value="" disabled selected hidden>
-                                Select Option
+                                Select {{ variation[0].type }}
                             </option>
                             <option v-for="option in variation">
                                 {{ option.type_option }}
@@ -183,6 +183,10 @@
                     <div class="mt-4">
                         <h6>Price</h6>
                         <h3 class="price">LKR {{ product.base_price }}</h3>
+                    </div>
+                    <div class="mt-4">
+                        <h6>About this item</h6>
+                        <p>{{ product.short_description }}</p>
                     </div>
                     <div class="mt-4" v-show="has_custom_text">
                         <h6>Custom message</h6>

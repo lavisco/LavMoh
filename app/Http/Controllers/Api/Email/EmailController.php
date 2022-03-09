@@ -22,13 +22,18 @@ class EmailController extends Controller
     |
     */
 
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
+
     /** 
     * Sends email to seller after they submit store activation form.
     */
 
     public function sendStoreActiveApplicationMail()
     {
-        Mail::to('mohorimaislamtamanna@gmail.com')->send(new StoreActiveApplicationMail());
+        Mail::to(auth()->user()->email)->send(new StoreActiveApplicationMail());
 
         return Mail::failures() != 0 ? "Email has been sent successfully." : "Oops! There was some error sending the email.";
     }
@@ -37,9 +42,9 @@ class EmailController extends Controller
     * Sends email informing seller that their store status is active.
     */
 
-    public function sendStoreActiveMail()
+    public function sendStoreActiveMail($email)
     {
-        Mail::to('mohorimaislamtamanna@gmail.com')->send(new StoreActiveMail());
+        Mail::to($email)->send(new StoreActiveMail());
 
         return Mail::failures() != 0 ? "Email has been sent successfully." : "Oops! There was some error sending the email.";
     }
@@ -50,7 +55,7 @@ class EmailController extends Controller
 
     public function sendProductListingConfirmedMail()
     {
-        Mail::to('mohorimaislamtamanna@gmail.com')->send(new ProductListingConfirmMail());
+        Mail::to(auth()->user()->email)->send(new ProductListingConfirmMail());
 
         return Mail::failures() != 0 ? "Email has been sent successfully." : "Oops! There was some error sending the email.";
     }
@@ -61,7 +66,7 @@ class EmailController extends Controller
 
     public function sendPasswordResetMail()
     {
-        Mail::to('mohorimaislamtamanna@gmail.com')->send(new PasswordResetMail());
+        Mail::to(auth()->user()->email)->send(new PasswordResetMail());
 
         return Mail::failures() != 0 ? "Email has been sent successfully." : "Oops! There was some error sending the email.";
     }

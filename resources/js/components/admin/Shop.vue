@@ -52,7 +52,7 @@
                                                 v-model="shop.status"
                                                 @change.prevent="
                                                     setCurrentState(
-                                                        shop.id,
+                                                        shop,
                                                         $event
                                                     )
                                                 "
@@ -725,6 +725,7 @@ export default {
             zipcode: "",
             status: "",
             user_id: "",
+            user: "",
         }),
     }),
 
@@ -865,6 +866,9 @@ export default {
                 .put("/api/admin/shops/" + this.form.id)
                 .then(() => {
                     $("#addRecord").modal("hide");
+                    if (this.form.status == 1) {
+                        this.sendStoreActiveMail(this.form.user.email);
+                    }
                     Fire.$emit("reloadRecords");
                 })
                 .catch((error) => console.log(error));
@@ -874,19 +878,19 @@ export default {
             this.form.status = event.target.value;
 
             this.form
-                .put("/api/admin/shops/updateState/" + shop)
+                .put("/api/admin/shops/updateState/" + shop.id)
                 .then(() => {
                     if (this.form.status == 1) {
-                        this.sendStoreActiveMail();
+                        this.sendStoreActiveMail(shop.user.email);
                     }
                     Fire.$emit("reloadRecords");
                 })
                 .catch((error) => console.log(error));
         },
 
-        sendStoreActiveMail() {
+        sendStoreActiveMail(email) {
             axios
-                .get("/api/email/store_active")
+                .get("/api/email/store_active/" + email)
                 .then(() => {})
                 .catch((error) => {
                     console.log(error);

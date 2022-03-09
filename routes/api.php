@@ -157,7 +157,7 @@ Route::prefix('seller')->group(function () {
 
 Route::prefix('email')->group(function () {
     Route::get('/store_active_application', [EmailController::class, 'sendStoreActiveApplicationMail']);
-    Route::get('/store_active', [EmailController::class, 'sendStoreActiveMail']);
+    Route::get('/store_active/{email}', [EmailController::class, 'sendStoreActiveMail']);
     Route::get('/new_product_listed', [EmailController::class, 'sendProductListingConfirmedMail']);
     Route::get('/password_reset', [EmailController::class, 'sendPasswordResetMail']);
     Route::get('/new_order', [EmailController::class, 'sendOrderMail']);

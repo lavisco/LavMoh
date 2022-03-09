@@ -142,6 +142,9 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'variation_sku.*' => [
+            'unique' => 'The variation SKU has already been taken.',
+        ]
     ],
 
     /*

@@ -25,11 +25,6 @@ class ProductVariationRequest extends FormRequest
     public function rules()
     {
         return [
-            'variation_sku.*' => [
-                'nullable',
-                'max:16',
-                Rule::unique('product_variations')->ignore($this->id),
-            ],
             'variation_description.*' => 'max:500|nullable',
             'variation_price.*' => 'numeric|nullable',
             'variation_quantity.*' => 'integer|nullable',
@@ -46,7 +41,6 @@ class ProductVariationRequest extends FormRequest
     public function attributes()
     {
         return [
-            'variation_sku.*' => 'variation sku',
             'variation_description.*' => 'variation description',
             'variation_price.*' => 'variation price',
             'variation_quantity.*' => 'variation quantity',

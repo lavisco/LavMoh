@@ -27,6 +27,7 @@ class HomeController extends Controller
                     'category:id,name',
                     'product_image'
                     ])
+                    ->where('product_state_id', '1')
                     ->latest()->take(10)->get();
 
         return response()->json([

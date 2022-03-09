@@ -5,8 +5,7 @@ namespace App\Http\Controllers\Api\Seller;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductVariationRequest;
 use App\Models\ProductVariation;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class ProductVariationController extends Controller
 {
@@ -36,9 +35,19 @@ class ProductVariationController extends Controller
     public function update(ProductVariationRequest $request, $productId)
     {
         ///$this->authorize('update', $productvariation);
-        
+       
         for ($i=0; $i < count($request->variation_id); $i++) { 
             $productVariation = ProductVariation::findOrFail($request->variation_id[$i]);
+
+            $request->validate([
+                // 'variation_sku'.$i => [
+                //     'nullable',
+                //     'max:16',
+                //     Rule::unique('product_variations', 'sku')->ignore($productVariation->id),
+                // ],
+                'variation_sku.' . $i => "nullable|max:16|unique:product_variations,sku,{$productVariation->id},id",
+            ]);
+            
             $productVariation->update([
                 'product_id' => $productId,
                 'type' => $request->variation_type[$i],

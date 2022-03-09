@@ -450,8 +450,6 @@
                                                 name="product_image_path"
                                             />
 
-                                            
-
                                             <button
                                                 class="image-upload-box"
                                                 :class="{
@@ -532,7 +530,8 @@
                                     labor, and other business expenses.
                                 </p>
                                 <p class="text-grey text-xs mt-1">
-                                    If you don't have a base price, please input <strong>0.00</strong>
+                                    If you don't have a base price, please input
+                                    <strong>0.00</strong>
                                 </p>
                             </label>
 
@@ -1307,9 +1306,13 @@
                             <i class="fas fa-times mr-2" aria-hidden="true"></i>
                             Cancel
                         </button>
-                        <button type="submit" class="btn">
+                        <button
+                            type="submit"
+                            class="btn"
+                            :disabled="submitButtonDisabled"
+                        >
                             <i class="fas fa-save mr-2" aria-hidden="true"></i>
-                            Save & Continue
+                            {{ submitButtonText }}
                         </button>
                     </div>
                 </form>
@@ -1429,6 +1432,8 @@ export default {
         AlertError,
     },
     data: () => ({
+        submitButtonText: "Save & Continue",
+        submitButtonDisabled: false,
         occasionMode: false,
         recipientMode: false,
         categories: [],
@@ -1616,11 +1621,21 @@ export default {
         },
 
         storeOccasionName(name) {
-            this.occasionName.push(name);
+            if (this.occasionName.includes(name)) {
+                let index = this.occasionName.indexOf(name);
+                this.occasionName.splice(index, 1);
+            } else {
+                this.occasionName.push(name);
+            }
         },
 
         storeRecipientName(name) {
-            this.recipientName.push(name);
+            if (this.recipientName.includes(name)) {
+                let index = this.recipientName.indexOf(name);
+                this.recipientName.splice(index, 1);
+            } else {
+                this.recipientName.push(name);
+            }
         },
 
         check(event) {
@@ -1673,15 +1688,20 @@ export default {
                 }
             }
 
-            //this.form.base_price === null ? (this.form.base_price = 0.0) : "";
+            this.submitButtonText = "In Progress...";
+            this.submitButtonDisabled = true;
 
             this.form
                 .post("/api/seller/products")
                 .then(() => {
+                    this.submitButtonText = "Saved";
+                    this.submitButtonDisabled = false;
                     $("#success-modal").modal("show");
                     this.sendProductListingConfirmedMail();
                 })
                 .catch((error) => {
+                    this.submitButtonText = "Save & Continue";
+                    this.submitButtonDisabled = false;
                     console.log(error);
                     $("#fail-modal").modal("show");
                 });

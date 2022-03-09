@@ -61,7 +61,7 @@
                                         </th>
                                         <th scope="col">Quantity</th>
                                         <th scope="col">Base Price</th>
-                                        <th class="table-col-sm">State</th>
+                                        <th class="table-col-sm">Status</th>
                                         <th scope="col"></th>
                                     </tr>
                                 </thead>
@@ -487,13 +487,15 @@ export default {
         },
 
         setCurrentState(product, event) {
-            this.form.product_state_id = event.target.value;
-            this.form
-                .put("/api/seller/products/updateState/" + product)
-                .then(() => {
-                    Fire.$emit("reloadRecords");
-                })
-                .catch((error) => console.log(error));
+            if (confirm("Are you sure you want to change product status?")) {
+                this.form.product_state_id = event.target.value;
+                this.form
+                    .put("/api/seller/products/updateState/" + product)
+                    .then(() => {
+                        Fire.$emit("reloadRecords");
+                    })
+                    .catch((error) => console.log(error));
+            }
         },
     },
     mounted() {

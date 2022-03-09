@@ -157,7 +157,64 @@
                                     <HasError :form="form" field="key" />
                                 </div>
                             </div>
+
                             <div class="form-group row">
+                                <label
+                                    class="col-md-3 col-form-label"
+                                    for="contentType"
+                                    >Content Type
+                                    <strong class="text-danger"> *</strong>
+                                </label>
+                                <div class="col-md-9">
+                                    <div
+                                        class="
+                                            custom-control
+                                            custom-radio
+                                            custom-control-inline
+                                        "
+                                    >
+                                        <input
+                                            type="radio"
+                                            id="contentType1"
+                                            name="contentType"
+                                            class="custom-control-input"
+                                            v-model="form.contentType"
+                                            value="text"
+                                        />
+                                        <label
+                                            class="custom-control-label"
+                                            for="contentType1"
+                                            >Text
+                                        </label>
+                                    </div>
+                                    <div
+                                        class="
+                                            custom-control
+                                            custom-radio
+                                            custom-control-inline
+                                        "
+                                    >
+                                        <input
+                                            type="radio"
+                                            id="contentType2"
+                                            name="contentType"
+                                            class="custom-control-input"
+                                            v-model="form.contentType"
+                                            value="image"
+                                        />
+                                        <label
+                                            class="custom-control-label"
+                                            for="contentType2"
+                                            >Image
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div
+                                class="form-group row"
+                                v-show="form.contentType"
+                            >
                                 <label
                                     class="col-md-3 col-form-label"
                                     for="content"
@@ -165,18 +222,54 @@
                                 </label>
 
                                 <div class="col-md-9">
-                                    <textarea
-                                        id="content"
-                                        class="
-                                            form-control
-                                            form-control-alternative
-                                        "
-                                        name="content"
-                                        rows="3"
-                                        cols="50"
-                                        v-model="form.content"
-                                    >
-                                    </textarea>
+                                    <div v-if="form.contentType == 'text'">
+                                        <textarea
+                                            id="content"
+                                            class="
+                                                form-control
+                                                form-control-alternative
+                                            "
+                                            name="content"
+                                            rows="3"
+                                            cols="50"
+                                            v-model="form.content"
+                                        >
+                                        </textarea>
+                                    </div>
+
+                                    <div v-if="form.contentType == 'image'">
+                                        <input
+                                            type="file"
+                                            style="display: none"
+                                            @change.prevent="fileSelected"
+                                            ref="fileInput"
+                                            name="content"
+                                        />
+
+                                        <button
+                                            class="image-upload-box"
+                                            @click.prevent="
+                                                $refs.fileInput.click()
+                                            "
+                                        >
+                                            <i
+                                                v-show="!this.photoName"
+                                                class="fas fa-plus"
+                                            ></i>
+                                            <i
+                                                v-show="this.photoName"
+                                                class="fas fa-check"
+                                            ></i>
+                                        </button>
+                                        <p class="image-upload-filename mt-2">
+                                            {{
+                                                this.photoName
+                                                    ? this.photoName
+                                                    : `Choose file`
+                                            }}
+                                        </p>
+                                    </div>
+
                                     <HasError :form="form" field="content" />
                                 </div>
                             </div>
@@ -229,10 +322,12 @@ export default {
         loading: true,
         sitetexts: [],
         searchText: null,
+        photoName: null,
         form: new Form({
             id: "",
             key: "",
             content: "",
+            contentType: "",
         }),
     }),
 
@@ -243,6 +338,21 @@ export default {
     },
 
     methods: {
+        fileSelected(e) {
+            let file = e.target.files[0];
+            let reader = new FileReader();
+            let limit = 1024 * 1024 * 2;
+            if (file["size"] > limit) {
+                alert("File size has crossed maximum limit, which is 2mb!");
+                return false;
+            }
+            reader.onloadend = (file) => {
+                this.form.content = reader.result;
+                this.photoName = e.target.files[0].name;
+            };
+            reader.readAsDataURL(file);
+        },
+
         newModal() {
             this.editMode = false;
             this.form.clear();

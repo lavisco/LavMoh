@@ -173,9 +173,23 @@
 
 <script>
 export default {
-    data: () => ({}),
+    data: () => ({
+        siteInfo: [],
+        keyValue: "seller_onboard_banner",
+    }),
 
-    methods: {},
-    mounted() {},
+    methods: {
+        loadData() {
+            axios
+                .get("/api/sitetexts/" + this.keyValue)
+                .then(({data}) => {
+                    this.siteInfo = data.data;
+                })
+                .catch((error) => console.log(error));
+        },
+    },
+    mounted() {
+        this.loadData();
+    },
 };
 </script>

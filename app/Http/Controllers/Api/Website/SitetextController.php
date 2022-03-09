@@ -12,4 +12,10 @@ class SitetextController extends Controller
     {
         return Sitetext::latest()->filter(request(['searchText']))->paginate(25);
     }
+
+    public function show($key)
+    {
+        ///$this->authorize('view', $sitetext);
+        return Sitetext::where('key', $key)->findOrFail();
+    }
 }

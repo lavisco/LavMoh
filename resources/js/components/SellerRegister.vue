@@ -2,7 +2,7 @@
     <!-- Body -->
     <div class="container-fluid login">
         <h1>Seller Sign Up</h1>
-        <h5>To start selling your wares today!</h5>
+        <h5>Get started Today! Grow your business with us.</h5>
 
         <div class="card">
             <!-- Form start -->

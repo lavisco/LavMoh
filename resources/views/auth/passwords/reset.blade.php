@@ -30,13 +30,17 @@
             <div
                 class="form-group{{ $errors->has('password') ? ' has-danger' : '' }}"
             >
-                <input
-                    class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}"
-                    name="password"
-                    placeholder="Password"
-                    type="password"
-                    required
-                />
+                <div class="password-input">
+                    <input
+                        class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}"
+                        name="password"
+                        placeholder="Password"
+                        type="password"
+                        required
+                    />
+                    <i class="fas fa-eye" onclick="showPasswordFunction()"></i>
+                </div>
+
                 @if ($errors->has('password'))
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $errors->first('password') }}</strong>

@@ -14,19 +14,25 @@
                 </label>
 
                 <div class="col-md-9">
-                    <input
-                        id="password"
-                        type="password"
-                        class="
-                            form-control
-                            @error('password')
-                            is-invalid
-                            @enderror
-                        "
-                        name="password"
-                        required
-                        autocomplete="current-password"
-                    />
+                    <div class="password-input">
+                        <input
+                            id="password"
+                            type="password"
+                            class="
+                                form-control
+                                @error('password')
+                                is-invalid
+                                @enderror
+                            "
+                            name="password"
+                            required
+                            autocomplete="current-password"
+                        />
+                        <i
+                            class="fas fa-eye"
+                            onclick="showPasswordFunction()"
+                        ></i>
+                    </div>
 
                     @error('password')
                     <span class="invalid-feedback" role="alert">

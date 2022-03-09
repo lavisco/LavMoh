@@ -68,5 +68,32 @@
         <script src="/assets/vendor/jquery/dist/jquery.min.js"></script>
         <script src="/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
         --}} @stack('js')
+
+        <script>
+            function showPasswordFunction() {
+                var x = document.getElementById("password");
+                if (x.type === "password") {
+                    x.type = "text";
+                } else {
+                    x.type = "password";
+                }
+            }
+            function showOldPasswordFunction() {
+                var x = document.getElementById("old_password");
+                if (x.type === "password") {
+                    x.type = "text";
+                } else {
+                    x.type = "password";
+                }
+            }
+            function showConfirmPasswordFunction() {
+                var x = document.getElementById("password_confirmation");
+                if (x.type === "password") {
+                    x.type = "text";
+                } else {
+                    x.type = "password";
+                }
+            }
+        </script>
     </body>
 </html>

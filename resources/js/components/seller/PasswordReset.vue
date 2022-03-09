@@ -26,13 +26,21 @@
                                             </label>
 
                                             <div class="col-md-9">
-                                                <input
-                                                    id="old_password"
-                                                    v-model="form.old_password"
-                                                    type="password"
-                                                    name="old_password"
-                                                    class="form-control"
-                                                />
+                                                <div class="password-input">
+                                                    <input
+                                                        id="old_password"
+                                                        v-model="
+                                                            form.old_password
+                                                        "
+                                                        type="password"
+                                                        name="old_password"
+                                                        class="form-control"
+                                                    />
+                                                    <i
+                                                        class="fas fa-eye"
+                                                        onclick="showOldPasswordFunction()"
+                                                    ></i>
+                                                </div>
                                                 <HasError
                                                     :form="form"
                                                     field="old_password"
@@ -50,13 +58,19 @@
                                             </label>
 
                                             <div class="col-md-9">
-                                                <input
-                                                    id="password"
-                                                    v-model="form.password"
-                                                    type="password"
-                                                    name="password"
-                                                    class="form-control"
-                                                />
+                                                <div class="password-input">
+                                                    <input
+                                                        id="password"
+                                                        v-model="form.password"
+                                                        type="password"
+                                                        name="password"
+                                                        class="form-control"
+                                                    />
+                                                    <i
+                                                        class="fas fa-eye"
+                                                        onclick="showPasswordFunction()"
+                                                    ></i>
+                                                </div>
                                                 <HasError
                                                     :form="form"
                                                     field="password"
@@ -73,20 +87,45 @@
                                                 </strong>
                                             </label>
 
-                                            <div class="col-md-9">
-                                                <input
-                                                    id="password_confirmation"
-                                                    v-model="
-                                                        form.password_confirmation
-                                                    "
-                                                    type="password"
-                                                    name="password_confirmation"
-                                                    class="form-control"
-                                                />
+                                            <div class="col-md-8">
+                                                <div class="password-input">
+                                                    <input
+                                                        id="password_confirmation"
+                                                        v-model="
+                                                            form.password_confirmation
+                                                        "
+                                                        type="password"
+                                                        name="password_confirmation"
+                                                        class="form-control"
+                                                    />
+                                                    <i
+                                                        class="fas fa-eye"
+                                                        onclick="showConfirmPasswordFunction()"
+                                                    ></i>
+                                                </div>
+
                                                 <HasError
                                                     :form="form"
                                                     field="password_confirmation"
                                                 />
+                                            </div>
+                                            <div
+                                                class="col-md-1"
+                                                v-show="form.password"
+                                            >
+                                                <div>
+                                                    <i
+                                                        class="
+                                                            fas
+                                                            fa-check
+                                                            pwd-confirm
+                                                        "
+                                                        v-show="
+                                                            form.password ==
+                                                            form.password_confirmation
+                                                        "
+                                                    ></i>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

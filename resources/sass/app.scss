@@ -1112,10 +1112,18 @@ footer {
         right: 10px;
         transform: translate(0, -50%);
         z-index: 2;
-        font-size: 26px;
+        font-size: 22px;
         cursor: pointer;
         color: $lav-dark-purple;
     }
+}
+.pwd-confirm{
+    color: $lav-green;
+    font-size: 26px;
+}
+.pwd-confirm-not{
+    color: $red;
+    font-size: 26px;
 }
 
 /*------------------------------dashboard------------------------------*/

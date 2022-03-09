@@ -11166,9 +11166,19 @@ footer a:hover svg path {
   right: 10px;
   transform: translate(0, -50%);
   z-index: 2;
-  font-size: 26px;
+  font-size: 22px;
   cursor: pointer;
   color: #6b57cf;
+}
+
+.pwd-confirm {
+  color: #1bc894;
+  font-size: 26px;
+}
+
+.pwd-confirm-not {
+  color: #e3342f;
+  font-size: 26px;
 }
 
 /*------------------------------dashboard------------------------------*/

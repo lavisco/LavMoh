@@ -958,9 +958,6 @@
                                                 form-control-alternative
                                             "
                                             placeholder="Description"
-                                            @change.prevent="
-                                                changeVariationDesc(index)
-                                            "
                                         />
                                         <HasError
                                             :form="form"

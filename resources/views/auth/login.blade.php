@@ -4,7 +4,7 @@
     <h5>Welcome back</h5>
     <p>
         Don't have an account?
-        <a class="pink" href="/lavisco/seller/register">Become a Seller</a>
+        <a class="pink" href="/seller_register">Become a Seller</a>
     </p>
     <div class="card">
         <form method="POST" action="{{ route('login') }}">

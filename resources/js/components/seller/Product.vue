@@ -60,7 +60,9 @@
                                             Title
                                         </th>
                                         <th scope="col">Quantity</th>
-                                        <th scope="col">Base Price</th>
+                                        <th scope="col" class="table-col-sm">
+                                            Base Price
+                                        </th>
                                         <th class="table-col-sm">Status</th>
                                         <th scope="col"></th>
                                     </tr>

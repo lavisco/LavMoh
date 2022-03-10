@@ -57,7 +57,7 @@ class ProductRequest extends FormRequest
             'productVariation.*.sku.*' => [
                 'nullable',
                 'max:16',
-                Rule::unique('product_variations', 'sku'),
+                'unique:product_variations,sku',
             ],
             //'productVariation.*.variationId' => 'required|sometimes',
             'productVariation.*.variationDescription' => 'max:100|nullable',

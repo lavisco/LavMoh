@@ -16,7 +16,7 @@ class CreateProductVariationsTable extends Migration
         Schema::create('product_variations', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('sku', 16)->unique()->nullable();
+            $table->string('sku', 16)->nullable();
 			$table->string('description', 500)->nullable();
 			$table->decimal('price', 14, 2)->default('0.00')->nullable();
 			$table->integer('quantity')->nullable();

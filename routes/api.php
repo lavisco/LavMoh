@@ -120,7 +120,7 @@ Route::prefix('admin')->group(function () {
 
 Route::prefix('buyer')->group(function () {
     Route::apiResource('/buyerprofile', BuyerBuyerProfileController::class);
-    Route::apiResource('/orders', BuyerOrderController::class);
+    //Route::apiResource('/orders', BuyerOrderController::class);
 });
 
 /*

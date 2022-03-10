@@ -59,7 +59,6 @@ class ProductRequest extends FormRequest
                 'max:16',
                 'unique:product_variations,sku',
             ],
-            //'productVariation.*.variationId' => 'required|sometimes',
             'productVariation.*.variationDescription' => 'max:100|nullable',
             'productVariation.*.variation_type_option.*' => 'required|sometimes',
             'productVariation.*.variation_quantity.*' => 'integer|nullable',

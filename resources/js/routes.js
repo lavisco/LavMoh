@@ -438,6 +438,14 @@ export let routes = [
         },
     },
     {
+        path: "/coming_soon",
+        name: "coming_soon",
+        component: require("./components/ComingSoon.vue").default,
+        meta: {
+            title: "Coming Soon",
+        },
+    },
+    {
         path: "/occasions",
         name: "occasions",
         component: require("./components/Occasions.vue").default,

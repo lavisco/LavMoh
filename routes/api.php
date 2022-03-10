@@ -178,6 +178,7 @@ Route::apiResource('/occasions', WebsiteOccasionController::class);
 Route::apiResource('/orders', WebsiteOrderController::class);
 Route::apiResource('/recipients', WebsiteRecipientController::class);
 Route::apiResource('/shops', WebsiteShopController::class);
+Route::get('/sitetexts/seller_pictures', [WebsiteSitetextController::class, 'sellerPictures']);
 Route::apiResource('/sitetexts', WebsiteSitetextController::class);
 //location
 Route::get('/locations/countries', [LocationController::class, 'indexCountry']);

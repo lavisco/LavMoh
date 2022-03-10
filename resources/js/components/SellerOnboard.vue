@@ -1,7 +1,7 @@
 <template>
     <div class="seller-onboard">
         <div class="container-fluid seller-hero">
-            <div class="seller-hero-img"></div>
+            <div class="seller-hero-img" v-bind:style="{ 'background-image': 'url(' + siteInfo.banner + ')' }"></div>
             <div class="seller-hero-box container">
                 <h1 class="mb-4">
                     Take your side hustle online with Lavisco! We have created a
@@ -41,21 +41,21 @@
                 </div>
                 <div class="container">
                     <div class="d-flex flex-row align-items-top mb-5">
-                        <img src="" class="mr-4 section-seller-details-img" />
+                        <img :src="siteInfo.icon_1" class="mr-4 section-seller-details-img" />
                         <div>
                             <h4 class="mb-3">5-10 % Transaction fee + Bank online payment processing Fee</h4>
                             <p>No hidden fees. You only pay for lavisco if you sell through the platform. Depending on product category the commision rate will be 5-10% plus a flat 2.5% bank fee charged to process online payments.</p>
                         </div>
                     </div>
                     <div class="d-flex flex-row align-items-top mb-5">
-                        <img src="" class="mr-4 section-seller-details-img" />
+                        <img :src="siteInfo.icon_2" class="mr-4 section-seller-details-img" />
                         <div>
                             <h4 class="mb-3">Weekly payouts</h4>
                             <p>Lavisco will be processing weekly payouts to reimburse your earnings into your nominated bank accounts</p>
                         </div>
                     </div>
                     <div class="d-flex flex-row align-items-top">
-                        <img src="" class="mr-4 section-seller-details-img" />
+                        <img :src="siteInfo.icon_3" class="mr-4 section-seller-details-img" />
                         <div>
                             <h4 class="mb-3">Delivery charges</h4>
                             <p>You can set your own delivery charge for your delivery. In future we will be joining forces with renowed delivery companies to bring special rates for you.</p>
@@ -80,21 +80,21 @@
                 </div>
                 <div class="container">
                     <div class="d-flex flex-row align-items-top mb-5">
-                        <img src="" class="mr-4 section-seller-details-img" />
+                        <img :src="siteInfo.icon_4" class="mr-4 section-seller-details-img" />
                         <div>
                             <h4 class="mb-3">Manage Products</h4>
                             <p>List new products, edit product listings and setup product customization for your customers as your wish.</p>
                         </div>
                     </div>
                     <div class="d-flex flex-row align-items-top mb-5">
-                        <img src="" class="mr-4 section-seller-details-img" />
+                        <img :src="siteInfo.icon_5" class="mr-4 section-seller-details-img" />
                         <div>
                             <h4 class="mb-3">Manage Customers</h4>
                             <p>Talk in real time to customers and answer thier questions or help them select a gift to purchase through lavisco.</p>
                         </div>
                     </div>
                     <div class="d-flex flex-row align-items-top">
-                        <img src="" class="mr-4 section-seller-details-img" />
+                        <img :src="siteInfo.icon_6" class="mr-4 section-seller-details-img" />
                         <div>
                             <h4 class="mb-3">Manage Orders</h4>
                             <p>View your current orders, plan your future orders and many more features to help you manage your business more efficiently. We have automated your admin work so you can focus on accepting more orders and keep growing.</p>
@@ -119,14 +119,14 @@
                 </div>
                 <div class="container">
                     <div class="d-flex flex-row align-items-top mb-5">
-                        <img src="" class="mr-4 section-seller-details-img" />
+                        <img :src="siteInfo.icon_7" class="mr-4 section-seller-details-img" />
                         <div>
                             <h4 class="mb-3">Talk to us</h4>
                             <p>We are always willing to help you to scale your business up. Talk to us to improve lavisco or for any advice.</p>
                         </div>
                     </div>
                     <div class="d-flex flex-row align-items-top">
-                        <img src="" class="mr-4 section-seller-details-img" />
+                        <img :src="siteInfo.icon_8" class="mr-4 section-seller-details-img" />
                         <div>
                             <h4 class="mb-3">Customer Support</h4>
                             <p>Lavisco customer care team are always ready to help customers. Our dedicated customer support team will help in order related inquires, delivery inquires and more.</p>
@@ -141,18 +141,11 @@
                 <h1>Seller Stories</h1>
                 <div class="container">
                     <div class="d-flex flex-md-row flex-column align-items-top mb-5">
-                        <img src="" class="mr-md-5 section-seller-stories-img mb-4 mb-md-0" />
+                        <img :src="siteInfo.review_1" class="mr-md-5 section-seller-stories-img mb-4 mb-md-0" />
                         <div>
-                            <p>Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote .</p>
-                            <h4 class="mt-3 text-right">By seller from place</h4>
+                            <p>Its a great pleasure working with Lavisco. It had helped me increase my sales, given me opportunities to work on new structures and helped me expand my customer base too. Glad to say I’m finally able to deliver my products beyond Kandy city limits. It had been a good experience in many aspects.</p>
+                            <h4 class="mt-3 text-right">By Bake Lounge</h4>
                         </div>
-                    </div>
-                    <div class="d-flex flex-md-row flex-column align-items-top mb-5">
-                        <div class="order-md-1 order-2">
-                            <p>Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote Quote .</p>
-                            <h4 class="mt-3 text-right">By seller from place</h4>
-                        </div>
-                        <img src="" class="ml-md-5 section-seller-stories-img order-md-2 order-1 mb-4 mb-md-0" />
                     </div>
                 </div>
             </div>
@@ -181,9 +174,9 @@ export default {
     methods: {
         loadData() {
             axios
-                .get("/api/sitetexts/" + this.keyValue)
+                .get("/api/sitetexts/seller_pictures")
                 .then(({data}) => {
-                    this.siteInfo = data.data;
+                    this.siteInfo = data;
                 })
                 .catch((error) => console.log(error));
         },

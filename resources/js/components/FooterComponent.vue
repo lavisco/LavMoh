@@ -52,10 +52,10 @@
                 <div class="col-md-6 row order-md-2 order-3 mb-5 mb-md-0">
                     <div class="col-md-4 d-flex flex-column">
                         <h5>Get to know Us</h5>
-                        <a href="">About us</a>
-                        <a href="">FAQ</a>
+                        <a href="/coming_soon">About us</a>
+                        <a href="/coming_soon">FAQ</a>
                         <a href="/seller_all"> Partner Vendors </a>
-                        <a href="">Announcements</a>
+                        <a href="/coming_soon">Announcements</a>
                     </div>
                     <div class="col-md-4 d-flex flex-column mt-5 mt-md-0">
                         <h5>Policies</h5>
@@ -68,9 +68,17 @@
                     </div>
                     <div class="col-md-4 d-flex flex-column mt-5 mt-md-0">
                         <h5>Let Us Help You</h5>
-                        <a href="">Contact Us</a>
-                        <a href="">Open Support Ticket</a>
-                        <div class="d-flex flex-row mt-3">
+                        <a href="/coming_soon">Contact Us</a>
+                        <a href="/coming_soon">Open Support Ticket</a>
+                        <div
+                            class="
+                                d-flex
+                                flex-row
+                                mt-3
+                                align-items-center
+                                justify-content-md-start justify-content-center
+                            "
+                        >
                             <a
                                 href="https://www.facebook.com/laviscosl"
                                 class="mr-4"
@@ -112,7 +120,7 @@
                     </div>
                 </div>
                 <div class="col-md-3 order-md-3 order-1 mb-5 mb-md-0">
-                    <a href="/">
+                    <a href="/coming_soon">
                         <svg
                             class="footer-logo"
                             width="290"

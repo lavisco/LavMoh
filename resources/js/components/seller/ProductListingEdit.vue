@@ -841,7 +841,12 @@
                         </div>
 
                         <div
-                            class="dashboard-info-card dashboard-var-card px-4 py-4 my-2"
+                            class="
+                                dashboard-info-card dashboard-var-card
+                                px-4
+                                py-4
+                                my-2
+                            "
                             v-show="variations.length > 0"
                         >
                             <h5 class="mb-4">Current Variations</h5>
@@ -1007,7 +1012,13 @@
                                                         )
                                                     "
                                                 >
-                                                    <i class="fas fa-times mr-2"></i>
+                                                    <i
+                                                        class="
+                                                            fas
+                                                            fa-times
+                                                            mr-2
+                                                        "
+                                                    ></i>
                                                     Delete
                                                 </a>
                                             </td>

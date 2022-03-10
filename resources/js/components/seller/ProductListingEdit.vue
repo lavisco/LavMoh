@@ -1357,6 +1357,7 @@
                                 for="processing_time"
                             >
                                 Processing Time
+                                <strong class="text-danger"> *</strong>
                                 <p class="text-grey text-xs mt-2">
                                     Once order has been placed, how long does it
                                     take you to prepare, package & ship?

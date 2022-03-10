@@ -23,16 +23,16 @@ class SitetextController extends Controller
     public function sellerPictures()
     {
         return response()->json([
-            'banner' => Storage::disk('s3')->temporaryUrl('public/images/sellerOnboard/seller_onboard_banner.png', '+2 minutes'),
-            'icon_1' => Storage::disk('s3')->temporaryUrl('public/images/sellerOnboard/seller_onboard_icon1.png', '+2 minutes'),
-            'icon_2' => Storage::disk('s3')->temporaryUrl('public/images/sellerOnboard/seller_onboard_icon2.png', '+2 minutes'),
-            'icon_3' => Storage::disk('s3')->temporaryUrl('public/images/sellerOnboard/seller_onboard_icon3.png', '+2 minutes'),
-            'icon_4' => Storage::disk('s3')->temporaryUrl('public/images/sellerOnboard/seller_onboard_icon4.png', '+2 minutes'),
-            'icon_5' => Storage::disk('s3')->temporaryUrl('public/images/sellerOnboard/seller_onboard_icon5.png', '+2 minutes'),
-            'icon_6' => Storage::disk('s3')->temporaryUrl('public/images/sellerOnboard/seller_onboard_icon6.png', '+2 minutes'),
-            'icon_7' => Storage::disk('s3')->temporaryUrl('public/images/sellerOnboard/seller_onboard_icon7.png', '+2 minutes'),
-            'icon_8' => Storage::disk('s3')->temporaryUrl('public/images/sellerOnboard/seller_onboard_icon8.png', '+2 minutes'),
-            'review_1' => Storage::disk('s3')->temporaryUrl('public/images/sellerOnboard/seller_onboard_review1.jpeg', '+2 minutes'),
+            'banner' => Storage::disk('s3')->temporaryUrl('public/images/sellerOnboard/seller_onboard_banner_sm.jpg', '+2 minutes'),
+            'icon_1' => Storage::disk('s3')->temporaryUrl('public/images/sellerOnboard/seller_onboard_icon1sm.png', '+2 minutes'),
+            'icon_2' => Storage::disk('s3')->temporaryUrl('public/images/sellerOnboard/seller_onboard_icon2sm.png', '+2 minutes'),
+            'icon_3' => Storage::disk('s3')->temporaryUrl('public/images/sellerOnboard/seller_onboard_icon3sm.png', '+2 minutes'),
+            'icon_4' => Storage::disk('s3')->temporaryUrl('public/images/sellerOnboard/seller_onboard_icon4sm.png', '+2 minutes'),
+            'icon_5' => Storage::disk('s3')->temporaryUrl('public/images/sellerOnboard/seller_onboard_icon5sm.png', '+2 minutes'),
+            'icon_6' => Storage::disk('s3')->temporaryUrl('public/images/sellerOnboard/seller_onboard_icon6sm.png', '+2 minutes'),
+            'icon_7' => Storage::disk('s3')->temporaryUrl('public/images/sellerOnboard/seller_onboard_icon7sm.png', '+2 minutes'),
+            'icon_8' => Storage::disk('s3')->temporaryUrl('public/images/sellerOnboard/seller_onboard_icon8sm.png', '+2 minutes'),
+            'review_1' => Storage::disk('s3')->temporaryUrl('public/images/sellerOnboard/seller_onboard_review1sm.jpeg', '+2 minutes'),
         ]);
     }
 }

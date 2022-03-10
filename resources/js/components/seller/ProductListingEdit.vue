@@ -1008,6 +1008,8 @@
                         </div>
                     </div>
 
+                    <p v-for="(n, index) in emptyVariationSlot">oho</p>
+
                     <!-- Shipping -->
                     <div class="card dashboard-info-card mt-4">
                         <!-- Header -->
@@ -1333,7 +1335,18 @@ export default {
         }),
     }),
 
-    computed: {},
+    computed: {
+        existingVariations() {
+            return _.groupBy(this.variations, (variation) => variation.type);
+        },
+        emptyVariationSlot() {
+            let existingVariationsArray = [];
+            for (let x in this.existingVariations) {
+                existingVariationsArray.push(x);
+            }
+            return 3 - existingVariationsArray.length;
+        },
+    },
 
     methods: {
         /*

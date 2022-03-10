@@ -274,6 +274,9 @@ button.bg-black:hover {
 .bg-grey {
     background-color: $lav-grey;
 }
+.bg-pale-grey {
+    background-color: #fcfafa;
+}
 .white {
     color: $white !important;
 }
@@ -330,6 +333,12 @@ button.bg-black:hover {
         width: 180px;
         @media (max-width: 991.98px) {
             width: 120px;
+        }
+    }
+    svg {
+        height: 54px;
+        @media (max-width: 991.98px) {
+            height: 40px;
         }
     }
 }
@@ -587,7 +596,6 @@ section {
     background-position: center;
     background-color: $lav-purple;
     min-height: 800px;
-    border-radius: 12px;
     z-index: -1;
 }
 .seller-hero-box {
@@ -631,25 +639,28 @@ section {
     }
 }
 .section-seller {
-    background: #f4f7ff;
+    background: #edf6f4;
     border-top: 4px solid $lav-pink;
     h1 {
-        color: #002f97;
+        color: #428f7e;
     }
 }
 .section-seller-1 {
-    background: #fff5f5;
+    background: #fdedf4;
     h1 {
-        color: #c10000;
+        color: #c05081;
     }
 }
 .section-seller-2 {
-    background: #e6fff7;
+    background: #ecf6d7;
     h1 {
-        color: #007521;
+        color: #789c30;
     }
 }
 .seller-onboard {
+    h4 {
+        color: $black !important;
+    }
     .gap {
         gap: 50px;
     }
@@ -658,7 +669,8 @@ section {
         padding: 155px;
 
         h1 {
-            margin-bottom: 40px;
+            margin-bottom: 28px;
+            font-size: 42px;
         }
     }
     button {
@@ -673,10 +685,11 @@ section {
         }
     }
     .section-seller-ribbon {
-        font-size: 20px;
+        font-size: 18px;
         font-weight: 600;
         text-transform: capitalize;
-        color: #000000;
+        color: $dark-grey;
+        margin-bottom: 75px;
     }
     .section-seller-details-img {
         border-radius: 0px;
@@ -687,8 +700,8 @@ section {
     }
     .section-seller-stories-img {
         border-radius: 12px;
-        width: 250px;
-        height: 250px;
+        width: 300px;
+        height: 300px;
         object-fit: cover;
         background-color: $black;
     }
@@ -702,7 +715,7 @@ section {
 }
 @media (max-width: 768px) {
     .seller-hero-img {
-        min-height: 250px;
+        min-height: 200px;
     }
     .seller-hero-box {
         margin-top: 0px;
@@ -714,9 +727,14 @@ section {
         }
     }
     .seller-join {
+        margin-left: auto;
+        margin-right: auto;
         margin-bottom: 30px;
         padding: 15px 10px;
-        width: auto;
+        width: 300px;
+        button {
+            width: 250px;
+        }
     }
     .seller-onboard {
         section {
@@ -726,8 +744,15 @@ section {
             font-size: 16px;
         }
         .section-seller-ribbon {
-            font-size: 17px;
-            font-weight: 500;
+            font-size: 14px;
+            font-weight: 600;
+            gap: 2px !important;
+            img {
+                height: 10px;
+            }
+        }
+        section h1 {
+            font-size: 26px;
         }
         .gap {
             gap: 10px;
@@ -1106,7 +1131,7 @@ footer {
 
 .password-input {
     position: relative;
-    input{
+    input {
         width: 100%;
     }
     .fas {
@@ -1121,11 +1146,11 @@ footer {
         color: $lav-dark-purple;
     }
 }
-.pwd-confirm{
+.pwd-confirm {
     color: $lav-green;
     font-size: 26px;
 }
-.pwd-confirm-not{
+.pwd-confirm-not {
     color: $red;
     font-size: 26px;
 }
@@ -1597,7 +1622,7 @@ h4 {
 }
 .dashboard-var-card {
     background-color: #ffffff;
-    border: 1px solid #eaeaead8;
+    border: 1px solid #f3f3f3d8;
     padding: 10px 18px;
 
     .btn {

@@ -10306,6 +10306,10 @@ button.bg-black:hover {
   background-color: #c9c9c9;
 }
 
+.bg-pale-grey {
+  background-color: #fcfafa;
+}
+
 .white {
   color: #ffffff !important;
 }
@@ -10371,6 +10375,14 @@ button.bg-black:hover {
 @media (max-width: 991.98px) {
   .navbar-brand img {
     width: 120px;
+  }
+}
+.navbar-brand svg {
+  height: 54px;
+}
+@media (max-width: 991.98px) {
+  .navbar-brand svg {
+    height: 40px;
   }
 }
 
@@ -10623,7 +10635,6 @@ section h1 {
   background-position: center;
   background-color: #836aff;
   min-height: 800px;
-  border-radius: 12px;
   z-index: -1;
 }
 
@@ -10671,27 +10682,30 @@ section h1 {
 }
 
 .section-seller {
-  background: #f4f7ff;
+  background: #edf6f4;
   border-top: 4px solid #ff5a7c;
 }
 .section-seller h1 {
-  color: #002f97;
+  color: #428f7e;
 }
 
 .section-seller-1 {
-  background: #fff5f5;
+  background: #fdedf4;
 }
 .section-seller-1 h1 {
-  color: #c10000;
+  color: #c05081;
 }
 
 .section-seller-2 {
-  background: #e6fff7;
+  background: #ecf6d7;
 }
 .section-seller-2 h1 {
-  color: #007521;
+  color: #789c30;
 }
 
+.seller-onboard h4 {
+  color: #333333 !important;
+}
 .seller-onboard .gap {
   gap: 50px;
 }
@@ -10700,7 +10714,8 @@ section h1 {
   padding: 155px;
 }
 .seller-onboard section h1 {
-  margin-bottom: 40px;
+  margin-bottom: 28px;
+  font-size: 42px;
 }
 .seller-onboard button {
   background-color: #ff5a7c;
@@ -10713,10 +10728,11 @@ section h1 {
   background-color: #333333;
 }
 .seller-onboard .section-seller-ribbon {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 600;
   text-transform: capitalize;
-  color: #000000;
+  color: #4e4e4e;
+  margin-bottom: 75px;
 }
 .seller-onboard .section-seller-details-img {
   border-radius: 0px;
@@ -10728,8 +10744,8 @@ section h1 {
 }
 .seller-onboard .section-seller-stories-img {
   border-radius: 12px;
-  width: 250px;
-  height: 250px;
+  width: 300px;
+  height: 300px;
   -o-object-fit: cover;
      object-fit: cover;
   background-color: #333333;
@@ -10746,7 +10762,7 @@ section h1 {
 
 @media (max-width: 768px) {
   .seller-hero-img {
-    min-height: 250px;
+    min-height: 200px;
   }
 
   .seller-hero-box {
@@ -10760,9 +10776,14 @@ section h1 {
   }
 
   .seller-join {
+    margin-left: auto;
+    margin-right: auto;
     margin-bottom: 30px;
     padding: 15px 10px;
-    width: auto;
+    width: 300px;
+  }
+  .seller-join button {
+    width: 250px;
   }
 
   .seller-onboard section {
@@ -10772,8 +10793,15 @@ section h1 {
     font-size: 16px;
   }
   .seller-onboard .section-seller-ribbon {
-    font-size: 17px;
-    font-weight: 500;
+    font-size: 14px;
+    font-weight: 600;
+    gap: 2px !important;
+  }
+  .seller-onboard .section-seller-ribbon img {
+    height: 10px;
+  }
+  .seller-onboard section h1 {
+    font-size: 26px;
   }
   .seller-onboard .gap {
     gap: 10px;
@@ -11635,7 +11663,7 @@ h4 {
 
 .dashboard-var-card {
   background-color: #ffffff;
-  border: 1px solid #eaeaead8;
+  border: 1px solid #f3f3f3d8;
   padding: 10px 18px;
 }
 .dashboard-var-card .btn {

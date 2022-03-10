@@ -140,6 +140,9 @@
                             </table>
                         </div>
                         <!-- Table end -->
+                        <h4 class="text-center mt-4" v-show="orders.length == 0">
+                            No orders have been placed yet
+                        </h4>
                     </div>
                 </div>
             </div>

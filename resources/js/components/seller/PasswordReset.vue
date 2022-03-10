@@ -87,7 +87,7 @@
                                                 </strong>
                                             </label>
 
-                                            <div class="col-md-8">
+                                            <div class="col-md-9">
                                                 <div class="password-input">
                                                     <input
                                                         id="password_confirmation"
@@ -99,8 +99,16 @@
                                                         class="form-control"
                                                     />
                                                     <i
-                                                        class="fas fa-eye"
-                                                        onclick="showConfirmPasswordFunction()"
+                                                        class="
+                                                            fas
+                                                            fa-check
+                                                            pwd-confirm
+                                                        "
+                                                        v-show="
+                                                            form.password &&
+                                                            form.password ==
+                                                                form.password_confirmation
+                                                        "
                                                     ></i>
                                                 </div>
 
@@ -108,24 +116,6 @@
                                                     :form="form"
                                                     field="password_confirmation"
                                                 />
-                                            </div>
-                                            <div
-                                                class="col-md-1"
-                                                v-show="form.password"
-                                            >
-                                                <div>
-                                                    <i
-                                                        class="
-                                                            fas
-                                                            fa-check
-                                                            pwd-confirm
-                                                        "
-                                                        v-show="
-                                                            form.password ==
-                                                            form.password_confirmation
-                                                        "
-                                                    ></i>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>

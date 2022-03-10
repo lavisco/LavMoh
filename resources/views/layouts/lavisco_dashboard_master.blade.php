@@ -86,14 +86,6 @@
                     x.type = "password";
                 }
             }
-            function showConfirmPasswordFunction() {
-                var x = document.getElementById("password_confirmation");
-                if (x.type === "password") {
-                    x.type = "text";
-                } else {
-                    x.type = "password";
-                }
-            }
         </script>
     </body>
 </html>

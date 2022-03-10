@@ -65,14 +65,23 @@
                         Confirm Password
                         <strong class="text-danger"> * </strong>
                     </label>
-                    <input
-                        id="password_confirmation"
-                        v-model="form.password_confirmation"
-                        type="password"
-                        name="password_confirmation"
-                        class="form-control"
-                        placeholder="Confirm Password"
-                    />
+                    <div class="password-input">
+                        <input
+                            id="password_confirmation"
+                            v-model="form.password_confirmation"
+                            type="password"
+                            name="password_confirmation"
+                            class="form-control"
+                            placeholder="Confirm Password"
+                        />
+                        <i
+                            class="fas fa-check pwd-confirm"
+                            v-show="
+                                form.password &&
+                                form.password == form.password_confirmation
+                            "
+                        ></i>
+                    </div>
                     <HasError :form="form" field="password_confirmation" />
                 </div>
 

@@ -29,7 +29,7 @@ class CategoryController extends Controller
     public function show($categoryId)
     {
         $category = Category::findOrFail($categoryId);
-        $products = Product::where('category_id', $categoryId)->with(['user.shop','product_image'])->latest()->filter(request(['searchText']))->paginate(25);
+        $products = Product::where('category_id', $categoryId)->where('product_state_id', '1')->with(['user.shop','product_image'])->latest()->filter(request(['searchText']))->paginate(25);
 
         return response()->json([
             'products' => $products,
@@ -45,7 +45,7 @@ class CategoryController extends Controller
      */
     public function getLocationWiseProducts($id, $location)
     {
-        $products = Product::where('category_id', $id)
+        $products = Product::where('category_id', $id)->where('product_state_id', '1')
             ->whereHas('user', function($query){
                 $query->whereHas('seller_profile', function($query) {
                     $query->where('city', 'Kandy');

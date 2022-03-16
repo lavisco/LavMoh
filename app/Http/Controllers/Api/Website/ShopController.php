@@ -28,7 +28,7 @@ class ShopController extends Controller
     public function show($shopId)
     {               
         $shop = Shop::findOrFail($shopId);
-        $products = Product::where('user_id', $shop->user_id)->with('product_image')->latest()->paginate(25);
+        $products = Product::where('user_id', $shop->user_id)->where('product_state_id', '1')->with('product_image')->latest()->paginate(25);
 
         return response()->json([
             'products' => $products,

@@ -486,6 +486,14 @@ export let routes = [
         },
     },
     {
+        path: "/sitemap",
+        name: "sitemap",
+        component: require("./components/Sitemap.vue").default,
+        meta: {
+            title: "Sitemap",
+        },
+    },
+    {
         path: "/shipping",
         name: "shipping",
         component: require("./components/Shipping.vue").default,

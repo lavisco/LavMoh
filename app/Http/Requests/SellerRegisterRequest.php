@@ -28,7 +28,7 @@ class SellerRegisterRequest extends FormRequest
             //seller profile
             'first_name' => 'required|max:100',
             'last_name' => 'required|max:100',
-            'phone' => 'required|digits_between:5,20',
+            'phone' => 'required',
             'email' => 'required|email',
             'province' => 'required',
             'district' => 'required',

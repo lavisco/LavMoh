@@ -18,7 +18,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $products = Product::select('id', 'title', 'base_price', 'user_id', 'category_id')
+        $products = Product::select('id', 'title', 'base_price', 'user_id', 'category_id', 'product_state_id')
+                    ->where('product_state_id', '1')
                     ->with(['user' => function($query){
                         $query->select('id', 'name');
                     }, 'user.shop' => function ($query){
@@ -27,7 +28,6 @@ class HomeController extends Controller
                     'category:id,name',
                     'product_image'
                     ])
-                    ->where('product_state_id', '1')
                     ->latest()->take(10)->get();
 
         return response()->json([

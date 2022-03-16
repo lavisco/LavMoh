@@ -158,6 +158,11 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'productNewOption.*.new_variation_sku.*' => 'variation SKU',
+        'productNewOption.*.new_variation_type_option.*' => 'variation type option',
+        'productNewOption.*.new_variation_quantity.*' => 'variation quantity',
+        'productNewOption.*.new_variation_price.*' => 'variation price',
+    ],
 
 ];

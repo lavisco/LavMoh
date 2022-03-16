@@ -7,7 +7,7 @@ use App\Http\Requests\ProductVariationRequest;
 use App\Http\Requests\ProductVariationStoreRequest;
 use App\Models\ProductVariation;
 use Carbon\Carbon;
-use Illuminate\Validation\Rule;
+use Illuminate\Http\Request;
 
 class ProductVariationController extends Controller
 {
@@ -63,6 +63,62 @@ class ProductVariationController extends Controller
                         'sku' => $sku[$j] ?? null,
                         'price' => $variation_price[$j] ?? '0.00',
                         'quantity' => $variation_quantity[$j] ?? '0',
+                    ]);
+                }
+            }
+        }
+    }
+
+    public function storeOption(Request $request)
+    {
+        ///$this->authorize('create', ProductVariation::class);
+
+        $request->validate([
+                'productNewOption.*.new_variation_sku.*' => 'nullable|max:16|unique:product_variations,sku',
+                'productNewOption.*.new_variation_type_option.*' => 'required',
+                'productNewOption.*.new_variation_quantity.*' => 'integer|nullable',
+                'productNewOption.*.new_variation_price.*' => 'numeric|required',
+            ]);
+
+        if ($request->hasAny(['productNewOption.0.new_variation_type_option.0', 'productNewOption.1.new_variation_type_option.0', 'productNewOption.2.new_variation_type_option.0'])) {
+
+            
+
+            $variationTypes = $request->input('productNewOption.*.new_variation_type');
+            $variationDescriptions = $request->input('productNewOption.*.new_variation_description');
+            $productNewOption = $request->input('productNewOption.*');
+            $productId = $request->id;
+            
+            $counter = 0;
+            for ($i = 0; $i < 3; $i++) {
+                if ($variationTypes[$i]) {
+                    $counter += 1;
+                }
+            }
+    
+            for ($i=0; $i < $counter; $i++) { 
+                $type = $variationTypes[$i];
+                $description = $variationDescriptions[$i];
+                $type_option = $productNewOption[$i]['new_variation_type_option'];
+                $sku = $productNewOption[$i]['new_variation_sku'];
+                $price = $productNewOption[$i]['new_variation_price'];
+                $quantity = $productNewOption[$i]['new_variation_quantity'];
+    
+                for ($j=0; $j < count($type_option); $j++) { 
+                    ProductVariation::create([
+                        //repeating
+                        'product_id' => $productId,
+                        'product_state_id' => 1,
+                        'user_id' => auth()->id(),
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now(),
+                        'type' => $type,
+                        'description' => $description,
+                        //non-repeating
+                        'type_option' => $type_option[$j],
+                        'sku' => $sku[$j] ?? null,
+                        'price' => $price[$j] ?? '0.00',
+                        'quantity' => $quantity[$j] ?? '0',
                     ]);
                 }
             }

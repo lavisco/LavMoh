@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Seller;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductImageRequest;
+use App\Models\Product;
 use App\Models\ProductImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -55,7 +56,7 @@ class ProductImageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ProductImageRequest $request)
+    public function update(ProductImageRequest $request, Product $product)
     {
         ///$this->authorize('update', $productimage);
 
@@ -65,9 +66,11 @@ class ProductImageController extends Controller
             if ($request->image_path[$i] != $productImage->image_path) {
 
                 $file_name = time().'_'.$request->image_title[$i];
+                $image = $request->image_path[$i];
 
-                $img = Image::make($request->image_path[$i])->encode();
+                $img = Image::make($image)->encode();
                 Storage::disk('s3')->put('/public/products/'.$file_name, $img->stream());
+
                 $productPhoto = 'products/'.$file_name;
 
                 $productImage->update([

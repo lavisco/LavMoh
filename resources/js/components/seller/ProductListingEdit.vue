@@ -845,9 +845,10 @@
                                 dashboard-info-card dashboard-var-card
                                 px-4
                                 py-4
-                                my-2
+                                mt-2
+                                mb-3
                             "
-                            v-show="variations.length > 0"
+                            v-if="variations.length > 0"
                         >
                             <h5 class="mb-4">Current Variations</h5>
                             <div class="table-responsive form-table">
@@ -861,7 +862,7 @@
                                                 </strong>
                                             </th>
                                             <th>
-                                                Option
+                                                Option Name
                                                 <strong class="text-danger">
                                                     *
                                                 </strong>
@@ -1029,6 +1030,173 @@
                         </div>
                     </div>
 
+                    <!-- New Options -->
+                    <div
+                        class="card dashboard-info-card mt-4"
+                        v-if="showEmptyOptionSlot"
+                    >
+                        <!-- Header -->
+                        <h4 class="mb-3">
+                            Add New Options to Existing Variations
+                        </h4>
+                        <hr class="mt-0" />
+                        <p class="mb-3 mb-md-4 note">
+                            Options without a name will not be added.
+                        </p>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label" for="">
+                                Add more Options
+                                <p class="text-grey text-xs mt-1 mb-0">
+                                    If options don't have individual prices,
+                                    then input 0 in price.
+                                </p>
+                            </label>
+                            <div class="col-md-9">
+                                <button
+                                    class="btn btn-sm"
+                                    type="button"
+                                    @click.prevent="setNewOptionMode = true"
+                                >
+                                    Add
+                                </button>
+                            </div>
+                        </div>
+
+                        <div
+                            class="
+                                card
+                                dashboard-info-card dashboard-var-card
+                                px-4
+                                py-4
+                                mt-2
+                                mb-3
+                            "
+                            v-show="setNewOptionMode && emptyOption > 0"
+                            v-for="(emptyOption, index) in emptyOptionSlot"
+                        >
+                            <h5 class="mb-4">
+                                Add New Options to Variation:
+                                {{
+                                    form.productNewOption[index]
+                                        .new_variation_type
+                                }}
+                            </h5>
+                            <div class="table-responsive form-table">
+                                <table class="table align-items-center">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                Option Name
+                                                <strong class="text-danger">
+                                                    *
+                                                </strong>
+                                            </th>
+                                            <th class="smwidth">
+                                                Price
+                                                <strong class="text-danger">
+                                                    *
+                                                </strong>
+                                            </th>
+                                            <th class="smwidth">Inventory</th>
+                                            <th>SKU</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="(option, i) in emptyOption">
+                                            <td>
+                                                <input
+                                                    id="new_variation_type_option"
+                                                    v-model="
+                                                        form.productNewOption[
+                                                            index
+                                                        ]
+                                                            .new_variation_type_option[
+                                                            i
+                                                        ]
+                                                    "
+                                                    type="text"
+                                                    name="new_variation_type_option"
+                                                    class="
+                                                        form-control
+                                                        form-control-alternative
+                                                    "
+                                                />
+                                                <HasError
+                                                    :form="form"
+                                                    :field="`productNewOption.${index}.new_variation_type_option.${i}`"
+                                                />
+                                            </td>
+                                            <td>
+                                                <input
+                                                    id="new_variation_price"
+                                                    v-model="
+                                                        form.productNewOption[
+                                                            index
+                                                        ].new_variation_price[i]
+                                                    "
+                                                    type="text"
+                                                    name="new_variation_price"
+                                                    class="
+                                                        form-control
+                                                        form-control-alternative
+                                                    "
+                                                />
+                                                <HasError
+                                                    :form="form"
+                                                    :field="`productNewOption.${index}.new_variation_price.${i}`"
+                                                />
+                                            </td>
+                                            <td>
+                                                <input
+                                                    id="new_variation_quantity"
+                                                    v-model="
+                                                        form.productNewOption[
+                                                            index
+                                                        ]
+                                                            .new_variation_quantity[
+                                                            i
+                                                        ]
+                                                    "
+                                                    type="number"
+                                                    name="new_variation_quantity"
+                                                    class="
+                                                        form-control
+                                                        form-control-alternative
+                                                    "
+                                                />
+                                                <HasError
+                                                    :form="form"
+                                                    :field="`productNewOption.${index}.new_variation_quantity.${i}`"
+                                                />
+                                            </td>
+                                            <td>
+                                                <input
+                                                    id="new_variation_sku"
+                                                    v-model="
+                                                        form.productNewOption[
+                                                            index
+                                                        ].new_variation_sku[i]
+                                                    "
+                                                    type="text"
+                                                    name="new_variation_sku"
+                                                    class="
+                                                        form-control
+                                                        form-control-alternative
+                                                    "
+                                                />
+                                                <HasError
+                                                    :form="form"
+                                                    :field="`productNewOption.${index}.new_variation_sku.${i}`"
+                                                />
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Variation -->
                     <div
                         class="card dashboard-info-card mt-4"
@@ -1042,7 +1210,6 @@
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label" for="">
                                 Add new Variations
-                                <strong class="text-danger"> *</strong>
                                 <p class="text-grey text-xs mt-2 mb-0">
                                     You may add upto
                                     <strong>{{ emptyVariationSlot }}</strong>
@@ -1110,7 +1277,6 @@
                                             form-control
                                             form-control-alternative
                                         "
-                                        placeholder="Variation Type"
                                         @change.prevent="
                                             changeVariationType(index)
                                         "
@@ -1142,7 +1308,6 @@
                                             form-control
                                             form-control-alternative
                                         "
-                                        placeholder="Description"
                                     />
                                     <HasError
                                         :form="form"
@@ -1218,7 +1383,6 @@
                                                                 form-control
                                                                 form-control-alternative
                                                             "
-                                                            placeholder="Option"
                                                         />
                                                         <HasError
                                                             :form="form"
@@ -1240,7 +1404,6 @@
                                                                 form-control
                                                                 form-control-alternative
                                                             "
-                                                            placeholder="price"
                                                         />
                                                         <HasError
                                                             :form="form"
@@ -1262,7 +1425,6 @@
                                                                 form-control
                                                                 form-control-alternative
                                                             "
-                                                            placeholder="qty"
                                                         />
                                                         <HasError
                                                             :form="form"
@@ -1281,7 +1443,6 @@
                                                                 form-control
                                                                 form-control-alternative
                                                             "
-                                                            placeholder="sku"
                                                         />
                                                         <HasError
                                                             :form="form"
@@ -1609,6 +1770,7 @@ export default {
         product: "",
         images: {},
         emptyImageSlot: "",
+        setNewOptionMode: false,
         variations: {},
         occasionName: [],
         recipientName: [],
@@ -1665,6 +1827,34 @@ export default {
             variation_price: [],
             variation_quantity: [],
 
+            //existing variations new options
+            productNewOption: [
+                {
+                    new_variation_type: "",
+                    new_variation_type_option: [],
+                    new_variation_sku: [],
+                    new_variation_description: "",
+                    new_variation_price: [],
+                    new_variation_quantity: [],
+                },
+                {
+                    new_variation_type: "",
+                    new_variation_type_option: [],
+                    new_variation_sku: [],
+                    new_variation_description: "",
+                    new_variation_price: [],
+                    new_variation_quantity: [],
+                },
+                {
+                    new_variation_type: "",
+                    new_variation_type_option: [],
+                    new_variation_sku: [],
+                    new_variation_description: "",
+                    new_variation_price: [],
+                    new_variation_quantity: [],
+                },
+            ],
+
             //new variations
             productVariation: [
                 {
@@ -1715,11 +1905,57 @@ export default {
             }
             return 3 - existingVariationsArray.length;
         },
+        emptyOptionSlot() {
+            let emptyOptionSlotArray = [];
+
+            for (let key in this.existingVariations) {
+                emptyOptionSlotArray.push(
+                    3 - this.existingVariations[key].length
+                );
+            }
+
+            return emptyOptionSlotArray;
+        },
+        showEmptyOptionSlot() {
+            let toggler = false;
+            if (this.emptyOptionSlot[0] && this.emptyOptionSlot[0] != "0") {
+                toggler = true;
+            } else if (
+                this.emptyOptionSlot[1] &&
+                this.emptyOptionSlot[1] != "0"
+            ) {
+                toggler = true;
+            } else if (
+                this.emptyOptionSlot[2] &&
+                this.emptyOptionSlot[2] != "0"
+            ) {
+                toggler = true;
+            }
+            return toggler;
+        },
+    },
+
+    watch: {
+        emptyOptionSlot(after, before) {
+            // convert existingVariations object to key's array
+            const keys = Object.keys(this.existingVariations);
+
+            // iterate over object
+            keys.forEach((key, index) => {
+                if (this.emptyOptionSlot[index] != "0") {
+                    this.form.productNewOption[index].new_variation_type = key;
+                    this.form.productNewOption[
+                        index
+                    ].new_variation_description =
+                        this.existingVariations[key][0].description;
+                }
+            });
+        },
     },
 
     methods: {
         /*
-         * New Variation
+         * Variation
          */
 
         setVariationMode() {
@@ -1781,90 +2017,15 @@ export default {
             variant.variation_quantity = [];
         },
 
-        /*
-         * Variation
-         */
-
-        loadProductVariations() {
-            axios
-                .get(
-                    "/api/seller/product_variations/" +
-                        this.$route.params.productId
-                )
-                .then(({ data }) => {
-                    this.variations = data;
-
-                    this.variations.forEach((value, index) => {
-                        this.$set(this.form.variation_id, index, value.id);
-                        this.$set(this.form.variation_type, index, value.type);
-                        this.$set(
-                            this.form.variation_type_option,
-                            index,
-                            value.type_option
-                        );
-                        this.$set(this.form.variation_sku, index, value.sku);
-                        this.$set(
-                            this.form.variation_description,
-                            index,
-                            value.description
-                        );
-                        this.$set(
-                            this.form.variation_price,
-                            index,
-                            value.price
-                        );
-                        this.$set(
-                            this.form.variation_quantity,
-                            index,
-                            value.quantity
-                        );
-                    });
-
-                    this.loading = false;
-                })
-                .catch((error) => console.log(error));
-        },
-
-        createProductVariations() {
-            this.form
-                .post("/api/seller/product_variations")
-                .then(() => {
-                    this.hasError = false;
-                })
-                .catch((error) => {
-                    console.log(error);
-                    this.hasError = true;
-                    $("#fail-modal").modal("show");
-                });
-        },
-
-        updateProductVariations() {
-            this.form
-                .put(
-                    "/api/seller/product_variations/" +
-                        this.$route.params.productId
-                )
-                .then(() => {
-                    this.hasError = false;
-                })
-                .catch((error) => {
-                    console.log(error);
-                    this.hasError = true;
-                    $("#fail-modal").modal("show");
-                });
-        },
-
         deleteProductVariations(id) {
             if (confirm("Are you sure you want to delete?")) {
                 axios
                     .delete("/api/seller/product_variations/" + id)
                     .then(() => {
-                        this.loadProduct();
-                        this.hasError = false;
+                        return this.loadProduct();
                     })
                     .catch((error) => {
                         console.log(error);
-                        this.hasError = true;
                         $("#fail-modal").modal("show");
                     });
             }
@@ -1965,61 +2126,58 @@ export default {
             reader.readAsDataURL(file);
         },
 
-        loadProductImages() {
-            axios
-                .get("/api/seller/product_images/", {
-                    params: { productId: this.$route.params.productId },
-                })
-                .then(({ data }) => {
-                    this.images = data;
-
-                    this.emptyImageSlot = 6 - this.images.length;
-
-                    this.form.image_path_new = [];
-                    this.form.photoName = [];
-
-                    this.images.forEach((value, index) => {
-                        this.form.image_id.push(value.id);
-                        this.form.image_path.push(value.image_path);
-                        this.form.primary_image.push(value.primary_image);
-                        this.form.path.push(value.path);
-                        this.form.image_title.push(value.title);
-                    });
-                })
-                .catch((error) => console.log(error));
-        },
-
-        updateProductImages() {
-            this.form
-                .put(
-                    "/api/seller/product_images/" + this.$route.params.productId
-                )
-                .then(() => {
-                    this.hasError = false;
-                })
-                .catch((error) => {
-                    console.log(error);
-                    this.hasError = true;
-                    $("#fail-modal").modal("show");
-                });
-        },
-
-        storeNewImage() {
-            this.form
-                .put("/api/seller/products/storeNewImage/" + this.form.id)
-                .then(() => {
-                    this.hasError = false;
-                })
-                .catch((error) => {
-                    console.log(error);
-                    this.hasError = true;
-                    $("#fail-modal").modal("show");
-                });
-        },
-
         /*
-         * Product
+         * Load Data
          */
+
+        resetVariations() {
+            //existing variation data
+            this.form.variation_id = [];
+            this.form.variation_type = [];
+            this.form.variation_type_option = [];
+            this.form.variation_sku = [];
+            this.form.variation_description = [];
+            this.form.variation_price = [];
+            this.form.variation_quantity = [];
+
+            for (let i = 0; i < 3; i++) {
+                //new variation data
+                this.form.productVariation[i].variationMode = false;
+                this.form.productVariation[i].variationId = "";
+                this.form.productVariation[i].variationDescription = "";
+                this.form.productVariation[i].option_list = [];
+                this.form.productVariation[i].variation_type = [];
+                this.form.productVariation[i].variation_type_option = [];
+                this.form.productVariation[i].sku = [];
+                this.form.productVariation[i].variation_price = [];
+                this.form.productVariation[i].variation_quantity = [];
+
+                //new options for existing variation data
+                this.form.productNewOption[i].new_variation_type = "";
+                this.form.productNewOption[i].new_variation_description = "";
+                this.form.productNewOption[i].new_variation_type_option = [];
+                this.form.productNewOption[i].new_variation_sku = [];
+                this.form.productNewOption[i].new_variation_price = [];
+                this.form.productNewOption[i].new_variation_quantity = [];
+            }
+        },
+
+        resetImages() {
+            //new image data
+            this.url = [];
+            this.form.image_path_new = [];
+            this.form.photoName = [];
+
+            //existing image data
+            this.form.image_id = [];
+            this.form.image_path = [];
+            this.form.path = [];
+            this.form.image_title = [];
+            this.form.primary_image = [];
+
+            this.emptyImageSlot = 6 - this.images.length;
+        },
+
         loadDetails() {
             axios
                 .get("/api/seller/products/details")
@@ -2028,22 +2186,6 @@ export default {
                     this.occasions = response.data.occasions;
                     this.recipients = response.data.recipients;
                     this.shippings = response.data.shippings;
-                })
-                .catch((error) => console.log(error));
-        },
-
-        loadProduct() {
-            axios
-                .get("/api/seller/products/" + this.$route.params.productId)
-                .then(({ data }) => {
-                    //this.form.fill(data);
-                    Object.keys(data).forEach((key) => {
-                        this.form[key] = data[key];
-                    });
-                    this.loadPivotVariables();
-                    this.loadProductImages();
-                    this.loadProductVariations();
-                    this.loading = false;
                 })
                 .catch((error) => console.log(error));
         },
@@ -2068,6 +2210,131 @@ export default {
             }
         },
 
+        loadProductImages() {
+            axios
+                .get("/api/seller/product_images/", {
+                    params: { productId: this.$route.params.productId },
+                })
+                .then(({ data }) => {
+                    this.images = data;
+
+                    this.resetImages();
+
+                    this.images.forEach((value, index) => {
+                        this.form.image_id.push(value.id);
+                        this.form.image_path.push(value.image_path);
+                        this.form.primary_image.push(value.primary_image);
+                        this.form.path.push(value.path);
+                        this.form.image_title.push(value.title);
+                    });
+                })
+                .catch((error) => console.log(error));
+        },
+
+        loadProductVariations() {
+            axios
+                .get(
+                    "/api/seller/product_variations/" +
+                        this.$route.params.productId
+                )
+                .then(({ data }) => {
+                    this.variations = data;
+
+                    this.variations.forEach((value, index) => {
+                        this.$set(this.form.variation_id, index, value.id);
+                        this.$set(this.form.variation_type, index, value.type);
+                        this.$set(
+                            this.form.variation_type_option,
+                            index,
+                            value.type_option
+                        );
+                        this.$set(this.form.variation_sku, index, value.sku);
+                        this.$set(
+                            this.form.variation_description,
+                            index,
+                            value.description
+                        );
+                        this.$set(
+                            this.form.variation_price,
+                            index,
+                            value.price
+                        );
+                        this.$set(
+                            this.form.variation_quantity,
+                            index,
+                            value.quantity
+                        );
+                    });
+
+                    this.loading = false;
+                })
+                .catch((error) => console.log(error));
+        },
+
+        loadProduct() {
+            axios
+                .get("/api/seller/products/" + this.$route.params.productId)
+                .then(({ data }) => {
+                    //this.form.fill(data);
+                    Object.keys(data).forEach((key) => {
+                        this.form[key] = data[key];
+                    });
+                })
+                .then(() => {
+                    this.loadDetails();
+                    this.loadPivotVariables();
+                    this.loadProductImages();
+                    this.resetVariations();
+                    this.loadProductVariations();
+                    this.loading = false;
+                })
+                .catch((error) => console.log(error));
+        },
+
+        /*
+         * Update/ Store Data
+         */
+
+        updateProductImages() {
+            this.form
+                .put(
+                    "/api/seller/product_images/" + this.$route.params.productId
+                )
+                .then(() => {})
+                .catch((error) => {});
+        },
+
+        storeNewImage() {
+            this.form
+                .put("/api/seller/products/storeNewImage/" + this.form.id)
+                .then(() => {})
+                .catch((error) => {});
+        },
+
+        createProductVariations() {
+            this.form
+                .post("/api/seller/product_variations")
+                .then(() => {})
+                .catch((error) => {});
+        },
+
+        createProductVariationOptions() {
+            this.form
+                .post("/api/seller/product_variations/store_new_option")
+                .then(() => {})
+                .catch((error) => {});
+        },
+
+        updateProductVariations() {
+            this.form
+                .put(
+                    "/api/seller/product_variations/" +
+                        this.$route.params.productId
+                )
+                .then(() => {})
+                .catch((error) => {});
+        },
+
         updateProduct() {
             if (this.form.has_inventory == 0) {
                 this.form.quantity == "";
@@ -2076,33 +2343,47 @@ export default {
             this.submitButtonText = "In Progress...";
             this.submitButtonDisabled = true;
 
-            this.updateProductImages();
-            this.storeNewImage();
-            this.updateProductVariations();
-
             this.form
                 .put("/api/seller/products/" + this.form.id)
                 .then(() => {
-                    this.createProductVariations();
-                    this.submitButtonText = "Update";
+                    return this.form.put(
+                        "/api/seller/product_variations/" + this.form.id
+                    );
+                })
+                .then(() => {
+                    return this.form.post(
+                        "/api/seller/product_variations/store_new_option"
+                    );
+                })
+                .then(() => {
+                    return this.form.post("/api/seller/product_variations");
+                })
+                .then(() => {
+                    return this.form.put(
+                        "/api/seller/products/storeNewImage/" + this.form.id
+                    );
+                })
+                .then(() => {
+                    return this.form.put(
+                        "/api/seller/product_images/" + this.form.id
+                    );
+                })
+                .then(() => {
+                    this.submitButtonText = "Submit";
                     this.submitButtonDisabled = false;
-                    this.hasError == false
-                        ? $("#success-modal").modal("show")
-                        : "";
-                    this.loadProduct();
-                    this.loadDetails();
+                    $("#success-modal").modal("show");
+                    return this.loadProduct();
                 })
                 .catch((error) => {
-                    this.submitButtonText = "Update";
-                    this.submitButtonDisabled = false;
                     console.log(error);
+                    this.submitButtonText = "Submit";
+                    this.submitButtonDisabled = false;
                     $("#fail-modal").modal("show");
                 });
         },
     },
     mounted() {
         this.loadProduct();
-        this.loadDetails();
     },
 };
 </script>

@@ -139,6 +139,8 @@ Route::prefix('seller')->group(function () {
     Route::apiResource('/products', SellerProductController::class);
     Route::apiResource('/productstates', SellerProductStateController::class);
     Route::apiResource('/product_images', SellerProductImageController::class);
+
+    Route::post('/product_variations/store_new_option', [SellerProductVariationController::class, 'storeOption']);
     Route::apiResource('/product_variations', SellerProductVariationController::class);
     //Route::apiResource('/product_videos', SellerProductVideoController::class);
     Route::apiResource('/receipts', SellerReceiptController::class);

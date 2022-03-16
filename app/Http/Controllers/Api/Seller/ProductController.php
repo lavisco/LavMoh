@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Seller;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
+use App\Http\Requests\ProductUpdateRequest;
 use App\Models\Category;
 use App\Models\Occasion;
 use App\Models\Product;
@@ -138,7 +139,7 @@ class ProductController extends Controller
         return Product::with(['occasions', 'recipients', 'shippings'])->findOrFail($id);
     }
 
-    public function update(ProductRequest $request, Product $product)
+    public function update(ProductUpdateRequest $request, Product $product)
     {
         $this->authorize('update', $product);
         

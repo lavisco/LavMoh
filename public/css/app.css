@@ -10102,8 +10102,8 @@ h6 {
   font-size: 14px;
   font-weight: 500;
   font-style: normal;
-  color: #4e4e4e !important;
-  margin-bottom: 14px;
+  color: #8f8f8f !important;
+  margin-bottom: 12px;
 }
 
 .title {
@@ -11898,13 +11898,6 @@ h4 {
      object-fit: cover;
   width: 100px;
   height: 100px;
-}
-
-.website-select {
-  border: 1px solid #c9c9c9;
-  font-size: 16px;
-  font-weight: 500;
-  color: #333333;
 }
 
 .price {

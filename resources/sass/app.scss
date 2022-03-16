@@ -89,8 +89,8 @@ h6 {
     font-size: 14px;
     font-weight: 500;
     font-style: normal;
-    color: $dark-grey !important;
-    margin-bottom: 14px;
+    color: #8f8f8f !important;
+    margin-bottom: 12px;
 }
 .title {
     font-style: normal;
@@ -1843,13 +1843,6 @@ h4 {
     object-fit: cover;
     width: 100px;
     height: 100px;
-}
-.website-select {
-    //background-color: #eeeeee;
-    border: 1px solid $lav-grey;
-    font-size: 16px;
-    font-weight: 500;
-    color: $black;
 }
 .price {
     font-weight: 600;

@@ -32,18 +32,18 @@ class EmailController extends Controller
          * WelcomeMail class that contains the email template.
          */
 
-        Mail::to('islammohrima@gmail.com')->send(new WelcomeMail());
+        //Mail::to('islammohrima@gmail.com')->send(new WelcomeMail());
 
-        //return new WelcomeMail();
+        return new WelcomeMail();
 
         /**
          * Check if the email has been sent successfully, or not.
          * Return the appropriate message.
          */
         
-        if (Mail::failures() != 0) {
-            return "Email has been sent successfully.";
-        }
-        return "Oops! There was some error sending the email.";
+        // if (Mail::failures() != 0) {
+        //     return "Email has been sent successfully.";
+        // }
+        // return "Oops! There was some error sending the email.";
     }
 }

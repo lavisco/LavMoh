@@ -3,10 +3,9 @@
 
 Thank you for registering with Lavisco.
 
-@component('mail::button', ['url' => ''])
+@component('mail::button', ['url' => 'http://lavisco.lk/login'])
 Login
 @endcomponent
 
-Thanks,<br>
-{{ config('app.name') }}
+If you this email does not concern you, please ignore it.
 @endcomponent

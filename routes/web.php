@@ -30,7 +30,7 @@ Route::get('/login', function () {
     return view('login');
 });
 
-// Route::get('/emailTest', [EmailController::class, 'sendWelcomeEmail']);
+//Route::get('/emailTest', [EmailController::class, 'sendWelcomeEmail']);
 
 Route::get('/email', function() {
     return new StoreActiveApplicationMail();

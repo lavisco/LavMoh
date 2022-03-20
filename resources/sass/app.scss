@@ -762,7 +762,8 @@ section {
             font-size: 33px;
             line-height: 46px;
         }
-        h4, h5 {
+        h4,
+        h5 {
             font-size: 19px !important;
         }
         .gap {
@@ -1824,7 +1825,34 @@ h4 {
 }
 
 /*------------------------------lavisco website------------------------------*/
-/*------------------------------product------------------------------*/
+/*------------------------------product page------------------------------*/
+
+.product-page {
+    @media (max-width: 768px) {
+        h3 {
+            font-size: 22px;
+        }
+    }
+}
+
+.fa-info-circle {
+    font-size: 18px;
+    color: $dark-grey;
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+// .fa-info-circle:hover + .info-msg-box {
+//     display: inline-block;
+// }
+
+.info-msg-box {
+    display: none;
+    position: absolute;
+    color: #ffffff;
+    background-color: $dark-grey;
+}
 
 .breadcrumb {
     background-color: $white;
@@ -1835,7 +1863,7 @@ h4 {
     font-weight: 400;
     font-size: 0.8rem;
     letter-spacing: 0.03rem;
-    padding: 5px 10px;
+    padding: 4px 10px;
 }
 .option-img {
     border: 2px solid $dark-grey;

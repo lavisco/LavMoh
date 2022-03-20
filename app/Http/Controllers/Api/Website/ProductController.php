@@ -19,7 +19,6 @@ class ProductController extends Controller
     public function index()
     {
         return Product::where('product_state_id', '1')->with(['category:id,name', 'user.shop', 'product_image'])->latest()->filter(request(['searchText']))->paginate(25);
-        
     }
 
     /**

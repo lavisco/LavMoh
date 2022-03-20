@@ -32,6 +32,7 @@
             >
                 <div class="password-input">
                     <input
+                        id="password"
                         class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}"
                         name="password"
                         placeholder="Password"
@@ -49,6 +50,7 @@
             </div>
             <div class="form-group">
                 <input
+                    id="password-confirm"
                     class="form-control"
                     placeholder="Confirm Password"
                     type="password"

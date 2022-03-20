@@ -91,7 +91,7 @@
                         class="checkout-btn"
                         @click.prevent="saveShopCartTotal(shop)"
                     >
-                        Checkout
+                        Continue to Checkout
                     </button>
                 </div>
             </div>

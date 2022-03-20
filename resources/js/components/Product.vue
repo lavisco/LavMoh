@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid mb-5">
+    <div class="container-fluid mb-5 product-page">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Home</a></li>
@@ -61,9 +61,12 @@
                     <!-- Swiper end -->
                 </div>
                 <div class="col-md-6 input-form">
+                    <!-- title -->
                     <div class="row">
                         <h3 class="text-left col-12">{{ product.title }}</h3>
                     </div>
+
+                    <!-- tags -->
                     <div
                         class="
                             d-flex
@@ -85,37 +88,72 @@
                             >
                         </div>
                     </div>
+
+                    <!-- short description -->
+                    <div class="mt-4">
+                        <h6>About this item</h6>
+                        <p>{{ product.short_description }}</p>
+                    </div>
+
+                    <!-- variation -->
                     <div
                         class="mt-4"
-                        v-show="variations"
-                        v-for="(variation, index) in variations"
-                        :key="variation.id"
+                        v-for="(variation, index) in variation_array"
                     >
-                        <h6>{{ variation[0].type }}</h6>
+                        <h6>
+                            {{ variation[0].type }}
+                            <i
+                                class="fas fa-info-circle mx-2"
+                                @click.prevent="
+                                    displayInfoBox(`info-box-custom-${index}`)
+                                "
+                                v-if="variation[0].description"
+                            ></i>
+                            <div
+                                :id="`info-box-custom-${index}`"
+                                class="info-msg-box badge badge-pill"
+                            >
+                                {{ variation[0].description }}
+                            </div>
+                        </h6>
 
                         <select
                             class="custom-select col-md-6"
-                            @change="recordVariationDetails($event, variation)"
+                            name="selected_variations"
+                            id="selected_variations"
+                            v-model="form.selected_variations[index]"
                         >
                             <option value="" disabled selected hidden>
-                                Select {{ variation[0].type }}
+                                Select
                             </option>
-                            <option v-for="(option, i) in variation" :key="option.id" :value="i">
+                            <option
+                                v-for="(option, i) in variation"
+                                :key="option.id"
+                                :value="option"
+                            >
                                 {{ option.type_option }}
                                 + {{ option.price }} lkr
                             </option>
                         </select>
                     </div>
-                    <div class="mt-4">
-                        <h6>Price</h6>
-                        <h3 class="price">LKR {{ product.base_price }}</h3>
-                    </div>
-                    <div class="mt-4">
-                        <h6>About this item</h6>
-                        <p>{{ product.short_description }}</p>
-                    </div>
+
+                    <!-- custom msg -->
                     <div class="mt-4" v-show="product.has_custom_text == 1">
-                        <h6>Custom message</h6>
+                        <h6>
+                            Custom message
+                            <i
+                                class="fas fa-info-circle mx-2"
+                                @click.prevent="
+                                    displayInfoBox(`info-box-custom`)
+                                "
+                            ></i>
+                            <div
+                                id="info-box-custom"
+                                class="info-msg-box badge badge-pill"
+                            >
+                                Max 25 characters only
+                            </div>
+                        </h6>
 
                         <input
                             id="custom_text"
@@ -124,8 +162,17 @@
                             name="custom_text"
                             class="form-control form-control-alternative"
                             placeholder="Custom message"
+                            maxlength="25"
                         />
                     </div>
+
+                    <!-- price -->
+                    <div class="mt-4">
+                        <h6>Price</h6>
+                        <h3 class="price">LKR {{ product.base_price }}</h3>
+                    </div>
+
+                    <!-- buttons -->
                     <div class="mt-4">
                         <h6>Checkout</h6>
                         <div class="d-md-flex">
@@ -148,6 +195,51 @@
                             </button>
                         </div>
                     </div>
+
+                    <!-- ingredients -->
+                    <div class="mt-4">
+                        <hr />
+                        <div
+                            class="
+                                d-flex
+                                justify-content-between
+                                align-items-center
+                            "
+                        >
+                            <h6 class="mb-0">Ingredients</h6>
+                            <a
+                                data-toggle="collapse"
+                                href="#collapseMaterial"
+                                role="button"
+                                aria-expanded="false"
+                                aria-controls="collapseMaterial"
+                            >
+                                <svg
+                                    width="45"
+                                    height="45"
+                                    viewBox="0 0 45 45"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <rect
+                                        x="33"
+                                        y="24"
+                                        width="20"
+                                        height="4.07299"
+                                        transform="rotate(-180 33 24)"
+                                        fill="#333333"
+                                    />
+                                </svg>
+                            </a>
+                        </div>
+                        <div class="collapse" id="collapseMaterial">
+                            <p class="mb-2">
+                                {{ product.material }}
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- description -->
                     <div class="mt-4">
                         <hr />
                         <div
@@ -187,11 +279,10 @@
                             <p class="mb-2">
                                 {{ product.description }}
                             </p>
-                            <p class="mb-2">
-                                {{ product.material }}
-                            </p>
                         </div>
                     </div>
+
+                    <!-- faq -->
                     <div class="mt-4">
                         <hr />
                         <div
@@ -238,6 +329,8 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- seller -->
                     <div class="mt-4">
                         <hr />
                         <h6 class="mt-4">Meet your Seller</h6>
@@ -316,80 +409,65 @@ export default {
             touchRatio: 0.2,
             slideToClickedSlide: true,
         },
+        variation_array: [],
         form: new Form({
             id: "",
             custom_text: "",
-            variation_type_option: [null, null, null],
-            selected_variations: [
-                {
-                    variation_type_option: "",
-                    variation_price: "",
-                },
-                {
-                    variation_type_option: "",
-                    variation_price: "",
-                },
-                {
-                    variation_type_option: "",
-                    variation_price: "",
-                },
-            ],
+            selected_variations: [],
         }),
     }),
-
-    computed: {
-        variations() {
-            return _.groupBy(
-                this.product.product_variations,
-                (variation) => variation.type
-            );
-        },
-    },
 
     beforeRouteEnter: function (to, from, next) {
         let uri = "/api/products/" + to.params.productId;
 
-        axios.get(uri).then((response) => {
-            next((vm) => {
-                vm.setData(response);
-            });
-        });
+        axios
+            .get(uri)
+            .then((response) => {
+                next((vm) => {
+                    vm.setData(response);
+                });
+            })
+            .catch((error) => console.log(error));
     },
 
     beforeRouteUpdate: function (to, from, next) {
         let uri = "/api/products/" + to.params.productId;
-        axios.get(uri).then((response) => {
-            this.setData(response);
-            next();
-        });
+        axios
+            .get(uri)
+            .then((response) => {
+                this.setData(response);
+                next();
+            })
+            .catch((error) => console.log(error));
     },
 
     methods: {
+        displayInfoBox(name) {
+            if (document.getElementById(name).style.display == "inline-block") {
+                document.getElementById(name).style.display = "none";
+            } else {
+                document.getElementById(name).style.display = "inline-block";
+            }
+        },
+
         setData(response) {
             this.product = response.data;
             this.loading = false;
+            this.setVariationArray();
         },
 
-        recordVariationDetails(event, variation) {
-            //console.log(option);
-            let index = event.target.value;
-            console.log(variation[index].type_option);
-            console.log(variation[index].price);
+        setVariationArray() {
+            let variationss = _.groupBy(
+                this.product.product_variations,
+                (variation) => variation.type
+            );
+            // convert existingVariations object to key's array
+            const keys = Object.keys(variationss);
 
-            this.$set( this.form.selected_variations[index], 'variation_type_option', variation[index].type_option);
-
-            //this.form.selected_variations[index].variation_type_option = variation[index].type_option;
-            this.form.selected_variations[index].variation_price = variation[index].price;
-        },
-
-        loadProduct() {
-            axios
-                .get("/api/products/" + this.$route.params.productId)
-                .then((response) => {
-                    this.product = response.data.product;
-                    this.loading = false;
-                })
-                .catch((error) => console.log(error));
+            // iterate over object
+            keys.forEach((key, index) => {
+                this.variation_array.push(variationss[key]);
+            });
         },
 
         addProductToCart(product) {

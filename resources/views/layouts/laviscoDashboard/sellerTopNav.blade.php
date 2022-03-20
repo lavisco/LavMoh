@@ -22,7 +22,7 @@
             <button
                 class="navbar-toggler mr-3"
                 type="button"
-                data-toggle="collapse"
+                data-toggle="dropdown"
                 data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent"
                 aria-expanded="false"
@@ -231,6 +231,7 @@
                     justify-content-center
                     gap
                     seller-nav
+                    dropdown
                 "
             >
                 <router-link to="/seller/shop" class="dashboard-link">

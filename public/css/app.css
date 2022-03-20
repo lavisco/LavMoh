@@ -10386,7 +10386,7 @@ button.bg-black:hover {
 }
 @media (max-width: 991.98px) {
   .navbar-brand svg {
-    height: 40px;
+    height: 44px;
   }
 }
 
@@ -10460,8 +10460,8 @@ button.bg-black:hover {
     order: 1;
   }
   .nav-user-options svg {
-    height: 40px;
-    width: 40px;
+    height: 46px;
+    width: 46px;
   }
 }
 .seller-nav {

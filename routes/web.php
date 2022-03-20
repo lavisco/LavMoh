@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EmailController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Website\HomeController;
@@ -29,10 +30,9 @@ Route::get('/login', function () {
     return view('login');
 });
 
-//Route::get('/email', [EmailController::class, 'sendWelcomeEmail']);
+// Route::get('/emailTest', [EmailController::class, 'sendWelcomeEmail']);
 
 Route::get('/email', function() {
-    
     return new StoreActiveApplicationMail();
 });
 

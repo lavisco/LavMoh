@@ -20,7 +20,7 @@ class ProductStateController extends Controller
      */
     public function index()
     {
-        return ProductState::where('id', '1')->orWhere('id', '2')->get();
+        return ProductState::where('id', '1')->orWhere('id', '2')->orWhere('id', '3')->get();
     }
 
     /**

@@ -12,6 +12,7 @@ use App\Models\ProductImage;
 use App\Models\ProductVariation;
 use App\Models\Recipient;
 use App\Models\Shipping;
+use App\Models\Variation;
 use App\Models\VariationOption;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -29,7 +30,7 @@ class ProductController extends Controller
     public function index()
     {
         ///$this->authorize('viewAny', Product::class);
-        return Product::where('user_id', auth()->id())->with(['product_images', 'product_image', 'product_variations', 'category'])->latest()->filter(request(['searchText']))->paginate(25);
+        return Product::where('user_id', auth()->id())->with(['product_images', 'product_image', 'product_variations', 'variations', 'variations.variation_options', 'category'])->latest()->filter(request(['searchText']))->paginate(25);
     }
 
     public function store(ProductRequest $request)
@@ -57,6 +58,64 @@ class ProductController extends Controller
         $this->uploadImage($request, $product->id);
     }
 
+    public function storeVariation($request, $productId)
+    {
+        if ($request->has('productVariation.0.option_name.0')) {
+
+            $totalVariations = $request->input('productVariation.*.variation_name');
+            $variationDescriptions = $request->input('productVariation.*.variation_description');
+            $productVariations = $request->input('productVariation.*');
+    
+            $VariationOptionsArray = [];
+            
+            $counter = 0;
+            for ($i = 0; $i < 3; $i++) {
+                if ($totalVariations[$i]) {
+                    $counter += 1;
+                }
+            }
+    
+            for ($i=0; $i < $counter; $i++) { 
+                //form fields
+                $variation_name = $totalVariations[$i];
+                $variation_description = $variationDescriptions[$i];
+
+                $option_name = $productVariations[$i]['option_name'];
+                $option_sku = $productVariations[$i]['option_sku'];
+                $option_price = $productVariations[$i]['option_price'];
+                $option_quantity = $productVariations[$i]['option_quantity'];
+
+                //create variation
+                $variation = new Variation([
+                    'name' => $variation_name,
+                    'description' => $variation_description,
+                    'product_id' => $productId,
+                    'product_state_id' => 1,
+                ]);
+                $variation->save();
+    
+                for ($j=0; $j < count($option_name); $j++) { 
+                    array_push($VariationOptionsArray, [
+                        //repeating
+                        'variation_id' => $variation->id,
+                        'product_id' => $productId,
+                        'product_state_id' => 1,
+                        'user_id' => auth()->id(),
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now(),
+                        //non-repeating
+                        'name' => $option_name[$j],
+                        'sku' => $option_sku[$j] ?? null,
+                        'price' => $option_price[$j] ?? '0.00',
+                        'quantity' => $option_quantity[$j] ?? '0',
+                    ]);
+                }
+            }
+
+            VariationOption::insert($VariationOptionsArray); //bulk insert
+        }
+    }
+
     public function storeNewImage(Request $request, $productId)
     {        
         //product images
@@ -82,54 +141,6 @@ class ProductController extends Controller
                     'primary_image' => $primary,
                     'product_id' => $productId,
                 ]);
-        }
-    }
-
-    public function storeVariation($request, $productId)
-    {
-        if ($request->has('productVariation.0.variation_type_option.0')) {
-
-            $variations = $request->input('productVariation.*.variationId');
-            $variationDescriptions = $request->input('productVariation.*.variationDescription');
-            $productVariations = $request->input('productVariation.*');
-    
-            $productVariationArray = [];
-            
-            $counter = 0;
-            for ($i = 0; $i < 3; $i++) {
-                if ($variations[$i]) {
-                    $counter += 1;
-                }
-            }
-    
-            for ($i=0; $i < $counter; $i++) { 
-                $variation_type = $variations[$i];
-                $variation_description = $variationDescriptions[$i];
-                $type_option = $productVariations[$i]['variation_type_option'];
-                $sku = $productVariations[$i]['sku'];
-                $variation_price = $productVariations[$i]['variation_price'];
-                $variation_quantity = $productVariations[$i]['variation_quantity'];
-    
-                for ($j=0; $j < count($type_option); $j++) { 
-                    array_push($productVariationArray, [
-                        //repeating
-                        'product_id' => $productId,
-                        'product_state_id' => 1,
-                        'user_id' => auth()->id(),
-                        'created_at' => Carbon::now(),
-                        'updated_at' => Carbon::now(),
-                        'type' => $variation_type,
-                        'description' => $variation_description,
-                        //non-repeating
-                        'type_option' => $type_option[$j],
-                        'sku' => $sku[$j] ?? null,
-                        'price' => $variation_price[$j] ?? '0.00',
-                        'quantity' => $variation_quantity[$j] ?? '0',
-                    ]);
-                }
-            }
-
-            ProductVariation::insert($productVariationArray); //bulk insert
         }
     }
 

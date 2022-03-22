@@ -96,45 +96,58 @@
                     </div>
 
                     <!-- variation -->
-                    <div
-                        class="mt-4"
-                        v-for="(variation, index) in variation_array"
-                    >
-                        <h6>
-                            {{ variation[0].type }}
-                            <i
-                                class="fas fa-info-circle mx-2"
-                                @click.prevent="
-                                    displayInfoBox(`info-box-custom-${index}`)
-                                "
-                                v-if="variation[0].description"
-                            ></i>
-                            <div
-                                :id="`info-box-custom-${index}`"
-                                class="info-msg-box badge badge-pill"
-                            >
-                                {{ variation[0].description }}
-                            </div>
-                        </h6>
-
-                        <select
-                            class="custom-select col-md-6"
-                            name="selected_variations"
-                            id="selected_variations"
-                            v-model="form.selected_variations[index]"
+                    <div v-if="product.has_variations == 1">
+                        <div
+                            class="mt-4"
+                            v-for="(variation, index) in product.variations"
+                            v-show="variation.product_state_id == 1"
                         >
-                            <option value="" disabled selected hidden>
-                                Select
-                            </option>
-                            <option
-                                v-for="(option, i) in variation"
-                                :key="option.id"
-                                :value="option"
+                            <h6>
+                                {{ variation.name }}
+                                <i
+                                    class="fas fa-info-circle mx-2"
+                                    @click.prevent="
+                                        displayInfoBox(
+                                            `info-box-custom-${index}`
+                                        )
+                                    "
+                                    v-if="variation.description"
+                                ></i>
+                                <div
+                                    :id="`info-box-custom-${index}`"
+                                    class="info-msg-box badge badge-pill"
+                                >
+                                    {{ variation.description }}
+                                </div>
+                            </h6>
+
+                            <select
+                                class="custom-select col-md-6"
+                                name="selected_variations"
+                                id="selected_variations"
+                                v-model="form.selected_variations[index]"
                             >
-                                {{ option.type_option }}
-                                + {{ option.price }} lkr
-                            </option>
-                        </select>
+                                <option value="" disabled selected hidden>
+                                    Select
+                                </option>
+                                <option
+                                    v-for="(
+                                        option, i
+                                    ) in variation.variation_options"
+                                    :key="option.id"
+                                    :value="option"
+                                >
+                                    {{ option.name }}
+                                </option>
+                            </select>
+                            <span
+                                class="addon-price"
+                                v-if="form.selected_variations[index]"
+                                >+
+                                {{ form.selected_variations[index].price }}
+                                lkr</span
+                            >
+                        </div>
                     </div>
 
                     <!-- custom msg -->
@@ -169,7 +182,7 @@
                     <!-- price -->
                     <div class="mt-4">
                         <h6>Price</h6>
-                        <h3 class="price">LKR {{ product.base_price }}</h3>
+                        <h3 class="price">LKR {{ this.total_price }}</h3>
                     </div>
 
                     <!-- buttons -->
@@ -409,11 +422,11 @@ export default {
             touchRatio: 0.2,
             slideToClickedSlide: true,
         },
-        variation_array: [],
         form: new Form({
             id: "",
             custom_text: "",
             selected_variations: [],
+            total_price: "",
         }),
     }),
 
@@ -441,6 +454,33 @@ export default {
             .catch((error) => console.log(error));
     },
 
+    watch: {
+        total_price(after, before) {
+            this.form.total_price = this.total_price;
+        },
+    },
+
+    computed: {
+        total_price() {
+            let var1price = this.form.selected_variations[0]
+                ? this.form.selected_variations[0].price
+                : 0;
+            let var2price = this.form.selected_variations[1]
+                ? this.form.selected_variations[1].price
+                : 0;
+            let var3price = this.form.selected_variations[2]
+                ? this.form.selected_variations[2].price
+                : 0;
+
+            return (
+                parseFloat(this.product.base_price) +
+                parseFloat(var1price) +
+                parseFloat(var2price) +
+                parseFloat(var3price)
+            ).toFixed(2);
+        },
+    },
+
     methods: {
         displayInfoBox(name) {
             if (document.getElementById(name).style.display == "inline-block") {
@@ -453,21 +493,6 @@ export default {
         setData(response) {
             this.product = response.data;
             this.loading = false;
-            this.setVariationArray();
-        },
-
-        setVariationArray() {
-            let variationss = _.groupBy(
-                this.product.product_variations,
-                (variation) => variation.type
-            );
-            // convert existingVariations object to key's array
-            const keys = Object.keys(variationss);
-
-            // iterate over object
-            keys.forEach((key, index) => {
-                this.variation_array.push(variationss[key]);
-            });
         },
 
         addProductToCart(product) {

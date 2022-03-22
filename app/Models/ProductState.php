@@ -23,10 +23,22 @@ class ProductState extends Model
         return $this->hasMany(Product::class);
     }
 
-    //product_variations:product_state M:1
+    //product_variations:product_state M:1!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     public function product_variations()
     {
         return $this->hasMany(ProductVariation::class);
+    }
+
+    //variations:product_state M:1
+    public function variations()
+    {
+        return $this->hasMany(Variation::class);
+    }
+
+    //variation_options:product_state M:1
+    public function variation_options()
+    {
+        return $this->hasMany(VariationOption::class);
     }
     
     public function scopeFilter($query, array $filters)

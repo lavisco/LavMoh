@@ -318,7 +318,7 @@
 
                         <div
                             class="card dashboard-info-card mt-4"
-                            v-show="form.product_variations"
+                            v-if="form.variations"
                         >
                             <!-- Header -->
                             <h6 class="mb-3">Variations</h6>
@@ -327,8 +327,8 @@
                                     <table class="table align-items-center">
                                         <thead>
                                             <tr>
-                                                <th scope="col">Type</th>
-                                                <th scope="col">Option</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Option Name</th>
                                                 <th scope="col" class="smwidth">
                                                     Price
                                                 </th>
@@ -336,47 +336,42 @@
                                                     Quantity
                                                 </th>
                                                 <th scope="col">SKU</th>
-                                                <th scope="col">Description</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr v-for="variation in variations">
+                                            <tr v-for="variation in form.variations">
                                                 <td>
-                                                    {{ variation[0].type }}
+                                                    {{ variation.name }}
+                                                    <p class="text-xs">{{ variation.description }}</p>
                                                 </td>
                                                 <td>
                                                     <p
-                                                        v-for="option in variation"
+                                                        v-for="option in variation.variation_options"
                                                     >
-                                                        {{ option.type_option }}
+                                                        {{ option.name }}
                                                     </p>
                                                 </td>
 
                                                 <td>
                                                     <p
-                                                        v-for="option in variation"
+                                                        v-for="option in variation.variation_options"
                                                     >
                                                         {{ option.price }}
                                                     </p>
                                                 </td>
                                                 <td>
                                                     <p
-                                                        v-for="option in variation"
+                                                        v-for="option in variation.variation_options"
                                                     >
                                                         {{ option.quantity }}
                                                     </p>
                                                 </td>
                                                 <td>
                                                     <p
-                                                        v-for="option in variation"
+                                                        v-for="option in variation.variation_options"
                                                     >
                                                         {{ option.sku }}
                                                     </p>
-                                                </td>
-                                                <td>
-                                                    {{
-                                                        variation[0].description
-                                                    }}
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -445,6 +440,7 @@ export default {
             product_image: null,
             product_images: null,
             product_variations: null,
+            variations: null,
         }),
     }),
 
@@ -455,12 +451,12 @@ export default {
     },
 
     computed: {
-        variations() {
-            return _.groupBy(
-                this.form.product_variations,
-                (variation) => variation.type
-            );
-        },
+        // variations() {
+        //     return _.groupBy(
+        //         this.form.product_variations,
+        //         (variation) => variation.type
+        //     );
+        // },
     },
 
     methods: {

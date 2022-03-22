@@ -49,20 +49,29 @@ class ProductRequest extends FormRequest
             'has_giftwrap' => 'boolean|required',
             'quantity' => 'integer|required',
             'rating' => 'integer|nullable',
-            //'product_state_id' => 'required|sometimes',
             'category_id' => 'required|sometimes',
-            //'user_id' => 'required|sometimes',
 
+            //'product_state_id' => 'required|sometimes',
+            //'user_id' => 'required|sometimes',
             //product variation request validation
-            'productVariation.*.sku.*' => [
+            // 'productVariation.*.sku.*' => [
+            //     'nullable',
+            //     'max:16',
+            //     'unique:product_variations,sku',
+            // ],
+
+            //variations
+            'productVariation.*.variation_description' => 'max:100|nullable',
+            'productVariation.*.option_name.*' => 'required|sometimes',
+            'productVariation.*.option_quantity.*' => 'integer|nullable',
+            'productVariation.*.option_price.*' => 'numeric|required',
+            'productVariation.*.option_sku.*' => [
                 'nullable',
                 'max:16',
-                'unique:product_variations,sku',
+                'unique:variation_options,sku',
             ],
-            'productVariation.*.variationDescription' => 'max:100|nullable',
-            'productVariation.*.variation_type_option.*' => 'required|sometimes',
-            'productVariation.*.variation_quantity.*' => 'integer|nullable',
-            'productVariation.*.variation_price.*' => 'numeric|required',
+            
+            //images
             'image_path.0' => 'required',
             'image_path.1' => 'required',
             'image_path.2' => 'required',
@@ -89,14 +98,16 @@ class ProductRequest extends FormRequest
             'has_variations' => 'enabling or disabling variations',
             'has_inventory' => 'enabling or disabling inventory',
             'has_giftwrap' => 'enabling or disabling giftwrap',
-            //'product_state_id' => 'product state',
             'category_id' => 'category',
-            //'productVariation.*.variationId' => 'variation type',
-            'productVariation.*.sku.*' => 'variation sku',
-            'productVariation.*.variationDescription' => 'variation description',
-            'productVariation.*.variation_price.*' => 'variation price',
-            'productVariation.*.variation_quantity.*' => 'variation quantity',
-            'productVariation.*.variation_type_option.*' => 'variation type option',
+
+            //variations
+            'productVariation.*.variation_description' => 'variation description',
+            'productVariation.*.option_name.*' => 'variation option name',
+            'productVariation.*.option_price.*' => 'variation option price',
+            'productVariation.*.option_quantity.*' => 'variation option quantity',
+            'productVariation.*.option_sku.*' => 'variation option sku',
+
+            //images
             'image_path.0' => 'primary image',
             'image_path.1' => 'second image',
             'image_path.2' => 'third image',

@@ -24,7 +24,21 @@ class VariationRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'max:255|required',
+            'variation_name.*' => 'max:100|required',
+            'variation_description.*' => 'max:255|nullable',
+        ];
+    }
+
+    /**
+     * Get custom attributes for validator errors.
+     *
+     * @return array
+     */
+    public function attributes()
+    {
+        return [
+            'variation_name.*' => 'variation name',
+            'variation_description.*' => 'variation description',
         ];
     }
 }

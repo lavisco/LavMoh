@@ -24,8 +24,10 @@ class VariationOptionRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'max:255|required',
-            'variation_id' => 'required',
+            'option_name.*' => 'max:100|required',
+            //'option_sku.*' => 'max:16|nullable',
+            'option_price.*' => 'numeric|nullable',
+            'option_quantity.*' => 'integer|nullable',
         ];
     }
 
@@ -37,7 +39,10 @@ class VariationOptionRequest extends FormRequest
     public function attributes()
     {
         return [
-            'variation_id' => 'variation',
+            'option_name.*' => 'option name',
+            'option_sku.*' => 'option sku',
+            'option_price.*' => 'option price',
+            'option_quantity.*' => 'option quantity',
         ];
     }
 }

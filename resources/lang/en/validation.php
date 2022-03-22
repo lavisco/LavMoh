@@ -144,6 +144,9 @@ return [
         ],
         'variation_sku.*' => [
             'unique' => 'The variation SKU has already been taken.',
+        ],
+        'option_sku.*' => [
+            'unique' => 'The option SKU has already been taken.',
         ]
     ],
 

@@ -11927,6 +11927,13 @@ h4 {
   text-align: left;
 }
 
+.addon-price {
+  font-size: 14px;
+  letter-spacing: 0.02rem;
+  font-weight: 400 !important;
+  color: #6b57cf;
+}
+
 .faq-card {
   background-color: #eeeeee;
   padding-top: 15px;

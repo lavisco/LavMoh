@@ -273,9 +273,10 @@
                         </div>
                         <div class="form-group row mb-md-1">
                             <label class="col-md-3 col-form-label" for="length">
-                                Item Dimensions
+                                Package Dimensions
                                 <p class="text-grey text-xs mt-2">
-                                    Enter a rough estimation of your item size.
+                                    If applicable, enter a rough estimation of
+                                    your product size when it's packaged.
                                 </p>
                             </label>
 

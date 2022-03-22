@@ -89,10 +89,22 @@ class Product extends Model
         return $this->hasOne(ProductImage::class)->where('primary_image', 1);
     }
 
-    //product_variations:product M:1
+    //product_variations:product M:1!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     public function product_variations()
     {
         return $this->hasMany(ProductVariation::class);
+    }
+
+    //variations:product M:1
+    public function variations()
+    {
+        return $this->hasMany(Variation::class);
+    }
+
+    //variation_options:product M:1
+    public function variation_options()
+    {
+        return $this->hasMany(VariationOption::class);
     }
 
     //product_videos:product M:1

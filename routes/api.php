@@ -28,6 +28,8 @@ use App\Http\Controllers\Api\Admin\SettingController;
 use App\Http\Controllers\Api\Admin\ShippingController;
 use App\Http\Controllers\Api\Admin\ShopController;
 use App\Http\Controllers\Api\Admin\SitetextController;
+use App\Http\Controllers\Api\Admin\VariationController;
+use App\Http\Controllers\Api\Admin\VariationOptionController;
 use App\Http\Controllers\Api\Buyer\BuyerProfileController as BuyerBuyerProfileController;
 use App\Http\Controllers\Api\Buyer\OrderController as BuyerOrderController;
 use App\Http\Controllers\Api\Email\EmailController;
@@ -41,6 +43,8 @@ use App\Http\Controllers\Api\Seller\ReceiptController as SellerReceiptController
 use App\Http\Controllers\Api\Seller\SellerProfileController as SellerSellerProfileController;
 use App\Http\Controllers\Api\Seller\ShopController as SellerShopController;
 use App\Http\Controllers\Api\Seller\UserController as SellerUserController;
+use App\Http\Controllers\Api\Seller\VariationController as SellerVariationController;
+use App\Http\Controllers\Api\Seller\VariationOptionController as SellerVariationOptionController;
 use App\Http\Controllers\Api\Website\CategoryController as WebsiteCategoryController;
 use App\Http\Controllers\Api\Website\HomeController as WebsiteHomeController;
 use App\Http\Controllers\Api\Website\LocationController;
@@ -105,6 +109,9 @@ Route::prefix('admin')->group(function () {
     Route::apiResource('/shippings', ShippingController::class);
     Route::put('/shops/updateState/{shop}', [ShopController::class, 'updateState']);
     Route::apiResource('/shops', ShopController::class);
+    Route::apiResource('/variations', VariationController::class);
+    Route::apiResource('/variation_options', VariationOptionController::class);
+
     /* User */
     Route::get('/users/buyer', [UserController::class, 'buyer']);
     Route::get('/users/seller', [UserController::class, 'seller']);
@@ -139,7 +146,6 @@ Route::prefix('seller')->group(function () {
     Route::apiResource('/products', SellerProductController::class);
     Route::apiResource('/productstates', SellerProductStateController::class);
     Route::apiResource('/product_images', SellerProductImageController::class);
-
     Route::post('/product_variations/store_new_option', [SellerProductVariationController::class, 'storeOption']);
     Route::apiResource('/product_variations', SellerProductVariationController::class);
     //Route::apiResource('/product_videos', SellerProductVideoController::class);
@@ -149,6 +155,8 @@ Route::prefix('seller')->group(function () {
     Route::post('/user/password_reset', [SellerUserController::class, 'updatePassword']);
     Route::post('/user/shop_setup', [SellerUserController::class, 'storeShopSetup']);
     Route::apiResource('/user', SellerUserController::class);
+    Route::apiResource('/variations', SellerVariationController::class);
+    Route::apiResource('/variation_options', SellerVariationOptionController::class);
 });
 
 /*

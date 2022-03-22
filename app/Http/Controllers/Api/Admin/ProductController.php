@@ -4,9 +4,15 @@ namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
+use App\Models\Category;
+use App\Models\Occasion;
 use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\ProductVariation;
+use App\Models\Recipient;
+use App\Models\Shipping;
+use App\Models\Variation;
+use App\Models\VariationOption;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -32,31 +38,85 @@ class ProductController extends Controller
     {
         ///$this->authorize('create', Product::class);
 
+        $userId = $request->user_id;
+        $productStateId = $request->product_state_id;
+
         $request->merge([
             'slug' => Str::slug($request->title),
+            'base_price' => $request->base_price ?? '0.00',
         ]);
+
         $product = new Product($request->all());
         $product->save();
 
-        // $product->occasions()->sync(request('product_occasion'));
-        // $product->recipients()->sync(request('product_recipient'));
-        // $product->shippings()->sync(request('product_shipping'));
-
         //sync to pivot tables
-        $this->syncPivotData($product);
+        $product->occasions()->sync(request('product_occasion'));
+        $product->recipients()->sync(request('product_recipient'));
+        $product->shippings()->sync(request('product_shipping'));
 
         //product variation
-        $this->storeVariation($request, $product->id);
+        $this->storeVariation($request, $product->id, $userId, $productStateId);
 
         //product images
         $this->uploadImage($request, $product->id);
     }
 
-    public function syncPivotData($product)
+    public function storeVariation($request, $productId, $userId, $productStateId)
     {
-        $product->occasions()->sync(request('product_occasion'));
-        $product->recipients()->sync(request('product_recipient'));
-        $product->shippings()->sync(request('product_shipping'));
+        if ($request->has('productVariation.0.option_name.0')) {
+
+            $totalVariations = $request->input('productVariation.*.variation_name');
+            $variationDescriptions = $request->input('productVariation.*.variation_description');
+            $productVariations = $request->input('productVariation.*');
+    
+            $VariationOptionsArray = [];
+            
+            $counter = 0;
+            for ($i = 0; $i < 3; $i++) {
+                if ($totalVariations[$i]) {
+                    $counter += 1;
+                }
+            }
+    
+            for ($i=0; $i < $counter; $i++) { 
+                //form fields
+                $variation_name = $totalVariations[$i];
+                $variation_description = $variationDescriptions[$i];
+
+                $option_name = $productVariations[$i]['option_name'];
+                $option_sku = $productVariations[$i]['option_sku'];
+                $option_price = $productVariations[$i]['option_price'];
+                $option_quantity = $productVariations[$i]['option_quantity'];
+
+                //create variation
+                $variation = new Variation([
+                    'name' => $variation_name,
+                    'description' => $variation_description,
+                    'product_id' => $productId,
+                    'product_state_id' => $productStateId,
+                ]);
+                $variation->save();
+    
+                for ($j=0; $j < count($option_name); $j++) { 
+                    array_push($VariationOptionsArray, [
+                        //repeating
+                        'variation_id' => $variation->id,
+                        'product_id' => $productId,
+                        'product_state_id' => $productStateId,
+                        'user_id' => $userId,
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now(),
+                        //non-repeating
+                        'name' => $option_name[$j],
+                        'sku' => $option_sku[$j] ?? null,
+                        'price' => $option_price[$j] ?? '0.00',
+                        'quantity' => $option_quantity[$j] ?? '0',
+                    ]);
+                }
+            }
+
+            VariationOption::insert($VariationOptionsArray); //bulk insert
+        }
     }
 
     public function uploadImage($request, $productId)
@@ -69,42 +129,6 @@ class ProductController extends Controller
                     'primary_image' => $primary,
                     'product_id' => $productId,
                 ]);
-        }
-    }
-
-    public function storeVariation($request, $productId)
-    {
-        if ($request->has('productVariation.0.variation_type_option.0')) {
-            $variation_type_option = $request->input('productVariation.*.variation_type_option.*');
-            $sku = $request->input('productVariation.*.sku.*');
-            $variation_price = $request->input('productVariation.*.variation_price.*');
-            $variation_quantity = $request->input('productVariation.*.variation_quantity.*');
-            $variation_description = $request->input('productVariation.*.variation_description.*');
-            $variation_type = $request->input('productVariation.*.variation_type.*');
-
-            $productVariationArray = []; //array containg data of each variation option
-
-            $length = count($variation_type_option);
-
-            for ($j=0; $j < $length; $j++) { 
-                
-                array_push($productVariationArray, [
-                    //repeating
-                    'product_id' => $productId,
-                    'product_state_id' => $request->input('product_state_id'),
-                    'user_id' => auth()->id(),
-                    'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now(),
-                    //non-repeating
-                    'type' => $variation_type[$j],
-                    'type_option' => $variation_type_option[$j],
-                    'sku' => $sku[$j] ?? null,
-                    'description' => $variation_description[$j] ?? null,
-                    'price' => $variation_price[$j] ?? '0.00',
-                    'quantity' => $variation_quantity[$j] ?? '0',
-                ]);
-            }
-            ProductVariation::insert($productVariationArray); //bulk insert
         }
     }
 
@@ -168,5 +192,18 @@ class ProductController extends Controller
                 @unlink($existingImage);
             }
         }
+    }
+
+    /**
+     * Get data from other tables, that are needed during product listing
+     */
+    public function getDetails()
+    {
+        return response()->json([
+            'categories' => Category::select('id', 'name')->latest()->get(),
+            'occasions' => Occasion::select('id', 'name')->latest()->get(),
+            'recipients' => Recipient::select('id', 'name')->latest()->get(),
+            'shippings' => Shipping::latest()->get(),
+        ]);
     }
 }

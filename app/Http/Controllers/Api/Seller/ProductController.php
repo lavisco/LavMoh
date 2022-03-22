@@ -47,6 +47,7 @@ class ProductController extends Controller
 
         $product->save();
 
+        //sync to pivot tables
         $product->occasions()->sync(request('product_occasion'));
         $product->recipients()->sync(request('product_recipient'));
         $product->shippings()->sync(request('product_shipping'));
@@ -201,6 +202,9 @@ class ProductController extends Controller
         }
     }
 
+    /**
+     * Get data from other tables, that are needed during product listing
+     */
     public function getDetails()
     {
         return response()->json([

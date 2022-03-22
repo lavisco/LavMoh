@@ -18205,6 +18205,8 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
 .input-form p {
     margin: 0;
     padding: 0;
+    font-weight: 400;
+    color: #848484;
 }
 .input-form input[type="text"],
 .input-form input[type="email"],

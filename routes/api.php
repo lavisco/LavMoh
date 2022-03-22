@@ -94,6 +94,7 @@ Route::prefix('admin')->group(function () {
     Route::apiResource('/orders', OrderController::class);
     Route::apiResource('/permissions', PermissionController::class);
     Route::put('/products/updateState/{product}', [ProductController::class, 'updateState']);
+    Route::get('/products/details', [ProductController::class, 'getDetails']);
     Route::apiResource('/products', ProductController::class);
     Route::apiResource('/product_images', ProductImageController::class);
     Route::apiResource('/product_variations', ProductVariationController::class);

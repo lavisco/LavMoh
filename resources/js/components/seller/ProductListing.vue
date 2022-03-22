@@ -125,7 +125,7 @@
                                 >
                                     Add Occasions
                                 </button>
-                                <p class="mt-2 mb-0">
+                                <p class="mt-2 mb-3">
                                     <span
                                         class="
                                             badge badge-pill badge-secondary
@@ -156,7 +156,7 @@
                                 >
                                     Add Recipients
                                 </button>
-                                <p class="mt-2 mb-0">
+                                <p class="mt-2 mb-3">
                                     <span
                                         class="
                                             badge badge-pill badge-secondary

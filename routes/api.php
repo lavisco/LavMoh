@@ -93,6 +93,8 @@ Route::prefix('admin')->group(function () {
     Route::apiResource('/occasions', OccasionController::class);
     Route::apiResource('/orders', OrderController::class);
     Route::apiResource('/permissions', PermissionController::class);
+    //store new image for existing product
+    Route::put('/products/storeNewImage/{productId}', [ProductController::class, 'storeNewImage']);
     Route::put('/products/updateState/{product}', [ProductController::class, 'updateState']);
     Route::get('/products/details', [ProductController::class, 'getDetails']);
     Route::apiResource('/products', ProductController::class);
@@ -142,6 +144,7 @@ Route::prefix('seller')->group(function () {
     Route::apiResource('/dashboard', SellerDashboardController::class);
     Route::apiResource('/orders', SellerOrderController::class);
     Route::get('/products/details', [SellerProductController::class, 'getDetails']);
+    //store new image for existing product
     Route::put('/products/storeNewImage/{productId}', [SellerProductController::class, 'storeNewImage']);
     Route::put('/products/updateState/{product}', [SellerProductController::class, 'updateState']);
     Route::apiResource('/products', SellerProductController::class);

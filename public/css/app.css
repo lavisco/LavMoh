@@ -11983,7 +11983,7 @@ h4 {
   font-weight: 600;
 }
 
-/*---------------product cart------------------------*/
+/*-----------------------product cart------------------------*/
 .menu-cart {
   width: 400px;
   padding: 10px;
@@ -12243,3 +12243,27 @@ h4 {
   background: #ff5a7c !important;
   opacity: 1;
 }
+
+/*-------------------------Scrollbar---------------------------------*/
+.vertical-scroll::-webkit-scrollbar {
+  width: 3em;
+  height: 1.4em;
+}
+
+.vertical-scroll::-webkit-scrollbar-track {
+  background: #b0a5e6;
+  border-radius: 100vw;
+  margin-block: 0.5em;
+}
+
+.vertical-scroll::-webkit-scrollbar-thumb {
+  background: #4b3d91;
+  border: 0.1rem solid #a192e9;
+  border-radius: 100vw;
+}
+
+.vertical-scroll::-webkit-scrollbar-thumb:hover {
+  background: #342a64;
+}
+
+/* Vertical scrolling */

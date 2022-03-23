@@ -119,7 +119,7 @@ class ProductController extends Controller
 
     public function storeNewImage(Request $request, $productId)
     {        
-        //product images
+        //create new product images for existing product listing
         //$this->uploadImage($request, $productId);
 
         for ($i=0; $i < count($request->image_path_new); $i++) { 

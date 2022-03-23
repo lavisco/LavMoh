@@ -24,6 +24,7 @@
                                         <th class="table-col-lg">Title</th>
                                         <th>Quantity</th>
                                         <th>Price</th>
+                                        <th class="table-col-sm">Shop</th>
                                         <th class="table-col-sm">State</th>
                                         <th scope="col"></th>
                                     </tr>
@@ -47,11 +48,12 @@
                                             {{ product.id }}
                                         </th>
                                         <td class="table-col-lg">
-                                            {{ product.sku }} <br />
                                             {{ product.title }}
+                                            <p class="text-sm mt-2">{{product.category.name}}</p>
                                         </td>
                                         <td>{{ product.quantity }}</td>
                                         <td>{{ product.base_price }}</td>
+                                        <td>{{ product.user.shop.name }}</td>
                                         <td>
                                             <select
                                                 class="
@@ -115,29 +117,7 @@
                                                                     product.id,
                                                             },
                                                         }"
-                                                        >Edit Details
-                                                    </router-link>
-                                                    <router-link
-                                                        class="dropdown-item"
-                                                        :to="{
-                                                            name: 'admin/products/listing/image/edit',
-                                                            params: {
-                                                                productId:
-                                                                    product.id,
-                                                            },
-                                                        }"
-                                                        >Edit Images
-                                                    </router-link>
-                                                    <router-link
-                                                        class="dropdown-item"
-                                                        :to="{
-                                                            name: 'admin/products/listing/variation/edit',
-                                                            params: {
-                                                                productId:
-                                                                    product.id,
-                                                            },
-                                                        }"
-                                                        >Edit Variation
+                                                        >Edit
                                                     </router-link>
                                                     <a
                                                         class="dropdown-item"

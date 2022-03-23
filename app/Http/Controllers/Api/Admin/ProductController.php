@@ -31,7 +31,7 @@ class ProductController extends Controller
     {
         ///$this->authorize('viewAny', Product::class);
 
-        return Product::with('product_image')->latest()->filter(request(['searchText']))->paginate(25);
+        return Product::with(['product_image', 'user.shop', 'category:id,name'])->latest()->filter(request(['searchText']))->paginate(25);
     }
 
     public function store(ProductRequest $request)
@@ -119,6 +119,21 @@ class ProductController extends Controller
         }
     }
 
+    public function storeNewImage(Request $request, $productId)
+    {        
+        //create new product images for existing product listing
+        //$this->uploadImage($request, $productId);
+
+        for ($i=0; $i < count($request->image_path_new); $i++) { 
+            ProductImage::create([
+                'image_path' => $this->storeImage($request->image_path_new[$i], $request->photoName[$i]),
+                'title' => $request->photoName[$i],
+                'primary_image' => false,
+                'product_id' => $productId,
+            ]);
+        }
+    }
+
     public function uploadImage($request, $productId)
     {
         for ($i=0; $i < count($request->image_path); $i++) { 
@@ -141,10 +156,11 @@ class ProductController extends Controller
     public function update(ProductRequest $request, Product $product)
     {
         ///$this->authorize('update', $product);
+
+        $product->update($request->all());
         $product->occasions()->sync(request('product_occasion'));
         $product->recipients()->sync(request('product_recipient'));
         $product->shippings()->sync(request('product_shipping'));
-        $product->update($request->all());
     }
 
     public function updateState(Request $request, Product $product)

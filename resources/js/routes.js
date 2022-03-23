@@ -127,34 +127,10 @@ export let routes = [
         },
     },
     {
-        path: "/admin/products/listing/image/:productId",
-        name: "admin/products/listing/image/edit",
-        component: require("./components/admin/ProductImageEdit.vue").default,
-        meta: {
-            title: "Product Listing Image Edit",
-        },
-    },
-    {
-        path: "/admin/products/listing/variation/:productId",
-        name: "admin/products/listing/variation/edit",
-        component: require("./components/admin/ProductVariationEdit.vue")
-            .default,
-        meta: {
-            title: "Product Listing Variation Edit",
-        },
-    },
-    {
         path: "/admin/products/listing/variations",
         component: require("./components/admin/ProductVariation.vue").default,
         meta: {
             title: "Product Variations",
-        },
-    },
-    {
-        path: "/admin/product_images",
-        component: require("./components/admin/ProductImage.vue").default,
-        meta: {
-            title: "Product Images",
         },
     },
     {
@@ -325,13 +301,6 @@ export let routes = [
             .default,
         meta: {
             title: "Product Listing Edit",
-        },
-    },
-    {
-        path: "/seller/product_variations",
-        component: require("./components/seller/ProductVariation.vue").default,
-        meta: {
-            title: "Product Variation",
         },
     },
     {

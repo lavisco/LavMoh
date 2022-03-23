@@ -50,7 +50,7 @@
                     </div>
                     <div class="card">
                         <!-- Table start -->
-                        <div class="table-responsive dashboard-table">
+                        <div class="table-responsive dashboard-table vertical-scroll">
                             <table class="table align-items-center table-hover">
                                 <thead>
                                     <tr>

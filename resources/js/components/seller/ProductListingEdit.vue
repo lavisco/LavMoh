@@ -871,7 +871,7 @@
                                         Name
                                         <strong class="text-danger"> *</strong>
                                     </label>
-                                    <div class="col-md-4">
+                                    <div class="col-md-9">
                                         <input
                                             id="variation_name"
                                             v-model="form.variation_name[index]"
@@ -888,14 +888,16 @@
                                             :field="`variation_name.${index}`"
                                         />
                                     </div>
+                                </div>
+                                <div class="form-group row">
                                     <label
-                                        class="col-md-2 col-form-label"
+                                        class="col-md-3 col-form-label"
                                         for="variation_status"
                                     >
                                         Status
                                         <strong class="text-danger"> *</strong>
                                     </label>
-                                    <div class="col-md-3">
+                                    <div class="col-md-4">
                                         <select
                                             class="
                                                 custom-select
@@ -1011,9 +1013,9 @@
                                                             Inventory
                                                         </th>
                                                         <th>SKU</th>
-                                                        <th
-                                                            class="tiny-col"
-                                                        ></th>
+                                                        <th class="smwidth">
+                                                            State
+                                                        </th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -1119,7 +1121,42 @@
                                                                 :field="`option_sku.${i}`"
                                                             />
                                                         </td>
-                                                        <td><div></div></td>
+                                                        <td>
+                                                            <select
+                                                                class="
+                                                                    custom-select
+                                                                    form-control
+                                                                    form-control-alternative
+                                                                "
+                                                                name="option_state"
+                                                                id="option_state"
+                                                                v-model="
+                                                                    form
+                                                                        .option_state[
+                                                                        i
+                                                                    ]
+                                                                "
+                                                            >
+                                                                <option
+                                                                    value=""
+                                                                    disabled
+                                                                    selected
+                                                                    hidden
+                                                                >
+                                                                    Select State
+                                                                </option>
+                                                                <option
+                                                                    v-for="productState in productStates"
+                                                                    :value="
+                                                                        productState.id
+                                                                    "
+                                                                >
+                                                                    {{
+                                                                        productState.state
+                                                                    }}
+                                                                </option>
+                                                            </select>
+                                                        </td>
                                                     </tr>
                                                     <tr
                                                         v-for="(
@@ -1941,6 +1978,7 @@ export default {
             option_sku: [],
             option_price: [],
             option_quantity: [],
+            option_state: [],
 
             //existing variations new options
             productNewOption: [
@@ -2209,6 +2247,7 @@ export default {
             this.form.option_sku = [];
             this.form.option_price = [];
             this.form.option_quantity = [];
+            this.form.option_state = [];
 
             for (let i = 0; i < 3; i++) {
                 //new variation data
@@ -2346,6 +2385,11 @@ export default {
                             this.form.option_quantity,
                             index,
                             value.quantity
+                        );
+                        this.$set(
+                            this.form.option_state,
+                            index,
+                            value.product_state_id
                         );
                     });
 

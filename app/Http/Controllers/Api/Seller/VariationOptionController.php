@@ -27,6 +27,7 @@ class VariationOptionController extends Controller
 
         for ($i=0; $i < 3; $i++) { 
 
+            //if new option at index $i is filled
             if ($newOptions[$i]['new_option_variation_id']) {
                 $variation_id = $newOptions[$i]['new_option_variation_id'];
                 $option_name = $newOptions[$i]['new_option_name'];
@@ -53,8 +54,8 @@ class VariationOptionController extends Controller
                     $option->save();
                 }
             }
-
         }
+        
     }
 
     public function show($id)
@@ -64,7 +65,7 @@ class VariationOptionController extends Controller
 
     public function update(VariationOptionRequest $request, $productId)
     {
-        ///$this->authorize('update', $productvariation);
+        ///$this->authorize('update', $variationoption);
        
         for ($i=0; $i < count($request->option_id); $i++) { 
             $option = VariationOption::findOrFail($request->option_id[$i]);
@@ -78,6 +79,7 @@ class VariationOptionController extends Controller
                 'sku' => $request->option_sku[$i] ?? null,
                 'price' => $request->option_price[$i] ?? '0.00',
                 'quantity' => $request->option_quantity[$i] ?? '0',
+                'product_state_id' => $request->option_state[$i],
             ]);
         }
     }

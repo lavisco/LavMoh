@@ -1,5 +1,5 @@
 <template>
-    <div class="container mt-3 mb-5">
+    <div class="container-fluid mt-4 mb-5">
         <div class="row">
             <div class="col">
                 <!-- Breadcrumbs -->
@@ -10,7 +10,10 @@
                                 Products
                             </router-link>
                         </li>
-                        <li class="breadcrumb-item text-sm active" aria-current="page">
+                        <li
+                            class="breadcrumb-item text-sm active"
+                            aria-current="page"
+                        >
                             New Product
                         </li>
                     </ol>
@@ -57,7 +60,7 @@
                                 </select>
                                 <HasError :form="form" field="user_id" />
                             </div>
-                            <div class="col-md-4 col-sm-6">
+                            <div class="col-md-5 col-sm-6">
                                 <select
                                     class="
                                         custom-select
@@ -83,7 +86,7 @@
                                 />
                             </div>
                         </div>
-                        <div class="form-group row mb-md-1">
+                        <div class="form-group row">
                             <label class="col-md-3 col-form-label" for="title">
                                 Title
                                 <strong class="text-danger"> *</strong>
@@ -139,7 +142,7 @@
                                 <HasError :form="form" field="category_id" />
                             </div>
                         </div>
-                        <div class="form-group row mb-md-1">
+                        <div class="form-group row">
                             <label class="col-md-3 col-form-label" for="sku">
                                 SKU
                                 <p class="text-grey text-xs mt-2">
@@ -162,7 +165,7 @@
                                 <HasError :form="form" field="sku" />
                             </div>
                         </div>
-                        <div class="form-group row mb-md-1">
+                        <div class="form-group row">
                             <label class="col-md-3 col-form-label" for="">
                                 Occasions
                                 <p class="text-grey text-xs mt-2">
@@ -183,7 +186,8 @@
                                 <p class="mt-2 mb-3">
                                     <span
                                         class="
-                                            badge badge-pill badge-info text-dark
+                                            badge badge-pill badge-info
+                                            text-dark
                                             mr-2
                                         "
                                         v-for="occasion in occasionName"
@@ -193,7 +197,7 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="form-group row mb-md-1">
+                        <div class="form-group row">
                             <label class="col-md-3 col-form-label" for="">
                                 Recipients
                                 <p class="text-grey text-xs mt-2">
@@ -214,7 +218,8 @@
                                 <p class="mt-2 mb-3">
                                     <span
                                         class="
-                                            badge badge-pill badge-info text-dark
+                                            badge badge-pill badge-info
+                                            text-dark
                                             mr-2
                                         "
                                         v-for="recipient in recipientName"
@@ -292,7 +297,7 @@
                                 <HasError :form="form" field="description" />
                             </div>
                         </div>
-                        <div class="form-group row mb-md-1">
+                        <div class="form-group row">
                             <label
                                 class="col-md-3 col-form-label"
                                 for="material"
@@ -319,7 +324,7 @@
                                 <HasError :form="form" field="material" />
                             </div>
                         </div>
-                        <div class="form-group row mb-md-1">
+                        <div class="form-group row">
                             <label class="col-md-3 col-form-label" for="length">
                                 Package Dimensions
                                 <p class="text-grey text-xs mt-2">
@@ -413,7 +418,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row mb-md-1">
+                        <div class="form-group row">
                             <label class="col-md-3 col-form-label" for="">
                                 Will this product have Lavisco packaging
                                 materials?
@@ -573,7 +578,7 @@
                         <!-- Header -->
                         <h3 class="mb-3">Inventory & Pricing</h3>
                         <hr class="mt-0 mb-2" />
-                        <div class="form-group row mb-md-1">
+                        <div class="form-group row">
                             <label
                                 class="col-md-3 col-form-label"
                                 for="base_price"
@@ -604,7 +609,7 @@
                                 <HasError :form="form" field="base_price" />
                             </div>
                         </div>
-                        <div class="form-group row mb-md-1">
+                        <div class="form-group row">
                             <label
                                 class="col-md-3 col-form-label"
                                 for="has_inventory"
@@ -924,11 +929,7 @@
                                 </div>
                             </div>
                             <div
-                                class="
-                                    card px-3 py-3
-                                    mt-2
-                                    mb-3
-                                "
+                                class="card px-3 py-3 mt-2 mb-3"
                                 v-show="variation.variationMode"
                                 v-for="(
                                     variation, index
@@ -943,10 +944,10 @@
                                         justify-content-between
                                     "
                                 >
-                                    <h5>
-                                        Variation
+                                    <h4>
+                                        Variation {{ index }} :
                                         {{ variation.variation_name }}
-                                    </h5>
+                                    </h4>
                                     <button
                                         type="button"
                                         class="btn btn-light btn-sm"
@@ -984,7 +985,7 @@
                                         />
                                     </div>
                                 </div>
-                                <div class="form-group row mb-md-1">
+                                <div class="form-group row">
                                     <label
                                         class="col-md-3 col-form-label"
                                         for="variation_description"
@@ -1239,7 +1240,7 @@
                             shoppers
                         </p>
 
-                        <div class="form-group row mb-md-1">
+                        <div class="form-group row">
                             <label
                                 class="col-md-3 col-form-label"
                                 for="processing_time"

@@ -11742,8 +11742,8 @@ h4 {
 .image-upload-box {
   width: 200px;
   height: 200px;
-  border-radius: 12px;
-  border: 2px dotted #4e4e4e;
+  border-radius: 5px;
+  border: 2px dotted #676767;
   background: #ffffff;
   -o-object-fit: cover;
      object-fit: cover;
@@ -11762,7 +11762,7 @@ h4 {
 }
 
 .image-upload-box-primary {
-  border: 2px solid #333333;
+  border: 2px solid #676767;
 }
 
 .image-upload-filename {
@@ -11794,9 +11794,9 @@ h4 {
 }
 
 .banner-container {
-  width: 180px;
-  height: 180px;
-  border-radius: 12px;
+  width: 190px;
+  height: 190px;
+  border-radius: 4px;
   -o-object-fit: cover;
      object-fit: cover;
   -o-object-position: center;
@@ -11806,7 +11806,7 @@ h4 {
 .banner-container-bg {
   width: 220px;
   height: 220px;
-  border-radius: 12px;
+  border-radius: 4px;
   -o-object-fit: contain;
      object-fit: contain;
   -o-object-position: center;
@@ -11817,7 +11817,7 @@ h4 {
 .banner-container-sm {
   width: 100px;
   height: 100px;
-  border-radius: 12px;
+  border-radius: 4px;
   -o-object-fit: cover;
      object-fit: cover;
   -o-object-position: center;
@@ -11826,14 +11826,18 @@ h4 {
 }
 
 @media (max-width: 768px) {
-  .img-full,
-.image-upload-box,
+  .img-full {
+    width: 47% !important;
+  }
+
+  .image-upload-box,
 .image-upload-filename {
     width: 100% !important;
   }
 
   .banner-container {
-    width: calc(100% - 20px) !important;
+    width: calc(100% - 10px) !important;
+    height: calc(100% - 10px) !important;
   }
 }
 .large-img-upload-box {

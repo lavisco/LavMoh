@@ -430,11 +430,13 @@
                                     class="
                                         d-flex
                                         align-items-start
-                                        flex-column flex-md-row flex-wrap
+                                        justify-content-center
+                                        flex-row flex-wrap
+                                        gap
                                     "
                                 >
                                     <div
-                                        class="mr-md-3 img-full"
+                                        class="img-full"
                                         v-for="(image, index) in images"
                                     >
                                         <div>
@@ -496,7 +498,7 @@
                                     </div>
 
                                     <div
-                                        class="mr-md-3 img-full"
+                                        class="img-full"
                                         v-for="(n, index) in emptyImageSlot"
                                     >
                                         <div>
@@ -755,6 +757,60 @@
                         </div>
 
                         <div class="form-group row">
+                            <label class="col-md-3 col-form-label" for="">
+                                Will this item have weight as a variation?
+                                <strong class="text-danger"> *</strong>
+                            </label>
+                            <div class="col-md-9">
+                                <div
+                                    class="
+                                        custom-control
+                                        custom-radio
+                                        custom-control-inline
+                                    "
+                                >
+                                    <input
+                                        type="radio"
+                                        id="has_weight1"
+                                        name="has_weight"
+                                        class="custom-control-input"
+                                        v-model="has_weight"
+                                        :value="true"
+                                    />
+                                    <label
+                                        class="custom-control-label"
+                                        for="has_weight1"
+                                        >Yes
+                                    </label>
+                                </div>
+                                <div
+                                    class="
+                                        custom-control
+                                        custom-radio
+                                        custom-control-inline
+                                    "
+                                >
+                                    <input
+                                        type="radio"
+                                        id="has_weight2"
+                                        name="has_weight"
+                                        class="custom-control-input"
+                                        v-model="has_weight"
+                                        :value="false"
+                                    />
+                                    <label
+                                        class="custom-control-label"
+                                        for="has_weight2"
+                                        >No
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div
+                            class="form-group row"
+                            v-show="has_weight === false"
+                        >
                             <label class="col-md-3 col-form-label" for="weight">
                                 Item weight
                             </label>
@@ -1158,6 +1214,8 @@
                                                             </select>
                                                         </td>
                                                     </tr>
+
+                                                    <!-- New Options -->
                                                     <tr
                                                         v-for="(
                                                             newOption,
@@ -1335,8 +1393,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- New Options -->
 
                     <!-- New Variation -->
                     <div
@@ -1922,6 +1978,7 @@ export default {
         occasionName: [],
         recipientName: [],
         url: [],
+        has_weight: "",
 
         form: new Form({
             id: "",
@@ -2426,6 +2483,7 @@ export default {
                     Object.keys(data).forEach((key) => {
                         this.form[key] = data[key];
                     });
+                    this.has_weight = this.form.weight === null ? true : false;
                 })
                 .then(() => {
                     this.loadDetails();
@@ -2452,6 +2510,11 @@ export default {
         updateProduct() {
             if (this.form.has_inventory == 0) {
                 this.form.quantity == "";
+            }
+
+            if (this.has_weight === true) {
+                this.form.weight = "";
+                this.form.weight_unit = "";
             }
 
             this.submitButtonText = "In Progress...";

@@ -1704,8 +1704,8 @@ h4 {
 .image-upload-box {
     width: 200px;
     height: 200px;
-    border-radius: 12px;
-    border: 2px dotted $dark-grey;
+    border-radius: 5px;
+    border: 2px dotted #676767;
     background: #ffffff;
     object-fit: cover;
     object-position: center;
@@ -1724,7 +1724,7 @@ h4 {
 }
 
 .image-upload-box-primary {
-    border: 2px solid $black;
+    border: 2px solid #676767;
 }
 
 .image-upload-filename {
@@ -1752,16 +1752,16 @@ h4 {
     transform: translate(-50%, -50%);
 }
 .banner-container {
-    width: 180px;
-    height: 180px;
-    border-radius: 12px;
+    width: 190px;
+    height: 190px;
+    border-radius: 4px;
     object-fit: cover;
     object-position: center;
 }
 .banner-container-bg {
     width: 220px;
     height: 220px;
-    border-radius: 12px;
+    border-radius: 4px;
     object-fit: contain;
     object-position: center;
     z-index: -1;
@@ -1769,20 +1769,23 @@ h4 {
 .banner-container-sm {
     width: 100px;
     height: 100px;
-    border-radius: 12px;
+    border-radius: 4px;
     object-fit: cover;
     object-position: center;
     z-index: -1;
 }
 
 @media (max-width: 768px) {
-    .img-full,
+    .img-full{
+        width: 47% !important;
+    }
     .image-upload-box,
     .image-upload-filename {
         width: 100% !important;
     }
     .banner-container {
-        width: calc(100% - 20px) !important;
+        width: calc(100% - 10px) !important;
+        height: calc(100% - 10px) !important;
     }
 }
 

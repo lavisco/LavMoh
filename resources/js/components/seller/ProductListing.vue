@@ -429,11 +429,13 @@
                                     class="
                                         d-flex
                                         align-items-start
-                                        flex-column flex-md-row flex-wrap
+                                        justify-content-center
+                                        flex-row flex-wrap
+                                        gap
                                     "
                                 >
                                     <div
-                                        class="mr-md-3 img-full"
+                                        class="img-full"
                                         v-for="(n, index) in 6"
                                     >
                                         <div>
@@ -1096,7 +1098,9 @@
                                                                 id="productVariation.option_sku"
                                                                 v-model="
                                                                     variation
-                                                                        .option_sku[i]
+                                                                        .option_sku[
+                                                                        i
+                                                                    ]
                                                                 "
                                                                 type="text"
                                                                 name="productVariation.option_sku"

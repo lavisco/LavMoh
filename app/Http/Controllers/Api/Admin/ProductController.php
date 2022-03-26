@@ -49,6 +49,10 @@ class ProductController extends Controller
         $product = new Product($request->all());
         $product->save();
 
+        $product->update([
+            'code' => 'LP'.$product->id,
+        ]);
+
         //sync to pivot tables
         $product->occasions()->sync(request('product_occasion'));
         $product->recipients()->sync(request('product_recipient'));

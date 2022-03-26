@@ -145,7 +145,7 @@
                                 v-if="form.selected_variations[index]"
                                 >+
                                 {{ form.selected_variations[index].price }}
-                                lkr</span
+                                LKR</span
                             >
                         </div>
                     </div>

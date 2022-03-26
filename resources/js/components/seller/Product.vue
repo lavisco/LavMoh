@@ -55,7 +55,7 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">Image</th>
-                                        <th scope="col">SKU</th>
+                                        <th scope="col">Code</th>
                                         <th scope="col" class="table-col-lg">
                                             Title
                                         </th>
@@ -82,7 +82,7 @@
                                                 "
                                             />
                                         </td>
-                                        <td>{{ product.sku }}</td>
+                                        <td>{{ product.code }}</td>
                                         <td>{{ product.title }}</td>
                                         <td>{{ product.quantity }}</td>
                                         <td>{{ product.base_price }}</td>

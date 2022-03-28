@@ -14,6 +14,15 @@ class Order extends Model
 
     protected $fillable = [
         'code',
+        'name',
+        'email',
+        'phone',
+        'country',
+        'address',
+        'zipcode',
+        'city',
+        'district',
+        'province',
         'status',
         'total',
         'subtotal',
@@ -65,16 +74,16 @@ class Order extends Model
         return $this->belongsTo(Giftwrap::class);
     }
 
-    //product:order M:M
-    public function products()
-    {
-        return $this->belongsToMany(Product::class)->using(OrderProduct::class)->withTimestamps();
-    }
-
     //order:receipt 1:1
     public function receipt()
     {
         return $this->hasOne(Receipt::class);
+    }
+
+    //order_products:order M:1
+    public function order_products()
+    {
+        return $this->hasMany(OrderProduct::class);
     }
 
     public function scopeFilter($query, array $filters)

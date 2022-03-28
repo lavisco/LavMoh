@@ -21,33 +21,30 @@
                                 "
                             />
                         </div>
-
-                        <div class="card-title-2">
-                            <router-link
-                                class="card-title-2"
-                                :to="{
-                                    name: 'products/product',
-                                    params: {
-                                        productId: product.id,
-                                    },
-                                }"
-                            >
-                                {{ product.title }}
-                            </router-link>
+                        <div class="px-3">
+                            <div class="card-title-2">
+                                <router-link
+                                    class="card-title-2"
+                                    :to="{
+                                        name: 'products/product',
+                                        params: {
+                                            productId: product.id,
+                                        },
+                                    }"
+                                >
+                                    {{ product.title }}
+                                </router-link>
+                            </div>
+                            <div class="card-price">
+                                {{ product.base_price }}
+                            </div>
+                            <div class="card-secondary-text">
+                                {{ product.category.name }}
+                            </div>
+                            <div class="card-secondary-text">
+                                Made by {{ product.user.shop.name }}
+                            </div>
                         </div>
-                        <div class="card-price">{{ product.base_price }}</div>
-                        <div class="card-secondary-text">
-                            {{ product.category.name }}
-                        </div>
-                        <div class="card-secondary-text">
-                            Made by {{ product.user.shop.name }}
-                        </div>
-                        <button
-                            class="btn-sm btn-full btn-sm-cart mt-auto"
-                            @click.prevent="addProductToCart(product)"
-                        >
-                            Add to Cart
-                        </button>
                     </div>
                 </div>
             </div>
@@ -72,12 +69,6 @@ export default {
         },
     },
 
-    computed: {
-        // products() {
-        //     return this.$store.state.products;
-        // },
-    },
-
     methods: {
         loadProducts() {
             axios
@@ -90,10 +81,6 @@ export default {
                     this.loading = false;
                 })
                 .catch((error) => console.log(error));
-        },
-
-        addProductToCart(product) {
-            this.$store.dispatch("addProductToCart", product);
         },
     },
     mounted() {

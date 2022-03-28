@@ -14,14 +14,14 @@ class OrderProductVariation extends Model
 
     protected $fillable = [
         'price',
-        'product_variation_id',
+        'variation_option_id',
         'order_product_id',
     ];
 
-    //product_variation:order_product_variations 1:M
-    public function product_variation()
+    //variation_option:order_product_variations 1:M
+    public function variation_option()
     {
-        return $this->belongsTo(ProductVariation::class);
+        return $this->belongsTo(VariationOption::class);
     }
 
     //order_product:order_product_variations 1:M

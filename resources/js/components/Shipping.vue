@@ -1,7 +1,6 @@
 <template>
     <div class="container-fluid login shipping">
-        <h1>Shipping Details</h1>
-        <h5>Provide shipping address to complete purchase!</h5>
+        <h1>Enter your Shipping Details</h1>
 
         <div class="card">
             <!-- Form start -->
@@ -21,7 +20,6 @@
                             name="name"
                             class="form-control"
                             required
-                            placeholder="Name"
                         />
                         <HasError :form="form" field="name" />
                     </div>
@@ -37,7 +35,6 @@
                             name="email"
                             class="form-control"
                             required
-                            placeholder="Email"
                         />
                         <HasError :form="form" field="email" />
                     </div>
@@ -53,42 +50,25 @@
                             name="phone"
                             class="form-control"
                             required
-                            placeholder="Phone"
                         />
                         <HasError :form="form" field="phone" />
                     </div>
                     <div class="form-group">
                         <label class="col-form-label" for="address"
-                            >Address
+                            >Street Address
                             <strong class="text-danger"> * </strong>
                         </label>
-                        <textarea
+                        <input
                             id="address"
-                            class="form-control"
-                            name="address"
-                            rows="3"
-                            cols="50"
                             v-model="form.address"
-                        >
-                        </textarea>
+                            type="text"
+                            name="address"
+                            class="form-control"
+                            required
+                        />
                         <HasError :form="form" field="address" />
                     </div>
                     <div class="form-group row">
-                        <div class="col-md-6">
-                            <label class="col-form-label" for="country"
-                                >Country
-                                <strong class="text-danger"> * </strong>
-                            </label>
-                            <input
-                                id="country"
-                                v-model="form.country"
-                                type="text"
-                                name="country"
-                                class="form-control"
-                                placeholder="Country"
-                            />
-                            <HasError :form="form" field="country" />
-                        </div>
                         <div class="col-md-6">
                             <label class="col-form-label" for="province"
                                 >Province
@@ -100,27 +80,10 @@
                                 type="text"
                                 name="province"
                                 class="form-control"
-                                placeholder="Province"
                             />
                             <HasError :form="form" field="province" />
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-md-4">
-                            <label class="col-form-label" for="zipcode"
-                                >Zip Code
-                            </label>
-                            <input
-                                id="zipcode"
-                                v-model="form.zipcode"
-                                type="text"
-                                name="zipcode"
-                                class="form-control"
-                                placeholder="Zip code"
-                            />
-                            <HasError :form="form" field="zipcode" />
-                        </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <label class="col-form-label" for="district"
                                 >District
                                 <strong class="text-danger"> * </strong>
@@ -131,10 +94,11 @@
                                 type="text"
                                 name="district"
                                 class="form-control"
-                                placeholder="District"
                             />
                             <HasError :form="form" field="district" />
                         </div>
+                    </div>
+                    <div class="form-group row">
                         <div class="col-md-6">
                             <label class="col-form-label" for="city"
                                 >City
@@ -146,16 +110,26 @@
                                 type="text"
                                 name="city"
                                 class="form-control"
-                                placeholder="City"
                             />
                             <HasError :form="form" field="city" />
                         </div>
+                        <div class="col-md-6">
+                            <label class="col-form-label" for="zipcode"
+                                >Zip Code
+                            </label>
+                            <input
+                                id="zipcode"
+                                v-model="form.zipcode"
+                                type="text"
+                                name="zipcode"
+                                class="form-control"
+                            />
+                            <HasError :form="form" field="zipcode" />
+                        </div>
                     </div>
-
-                    <!-- shipping method -->
-                    <h4 class="mt-5 mb-4 text-center">Shipping Method</h4>
                 </div>
 
+                <!-- shipping method -->
                 <div
                     class="
                         d-flex
@@ -165,6 +139,7 @@
                         my-5
                     "
                 >
+                    <h4 class="mb-5 text-center">Shipping Method</h4>
                     <div class="price-card mb-5">
                         <p>
                             Subtotal <span>{{ total }}</span>
@@ -196,41 +171,38 @@ export default {
     },
 
     data: () => ({
-        url: "",
         shippings: [],
         form: new Form({
             id: "",
-            name: "Mohorima Islam",
-            email: "islammohorima@gmail.com",
-            phone: "96322369",
-            address: "23 boulvard",
+            name: "",
+            email: "",
+            phone: "",
+            address: "",
             zipcode: "",
-            country: "Sri Lanka",
-            province: "Central",
-            district: "Colombo",
-            city: "Colombo 6",
+            province: "",
+            district: "",
+            city: "",
             //order
-            total: "50.00",
-            subtotal: "45.00",
-            giftwrap_price: "5.00",
-            shipping_price: "0.00",
-            discount_price: "0.00",
-            shop_id: "1",
-            shipping_id: "1",
-            discount_id: "1",
-            giftwrap_id: "1",
-            seller_id: "2",
+            total: "",
+            subtotal: "",
+            giftwrap_price: 0.0,
+            shipping_price: 0.0,
+            discount_price: 0.0,
+            shipping_id: "",
+            discount_id: "",
+            giftwrap_id: "",
             //product
-            base_price: "22.50",
-            quantity: "2",
-            product_total: "45.00",
+            base_price: "",
+            quantity: "",
+            product_total: "",
             custom_text: "",
             custom_image: "",
-            has_variations: "0",
-            product_id: "1",
+            has_variations: "",
+            product_id: "",
             //product variation
             price: "",
-            product_variation_id: "",
+            variation_option_id: "",
+            products: [],
         }),
     }),
 
@@ -244,16 +216,28 @@ export default {
     },
 
     methods: {
+        loadProducts() {
+            this.form.products = this.$store.getters.currentCartProducts;
+            this.form.subtotal = this.$store.getters.shopCartTotal;
+            this.form.total = (
+                this.form.subtotal +
+                this.form.giftwrap_price +
+                this.form.shipping_price -
+                this.form.discount_price
+            ).toFixed(2);
+        },
         createOrder() {
             this.form
                 .post("/api/orders")
                 .then(() => {
-                    this.$router.push("/products");
+                    this.$router.push("/order_complete");
                 })
                 .catch((error) => console.log(error));
         },
     },
 
-    mounted() {},
+    mounted() {
+        this.loadProducts();
+    },
 };
 </script>

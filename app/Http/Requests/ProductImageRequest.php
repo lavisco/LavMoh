@@ -25,7 +25,7 @@ class ProductImageRequest extends FormRequest
     {
         return [
             'image_path' => 'required',
-            'title' => 'max:50|required',
+            'title' => 'max:255|required',
             'primary_image' => 'required',
         ];
     }

@@ -43,5 +43,12 @@ class UserSeeder extends Seeder
             'password' => Hash::make('sarah1234'),
             'role_id' => '4',
         ]);
+        //Guest Buyer user
+        User::create([
+            'name' => 'Guest',
+            'email' => 'guestlavisco@gmail.com',
+            'password' => Hash::make('guest1234'),
+            'role_id' => '3',
+        ]);
     }
 }

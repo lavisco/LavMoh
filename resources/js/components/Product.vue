@@ -6,9 +6,6 @@
                 <li class="breadcrumb-item">
                     <router-link to="/products"> Products </router-link>
                 </li>
-                <li class="breadcrumb-item active" aria-current="page">
-                    {{ product.title }}
-                </li>
             </ol>
         </nav>
         <div
@@ -19,7 +16,7 @@
         </div>
         <div v-else class="col">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-7">
                     <!-- Swiper -->
                     <div class="thumb-example">
                         <!-- swiper1 -->
@@ -60,39 +57,44 @@
                     </div>
                     <!-- Swiper end -->
                 </div>
-                <div class="col-md-6 input-form">
+                <div class="col-md-5 input-form">
                     <!-- title -->
-                    <div class="row">
-                        <h3 class="text-left col-12">{{ product.title }}</h3>
-                    </div>
 
+                    <div class="row">
+                        <h3 class="text-left col-12 mt-md-0 mt-3">{{ product.title }}</h3>
+                    </div>
+                    <p class="mb-1">{{ product.user.shop.name }}</p>
                     <!-- tags -->
                     <div
                         class="
                             d-flex
                             justify-content-between
                             align-items-center
-                            pt-2
                         "
                     >
                         <div>
                             <span
-                                class="badge badge-pill badge-success bg-green"
+                                class="badge badge-pill badge-tag"
                                 v-show="product.quantity > 0"
                                 >In Stock</span
                             >
                             <span
-                                class="badge badge-pill badge-success bg-orange"
+                                class="badge badge-pill badge-tag"
                                 v-show="product.has_inventory == 0"
                                 >Made to Order</span
                             >
                         </div>
                     </div>
 
+                    <!-- price -->
+                    <div class="mt-4">
+                        <h3 class="price">LKR {{ this.total_price }}</h3>
+                    </div>
+
                     <!-- short description -->
                     <div class="mt-4">
                         <h6>About this item</h6>
-                        <p>{{ product.short_description }}</p>
+                        <p class="mb-0">{{ product.short_description }}</p>
                     </div>
 
                     <!-- variation -->
@@ -122,10 +124,11 @@
                             </h6>
 
                             <select
-                                class="custom-select col-md-6"
+                                class="custom-select col-md-8"
                                 name="selected_variations"
                                 id="selected_variations"
                                 v-model="form.selected_variations[index]"
+                                required
                             >
                                 <option value="" disabled selected hidden>
                                     Select
@@ -173,35 +176,27 @@
                             v-model="form.custom_text"
                             type="text"
                             name="custom_text"
-                            class="form-control form-control-alternative"
+                            class="
+                                form-control form-control-alternative
+                                col-md-8
+                            "
                             placeholder="Custom message"
                             maxlength="25"
                         />
                     </div>
 
-                    <!-- price -->
-                    <div class="mt-4">
-                        <h6>Price</h6>
-                        <h3 class="price">LKR {{ this.total_price }}</h3>
-                    </div>
-
                     <!-- buttons -->
                     <div class="mt-4">
-                        <h6>Checkout</h6>
                         <div class="d-md-flex">
-                            <button
-                                class="checkout-btn btn-full col-md-6 mr-md-2"
-                            >
-                                Quick Buy
-                            </button>
                             <button
                                 class="
                                     checkout-btn
                                     btn-full
                                     checkout-btn-cart
                                     mt-2 mt-md-0
-                                    col-md-6
+                                    col-md-8
                                 "
+                                type="submit"
                                 @click.prevent="addProductToCart(product)"
                             >
                                 Add to Cart
@@ -211,133 +206,129 @@
 
                     <!-- ingredients -->
                     <div class="mt-4">
-                        <hr />
                         <div
                             class="
                                 d-flex
                                 justify-content-between
                                 align-items-center
+                                product-detail-header
+                                mb-3
                             "
+                            data-toggle="collapse"
+                            href="#collapseMaterial"
+                            role="button"
+                            aria-expanded="false"
+                            aria-controls="collapseMaterial"
                         >
-                            <h6 class="mb-0">Ingredients</h6>
-                            <a
-                                data-toggle="collapse"
-                                href="#collapseMaterial"
-                                role="button"
-                                aria-expanded="false"
-                                aria-controls="collapseMaterial"
+                            <h5 class="mb-0">Ingredients</h5>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                                aria-hidden="true"
+                                role="img"
+                                width="23"
+                                height="26"
+                                preserveAspectRatio="xMidYMid meet"
+                                viewBox="0 0 20 20"
                             >
-                                <svg
-                                    width="45"
-                                    height="45"
-                                    viewBox="0 0 45 45"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <rect
-                                        x="33"
-                                        y="24"
-                                        width="20"
-                                        height="4.07299"
-                                        transform="rotate(-180 33 24)"
-                                        fill="#333333"
-                                    />
-                                </svg>
-                            </a>
+                                <path
+                                    fill="#333"
+                                    d="m5 6l5 5l5-5l2 1l-7 7l-7-7z"
+                                />
+                            </svg>
                         </div>
                         <div class="collapse" id="collapseMaterial">
-                            <p class="mb-2">
-                                {{ product.material }}
-                            </p>
+                            <div class="card product-detail-card">
+                                <p>
+                                    {{ product.material }}
+                                </p>
+                            </div>
                         </div>
                     </div>
 
                     <!-- description -->
                     <div class="mt-4">
-                        <hr />
                         <div
                             class="
                                 d-flex
                                 justify-content-between
                                 align-items-center
+                                product-detail-header
+                                mb-3
                             "
+                            data-toggle="collapse"
+                            href="#collapseDesc"
+                            role="button"
+                            aria-expanded="false"
+                            aria-controls="collapseDesc"
                         >
-                            <h6 class="mb-0">Description</h6>
-                            <a
-                                data-toggle="collapse"
-                                href="#collapseDesc"
-                                role="button"
-                                aria-expanded="false"
-                                aria-controls="collapseDesc"
+                            <h5 class="mb-0">Description</h5>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                                aria-hidden="true"
+                                role="img"
+                                width="23"
+                                height="26"
+                                preserveAspectRatio="xMidYMid meet"
+                                viewBox="0 0 20 20"
                             >
-                                <svg
-                                    width="45"
-                                    height="45"
-                                    viewBox="0 0 45 45"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <rect
-                                        x="33"
-                                        y="24"
-                                        width="20"
-                                        height="4.07299"
-                                        transform="rotate(-180 33 24)"
-                                        fill="#333333"
-                                    />
-                                </svg>
-                            </a>
+                                <path
+                                    fill="#333"
+                                    d="m5 6l5 5l5-5l2 1l-7 7l-7-7z"
+                                />
+                            </svg>
                         </div>
                         <div class="collapse" id="collapseDesc">
-                            <p class="mb-2">
-                                {{ product.description }}
-                            </p>
+                            <div class="card product-detail-card">
+                                <p>
+                                    {{ product.description }}
+                                </p>
+                            </div>
                         </div>
                     </div>
 
                     <!-- faq -->
                     <div class="mt-4">
-                        <hr />
                         <div
                             class="
                                 d-flex
                                 justify-content-between
                                 align-items-center
+                                product-detail-header
+                                mb-3
                             "
+                            data-toggle="collapse"
+                            href="#collapseFAQ"
+                            role="button"
+                            aria-expanded="false"
+                            aria-controls="collapseFAQ"
                         >
-                            <h6 class="mb-0">F.A.Q</h6>
-                            <a
-                                data-toggle="collapse"
-                                href="#collapseFAQ"
-                                role="button"
-                                aria-expanded="false"
-                                aria-controls="collapseFAQ"
+                            <h5 class="mb-0">F.A.Q</h5>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                                aria-hidden="true"
+                                role="img"
+                                width="23"
+                                height="26"
+                                preserveAspectRatio="xMidYMid meet"
+                                viewBox="0 0 20 20"
                             >
-                                <svg
-                                    width="45"
-                                    height="45"
-                                    viewBox="0 0 45 45"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <rect
-                                        x="33"
-                                        y="24"
-                                        width="20"
-                                        height="4.07299"
-                                        transform="rotate(-180 33 24)"
-                                        fill="#333333"
-                                    />
-                                </svg>
-                            </a>
+                                <path
+                                    fill="#333"
+                                    d="m5 6l5 5l5-5l2 1l-7 7l-7-7z"
+                                />
+                            </svg>
                         </div>
 
                         <div class="collapse" id="collapseFAQ">
-                            <div class="card faq-card">
+                            <div class="card product-detail-card">
                                 <p>How is the pricing calculated?</p>
-                                <p>
+                                <p class="mt-2">
                                     The price of a product consists of its base
-                                    price + variation price
+                                    price (the price at the top) + price of all
+                                    selected variations
                                 </p>
                             </div>
                         </div>
@@ -345,31 +336,74 @@
 
                     <!-- seller -->
                     <div class="mt-4">
-                        <hr />
-                        <h6 class="mt-4">Meet your Seller</h6>
-                        <div class="d-flex">
-                            <img
-                                src="/images/lavisco/img-bg.jpg"
-                                class="product-seller-img mr-md-4"
-                                alt=""
-                            />
-                            <div>
-                                <h4>{{ product.user.shop.name }}</h4>
-                                <p>
-                                    {{ product.user.shop.about }}
-                                </p>
-                                <button class="btn-secondary">
-                                    <router-link
-                                        :to="{
-                                            name: 'seller_shop',
-                                            params: {
-                                                shopId: product.user.shop.id,
-                                            },
-                                        }"
-                                    >
-                                        View Seller
-                                    </router-link>
-                                </button>
+                        <div
+                            class="
+                                d-flex
+                                justify-content-between
+                                align-items-center
+                                product-detail-header
+                                mb-3
+                            "
+                            data-toggle="collapse"
+                            href="#collapseSeller"
+                            role="button"
+                            aria-expanded="false"
+                            aria-controls="collapseSeller"
+                        >
+                            <h5 class="mb-0">Meet your Seller</h5>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                                aria-hidden="true"
+                                role="img"
+                                width="23"
+                                height="26"
+                                preserveAspectRatio="xMidYMid meet"
+                                viewBox="0 0 20 20"
+                            >
+                                <path
+                                    fill="#333"
+                                    d="m5 6l5 5l5-5l2 1l-7 7l-7-7z"
+                                />
+                            </svg>
+                        </div>
+
+                        <div class="collapse" id="collapseSeller">
+                            <div class="card product-detail-card">
+                                <div class="d-flex">
+                                    <img
+                                        :src="
+                                            product.user.shop.path
+                                                ? product.user.shop.path
+                                                : '/images/lavisco/img-bg.jpg'
+                                        "
+                                        class="product-seller-img mr-md-4 mr-3"
+                                        alt=""
+                                    />
+                                    <div>
+                                        <h5 class="mb-2">
+                                            {{ product.user.shop.name }}
+                                        </h5>
+                                        <p class="small-para mb-2">
+                                            {{ product.user.shop.about }}
+                                        </p>
+                                        <router-link
+                                            :to="{
+                                                name: 'seller_shop',
+                                                params: {
+                                                    shopId: product.user.shop
+                                                        .id,
+                                                },
+                                            }"
+                                        >
+                                            <button
+                                                class="btn-secondary btn-sm"
+                                            >
+                                                View Seller
+                                            </button>
+                                        </router-link>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -381,19 +415,13 @@
 
 <script>
 import { Swiper, SwiperSlide, directive } from "vue-awesome-swiper";
-import Form from "vform";
-import { HasError, AlertError } from "vform/src/components/bootstrap4";
+//import Form from "vform";
+//import { HasError, AlertError } from "vform/src/components/bootstrap4";
 
-// import style (>= Swiper 6.x)
-//import "swiper/swiper-bundle.css";
-
-// import style (<= Swiper 5.x)
 import "swiper/css/swiper.css";
 
 export default {
     components: {
-        HasError,
-        AlertError,
         Swiper,
         SwiperSlide,
     },
@@ -422,12 +450,13 @@ export default {
             touchRatio: 0.2,
             slideToClickedSlide: true,
         },
-        form: new Form({
+        form: {
             id: "",
             custom_text: "",
             selected_variations: [],
             total_price: "",
-        }),
+        },
+        formErrors: {},
     }),
 
     beforeRouteEnter: function (to, from, next) {
@@ -496,7 +525,32 @@ export default {
         },
 
         addProductToCart(product) {
-            this.$store.dispatch("addProductToCart", product);
+            let activeVariation = [];
+
+            this.product.variations.forEach((vari, index) => {
+                if (vari.product_state_id == 1) {
+                    this.$set(activeVariation, index, vari);
+                }
+            });
+
+            if (this.product.has_variations === 1) {
+                if (
+                    this.form.selected_variations.length ===
+                    activeVariation.length
+                ) {
+                    this.$store.dispatch("addProductToCart", {
+                        product: product,
+                        productForm: this.form,
+                    });
+                }
+            } else {
+                this.$store.dispatch("addProductToCart", {
+                    product: product,
+                    productForm: this.form,
+                });
+            }
+
+            //pass multiple parameters to vuex action using destructuring
         },
     },
     mounted() {

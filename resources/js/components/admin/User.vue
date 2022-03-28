@@ -193,20 +193,20 @@
                     <div class="modal-header bg-neutral">
                         <h4
                             v-show="editMode"
-                            class="modal-title"
+                            class="modal-title text-uppercase"
                             id="addRecordLabel"
                         >
                             Update the User
                         </h4>
                         <h4
-                            v-show="!editMode"
+                            v-show="!editMode && !passwordMode"
                             class="modal-title text-uppercase"
                             id="addRecordLabel"
                         >
                             Add New User
                         </h4>
                         <h4
-                            v-show="editPasswordModal"
+                            v-show="passwordMode"
                             class="modal-title text-uppercase"
                             id="addRecordLabel"
                         >
@@ -228,7 +228,7 @@
                     <!-- Form password Reset start -->
 
                     <form
-                        v-if="editPasswordModal"
+                        v-if="passwordMode"
                         class="input-form"
                         @submit.prevent="updateUserPassword()"
                     >
@@ -534,26 +534,32 @@ export default {
 
         newModal() {
             this.editMode = false;
+            this.passwordMode = false;
             this.form.clear();
             this.form.reset();
             this.loadRoles();
             $("#addRecord").modal("show");
         },
+
         editModal(user) {
             this.editMode = true;
+            this.passwordMode = false;
             this.form.clear();
             this.form.reset();
             this.loadRoles();
             $("#addRecord").modal("show");
             this.form.fill(user);
         },
+
         editPasswordModal(user) {
             this.passwordMode = true;
+            this.editMode = false;
             this.form.clear();
             this.form.reset();
             $("#addRecord").modal("show");
             this.form.fill(user);
         },
+
         loadUsers() {
             axios
                 .get("/api/admin/users", {

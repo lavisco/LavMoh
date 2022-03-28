@@ -113,10 +113,10 @@ class Product extends Model
         return $this->hasMany(ProductVideo::class);
     }
 
-    //product:order M:M
-    public function orders()
+    //order_products:product M:1
+    public function order_products()
     {
-        return $this->belongsToMany(Order::class)->using(OrderProduct::class)->withTimestamps();
+        return $this->hasMany(OrderProduct::class);
     }
     
     public function scopeFilter($query, array $filters)

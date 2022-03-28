@@ -48,6 +48,12 @@ class VariationOption extends Model
         return $this->belongsTo(User::class);
     }
 
+    //variation_option:order_product_variations 1:M
+    public function order_product_variations()
+    {
+        return $this->hasMany(OrderProductVariation::class);
+    }
+
     public function scopeFilter($query, array $filters)
     {
         $query->when($filters['searchText'] ?? false, fn($query, $searchText) =>

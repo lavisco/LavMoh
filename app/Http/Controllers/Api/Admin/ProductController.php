@@ -50,7 +50,7 @@ class ProductController extends Controller
         $product->save();
 
         $product->update([
-            'code' => 'LP'.$product->id,
+            'code' => 'LP'.str_pad($product->id,10,"0",STR_PAD_LEFT),
         ]);
 
         //sync to pivot tables

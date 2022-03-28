@@ -11,12 +11,12 @@ class OrderProduct extends Model
 
 	public $incrementing = true;
 
-    protected $table = 'order_product';
+    protected $table = 'order_products';
 
     protected $fillable = [
         'base_price',
         'quantity',
-        'total',
+        'total', //(base_price+variation_prices)*quantity
         'custom_text',
         'custom_image',
         'has_variations',
@@ -24,7 +24,19 @@ class OrderProduct extends Model
         'product_id',
     ];
 
-    //order_product:order_product_variations 1:M
+    //order_products:order M:1
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
+    
+    //order_products:product M:1
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
+
+    //order_products:order_product_variations 1:M
     public function order_product_variations()
     {
         return $this->hasMany(OrderProductVariation::class);

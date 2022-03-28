@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid login shipping">
+    <div class="container login">
         <h1>Thank You For Your Order</h1>
         <h5>
             Browse more
@@ -8,17 +8,41 @@
             </router-link>
         </h5>
 
-        <div class="card d-flex flex-comlumn">
+        <div class="card cart-order-complete d-flex flex-comlumn">
             <div
-                class="card d-flex flex-row justify-content-between"
+                class="
+                    cart-order-complete-item
+                    d-flex
+                    flex-row
+                    justify-content-between
+                "
                 v-for="product in shopProducts"
             >
-                <div>{{ product.title }}<br />{{ product.quantity }}</div>
-                <div>{{ product.price * product.quantity }}</div>
+                <div>
+                    <img
+                        class="banner-container-xs"
+                        :src="
+                            product.image_path
+                                ? product.image_path
+                                : '/images/lavisco/img-bg.jpg'
+                        "
+                    />
+                    <div>{{ product.title }}<br />{{ product.quantity }}</div>
+                </div>
+
+                <div class="price">{{ product.price * product.quantity }}</div>
             </div>
-        </div>
-        <div class="card d-flex flex-row justify-content-between">
-            Total <span>{{ total }}</span>
+            <div
+                class="
+                    cart-order-complete-item cart-order-item-last
+                    d-flex
+                    flex-row
+                    justify-content-between
+                "
+            >
+                Total
+                <div class="price">{{ total }}</div>
+            </div>
         </div>
     </div>
 </template>

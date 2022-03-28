@@ -2105,27 +2105,6 @@ export default {
         emptyVariationSlot() {
             return 3 - this.form.variation_id.length;
         },
-        // emptyOptionSlot() {
-        //     let emptyOptionSlotArray = [];
-
-        //     for (let i = 0; i < this.form.variation_id.length; i++) {
-        //         let count = 0;
-        //         for (let j = 0; j < this.form.option_variation_id.length; j++) {
-        //             if (
-        //                 this.form.variation_id[i] ==
-        //                 this.form.option_variation_id[j]
-        //             ) {
-        //                 count = count + 1;
-        //             }
-        //         }
-        //         emptyOptionSlotArray.push([
-        //             this.form.variation_id[i],
-        //             3 - count,
-        //         ]);
-        //     }
-
-        //     return emptyOptionSlotArray;
-        // },
     },
 
     methods: {

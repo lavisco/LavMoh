@@ -1,97 +1,162 @@
 <template>
     <div class="container login">
-        <h1 class="mb-4">Your Cart</h1>
-        <h5 v-show="!products[0]">
-            Add
-            <router-link to="/products">
-                <u>Products</u>
-            </router-link>
-        </h5>
+        <div class="col-12">
+            <div
+                class="
+                    d-flex
+                    flex-md-row flex-column
+                    align-items-center
+                    justify-content-between
+                    mb-4
+                "
+            >
+                <h1 class="text-left">
+                    {{ products.length }} items in your Cart
+                </h1>
+
+                <h5 class="black">
+                    <router-link to="/products">Keep Shopping</router-link>
+                </h5>
+            </div>
+
+            <h5 class="text-left" v-show="!products[0]">
+                Your cart is empty. Add
+                <router-link to="/products">
+                    <u>Products</u>
+                </router-link>
+            </h5>
+        </div>
+
         <div class="col-12" v-show="products[0]">
             <div v-for="shop in shopProducts" class="mb-5">
-                <h3 class="text-left">{{ shop[0].shop }}</h3>
-                <p class="text-left mb-3">
-                    {{ shop.length }} Items in your Cart
-                </p>
-
-                <div class="table-responsive">
-                    <table class="table table-bordered cart-table">
-                        <thead>
-                            <tr>
-                                <th scope="col">Item</th>
-                                <th scope="col" class="cart-qty">Quantity</th>
-                                <th scope="col" class="cart-total">Subtotal</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="product in shop">
-                                <th scope="row" class="cart-title">
-                                    {{ product.title }}
-                                    <div class="card-secondary-text">
-                                        Category: {{ product.category }}
+                <div class="cart-items-card">
+                    <h3 class="text-left d-flex flex-row align-items-center">
+                        <img
+                            class="cart-shop-banner mr-2"
+                            :src="
+                                shop[0].shop_image
+                                    ? shop[0].shop_image
+                                    : '/images/lavisco/img-bg.jpg'
+                            "
+                        />
+                        {{ shop[0].shop }}
+                    </h3>
+                    <hr />
+                    <div v-for="product in shop">
+                        <div
+                            class="
+                                d-flex
+                                flex-row
+                                justify-content-between
+                                my-2
+                                cart-table
+                            "
+                        >
+                            <div class="d-flex flex-row gap">
+                                <img
+                                    class="banner-container"
+                                    :src="
+                                        product.image_path
+                                            ? product.image_path
+                                            : '/images/lavisco/img-bg.jpg'
+                                    "
+                                />
+                                <div class="d-flex flex-column gap">
+                                    <div>
+                                        <div class="cart-title mb-2">
+                                            {{ product.title }}
+                                        </div>
+                                        <div class="mb-2 cart-price hide-lg">
+                                            LKR.
+                                            {{
+                                                product.price * product.quantity
+                                            }}
+                                        </div>
+                                        <div class="cart-body-text">
+                                            <div
+                                                v-for="variation in product.variations"
+                                            >
+                                                {{ variation.parent }} :
+                                                {{ variation.name }}
+                                            </div>
+                                            <div v-show="product.custom_text">
+                                                Custom Text:
+                                                {{ product.custom_text }}
+                                            </div>
+                                        </div>
                                     </div>
-                                </th>
-                                <td class="cart-qty-body">
-                                    <div class="mb-3">
-                                        <button
-                                            href=""
-                                            class="
-                                                mr-md-3 mr-1
-                                                cart-qty-control
-                                            "
-                                            @click.prevent="
-                                                decreaseProductQuantity(product)
-                                            "
-                                        >
-                                            -
-                                        </button>
-                                        {{ product.quantity }}
-                                        <button
-                                            href=""
-                                            class="
-                                                ml-md-3 ml-1
-                                                cart-qty-control
-                                            "
-                                            @click.prevent="
-                                                addProductToCart(product)
-                                            "
-                                        >
-                                            +
-                                        </button>
-                                    </div>
-
-                                    <a
-                                        class="cart-remove-btn"
-                                        title="Remove from cart"
-                                        @click.prevent="
-                                            removeProductFromCart(product)
+                                    <div
+                                        class="
+                                            d-flex
+                                            flex-row
+                                            align-items-center
                                         "
                                     >
-                                        Remove
-                                    </a>
-                                </td>
-                                <td class="cart-price">
-                                    Rs. {{ product.price * product.quantity }}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td scope="row"></td>
-                                <th class="text-center align-middle">Total:</th>
-                                <td class="cart-price">
-                                    Rs. {{ cartTotal(shop) }}
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                                        <div class="cart-qty-body">
+                                            <div>
+                                                <button
+                                                    href=""
+                                                    class="
+                                                        mr-2
+                                                        cart-qty-control
+                                                    "
+                                                    @click.prevent="
+                                                        decreaseProductQuantity(
+                                                            product
+                                                        )
+                                                    "
+                                                >
+                                                    -
+                                                </button>
+                                                {{ product.quantity }}
+                                                <button
+                                                    href=""
+                                                    class="
+                                                        ml-2
+                                                        cart-qty-control
+                                                    "
+                                                    @click.prevent="
+                                                        increaseProductQuantity(
+                                                            product
+                                                        )
+                                                    "
+                                                >
+                                                    +
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <a
+                                            class="cart-remove-btn ml-4"
+                                            title="Remove from cart"
+                                            @click.prevent="
+                                                removeProductFromCart(product)
+                                            "
+                                        >
+                                            Remove
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ml-3 cart-price hide">
+                                LKR. {{ product.price * product.quantity }}
+                            </div>
+                        </div>
+                        <hr />
+                    </div>
+                    <div class="cart-price text-right">
+                        <span class="text-lighter">Subtotal LKR. </span
+                        >{{ cartTotal(shop) }}
+                    </div>
                 </div>
 
-                <p>*Shipping calculations and discounts on next step</p>
+                <p class="mt-4">*Shipping calculations and discounts on next step</p>
                 <div class="text-right my-2">
                     <button
                         class="checkout-btn"
                         @click.prevent="saveShopCartTotal(shop)"
                     >
-                        Continue to Checkout
+                        Proceed to Checkout
                     </button>
                 </div>
             </div>
@@ -117,16 +182,23 @@ export default {
         removeProductFromCart(product) {
             this.$store.dispatch("removeProductFromCart", product);
         },
+
+        increaseProductQuantity(product) {
+            this.$store.dispatch("increaseProductQuantity", product);
+        },
+
         decreaseProductQuantity(product) {
             this.$store.dispatch("decreaseProductQuantity", product);
         },
-        addProductToCart(product) {
-            this.$store.dispatch("addProductToCart", product);
-        },
+
         saveShopCartTotal(shop) {
             this.$store.dispatch("saveShopCartTotal", this.cartTotal(shop));
             this.$store.dispatch("addProductToCurrentCart", shop);
             this.$router.push("/shipping");
+        },
+
+        refreshCurrentCart() {
+            this.$store.dispatch("emptyCurrentCart");
         },
 
         cartTotal(shop) {
@@ -139,6 +211,8 @@ export default {
         },
     },
 
-    mounted() {},
+    mounted() {
+        this.refreshCurrentCart();
+    },
 };
 </script>

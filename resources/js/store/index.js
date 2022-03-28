@@ -17,11 +17,16 @@ export default new Vuex.Store({
                 return {
                     id: cartItem.id,
                     title: cartItem.title,
+                    base_price: cartItem.base_price,
                     price: cartItem.price,
                     user_id: cartItem.user_id,
                     shop: cartItem.shop,
+                    shop_image: cartItem.shop_image,
                     category: cartItem.category,
+                    image_path: cartItem.image_path,
                     quantity: cartItem.quantity,
+                    variations: cartItem.variations,
+                    custom_text: cartItem.custom_text,
                 };
             });
         },
@@ -44,11 +49,15 @@ export default new Vuex.Store({
                 return {
                     id: cartItem.id,
                     title: cartItem.title,
+                    base_price: cartItem.base_price,
                     price: cartItem.price,
                     shop: cartItem.shop,
+                    image_path: cartItem.image_path,
                     quantity: cartItem.quantity,
                     shop_id: cartItem.shop_id,
                     seller_id: cartItem.seller_id,
+                    variations: cartItem.variations,
+                    custom_text: cartItem.custom_text,
                 };
             });
         },
@@ -60,24 +69,48 @@ export default new Vuex.Store({
 
     actions: {
         //methods
-        addProductToCart(context, product) {
+        addProductToCart(context, { product, productForm }) {
+            //pass multiple parameters to an action using destructuring e.g.{ product, productForm }
+            //store product if it exists in state.cart
             const cartItem = context.state.cart.find(
                 (item) => item.id === product.id
             );
+
+            //store variation option id values passed in productForm
+            let variation_id_values = "";
+            for (let key in productForm.selected_variations) {
+                variation_id_values += productForm.selected_variations[key].id;
+            }
+
             if (!cartItem) {
-                context.commit("pushProductToCart", product);
+                //if product doesn't exist in cart, push to cart
+                context.commit("pushProductToCart", { product, productForm });
             } else {
-                context.commit("incrementItemQuantity", cartItem);
+                //else check if variations match, if yes then increment quantity, else push to cart
+                let cartItemVar = context.state.cart.find(
+                    (item) => item.variation_ids === variation_id_values
+                );
+                //custom msg????
+                let cartItemCustomMsg = context.state.cart.find(
+                    (item) => item.custom_text === productForm.custom_text
+                );
+
+                if (cartItemVar) {
+                    context.commit("incrementItemQuantity", cartItemVar);
+                } else {
+                    context.commit("pushProductToCart", {
+                        product,
+                        productForm,
+                    });
+                }
             }
         },
 
-        addProductVariationToCart(context, product, option) {
+        increaseProductQuantity(context, product) {
             const cartItem = context.state.cart.find(
-                (item) => item.id === product.id
+                (item) => item.variation_ids === product.variation_ids
             );
-            if (!cartItem) {
-                context.commit("pushProductVariationToCart", product, option);
-            } else {
+            if (cartItem.quantity > 0) {
                 context.commit("incrementItemQuantity", cartItem);
             }
         },
@@ -88,7 +121,7 @@ export default new Vuex.Store({
 
         decreaseProductQuantity(context, product) {
             const cartItem = context.state.cart.find(
-                (item) => item.id === product.id
+                (item) => item.variation_ids === product.variation_ids
             );
             if (cartItem.quantity === 1) {
                 context.commit("deleteProductFromCart", product);
@@ -102,32 +135,52 @@ export default new Vuex.Store({
         },
 
         addProductToCurrentCart(context, shop) {
-            //context.commit("pushProductToCurrentCart", product);
             shop.map((product) => {
                 context.commit("pushProductToCurrentCart", product);
             });
+        },
+
+        emptyCurrentCart(context) {
+            if (context.state.currentCart != []) {
+                context.commit("deleteAllProductsFromCurrentCart");
+            }
         },
     },
 
     mutations: {
         //alter state
-        pushProductToCart(state, product) {
+        pushProductToCart(state, { product, productForm }) {
+            //pass multiple parameters to a mutation using destructuring e.g.{ product, productForm }
+
+            //store variations
+            let variation_values = [];
+            //store variation option ids for checking items in cart
+            let variation_id_values = "";
+            for (let key in productForm.selected_variations) {
+                variation_values.push({
+                    id: productForm.selected_variations[key].id,
+                    name: productForm.selected_variations[key].name,
+                    price: productForm.selected_variations[key].price,
+                    parent: productForm.selected_variations[key].variation.name,
+                });
+                variation_id_values += productForm.selected_variations[key].id;
+            }
+
             state.cart.push({
                 id: product.id,
                 title: product.title,
-                price: product.base_price,
+                base_price: product.base_price,
+                price: productForm.total_price,
                 user_id: product.user_id,
                 shop: product.user.shop.name,
+                shop_id: product.user.shop.id,
+                shop_image: product.user.shop.path,
                 category: product.category.name,
+                image_path: product.product_image.path,
                 quantity: 1,
-            });
-        },
-
-        pushProductVariationToCart(state, product, option) {
-            state.cart.push({
-                id: product.id,
-                option_id_1: option.id,
-                option_price_1: option.price,
+                variations: variation_values,
+                variation_ids: variation_id_values,
+                custom_text: productForm.custom_text,
             });
         },
 
@@ -135,12 +188,21 @@ export default new Vuex.Store({
             state.currentCart.push({
                 id: product.id,
                 title: product.title,
-                price: product.base_price,
+                base_price: product.base_price,
+                price: product.price,
                 shop: product.shop,
+                image_path: product.image_path,
                 quantity: product.quantity,
-                shop_id: product.user.shop.id,
+                shop_id: product.shop_id,
                 seller_id: product.user_id,
+                variations: product.variations,
+                variation_ids: product.variation_ids,
+                custom_text: product.custom_text,
             });
+        },
+
+        deleteAllProductsFromCurrentCart(state) {
+            state.currentCart = [];
         },
 
         incrementItemQuantity(state, cartItem) {
@@ -156,16 +218,13 @@ export default new Vuex.Store({
         },
 
         deleteProductFromCart(state, product) {
-            let index = state.cart.findIndex((c) => c.id === product.id);
+            let index = state.cart.findIndex(
+                (c) => c.variation_ids === product.variation_ids
+            );
 
             if (index > -1) {
                 state.cart.splice(index, 1);
             }
-        },
-
-        saveCart(state) {
-            window.localStorage.setItem("cart", JSON.stringify(state.cart));
-            window.localStorage.setItem("cartCount", state.cart.length);
         },
     },
 });

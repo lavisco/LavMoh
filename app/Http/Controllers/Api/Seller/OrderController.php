@@ -16,7 +16,7 @@ class OrderController extends Controller
 
     public function index()
     {
-        return Order::where('seller_id', auth()->id())->with(['products', 'receipt'])->latest()->filter(request(['searchText']))->paginate(25);
+        return Order::where('seller_id', auth()->id())->with(['buyer', 'order_products', 'order_products.product', 'order_products.order_product_variations.variation_option.variation', 'receipt'])->latest()->filter(request(['searchText']))->paginate(25);
     }
 
     public function show($id)

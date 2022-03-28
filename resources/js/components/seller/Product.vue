@@ -450,15 +450,6 @@ export default {
         },
     },
 
-    computed: {
-        // variations() {
-        //     return _.groupBy(
-        //         this.form.product_variations,
-        //         (variation) => variation.type
-        //     );
-        // },
-    },
-
     methods: {
         newModal(product) {
             $("#addRecord").modal("show");

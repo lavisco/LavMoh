@@ -25,15 +25,14 @@ class OrderRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'sometimes|required|string|max:255',
-            'email' => [
-                'required',
-                'sometimes',
-                'string',
-                'email',
-                'max:255',
-                Rule::unique('users')->ignore($this->id),
-            ],
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
+            'phone' => 'required',
+            'address' => 'required|string|max:255',
+            'city' => 'required|string|max:100',
+            'zipcode' => 'nullable|max:12',
+            'district' => 'required|string|max:100',
+            'province' => 'required|string|max:100',
             'total' => 'numeric|required',
             'subtotal' => 'numeric|required',
             'giftwrap_price' => 'numeric|nullable',

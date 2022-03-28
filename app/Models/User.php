@@ -28,6 +28,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'role_id'
     ];
 
+    //user consts for guest user
+    public const GUEST_USER_MAIL = 'guestlavisco@gmail.com';
+
     protected $appends = ['path'];
 
     public function getPathAttribute()
@@ -66,16 +69,22 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(SellerProfile::class);
     }
 
-    //shop:user M:1
+    //giftwraps:user M:1
     public function giftwraps()
     {
         return $this->hasMany(Giftwrap::class);
     }
 
-    //shop:user M:1
+    //orders:user M:1
     public function orders()
     {
         return $this->hasMany(Order::class);
+    }
+
+    //receipts:user M:1
+    public function receipts()
+    {
+        return $this->hasMany(Receipt::class);
     }
 
     //product:user M:1

@@ -122,6 +122,7 @@
 
                 <div
                     class="dropdown-menu dropdown-menu-right"
+                    style="border-radius: 8px;"
                     aria-labelledby="dropdownCartLink"
                 >
                     <menu-cart></menu-cart>

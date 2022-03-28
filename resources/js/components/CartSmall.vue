@@ -9,14 +9,24 @@
             </div>
             <div v-for="product in shop">
                 <div class="menu-cart-item">
-                    <div>
-                        <div class="menu-cart-item-title">
-                            {{ product.title }}
+                    <div class="d-flex flex-row">
+                        <img
+                            class="banner-container-xs mr-2"
+                            :src="
+                                product.image_path
+                                    ? product.image_path
+                                    : '/images/lavisco/img-bg.jpg'
+                            "
+                        />
+                        <div>
+                            <div class="menu-cart-item-title">
+                                {{ product.title }}
+                            </div>
+                            <div>x {{ product.quantity }}</div>
                         </div>
-                        <div>{{ product.quantity }}</div>
                     </div>
                     <div class="menu-cart-item-price">
-                        Rs. {{ product.price * product.quantity }}
+                        Lkr {{ product.price * product.quantity }}
                     </div>
                 </div>
                 <a
@@ -30,13 +40,8 @@
             </div>
         </div>
 
-
         <div v-show="products[0] != null" class="text-center">
-            <p>Total</p>
-            <h5 class="pt-0 font-weight-bold mb-3">Rs. {{ total }}</h5>
-            <button class="btn-sm btn-full btn-sm-cart green mt-auto mb-2">
-                Checkout
-            </button>
+            <h5 class="p-0 my-3">Total LKR<span class="font-weight-bold ml-2"> {{ total }}</span></h5>
             <router-link to="/cart">
                 <button class="btn-sm btn-full btn-sm-cart purple mt-auto">
                     Open Cart Page

@@ -72,6 +72,3 @@ Route::group(['middleware' => 'auth'],function () {
 Route::get('/{path}', [HomeController::class, 'websiteIndex'])->where('path', '.*');
 
 
-Route::resource('/orders', OrderController::class);
-
-

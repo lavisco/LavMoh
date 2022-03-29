@@ -17,24 +17,19 @@ use PhpParser\Node\Stmt\If_;
 
 class OrderController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth:api');
-    }
-
-    public function store(OrderRequest $request)
+    public function store(Request $request)
     {
         $guestUser = User::select('id')->where('email', User::GUEST_USER_MAIL)->first();
 
-        if (auth()->check()) {
-            if(auth()->user()->role_id == Role::IS_BUYER){
-                $userId = auth()->user()->id;
+        if (auth('api')->check()) {
+            if(auth('api')->user()->role_id == Role::IS_BUYER){
+                $userId = auth('api')->user()->id;
             } else{
                 $userId = $guestUser->id;
             }
-        } else {
+          } else {
             $userId = $guestUser->id;
-        }
+          }
         
         $request->merge([
             'status' => "pending",

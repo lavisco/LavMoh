@@ -152,8 +152,8 @@
                         </p>
                     </div>
 
-                    <button type="submit" class="checkout-btn">
-                        Continue to Payment
+                    <button type="submit" class="checkout-btn" :disabled="submitButtonDisabled">
+                        {{ submitButtonText }}
                     </button>
                 </div>
             </form>
@@ -171,6 +171,8 @@ export default {
     },
 
     data: () => ({
+        submitButtonText: "Proceed to Payment",
+        submitButtonDisabled: false,
         shippings: [],
         form: new Form({
             id: "",
@@ -227,13 +229,22 @@ export default {
             ).toFixed(2);
         },
         createOrder() {
+            this.submitButtonText = "In Progress...";
+            this.submitButtonDisabled = true;
+
             this.form
                 .post("/api/orders")
                 .then(() => {
                     //this.$store.dispatch("emptyCurrentCart");
+                    this.submitButtonText = "Saved";
+                    this.submitButtonDisabled = false;
                     this.$router.push("/order_complete");
                 })
-                .catch((error) => console.log(error));
+                .catch((error) => {
+                    this.submitButtonText = "Proceed to Payment";
+                    this.submitButtonDisabled = false;
+                    console.log(error);
+                });
         },
     },
 

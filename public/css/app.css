@@ -11991,6 +11991,7 @@ h4 {
 }
 
 .price {
+  font-weight: 600;
   text-align: left;
   color: #6b57cf;
 }

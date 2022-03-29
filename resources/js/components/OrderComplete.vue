@@ -18,9 +18,12 @@
                 "
                 v-for="product in shopProducts"
             >
-                <div>
+                <div class="
+                    d-flex
+                    flex-row
+                ">
                     <img
-                        class="banner-container-xs"
+                        class="banner-container-xs mr-2"
                         :src="
                             product.image_path
                                 ? product.image_path
@@ -59,7 +62,7 @@ export default {
 
     methods: {
         showOrder(){
-            
+
         }
     },
 

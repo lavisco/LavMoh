@@ -228,7 +228,7 @@ export default {
         },
         createOrder() {
             this.form
-                .post("/api/orders")
+                .post("/orders")
                 .then(() => {
                     //this.$store.dispatch("emptyCurrentCart");
                     this.$router.push("/order_complete");

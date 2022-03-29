@@ -4,6 +4,7 @@ use App\Http\Controllers\EmailController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Website\HomeController;
+use App\Http\Controllers\Website\OrderController;
 use App\Mail\StoreActiveApplicationMail;
 use App\Mail\WelcomeMail;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -71,5 +72,6 @@ Route::group(['middleware' => 'auth'],function () {
 Route::get('/{path}', [HomeController::class, 'websiteIndex'])->where('path', '.*');
 
 
+Route::resource('/orders', OrderController::class);
 
 

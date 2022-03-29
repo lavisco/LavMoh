@@ -13,16 +13,27 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use PhpParser\Node\Stmt\If_;
 
 class OrderController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
+
     public function store(OrderRequest $request)
     {
-        if (Auth::check() && auth()->user()->role_id === Role::IS_BUYER) {
-            $userId = auth()->id();
+        $guestUser = User::select('id')->where('email', User::GUEST_USER_MAIL)->first();
+
+        if (auth()->check()) {
+            if(auth()->user()->role_id == Role::IS_BUYER){
+                $userId = auth()->user()->id;
+            } else{
+                $userId = $guestUser->id;
+            }
         } else {
-            $user = User::select('id')->where('email', User::GUEST_USER_MAIL)->first();
-            $userId = $user->id;
+            $userId = $guestUser->id;
         }
         
         $request->merge([

@@ -39,6 +39,7 @@ class LoginController extends Controller
             break; 
           case Role::IS_BUYER:
             return RouteServiceProvider::BUYER_DASHBOARD;
+            return back();
             break; 
       
           default:

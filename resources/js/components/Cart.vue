@@ -150,7 +150,9 @@
                     </div>
                 </div>
 
-                <p class="mt-4">*Shipping calculations and discounts on next step</p>
+                <p class="mt-4">
+                    *Shipping calculations and discounts on next step
+                </p>
                 <div class="text-right my-2">
                     <button
                         class="checkout-btn"
@@ -161,11 +163,116 @@
                 </div>
             </div>
         </div>
+
+        <!-- Modal -->
+        <div
+            class="modal fade"
+            id="addRecord"
+            tabindex="-1"
+            aria-labelledby="addRecordLabel"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4
+                            class="modal-title mb-0 text-center"
+                            id="addRecordLabel"
+                        >
+                            Login or Continue as Guest
+                        </h4>
+                        <button
+                            type="button"
+                            class="close"
+                            data-dismiss="modal"
+                            aria-label="Close"
+                        >
+                            <i
+                                class="fas fa-times-circle"
+                                aria-hidden="true"
+                            ></i>
+                        </button>
+                    </div>
+
+                    <!-- Form start -->
+                    <div class="modal-body modal-view">
+                        <div class="card">
+                            <router-link to="/shipping">
+                                <button
+                                    class="checkout-btn btn-full btn-secondary"
+                                    data-dismiss="modal"
+                                >
+                                    Continue as Guest
+                                </button>
+                            </router-link>
+                            <h4 class="my-3 text-center">OR</h4>
+                            <form class="input-form" @submit.prevent="login()">
+                                <div class="form-group">
+                                    <input
+                                        id="email"
+                                        type="email"
+                                        class="form-control"
+                                        name="email"
+                                        required
+                                        placeholder="Email"
+                                        v-model="form.email"
+                                    />
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="password-input">
+                                        <input
+                                            id="password"
+                                            type="password"
+                                            class="form-control"
+                                            name="password"
+                                            required
+                                            placeholder="Password"
+                                            v-model="form.password"
+                                        />
+                                        <i
+                                            class="fas fa-eye"
+                                            onclick="showPasswordFunction()"
+                                        ></i>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex justify-content-center mt-3">
+                                    <button
+                                        type="submit"
+                                        class="checkout-btn btn-full"
+                                    >
+                                        Login
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
+import Form from "vform";
+import { HasError, AlertError } from "vform/src/components/bootstrap4";
+
 export default {
+    components: {
+        HasError,
+        AlertError,
+    },
+
+    data: () => ({
+        form: new Form({
+            id: "",
+            email: "",
+            password: "",
+        }),
+    }),
+
     computed: {
         products() {
             return this.$store.getters.cartProducts;
@@ -179,6 +286,17 @@ export default {
     },
 
     methods: {
+        login() {
+            this.form
+                .post("/login")
+                .then(() => {
+                    $("#addRecord").modal("hide");
+                    console.log("worke");
+                    this.$router.push("/shipping");
+                })
+                .catch((error) => console.log(error));
+        },
+
         removeProductFromCart(product) {
             this.$store.dispatch("removeProductFromCart", product);
         },
@@ -194,7 +312,8 @@ export default {
         saveShopCartTotal(shop) {
             this.$store.dispatch("saveShopCartTotal", this.cartTotal(shop));
             this.$store.dispatch("addProductToCurrentCart", shop);
-            this.$router.push("/shipping");
+            $("#addRecord").modal("show");
+            //this.$router.push("/shipping");
         },
 
         refreshCurrentCart() {

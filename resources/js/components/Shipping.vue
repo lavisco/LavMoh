@@ -230,6 +230,7 @@ export default {
             this.form
                 .post("/api/orders")
                 .then(() => {
+                    //this.$store.dispatch("emptyCurrentCart");
                     this.$router.push("/order_complete");
                 })
                 .catch((error) => console.log(error));

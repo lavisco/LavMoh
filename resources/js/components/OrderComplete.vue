@@ -57,8 +57,14 @@ export default {
         },
     },
 
-    methods: {},
+    methods: {
+        showOrder(){
+            
+        }
+    },
 
-    mounted() {},
+    mounted() {
+        this.showOrder();
+    },
 };
 </script>

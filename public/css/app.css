@@ -10351,6 +10351,10 @@ button.bg-black:hover {
   border: 1px solid #dfdfdf !important;
 }
 
+.border-warning {
+  box-shadow: #e3352fec 0 0 0 1px !important;
+}
+
 /*---------------------top-ribbon---------------------*/
 .top-ribbon {
   text-transform: uppercase;

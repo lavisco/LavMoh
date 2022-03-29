@@ -186,7 +186,17 @@
                                                 </option>
                                             </select>
                                         </td>
-                                        <td></td>
+                                        <td class="text-right">
+                                            <a
+                                                class="btn btn-sm"
+                                                href="#"
+                                                @click.prevent="
+                                                    viewModal(order)
+                                                "
+                                            >
+                                                View
+                                            </a>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -272,21 +282,8 @@
                                     {{ parent_product.product.sku }}
                                 </div>
                             </div>
-                            <div
-                                class="form-group row"
-                            >
-                                <label
-                                    class="col-md-3 col-form-label"
-                                    for="name"
-                                    >Total Price
-                                </label>
-                                <div class="col-md-9">
-                                    {{ parent_product.total }}
-                                </div>
-                            </div>
-                            <div
-                                class="form-group row"
-                            >
+
+                            <div class="form-group row">
                                 <label
                                     class="col-md-3 col-form-label"
                                     for="name"
@@ -294,6 +291,29 @@
                                 </label>
                                 <div class="col-md-9">
                                     {{ parent_product.base_price }}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label
+                                    class="col-md-3 col-form-label"
+                                    for="name"
+                                    >Net Total Price
+                                </label>
+                                <div class="col-md-9">
+                                    {{ parent_product.total }}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label
+                                    class="col-md-3 col-form-label"
+                                    for="name"
+                                    >Total Price
+                                </label>
+                                <div class="col-md-9">
+                                    {{
+                                        parent_product.total *
+                                        parent_product.quantity
+                                    }}
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -412,6 +432,220 @@
                         </button>
                     </div>
                 </div>
+                <div class="modal-content" v-if="current_order_mode">
+                    <!-- Modal Header -->
+                    <div class="modal-header bg-black">
+                        <h4
+                            class="modal-title white text-uppercase mb-0"
+                            id="addRecordLabel"
+                        >
+                            {{ current_order.code }}
+                        </h4>
+                        <button
+                            type="button"
+                            class="close"
+                            data-dismiss="modal"
+                            aria-label="Close"
+                        >
+                            <i
+                                class="fas fa-times-circle white"
+                                aria-hidden="true"
+                            ></i>
+                        </button>
+                    </div>
+
+                    <!-- Form start -->
+                    <div class="modal-body modal-view">
+                        <div class="card dashboard-info-card mt-4">
+                            <!-- Header -->
+                            <h6 class="mb-3">Summary</h6>
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label"
+                                    >Code
+                                </label>
+                                <div class="col-md-9">
+                                    {{ current_order.code }}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label"
+                                    >Date
+                                </label>
+                                <div class="col-md-9">
+                                    {{ current_order.created_at }}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label"
+                                    >Total
+                                </label>
+                                <div class="col-md-9">
+                                    LKR {{ current_order.total }}
+                                    <div class="text-sm">
+                                        <div>
+                                            Subtotal:
+                                            {{ current_order.subtotal }} +
+                                        </div>
+                                        <div>Tax : {{ current_order.tax }} +</div>
+                                        <div>
+                                            Shipping :
+                                            {{ current_order.shipping_price }} +
+                                        </div>
+                                        <div>
+                                            Giftwrap :
+                                            {{
+                                                current_order.giftwrap_price
+                                                    ? current_order.giftwrap_price
+                                                    : "0.00"
+                                            }}
+                                            -
+                                        </div>
+                                        <div>
+                                            Discount :
+                                            {{
+                                                current_order.discount_price
+                                                    ? current_order.discount_price
+                                                    : "0.00"
+                                            }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card dashboard-info-card mt-4">
+                            <!-- Header -->
+                            <h6 class="mb-3">Customer Information</h6>
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label"
+                                    >Name
+                                </label>
+                                <div class="col-md-9">
+                                    {{ current_order.name }}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label"
+                                    >Email
+                                </label>
+                                <div class="col-md-9">
+                                    {{ current_order.email }}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label"
+                                    >Phone
+                                </label>
+                                <div class="col-md-9">
+                                    {{ current_order.phone }}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label"
+                                    >Address
+                                </label>
+                                <div class="col-md-9">
+                                    {{ current_order.address }}<br />
+                                    {{ current_order.city }}
+                                    {{ current_order.zipcode }}<br />
+                                    {{ current_order.district }}<br />
+                                    {{ current_order.province }},
+                                    {{ current_order.country }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card dashboard-info-card mt-4">
+                            <!-- Header -->
+                            <h6 class="mb-3">Products</h6>
+                            <div>
+                                <div class="table-responsive form-table">
+                                    <table class="table align-items-center">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Code</th>
+                                                <th scope="col">Variations</th>
+                                                <th scope="col" class="smwidth">
+                                                    Net Price
+                                                </th>
+                                                <th scope="col" class="smwidth">
+                                                    Quantity
+                                                </th>
+                                                <th scope="col" class="smwidth">
+                                                    Total Price
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr
+                                                v-for="productParent in current_order.order_products"
+                                            >
+                                                <td>
+                                                    {{
+                                                        productParent.product
+                                                            .code
+                                                    }}
+                                                    <div class="text-sm">
+                                                        {{
+                                                            productParent
+                                                                .product.title
+                                                        }}
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div
+                                                        v-for="variation in productParent.order_product_variations"
+                                                    >
+                                                        {{
+                                                            variation
+                                                                .variation_option
+                                                                .variation.name
+                                                        }}
+                                                        :
+                                                        {{
+                                                            variation
+                                                                .variation_option
+                                                                .name
+                                                        }}
+                                                        <span class="text-sm">{{
+                                                            variation.price
+                                                        }}</span>
+                                                        <hr />
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    {{ productParent.total }}
+                                                </td>
+                                                <td>
+                                                    {{ productParent.quantity }}
+                                                </td>
+                                                <td>
+                                                    {{
+                                                        productParent.total *
+                                                        productParent.quantity
+                                                    }}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer bg-black">
+                        <button
+                            type="button"
+                            class="btn btn-primary"
+                            data-dismiss="modal"
+                            aria-label="Close"
+                        >
+                            <i
+                                class="fas fa-times-circle mr-2"
+                                aria-hidden="true"
+                            ></i>
+                            Close
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -432,6 +666,8 @@ export default {
         loading: true,
         parent_product: "",
         parent_product_mode: false,
+        current_order: "",
+        current_order_mode: false,
         form: new Form({
             id: "",
             status: "",
@@ -441,7 +677,14 @@ export default {
     methods: {
         newModal(product) {
             this.parent_product = product;
+            this.current_order_mode = false;
             this.parent_product_mode = true;
+            $("#addRecord").modal("show");
+        },
+        viewModal(order) {
+            this.current_order = order;
+            this.parent_product_mode = false;
+            this.current_order_mode = true;
             $("#addRecord").modal("show");
         },
         loadOrders() {

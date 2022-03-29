@@ -61,7 +61,9 @@
                     <!-- title -->
 
                     <div class="row">
-                        <h3 class="text-left col-12 mt-md-0 mt-3">{{ product.title }}</h3>
+                        <h3 class="text-left col-12 mt-md-0 mt-3">
+                            {{ product.title }}
+                        </h3>
                     </div>
                     <p class="mb-1">{{ product.user.shop.name }}</p>
                     <!-- tags -->
@@ -125,10 +127,13 @@
 
                             <select
                                 class="custom-select col-md-8"
+                                :class="{
+                                    'border-warning': formErrors != null,
+                                }"
                                 name="selected_variations"
                                 id="selected_variations"
                                 v-model="form.selected_variations[index]"
-                                required
+                                @change="formErrors = null"
                             >
                                 <option value="" disabled selected hidden>
                                     Select
@@ -151,6 +156,9 @@
                                 LKR</span
                             >
                         </div>
+                        <h6 class="text-danger mt-4" v-show="formErrors">
+                            {{ formErrors }}
+                        </h6>
                     </div>
 
                     <!-- custom msg -->
@@ -456,7 +464,7 @@ export default {
             selected_variations: [],
             total_price: "",
         },
-        formErrors: {},
+        formErrors: null,
     }),
 
     beforeRouteEnter: function (to, from, next) {
@@ -542,6 +550,10 @@ export default {
                         product: product,
                         productForm: this.form,
                     });
+                    this.formErrors = null;
+                } else {
+                    this.formErrors =
+                        "Please select an option in all the variations above to add product to cart";
                 }
             } else {
                 this.$store.dispatch("addProductToCart", {

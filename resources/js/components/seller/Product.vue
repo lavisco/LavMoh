@@ -14,11 +14,13 @@
                         <div class="row align-items-center">
                             <div
                                 class="
-                                    col-lg-4 col-8
+                                    col-lg-4 col-12
                                     input-form
                                     input-group
                                     input-group-alternative
                                     search-input
+                                    mr-md-2
+                                    mb-3 mb-md-0
                                 "
                             >
                                 <div class="input-group-prepend">
@@ -35,7 +37,7 @@
                                     v-model="searchText"
                                 />
                             </div>
-                            <div class="col-lg-8 col-4 text-right">
+                            <div class="col-lg-8 col-8 text-right">
                                 <router-link to="/seller/products/listing">
                                     <button type="button" class="btn">
                                         <i
@@ -55,6 +57,7 @@
                                 table-responsive
                                 dashboard-table
                                 vertical-scroll
+                                hide-content-sm
                             "
                         >
                             <table class="table align-items-center table-hover">
@@ -147,6 +150,172 @@
                             </table>
                         </div>
                         <!-- Table end -->
+
+                        <!-- Mobile View start -->
+                        <div class="hide-content">
+                            <div
+                                class="card dashboard-info-card mb-4 pb-3"
+                                v-for="product in products"
+                            >
+                                <div
+                                    class="
+                                        d-flex
+                                        flex-row
+                                        align-items-center
+                                        justify-content-between
+                                        mb-4
+                                    "
+                                >
+                                    <div class="mobile-card-title mr-3">
+                                        {{ product.code }}
+                                    </div>
+                                    <div class="d-flex flex-row">
+                                        <select
+                                            class="
+                                                custom-select
+                                                form-control
+                                                mr-2
+                                            "
+                                            name="product_state_id"
+                                            id="product_state_id"
+                                            v-model="product.product_state_id"
+                                            @change.prevent="
+                                                setCurrentState(
+                                                    product.id,
+                                                    $event
+                                                )
+                                            "
+                                        >
+                                            <option
+                                                v-for="productState in productStates"
+                                                :value="productState.id"
+                                            >
+                                                {{ productState.state }}
+                                            </option>
+                                        </select>
+
+                                        <div class="mobile-card-dropdown">
+                                            <button
+                                                type="button"
+                                                class="btn btn-sm"
+                                                data-toggle="dropdown"
+                                                aria-haspopup="true"
+                                                aria-expanded="false"
+                                            >
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                    aria-hidden="true"
+                                                    role="img"
+                                                    width="23px"
+                                                    height="23px"
+                                                    preserveAspectRatio="xMidYMid meet"
+                                                    viewBox="0 0 16 16"
+                                                >
+                                                    <g
+                                                        fill="none"
+                                                        stroke="#976aff"
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                        stroke-width="1.5"
+                                                    >
+                                                        <circle
+                                                            cx="8"
+                                                            cy="2.5"
+                                                            r=".75"
+                                                        />
+                                                        <circle
+                                                            cx="8"
+                                                            cy="8"
+                                                            r=".75"
+                                                        />
+                                                        <circle
+                                                            cx="8"
+                                                            cy="13.5"
+                                                            r=".75"
+                                                        />
+                                                    </g>
+                                                </svg>
+                                            </button>
+                                            <div
+                                                class="
+                                                    dropdown-menu
+                                                    dropdown-menu-right
+                                                "
+                                            >
+                                                <router-link
+                                                    class="dropdown-item"
+                                                    :to="{
+                                                        name: 'seller/products/listing/edit',
+                                                        params: {
+                                                            productId:
+                                                                product.id,
+                                                        },
+                                                    }"
+                                                    >Edit
+                                                </router-link>
+                                                <button
+                                                    class="dropdown-item"
+                                                    type="button"
+                                                    @click.prevent="
+                                                        newModal(product)
+                                                    "
+                                                >
+                                                    View
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <div class="mobile-card-sub-title">
+                                        Title
+                                    </div>
+                                    <div class="mobile-card-body">
+                                        {{ product.title }}
+                                    </div>
+                                </div>
+                                <div
+                                    class="
+                                        d-flex
+                                        flex-row
+                                        align-items-center
+                                        justify-content-between
+                                    "
+                                >
+                                    <div class="mr-3">
+                                        <div class="mobile-card-sub-title">
+                                            Quantity
+                                        </div>
+                                        <div class="mobile-card-body">
+                                            {{ product.quantity }}
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="mobile-card-sub-title">
+                                            Date
+                                        </div>
+                                        <div class="mobile-card-body">
+                                            {{
+                                                moment(
+                                                    product.created_at
+                                                ).format("DD-MM-YYYY")
+                                            }}
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="mobile-card-sub-title">
+                                            Base Price
+                                        </div>
+                                        <div class="mobile-card-body">
+                                            {{ product.base_price }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Mobile View end -->
                     </div>
                 </div>
             </div>
@@ -416,7 +585,8 @@
 <script>
 import Form from "vform";
 import { HasError, AlertError } from "vform/src/components/bootstrap4";
-import _ from 'lodash';
+import _ from "lodash";
+import moment from "moment";
 
 export default {
     components: {
@@ -424,6 +594,7 @@ export default {
         AlertError,
     },
     data: () => ({
+        moment: moment,
         products: [],
         productStates: [],
         searchText: null,

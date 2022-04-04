@@ -16,9 +16,6 @@
                                 Products
                             </router-link>
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page">
-                            {{ form.title }}
-                        </li>
                     </ol>
                 </nav>
 

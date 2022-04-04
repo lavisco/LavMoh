@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Seller;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ShopRequest;
+use App\Models\Shipping;
 use App\Models\Shop;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -19,7 +20,7 @@ class ShopController extends Controller
     public function index()
     {
         ///$this->authorize('viewAny', Shop::class);
-        return Shop::where('user_id', auth()->id())->first();
+        return Shop::where('user_id', auth()->id())->with('shippings:id')->first();
     }
 
     public function store(ShopRequest $request)
@@ -36,6 +37,10 @@ class ShopController extends Controller
         ]);
         
         $shop->update($request->all());
+
+        //sync to pivot tables
+        $shop->shippings()->sync(request('shop_shipping'));
+
         return ['message' => "Update Successful"];
     }
 
@@ -70,5 +75,16 @@ class ShopController extends Controller
                 @unlink($existingImage);
             }
         }
+    }
+
+    
+    /**
+     * Get data from other tables, that are needed
+     */
+    public function getShippings()
+    {
+        return response()->json([
+            'shippings' => Shipping::latest()->get(),
+        ]);
     }
 }

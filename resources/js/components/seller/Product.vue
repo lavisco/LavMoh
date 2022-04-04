@@ -50,7 +50,13 @@
                     </div>
                     <div class="card">
                         <!-- Table start -->
-                        <div class="table-responsive dashboard-table vertical-scroll">
+                        <div
+                            class="
+                                table-responsive
+                                dashboard-table
+                                vertical-scroll
+                            "
+                        >
                             <table class="table align-items-center table-hover">
                                 <thead>
                                     <tr>
@@ -339,10 +345,16 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr v-for="variation in form.variations">
+                                            <tr
+                                                v-for="variation in form.variations"
+                                            >
                                                 <td>
                                                     {{ variation.name }}
-                                                    <p class="text-xs">{{ variation.description }}</p>
+                                                    <p class="text-xs">
+                                                        {{
+                                                            variation.description
+                                                        }}
+                                                    </p>
                                                 </td>
                                                 <td>
                                                     <p
@@ -404,6 +416,7 @@
 <script>
 import Form from "vform";
 import { HasError, AlertError } from "vform/src/components/bootstrap4";
+import _ from 'lodash';
 
 export default {
     components: {
@@ -445,9 +458,12 @@ export default {
     }),
 
     watch: {
-        searchText(after, before) {
+        // searchText(after, before) {
+        //     this.loadProducts();
+        // },
+        searchText: _.debounce(function (after, before) {
             this.loadProducts();
-        },
+        }, 500),
     },
 
     methods: {

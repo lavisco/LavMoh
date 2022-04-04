@@ -896,6 +896,7 @@ export default {
             };
             reader.readAsDataURL(file);
         },
+        
         updateSellerprofile() {
             if ((this.billingMode = true)) {
                 this.form.billing_address =
@@ -913,6 +914,15 @@ export default {
                 .post("/api/seller/user/shop_setup")
                 .then(() => {
                     window.location.replace("/login");
+                })
+                .catch((error) => console.log(error));
+        },
+
+        loadShippings() {
+            axios
+                .get("/api/seller/shop/shippings")
+                .then((response) => {
+                    this.shippings = response.data.shippings;
                 })
                 .catch((error) => console.log(error));
         },

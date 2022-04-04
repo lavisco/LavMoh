@@ -25,6 +25,7 @@
         "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
+        "moment": "^2.29.2",
         "swiper": "^5.4.5",
         "vform": "^2.1.2",
         "vue-awesome-swiper": "^4.1.1",

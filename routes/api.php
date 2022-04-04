@@ -155,6 +155,7 @@ Route::prefix('seller')->group(function () {
     //Route::apiResource('/product_videos', SellerProductVideoController::class);
     Route::apiResource('/receipts', SellerReceiptController::class);
     Route::apiResource('/sellerprofile', SellerSellerProfileController::class);
+    Route::get('/shop/shippings', [SellerShopController::class, 'getShippings']);
     Route::apiResource('/shop', SellerShopController::class);
     Route::post('/user/password_reset', [SellerUserController::class, 'updatePassword']);
     Route::post('/user/shop_setup', [SellerUserController::class, 'storeShopSetup']);
@@ -189,6 +190,7 @@ Route::get('/categories/products/{id}/{location}', [WebsiteCategoryController::c
 Route::apiResource('/categories', WebsiteCategoryController::class);
 Route::apiResource('/sellerprofiles', WebsiteSellerProfileController::class);
 Route::apiResource('/occasions', WebsiteOccasionController::class);
+Route::get('/orders/shippings/{shopId}', [WebsiteOrderController::class, 'getShippings']);
 Route::apiResource('/orders', WebsiteOrderController::class);
 Route::apiResource('/recipients', WebsiteRecipientController::class);
 Route::apiResource('/shops', WebsiteShopController::class);

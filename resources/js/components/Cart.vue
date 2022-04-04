@@ -138,7 +138,7 @@
                                 </div>
                             </div>
 
-                            <div class="ml-3 cart-price hide">
+                            <div class="ml-4 cart-price hide">
                                 LKR. {{ product.price * product.quantity }}
                             </div>
                         </div>

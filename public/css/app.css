@@ -10081,7 +10081,7 @@ h3 {
   color: #333333;
   font-style: normal;
   font-weight: 500;
-  font-size: 24px;
+  font-size: 23px;
   text-align: center;
   text-transform: capitalize;
   line-height: 1.4;
@@ -10277,6 +10277,10 @@ button.bg-black:hover {
 
 .darkgrey {
   color: #909090;
+}
+
+.bg-white {
+  background-color: #ffffff;
 }
 
 .bg-black {
@@ -10861,7 +10865,12 @@ section h1 {
 
 /*---------------------shipping---------------------*/
 .shipping .card {
-  width: auto !important;
+  width: 750px !important;
+}
+@media (max-width: 768px) {
+  .shipping .card {
+    width: 100% !important;
+  }
 }
 
 .price-card {
@@ -11283,6 +11292,13 @@ h4 {
   color: #976aff;
 }
 
+.simple-link {
+  font-size: 14px;
+  color: #6b57cf;
+  font-weight: 500;
+  letter-spacing: 0.01rem;
+}
+
 .main-dashboard-content .modal-content {
   border: none;
 }
@@ -11316,9 +11332,8 @@ h4 {
     padding: 8px 20px !important;
   }
   .main-dashboard-content .btn {
-    padding: 8px 20px !important;
     font-weight: 600;
-    font-size: 15px;
+    font-size: 16px;
   }
   .main-dashboard-content .btn-sm, .main-dashboard-content .btn-group-sm > .btn {
     font-weight: 600;
@@ -11508,7 +11523,7 @@ h4 {
   width: 280px;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-height: 51px;
+  max-height: 27px;
 }
 
 .shop-setup-content .input-form-compact {
@@ -11597,8 +11612,32 @@ h4 {
   margin: 0;
 }
 
+.bg-dull-red {
+  background-color: #ffe1e1;
+}
+
+.bg-dull-green {
+  background-color: #eaffe1;
+}
+
+.bg-dull-yellow {
+  background-color: #fffde1;
+}
+
+.bg-dull-orange {
+  background-color: #fff5e1;
+}
+
+.bg-dull-dark-orange {
+  background-color: #f6e6ca;
+}
+
+.bg-dull-dark-green {
+  background-color: #d3edc8;
+}
+
 .modal-view {
-  font-size: 17px;
+  font-size: 16px;
 }
 .modal-view label {
   letter-spacing: 0.03rem;
@@ -11611,6 +11650,13 @@ h4 {
 }
 .modal-view .dashboard-info-card h6 {
   font-size: 16px;
+}
+.modal-view .modal-label {
+  font-size: 13px;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.02rem;
+  color: #da89f3;
 }
 
 .option-badge {
@@ -12129,8 +12175,8 @@ h4 {
   border-radius: 12px;
   padding: 30px;
   width: 100%;
-  background-color: #fdfdfd5e;
-  box-shadow: 0px 0px 15px -5px #d9d9d9;
+  background-color: #f7f7f780;
+  box-shadow: 0px 0px 11px -5px #d3d3d3;
 }
 .cart-items-card .hide-lg {
   display: none;
@@ -12193,9 +12239,10 @@ h4 {
 .cart-order-complete {
   width: 650px !important;
   margin-top: 40px;
-  padding: 40px !important;
-  background-color: #fdfdfd5e;
-  box-shadow: 0px 0px 15px -5px #d9d9d9;
+  border-radius: 12px;
+  padding: 30px !important;
+  background-color: #f7f7f780;
+  box-shadow: 0px 0px 11px -5px #d3d3d3;
 }
 
 .cart-order-complete-item {

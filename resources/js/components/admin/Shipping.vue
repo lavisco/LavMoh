@@ -31,7 +31,9 @@
                                     <tr v-for="shipping in shippings">
                                         <th>{{ shipping.type }}</th>
                                         <td>{{ shipping.price }}</td>
-                                        <td>{{ shipping.delivery_time }}</td>
+                                        <td>
+                                            {{ shipping.delivery_time }} days
+                                        </td>
                                         <td>{{ shipping.locations }}</td>
                                         <td>{{ shipping.tracking_opt }}</td>
                                         <td class="text-right">
@@ -197,17 +199,31 @@
                                 </label>
 
                                 <div class="col-md-9">
-                                    <input
-                                        id="delivery_time"
-                                        v-model="form.delivery_time"
-                                        type="text"
-                                        name="delivery_time"
+                                    <select
                                         class="
+                                            custom-select
                                             form-control
                                             form-control-alternative
                                         "
-                                        placeholder="Delivery Time"
-                                    />
+                                        name="delivery_time"
+                                        id="delivery_time"
+                                        v-model="form.delivery_time"
+                                    >
+                                        <option value="1">1 day</option>
+                                        <option value="2">2 days</option>
+                                        <option value="3">3 days</option>
+                                        <option value="4">4 days</option>
+                                        <option value="5">5 days</option>
+                                        <option value="6">6 days</option>
+                                        <option value="7">7 days</option>
+                                        <option value="8">8 days</option>
+                                        <option value="9">9 days</option>
+                                        <option value="10">10 days</option>
+                                        <option value="11">11 days</option>
+                                        <option value="12">12 days</option>
+                                        <option value="13">13 days</option>
+                                        <option value="14">14 days</option>
+                                    </select>
                                     <HasError
                                         :form="form"
                                         field="delivery_time"

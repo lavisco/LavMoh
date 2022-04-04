@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\OrderProductVariation;
 use App\Models\Role;
+use App\Models\Shop;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,34 +18,34 @@ use PhpParser\Node\Stmt\If_;
 
 class OrderController extends Controller
 {
-    public function store(Request $request)
+    public function store(OrderRequest $request)
     {
         $guestUser = User::select('id')->where('email', User::GUEST_USER_MAIL)->first();
 
         if (auth('api')->check()) {
             if(auth('api')->user()->role_id == Role::IS_BUYER){
                 $userId = auth('api')->user()->id;
-            } else{
+            } else {
                 $userId = $guestUser->id;
             }
-          } else {
+        } else {
             $userId = $guestUser->id;
-          }
+        }
         
         $request->merge([
-            'status' => "pending",
+            'status' => "not acknowledged",
             'tax' => 0.00,
             'buyer_id' => $userId,
             'country' => "Sri Lanka",
+            'billing_country' => "Sri Lanka",
             'seller_id' => $request->input('products.0.seller_id'),
             'shop_id' => $request->input('products.0.shop_id'),
-            'shipping_id' => "1",
         ]);
 
         $order = Order::create($request->all());
 
         $order->update([
-            'code' => 'LO'.str_pad($order->id,10,"0",STR_PAD_LEFT),
+            'code' => 'LO'.str_pad($order->id,5,"0",STR_PAD_LEFT),
         ]);
 
         $products = $request->input('products.*');
@@ -77,5 +78,16 @@ class OrderController extends Controller
         }
 
         return $order;
+    }
+
+    /**
+     * Get data from other tables, that are needed
+     */
+    public function getShippings($shopId)
+    {
+        $shop = Shop::findOrFail($shopId);
+        return response()->json([
+            'shippings' => $shop->shippings()->get(),
+        ]);
     }
 }

@@ -62,6 +62,12 @@ class Shop extends Model
     {
         return $this->hasMany(Order::class);
     }
+
+    //shops:shippings M:M
+    public function shippings()
+    {
+        return $this->belongsToMany(Shipping::class)->withTimestamps();
+    }
     
     public function scopeFilter($query, array $filters)
     {

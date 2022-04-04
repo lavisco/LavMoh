@@ -137,6 +137,102 @@
                                     </div>
                                 </div>
 
+                                <!-- Shipping -->
+                                <div class="card dashboard-info-card mt-4">
+                                    <h4 class="mb-3">
+                                        Available Shipping Options
+                                    </h4>
+                                    <hr class="mt-0" />
+                                    <div class="form-group">
+                                        <label class="col-form-label" for="">
+                                            Shipping types
+                                            <strong class="text-danger">
+                                                *</strong
+                                            >
+                                            <p class="text-grey text-xs mt-2">
+                                                Select the shipping options you
+                                                provide.
+                                            </p>
+                                        </label>
+                                        <div
+                                            class="
+                                                table-responsive
+                                                form-table
+                                                mt-md-2
+                                            "
+                                        >
+                                            <table
+                                                class="
+                                                    table
+                                                    align-items-center
+                                                    table-hover
+                                                "
+                                            >
+                                                <thead>
+                                                    <tr>
+                                                        <th
+                                                            scope="col"
+                                                            class="tiny-col"
+                                                        ></th>
+                                                        <th scope="col">
+                                                            Type Details
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr
+                                                        v-for="shipping in shippings"
+                                                    >
+                                                        <th scope="row">
+                                                            <input
+                                                                type="checkbox"
+                                                                name="shop_shipping"
+                                                                v-model="
+                                                                    form.shop_shipping
+                                                                "
+                                                                :value="
+                                                                    shipping.id
+                                                                "
+                                                            />
+                                                        </th>
+                                                        <td>
+                                                            {{ shipping.type }}
+                                                            <br />
+                                                            LKR
+                                                            {{ shipping.price }}
+                                                            <br />
+                                                            <span
+                                                                class="
+                                                                    text-sm
+                                                                    text-grey
+                                                                "
+                                                                >Delivery Time
+                                                            </span>
+                                                            {{
+                                                                shipping.delivery_time
+                                                            }}
+                                                            <br />
+                                                            <span
+                                                                class="
+                                                                    text-sm
+                                                                    text-grey
+                                                                "
+                                                                v-if="
+                                                                    shipping.locations
+                                                                "
+                                                                >Locations
+                                                            </span>
+                                                            {{
+                                                                shipping.locations
+                                                            }}
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <!-- Address -->
                                 <div class="card dashboard-info-card mt-4">
                                     <h4 class="mb-3">Your Address</h4>
@@ -294,10 +390,7 @@
                                             />
                                         </div>
                                     </div>
-                                    <div
-                                        class="row"
-                                        v-show="areas[0] != null"
-                                    >
+                                    <div class="row" v-show="areas[0] != null">
                                         <div class="form-group col-md-6">
                                             <label
                                                 class="col-form-label"
@@ -419,6 +512,7 @@ export default {
         districts: [],
         cities: [],
         areas: [],
+        shippings: [],
         loading: true,
         form: new Form({
             id: "",
@@ -432,6 +526,8 @@ export default {
             area: "",
             address: "",
             zipcode: "",
+            shop_shipping: [],
+            shippings: [],
         }),
     }),
 
@@ -458,10 +554,27 @@ export default {
                 .then(({ data }) => {
                     this.shop = data;
                     this.form.fill(this.shop);
+                    this.loadShippings();
                     this.loadProvinces();
                     this.loadDistricts();
                     this.loadCities();
                     this.loading = false;
+                })
+                .catch((error) => console.log(error));
+        },
+
+        loadShippings() {
+            axios
+                .get("/api/seller/shop/shippings")
+                .then((response) => {
+                    this.shippings = response.data.shippings;
+
+                    this.form.shop_shipping = [];
+                    if (this.form.shippings != null) {
+                        this.form.shippings.forEach((value) => {
+                            this.form.shop_shipping.push(value.id);
+                        });
+                    }
                 })
                 .catch((error) => console.log(error));
         },

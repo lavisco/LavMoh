@@ -11,6 +11,17 @@ const router = new VueRouter({
     mode: "history",
     linkActiveClass: "active",
     routes: routes,
+    scrollBehavior(to, from, savedPosition) {
+        if (savedPosition) {
+            //when navigating by the browser's back/forward buttons, return to prev position
+            return savedPosition;
+        } else {
+            // scroll to top
+            return {
+                top: 0,
+            };
+        }
+    },
 });
 
 router.beforeEach((to, from, next) => {
@@ -38,10 +49,6 @@ Vue.component(
     "table-header",
     require("./components/admin/TableHeader.vue").default
 );
-Vue.component(
-    "product-variation",
-    require("./components/admin/ProductVariation.vue").default
-);
 Vue.component("index-component", require("./components/Index.vue").default);
 Vue.component("menu-cart", require("./components/CartSmall.vue").default);
 
@@ -68,5 +75,3 @@ const app = new Vue({
     router: router,
     store,
 });
-
-

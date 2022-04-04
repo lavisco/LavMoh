@@ -23,6 +23,15 @@ class Order extends Model
         'city',
         'district',
         'province',
+
+        'billing_country',
+        'billing_address',
+        'billing_zipcode',
+        'billing_city',
+        'billing_district',
+        'billing_province',
+        'delivery_date',
+        
         'status',
         'total',
         'subtotal',
@@ -91,7 +100,14 @@ class Order extends Model
         $query->when($filters['searchText'] ?? false, fn($query, $searchText) =>
             $query
                 ->where('code', 'like', '%' . $searchText . '%')
-                ->orWhere('status', 'like', '%' . $searchText . '%')
+            );
+    }
+
+    public function scopeFilterstatus($query, array $filters)
+    {
+        $query->when($filters['statusFilter'] ?? false, fn($query, $statusFilter) =>
+            $query
+                ->where('status', 'like', '%' . $statusFilter . '%')
             );
     }
 }

@@ -1280,75 +1280,6 @@
                                 />
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-md-3 col-form-label" for="">
-                                Shipping types
-                                <strong class="text-danger"> *</strong>
-                                <p class="text-grey text-xs mt-2">
-                                    Select the shipping options you provide.
-                                </p>
-                            </label>
-                            <div class="col-md-9">
-                                <div
-                                    class="table-responsive form-table mt-md-2"
-                                >
-                                    <table
-                                        class="
-                                            table
-                                            align-items-center
-                                            table-hover
-                                        "
-                                    >
-                                        <thead>
-                                            <tr>
-                                                <th
-                                                    scope="col"
-                                                    class="tiny-col"
-                                                ></th>
-                                                <th scope="col">Type</th>
-                                                <th scope="col" class="smwidth">
-                                                    Price
-                                                </th>
-                                                <th scope="col" class="smwidth">
-                                                    Delivery Time
-                                                </th>
-                                                <th scope="col">Locations</th>
-                                                <th scope="col">
-                                                    Tracking opt
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr v-for="shipping in shippings">
-                                                <th scope="row">
-                                                    <input
-                                                        type="checkbox"
-                                                        name="product_shipping"
-                                                        v-model="
-                                                            form.product_shipping
-                                                        "
-                                                        :value="shipping.id"
-                                                    />
-                                                </th>
-                                                <td>{{ shipping.type }}</td>
-                                                <td>
-                                                    {{ shipping.price }}
-                                                </td>
-                                                <td>
-                                                    {{ shipping.delivery_time }}
-                                                </td>
-                                                <td>
-                                                    {{ shipping.locations }}
-                                                </td>
-                                                <td>
-                                                    {{ shipping.tracking_opt }}
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
                     </div>
 
                     <div class="input-form text-center mt-4">
@@ -1493,7 +1424,6 @@ export default {
         categories: [],
         occasions: [],
         recipients: [],
-        shippings: [],
         sellers: [],
         productStates: [],
         url: [],
@@ -1696,7 +1626,6 @@ export default {
                     this.categories = response.data.categories;
                     this.occasions = response.data.occasions;
                     this.recipients = response.data.recipients;
-                    this.shippings = response.data.shippings;
                 })
                 .catch((error) => console.log(error));
         },

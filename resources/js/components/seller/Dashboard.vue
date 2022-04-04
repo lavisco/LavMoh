@@ -658,6 +658,132 @@
                                                 mt-4
                                             "
                                         >
+                                            <h4 class="mb-2 mb-3">
+                                                Available Shipping Options
+                                            </h4>
+
+                                            <div class="row">
+                                                <div class="form-group col-12">
+                                                    <label
+                                                        class="col-form-label"
+                                                        for=""
+                                                    >
+                                                        Shipping types
+                                                        <strong
+                                                            class="text-danger"
+                                                        >
+                                                            *</strong
+                                                        >
+                                                        <p
+                                                            class="
+                                                                text-grey
+                                                                text-xs
+                                                                mt-2
+                                                            "
+                                                        >
+                                                            Select the shipping
+                                                            options you provide.
+                                                        </p>
+                                                    </label>
+                                                    <div
+                                                        class="
+                                                            table-responsive
+                                                            form-table
+                                                            mt-md-2
+                                                        "
+                                                    >
+                                                        <table
+                                                            class="
+                                                                table
+                                                                align-items-center
+                                                                table-hover
+                                                            "
+                                                        >
+                                                            <thead>
+                                                                <tr>
+                                                                    <th
+                                                                        scope="col"
+                                                                        class="
+                                                                            tiny-col
+                                                                        "
+                                                                    ></th>
+                                                                    <th
+                                                                        scope="col"
+                                                                    >
+                                                                        Type
+                                                                        Details
+                                                                    </th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr
+                                                                    v-for="shipping in shippings"
+                                                                >
+                                                                    <th
+                                                                        scope="row"
+                                                                    >
+                                                                        <input
+                                                                            type="checkbox"
+                                                                            name="shop_shipping"
+                                                                            v-model="
+                                                                                form.shop_shipping
+                                                                            "
+                                                                            :value="
+                                                                                shipping.id
+                                                                            "
+                                                                        />
+                                                                    </th>
+                                                                    <td>
+                                                                        {{
+                                                                            shipping.type
+                                                                        }}
+                                                                        <br />
+                                                                        LKR
+                                                                        {{
+                                                                            shipping.price
+                                                                        }}
+                                                                        <br />
+                                                                        <span
+                                                                            class="
+                                                                                text-sm
+                                                                                text-grey
+                                                                            "
+                                                                            >Delivery
+                                                                            Time
+                                                                        </span>
+                                                                        {{
+                                                                            shipping.delivery_time
+                                                                        }}
+                                                                        <br />
+                                                                        <span
+                                                                            class="
+                                                                                text-sm
+                                                                                text-grey
+                                                                            "
+                                                                            v-if="
+                                                                                shipping.locations
+                                                                            "
+                                                                            >Locations
+                                                                        </span>
+                                                                        {{
+                                                                            shipping.locations
+                                                                        }}
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div
+                                            class="
+                                                card
+                                                dashboard-info-card
+                                                mt-4
+                                            "
+                                        >
                                             <h4 class="mb-2">Store Address</h4>
                                             <p class="text-xs mb-3">
                                                 Please make sure you add the
@@ -1368,6 +1494,7 @@ export default {
         part4: false,
         failed: false,
 
+        shippings: [],
         //location data
         provinces: [],
         districts: [],
@@ -1426,6 +1553,7 @@ export default {
                     if (this.has_shop === false) {
                         $("#addRecord").modal("show");
                         this.loadProvinces();
+                        this.loadShippings();
                     }
                     this.orders = data.orders;
                     this.products = data.products;
@@ -1450,6 +1578,15 @@ export default {
                 this.url = URL.createObjectURL(e.target.files[0]);
             };
             reader.readAsDataURL(file);
+        },
+
+        loadShippings() {
+            axios
+                .get("/api/seller/shop/shippings")
+                .then((response) => {
+                    this.shippings = response.data.shippings;
+                })
+                .catch((error) => console.log(error));
         },
 
         loadProvinces() {

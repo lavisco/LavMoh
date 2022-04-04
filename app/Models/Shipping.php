@@ -25,6 +25,12 @@ class Shipping extends Model
     {
         return $this->belongsToMany(Product::class)->withTimestamps();
     }
+
+    //shops:shippings M:M
+    public function shops()
+    {
+        return $this->belongsToMany(Shop::class)->withTimestamps();
+    }
     
     //shipping:order 1:M
     public function order()

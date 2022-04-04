@@ -14,11 +14,13 @@
                         <div class="row align-items-center">
                             <div
                                 class="
-                                    col-lg-4 col-8
+                                    col-lg-4 col-12
                                     input-form
                                     input-group
                                     input-group-alternative
                                     search-input
+                                    mr-md-2
+                                    mb-3 mb-md-0
                                 "
                             >
                                 <div class="input-group-prepend">
@@ -35,6 +37,37 @@
                                     v-model="searchText"
                                 />
                             </div>
+                            <div class="col-lg-2 col-12 input-form">
+                                <select
+                                    class="custom-select form-control"
+                                    name="status"
+                                    id="status"
+                                    v-model="statusFilter"
+                                >
+                                    <option value="">all</option>
+                                    <option value="not acknowledged">
+                                        not acknowledged
+                                    </option>
+                                    <option value="acknowledged">
+                                        acknowledged
+                                    </option>
+                                    <option value="in production">
+                                        in production
+                                    </option>
+                                    <option value="ready for delivery">
+                                        ready for delivery
+                                    </option>
+                                    <option value="order dispatched">
+                                        order dispatched
+                                    </option>
+                                    <option value="delivery in progress">
+                                        delivery in progress
+                                    </option>
+                                    <option value="delivery completed">
+                                        delivery completed
+                                    </option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                     <div class="card">
@@ -44,20 +77,15 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">Order</th>
-                                        <th scope="col">Date</th>
-                                        <th
-                                            scope="col"
-                                            class="
-                                                d-flex
-                                                flex-row
-                                                justify-content-between
-                                                align-items-start
-                                            "
-                                        >
-                                            Products <span>Quantity</span>
+                                        <th scope="col" class="table-col-lg">
+                                            Date
                                         </th>
-                                        <th scope="col">Shipping Details</th>
-                                        <th scope="col">Amount</th>
+                                        <th scope="col" class="table-col-lg">
+                                            Items
+                                        </th>
+                                        <th scope="col" class="table-col-sm">
+                                            Amount
+                                        </th>
                                         <th scope="col" class="table-col-sm">
                                             Status
                                         </th>
@@ -65,94 +93,109 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="order in orders">
+                                    <tr
+                                        v-for="order in orders"
+                                        :class="{
+                                            'bg-dull-red':
+                                                order.status ===
+                                                'not acknowledged',
+                                            'bg-dull-green':
+                                                order.status === 'acknowledged',
+                                            'bg-dull-yellow':
+                                                order.status ===
+                                                'in production',
+                                            'bg-dull-orange':
+                                                order.status ===
+                                                'ready for delivery',
+                                            'bg-dull-dark-orange':
+                                                order.status ===
+                                                    'order dispatched' ||
+                                                order.status ===
+                                                    'delivery in progress',
+                                            'bg-dull-dark-green':
+                                                order.status ===
+                                                'delivery completed',
+                                        }"
+                                    >
                                         <td>{{ order.code }}</td>
-                                        <td>{{ order.created_at }}</td>
+                                        <td>
+                                            <div>
+                                                <span
+                                                    class="
+                                                        badge badge-pill
+                                                        dark-purple
+                                                        bg-white
+                                                        border-grey
+                                                        mr-2
+                                                    "
+                                                >
+                                                    Dispatch
+                                                </span>
+                                                {{
+                                                    moment(order.delivery_date)
+                                                        .subtract(
+                                                            order.shipping
+                                                                .delivery_time,
+                                                            "days"
+                                                        )
+                                                        .format("DD-MM-YYYY")
+                                                }}
+                                                9:30am
+                                            </div>
+                                            <div>
+                                                <span
+                                                    class="
+                                                        badge badge-pill
+                                                        dark-purple
+                                                        bg-white
+                                                        border-grey
+                                                        mr-2
+                                                    "
+                                                >
+                                                    Delivery
+                                                </span>
+                                                {{
+                                                    moment(
+                                                        order.delivery_date
+                                                    ).format("DD-MM-YYYY")
+                                                }}
+                                            </div>
+                                        </td>
                                         <td>
                                             <div
                                                 v-for="parent_product in order.order_products"
-                                                class="
-                                                    d-flex
-                                                    flex-row
-                                                    justify-content-between
-                                                    align-items-start
-                                                    py-2
-                                                    border-bottom
-                                                "
                                             >
-                                                <a
+                                                <div
                                                     class="
-                                                        btn btn-sm btn-xs
-                                                        mr-2
-                                                    "
-                                                    @click.prevent="
-                                                        newModal(parent_product)
+                                                        d-flex
+                                                        flex-row
+                                                        justify-content-between
+                                                        align-items-start
                                                     "
                                                 >
-                                                    <i
-                                                        class="
-                                                            fas
-                                                            fa-expand-arrows-alt
-                                                        "
-                                                    ></i>
-                                                </a>
-                                                <div class="fixed-title mr-3">
+                                                    <div
+                                                        class="fixed-title mr-3"
+                                                    >
+                                                        {{
+                                                            parent_product
+                                                                .product.title
+                                                        }}
+                                                    </div>
                                                     {{
-                                                        parent_product.product
-                                                            .title
+                                                        parent_product.quantity
                                                     }}
                                                 </div>
-                                                {{ parent_product.quantity }}
+                                                <hr class="my-1 py-0" />
                                             </div>
+                                            <a
+                                                href=""
+                                                @click.prevent="newModal(order)"
+                                                class="simple-link"
+                                            >
+                                                View Items Summary
+                                            </a>
                                         </td>
-                                        <td>
-                                            {{
-                                                order.address +
-                                                ", " +
-                                                order.city +
-                                                " " +
-                                                order.zipcode +
-                                                ", " +
-                                                order.district +
-                                                ", " +
-                                                order.province +
-                                                ", " +
-                                                order.country
-                                            }}
-                                        </td>
-                                        <td>
-                                            LKR {{ order.total }}
-                                            <div class="text-sm text-grey">
-                                                <div>
-                                                    Subtotal:
-                                                    {{ order.subtotal }} +
-                                                </div>
-                                                <div>
-                                                    Tax : {{ order.tax }} +
-                                                </div>
-                                                <div>
-                                                    Shipping :
-                                                    {{ order.shipping_price }} +
-                                                </div>
-                                                <div>
-                                                    Giftwrap :
-                                                    {{
-                                                        order.giftwrap_price
-                                                            ? order.giftwrap_price
-                                                            : "0.00"
-                                                    }}
-                                                    -
-                                                </div>
-                                                <div>
-                                                    Discount :
-                                                    {{
-                                                        order.discount_price
-                                                            ? order.discount_price
-                                                            : "0.00"
-                                                    }}
-                                                </div>
-                                            </div>
-                                        </td>
+                                        <td>LKR {{ order.total }}</td>
                                         <td>
                                             <select
                                                 class="
@@ -169,20 +212,53 @@
                                                     )
                                                 "
                                             >
-                                                <option value="pending">
-                                                    Pending
+                                                <option
+                                                    value="not acknowledged"
+                                                >
+                                                    not acknowledged
                                                 </option>
-                                                <option value="confirmed">
-                                                    Confirmed
+                                                <option
+                                                    value="acknowledged"
+                                                    v-show="
+                                                        order.status ==
+                                                        'not acknowledged'
+                                                    "
+                                                >
+                                                    acknowledged
                                                 </option>
-                                                <option value="paid">
-                                                    Paid
+                                                <option
+                                                    value="in production"
+                                                    v-show="
+                                                        order.status ==
+                                                        'acknowledged'
+                                                    "
+                                                >
+                                                    in production
                                                 </option>
-                                                <option value="shipped">
-                                                    Shipped
+                                                <option
+                                                    value="ready for delivery"
+                                                    v-show="
+                                                        order.status ==
+                                                        'in production'
+                                                    "
+                                                >
+                                                    ready for delivery
                                                 </option>
-                                                <option value="delivered">
-                                                    Delivered
+                                                <option
+                                                    value="order dispatched"
+                                                >
+                                                    order dispatched
+                                                </option>
+                                                <option
+                                                    value="delivery in progress"
+                                                >
+                                                    delivery in progress
+                                                </option>
+                                                <option
+                                                    value="delivery completed"
+                                                    hidden
+                                                >
+                                                    delivery completed
                                                 </option>
                                             </select>
                                         </td>
@@ -222,6 +298,7 @@
             aria-hidden="true"
         >
             <div class="modal-dialog modal-dialog-centered modal-lg">
+                <!-- Item Summary -->
                 <div class="modal-content" v-if="parent_product_mode">
                     <!-- Modal Header -->
                     <div class="modal-header bg-black">
@@ -229,7 +306,7 @@
                             class="modal-title white text-uppercase mb-0"
                             id="addRecordLabel"
                         >
-                            {{ parent_product.product.title }}
+                            Item Summary of Order #{{ current_order.code }}
                         </h4>
                         <button
                             type="button"
@@ -244,174 +321,81 @@
                         </button>
                     </div>
 
-                    <!-- Form start -->
                     <div class="modal-body modal-view">
-                        <div class="card dashboard-info-card mt-4">
+                        <div
+                            class="card dashboard-info-card mt-4"
+                            v-for="(
+                                parent_product, index
+                            ) in current_order.order_products"
+                        >
                             <!-- Header -->
-                            <h6 class="mb-3">Details</h6>
-                            <div class="form-group row">
-                                <label
-                                    class="col-md-3 col-form-label"
-                                    for="name"
-                                    >Code
-                                </label>
-                                <div class="col-md-9">
-                                    {{ parent_product.product.code }}
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label
-                                    class="col-md-3 col-form-label"
-                                    for="name"
-                                    >Title
-                                </label>
+                            <h4 class="mb-3">Item {{ index + 1 }}</h4>
+                            <hr class="mt-0" />
+                            <div class="row mb-2">
+                                <div class="col-md-3 modal-label">Title</div>
                                 <div class="col-md-9">
                                     {{ parent_product.product.title }}
                                 </div>
                             </div>
-                            <div
-                                class="form-group row"
-                                v-show="parent_product.product.sku"
-                            >
-                                <label
-                                    class="col-md-3 col-form-label"
-                                    for="name"
-                                    >SKU
-                                </label>
+                            <div class="row mb-2">
+                                <div class="col-md-3 modal-label">Code</div>
                                 <div class="col-md-9">
-                                    {{ parent_product.product.sku }}
+                                    {{ parent_product.product.code }}
                                 </div>
                             </div>
-
-                            <div class="form-group row">
-                                <label
-                                    class="col-md-3 col-form-label"
-                                    for="name"
-                                    >Base Price
-                                </label>
-                                <div class="col-md-9">
-                                    {{ parent_product.base_price }}
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label
-                                    class="col-md-3 col-form-label"
-                                    for="name"
-                                    >Net Total Price
-                                </label>
-                                <div class="col-md-9">
-                                    {{ parent_product.total }}
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label
-                                    class="col-md-3 col-form-label"
-                                    for="name"
-                                    >Total Price
-                                </label>
-                                <div class="col-md-9">
-                                    {{
-                                        parent_product.total *
-                                        parent_product.quantity
-                                    }}
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label
-                                    class="col-md-3 col-form-label"
-                                    for="name"
-                                    >Quantity
-                                </label>
+                            <div class="row mb-2">
+                                <div class="col-md-3 modal-label">Quantity</div>
                                 <div class="col-md-9">
                                     {{ parent_product.quantity }}
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label
-                                    class="col-md-3 col-form-label"
-                                    for="name"
-                                    >Dimensions
-                                </label>
-                                <div class="col-md-9">
-                                    {{
-                                        parent_product.product.dimensions_unit
-                                            ? `${parent_product.product.length} * ${parent_product.product.width} * ${parent_product.product.height} ${parent_product.product.dimensions_unit}`
-                                            : ""
-                                    }}
-                                </div>
-                            </div>
                             <div
-                                class="form-group row"
-                                v-show="parent_product.product.weight"
+                                class="row mb-2"
+                                v-if="
+                                    parent_product.order_product_variations
+                                        .length > 0
+                                "
                             >
-                                <label
-                                    class="col-md-3 col-form-label"
-                                    for="name"
-                                    >Weight
-                                </label>
+                                <div class="col-md-3 modal-label">
+                                    Specification
+                                </div>
                                 <div class="col-md-9">
+                                    <div
+                                        v-for="variation in parent_product.order_product_variations"
+                                    >
+                                        {{
+                                            variation.variation_option.variation
+                                                .name
+                                        }}
+                                        :
+                                        {{ variation.variation_option.name }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 modal-label">Amount</div>
+                                <div class="col-md-9">
+                                    LKR
                                     {{
-                                        parent_product.product.weight
-                                            ? `${parent_product.product.weight} ${parent_product.product.weight_unit}`
-                                            : ""
+                                        parent_product.total *
+                                        parent_product.quantity
                                     }}
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label
-                                    class="col-md-3 col-form-label"
-                                    for="name"
-                                    >Processing Time
-                                </label>
-                                <div class="col-md-9">
-                                    {{ parent_product.product.processing_time }}
-                                </div>
-                            </div>
-                        </div>
-
-                        <div
-                            class="card dashboard-info-card mt-4"
-                            v-if="
-                                parent_product.order_product_variations.length >
-                                0
-                            "
-                        >
-                            <!-- Header -->
-                            <h6 class="mb-3">Variations</h6>
-                            <div>
-                                <div class="table-responsive form-table">
-                                    <table class="table align-items-center">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Name</th>
-                                                <th scope="col">Option Name</th>
-                                                <th scope="col" class="smwidth">
-                                                    Price
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr
-                                                v-for="variation in parent_product.order_product_variations"
-                                            >
-                                                <td>
-                                                    {{
-                                                        variation
-                                                            .variation_option
-                                                            .variation.name
-                                                    }}
-                                                </td>
-                                                <td>
-                                                    {{
-                                                        variation
-                                                            .variation_option
-                                                            .name
-                                                    }}
-                                                </td>
-                                                <td>{{ variation.price }}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                    <div class="darkgrey">
+                                        Base Price : LKR
+                                        {{ parent_product.product.base_price }}
+                                    </div>
+                                    <div
+                                        class="darkgrey"
+                                        v-for="variation in parent_product.order_product_variations"
+                                    >
+                                        {{
+                                            variation.variation_option.variation
+                                                .name
+                                        }}
+                                        ({{ variation.variation_option.name }})
+                                        : + LKR
+                                        {{ variation.variation_option.price }}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -432,6 +416,8 @@
                         </button>
                     </div>
                 </div>
+
+                <!-- Order Summary -->
                 <div class="modal-content" v-if="current_order_mode">
                     <!-- Modal Header -->
                     <div class="modal-header bg-black">
@@ -486,7 +472,9 @@
                                             Subtotal:
                                             {{ current_order.subtotal }} +
                                         </div>
-                                        <div>Tax : {{ current_order.tax }} +</div>
+                                        <div>
+                                            Tax : {{ current_order.tax }} +
+                                        </div>
                                         <div>
                                             Shipping :
                                             {{ current_order.shipping_price }} +
@@ -537,19 +525,6 @@
                                 </label>
                                 <div class="col-md-9">
                                     {{ current_order.phone }}
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-3 col-form-label"
-                                    >Address
-                                </label>
-                                <div class="col-md-9">
-                                    {{ current_order.address }}<br />
-                                    {{ current_order.city }}
-                                    {{ current_order.zipcode }}<br />
-                                    {{ current_order.district }}<br />
-                                    {{ current_order.province }},
-                                    {{ current_order.country }}
                                 </div>
                             </div>
                         </div>
@@ -654,6 +629,7 @@
 <script>
 import Form from "vform";
 import { HasError, AlertError } from "vform/src/components/bootstrap4";
+import moment from "moment";
 
 export default {
     components: {
@@ -661,8 +637,10 @@ export default {
         AlertError,
     },
     data: () => ({
+        moment: moment,
         orders: [],
         searchText: null,
+        statusFilter: "",
         loading: true,
         parent_product: "",
         parent_product_mode: false,
@@ -674,9 +652,15 @@ export default {
         }),
     }),
 
+    watch: {
+        statusFilter(after, before) {
+            Fire.$emit("reloadRecords");
+        },
+    },
+
     methods: {
-        newModal(product) {
-            this.parent_product = product;
+        newModal(order) {
+            this.current_order = order;
             this.current_order_mode = false;
             this.parent_product_mode = true;
             $("#addRecord").modal("show");
@@ -690,7 +674,10 @@ export default {
         loadOrders() {
             axios
                 .get("/api/seller/orders", {
-                    params: { searchText: this.searchText },
+                    params: {
+                        searchText: this.searchText,
+                        statusFilter: this.statusFilter,
+                    },
                 })
                 .then(({ data }) => {
                     this.orders = data.data;
@@ -700,13 +687,15 @@ export default {
         },
 
         setCurrentState(order, event) {
-            this.form.status = event.target.value;
-            this.form
-                .put("/api/seller/orders/" + order)
-                .then(() => {
-                    Fire.$emit("reloadRecords");
-                })
-                .catch((error) => console.log(error));
+            if (confirm("Are you sure you want to change order status?")) {
+                this.form.status = event.target.value;
+                this.form
+                    .put("/api/seller/orders/" + order)
+                    .then(() => {
+                        Fire.$emit("reloadRecords");
+                    })
+                    .catch((error) => console.log(error));
+            }
         },
     },
     mounted() {

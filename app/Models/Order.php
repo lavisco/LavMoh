@@ -107,7 +107,7 @@ class Order extends Model
     {
         $query->when($filters['statusFilter'] ?? false, fn($query, $statusFilter) =>
             $query
-                ->where('status', 'like', '%' . $statusFilter . '%')
+                ->where('status', $statusFilter)
             );
     }
 }

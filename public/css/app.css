@@ -11299,6 +11299,23 @@ h4 {
   letter-spacing: 0.01rem;
 }
 
+.hide-content {
+  display: none !important;
+}
+
+.hide-content-sm {
+  display: block !important;
+}
+
+@media (max-width: 768px) {
+  .hide-content {
+    display: block !important;
+  }
+
+  .hide-content-sm {
+    display: none !important;
+  }
+}
 .main-dashboard-content .modal-content {
   border: none;
 }
@@ -11336,8 +11353,15 @@ h4 {
     font-size: 16px;
   }
   .main-dashboard-content .btn-sm, .main-dashboard-content .btn-group-sm > .btn {
+    padding: 8px 10px;
     font-weight: 600;
     font-size: 0.8rem;
+  }
+  .main-dashboard-content .custom-select {
+    padding: 8px 10px;
+    font-weight: 500;
+    font-size: 14px;
+    color: #976aff;
   }
   .main-dashboard-content .card {
     padding: 0;
@@ -11349,7 +11373,6 @@ h4 {
   }
   .main-dashboard-content .dashboard-info-card {
     padding: 20px !important;
-    padding-bottom: 10px !important;
   }
   .main-dashboard-content .dashboard-var-card {
     padding: 8px 14px !important;
@@ -11525,6 +11548,13 @@ h4 {
   text-overflow: ellipsis;
   max-height: 27px;
 }
+@media (max-width: 768px) {
+  .fixed-title {
+    max-height: 21px;
+    width: auto;
+    word-break: break-all;
+  }
+}
 
 .shop-setup-content .input-form-compact {
   height: 100%;
@@ -11634,6 +11664,36 @@ h4 {
 
 .bg-dull-dark-green {
   background-color: #d3edc8;
+}
+
+.border-dull-red {
+  border-color: #e3342f !important;
+  box-shadow: 0 0 2px #d400005c;
+}
+
+.border-dull-green {
+  border-color: #1bc894 !important;
+  box-shadow: 0 0 2px #07d4005c;
+}
+
+.border-dull-yellow {
+  border-color: #fff131 !important;
+  box-shadow: 0 0 2px #d4c9005c;
+}
+
+.border-dull-orange {
+  border-color: #ffb14c !important;
+  box-shadow: 0 0 2px #d48a005c;
+}
+
+.border-dull-blue {
+  border-color: #0fb6ff !important;
+  box-shadow: 0 0 2px #00bcd45c;
+}
+
+.border-dull-dark-green {
+  border-color: #26a75c !important;
+  box-shadow: 0 0 2px #048e095c;
 }
 
 .modal-view {
@@ -11755,6 +11815,27 @@ h4 {
   font-style: italic;
   font-size: 15px;
   font-weight: 400 !important;
+}
+
+.mobile-card-title {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: #333333;
+}
+
+.mobile-card-sub-title {
+  font-weight: 400;
+  font-size: 11px;
+  color: #7b7b7b;
+  margin-bottom: 7px;
+}
+
+.mobile-card-body {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  color: #333333;
 }
 
 #pills-tab {

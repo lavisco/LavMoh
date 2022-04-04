@@ -72,7 +72,13 @@
                     </div>
                     <div class="card">
                         <!-- Table start -->
-                        <div class="table-responsive dashboard-table">
+                        <div
+                            class="
+                                table-responsive
+                                dashboard-table
+                                hide-content-sm
+                            "
+                        >
                             <table class="table align-items-center table-hover">
                                 <thead>
                                     <tr>
@@ -278,6 +284,196 @@
                             </table>
                         </div>
                         <!-- Table end -->
+
+                        <!-- Mobile View start -->
+                        <div class="hide-content">
+                            <div
+                                class="card dashboard-info-card mb-4 pb-3"
+                                :class="{
+                                            'border-dull-red':
+                                                order.status ===
+                                                'not acknowledged',
+                                            'border-dull-green':
+                                                order.status === 'acknowledged',
+                                            'border-dull-yellow':
+                                                order.status ===
+                                                'in production',
+                                            'border-dull-orange':
+                                                order.status ===
+                                                'ready for delivery',
+                                            'border-dull-blue':
+                                                order.status ===
+                                                    'order dispatched' ||
+                                                order.status ===
+                                                    'delivery in progress',
+                                            'border-dull-dark-green':
+                                                order.status ===
+                                                'delivery completed',
+                                        }"
+                                v-for="order in orders"
+                            >
+                                <div
+                                    class="
+                                        d-flex
+                                        flex-row
+                                        align-items-center
+                                        justify-content-between
+                                        mb-4
+                                    "
+                                >
+                                    <div class="mobile-card-title mr-3">
+                                        {{ order.code }}
+                                    </div>
+                                    <div class="d-flex flex-row">
+                                        <select
+                                            class="
+                                                custom-select
+                                                form-control
+                                                mr-2
+                                            "
+                                            name="status"
+                                            id="status"
+                                            v-model="order.status"
+                                            @change.prevent="
+                                                setCurrentState(
+                                                    order.id,
+                                                    $event
+                                                )
+                                            "
+                                        >
+                                            <option value="not acknowledged">
+                                                not acknowledged
+                                            </option>
+                                            <option
+                                                value="acknowledged"
+                                                v-show="
+                                                    order.status ==
+                                                    'not acknowledged'
+                                                "
+                                            >
+                                                acknowledged
+                                            </option>
+                                            <option
+                                                value="in production"
+                                                v-show="
+                                                    order.status ==
+                                                    'acknowledged'
+                                                "
+                                            >
+                                                in production
+                                            </option>
+                                            <option
+                                                value="ready for delivery"
+                                                v-show="
+                                                    order.status ==
+                                                    'in production'
+                                                "
+                                            >
+                                                ready for delivery
+                                            </option>
+                                            <option value="order dispatched">
+                                                order dispatched
+                                            </option>
+                                            <option
+                                                value="delivery in progress"
+                                            >
+                                                delivery in progress
+                                            </option>
+                                            <option
+                                                value="delivery completed"
+                                                hidden
+                                            >
+                                                delivery completed
+                                            </option>
+                                        </select>
+
+                                        <div class="mobile-card-dropdown">
+                                            <button type="button" class="btn btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="23px" height="23px" preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16"><g fill="none" stroke="#976aff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"><circle cx="8" cy="2.5" r=".75"/><circle cx="8" cy="8" r=".75"/><circle cx="8" cy="13.5" r=".75"/></g></svg>
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <button class="dropdown-item" type="button" @click.prevent="viewModal(order)">View Order</button>
+                                                <button class="dropdown-item" type="button" @click.prevent="newModal(order)">View Items</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div
+                                    class="
+                                        d-flex
+                                        flex-row
+                                        align-items-center
+                                        mb-4
+                                    "
+                                >
+                                    <div class="mr-5">
+                                        <div class="mobile-card-sub-title">
+                                            Total
+                                        </div>
+                                        <div class="mobile-card-body">
+                                            {{ order.total }}
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="mobile-card-sub-title">
+                                            Items
+                                        </div>
+                                        <div
+                                            class="mobile-card-body d-flex"
+                                            v-for="parent_product in order.order_products"
+                                        >
+                                            <div class="fixed-title mr-4">
+                                                {{
+                                                    parent_product.product.title
+                                                }}
+                                            </div>
+                                            {{ parent_product.quantity }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div
+                                    class="
+                                        d-flex
+                                        flex-row
+                                        align-items-center
+                                        justify-content-between
+                                    "
+                                >
+                                    <div class="mr-3">
+                                        <div class="mobile-card-sub-title">
+                                            Dispatch Date
+                                        </div>
+                                        <div class="mobile-card-body">
+                                            {{
+                                                moment(order.delivery_date)
+                                                    .subtract(
+                                                        order.shipping
+                                                            .delivery_time,
+                                                        "days"
+                                                    )
+                                                    .format("DD-MM-YYYY")
+                                            }}
+                                            9:30am
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="mobile-card-sub-title">
+                                            Delivery Date
+                                        </div>
+                                        <div class="mobile-card-body">
+                                            {{
+                                                moment(
+                                                    order.delivery_date
+                                                ).format("DD-MM-YYYY")
+                                            }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Mobile View end -->
+
                         <h4
                             class="text-center mt-4"
                             v-show="orders.length == 0"

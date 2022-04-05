@@ -277,6 +277,12 @@ button.bg-black:hover {
 .bg-orange {
     background-color: $lav-orange;
 }
+.bg-dark-orange {
+    background-color: #db7424;
+}
+.bg-dark-green {
+    background-color: #0f8942;
+}
 .bg-grey {
     background-color: $lav-grey;
 }
@@ -1197,6 +1203,12 @@ h4 {
     font-weight: 400 !important;
     color: #868686;
 }
+.text-xxs {
+    font-weight: 400;
+    font-size: 11px;
+    color: #7b7b7b;
+    //margin-bottom: 2px;
+}
 
 .dashboard-link {
     background: #ffffff;
@@ -1240,6 +1252,16 @@ h4 {
     .hide-content-sm {
         display: none !important;
     }
+}
+
+.status-indicator{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 10px;
+    background-color: $black;
+    vertical-align: middle;
 }
 
 .main-dashboard-content {
@@ -1294,7 +1316,7 @@ h4 {
         }
         .custom-select {
             padding: 8px 10px;
-            font-weight: 500;
+            font-weight: 400;
             font-size: 14px;
             color: $lav-purple;
         }
@@ -1445,7 +1467,7 @@ h4 {
 .form-table {
     background-color: #ffffff;
     border: 1px solid #b9b9b9;
-    border-radius: 5px;
+    border-radius: 8px;
     tbody {
         font-size: 16px;
         color: $black;
@@ -1506,14 +1528,14 @@ h4 {
 
 .search-input {
     .input-group-text {
-        background-color: #fafafa;
+        background-color: #fafafa80;
         color: $lav-purple;
         border: none;
         box-shadow: rgba(226, 226, 226, 0.596) 0 0 0 1px;
         border-radius: 12px;
     }
     .form-control {
-        background-color: #fafafa !important;
+        background-color: #fafafa80 !important;
         box-shadow: rgba(226, 226, 226, 0.596) 0 0 0 1px !important;
         color: $black;
         &:focus {
@@ -1688,9 +1710,9 @@ h4 {
 }
 
 .dashboard-table {
-    background-color: #fafafa;
+    background-color: #fafafa80;
     border: 1px solid #f7f7f7d8;
-    border-radius: 5px;
+    border-radius: 8px;
     tbody {
         font-size: 16px;
         color: $black;
@@ -1712,9 +1734,9 @@ h4 {
 }
 
 .dashboard-card {
-    background-color: #fafafa;
+    background-color: #fafafa80;
     border: 1px solid #f7f7f7d8;
-    border-radius: 5px;
+    border-radius: 8px;
     color: $dark-grey;
     padding: 40px;
     min-width: 350px;
@@ -1728,11 +1750,11 @@ h4 {
     }
 }
 .dashboard-info-card {
-    background-color: #fafafa;
+    background-color: #fafafa80;
     border: 1px solid #f7f7f7d8;
     padding: 30px;
     padding-bottom: 23px;
-    border-radius: 5px;
+    border-radius: 8px;
 }
 .dashboard-var-card {
     background-color: #ffffff;
@@ -1827,7 +1849,7 @@ h4 {
 .image-upload-box {
     width: 200px;
     height: 200px;
-    border-radius: 5px;
+    border-radius: 8px;
     border: 2px dotted #676767;
     background: #ffffff;
     object-fit: cover;
@@ -1905,6 +1927,11 @@ h4 {
     object-position: center;
 }
 
+.mobile-card-banner-container{
+    width: 80px;
+    height: 80px;
+}
+
 @media (max-width: 768px) {
     .img-full {
         width: 47% !important;
@@ -1928,7 +1955,7 @@ h4 {
     height: 250px;
     object-fit: cover;
     object-position: center;
-    border-radius: 5px;
+    border-radius: 8px;
 }
 .img-upload-btn {
     position: absolute;

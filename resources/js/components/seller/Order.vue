@@ -99,44 +99,40 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr
-                                        v-for="order in orders"
-                                        :class="{
-                                            'bg-dull-red':
-                                                order.status ===
-                                                'not acknowledged',
-                                            'bg-dull-green':
-                                                order.status === 'acknowledged',
-                                            'bg-dull-yellow':
-                                                order.status ===
-                                                'in production',
-                                            'bg-dull-orange':
-                                                order.status ===
-                                                'ready for delivery',
-                                            'bg-dull-dark-orange':
-                                                order.status ===
-                                                    'order dispatched' ||
-                                                order.status ===
-                                                    'delivery in progress',
-                                            'bg-dull-dark-green':
-                                                order.status ===
-                                                'delivery completed',
-                                        }"
-                                    >
-                                        <td>{{ order.code }}</td>
+                                    <tr v-for="order in orders">
                                         <td>
-                                            <div>
-                                                <span
-                                                    class="
-                                                        badge badge-pill
-                                                        dark-purple
-                                                        bg-white
-                                                        border-grey
-                                                        mr-2
-                                                    "
-                                                >
+                                            <div
+                                                class="status-indicator"
+                                                :class="{
+                                                    'bg-danger':
+                                                        order.status ===
+                                                        'not acknowledged',
+                                                    'bg-success':
+                                                        order.status ===
+                                                        'acknowledged',
+                                                    'bg-warning':
+                                                        order.status ===
+                                                        'in production',
+                                                    'bg-orange':
+                                                        order.status ===
+                                                        'ready for delivery',
+                                                    'bg-dark-orange':
+                                                        order.status ===
+                                                            'order dispatched' ||
+                                                        order.status ===
+                                                            'delivery in progress',
+                                                    'bg-dark-green':
+                                                        order.status ===
+                                                        'delivery completed',
+                                                }"
+                                            ></div>
+                                            {{ order.code }}
+                                        </td>
+                                        <td>
+                                            <div class="mb-2">
+                                                <div class="text-xxs">
                                                     Dispatch
-                                                </span>
+                                                </div>
                                                 {{
                                                     moment(order.delivery_date)
                                                         .subtract(
@@ -149,17 +145,10 @@
                                                 9:30am
                                             </div>
                                             <div>
-                                                <span
-                                                    class="
-                                                        badge badge-pill
-                                                        dark-purple
-                                                        bg-white
-                                                        border-grey
-                                                        mr-2
-                                                    "
-                                                >
+                                                <div class="text-xxs">
                                                     Delivery
-                                                </span>
+                                                </div>
+
                                                 {{
                                                     moment(
                                                         order.delivery_date
@@ -290,26 +279,20 @@
                             <div
                                 class="card dashboard-info-card mb-4 pb-3"
                                 :class="{
-                                            'border-dull-red':
-                                                order.status ===
-                                                'not acknowledged',
-                                            'border-dull-green':
-                                                order.status === 'acknowledged',
-                                            'border-dull-yellow':
-                                                order.status ===
-                                                'in production',
-                                            'border-dull-orange':
-                                                order.status ===
-                                                'ready for delivery',
-                                            'border-dull-blue':
-                                                order.status ===
-                                                    'order dispatched' ||
-                                                order.status ===
-                                                    'delivery in progress',
-                                            'border-dull-dark-green':
-                                                order.status ===
-                                                'delivery completed',
-                                        }"
+                                    'border-dull-red':
+                                        order.status === 'not acknowledged',
+                                    'border-dull-green':
+                                        order.status === 'acknowledged',
+                                    'border-dull-yellow':
+                                        order.status === 'in production',
+                                    'border-dull-orange':
+                                        order.status === 'ready for delivery',
+                                    'border-dull-blue':
+                                        order.status === 'order dispatched' ||
+                                        order.status === 'delivery in progress',
+                                    'border-dull-dark-green':
+                                        order.status === 'delivery completed',
+                                }"
                                 v-for="order in orders"
                             >
                                 <div
@@ -388,12 +371,72 @@
                                         </select>
 
                                         <div class="mobile-card-dropdown">
-                                            <button type="button" class="btn btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="23px" height="23px" preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16"><g fill="none" stroke="#976aff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"><circle cx="8" cy="2.5" r=".75"/><circle cx="8" cy="8" r=".75"/><circle cx="8" cy="13.5" r=".75"/></g></svg>
+                                            <button
+                                                type="button"
+                                                class="btn btn-sm"
+                                                data-toggle="dropdown"
+                                                aria-haspopup="true"
+                                                aria-expanded="false"
+                                            >
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                    aria-hidden="true"
+                                                    role="img"
+                                                    width="23px"
+                                                    height="23px"
+                                                    preserveAspectRatio="xMidYMid meet"
+                                                    viewBox="0 0 16 16"
+                                                >
+                                                    <g
+                                                        fill="none"
+                                                        stroke="#976aff"
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                        stroke-width="1.5"
+                                                    >
+                                                        <circle
+                                                            cx="8"
+                                                            cy="2.5"
+                                                            r=".75"
+                                                        />
+                                                        <circle
+                                                            cx="8"
+                                                            cy="8"
+                                                            r=".75"
+                                                        />
+                                                        <circle
+                                                            cx="8"
+                                                            cy="13.5"
+                                                            r=".75"
+                                                        />
+                                                    </g>
+                                                </svg>
                                             </button>
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                                <button class="dropdown-item" type="button" @click.prevent="viewModal(order)">View Order</button>
-                                                <button class="dropdown-item" type="button" @click.prevent="newModal(order)">View Items</button>
+                                            <div
+                                                class="
+                                                    dropdown-menu
+                                                    dropdown-menu-right
+                                                "
+                                            >
+                                                <button
+                                                    class="dropdown-item"
+                                                    type="button"
+                                                    @click.prevent="
+                                                        viewModal(order)
+                                                    "
+                                                >
+                                                    View Order
+                                                </button>
+                                                <button
+                                                    class="dropdown-item"
+                                                    type="button"
+                                                    @click.prevent="
+                                                        newModal(order)
+                                                    "
+                                                >
+                                                    View Items
+                                                </button>
                                             </div>
                                         </div>
                                     </div>

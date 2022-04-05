@@ -19,7 +19,6 @@
                                     input-group
                                     input-group-alternative
                                     search-input
-                                    mr-md-2
                                     mb-3 mb-md-0
                                 "
                             >
@@ -37,7 +36,7 @@
                                     v-model="searchText"
                                 />
                             </div>
-                            <div class="col-lg-8 col-8 text-right">
+                            <div class="col-8 text-right">
                                 <router-link to="/seller/products/listing">
                                     <button type="button" class="btn">
                                         <i
@@ -161,109 +160,119 @@
                                     class="
                                         d-flex
                                         flex-row
-                                        align-items-center
                                         justify-content-between
                                         mb-4
                                     "
                                 >
-                                    <div class="mobile-card-title mr-3">
-                                        {{ product.code }}
-                                    </div>
-                                    <div class="d-flex flex-row">
-                                        <select
-                                            class="
-                                                custom-select
-                                                form-control
-                                                mr-2
+                                    <div class="d-flex flex-row mr-3">
+                                        <img
+                                            width="150px"
+                                            height="150px"
+                                            class="mobile-card-banner-container banner-container-xs mr-3"
+                                            :src="
+                                                product.product_image
+                                                    ? product.product_image.path
+                                                    : '/images/lavisco/img-bg.jpg'
                                             "
-                                            name="product_state_id"
-                                            id="product_state_id"
-                                            v-model="product.product_state_id"
-                                            @change.prevent="
-                                                setCurrentState(
-                                                    product.id,
-                                                    $event
-                                                )
-                                            "
-                                        >
-                                            <option
-                                                v-for="productState in productStates"
-                                                :value="productState.id"
-                                            >
-                                                {{ productState.state }}
-                                            </option>
-                                        </select>
-
-                                        <div class="mobile-card-dropdown">
-                                            <button
-                                                type="button"
-                                                class="btn btn-sm"
-                                                data-toggle="dropdown"
-                                                aria-haspopup="true"
-                                                aria-expanded="false"
-                                            >
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                    aria-hidden="true"
-                                                    role="img"
-                                                    width="23px"
-                                                    height="23px"
-                                                    preserveAspectRatio="xMidYMid meet"
-                                                    viewBox="0 0 16 16"
-                                                >
-                                                    <g
-                                                        fill="none"
-                                                        stroke="#976aff"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                        stroke-width="1.5"
-                                                    >
-                                                        <circle
-                                                            cx="8"
-                                                            cy="2.5"
-                                                            r=".75"
-                                                        />
-                                                        <circle
-                                                            cx="8"
-                                                            cy="8"
-                                                            r=".75"
-                                                        />
-                                                        <circle
-                                                            cx="8"
-                                                            cy="13.5"
-                                                            r=".75"
-                                                        />
-                                                    </g>
-                                                </svg>
-                                            </button>
-                                            <div
+                                        />
+                                        <div>
+                                            <div class="mobile-card-title mb-3">
+                                                {{ product.code }}
+                                            </div>
+                                            <select
                                                 class="
-                                                    dropdown-menu
-                                                    dropdown-menu-right
+                                                    custom-select
+                                                    form-control
+                                                "
+                                                name="product_state_id"
+                                                id="product_state_id"
+                                                v-model="
+                                                    product.product_state_id
+                                                "
+                                                @change.prevent="
+                                                    setCurrentState(
+                                                        product.id,
+                                                        $event
+                                                    )
                                                 "
                                             >
-                                                <router-link
-                                                    class="dropdown-item"
-                                                    :to="{
-                                                        name: 'seller/products/listing/edit',
-                                                        params: {
-                                                            productId:
-                                                                product.id,
-                                                        },
-                                                    }"
-                                                    >Edit
-                                                </router-link>
-                                                <button
-                                                    class="dropdown-item"
-                                                    type="button"
-                                                    @click.prevent="
-                                                        newModal(product)
-                                                    "
+                                                <option
+                                                    v-for="productState in productStates"
+                                                    :value="productState.id"
                                                 >
-                                                    View
-                                                </button>
-                                            </div>
+                                                    {{ productState.state }}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="mobile-card-dropdown">
+                                        <button
+                                            type="button"
+                                            class="btn btn-sm"
+                                            data-toggle="dropdown"
+                                            aria-haspopup="true"
+                                            aria-expanded="false"
+                                        >
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                aria-hidden="true"
+                                                role="img"
+                                                width="23px"
+                                                height="23px"
+                                                preserveAspectRatio="xMidYMid meet"
+                                                viewBox="0 0 16 16"
+                                            >
+                                                <g
+                                                    fill="none"
+                                                    stroke="#976aff"
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="1.5"
+                                                >
+                                                    <circle
+                                                        cx="8"
+                                                        cy="2.5"
+                                                        r=".75"
+                                                    />
+                                                    <circle
+                                                        cx="8"
+                                                        cy="8"
+                                                        r=".75"
+                                                    />
+                                                    <circle
+                                                        cx="8"
+                                                        cy="13.5"
+                                                        r=".75"
+                                                    />
+                                                </g>
+                                            </svg>
+                                        </button>
+                                        <div
+                                            class="
+                                                dropdown-menu
+                                                dropdown-menu-right
+                                            "
+                                        >
+                                            <router-link
+                                                class="dropdown-item"
+                                                :to="{
+                                                    name: 'seller/products/listing/edit',
+                                                    params: {
+                                                        productId: product.id,
+                                                    },
+                                                }"
+                                                >Edit
+                                            </router-link>
+                                            <button
+                                                class="dropdown-item"
+                                                type="button"
+                                                @click.prevent="
+                                                    newModal(product)
+                                                "
+                                            >
+                                                View
+                                            </button>
                                         </div>
                                     </div>
                                 </div>

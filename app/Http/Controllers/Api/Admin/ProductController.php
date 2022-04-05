@@ -160,6 +160,10 @@ class ProductController extends Controller
     public function update(ProductRequest $request, Product $product)
     {
         ///$this->authorize('update', $product);
+        
+        $request->merge([
+            'code' => 'LP'.str_pad($product->id,5,"0",STR_PAD_LEFT),
+        ]);
 
         $product->update($request->all());
         $product->occasions()->sync(request('product_occasion'));

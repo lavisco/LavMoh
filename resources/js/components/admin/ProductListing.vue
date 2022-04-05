@@ -1461,7 +1461,6 @@ export default {
             //pivot table arrays
             product_occasion: [],
             product_recipient: [],
-            product_shipping: [],
 
             //variation fields
             productVariation: [

@@ -1943,7 +1943,6 @@ export default {
             recipients: [],
             product_occasion: [],
             product_recipient: [],
-            product_shipping: [],
 
             //new image
             image_path_new: [],
@@ -2297,7 +2296,6 @@ export default {
             this.occasionName = [];
             this.form.product_recipient = [];
             this.recipientName = [];
-            this.form.product_shipping = [];
 
             if (this.form.occasions != null) {
                 this.form.occasions.forEach((value) => {

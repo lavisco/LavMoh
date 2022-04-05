@@ -8,9 +8,7 @@ use App\Models\Category;
 use App\Models\Occasion;
 use App\Models\Product;
 use App\Models\ProductImage;
-use App\Models\ProductVariation;
 use App\Models\Recipient;
-use App\Models\Shipping;
 use App\Models\Variation;
 use App\Models\VariationOption;
 use Carbon\Carbon;
@@ -56,7 +54,6 @@ class ProductController extends Controller
         //sync to pivot tables
         $product->occasions()->sync(request('product_occasion'));
         $product->recipients()->sync(request('product_recipient'));
-        $product->shippings()->sync(request('product_shipping'));
 
         //product variation
         $this->storeVariation($request, $product->id, $userId, $productStateId);
@@ -154,7 +151,7 @@ class ProductController extends Controller
     public function show($id)
     {
         ///$this->authorize('view', $product);
-        return Product::with(['occasions', 'recipients', 'shippings'])->findOrFail($id);
+        return Product::with(['occasions', 'recipients'])->findOrFail($id);
     }
 
     public function update(ProductRequest $request, Product $product)
@@ -168,7 +165,6 @@ class ProductController extends Controller
         $product->update($request->all());
         $product->occasions()->sync(request('product_occasion'));
         $product->recipients()->sync(request('product_recipient'));
-        $product->shippings()->sync(request('product_shipping'));
     }
 
     public function updateState(Request $request, Product $product)
@@ -227,7 +223,6 @@ class ProductController extends Controller
             'categories' => Category::select('id', 'name')->latest()->get(),
             'occasions' => Occasion::select('id', 'name')->latest()->get(),
             'recipients' => Recipient::select('id', 'name')->latest()->get(),
-            'shippings' => Shipping::latest()->get(),
         ]);
     }
 }

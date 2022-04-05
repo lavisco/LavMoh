@@ -14,12 +14,12 @@
                         <div class="row align-items-center">
                             <div
                                 class="
-                                    col-lg-4 col-12
+                                    col-lg-4 col-9
                                     input-form
                                     input-group
                                     input-group-alternative
                                     search-input
-                                    mb-3 mb-md-0
+                                    mb-0 mb-md-0
                                 "
                             >
                                 <div class="input-group-prepend">
@@ -36,14 +36,14 @@
                                     v-model="searchText"
                                 />
                             </div>
-                            <div class="col-8 text-right">
+                            <div class="col-lg-8 col-3 text-right">
                                 <router-link to="/seller/products/listing">
-                                    <button type="button" class="btn">
+                                    <button type="button" class="btn mobile-add-btn">
                                         <i
-                                            class="fas fa-plus mr-2"
+                                            class="fas fa-plus mr-md-2"
                                             aria-hidden="true"
                                         ></i>
-                                        Add
+                                        <span class="hide-content-sm">Add</span>
                                     </button>
                                 </router-link>
                             </div>
@@ -168,7 +168,11 @@
                                         <img
                                             width="150px"
                                             height="150px"
-                                            class="mobile-card-banner-container banner-container-xs mr-3"
+                                            class="
+                                                mobile-card-banner-container
+                                                banner-container-xs
+                                                mr-3
+                                            "
                                             :src="
                                                 product.product_image
                                                     ? product.product_image.path
@@ -183,6 +187,7 @@
                                                 class="
                                                     custom-select
                                                     form-control
+                                                    mobile-btn-sm
                                                 "
                                                 name="product_state_id"
                                                 id="product_state_id"
@@ -208,7 +213,7 @@
                                     <div class="mobile-card-dropdown">
                                         <button
                                             type="button"
-                                            class="btn btn-sm"
+                                            class="btn btn-sm mobile-btn-sm"
                                             data-toggle="dropdown"
                                             aria-haspopup="true"
                                             aria-expanded="false"
@@ -255,7 +260,10 @@
                                             "
                                         >
                                             <router-link
-                                                class="dropdown-item"
+                                                class="
+                                                    dropdown-item
+                                                    mobile-dropdown-item
+                                                "
                                                 :to="{
                                                     name: 'seller/products/listing/edit',
                                                     params: {
@@ -265,7 +273,10 @@
                                                 >Edit
                                             </router-link>
                                             <button
-                                                class="dropdown-item"
+                                                class="
+                                                    dropdown-item
+                                                    mobile-dropdown-item
+                                                "
                                                 type="button"
                                                 @click.prevent="
                                                     newModal(product)

@@ -11862,6 +11862,26 @@ h4 {
   color: #333333;
 }
 
+.mobile-btn-sm {
+  color: #976aff;
+  font-weight: 500 !important;
+  padding: 6px 8px !important;
+  height: 38px;
+}
+
+.mobile-dropdown-item {
+  font-size: 14px;
+}
+
+.mobile-card-banner-container {
+  width: 78px !important;
+  height: 78px !important;
+}
+
+.mobile-add-btn {
+  padding: 8px 20px;
+}
+
 #pills-tab {
   justify-content: center;
   gap: 70px;
@@ -12000,11 +12020,6 @@ h4 {
      object-fit: cover;
   -o-object-position: center;
      object-position: center;
-}
-
-.mobile-card-banner-container {
-  width: 80px;
-  height: 80px;
 }
 
 @media (max-width: 768px) {

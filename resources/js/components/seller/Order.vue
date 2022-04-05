@@ -92,8 +92,11 @@
                                         <th scope="col" class="table-col-sm">
                                             Amount
                                         </th>
-                                        <th scope="col" class="table-col-sm">
+                                        <th scope="col">
                                             Status
+                                        </th>
+                                        <th scope="col" class="table-col-sm">
+                                            Update Status
                                         </th>
                                         <th scope="col"></th>
                                     </tr>
@@ -192,70 +195,53 @@
                                         </td>
                                         <td>LKR {{ order.total }}</td>
                                         <td>
-                                            <select
+                                            <span
                                                 class="
-                                                    custom-select
-                                                    form-control
+                                                    badge badge-pill
+                                                    bg-purple
+                                                    white
                                                 "
-                                                name="status"
-                                                id="status"
-                                                v-model="order.status"
-                                                @change.prevent="
-                                                    setCurrentState(
-                                                        order.id,
-                                                        $event
-                                                    )
+                                                :class="{
+                                                    'bg-danger':
+                                                        order.status ===
+                                                        'not acknowledged',
+                                                    'bg-success':
+                                                        order.status ===
+                                                        'acknowledged',
+                                                    'bg-warning':
+                                                        order.status ===
+                                                        'in production',
+                                                    'bg-orange':
+                                                        order.status ===
+                                                        'ready for delivery',
+                                                    'bg-dark-orange':
+                                                        order.status ===
+                                                            'order dispatched' ||
+                                                        order.status ===
+                                                            'delivery in progress',
+                                                    'bg-dark-green':
+                                                        order.status ===
+                                                        'delivery completed',
+                                                }"
+                                            >
+                                                {{ order.status }}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <button
+                                                @click.prevent="
+                                                    setCurrentStatus(order)
+                                                "
+                                                class="btn btn-sm"
+                                                title="Change status"
+                                                v-if="
+                                                    statusUpdateActive(
+                                                        order.status
+                                                    ) == true
                                                 "
                                             >
-                                                <option
-                                                    value="not acknowledged"
-                                                >
-                                                    not acknowledged
-                                                </option>
-                                                <option
-                                                    value="acknowledged"
-                                                    v-show="
-                                                        order.status ==
-                                                        'not acknowledged'
-                                                    "
-                                                >
-                                                    acknowledged
-                                                </option>
-                                                <option
-                                                    value="in production"
-                                                    v-show="
-                                                        order.status ==
-                                                        'acknowledged'
-                                                    "
-                                                >
-                                                    in production
-                                                </option>
-                                                <option
-                                                    value="ready for delivery"
-                                                    v-show="
-                                                        order.status ==
-                                                        'in production'
-                                                    "
-                                                >
-                                                    ready for delivery
-                                                </option>
-                                                <option
-                                                    value="order dispatched"
-                                                >
-                                                    order dispatched
-                                                </option>
-                                                <option
-                                                    value="delivery in progress"
-                                                >
-                                                    delivery in progress
-                                                </option>
-                                                <option
-                                                    value="delivery completed"
-                                                    hidden
-                                                >
-                                                    delivery completed
-                                                </option>
-                                            </select>
+                                                {{ nextStatus(order.status) }}
+                                            </button>
                                         </td>
                                         <td class="text-right">
                                             <a
@@ -299,81 +285,70 @@
                                     class="
                                         d-flex
                                         flex-row
-                                        align-items-center
                                         justify-content-between
+                                        align-items-start
                                         mb-4
                                     "
                                 >
                                     <div class="mobile-card-title mr-3">
                                         {{ order.code }}
-                                    </div>
-                                    <div class="d-flex flex-row">
-                                        <select
+                                        <br />
+                                        <span
                                             class="
-                                                custom-select
-                                                form-control
+                                                badge badge-pill
+                                                bg-purple
+                                                white
+                                            "
+                                            :class="{
+                                                'bg-danger':
+                                                    order.status ===
+                                                    'not acknowledged',
+                                                'bg-success':
+                                                    order.status ===
+                                                    'acknowledged',
+                                                'bg-warning':
+                                                    order.status ===
+                                                    'in production',
+                                                'bg-orange':
+                                                    order.status ===
+                                                    'ready for delivery',
+                                                'bg-dark-orange':
+                                                    order.status ===
+                                                        'order dispatched' ||
+                                                    order.status ===
+                                                        'delivery in progress',
+                                                'bg-dark-green':
+                                                    order.status ===
+                                                    'delivery completed',
+                                            }"
+                                        >
+                                            {{ order.status }}
+                                        </span>
+                                    </div>
+                                    <div class="d-flex flex-row align-items-center">
+                                        <button
+                                            @click.prevent="
+                                                setCurrentStatus(order)
+                                            "
+                                            class="
+                                                btn btn-sm
+                                                mobile-btn-sm
                                                 mr-2
                                             "
-                                            name="status"
-                                            id="status"
-                                            v-model="order.status"
-                                            @change.prevent="
-                                                setCurrentState(
-                                                    order.id,
-                                                    $event
-                                                )
+                                            title="Change status"
+                                            v-if="
+                                                statusUpdateActive(
+                                                    order.status
+                                                ) == true
                                             "
                                         >
-                                            <option value="not acknowledged">
-                                                not acknowledged
-                                            </option>
-                                            <option
-                                                value="acknowledged"
-                                                v-show="
-                                                    order.status ==
-                                                    'not acknowledged'
-                                                "
-                                            >
-                                                acknowledged
-                                            </option>
-                                            <option
-                                                value="in production"
-                                                v-show="
-                                                    order.status ==
-                                                    'acknowledged'
-                                                "
-                                            >
-                                                in production
-                                            </option>
-                                            <option
-                                                value="ready for delivery"
-                                                v-show="
-                                                    order.status ==
-                                                    'in production'
-                                                "
-                                            >
-                                                ready for delivery
-                                            </option>
-                                            <option value="order dispatched">
-                                                order dispatched
-                                            </option>
-                                            <option
-                                                value="delivery in progress"
-                                            >
-                                                delivery in progress
-                                            </option>
-                                            <option
-                                                value="delivery completed"
-                                                hidden
-                                            >
-                                                delivery completed
-                                            </option>
-                                        </select>
+                                            {{ nextStatus(order.status) }}
+                                        </button>
 
                                         <div class="mobile-card-dropdown">
                                             <button
                                                 type="button"
-                                                class="btn btn-sm"
+                                                class="btn btn-sm mobile-btn-sm"
                                                 data-toggle="dropdown"
                                                 aria-haspopup="true"
                                                 aria-expanded="false"
@@ -420,7 +395,10 @@
                                                 "
                                             >
                                                 <button
-                                                    class="dropdown-item"
+                                                    class="
+                                                        dropdown-item
+                                                        mobile-dropdown-item
+                                                    "
                                                     type="button"
                                                     @click.prevent="
                                                         viewModal(order)
@@ -429,7 +407,10 @@
                                                     View Order
                                                 </button>
                                                 <button
-                                                    class="dropdown-item"
+                                                    class="
+                                                        dropdown-item
+                                                        mobile-dropdown-item
+                                                    "
                                                     type="button"
                                                     @click.prevent="
                                                         newModal(order)
@@ -910,6 +891,7 @@ export default {
             this.current_order_mode = true;
             $("#addRecord").modal("show");
         },
+
         loadOrders() {
             axios
                 .get("/api/seller/orders", {
@@ -925,11 +907,51 @@ export default {
                 .catch((error) => console.log(error));
         },
 
-        setCurrentState(order, event) {
+        statusUpdateActive(status) {
+            if (
+                status == "not acknowledged" ||
+                status == "acknowledge" ||
+                status == "in production"
+            ) {
+                return true;
+            } else {
+                return false;
+            }
+        },
+
+        nextStatus(status) {
+            switch (status) {
+                case "not acknowledged":
+                    return "acknowledge";
+                    break;
+                case "acknowledged":
+                    return "in production";
+                    break;
+                case "in production":
+                    return "ready for delivery";
+                    break;
+            }
+        },
+
+        setCurrentStatus(order) {
+            switch (order.status) {
+                case "":
+                    this.form.status = "acknowledged";
+                    break;
+                case "not acknowledged":
+                    this.form.status = "acknowledged";
+                    break;
+                case "acknowledged":
+                    this.form.status = "in production";
+                    break;
+                case "in production":
+                    this.form.status = "ready for delivery";
+                    break;
+            }
+
             if (confirm("Are you sure you want to change order status?")) {
-                this.form.status = event.target.value;
                 this.form
-                    .put("/api/seller/orders/" + order)
+                    .put("/api/seller/orders/" + order.id)
                     .then(() => {
                         Fire.$emit("reloadRecords");
                     })

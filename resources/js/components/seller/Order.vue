@@ -92,9 +92,7 @@
                                         <th scope="col" class="table-col-sm">
                                             Amount
                                         </th>
-                                        <th scope="col">
-                                            Status
-                                        </th>
+                                        <th scope="col">Status</th>
                                         <th scope="col" class="table-col-sm">
                                             Update Status
                                         </th>
@@ -287,17 +285,27 @@
                                         flex-row
                                         justify-content-between
                                         align-items-start
-                                        mb-4
+                                        mb-2
                                     "
                                 >
                                     <div class="mobile-card-title mr-3">
                                         {{ order.code }}
-                                        <br />
+                                    </div>
+
+                                    <div
+                                        class="
+                                            d-flex
+                                            flex-row
+                                            align-items-start
+                                        "
+                                    >
                                         <span
                                             class="
                                                 badge badge-pill
                                                 bg-purple
                                                 white
+                                                text-xxs
+                                                mr-2
                                             "
                                             :class="{
                                                 'bg-danger':
@@ -324,26 +332,6 @@
                                         >
                                             {{ order.status }}
                                         </span>
-                                    </div>
-                                    <div class="d-flex flex-row align-items-center">
-                                        <button
-                                            @click.prevent="
-                                                setCurrentStatus(order)
-                                            "
-                                            class="
-                                                btn btn-sm
-                                                mobile-btn-sm
-                                                mr-2
-                                            "
-                                            title="Change status"
-                                            v-if="
-                                                statusUpdateActive(
-                                                    order.status
-                                                ) == true
-                                            "
-                                        >
-                                            {{ nextStatus(order.status) }}
-                                        </button>
 
                                         <div class="mobile-card-dropdown">
                                             <button
@@ -423,6 +411,23 @@
                                     </div>
                                 </div>
                                 <div
+                                    class="mb-4"
+                                    v-if="
+                                        statusUpdateActive(order.status) == true
+                                    "
+                                >
+                                    <div class="mobile-card-sub-title">
+                                        Update Status
+                                    </div>
+                                    <button
+                                        @click.prevent="setCurrentStatus(order)"
+                                        class="btn btn-sm mobile-btn-sm"
+                                        title="Change status"
+                                    >
+                                        {{ nextStatus(order.status) }}
+                                    </button>
+                                </div>
+                                <div
                                     class="
                                         d-flex
                                         flex-row
@@ -451,7 +456,9 @@
                                                     parent_product.product.title
                                                 }}
                                             </div>
-                                            {{ parent_product.quantity }}
+                                            <span class="mobile-card-price">{{
+                                                parent_product.quantity
+                                            }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -543,7 +550,7 @@
 
                     <div class="modal-body modal-view">
                         <div
-                            class="card dashboard-info-card mt-4"
+                            class="card dashboard-info-card mb-4"
                             v-for="(
                                 parent_product, index
                             ) in current_order.order_products"
@@ -551,26 +558,26 @@
                             <!-- Header -->
                             <h4 class="mb-3">Item {{ index + 1 }}</h4>
                             <hr class="mt-0" />
-                            <div class="row mb-2">
+                            <div class="row mb-3">
                                 <div class="col-md-3 modal-label">Title</div>
                                 <div class="col-md-9">
                                     {{ parent_product.product.title }}
                                 </div>
                             </div>
-                            <div class="row mb-2">
+                            <div class="row mb-3">
                                 <div class="col-md-3 modal-label">Code</div>
                                 <div class="col-md-9">
                                     {{ parent_product.product.code }}
                                 </div>
                             </div>
-                            <div class="row mb-2">
+                            <div class="row mb-3">
                                 <div class="col-md-3 modal-label">Quantity</div>
                                 <div class="col-md-9">
                                     {{ parent_product.quantity }}
                                 </div>
                             </div>
                             <div
-                                class="row mb-2"
+                                class="row mb-3"
                                 v-if="
                                     parent_product.order_product_variations
                                         .length > 0
@@ -662,165 +669,189 @@
 
                     <!-- Form start -->
                     <div class="modal-body modal-view">
-                        <div class="card dashboard-info-card mt-4">
+                        <div class="card dashboard-info-card">
                             <!-- Header -->
-                            <h6 class="mb-3">Summary</h6>
-                            <div class="form-group row">
-                                <label class="col-md-3 col-form-label"
-                                    >Code
-                                </label>
+                            <h4 class="mb-3">Summary</h4>
+                            <hr class="mt-0" />
+                            <div class="row mb-3">
+                                <div class="col-md-3 modal-label">Code</div>
                                 <div class="col-md-9">
                                     {{ current_order.code }}
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-md-3 col-form-label"
-                                    >Date
-                                </label>
+                            <div class="row mb-3">
+                                <div class="col-md-3 modal-label">
+                                    Order placed on
+                                </div>
                                 <div class="col-md-9">
-                                    {{ current_order.created_at }}
+                                    {{
+                                        moment(current_order.created_at).format(
+                                            "DD-MM-YYYY"
+                                        )
+                                    }}
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-md-3 col-form-label"
-                                    >Total
-                                </label>
+                            <div class="row mb-3">
+                                <div class="col-md-3 modal-label">
+                                    Dispatch Date
+                                </div>
+                                <div class="col-md-9">
+                                    {{
+                                        moment(current_order.delivery_date)
+                                            .subtract(
+                                                current_order.shipping
+                                                    .delivery_time,
+                                                "days"
+                                            )
+                                            .format("DD-MM-YYYY")
+                                    }}
+                                    9:30am
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-3 modal-label">
+                                    Delivery Date
+                                </div>
+                                <div class="col-md-9">
+                                    {{
+                                        moment(
+                                            current_order.delivery_date
+                                        ).format("DD-MM-YYYY")
+                                    }}
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-3 modal-label">Total</div>
                                 <div class="col-md-9">
                                     LKR {{ current_order.total }}
-                                    <div class="text-sm">
-                                        <div>
-                                            Subtotal:
-                                            {{ current_order.subtotal }} +
-                                        </div>
-                                        <div>
-                                            Tax : {{ current_order.tax }} +
-                                        </div>
-                                        <div>
-                                            Shipping :
-                                            {{ current_order.shipping_price }} +
-                                        </div>
-                                        <div>
-                                            Giftwrap :
-                                            {{
-                                                current_order.giftwrap_price
-                                                    ? current_order.giftwrap_price
-                                                    : "0.00"
-                                            }}
-                                            -
-                                        </div>
-                                        <div>
-                                            Discount :
-                                            {{
-                                                current_order.discount_price
-                                                    ? current_order.discount_price
-                                                    : "0.00"
-                                            }}
-                                        </div>
+                                    <div class="darkgrey">
+                                        Subtotal:
+                                        {{ current_order.subtotal }} +
+                                    </div>
+                                    <div class="darkgrey">
+                                        Tax : {{ current_order.tax }} +
+                                    </div>
+                                    <div class="darkgrey">
+                                        Shipping :
+                                        {{ current_order.shipping_price }} +
+                                    </div>
+                                    <div class="darkgrey">
+                                        Giftwrap :
+                                        {{
+                                            current_order.giftwrap_price
+                                                ? current_order.giftwrap_price
+                                                : "0.00"
+                                        }}
+                                        -
+                                    </div>
+                                    <div class="darkgrey">
+                                        Discount :
+                                        {{
+                                            current_order.discount_price
+                                                ? current_order.discount_price
+                                                : "0.00"
+                                        }}
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="card dashboard-info-card mt-4">
                             <!-- Header -->
-                            <h6 class="mb-3">Customer Information</h6>
-                            <div class="form-group row">
-                                <label class="col-md-3 col-form-label"
-                                    >Name
-                                </label>
+                            <h4 class="mb-3">Customer Details</h4>
+                            <hr class="mt-0" />
+                            <div class="row mb-3">
+                                <div class="col-md-3 modal-label">Name</div>
                                 <div class="col-md-9">
                                     {{ current_order.name }}
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-md-3 col-form-label"
-                                    >Email
-                                </label>
+                            <div class="row mb-3">
+                                <div class="col-md-3 modal-label">Email</div>
                                 <div class="col-md-9">
                                     {{ current_order.email }}
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-md-3 col-form-label"
-                                    >Phone
-                                </label>
+                            <div class="row mb-3">
+                                <div class="col-md-3 modal-label">Phone</div>
                                 <div class="col-md-9">
                                     {{ current_order.phone }}
                                 </div>
                             </div>
                         </div>
-                        <div class="card dashboard-info-card mt-4">
+                        <div
+                            class="card dashboard-info-card mt-4"
+                            v-for="(
+                                parent_product, index
+                            ) in current_order.order_products"
+                        >
                             <!-- Header -->
-                            <h6 class="mb-3">Products</h6>
-                            <div>
-                                <div class="table-responsive form-table">
-                                    <table class="table align-items-center">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Code</th>
-                                                <th scope="col">Variations</th>
-                                                <th scope="col" class="smwidth">
-                                                    Net Price
-                                                </th>
-                                                <th scope="col" class="smwidth">
-                                                    Quantity
-                                                </th>
-                                                <th scope="col" class="smwidth">
-                                                    Total Price
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr
-                                                v-for="productParent in current_order.order_products"
-                                            >
-                                                <td>
-                                                    {{
-                                                        productParent.product
-                                                            .code
-                                                    }}
-                                                    <div class="text-sm">
-                                                        {{
-                                                            productParent
-                                                                .product.title
-                                                        }}
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div
-                                                        v-for="variation in productParent.order_product_variations"
-                                                    >
-                                                        {{
-                                                            variation
-                                                                .variation_option
-                                                                .variation.name
-                                                        }}
-                                                        :
-                                                        {{
-                                                            variation
-                                                                .variation_option
-                                                                .name
-                                                        }}
-                                                        <span class="text-sm">{{
-                                                            variation.price
-                                                        }}</span>
-                                                        <hr />
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    {{ productParent.total }}
-                                                </td>
-                                                <td>
-                                                    {{ productParent.quantity }}
-                                                </td>
-                                                <td>
-                                                    {{
-                                                        productParent.total *
-                                                        productParent.quantity
-                                                    }}
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                            <h4 class="mb-3">Item {{ index + 1 }}</h4>
+                            <hr class="mt-0" />
+                            <div class="row mb-3">
+                                <div class="col-md-3 modal-label">Title</div>
+                                <div class="col-md-9">
+                                    {{ parent_product.product.title }}
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-3 modal-label">Code</div>
+                                <div class="col-md-9">
+                                    {{ parent_product.product.code }}
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-3 modal-label">Quantity</div>
+                                <div class="col-md-9">
+                                    {{ parent_product.quantity }}
+                                </div>
+                            </div>
+                            <div
+                                class="row mb-3"
+                                v-if="
+                                    parent_product.order_product_variations
+                                        .length > 0
+                                "
+                            >
+                                <div class="col-md-3 modal-label">
+                                    Specification
+                                </div>
+                                <div class="col-md-9">
+                                    <div
+                                        v-for="variation in parent_product.order_product_variations"
+                                    >
+                                        {{
+                                            variation.variation_option.variation
+                                                .name
+                                        }}
+                                        :
+                                        {{ variation.variation_option.name }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 modal-label">Amount</div>
+                                <div class="col-md-9">
+                                    LKR
+                                    {{
+                                        parent_product.total *
+                                        parent_product.quantity
+                                    }}
+                                    <div class="darkgrey">
+                                        Base Price : LKR
+                                        {{ parent_product.product.base_price }}
+                                    </div>
+                                    <div
+                                        class="darkgrey"
+                                        v-for="variation in parent_product.order_product_variations"
+                                    >
+                                        {{
+                                            variation.variation_option.variation
+                                                .name
+                                        }}
+                                        ({{ variation.variation_option.name }})
+                                        : + LKR
+                                        {{ variation.variation_option.price }}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -885,6 +916,7 @@ export default {
             this.parent_product_mode = true;
             $("#addRecord").modal("show");
         },
+
         viewModal(order) {
             this.current_order = order;
             this.parent_product_mode = false;

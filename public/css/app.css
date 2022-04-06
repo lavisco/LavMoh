@@ -11278,7 +11278,7 @@ h4 {
 
 .text-xxs {
   font-weight: 400;
-  font-size: 11px;
+  font-size: 11px !important;
   color: #7b7b7b;
 }
 
@@ -11738,9 +11738,18 @@ h4 {
 .modal-view .modal-label {
   font-size: 13px;
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 400;
   letter-spacing: 0.02rem;
-  color: #da89f3;
+  color: #b579c0;
+}
+@media (max-width: 768px) {
+  .modal-view {
+    padding: 8px !important;
+  }
+  .modal-view .modal-label {
+    font-size: 11px;
+    letter-spacing: 0.01rem;
+  }
 }
 
 .option-badge {
@@ -11860,6 +11869,10 @@ h4 {
   font-size: 14px;
   line-height: 21px;
   color: #333333;
+}
+
+.mobile-card-price {
+  font-weight: 500;
 }
 
 .mobile-btn-sm {

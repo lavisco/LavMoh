@@ -1205,9 +1205,8 @@ h4 {
 }
 .text-xxs {
     font-weight: 400;
-    font-size: 11px;
+    font-size: 11px !important;
     color: #7b7b7b;
-    //margin-bottom: 2px;
 }
 
 .dashboard-link {
@@ -1254,7 +1253,7 @@ h4 {
     }
 }
 
-.status-indicator{
+.status-indicator {
     width: 20px;
     height: 20px;
     border-radius: 50%;
@@ -1674,9 +1673,16 @@ h4 {
     .modal-label {
         font-size: 13px;
         text-transform: uppercase;
-        font-weight: 600;
+        font-weight: 400;
         letter-spacing: 0.02rem;
-        color: #da89f3;
+        color: #b579c0;
+    }
+    @media (max-width: 768px) {
+        padding: 8px !important;
+        .modal-label {
+            font-size: 11px;
+            letter-spacing: 0.01rem;
+        }
     }
 }
 
@@ -1797,23 +1803,27 @@ h4 {
     color: $black;
 }
 
-.mobile-btn-sm{
+.mobile-card-price {
+    font-weight: 500;
+}
+
+.mobile-btn-sm {
     color: $lav-purple;
     font-weight: 500 !important;
     padding: 6px 8px !important;
     height: 38px;
 }
 
-.mobile-dropdown-item{
+.mobile-dropdown-item {
     font-size: 14px;
 }
 
-.mobile-card-banner-container{
+.mobile-card-banner-container {
     width: 78px !important;
     height: 78px !important;
 }
 
-.mobile-add-btn{
+.mobile-add-btn {
     padding: 8px 20px;
 }
 
@@ -1946,7 +1956,6 @@ h4 {
     object-fit: cover;
     object-position: center;
 }
-
 
 @media (max-width: 768px) {
     .img-full {
@@ -2206,10 +2215,10 @@ h4 {
     }
 }
 
-.cart-notif{
+.cart-notif {
     position: absolute;
     top: -3px;
-    left: -4px;    
+    left: -4px;
     width: 21px;
     height: 21px;
     display: flex;

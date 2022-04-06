@@ -38,7 +38,10 @@
                             </div>
                             <div class="col-lg-8 col-3 text-right">
                                 <router-link to="/seller/products/listing">
-                                    <button type="button" class="btn mobile-add-btn">
+                                    <button
+                                        type="button"
+                                        class="btn mobile-add-btn"
+                                    >
                                         <i
                                             class="fas fa-plus mr-md-2"
                                             aria-hidden="true"
@@ -376,7 +379,8 @@
                     <div class="modal-body modal-view">
                         <div class="card dashboard-info-card">
                             <!-- Header -->
-                            <h6 class="mb-3">Images</h6>
+                            <h4 class="mb-3">Images</h4>
+                            <hr class="mt-0" />
                             <div class="d-flex flex-row flex-wrap gap">
                                 <div
                                     class="image-upload-box"
@@ -403,80 +407,60 @@
 
                         <div class="card dashboard-info-card mt-4">
                             <!-- Header -->
-                            <h6 class="mb-3">Details</h6>
-                            <div class="form-group row">
-                                <label
-                                    class="col-md-3 col-form-label"
-                                    for="name"
-                                    >Title
-                                </label>
-                                <div class="col-md-9">{{ form.title }}</div>
+                            <h4 class="mb-3">Details</h4>
+                            <hr class="mt-0" />
+                            <div class="row mb-3">
+                                <div class="col-md-3 modal-label">Title</div>
+                                <div class="col-md-9">
+                                    {{ form.title }}
+                                </div>
                             </div>
-                            <div class="form-group row">
-                                <label
-                                    class="col-md-3 col-form-label"
-                                    for="name"
-                                    >Category
-                                </label>
+                            <div class="row mb-3">
+                                <div class="col-md-3 modal-label">Category</div>
                                 <div class="col-md-9">
                                     {{ form.category.name }}
                                 </div>
                             </div>
-                            <div class="form-group row" v-show="form.sku">
-                                <label
-                                    class="col-md-3 col-form-label"
-                                    for="name"
-                                    >SKU
-                                </label>
-                                <div class="col-md-9">{{ form.sku }}</div>
+                            <div class="row mb-3" v-show="form.sku">
+                                <div class="col-md-3 modal-label">SKU</div>
+                                <div class="col-md-9">
+                                    {{ form.sku }}
+                                </div>
                             </div>
-                            <div
-                                class="form-group row"
-                                v-show="form.base_price"
-                            >
-                                <label
-                                    class="col-md-3 col-form-label"
-                                    for="name"
-                                    >Base Price
-                                </label>
+                            <div class="row mb-3" v-show="form.base_price">
+                                <div class="col-md-3 modal-label">
+                                    Base Price
+                                </div>
                                 <div class="col-md-9">
                                     {{ form.base_price }}
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label
-                                    class="col-md-3 col-form-label"
-                                    for="name"
-                                    >Quantity
-                                </label>
-                                <div class="col-md-9">{{ form.quantity }}</div>
+                            <div class="row mb-3">
+                                <div class="col-md-3 modal-label">Quantity</div>
+                                <div class="col-md-9">
+                                    {{ form.quantity }}
+                                </div>
                             </div>
-                            <div class="form-group row">
-                                <label
-                                    class="col-md-3 col-form-label"
-                                    for="name"
-                                    >Short Description
-                                </label>
+                            <div class="row mb-3">
+                                <div class="col-md-3 modal-label">
+                                    Short Description
+                                </div>
                                 <div class="col-md-9">
                                     {{ form.short_description }}
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label
-                                    class="col-md-3 col-form-label"
-                                    for="name"
-                                    >Description
-                                </label>
+                            <div class="row mb-3">
+                                <div class="col-md-3 modal-label">
+                                    Description
+                                </div>
                                 <div class="col-md-9">
                                     {{ form.description }}
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label
-                                    class="col-md-3 col-form-label"
-                                    for="name"
-                                    >Dimensions
-                                </label>
+                            <div class="row mb-3">
+                                <div class="col-md-3 modal-label">
+                                    Dimensions
+                                </div>
                                 <div class="col-md-9">
                                     {{
                                         form.dimensions_unit
@@ -485,12 +469,8 @@
                                     }}
                                 </div>
                             </div>
-                            <div class="form-group row" v-show="form.weight">
-                                <label
-                                    class="col-md-3 col-form-label"
-                                    for="name"
-                                    >Weight
-                                </label>
+                            <div class="row mb-3" v-show="form.weight">
+                                <div class="col-md-3 modal-label">Weight</div>
                                 <div class="col-md-9">
                                     {{
                                         form.weight
@@ -499,84 +479,67 @@
                                     }}
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label
-                                    class="col-md-3 col-form-label"
-                                    for="name"
-                                    >Processing Time
-                                </label>
+                            <div class="row mb-3">
+                                <div class="col-md-3 modal-label">
+                                    Processing Time
+                                </div>
                                 <div class="col-md-9">
                                     {{ form.processing_time }}
                                 </div>
                             </div>
                         </div>
 
-                        <div
-                            class="card dashboard-info-card mt-4"
-                            v-if="form.variations"
-                        >
-                            <!-- Header -->
-                            <h6 class="mb-3">Variations</h6>
-                            <div>
-                                <div class="table-responsive form-table">
-                                    <table class="table align-items-center">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Name</th>
-                                                <th scope="col">Option Name</th>
-                                                <th scope="col" class="smwidth">
-                                                    Price
-                                                </th>
-                                                <th scope="col" class="smwidth">
-                                                    Quantity
-                                                </th>
-                                                <th scope="col">SKU</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr
-                                                v-for="variation in form.variations"
-                                            >
-                                                <td>
-                                                    {{ variation.name }}
-                                                    <p class="text-xs">
-                                                        {{
-                                                            variation.description
-                                                        }}
-                                                    </p>
-                                                </td>
-                                                <td>
-                                                    <p
-                                                        v-for="option in variation.variation_options"
-                                                    >
-                                                        {{ option.name }}
-                                                    </p>
-                                                </td>
-
-                                                <td>
-                                                    <p
-                                                        v-for="option in variation.variation_options"
-                                                    >
-                                                        {{ option.price }}
-                                                    </p>
-                                                </td>
-                                                <td>
-                                                    <p
-                                                        v-for="option in variation.variation_options"
-                                                    >
-                                                        {{ option.quantity }}
-                                                    </p>
-                                                </td>
-                                                <td>
-                                                    <p
-                                                        v-for="option in variation.variation_options"
-                                                    >
-                                                        {{ option.sku }}
-                                                    </p>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                        <div v-if="form.variations">
+                            <div
+                                class="card dashboard-info-card mt-4"
+                                v-for="(variation, index) in form.variations"
+                            >
+                                <!-- Header -->
+                                <h4 class="mb-3">Variation {{ index + 1 }}</h4>
+                                <hr class="mt-0" />
+                                <div class="row mb-3">
+                                    <div class="col-md-3 modal-label">Type</div>
+                                    <div class="col-md-9">
+                                        {{ variation.name }}
+                                    </div>
+                                </div>
+                                <div
+                                    class="row mb-3"
+                                    v-if="variation.description"
+                                >
+                                    <div class="col-md-3 modal-label">
+                                        Description
+                                    </div>
+                                    <div class="col-md-9">
+                                        {{ variation.description }}
+                                    </div>
+                                </div>
+                                <div
+                                    class="row mb-3"
+                                    v-for="(
+                                        option, index
+                                    ) in variation.variation_options"
+                                >
+                                    <div class="col-md-3 modal-label">
+                                        Option {{ index + 1 }}
+                                    </div>
+                                    <div class="col-md-9">
+                                        {{ option.name }}
+                                        <span class="grey">-</span>
+                                        LKR {{ option.price }}
+                                        <div>
+                                            {{ option.quantity }}
+                                            <span class="grey text-xxs">
+                                                Quantity
+                                            </span>
+                                        </div>
+                                        <div v-if="option.sku">
+                                            {{ option.sku }}
+                                            <span class="grey text-xxs">
+                                                SKU
+                                            </span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

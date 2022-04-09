@@ -15933,7 +15933,7 @@ textarea[resize="horizontal"] {
     border-left: 2px solid #5e72e4;
 }
 .navbar-vertical .navbar-nav .nav-link > i {
-    font-size: 0.9375rem;
+    font-size: 1rem;
     line-height: 1.5rem;
 
     min-width: 2.25rem;
@@ -18298,7 +18298,6 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
     max-width: 280px;
 }
 
-
 .form-table {
     background-color: #f8f9fe;
     border: 1px solid #d9dae0;
@@ -18307,7 +18306,16 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
 .form-table .table {
     padding: 10px;
 }
-.form-table .table td, .form-table .table th{
+.form-table .table td,
+.form-table .table th {
     padding-left: 8px;
     padding-right: 8px;
+}
+
+.modal-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 400;
+    letter-spacing: 0.02rem;
+    color: #e91e63;
 }

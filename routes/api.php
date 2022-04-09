@@ -91,6 +91,7 @@ Route::prefix('admin')->group(function () {
     Route::apiResource('/giftwraps', GiftwrapController::class);
     Route::apiResource('/homesliders', HomeSliderController::class);
     Route::apiResource('/occasions', OccasionController::class);
+    Route::put('/orders/updateStatus/{order}', [OrderController::class, 'updateStatus']);
     Route::apiResource('/orders', OrderController::class);
     Route::apiResource('/permissions', PermissionController::class);
     //store new image for existing product

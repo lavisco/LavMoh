@@ -46,7 +46,9 @@
                                             class="fas fa-plus mr-md-2"
                                             aria-hidden="true"
                                         ></i>
-                                        <span class="hide-content-sm">Add</span>
+                                        <span class="hide-content-sm-inline"
+                                            >Add</span
+                                        >
                                     </button>
                                 </router-link>
                             </div>
@@ -616,7 +618,7 @@ export default {
         //     this.loadProducts();
         // },
         searchText: _.debounce(function (after, before) {
-            this.loadProducts();
+            Fire.$emit("reloadRecords");
         }, 500),
     },
 

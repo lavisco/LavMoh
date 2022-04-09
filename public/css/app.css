@@ -11321,12 +11321,17 @@ h4 {
   display: block !important;
 }
 
+.hide-content-sm-inline {
+  display: inline-block !important;
+}
+
 @media (max-width: 768px) {
   .hide-content {
     display: block !important;
   }
 
-  .hide-content-sm {
+  .hide-content-sm,
+.hide-content-sm-inline {
     display: none !important;
   }
 }
@@ -11891,8 +11896,10 @@ h4 {
   height: 78px !important;
 }
 
-.mobile-add-btn {
-  padding: 8px 20px;
+@media (max-width: 768px) {
+  .mobile-add-btn {
+    padding: 8px 20px;
+  }
 }
 
 #pills-tab {

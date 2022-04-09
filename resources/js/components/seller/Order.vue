@@ -667,7 +667,7 @@
                         </button>
                     </div>
 
-                    <!-- Form start -->
+                    <!-- Modal Body start -->
                     <div class="modal-body modal-view">
                         <div class="card dashboard-info-card">
                             <!-- Header -->
@@ -880,6 +880,7 @@
 <script>
 import Form from "vform";
 import { HasError, AlertError } from "vform/src/components/bootstrap4";
+import _ from "lodash";
 import moment from "moment";
 
 export default {
@@ -887,6 +888,7 @@ export default {
         HasError,
         AlertError,
     },
+
     data: () => ({
         moment: moment,
         orders: [],
@@ -907,6 +909,9 @@ export default {
         statusFilter(after, before) {
             Fire.$emit("reloadRecords");
         },
+        searchText: _.debounce(function (after, before) {
+            Fire.$emit("reloadRecords");
+        }, 500),
     },
 
     methods: {

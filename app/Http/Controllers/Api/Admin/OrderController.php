@@ -16,7 +16,11 @@ class OrderController extends Controller
     
     public function index()
     {
-        return Order::latest()->paginate(25);
+        return Order::with(['buyer', 'seller', 'seller.shop', 'order_products', 'order_products.product', 'order_products.order_product_variations.variation_option.variation', 'receipt', 'shipping'])
+                ->latest()
+                ->filterstatus(request(['statusFilter']))
+                ->filter(request(['searchText']))
+                ->paginate(25);
     }
 
     public function store(OrderRequest $request)
@@ -26,12 +30,19 @@ class OrderController extends Controller
 
     public function show($id)
     {
-        return Order::findOrFail($id);
+        return Order::with(['products', 'receipt'])->findOrFail($id);
     }
 
     public function update(OrderRequest $request, Order $order)
     {
         $order->update($request->all());
+    }
+
+    public function updateStatus(Request $request, Order $order)
+    {
+        $order->update([
+            'status' => request('status'),
+        ]);
     }
 
     public function destroy(Order $order)

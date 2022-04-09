@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EmailController;
+use App\Http\Controllers\FallbackController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Website\HomeController;
@@ -72,4 +73,4 @@ Route::group(['middleware' => 'auth'],function () {
 
 Route::get('/{path}', [HomeController::class, 'websiteIndex'])->where('path', '.*');
 
-
+Route::fallback(FallbackController::class);

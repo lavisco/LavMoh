@@ -3,7 +3,7 @@
         class="navbar navbar-expand-lg d-flex justify-content-between"
         style="z-index: 9999"
     >
-        <a href="/coming_soon" class="navbar-brand">
+        <a href="/" class="navbar-brand">
             <svg
                 height="55"
                 viewBox="0 0 290 76"
@@ -37,7 +37,91 @@
         <div class="navbar-main-menu" id="navbarSupportedContent">
             <ul class="navbar-nav">
                 <li class="nav-item mr-3">
-                    <a class="nav-link" href="/coming_soon">Browse Products </a>
+                    <div class="dropdown show">
+                        <a
+                            class="nav-link dropdown-toggle"
+                            href="#"
+                            role="button"
+                            id="dropdownMenuLink"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                        >
+                            Browse Products
+                        </a>
+
+                        <div
+                            style="z-index: -1"
+                            class="dropdown-menu"
+                            aria-labelledby="dropdownMenuLink"
+                        >
+                            <div
+                                class="
+                                    d-flex
+                                    flex-md-row flex-column
+                                    align-items-start
+                                "
+                            >
+                                <div class="dropdown-menu-col-1 pr-md-2">
+                                    <h6 class="dropdown-header">
+                                        <a href="/categories"
+                                            >Browse by Nature</a
+                                        >
+                                    </h6>
+
+                                    <router-link
+                                        class="dropdown-item"
+                                        v-for="category in categories"
+                                        :key="category.id"
+                                        :to="{
+                                            name: 'categories/category',
+                                            params: {
+                                                categoryId: category.id,
+                                            },
+                                        }"
+                                    >
+                                        {{ category.name }}
+                                        <span class="dropdown-item-arrow">
+                                            >
+                                        </span>
+                                    </router-link>
+                                </div>
+                                <div class="dropdown-menu-col-2 pl-md-2">
+                                    <h6 class="dropdown-header">
+                                        <a href="/recipients">
+                                            Browse by Recipient
+                                        </a>
+                                    </h6>
+                                    <div class="row">
+                                        <div
+                                            class="col-md-4"
+                                            v-for="chunkRecipient in chunkedRecipients"
+                                        >
+                                            <router-link
+                                                class="dropdown-item"
+                                                v-for="recipient in chunkRecipient"
+                                                :key="recipient.id"
+                                                :to="{
+                                                    name: 'recipients/recipient',
+                                                    params: {
+                                                        recipientId:
+                                                            recipient.id,
+                                                    },
+                                                }"
+                                            >
+                                                {{ recipient.name }}
+                                                <span
+                                                    class="dropdown-item-arrow"
+                                                >
+                                                    >
+                                                </span>
+                                            </router-link>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/seller_onboard"

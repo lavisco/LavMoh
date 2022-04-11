@@ -10930,6 +10930,7 @@ section h1 {
   overflow: hidden;
   text-overflow: ellipsis;
   margin-bottom: 5px;
+  height: 25px;
 }
 .card-title a:hover {
   color: #333333;
@@ -10965,6 +10966,7 @@ section h1 {
   width: 100%;
   background-color: #ffffff;
   margin-bottom: 20px;
+  border-radius: 7px;
 }
 .card-img img {
   -o-object-fit: cover;

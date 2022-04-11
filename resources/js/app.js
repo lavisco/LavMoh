@@ -12,15 +12,7 @@ const router = new VueRouter({
     linkActiveClass: "active",
     routes: routes,
     scrollBehavior(to, from, savedPosition) {
-        if (savedPosition) {
-            //when navigating by the browser's back/forward buttons, return to prev position
-            return savedPosition;
-        } else {
-            // scroll to top
-            return {
-                top: 0,
-            };
-        }
+        document.getElementById("app").scrollIntoView();
     },
 });
 

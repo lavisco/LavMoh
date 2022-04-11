@@ -29,7 +29,7 @@ class CategoryController extends Controller
     public function show($categoryId)
     {
         $category = Category::findOrFail($categoryId);
-        $products = Product::where('category_id', $categoryId)->where('product_state_id', '1')->with(['user.shop','product_image'])->latest()->filter(request(['searchText']))->paginate(25);
+        $products = Product::where('category_id', $categoryId)->where('product_state_id', '1')->with(['category:id,name', 'user.shop', 'product_image'])->latest()->filter(request(['searchText']))->paginate(25);
 
         return response()->json([
             'products' => $products,

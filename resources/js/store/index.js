@@ -1,9 +1,12 @@
 import Vuex from "vuex";
 import Vue from "vue";
+import createPersistedState from "vuex-persistedstate";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
+    plugins: [createPersistedState()],
+
     state: {
         //data
         cart: [], //{product id, product quantity}
@@ -29,6 +32,15 @@ export default new Vuex.Store({
                     custom_text: cartItem.custom_text,
                 };
             });
+        },
+
+        cartProductQuantity(state) {
+            let totalQuantity = 0;
+            state.cart.map((cartItem) => {
+                totalQuantity += cartItem.quantity;
+            });
+
+            return totalQuantity;
         },
 
         cartTotal(state) {

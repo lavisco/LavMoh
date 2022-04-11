@@ -375,6 +375,22 @@ export let routes = [
         },
     },
     {
+        path: "/about",
+        name: "about",
+        component: require("./components/AboutUs.vue").default,
+        meta: {
+            title: "About Us",
+        },
+    },
+    {
+        path: "/contact_us",
+        name: "contact_us",
+        component: require("./components/ContactUs.vue").default,
+        meta: {
+            title: "Contact Us",
+        },
+    },
+    {
         path: "/products",
         name: "products",
         component: require("./components/Products.vue").default,
@@ -412,6 +428,14 @@ export let routes = [
         component: require("./components/ComingSoon.vue").default,
         meta: {
             title: "Coming Soon",
+        },
+    },
+    {
+        path: "/faq",
+        name: "faq",
+        component: require("./components/Faq.vue").default,
+        meta: {
+            title: "FAQ",
         },
     },
     {

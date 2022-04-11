@@ -23,7 +23,7 @@
                     class="card item-card"
                     v-for="product in category.latest_products"
                 >
-                    <div class="card-img">
+                    <div class="card-img card-img-2">
                         <img
                             :src="
                                 product.product_image
@@ -32,9 +32,23 @@
                             "
                         />
                     </div>
-                    <div class="card-title">{{ product.title }}</div>
-                    <div class="card-title card-price">
-                        {{ product.base_price }}
+                    <div class="card-body">
+                        <div class="card-title">
+                            <router-link
+                                class="card-title"
+                                :to="{
+                                    name: 'products/product',
+                                    params: {
+                                        productId: product.id,
+                                    },
+                                }"
+                            >
+                                {{ product.title }}
+                            </router-link>
+                        </div>
+                        <div class="card-title card-price">
+                            {{ product.base_price }}
+                        </div>
                     </div>
                 </div>
                 <router-link

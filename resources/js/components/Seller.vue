@@ -31,27 +31,30 @@
                                 "
                             />
                         </div>
-
-                        <div class="card-title-2">
-                            <router-link
-                                class="card-title-2"
-                                :to="{
-                                    name: 'products/product',
-                                    params: {
-                                        productId: product.id,
-                                    },
-                                }"
-                            >
-                                {{ product.title }}
-                            </router-link>
+                        <div class="px-3">
+                            <div class="card-title-2">
+                                <router-link
+                                    class="card-title-2"
+                                    :to="{
+                                        name: 'products/product',
+                                        params: {
+                                            productId: product.id,
+                                        },
+                                    }"
+                                >
+                                    {{ product.title }}
+                                </router-link>
+                            </div>
+                            <div class="card-price">
+                                {{ product.base_price }}
+                            </div>
+                            <div class="card-secondary-text">
+                                {{ product.category.name }}
+                            </div>
+                            <div class="card-secondary-text">
+                                Made by {{ product.user.shop.name }}
+                            </div>
                         </div>
-                        <div class="card-price">{{ product.base_price }}</div>
-                        <div class="card-secondary-text">
-                            Made by {{ shop.name }}
-                        </div>
-                        <button class="btn-sm btn-full btn-sm-cart mt-auto">
-                            Add to Cart
-                        </button>
                     </div>
                 </div>
             </div>

@@ -8,7 +8,7 @@
                 </h1>
                 <p>
                     <ul>
-                        <li>We are building one of a kind marketplace for you to sell you products and services to customers in srilanka. expose your business to expats living abroad and get access to unique tools built specifically for people like you to manage your customers.</li>
+                        <li>We are building one of a kind marketplace for you to sell you products and services to customers in srilanka. Expose your business to expats living abroad and get access to unique tools built specifically for people like you to manage your customers.</li>
                         <li>Create your own store, manage your orders and access to many more tools to grow your business.</li>
                     </ul>
                 </p>

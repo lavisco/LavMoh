@@ -8,8 +8,8 @@
             aria-haspopup="true"
             aria-expanded="false"
         >
-            <div class="cart-notif" v-show="totalQuantity > 0">
-                {{ totalQuantity }}
+            <div class="cart-notif" v-show="cartProductQuantity > 0">
+                {{ cartProductQuantity }}
             </div>
             <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -145,10 +145,8 @@
 
 <script>
 export default {
-    data: () => ({
-        grouped: "",
-        totalQuantity: 0,
-    }),
+    data: () => ({}),
+
     computed: {
         products() {
             return this.$store.getters.cartProducts;
@@ -159,11 +157,8 @@ export default {
         shopProducts() {
             return this.$store.getters.cartProductsByShop;
         },
-    },
-
-    watch: {
-        products(after, before) {
-            this.calcProductQuantity();
+        cartProductQuantity() {
+            return this.$store.getters.cartProductQuantity;
         },
     },
 
@@ -171,16 +166,8 @@ export default {
         removeProductFromCart(product) {
             this.$store.dispatch("removeProductFromCart", product);
         },
-        calcProductQuantity() {
-            this.totalQuantity = 0;
-            this.products.forEach((value, index) => {
-                this.totalQuantity += value.quantity;
-            });
-        },
     },
 
-    mounted() {
-        console.log("Component mounted.");
-    },
+    mounted() {},
 };
 </script>

@@ -326,10 +326,11 @@
                         </div>
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label" for="length">
-                                Package Dimensions
+                                Package Dimensions (inch)
                                 <p class="text-grey text-xs mt-2">
                                     If applicable, enter a rough estimation of
-                                    your product size when it's packaged.
+                                    your product size in inches when it's
+                                    packaged.
                                 </p>
                             </label>
 
@@ -394,27 +395,7 @@
                                 >
                                     Unit
                                 </label>
-                                <select
-                                    class="
-                                        custom-select
-                                        form-control form-control-alternative
-                                    "
-                                    name="dimensions_unit"
-                                    id="dimensions_unit"
-                                    v-model="form.dimensions_unit"
-                                >
-                                    <option value="" disabled selected hidden>
-                                        Select unit
-                                    </option>
-                                    <option>cm</option>
-                                    <option>in</option>
-                                    <option>m</option>
-                                    <option>oz</option>
-                                </select>
-                                <HasError
-                                    :form="form"
-                                    field="dimensions_unit"
-                                />
+                                <p>inches</p>
                             </div>
                         </div>
 
@@ -1646,10 +1627,16 @@ export default {
             if (this.form.has_inventory == "0") {
                 this.form.quantity = "0";
             }
+
             if (this.has_weight === true) {
                 this.form.weight = "";
                 this.form.weight_unit = "";
             }
+
+            if (this.form.length != "") {
+                this.form.dimensions_unit = "in";
+            }
+
             if (this.form.has_variations == 0) {
                 for (let i = 0; i < this.form.productVariation.length; i++) {
                     let variant = this.form.productVariation[i];

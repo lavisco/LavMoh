@@ -394,27 +394,7 @@
                                 >
                                     Unit
                                 </label>
-                                <select
-                                    class="
-                                        custom-select
-                                        form-control form-control-alternative
-                                    "
-                                    name="dimensions_unit"
-                                    id="dimensions_unit"
-                                    v-model="form.dimensions_unit"
-                                >
-                                    <option value="" disabled selected hidden>
-                                        Select unit
-                                    </option>
-                                    <option>cm</option>
-                                    <option>in</option>
-                                    <option>m</option>
-                                    <option>oz</option>
-                                </select>
-                                <HasError
-                                    :form="form"
-                                    field="dimensions_unit"
-                                />
+                                <p>inches</p>
                             </div>
                         </div>
 
@@ -907,14 +887,7 @@
 
                         <div v-show="form.has_variations == 1">
                             <div
-                                class="
-                                    card
-                                    border-light
-                                    px-4
-                                    py-4
-                                    mt-2
-                                    mb-3
-                                "
+                                class="card border-light px-4 py-4 mt-2 mb-3"
                                 v-for="(item, index) in variations"
                             >
                                 <h4>
@@ -2441,6 +2414,10 @@ export default {
         updateProduct() {
             if (this.form.has_inventory == 0) {
                 this.form.quantity == "";
+            }
+
+            if (this.form.length != "") {
+                this.form.dimensions_unit = "in";
             }
 
             this.submitButtonText = "In Progress...";

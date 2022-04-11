@@ -37,7 +37,7 @@ class ProductRequest extends FormRequest
             'length' => 'numeric|nullable',
             'width' => 'numeric|nullable',
             'height' => 'numeric|nullable',
-            'dimensions_unit' => 'max:5|required_with:length,width,height',
+            'dimensions_unit' => 'max:5|nullable',
             'weight' => 'numeric|nullable',
             'weight_unit' => 'max:5|required_with:weight',
             'base_price' => 'numeric|required',

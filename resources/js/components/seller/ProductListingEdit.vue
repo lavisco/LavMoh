@@ -270,14 +270,15 @@
                         </div>
                         <div class="form-group row mb-md-1">
                             <label class="col-md-3 col-form-label" for="length">
-                                Package Dimensions
+                                Package Dimensions (inch)
                                 <p class="text-grey text-xs mt-2">
                                     If applicable, enter a rough estimation of
-                                    your product size when it's packaged.
+                                    your product size in inches when it's
+                                    packaged.
                                 </p>
                             </label>
 
-                            <div class="col-md-2 col-6">
+                            <div class="col-md-3 col-6">
                                 <label class="col-form-label" for="length">
                                     Length
                                 </label>
@@ -293,7 +294,7 @@
                                 />
                                 <HasError :form="form" field="length" />
                             </div>
-                            <div class="col-md-2 col-6">
+                            <div class="col-md-3 col-6">
                                 <label class="col-form-label" for="width">
                                     Width
                                 </label>
@@ -309,7 +310,7 @@
                                 />
                                 <HasError :form="form" field="width" />
                             </div>
-                            <div class="col-md-2 col-6 mt-2 mt-md-0">
+                            <div class="col-md-3 col-6 mt-2 mt-md-0">
                                 <label class="col-form-label" for="height">
                                     Height
                                 </label>
@@ -324,35 +325,6 @@
                                     placeholder="Height"
                                 />
                                 <HasError :form="form" field="height" />
-                            </div>
-                            <div class="col-md-3 col-6 mt-2 mt-md-0">
-                                <label
-                                    class="col-form-label"
-                                    for="dimensions_unit"
-                                >
-                                    Unit
-                                </label>
-                                <select
-                                    class="
-                                        custom-select
-                                        form-control form-control-alternative
-                                    "
-                                    name="dimensions_unit"
-                                    id="dimensions_unit"
-                                    v-model="form.dimensions_unit"
-                                >
-                                    <option value="" disabled selected hidden>
-                                        Select unit
-                                    </option>
-                                    <option>cm</option>
-                                    <option>in</option>
-                                    <option>m</option>
-                                    <option>oz</option>
-                                </select>
-                                <HasError
-                                    :form="form"
-                                    field="dimensions_unit"
-                                />
                             </div>
                         </div>
 
@@ -2412,6 +2384,10 @@ export default {
         updateProduct() {
             if (this.form.has_inventory == 0) {
                 this.form.quantity == "";
+            }
+
+            if (this.form.length != "") {
+                this.form.dimensions_unit = "in";
             }
 
             if (this.has_weight === true) {

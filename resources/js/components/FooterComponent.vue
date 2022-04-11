@@ -61,7 +61,6 @@
                         <a href="/terms_and_conditions"> Terms & Conditions </a>
                         <a href="/privacy_policy">Privacy</a>
                         <a href="/delivery_policy"> Delivery </a>
-                        <a href="/cookie_policy">Cookie</a>
                         <a href="/payment_policy">Payment</a>
                         <a href="/returns_refunds_policy"> Return & Refunds </a>
                     </div>

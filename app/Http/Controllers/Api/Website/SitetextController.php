@@ -35,4 +35,11 @@ class SitetextController extends Controller
             'review_1' => Storage::disk('s3')->temporaryUrl('public/images/sellerOnboard/seller_onboard_review1sm.jpeg', '+2 minutes'),
         ]);
     }
+
+    public function aboutusPictures()
+    {
+        return response()->json([
+            'banner' => Storage::disk('s3')->temporaryUrl('public/images/lavisco_banner.png', '+2 minutes')
+        ]);
+    }
 }

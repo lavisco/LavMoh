@@ -195,6 +195,7 @@ Route::get('/orders/shippings/{shopId}', [WebsiteOrderController::class, 'getShi
 Route::apiResource('/orders', WebsiteOrderController::class);
 Route::apiResource('/recipients', WebsiteRecipientController::class);
 Route::apiResource('/shops', WebsiteShopController::class);
+Route::get('/sitetexts/about_pictures', [WebsiteSitetextController::class, 'aboutusPictures']);
 Route::get('/sitetexts/seller_pictures', [WebsiteSitetextController::class, 'sellerPictures']);
 Route::apiResource('/sitetexts', WebsiteSitetextController::class);
 //location

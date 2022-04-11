@@ -1,7 +1,7 @@
 <template>
         <div class="seller-onboard">
         <div class="container-fluid seller-hero px-0">
-            <div class="seller-hero-img"></div>
+            <div class="seller-hero-img" v-bind:style="{ 'background-image': 'url(' + siteInfo.banner + ')' }"></div>
             <div class="seller-hero-box container">
                 <h1 class="mb-4">
                     Lavisco.lk, the online marketplace to buy & sell cakes, unique gifts and more
@@ -62,6 +62,22 @@ Looking back as a company we've come a long way and we promise to deliver and bu
 
 <script>
 export default {
-    mounted() {},
+    data: () => ({
+        siteInfo: [],
+    }),
+
+    methods: {
+        loadData() {
+            axios
+                .get("/api/sitetexts/about_pictures")
+                .then(({data}) => {
+                    this.siteInfo = data;
+                })
+                .catch((error) => console.log(error));
+        },
+    },
+    mounted() {
+        this.loadData();
+    },
 };
 </script>

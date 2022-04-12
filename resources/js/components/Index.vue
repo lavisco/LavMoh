@@ -253,14 +253,22 @@
             </div>
         </section>
         <section class="section-shortcuts row">
-            <div class="col-md-6 shortcut-left py-4">
-                <h1>Start selling on Lavisco</h1>
+            <div class="col-md-6 shortcut-left py-4 px-md-5">
+                <h1 class="mb-3">Start selling on Lavisco</h1>
+                <h4 class="mb-5">
+                    Join a one of a kind marketplace and get an edge over your
+                    competitors.
+                </h4>
                 <router-link to="/seller_onboard">
                     <button class="bg-orange">Become a Seller</button>
                 </router-link>
             </div>
-            <div class="col-md-6 shortcut-right py-4">
-                <h1>Create an account today!</h1>
+            <div class="col-md-6 shortcut-right py-4 px-md-5">
+                <h1 class="mb-3">Create an account today!</h1>
+                <h4 class="mb-5">
+                    Sign up with Lavisco today to unlock exclusive drops and
+                    discounts!
+                </h4>
                 <a href="/register">
                     <button class="bg-green">Sign up</button>
                 </a>

@@ -77,10 +77,11 @@ h3 {
     font-size: 23px;
     text-align: center;
     text-transform: capitalize;
-    line-height: 1.4;
+    line-height: 2;
 }
 h4 {
     font-size: 16px;
+    line-height: 1.7;
     font-style: normal;
     color: $dark-grey !important;
 }
@@ -1200,7 +1201,6 @@ h4 {
     font-style: normal;
     font-weight: 500;
     font-size: 20px;
-    text-transform: capitalize;
 }
 .text-xs {
     font-size: 0.8rem;
@@ -1281,6 +1281,9 @@ h4 {
 }
 
 .main-dashboard-content {
+    h4 {
+        text-transform: capitalize;
+    }
     .modal-content {
         border: none;
     }

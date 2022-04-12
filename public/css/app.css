@@ -10040,6 +10040,11 @@ body {
   background-color: #ffffff;
   font-size: 1rem;
 }
+@media (max-width: 768px) {
+  body {
+    font-size: 0.9rem;
+  }
+}
 
 a {
   text-decoration: none;
@@ -10196,7 +10201,7 @@ button.bg-black:hover {
   width: 100%;
 }
 
-@media (min-width: 768px) {
+@media (max-width: 768px) {
   .btn-md-full {
     width: 100%;
   }
@@ -11347,14 +11352,15 @@ h4 {
   vertical-align: middle;
 }
 
+.btn-primary {
+  background-color: #976aff !important;
+}
+.btn-primary:hover, .btn-primary:focus {
+  background-color: #ff5a7c !important;
+}
+
 .main-dashboard-content .modal-content {
   border: none;
-}
-.main-dashboard-content .bg-black .btn-primary {
-  background-color: #976aff;
-}
-.main-dashboard-content .bg-black .btn-primary:hover, .main-dashboard-content .bg-black .btn-primary:focus {
-  background-color: #ff5a7c;
 }
 @media (max-width: 768px) {
   .main-dashboard-content .input-form input[type=text],
@@ -12196,29 +12202,22 @@ h4 {
   color: #6b57cf;
 }
 
-.product-seller-img {
-  border-radius: 50%;
-  width: 100px;
-  height: 100px;
+.seller-card {
+  width: 100%;
+  background-color: #f7f7f780;
+  box-shadow: 0px 0px 11px -5px #d3d3d3;
+}
+.seller-card .product-seller-img {
+  border-radius: 12px;
+  width: 100%;
+  height: 400px;
   -o-object-fit: cover;
      object-fit: cover;
 }
-@media (max-width: 768px) {
-  .product-seller-img {
-    width: 48px;
-    height: 48px;
-  }
-}
-
-.seller-card {
-  border: 1px solid #e6e6eb;
-  width: 100%;
-  gap: 10px;
-}
-@media (min-width: 768px) {
-  .seller-card {
-    width: 48%;
-  }
+.seller-card .seller-card-about {
+  max-height: 50px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .seller-card img {
   border-radius: 12px;
@@ -12229,9 +12228,24 @@ h4 {
 }
 .seller-card .topseller-product-img {
   width: 25%;
-  height: 100px;
+  height: 107px;
   -o-object-fit: cover;
      object-fit: cover;
+}
+@media (max-width: 768px) {
+  .seller-card {
+    padding: 14px;
+  }
+  .seller-card .product-seller-img {
+    height: 250px;
+  }
+  .seller-card .topseller-products {
+    gap: 4px;
+  }
+  .seller-card .topseller-product-img {
+    width: calc(25% - 4px);
+    height: 90px;
+  }
 }
 
 .dropdown-seller-product-edit .dropdown-menu {

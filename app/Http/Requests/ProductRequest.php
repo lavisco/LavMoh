@@ -51,15 +51,6 @@ class ProductRequest extends FormRequest
             'rating' => 'integer|nullable',
             'category_id' => 'required|sometimes',
 
-            //'product_state_id' => 'required|sometimes',
-            //'user_id' => 'required|sometimes',
-            //product variation request validation
-            // 'productVariation.*.sku.*' => [
-            //     'nullable',
-            //     'max:16',
-            //     'unique:product_variations,sku',
-            // ],
-
             //variations
             'productVariation.*.variation_description' => 'max:100|nullable',
             'productVariation.*.option_name.*' => 'required|sometimes',

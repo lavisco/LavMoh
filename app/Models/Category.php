@@ -22,6 +22,11 @@ class Category extends Model
         'slug',
     ];
 
+    /*
+    |--------------------------------------------------------------------------
+    | Banner Image Path
+    |--------------------------------------------------------------------------
+    */
     protected $appends = ['path'];
 
     public function getPathAttribute()

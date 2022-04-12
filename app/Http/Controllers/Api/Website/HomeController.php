@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Website;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\HomeSlider;
 use App\Models\Occasion;
 use App\Models\Product;
 use App\Models\Recipient;
@@ -35,6 +36,7 @@ class HomeController extends Controller
             'occasions' => Occasion::select('id', 'name')->latest()->get(),
             'recipients' => Recipient::select('id', 'name')->latest()->get(),
             'categories' => Category::select('id', 'name')->latest()->get(),
+            'homesliders' => HomeSlider::orderBy('order')->get(),
         ]);
     }
 

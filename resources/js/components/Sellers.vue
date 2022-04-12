@@ -15,72 +15,49 @@
             <img src="/images/lavisco/loading.gif" />
         </section>
         <section v-else class="section-best-seller mb-5">
-            <div
-                class="
-                    d-flex
-                    flex-wrap
-                    card-container
-                    align-items-center
-                    justify-content-center
-                "
-            >
-                <div class="card seller-card d-flex" v-for="shop in shops">
-                    <div class="d-flex justify-content-between mb-3">
-                        <div class="d-flex">
-                            <img
-                                :src="shop.path"
-                                class="product-seller-img mr-4"
-                                alt=""
-                            />
-                            <div>
-                                <h3 class="text-left">{{ shop.name }}</h3>
-                                <span v-html="shopRating(shop.rating)"></span>
-                                <p class="mt-3">
-                                    {{ shop.description }}
-                                </p>
+            <div class="card seller-card mb-5" v-for="shop in shops">
+                <div class="row">
+                    <div class="col-md-4 mb-3 mb-md-0">
+                        <img
+                            :src="shop.path"
+                            class="product-seller-img"
+                            :alt="shop.name"
+                        />
+                    </div>
+                    <div class="col-md-8">
+                        <h1 class="mb-0 text-left">{{ shop.name }}</h1>
+                        <span v-html="shopRating(shop.rating)"></span>
+                        <p class="my-4 seller-card-about">
+                            {{ shop.about }}
+                        </p>
+                        <div v-if="shop.products">
+                            <h6>Top selling products</h6>
+                            <div class="d-flex topseller-products">
+                                <img
+                                    :src="productImg(product.product_image)"
+                                    class="topseller-product-img"
+                                    :alt="product.title"
+                                    :title="product.title"
+                                    v-for="product in shop.products
+                                        .latest_products"
+                                    :key="product.id"
+                                />
                             </div>
                         </div>
 
-                        <a href="">
-                            <svg
-                                width="34"
-                                height="34"
-                                viewBox="0 0 45 45"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <path
-                                    d="M5.625 22.5C5.625 25.6012 8.14875 28.125 11.25 28.125C12.7387 28.125 14.085 27.5344 15.0919 26.5875L26.325 33.0075C26.2913 33.2512 26.25 33.495 26.25 33.75C26.25 36.8512 28.7738 39.375 31.875 39.375C34.9762 39.375 37.5 36.8512 37.5 33.75C37.5 30.6488 34.9762 28.125 31.875 28.125C30.3862 28.125 29.04 28.7156 28.0331 29.6625L16.8 23.2444C16.8337 22.9988 16.875 22.755 16.875 22.5C16.875 22.245 16.8337 22.0012 16.8 21.7556L28.0331 15.3375C29.04 16.2844 30.3862 16.875 31.875 16.875C34.9762 16.875 37.5 14.3512 37.5 11.25C37.5 8.14875 34.9762 5.625 31.875 5.625C28.7738 5.625 26.25 8.14875 26.25 11.25C26.25 11.505 26.2913 11.7487 26.325 11.9944L15.0919 18.4125C14.055 17.4275 12.6801 16.8773 11.25 16.875C8.14875 16.875 5.625 19.3988 5.625 22.5Z"
-                                    fill="black"
-                                />
-                            </svg>
-                        </a>
+                        <router-link
+                            :to="{
+                                name: 'seller_shop',
+                                params: {
+                                    shopId: shop.id,
+                                },
+                            }"
+                        >
+                            <button class="btn btn-primary mt-4 btn-md-full">
+                                View Seller
+                            </button>
+                        </router-link>
                     </div>
-
-                    <h6>Top selling products</h6>
-                    <div class="d-flex topseller-products" v-if="shop.products">
-                        <img
-                            :src="productImg(product.product_image)"
-                            class="topseller-product-img"
-                            :alt="product.title"
-                            :title="product.title"
-                            v-for="product in shop.products.latest_products"
-                            :key="product.id"
-                        />
-                    </div>
-
-                    <router-link
-                        :to="{
-                            name: 'seller_shop',
-                            params: {
-                                shopId: shop.id,
-                            },
-                        }"
-                    >
-                        <button class="btn-sm btn-full btn-sm-cart mt-2">
-                            View Seller
-                        </button>
-                    </router-link>
                 </div>
             </div>
             <div class="d-flex justify-content-center mt-5">

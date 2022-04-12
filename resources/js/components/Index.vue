@@ -9,21 +9,23 @@
             >
                 <swiper-slide
                     class="slide-1"
-                    v-for="product in products"
-                    :key="product.id"
+                    v-for="homeslider in homesliders"
+                    :key="homeslider.id"
                 >
                     <img
                         :src="
-                            product.product_image
-                                ? product.product_image.path
+                            homeslider.path
+                                ? homeslider.path
                                 : '/images/lavisco/img-bg.jpg'
                         "
                     />
-                    <h1 class="title">Delicious Cakes</h1>
+                    <h1 class="title">{{ homeslider.name }}</h1>
                     <h1 class="sub-title mb-5">
-                        Order cakes from local bakers near you!
+                        {{ homeslider.description }}
                     </h1>
-                    <a href="/products"><button>View Products</button></a>
+                    <a :href="homeslider.link">
+                        <button>{{ homeslider.link_text }}</button>
+                    </a>
                 </swiper-slide>
                 <div
                     class="swiper-button-next swiper-button-black"
@@ -285,6 +287,7 @@ export default {
         occasions: [],
         recipients: [],
         categories: [],
+        homesliders: [],
         swiperOption: {
             slidesPerView: 5,
             spaceBetween: 20,
@@ -339,6 +342,7 @@ export default {
                     this.occasions = response.data.occasions;
                     this.recipients = response.data.recipients;
                     this.categories = response.data.categories;
+                    this.homesliders = response.data.homesliders;
                 })
                 .catch((error) => console.log(error));
         },

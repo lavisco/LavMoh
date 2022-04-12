@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class HomeSliderRequest extends FormRequest
 {
@@ -24,12 +25,16 @@ class HomeSliderRequest extends FormRequest
     public function rules()
     {
         return [
-            'score' => 'required',
+            'order' => [
+                'required',
+                'numeric',
+                Rule::unique('home_sliders')->ignore($this->id),
+            ],
             'name' => 'required|max:100',
-            'description' => 'required|max:300',
+            'description' => 'required|max:200',
+            'link_text' => 'required|max:20',
             'link' => 'required|max:300',
-            'color' => 'required|max:10',
-            'display_picture' => 'required|max:300',
+            'banner' => 'required',
         ];
     }
 

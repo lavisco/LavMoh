@@ -33,6 +33,9 @@ body {
     overflow-x: hidden;
     background-color: #ffffff;
     font-size: 1rem;
+    @media (max-width: 768px) {
+        font-size: 0.9rem;
+    }
 }
 a {
     text-decoration: none;
@@ -177,7 +180,7 @@ button.bg-black:hover {
     width: 100%;
 }
 .btn-md-full {
-    @media (min-width: 768px) {
+    @media (max-width: 768px) {
         width: 100%;
     }
 }
@@ -1269,18 +1272,17 @@ h4 {
     vertical-align: middle;
 }
 
+.btn-primary {
+    background-color: $lav-purple !important;
+    &:hover,
+    &:focus {
+        background-color: $lav-pink !important;
+    }
+}
+
 .main-dashboard-content {
     .modal-content {
         border: none;
-    }
-    .bg-black {
-        .btn-primary {
-            background-color: $lav-purple;
-            &:hover,
-            &:focus {
-                background-color: $lav-pink;
-            }
-        }
     }
 
     @media (max-width: 768px) {
@@ -2111,23 +2113,21 @@ h4 {
     color: $lav-dark-purple;
 }
 
-.product-seller-img {
-    border-radius: 50%;
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    @media (max-width: 768px) {
-        width: 48px;
-        height: 48px;
-    }
-}
-
 .seller-card {
-    border: 1px solid #e6e6eb;
+    //border: 1px solid #f0eff1;
     width: 100%;
-    gap: 10px;
-    @media (min-width: 768px) {
-        width: 48%;
+    background-color: #f7f7f780;
+    box-shadow: 0px 0px 11px -5px #d3d3d3;
+    .product-seller-img {
+        border-radius: 12px;
+        width: 100%;
+        height: 400px;
+        object-fit: cover;
+    }
+    .seller-card-about {
+        max-height: 50px;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
     img {
         border-radius: 12px;
@@ -2138,8 +2138,21 @@ h4 {
     }
     .topseller-product-img {
         width: 25%;
-        height: 100px;
+        height: 107px;
         object-fit: cover;
+    }
+    @media (max-width: 768px) {
+        padding: 14px;
+        .product-seller-img {
+            height: 250px;
+        }
+        .topseller-products {
+            gap: 4px;
+        }
+        .topseller-product-img {
+            width: calc(25% - 4px);
+            height: 90px;
+        }
     }
 }
 

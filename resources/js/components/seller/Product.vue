@@ -40,7 +40,7 @@
                                 <router-link to="/seller/products/listing">
                                     <button
                                         type="button"
-                                        class="btn mobile-add-btn"
+                                        class="btn btn-primary mobile-add-btn"
                                     >
                                         <i
                                             class="fas fa-plus mr-md-2"

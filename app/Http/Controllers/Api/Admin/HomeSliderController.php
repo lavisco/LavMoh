@@ -19,12 +19,15 @@ class HomeSliderController extends Controller
     {
         ///$this->authorize('viewAny', HomeSlider::class);
 
-        return HomeSlider::latest()->filter(request(['searchText']))->paginate(25);
+        return HomeSlider::orderBy('order')->filter(request(['searchText']))->paginate(25);
     }
 
     public function store(HomeSliderRequest $request)
     {
         ///$this->authorize('create', HomeSlider::class);
+        $request->merge([
+            'banner' => $this->storeImage($request->banner, $request->photoName)
+        ]);
         return HomeSlider::create($request->all());
     }
 
@@ -37,6 +40,8 @@ class HomeSliderController extends Controller
     public function update(HomeSliderRequest $request, HomeSlider $homeslider)
     {
         ///$this->authorize('update', $homeslider);
+
+        $this->updateImage($request, $homeslider->banner);
         $homeslider->update($request->all());
     }
 
@@ -46,7 +51,7 @@ class HomeSliderController extends Controller
         $homeslider->delete();
     }
 
-        /**
+    /**
      * Store a newly created image in storage, and save the path to db.
      */
     

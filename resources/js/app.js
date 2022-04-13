@@ -54,6 +54,7 @@ Vue.component(
     require("./components/SuccessToast.vue").default
 );
 Vue.component("fail-toast", require("./components/FailToast.vue").default);
+Vue.component("searchbar", require("./components/SearchBar.vue").default);
 
 //Fire is a new instance of vue which will be used as a bus
 window.Fire = new Vue();

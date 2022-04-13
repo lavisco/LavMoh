@@ -48,9 +48,6 @@
         <div id="app">
             <main>
                 <div>
-                    <div class="top-ribbon">
-                        Good News! We are shipping worldwide now
-                    </div>
                     <!-- navbar section starts -->
                     <navbar-component></navbar-component>
                     <!-- navbar section ends -->

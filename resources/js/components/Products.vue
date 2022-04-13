@@ -77,7 +77,6 @@ export default {
                 })
                 .then(({ data }) => {
                     this.products = data.data;
-                    //this.$store.commit("setProducts", data.data);
                     this.loading = false;
                 })
                 .catch((error) => console.log(error));

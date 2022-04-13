@@ -34,6 +34,8 @@
             </svg>
         </a>
 
+        <searchbar></searchbar>
+
         <div class="navbar-main-menu" id="navbarSupportedContent">
             <ul class="navbar-nav">
                 <li class="nav-item mr-3">

@@ -479,6 +479,17 @@ export let routes = [
         },
     },
     {
+        path: "/results/:searchText",
+        //path: "/results",
+        //path: "/recipients/:recipientId",
+        name: "results",
+        props: true,
+        component: require("./components/ResultsPage.vue").default,
+        meta: {
+            title: "Search Results",
+        },
+    },
+    {
         path: "/sitemap",
         name: "sitemap",
         component: require("./components/Sitemap.vue").default,

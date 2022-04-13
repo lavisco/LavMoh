@@ -10144,6 +10144,10 @@ h6 {
     line-height: 60px;
   }
 
+  .sub-title {
+    font-size: 18px;
+  }
+
   section h1,
 h1 {
     font-size: 26px;
@@ -10589,19 +10593,14 @@ button.bg-black:hover {
 }
 
 /*---------------------hero---------------------*/
-.hero-swiper {
-  padding: 0 !important;
-  background-color: #ff5a7c;
-}
-
 .hero {
   position: relative;
   background-size: cover;
   background-position: center;
-  background-color: #ff5a7c;
   border-radius: 12px;
   min-height: 660px;
-  padding: 90px;
+  padding-right: 15px;
+  padding-left: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -10609,13 +10608,14 @@ button.bg-black:hover {
 }
 @media (max-width: 768px) {
   .hero {
-    padding: 30px 20px;
+    padding: 0;
   }
 }
 .hero .gallery-top {
   height: 660px;
   border-radius: 12px;
   width: 100%;
+  background-color: #ff5a7c;
 }
 .hero .swiper {
   z-index: 1;
@@ -10987,7 +10987,7 @@ section h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 20px;
   text-transform: capitalize;
 }
@@ -11071,7 +11071,8 @@ section h1 {
 
 .instruction-card {
   justify-content: space-between;
-  height: 420px;
+  align-items: center;
+  height: 430px;
   text-align: center;
   color: #ffffff;
 }
@@ -11080,11 +11081,18 @@ section h1 {
     height: auto;
   }
 }
+.instruction-card img {
+  height: auto;
+  width: 120px;
+  margin-bottom: 20px;
+}
 .instruction-card h1 {
-  text-align: left;
+  align-self: flex-start;
   font-weight: 900;
   font-size: 72px;
   color: #ffffff;
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
 }
 .instruction-card p {
   font-weight: 600;
@@ -11092,20 +11100,28 @@ section h1 {
   line-height: 37px;
 }
 .instruction-card-1 {
+  -ms-transform: rotate(-3.6deg);
   /* IE 9 */
+  background-color: #6da9e3;
   transform: rotate(-3.6deg);
 }
 .instruction-card-2 {
+  -ms-transform: rotate(1.76deg);
   /* IE 9 */
+  background-color: #a480f6;
   transform: rotate(1.76deg);
   margin-top: 10px;
 }
 .instruction-card-3 {
+  -ms-transform: rotate(-0.85deg);
   /* IE 9 */
+  background-color: #fe6e8c;
   transform: rotate(-0.85deg);
 }
 .instruction-card-4 {
+  -ms-transform: rotate(4.6deg);
   /* IE 9 */
+  background-color: #ff9e74;
   transform: rotate(4.6deg);
 }
 

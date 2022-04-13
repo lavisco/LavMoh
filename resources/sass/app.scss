@@ -125,6 +125,9 @@ h6 {
         font-size: 40px;
         line-height: 60px;
     }
+    .sub-title {
+        font-size: 18px;
+    }
     section h1,
     h1 {
         font-size: 26px;
@@ -540,31 +543,29 @@ button.bg-black:hover {
 }
 
 /*---------------------hero---------------------*/
-.hero-swiper {
-    padding: 0 !important;
-    background-color: $lav-pink;
-}
+
 .hero {
     position: relative;
     background-size: cover;
     background-position: center;
-    background-color: $lav-pink;
     border-radius: 12px;
     min-height: 660px;
-    padding: 90px;
+    padding-right: 15px;
+    padding-left: 15px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
 
     @media (max-width: 768px) {
-        padding: 30px 20px;
+        padding: 0;
     }
 
     .gallery-top {
         height: 660px;
         border-radius: 12px;
         width: 100%;
+        background-color: $lav-pink;
     }
 
     .swiper {
@@ -919,7 +920,7 @@ section {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-weight: 500;
+    font-weight: 600;
     font-size: 20px;
     text-transform: capitalize;
     .card-img-text {
@@ -1002,17 +1003,28 @@ section {
 }
 .instruction-card {
     justify-content: space-between;
-    height: 420px;
+    align-items: center;
+    height: 430px;
     text-align: center;
     color: $white;
+
     @media (max-width: 768px) {
         height: auto;
     }
+
+    img {
+        height: auto;
+        width: 120px;
+        margin-bottom: 20px;
+    }
+
     h1 {
-        text-align: left;
+        align-self: flex-start;
         font-weight: 900;
         font-size: 72px;
         color: $white;
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
     }
     p {
         font-weight: 600;
@@ -1021,19 +1033,23 @@ section {
     }
     &-1 {
         -ms-transform: rotate(-3.6deg); /* IE 9 */
+        background-color: #6da9e3;
         transform: rotate(-3.6deg);
     }
     &-2 {
         -ms-transform: rotate(1.76deg); /* IE 9 */
+        background-color: #a480f6;
         transform: rotate(1.76deg);
         margin-top: 10px;
     }
     &-3 {
         -ms-transform: rotate(-0.85deg); /* IE 9 */
+        background-color: #fe6e8c;
         transform: rotate(-0.85deg);
     }
     &-4 {
         -ms-transform: rotate(4.6deg); /* IE 9 */
+        background-color: #ff9e74;
         transform: rotate(4.6deg);
     }
 }

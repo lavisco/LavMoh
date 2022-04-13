@@ -480,8 +480,6 @@ export let routes = [
     },
     {
         path: "/results/:searchText",
-        //path: "/results",
-        //path: "/recipients/:recipientId",
         name: "results",
         props: true,
         component: require("./components/ResultsPage.vue").default,

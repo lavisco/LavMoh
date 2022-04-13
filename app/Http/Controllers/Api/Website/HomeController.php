@@ -9,6 +9,7 @@ use App\Models\Occasion;
 use App\Models\Product;
 use App\Models\Recipient;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
@@ -37,6 +38,10 @@ class HomeController extends Controller
             'recipients' => Recipient::select('id', 'name')->latest()->get(),
             'categories' => Category::select('id', 'name')->latest()->get(),
             'homesliders' => HomeSlider::orderBy('order')->get(),
+            'icon_cake' => Storage::disk('s3')->temporaryUrl('public/images/cake.png', '+2 minutes'),
+            'icon_delivery' => Storage::disk('s3')->temporaryUrl('public/images/door-delivery.png', '+2 minutes'),
+            'icon_money' => Storage::disk('s3')->temporaryUrl('public/images/send-money.png', '+2 minutes'),
+            'icon_surprise' => Storage::disk('s3')->temporaryUrl('public/images/surprise.png', '+2 minutes'),
         ]);
     }
 

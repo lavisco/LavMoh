@@ -2286,7 +2286,7 @@ export default {
 
         loadProductImages() {
             axios
-                .get("/api/admin/product_images/", {
+                .get("/api/admin/product_images", {
                     params: { productId: this.$route.params.productId },
                 })
                 .then(({ data }) => {

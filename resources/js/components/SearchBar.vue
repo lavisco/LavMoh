@@ -1,5 +1,5 @@
 <template>
-    <div class="input-group home-search-input order-2">
+    <div class="input-group home-search-input mr-0 mr-lg-3 order-2 order-lg-1">
         <input
             class="form-control"
             placeholder="Search for anything"

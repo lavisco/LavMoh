@@ -1,15 +1,7 @@
 <template>
     <div style="z-index: 9999" class="main-top-nav">
-        <nav
-            class="
-                navbar navbar-expand-lg
-                d-flex
-                justify-content-between
-                align-items-center
-                w-100
-            "
-        >
-            <a href="/" class="navbar-brand mr-4">
+        <nav class="navbar navbar-expand-lg d-flex justify-content-between">
+            <a href="/" class="navbar-brand">
                 <svg
                     height="55"
                     viewBox="0 0 290 76"
@@ -41,142 +33,140 @@
             </a>
 
             <div
-                class="
-                    order-2
-                    d-flex
-                    flex-row
-                    align-items-center
-                    mr-0
-                    w-100
-                    pt-2 pt-lg-0
-                "
+                class="navbar-main-menu order-3 order-md-1"
+                id="navbarSupportedContent"
             >
-                <div
-                    class="
-                        hide-content
-                        order-1
-                        navbar-main-menu navbar-main-menu-mobile
-                        mr-3
-                    "
-                >
-                    <div class="dropdown show">
-                        <a
-                            class="nav-link"
-                            href="#"
-                            role="button"
-                            id="dropdownMenuLink1"
-                            data-toggle="dropdown"
-                            aria-haspopup="true"
-                            aria-expanded="false"
-                        >
+                <ul class="navbar-nav">
+                    <li class="nav-item mr-3">
+                        <div class="dropdown show">
+                            <a
+                                class="nav-link"
+                                href="#"
+                                role="button"
+                                id="dropdownMenuLink"
+                                data-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    aria-hidden="true"
+                                    role="img"
+                                    width="24"
+                                    height="24"
+                                    preserveAspectRatio="xMidYMid meet"
+                                    viewBox="0 0 16 16"
+                                    class="mr-1"
+                                >
+                                    <path
+                                        fill="#333"
+                                        d="M8 5H7v3H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h1.268A2 2 0 0 1 7.5 2.677A2 2 0 0 1 10.732 5H12a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H8V5ZM5 4a1 1 0 0 0 1 1h1V4a1 1 0 0 0-2 0Zm3 1h1a1 1 0 1 0-1-1v1Zm4 4H8v5h2a2 2 0 0 0 2-2V9Zm-5 5V9H3v3a2 2 0 0 0 2 2h2Z"
+                                    />
+                                </svg>
+                                Products
+                            </a>
+
+                            <div
+                                style="z-index: -1"
+                                class="dropdown-menu"
+                                aria-labelledby="dropdownMenuLink"
+                            >
+                                <div
+                                    class="
+                                        d-flex
+                                        flex-md-row flex-column
+                                        align-items-start
+                                    "
+                                >
+                                    <div class="dropdown-menu-col-1 pr-md-2">
+                                        <h6 class="dropdown-header">
+                                            <a href="/categories"
+                                                >Browse by Nature</a
+                                            >
+                                        </h6>
+
+                                        <router-link
+                                            class="dropdown-item"
+                                            v-for="category in categories"
+                                            :key="category.id"
+                                            :to="{
+                                                name: 'categories/category',
+                                                params: {
+                                                    categoryId: category.id,
+                                                },
+                                            }"
+                                        >
+                                            {{ category.name }}
+                                            <span class="dropdown-item-arrow">
+                                                >
+                                            </span>
+                                        </router-link>
+                                    </div>
+                                    <div class="dropdown-menu-col-2 pl-md-2">
+                                        <h6 class="dropdown-header">
+                                            <a href="/recipients">
+                                                Browse by Recipient
+                                            </a>
+                                        </h6>
+                                        <div class="row">
+                                            <div
+                                                class="col-md-4"
+                                                v-for="chunkRecipient in chunkedRecipients"
+                                            >
+                                                <router-link
+                                                    class="dropdown-item"
+                                                    v-for="recipient in chunkRecipient"
+                                                    :key="recipient.id"
+                                                    :to="{
+                                                        name: 'recipients/recipient',
+                                                        params: {
+                                                            recipientId:
+                                                                recipient.id,
+                                                        },
+                                                    }"
+                                                >
+                                                    {{ recipient.name }}
+                                                    <span
+                                                        class="
+                                                            dropdown-item-arrow
+                                                        "
+                                                    >
+                                                        >
+                                                    </span>
+                                                </router-link>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/seller_onboard">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 aria-hidden="true"
                                 role="img"
-                                width="36"
-                                height="36"
+                                width="24"
+                                height="24"
                                 preserveAspectRatio="xMidYMid meet"
-                                viewBox="0 0 24 24"
+                                viewBox="0 0 1024 1024"
+                                class="mr-1"
                             >
                                 <path
                                     fill="#333"
-                                    d="M15 18H3v-2h12v2Zm6-5H3v-2h18v2Zm-6-5H3V6h12v2Z"
+                                    d="M704 704h64v192H256V704h64v64h384v-64zm188.544-152.192C894.528 559.616 896 567.616 896 576a96 96 0 1 1-192 0a96 96 0 1 1-192 0a96 96 0 1 1-192 0a96 96 0 1 1-192 0c0-8.384 1.408-16.384 3.392-24.192L192 128h640l60.544 423.808z"
                                 />
                             </svg>
+                            Seller
                         </a>
-
-                        <div
-                            style="z-index: -1"
-                            class="dropdown-menu"
-                            aria-labelledby="dropdownMenuLinkMobile"
-                        >
-                            <h6 class="dropdown-header">
-                                <a href="/categories">
-                                    Browse All Categories
-                                </a>
-                            </h6>
-                            <div class="d-flex flex-column flex-md-row">
-                                <div class="col-md-4">
-                                    <router-link
-                                        class="dropdown-item"
-                                        v-for="category in categories"
-                                        :key="category.id"
-                                        :to="{
-                                            name: 'categories/category',
-                                            params: {
-                                                categoryId: category.id,
-                                            },
-                                        }"
-                                    >
-                                        {{ category.name }}
-                                        <span class="dropdown-item-arrow">
-                                            >
-                                        </span>
-                                    </router-link>
-                                </div>
-                            </div>
-                            <h6 class="dropdown-header">
-                                <a href="/recipients">
-                                    Browse All Recipients
-                                </a>
-                            </h6>
-                            <div class="d-flex flex-column flex-md-row">
-                                <div
-                                    class="col-md-4"
-                                    v-for="chunkRecipient in chunkedRecipients"
-                                >
-                                    <router-link
-                                        class="dropdown-item"
-                                        v-for="recipient in chunkRecipient"
-                                        :key="recipient.id"
-                                        :to="{
-                                            name: 'recipients/recipient',
-                                            params: {
-                                                recipientId: recipient.id,
-                                            },
-                                        }"
-                                    >
-                                        {{ recipient.name }}
-                                        <span class="dropdown-item-arrow">
-                                            >
-                                        </span>
-                                    </router-link>
-                                </div>
-                            </div>
-                            <h6 class="dropdown-header">
-                                <a href="/occasions"> Browse All Occasions </a>
-                            </h6>
-                            <div class="d-flex flex-column flex-md-row">
-                                <div
-                                    class="col-md-4"
-                                    v-for="chunkOccasion in chunkedOccasions"
-                                >
-                                    <router-link
-                                        class="dropdown-item"
-                                        v-for="occasion in chunkOccasion"
-                                        :key="occasion.id"
-                                        :to="{
-                                            name: 'occasions/occasion',
-                                            params: {
-                                                occasionId: occasion.id,
-                                            },
-                                        }"
-                                    >
-                                        {{ occasion.name }}
-                                        <span class="dropdown-item-arrow">
-                                            >
-                                        </span>
-                                    </router-link>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <searchbar></searchbar>
+                    </li>
+                </ul>
             </div>
 
-            <div class="d-flex justify-content-end order-1 order-lg-2">
+            <searchbar></searchbar>
+
+            <div class="d-flex justify-content-end order-1 order-md-3">
                 <a class="nav-link nav-link-account mr-3" href="/login">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -209,148 +199,6 @@
                 <menu-cart></menu-cart>
             </div>
         </nav>
-        <nav class="navbar navbar-expand-lg w-100 pt-0 hide-content-md-flex">
-            <div class="navbar-main-menu order-3" id="navbarSupportedContent">
-                <ul
-                    class="
-                        navbar-nav
-                        d-flex
-                        justify-content-center
-                        align-items-center
-                    "
-                >
-                    <li
-                        class="nav-item mx-2"
-                        v-for="category in categories"
-                        :key="category.id"
-                    >
-                        <router-link
-                            class="nav-link"
-                            :to="{
-                                name: 'categories/category',
-                                params: {
-                                    categoryId: category.id,
-                                },
-                            }"
-                        >
-                            {{ category.name }}
-                        </router-link>
-                    </li>
-
-                    <div class="vertical-divider"></div>
-
-                    <li class="nav-item mx-2">
-                        <div class="dropdown show">
-                            <a
-                                class="nav-link"
-                                href="#"
-                                role="button"
-                                id="dropdownMenuLink1"
-                                data-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false"
-                            >
-                                Recipients
-                            </a>
-
-                            <div
-                                style="z-index: -1"
-                                class="dropdown-menu"
-                                aria-labelledby="dropdownMenuLink1"
-                            >
-                                <h6 class="dropdown-header">
-                                    <a href="/recipients">
-                                        Browse All Recipients
-                                    </a>
-                                </h6>
-                                <div class="d-flex flex-column flex-md-row">
-                                    <div
-                                        class="col-md-4"
-                                        v-for="chunkRecipient in chunkedRecipients"
-                                    >
-                                        <router-link
-                                            class="dropdown-item"
-                                            v-for="recipient in chunkRecipient"
-                                            :key="recipient.id"
-                                            :to="{
-                                                name: 'recipients/recipient',
-                                                params: {
-                                                    recipientId: recipient.id,
-                                                },
-                                            }"
-                                        >
-                                            {{ recipient.name }}
-                                            <span class="dropdown-item-arrow">
-                                                >
-                                            </span>
-                                        </router-link>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-
-                    <div class="vertical-divider"></div>
-
-                    <li class="nav-item mx-2">
-                        <div class="dropdown show">
-                            <a
-                                class="nav-link"
-                                href="#"
-                                role="button"
-                                id="dropdownMenuLink2"
-                                data-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false"
-                            >
-                                Occasions
-                            </a>
-
-                            <div
-                                style="z-index: -1"
-                                class="dropdown-menu"
-                                aria-labelledby="dropdownMenuLink2"
-                            >
-                                <h6 class="dropdown-header">
-                                    <a href="/occasions">
-                                        Browse All Occasions
-                                    </a>
-                                </h6>
-                                <div class="d-flex flex-column flex-md-row">
-                                    <div
-                                        class="col-md-4"
-                                        v-for="chunkOccasion in chunkedOccasions"
-                                    >
-                                        <router-link
-                                            class="dropdown-item"
-                                            v-for="occasion in chunkOccasion"
-                                            :key="occasion.id"
-                                            :to="{
-                                                name: 'occasions/occasion',
-                                                params: {
-                                                    occasionId: occasion.id,
-                                                },
-                                            }"
-                                        >
-                                            {{ occasion.name }}
-                                            <span class="dropdown-item-arrow">
-                                                >
-                                            </span>
-                                        </router-link>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-
-                    <div class="vertical-divider"></div>
-
-                    <li class="nav-item mx-2">
-                        <a class="nav-link" href="/seller_onboard"> Seller </a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
     </div>
 </template>
 
@@ -358,16 +206,12 @@
 export default {
     data: () => ({
         recipients: [],
-        occasions: [],
         categories: [],
     }),
 
     computed: {
         chunkedRecipients() {
-            return _.chunk(this.recipients, 7);
-        },
-        chunkedOccasions() {
-            return _.chunk(this.occasions, 6);
+            return _.chunk(this.recipients, 8);
         },
     },
 
@@ -377,7 +221,6 @@ export default {
                 .get("/api/home")
                 .then((response) => {
                     this.recipients = response.data.recipients;
-                    this.occasions = response.data.occasions;
                     this.categories = response.data.categories;
                 })
                 .catch((error) => console.log(error));

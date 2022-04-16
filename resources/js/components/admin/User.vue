@@ -23,6 +23,7 @@
                                         <th scope="col">Email</th>
                                         <th scope="col">Status</th>
                                         <th scope="col">Date joined</th>
+                                        <th scope="col">Email verified</th>
                                         <th scope="col">Role</th>
                                         <th scope="col"></th>
                                     </tr>
@@ -70,7 +71,22 @@
                                                 Inactive
                                             </span>
                                         </td>
-                                        <td>{{ user.created_at }}</td>
+                                        <td>
+                                            {{
+                                                moment(user.created_at).format(
+                                                    "DD-MM-YYYY"
+                                                )
+                                            }}
+                                        </td>
+                                        <td>
+                                            {{
+                                                user.email_verified_at
+                                                    ? moment(
+                                                          user.email_verified_at
+                                                      ).format("DD-MM-YYYY")
+                                                    : "not verified"
+                                            }}
+                                        </td>
                                         <td>{{ user.role.name }}</td>
                                         <td class="text-right">
                                             <div class="dropdown">
@@ -134,45 +150,6 @@
                                     </tr>
                                 </tbody>
                             </table>
-                        </div>
-                        <!-- Card Footer -->
-                        <div class="card-footer py-4">
-                            <nav aria-label="...">
-                                <ul class="pagination justify-content-end mb-0">
-                                    <li class="page-item disabled">
-                                        <a
-                                            class="page-link"
-                                            href="#"
-                                            tabindex="-1"
-                                        >
-                                            <i class="fas fa-angle-left"></i>
-                                            <span class="sr-only"
-                                                >Previous</span
-                                            >
-                                        </a>
-                                    </li>
-                                    <li class="page-item active">
-                                        <a class="page-link" href="#">1</a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#"
-                                            >2
-                                            <span class="sr-only"
-                                                >(current)</span
-                                            ></a
-                                        >
-                                    </li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">3</a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">
-                                            <i class="fas fa-angle-right"></i>
-                                            <span class="sr-only">Next</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
                         </div>
                     </div>
                 </div>
@@ -485,6 +462,7 @@
 <script>
 import Form from "vform";
 import { HasError, AlertError } from "vform/src/components/bootstrap4";
+import moment from "moment";
 
 export default {
     components: {
@@ -493,6 +471,7 @@ export default {
     },
 
     data: () => ({
+        moment: moment,
         editMode: false,
         passwordMode: false,
         loading: true,

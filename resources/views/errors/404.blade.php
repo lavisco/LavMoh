@@ -15,7 +15,7 @@
         <h1>Oops! Page not found.</h1>
         <h3>
             Go back to
-            <a href="/lavisco/home" class="pink">Home</a>
+            <a href="/" class="pink">Home</a>
         </h3>
     </div>
 </div>

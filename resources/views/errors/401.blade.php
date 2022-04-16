@@ -15,7 +15,7 @@
         <h1>You are unauthorized for this action</h1>
         <h3>
             Go back to
-            <a href="/lavisco/home" class="pink">Home</a>
+            <a href="/" class="pink">Home</a>
         </h3>
     </div>
 </div>

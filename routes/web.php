@@ -34,9 +34,9 @@ Route::get('/login', function () {
 
 //Route::get('/emailTest', [EmailController::class, 'sendWelcomeEmail']);
 
-Route::get('/email', function() {
-    return new StoreActiveApplicationMail();
-});
+// Route::get('/email', function() {
+//     return new StoreActiveApplicationMail();
+// });
 
 Auth::routes(['verify' => true]);
 

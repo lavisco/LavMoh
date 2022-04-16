@@ -1,5 +1,5 @@
 <template>
-    <div class="dropdown show nav-link">
+    <div class="dropdown show nav-link nav-link-account">
         <a
             href="#"
             role="button"

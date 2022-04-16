@@ -32,7 +32,7 @@
                 </svg>
             </a>
 
-            <div class="navbar-main-menu" id="navbarSupportedContent">
+            <div class="navbar-main-menu order-3 order-md-1" id="navbarSupportedContent">
                 <ul class="navbar-nav">
                     <li class="nav-item mr-3">
                         <div class="dropdown show">
@@ -163,8 +163,8 @@
 
             <searchbar></searchbar>
 
-            <div class="d-flex justify-content-end">
-                <a class="nav-link mr-3" href="/login">
+            <div class="d-flex justify-content-end order-1 order-md-3">
+                <a class="nav-link nav-link-account mr-3" href="/login">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         aria-hidden="true"
@@ -173,14 +173,22 @@
                         height="23"
                         preserveAspectRatio="xMidYMid meet"
                         viewBox="0 0 24 24"
-                        class="mr-1"
+                        class="mr-md-1"
                     >
                         <path
                             fill="#333"
                             d="M12 4a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4Z"
                         />
                     </svg>
-                    <div class="d-flex flex-column align-items-start line-height-min">
+                    <div
+                        class="
+                            nav-link-account-text
+                            d-flex
+                            flex-column
+                            align-items-start
+                            line-height-min
+                        "
+                    >
                         <span class="nav-tiny-text">Sign In</span>
                         Account
                     </div>

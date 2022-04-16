@@ -10458,6 +10458,23 @@ button.bg-black:hover {
   color: #976aff;
 }
 
+@media (max-width: 992px) {
+  .nav-link-account {
+    padding: 0 !important;
+  }
+  .nav-link-account:hover {
+    border: none !important;
+    border-color: transparent !important;
+  }
+  .nav-link-account svg {
+    width: 30px;
+    height: 30px;
+  }
+  .nav-link-account .nav-link-account-text {
+    display: none !important;
+  }
+}
+
 .nav-tiny-text {
   font-weight: 400;
   font-size: 12px;
@@ -10505,8 +10522,6 @@ button.bg-black:hover {
 
   .navbar-main-menu {
     width: 100%;
-    order: 2;
-    margin-bottom: 10px;
   }
   .navbar-main-menu .navbar-nav {
     flex-direction: row;
@@ -10514,8 +10529,8 @@ button.bg-black:hover {
     margin-top: 10px;
   }
   .navbar-main-menu .nav-link {
-    padding: 5px 10px;
-    font-size: 17px;
+    height: 43px;
+    padding: 8px 14px !important;
   }
 
   .nav-user-options {
@@ -11321,6 +11336,13 @@ footer a:hover svg path {
   padding: 2px;
   font-size: 16px;
 }
+@media (max-width: 768px) {
+  .home-search-input {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 5px;
+  }
+}
 .home-search-input input[type=text] {
   border: none;
   box-shadow: none;
@@ -11414,13 +11436,18 @@ h4 {
   display: inline-block !important;
 }
 
+.hide-content-sm-flex {
+  display: flex !important;
+}
+
 @media (max-width: 768px) {
   .hide-content {
     display: block !important;
   }
 
   .hide-content-sm,
-.hide-content-sm-inline {
+.hide-content-sm-inline,
+.hide-content-sm-flex {
     display: none !important;
   }
 }
@@ -12435,6 +12462,11 @@ h4 {
   color: white;
   font-size: 11px;
   font-weight: 600;
+}
+@media (max-width: 768px) {
+  .cart-notif {
+    right: -9px;
+  }
 }
 
 .cart-shop-banner {

@@ -10394,9 +10394,14 @@ button.bg-black:hover {
   height: 35px;
 }
 
+.main-top-nav {
+  background: rgba(239, 239, 239, 0.31);
+  margin-bottom: 20px;
+}
+
 .navbar {
-  padding-top: 18px;
-  padding-bottom: 18px;
+  padding-top: 16px;
+  padding-bottom: 16px;
   z-index: 999 !important;
 }
 
@@ -10422,10 +10427,15 @@ button.bg-black:hover {
 }
 
 .nav-link {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
   font-style: normal;
-  font-weight: 500;
-  font-size: 20px;
-  padding: 5px 10px !important;
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: 0.025em;
+  padding: 8px 16px !important;
   text-align: center;
   text-transform: capitalize;
   color: #333333;
@@ -10437,6 +10447,27 @@ button.bg-black:hover {
   color: #976aff;
   border: 1px solid #976aff;
   border-radius: 12px;
+}
+.nav-link:hover svg path {
+  fill: #976aff;
+}
+.nav-link:hover svg circle {
+  fill: #976aff;
+}
+.nav-link:hover .nav-tiny-text {
+  color: #976aff;
+}
+
+.nav-tiny-text {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 10px;
+  color: #333333;
+  margin-bottom: 3px;
+}
+
+.line-height-min {
+  line-height: 17px;
 }
 
 .nav-item-divider {
@@ -11281,16 +11312,25 @@ footer a:hover svg path {
 }
 
 /*------------------------------search------------------------------*/
+.home-search-input {
+  height: 50px;
+  width: 45%;
+  border: 1px solid rgba(196, 196, 196, 0.61);
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 2px;
+  font-size: 16px;
+}
 .home-search-input input[type=text] {
-  border: 1px solid #3333333b;
+  border: none;
   box-shadow: none;
-  padding: 8px 22px !important;
+  padding: 6px 18px !important;
   height: auto !important;
   border-radius: 12px;
   resize: none;
   background-color: #ffffff;
 }
-.home-search-input input[type=text]:focus {
+.home-search-input:focus {
   border: 1px solid #836aff9f;
   outline: none;
   transition: all 0.3s ease;
@@ -11300,7 +11340,10 @@ footer a:hover svg path {
   -o-transition: all 0.3s ease;
 }
 .home-search-input .btn {
-  padding: 8px 16px !important;
+  border-radius: 12px !important;
+  width: 44px;
+  height: 44px;
+  padding: 0 !important;
 }
 
 /*------------------------------dashboard------------------------------*/
@@ -11574,6 +11617,15 @@ h4 {
   background-color: #c5c5c5 !important;
 }
 .btn-grey:hover {
+  background-color: #adadad !important;
+}
+
+.btn-sm-grey {
+  background-color: #c5c5c5 !important;
+  border-color: #c5c5c5 !important;
+  color: #333333 !important;
+}
+.btn-sm-grey:hover {
   background-color: #adadad !important;
 }
 
@@ -12370,8 +12422,8 @@ h4 {
 
 .cart-notif {
   position: absolute;
-  top: -3px;
-  left: -4px;
+  top: 3px;
+  right: 4px;
   width: 21px;
   height: 21px;
   display: flex;

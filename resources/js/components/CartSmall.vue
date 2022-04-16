@@ -1,5 +1,5 @@
 <template>
-    <div class="dropdown show">
+    <div class="dropdown show nav-link">
         <a
             href="#"
             role="button"
@@ -13,64 +13,19 @@
             </div>
             <svg
                 xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                width="78"
-                height="79"
-                viewBox="0 0 78000 79000"
+                aria-hidden="true"
+                role="img"
+                width="34"
+                height="34"
+                preserveAspectRatio="xMidYMid meet"
+                viewBox="0 0 24 24"
             >
-                <g filter="url(#a)">
-                    <rect
-                        fill="#fff"
-                        width="58000"
-                        height="59000"
-                        x="10000"
-                        y="10000"
-                        rx="12000"
-                    />
-                </g>
                 <path
-                    d="M24558 21520a2063 2063 0 10 0 4127h2517l630 2521c5 30 12 58 20 87l2802 11204-1843 1840c-2600 2600-760 7043 2918 7043h17716a2064 2064 0 00 0-4127H31602l2063-2063h13590a2063 2063 0 00 1844-1141l6189-12380a2064 2064 0 00-1845-2986h-22120l-640-2565a2063 2063 0 00-2000-1562h-4127zM51380 53502a3095 3095 0 11-6190 0 3095 3095 0 01 6190 0zm-19600 3095a3095 3095 0 10 0-6189 3095 3095 0 00 0 6190"
                     fill="#333"
+                    d="M21.822 7.431A1 1 0 0 0 21 7H7.333L6.179 4.23A1.994 1.994 0 0 0 4.333 3H2v2h2.333l4.744 11.385A1 1 0 0 0 10 17h8c.417 0 .79-.259.937-.648l3-8a1 1 0 0 0-.115-.921z"
                 />
-                <defs>
-                    <filter
-                        id="a"
-                        width="78000"
-                        height="79000"
-                        x="0"
-                        y="0"
-                        color-interpolation-filters="sRGB"
-                        filterUnits="userSpaceOnUse"
-                    >
-                        <feFlood
-                            flood-opacity="0"
-                            result="BackgroundImageFix"
-                        />
-                        <feColorMatrix
-                            in="SourceAlpha"
-                            result="hardAlpha"
-                            type="matrix"
-                            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-                        />
-                        <feOffset />
-                        <feGaussianBlur stdDeviation="5" />
-                        <feColorMatrix
-                            type="matrix"
-                            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"
-                        />
-                        <feBlend
-                            in2="BackgroundImageFix"
-                            mode="normal"
-                            result="effect1_dropShadow_2202_1029"
-                        />
-                        <feBlend
-                            in="SourceGraphic"
-                            in2="effect1_dropShadow_2202_1029"
-                            mode="normal"
-                            result="shape"
-                        />
-                    </filter>
-                </defs>
+                <circle cx="10.5" cy="19.5" r="1.5" fill="#333" />
+                <circle cx="17.5" cy="19.5" r="1.5" fill="#333" />
             </svg>
         </a>
 

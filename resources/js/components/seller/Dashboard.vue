@@ -88,6 +88,16 @@
                                 >
                                     Confirmation
                                 </button>
+                                <button
+                                    type="button"
+                                    class="
+                                        btn-sm btn-sm-cart btn-sm-grey btn-full
+                                        mt-3
+                                    "
+                                    @click.prevent="logout"
+                                >
+                                    Cancel
+                                </button>
                             </div>
                             <div class="col-md-9 shop-setup-content">
                                 <!-- Form start -->
@@ -1638,6 +1648,17 @@ export default {
                     this.submitButtonDisabled = false;
                     console.log(error);
                     this.failed = true;
+                });
+        },
+
+        logout() {
+            axios
+                .post("/logout")
+                .then((response) => {
+                    window.location.replace("/login");
+                })
+                .catch((error) => {
+                    console.log(error);
                 });
         },
 

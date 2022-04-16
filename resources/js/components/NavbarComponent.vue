@@ -1,5 +1,5 @@
 <template>
-    <div style="z-index: 9999">
+    <div style="z-index: 9999" class="main-top-nav">
         <nav class="navbar navbar-expand-lg d-flex justify-content-between">
             <a href="/" class="navbar-brand">
                 <svg
@@ -37,7 +37,7 @@
                     <li class="nav-item mr-3">
                         <div class="dropdown show">
                             <a
-                                class="nav-link dropdown-toggle"
+                                class="nav-link"
                                 href="#"
                                 role="button"
                                 id="dropdownMenuLink"
@@ -45,6 +45,21 @@
                                 aria-haspopup="true"
                                 aria-expanded="false"
                             >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    aria-hidden="true"
+                                    role="img"
+                                    width="24"
+                                    height="24"
+                                    preserveAspectRatio="xMidYMid meet"
+                                    viewBox="0 0 16 16"
+                                    class="mr-1"
+                                >
+                                    <path
+                                        fill="#333"
+                                        d="M8 5H7v3H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h1.268A2 2 0 0 1 7.5 2.677A2 2 0 0 1 10.732 5H12a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H8V5ZM5 4a1 1 0 0 0 1 1h1V4a1 1 0 0 0-2 0Zm3 1h1a1 1 0 1 0-1-1v1Zm4 4H8v5h2a2 2 0 0 0 2-2V9Zm-5 5V9H3v3a2 2 0 0 0 2 2h2Z"
+                                    />
+                                </svg>
                                 Products
                             </a>
 
@@ -124,80 +139,53 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/seller_onboard">Seller</a>
+                        <a class="nav-link" href="/seller_onboard">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                aria-hidden="true"
+                                role="img"
+                                width="24"
+                                height="24"
+                                preserveAspectRatio="xMidYMid meet"
+                                viewBox="0 0 1024 1024"
+                                class="mr-1"
+                            >
+                                <path
+                                    fill="#333"
+                                    d="M704 704h64v192H256V704h64v64h384v-64zm188.544-152.192C894.528 559.616 896 567.616 896 576a96 96 0 1 1-192 0a96 96 0 1 1-192 0a96 96 0 1 1-192 0a96 96 0 1 1-192 0c0-8.384 1.408-16.384 3.392-24.192L192 128h640l60.544 423.808z"
+                                />
+                            </svg>
+                            Seller
+                        </a>
                     </li>
                 </ul>
             </div>
 
             <searchbar></searchbar>
 
-            <div class="d-flex nav-user-options justify-content-end">
-                <menu-cart></menu-cart>
-                <a href="/login">
+            <div class="d-flex justify-content-end">
+                <a class="nav-link mr-3" href="/login">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        width="78"
-                        height="79"
-                        viewBox="0 0 780 790"
+                        aria-hidden="true"
+                        role="img"
+                        width="23"
+                        height="23"
+                        preserveAspectRatio="xMidYMid meet"
+                        viewBox="0 0 24 24"
+                        class="mr-1"
                     >
-                        <g filter="url(#a)">
-                            <rect
-                                fill="#fff"
-                                width="580"
-                                height="590"
-                                x="100"
-                                y="100"
-                                rx="120"
-                            />
-                        </g>
                         <path
-                            d="M246.25 562.5s-28.75 0-28.75-28.75 28.75-115 172.5-115 172.5 86.25 172.5 115-28.75 28.75-28.75 28.75h-287.5zM390 390a86.25 86.25 0 10 0-172.5A86.25 86.25 0 00 390 390"
                             fill="#333"
-                            fill-rule="evenodd"
-                            clip-rule="evenodd"
+                            d="M12 4a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4Z"
                         />
-                        <defs>
-                            <filter
-                                id="a"
-                                width="780"
-                                height="790"
-                                x="0"
-                                y="0"
-                                color-interpolation-filters="sRGB"
-                                filterUnits="userSpaceOnUse"
-                            >
-                                <feFlood
-                                    flood-opacity="0"
-                                    result="BackgroundImageFix"
-                                />
-                                <feColorMatrix
-                                    in="SourceAlpha"
-                                    result="hardAlpha"
-                                    type="matrix"
-                                    values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-                                />
-                                <feOffset />
-                                <feGaussianBlur stdDeviation="5" />
-                                <feColorMatrix
-                                    type="matrix"
-                                    values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"
-                                />
-                                <feBlend
-                                    in2="BackgroundImageFix"
-                                    mode="normal"
-                                    result="effect1_dropShadow_2202_1045"
-                                />
-                                <feBlend
-                                    in="SourceGraphic"
-                                    in2="effect1_dropShadow_2202_1045"
-                                    mode="normal"
-                                    result="shape"
-                                />
-                            </filter>
-                        </defs>
                     </svg>
+                    <div class="d-flex flex-column align-items-start line-height-min">
+                        <span class="nav-tiny-text">Sign In</span>
+                        Account
+                    </div>
                 </a>
+                <menu-cart></menu-cart>
             </div>
         </nav>
     </div>

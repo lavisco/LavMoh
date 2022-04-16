@@ -46,7 +46,7 @@ class UserController extends Controller
             'role_id' => Role::IS_SELLER,
         ]);
 
-        event(new Registered($user));
+        //event(new Registered($user));
     }
 
     public function storeShopSetup(SellerRegisterRequest $request)

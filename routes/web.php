@@ -38,7 +38,9 @@ Route::get('/login', function () {
 //     return new StoreActiveApplicationMail();
 // });
 
-Auth::routes(['verify' => true]);
+Auth::routes();
+
+//Auth::routes(['verify' => true]);
 
 Route::get('/email/verify', function () {
     return view('auth.verify-email');

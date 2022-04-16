@@ -101,9 +101,9 @@
         <!-- Notification Modal -->
         <success-modal
             id="success-modal"
-            msgTitle="Verify Your Email Address"
-            msg="Before proceeding, please check your email for a verification link."
-            gotoRoute="verify-email"
+            msgTitle="Successfully Registered"
+            msg="You are now a Lavisco Seller! You'll be redirected to the login page."
+            gotoRoute="login"
         />
         <fail-modal
             id="fail-modal"

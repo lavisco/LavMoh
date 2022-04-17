@@ -1,24 +1,27 @@
 <template>
     <div class="container-fluid">
-        <div class="hero">
-            <h1 class="title text-center">Privacy Policy</h1>
-            <h1 class="sub-title mb-5 text-center">
-                We work hard to protect your information and put you in control.
-            </h1>
+        <div class="hero hero-default">
+            <div class="slide-content">
+                <h1 class="title mb-3">Privacy Policy</h1>
+                <h1 class="sub-title mb-5">
+                    We work hard to protect your information and put you in
+                    control.
+                </h1>
+            </div>
         </div>
 
         <div class="container">
             <section>
-                <h4 class="black mb-4">Table of Contents</h4>
-                <a href="#1"><h6>01 - Privacy Clause?</h6></a>
-                <a href="#2"><h6>02 - Interpretation and Definitions</h6></a>
+                <h1 class="text-left mb-4">Table of Contents</h1>
+                <a href="#1"><h4>01 - Privacy Clause?</h4></a>
+                <a href="#2"><h4>02 - Interpretation and Definitions</h4></a>
                 <a href="#3"
-                    ><h6>03 - Collecting and Using Your Personal Data</h6></a
+                    ><h4>03 - Collecting and Using Your Personal Data</h4></a
                 >
-                <a href="#4"><h6>04 - Children's Privacy</h6></a>
-                <a href="#5"><h6>05 - Links to Other Websites</h6></a>
-                <a href="#6"><h6>06 - Changes to this Privacy Policy</h6></a>
-                <a href="#7"><h6>07 - Contact Us</h6></a>
+                <a href="#4"><h4>04 - Children's Privacy</h4></a>
+                <a href="#5"><h4>05 - Links to Other Websites</h4></a>
+                <a href="#6"><h4>06 - Changes to this Privacy Policy</h4></a>
+                <a href="#7"><h4>07 - Contact Us</h4></a>
             </section>
             <section id="1">
                 <h1 class="text-left">01 - Privacy Clause</h1>

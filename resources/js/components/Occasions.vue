@@ -1,10 +1,13 @@
 <template>
     <div class="container-fluid">
-        <div class="hero">
-            <h1 class="title text-center">Browse All occasions</h1>
-            <h1 class="sub-title mb-5 text-center">
-                From cakes to bags, Lavisco has everything you are looking for!
-            </h1>
+        <div class="hero hero-default">
+            <div class="slide-content">
+                <h1 class="title mb-3">Browse All Occasions</h1>
+                <h1 class="sub-title mb-5">
+                    From cakes to bags, Lavisco has everything you are looking
+                    for!
+                </h1>
+            </div>
         </div>
         <section
             v-if="loading"

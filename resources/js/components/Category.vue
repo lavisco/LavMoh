@@ -1,13 +1,15 @@
 <template>
     <div class="container-fluid">
         <div
-            class="hero"
+            class="hero hero-default"
             v-bind:style="{ 'background-image': 'url(' + category.path + ')' }"
         >
-            <h1 class="title text-center">Browse {{ category.name }}</h1>
-            <h1 class="sub-title mb-5 text-center">
-                {{ category.description }}
-            </h1>
+            <div class="slide-content">
+                <h1 class="title mb-3">Browse {{ category.name }}</h1>
+                <h1 class="sub-title mb-5">
+                    {{ category.description }}
+                </h1>
+            </div>
         </div>
         <section class="section-best-seller mb-5">
             <div class="d-flex flex-wrap justify-content-center card-container">

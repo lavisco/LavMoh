@@ -1,19 +1,23 @@
 <template>
     <div class="container-fluid">
-        <div class="hero">
-            <h1 class="title text-center">Delivery Policy</h1>
-            <h1 class="sub-title mb-5 text-center">All about our delivery policy</h1>
+        <div class="hero hero-default">
+            <div class="slide-content">
+                <h1 class="title mb-3">Delivery Policy</h1>
+                <h1 class="sub-title mb-5">
+                    All about our delivery policy
+                </h1>
+            </div>
         </div>
         <div class="container">
             <section>
-                <h4 class="black mb-4">Table of Contents</h4>
-                <a href="#1"><h6>01 - Delivery Info</h6></a>
-                <a href="#2"><h6>02 - Where do we deliver?</h6></a>
-                <a href="#3"><h6>02 - How do I track my order?</h6></a>
+                <h1 class="text-left mb-4">Table of Contents</h1>
+                <a href="#1"><h4>01 - Delivery Info</h4></a>
+                <a href="#2"><h4>02 - Where do we deliver?</h4></a>
+                <a href="#3"><h4>02 - How do I track my order?</h4></a>
                 <a href="#4"
-                    ><h6>
+                    ><h4>
                         02 - How can I ensure the safety of my products?
-                    </h6></a
+                    </h4></a
                 >
             </section>
             <section id="1">

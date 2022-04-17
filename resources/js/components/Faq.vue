@@ -1,10 +1,10 @@
 <template>
     <div class="container-fluid">
-        <div class="hero">
-            <h1 class="title text-center">FAQ</h1>
-            <h1 class="sub-title mb-5 text-center">
-                Frequently Asked Questions
-            </h1>
+        <div class="hero hero-default">
+            <div class="slide-content">
+                <h1 class="title mb-3">FAQ</h1>
+                <h1 class="sub-title mb-5">Frequently Asked Questions</h1>
+            </div>
         </div>
         <section class="mb-5">
             <h1 class="text-left">Coming soon</h1>

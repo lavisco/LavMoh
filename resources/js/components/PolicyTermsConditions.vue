@@ -1,26 +1,29 @@
 <template>
     <div class="container-fluid">
-        <div class="hero">
-            <h1 class="title text-center">Terms & Conditions</h1>
-            <h1 class="sub-title mb-5 text-center">
-                Read and get to know the legal stuff when using our platform
-            </h1>
+        <div class="hero hero-default">
+            <div class="slide-content">
+                <h1 class="title mb-3">Terms & Conditions</h1>
+                <h1 class="sub-title mb-5">
+                    Read and get to know the legal stuff when using our platform
+                </h1>
+            </div>
         </div>
+
         <div class="container">
             <section>
-                <h4 class="black mb-4">Table of Contents</h4>
-                <a href="#1"><h6>01 - Overview</h6></a>
-                <a href="#2"><h6>02 - Online store terms</h6></a>
-                <a href="#3"><h6>03 - General conditions</h6></a>
+                <h1 class="text-left mb-4">Table of Contents</h1>
+                <a href="#1"><h4>01 - Overview</h4></a>
+                <a href="#2"><h4>02 - Online store terms</h4></a>
+                <a href="#3"><h4>03 - General conditions</h4></a>
                 <a href="#4"
-                    ><h6>
+                    ><h4>
                         04 - Accuracy completeness and timeliness of information
-                    </h6></a
+                    </h4></a
                 >
                 <a href="#5"
-                    ><h6>05 - Modifications to the service/prices</h6></a
+                    ><h4>05 - Modifications to the service/prices</h4></a
                 >
-                <a href="#6"><h6>06 - Products or services</h6></a>
+                <a href="#6"><h4>06 - Products or services</h4></a>
             </section>
             <section id="1">
                 <h1 class="text-left">01 - Overview</h1>

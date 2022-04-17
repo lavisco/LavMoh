@@ -19,13 +19,15 @@
                                 : '/images/lavisco/img-bg.jpg'
                         "
                     />
-                    <h1 class="title px-3">{{ homeslider.name }}</h1>
-                    <h1 class="sub-title mb-5 px-3">
-                        {{ homeslider.description }}
-                    </h1>
-                    <a :href="homeslider.link">
-                        <button>{{ homeslider.link_text }}</button>
-                    </a>
+                    <div class="slide-content">
+                        <h1 class="title mb-3">{{ homeslider.name }}</h1>
+                        <h1 class="sub-title mb-5">
+                            {{ homeslider.description }}
+                        </h1>
+                        <a :href="homeslider.link">
+                            <button>{{ homeslider.link_text }}</button>
+                        </a>
+                    </div>
                 </swiper-slide>
                 <div
                     class="swiper-button-next swiper-button-black"

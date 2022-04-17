@@ -13,6 +13,59 @@
             </div>
             <div v-else class="row">
                 <div class="col">
+                    <div id="accordion">
+                        <div class="card mb-3">
+                            <div class="card-header" id="headingOne">
+                                <h5 class="mb-0">
+                                    <button
+                                        class="btn btn-link collapsed"
+                                        data-toggle="collapse"
+                                        data-target="#collapseOne"
+                                        aria-expanded="false"
+                                        aria-controls="collapseOne"
+                                    >
+                                        Naming conventions
+                                    </button>
+                                </h5>
+                            </div>
+
+                            <div
+                                id="collapseOne"
+                                class="collapse"
+                                aria-labelledby="headingOne"
+                                data-parent="#accordion"
+                            >
+                                <div class="card-body">
+                                    <ol>
+                                        <li>
+                                            Each word in the key / key name
+                                            must be seperated by an underscore
+                                            _
+                                        </li>
+                                        <li>
+                                            Key name for text content - Add
+                                            '_text' at the end of name
+                                        </li>
+                                        <li>
+                                            Key name for image content - Add
+                                            '_image' at the end of name
+                                        </li>
+                                        <li>
+                                            Key name for multiple text/ image content
+                                            - Add serial number e.g. '_1', '_2',
+                                            at the end of name
+                                        </li>
+                                        <li>
+                                            For more information refer to the
+                                            Lavisco naming guide or contact
+                                            admin
+                                        </li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="card">
                         <!-- Table start -->
                         <div class="table-responsive">
@@ -264,8 +317,8 @@
                                         <p class="image-upload-filename mt-2">
                                             {{
                                                 this.form.content
-                                                ? this.form.photoName
-                                                : `Choose file`
+                                                    ? this.form.photoName
+                                                    : `Choose file`
                                             }}
                                         </p>
                                     </div>

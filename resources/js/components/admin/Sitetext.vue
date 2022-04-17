@@ -253,19 +253,19 @@
                                             "
                                         >
                                             <i
-                                                v-show="!this.photoName"
+                                                v-show="!this.content"
                                                 class="fas fa-plus"
                                             ></i>
                                             <i
-                                                v-show="this.photoName"
+                                                v-show="this.content"
                                                 class="fas fa-check"
                                             ></i>
                                         </button>
                                         <p class="image-upload-filename mt-2">
                                             {{
-                                                this.photoName
-                                                    ? this.photoName
-                                                    : `Choose file`
+                                                this.form.content
+                                                ? this.form.photoName
+                                                : `Choose file`
                                             }}
                                         </p>
                                     </div>
@@ -322,7 +322,6 @@ export default {
         loading: true,
         sitetexts: [],
         searchText: null,
-        photoName: null,
         form: new Form({
             id: "",
             key: "",
@@ -348,7 +347,7 @@ export default {
             }
             reader.onloadend = (file) => {
                 this.form.content = reader.result;
-                this.photoName = e.target.files[0].name;
+                this.form.photoName = e.target.files[0].name;
             };
             reader.readAsDataURL(file);
         },
@@ -366,6 +365,7 @@ export default {
             this.form.reset();
             $("#addRecord").modal("show");
             this.form.fill(sitetext);
+            this.form.photoName = this.form.content;
         },
         loadSitetexts() {
             axios

@@ -182,6 +182,7 @@
                                                 <tbody>
                                                     <tr
                                                         v-for="shipping in shippings"
+                                                        :key="shipping.id"
                                                     >
                                                         <th scope="row">
                                                             <input
@@ -198,30 +199,31 @@
                                                         <td>
                                                             {{ shipping.type }}
                                                             <br />
+                                                            <div
+                                                                class="text-xxs"
+                                                            >
+                                                                Price
+                                                            </div>
                                                             LKR
                                                             {{ shipping.price }}
-                                                            <br />
-                                                            <span
-                                                                class="
-                                                                    text-sm
-                                                                    text-grey
-                                                                "
-                                                                >Delivery Time
-                                                            </span>
+                                                            <div
+                                                                class="text-xxs"
+                                                            >
+                                                                Delivery Time
+                                                            </div>
                                                             {{
                                                                 shipping.delivery_time
                                                             }}
+                                                            day
                                                             <br />
-                                                            <span
-                                                                class="
-                                                                    text-sm
-                                                                    text-grey
-                                                                "
+                                                            <div
+                                                                class="text-xxs"
                                                                 v-if="
                                                                     shipping.locations
                                                                 "
-                                                                >Locations
-                                                            </span>
+                                                            >
+                                                                Locations
+                                                            </div>
                                                             {{
                                                                 shipping.locations
                                                             }}

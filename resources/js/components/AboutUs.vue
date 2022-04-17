@@ -1,7 +1,7 @@
 <template>
         <div class="seller-onboard">
         <div class="container-fluid seller-hero px-0">
-            <div class="seller-hero-img" v-bind:style="{ 'background-image': 'url(' + siteInfo.banner + ')' }"></div>
+            <div class="seller-hero-img" v-bind:style="{ 'background-image': 'url(' + about_us_image_1 + ')' }"></div>
             <div class="seller-hero-box container">
                 <h1 class="mb-4">
                     Lavisco.lk, the online marketplace to buy & sell cakes, unique gifts and more
@@ -26,7 +26,7 @@
                 <h1 class="dark-purple">Our story</h1>
                 <div class="container">
                     <div class="d-flex flex-md-row flex-column align-items-top">
-                        <img src="" class="mr-md-5 section-seller-stories-img mb-4 mb-md-0" />
+                        <img :src="about_us_image_2" class="mr-md-5 section-seller-stories-img mb-4 mb-md-0" />
                         <div>
                             <p>
                                 Our story goes back to 2018 when we started offering customized product services to schools and corporate clients. We had 0 employees nor any office. The whole operation was done using just one mobile phone and a computer. But slowly we bootstrapped the company and kept growing until in 2019 we bought a printer and a mug printing machine and started offering mug printing services through Facebook and Instagram. In the same year we also opened out first office in Kandy, Sri Lanka.  A mere 320 Sq space which also doubled up as our manufacturing facility. At this point our we had increased our product offerings from 1 product to 50+ products ranging from personal care to high end gift items.
@@ -67,6 +67,8 @@
 export default {
     data: () => ({
         siteInfo: [],
+        about_us_image_1: "",
+        about_us_image_2: "",
     }),
 
     methods: {
@@ -75,6 +77,8 @@ export default {
                 .get("/api/sitetexts/about_pictures")
                 .then(({data}) => {
                     this.siteInfo = data;
+                    this.about_us_image_1 = this.siteInfo.about_us_image_1[0].path;
+                    this.about_us_image_2 = this.siteInfo.about_us_image_2[0].path;
                 })
                 .catch((error) => console.log(error));
         },

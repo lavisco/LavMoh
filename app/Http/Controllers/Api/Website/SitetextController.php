@@ -39,7 +39,8 @@ class SitetextController extends Controller
     public function aboutusPictures()
     {
         return response()->json([
-            'banner' => Storage::disk('s3')->temporaryUrl('public/images/lavisco_banner.png', '+2 minutes')
+            'about_us_image_1' => Sitetext::where('key', 'about_us_image_1')->select('content')->get(),
+            'about_us_image_2' => Sitetext::where('key', 'about_us_image_2')->select('content')->get(),
         ]);
     }
 }

@@ -1542,6 +1542,7 @@ export default {
             deposit_bank: "",
             deposit_bank_branch: "",
             deposit_account_status: "",
+            shop_shipping: [],
         }),
     }),
 

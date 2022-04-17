@@ -260,13 +260,6 @@ export let routes = [
     */
 
     {
-        path: "/seller/carts",
-        component: require("./components/seller/Cart.vue").default,
-        meta: {
-            title: "Carts",
-        },
-    },
-    {
         path: "/seller/dashboard",
         component: require("./components/seller/Dashboard.vue").default,
         meta: {

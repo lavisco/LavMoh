@@ -8,6 +8,7 @@ use App\Models\HomeSlider;
 use App\Models\Occasion;
 use App\Models\Product;
 use App\Models\Recipient;
+use App\Models\Shop;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -42,6 +43,26 @@ class HomeController extends Controller
             'icon_delivery' => Storage::disk('s3')->temporaryUrl('public/images/door-delivery.png', '+2 minutes'),
             'icon_money' => Storage::disk('s3')->temporaryUrl('public/images/send-money.png', '+2 minutes'),
             'icon_surprise' => Storage::disk('s3')->temporaryUrl('public/images/surprise.png', '+2 minutes'),
+        ]);
+    }
+
+    /**
+     * Display a listing of the search result resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function searchIndex()
+    {
+        $products = Product::where('product_state_id', '1')->with(['category:id,name', 'user.shop', 'product_image'])->latest()->filter(request(['searchText']))->get();
+        $shop = Shop::latest()->filter(request(['searchText']))->get();
+
+        return response()->json([
+            'products' => $products,
+            'occasions' => Occasion::filter(request(['searchText']))->latest()->get(),
+            'recipients' => Recipient::latest()->filter(request(['searchText']))->get(),
+            'categories' => Category::latest()->filter(request(['searchText']))->get(),
+            'shops' => Shop::latest()->filter(request(['searchText']))->get(),
+            //'all' => [$products, $shop],
         ]);
     }
 

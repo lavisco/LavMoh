@@ -11178,6 +11178,21 @@ section h1 {
   border: 1px solid #e6e6eb82;
   border-radius: 7px;
 }
+.item-card-2 .card-tag {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  right: 0;
+  padding: 6px 12px;
+  border-bottom-left-radius: 7px;
+  border-top-right-radius: 7px;
+  font-size: 13px;
+  color: white;
+  font-weight: 600;
+  letter-spacing: 0.02rem;
+  line-height: 12px;
+  text-transform: uppercase;
+}
 
 .card-title {
   font-weight: 500;
@@ -11262,6 +11277,13 @@ section h1 {
 
 .card-img-2 {
   height: 320px;
+}
+
+.search-result .item-card-2 {
+  height: 470px;
+}
+.search-result .card-title-2 {
+  max-height: 25px;
 }
 
 @media (max-width: 768px) {

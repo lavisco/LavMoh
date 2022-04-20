@@ -42,15 +42,19 @@ export default {
     methods: {
         fetchResults() {
             axios
-                .get("/api/products", {
+                .get("/api/search", {
                     params: { searchText: this.searchText },
                 })
-                .then(({ data }) => {
+                .then((response) => {
                     this.$router.replace({
                         name: "results",
                         params: {
                             searchText: this.searchText,
-                            results: data.data,
+                            resultsProduct: response.data.products,
+                            resultsOccasion: response.data.occasions,
+                            resultsRecipient: response.data.recipients,
+                            resultsCategory: response.data.categories,
+                            resultsShop: response.data.shops,
                         },
                     });
                 })

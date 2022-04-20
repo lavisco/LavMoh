@@ -475,7 +475,7 @@ export let routes = [
         path: "/results/:searchText",
         name: "results",
         props: true,
-        component: require("./components/ResultsPage.vue").default,
+        component: require("./components/SearchResultsPage.vue").default,
         meta: {
             title: "Search Results",
         },

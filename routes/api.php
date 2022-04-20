@@ -185,6 +185,7 @@ Route::prefix('email')->group(function () {
 |--------------------------------------------------------------------------
 */
 
+Route::get('/search', [WebsiteHomeController::class, 'searchIndex']);
 Route::apiResource('/home', WebsiteHomeController::class);
 Route::apiResource('/products', WebsiteProductController::class);
 Route::get('/categories/products/{id}/{location}', [WebsiteCategoryController::class, 'getLocationWiseProducts']);

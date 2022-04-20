@@ -48,6 +48,7 @@ export default {
                 .then((response) => {
                     this.$router.replace({
                         name: "results",
+                        query: { t: Date.now() },
                         params: {
                             searchText: this.searchText,
                             resultsProduct: response.data.products,

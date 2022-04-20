@@ -1,10 +1,27 @@
 <template>
     <div class="container-fluid search-result">
         <section class="section-best-seller mt-5 mb-5">
+            <div class="col-sm-6 col-md-3 mb-4">
+                <select
+                    class="custom-select form-control form-control-alternative"
+                    id="filter"
+                    name="filter"
+                    @change.prevent="setResult($event)"
+                >
+                    <option value="" disabled selected hidden>Filter</option>
+                    <option value="all">All</option>
+                    <option value="products">Products</option>
+                    <option value="shops">Shops</option>
+                    <option value="categories">Categories</option>
+                    <option value="occasions">Occasions</option>
+                    <option value="recipients">Recipients</option>
+                </select>
+            </div>
             <div class="d-flex flex-wrap justify-content-center card-container">
                 <div
+                    v-show="resultsProductMode"
                     v-for="product in resultsProduct"
-                    :key="product.id"
+                    :key="`p${product.id}`"
                     class="product-list"
                 >
                     <div class="card item-card-2">
@@ -46,8 +63,9 @@
                     </div>
                 </div>
                 <div
+                    v-show="resultsShopMode"
                     v-for="shop in resultsShop"
-                    :key="shop.id"
+                    :key="`s${shop.id}`"
                     class="product-list"
                 >
                     <div class="card item-card-2">
@@ -83,8 +101,9 @@
                     </div>
                 </div>
                 <div
+                    v-show="resultsOccasionMode"
                     v-for="occasion in resultsOccasion"
-                    :key="occasion.id"
+                    :key="`o${occasion.id}`"
                     class="product-list"
                 >
                     <div class="card item-card-2">
@@ -117,8 +136,9 @@
                     </div>
                 </div>
                 <div
+                    v-show="resultsRecipientMode"
                     v-for="recipient in resultsRecipient"
-                    :key="recipient.id"
+                    :key="`r${recipient.id}`"
                     class="product-list"
                 >
                     <div class="card item-card-2">
@@ -151,8 +171,9 @@
                     </div>
                 </div>
                 <div
+                    v-show="resultsCategoryMode"
                     v-for="category in resultsCategory"
-                    :key="category.id"
+                    :key="`c${category.id}`"
                     class="product-list"
                 >
                     <div class="card item-card-2">
@@ -201,5 +222,48 @@ export default {
         "resultsCategory",
         "resultsShop",
     ],
+
+    data: () => ({
+        resultsProductMode: true,
+        resultsOccasionMode: true,
+        resultsRecipientMode: true,
+        resultsCategoryMode: true,
+        resultsShopMode: true,
+    }),
+
+    methods: {
+        setResult(event) {
+            this.resultsProductMode = false;
+            this.resultsOccasionMode = false;
+            this.resultsRecipientMode = false;
+            this.resultsCategoryMode = false;
+            this.resultsShopMode = false;
+
+            switch (event.target.value) {
+                case "all":
+                    this.resultsProductMode = true;
+                    this.resultsShopMode = true;
+                    this.resultsCategoryMode = true;
+                    this.resultsOccasionMode = true;
+                    this.resultsRecipientMode = true;
+                    break;
+                case "products":
+                    this.resultsProductMode = true;
+                    break;
+                case "shops":
+                    this.resultsShopMode = true;
+                    break;
+                case "categories":
+                    this.resultsCategoryMode = true;
+                    break;
+                case "occasions":
+                    this.resultsOccasionMode = true;
+                    break;
+                case "recipients":
+                    this.resultsRecipientMode = true;
+                    break;
+            }
+        },
+    },
 };
 </script>

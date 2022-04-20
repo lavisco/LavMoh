@@ -7,5 +7,6 @@
     on time.
 </p>
 
-@component('mail::button', ['url' => '']) Sign In @endcomponent Regards,<br />
+@component('mail::button', ['url' => 'https://lavisco.lk/login']) Sign In
+@endcomponent Regards,<br />
 Lavisco Team @endcomponent

@@ -652,7 +652,7 @@
                             class="modal-title white text-uppercase mb-0"
                             id="addRecordLabel"
                         >
-                            {{ current_order.code }}
+                            Order {{ current_order.code }}
                         </h4>
                         <button
                             type="button"
@@ -757,7 +757,7 @@
                         </div>
                         <div class="card dashboard-info-card mt-4">
                             <!-- Header -->
-                            <h4 class="mb-3">Customer Details</h4>
+                            <h4 class="mb-3">Order placed by</h4>
                             <hr class="mt-0" />
                             <div class="row mb-3">
                                 <div class="col-md-3 modal-label">Name</div>
@@ -775,6 +775,32 @@
                                 <div class="col-md-3 modal-label">Phone</div>
                                 <div class="col-md-9">
                                     {{ current_order.phone }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card dashboard-info-card mt-4">
+                            <!-- Header -->
+                            <h4 class="mb-3">Recipient Customer Details</h4>
+                            <hr class="mt-0" />
+                            <div class="row mb-3">
+                                <div class="col-md-3 modal-label">Name</div>
+                                <div class="col-md-9">
+                                    {{ current_order.recipient_name }}
+                                </div>
+                            </div>
+                            <div
+                                class="row mb-3"
+                                v-show="current_order.recipient_email"
+                            >
+                                <div class="col-md-3 modal-label">Email</div>
+                                <div class="col-md-9">
+                                    {{ current_order.recipient_email }}
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-3 modal-label">Phone</div>
+                                <div class="col-md-9">
+                                    {{ current_order.recipient_phone }}
                                 </div>
                             </div>
                         </div>

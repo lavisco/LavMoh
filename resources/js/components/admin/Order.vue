@@ -471,7 +471,7 @@
                         </div>
                         <div class="card p-3 mt-4">
                             <!-- Header -->
-                            <h4 class="mb-3">Customer Details</h4>
+                            <h4 class="mb-3">Order placed by</h4>
                             <hr class="mt-0" />
                             <div class="row mb-3">
                                 <div class="col-md-3 modal-label">Name</div>
@@ -492,17 +492,6 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <div class="col-md-3 modal-label">Address</div>
-                                <div class="col-md-9">
-                                    {{ current_order.address }},
-                                    {{ current_order.zipcode }},
-                                    {{ current_order.city }} <br />
-                                    {{ current_order.district }},
-                                    {{ current_order.province }},
-                                    {{ current_order.country }}
-                                </div>
-                            </div>
-                            <div class="row mb-3">
                                 <div class="col-md-3 modal-label">
                                     Billing Address
                                 </div>
@@ -513,6 +502,40 @@
                                     {{ current_order.billing_district }},
                                     {{ current_order.billing_province }},
                                     {{ current_order.billing_country }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card p-3 mt-4">
+                            <!-- Header -->
+                            <h4 class="mb-3">Recipient Customer Details</h4>
+                            <hr class="mt-0" />
+                            <div class="row mb-3">
+                                <div class="col-md-3 modal-label">Name</div>
+                                <div class="col-md-9">
+                                    {{ current_order.recipient_name }}
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-3 modal-label">Email</div>
+                                <div class="col-md-9">
+                                    {{ current_order.recipient_email }}
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-3 modal-label">Phone</div>
+                                <div class="col-md-9">
+                                    {{ current_order.recipient_phone }}
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-3 modal-label">Address</div>
+                                <div class="col-md-9">
+                                    {{ current_order.address }},
+                                    {{ current_order.zipcode }},
+                                    {{ current_order.city }} <br />
+                                    {{ current_order.district }},
+                                    {{ current_order.province }},
+                                    {{ current_order.country }}
                                 </div>
                             </div>
                         </div>
@@ -684,6 +707,81 @@
                                         "
                                     />
                                     <HasError :form="form" field="phone" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label
+                                    class="col-md-3 col-form-label"
+                                    for="recipient_name"
+                                    >Recipient's Name
+                                    <strong class="text-danger"> *</strong>
+                                </label>
+
+                                <div class="col-md-9">
+                                    <input
+                                        id="recipient_name"
+                                        v-model="form.recipient_name"
+                                        type="text"
+                                        name="recipient_name"
+                                        class="
+                                            form-control
+                                            form-control-alternative
+                                        "
+                                    />
+                                    <HasError
+                                        :form="form"
+                                        field="recipient_name"
+                                    />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label
+                                    class="col-md-3 col-form-label"
+                                    for="recipient_email"
+                                    >Recipient's Email
+                                    <strong class="text-danger"> *</strong>
+                                </label>
+
+                                <div class="col-md-9">
+                                    <input
+                                        id="recipient_email"
+                                        v-model="form.recipient_email"
+                                        type="email"
+                                        name="recipient_email"
+                                        class="
+                                            form-control
+                                            form-control-alternative
+                                        "
+                                    />
+                                    <HasError
+                                        :form="form"
+                                        field="recipient_email"
+                                    />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label
+                                    class="col-md-3 col-form-label"
+                                    for="recipient_phone"
+                                    >Recipient's Phone
+                                    <strong class="text-danger"> *</strong>
+                                </label>
+
+                                <div class="col-md-9">
+                                    <input
+                                        id="recipient_phone"
+                                        v-model="form.recipient_phone"
+                                        type="text"
+                                        name="recipient_phone"
+                                        class="
+                                            form-control
+                                            form-control-alternative
+                                        "
+                                    />
+                                    <HasError
+                                        :form="form"
+                                        field="recipient_phone"
+                                    />
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -1190,12 +1288,17 @@ export default {
             city: "",
             district: "",
             province: "",
+
+            recipient_name: "",
+            recipient_email: "",
+            recipient_phone: "",
             billing_country: "",
             billing_address: "",
             billing_zipcode: "",
             billing_city: "",
             billing_district: "",
             billing_province: "",
+
             delivery_date: "",
             total: "",
             subtotal: "",

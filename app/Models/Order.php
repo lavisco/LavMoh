@@ -24,6 +24,9 @@ class Order extends Model
         'district',
         'province',
 
+        'recipient_name',
+        'recipient_email',
+        'recipient_phone',
         'billing_country',
         'billing_address',
         'billing_zipcode',

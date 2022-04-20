@@ -11,6 +11,8 @@ class WelcomeMail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $receiverEmailAddress = "islammohorima@gmail.com";
+
     /**
      * Create a new message instance.
      *

@@ -1,11 +1,7 @@
-@component('mail::message')
-# Welcome to Lavisco.lk
+@component('mail::message') # Welcome to Lavisco.lk
 
-Thank you for registering with Lavisco.
+<p>Thank you for registering with Lavisco, {{ $receiverEmailAddress }}</p>
 
-@component('mail::button', ['url' => 'http://lavisco.lk/login'])
-Login
-@endcomponent
-
-If you this email does not concern you, please ignore it.
-@endcomponent
+@component('mail::button', ['url' => 'https://lavisco.lk/login']) Login
+@endcomponent Regards,<br />
+Lavisco Team @endcomponent

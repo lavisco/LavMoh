@@ -29,14 +29,6 @@
                         </a>
                     </div>
                 </swiper-slide>
-                <div
-                    class="swiper-button-next swiper-button-black"
-                    slot="button-next"
-                ></div>
-                <div
-                    class="swiper-button-prev swiper-button-black"
-                    slot="button-prev"
-                ></div>
                 <div class="swiper-pagination" slot="pagination"></div>
             </swiper>
             <!-- Swiper end -->
@@ -340,16 +332,16 @@ export default {
             loop: true,
             loopedSlides: 3, // looped slides should be the same
             spaceBetween: 10,
-            navigation: {
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
-            },
+            // navigation: {
+            //     nextEl: ".swiper-button-next",
+            //     prevEl: ".swiper-button-prev",
+            // },
             pagination: {
                 el: ".swiper-pagination",
                 clickable: true,
             },
             autoplay: {
-                delay: 3500,
+                delay: 3800,
                 disableOnInteraction: false,
             },
         },

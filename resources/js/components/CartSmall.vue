@@ -1,5 +1,5 @@
 <template>
-    <div class="dropdown show nav-link nav-link-account">
+    <div class="dropdown show">
         <a
             href="#"
             role="button"
@@ -7,6 +7,7 @@
             data-toggle="dropdown"
             aria-haspopup="true"
             aria-expanded="false"
+            class="nav-link nav-link-account"
         >
             <div class="cart-notif" v-show="cartProductQuantity > 0">
                 {{ cartProductQuantity }}

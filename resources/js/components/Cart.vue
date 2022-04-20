@@ -1,5 +1,31 @@
 <template>
     <div class="container login">
+        <div class="progress-bar mb-3 mb-md-5">
+            <div class="progress-line">
+                <div class="now"></div>
+                <div class=""></div>
+                <div class=""></div>
+                <div class=""></div>
+            </div>
+            <div class="d-flex align-items-center">
+                <div class="part activated">
+                    <div class="check-sign mr-2"></div>
+                    Choose Cart
+                </div>
+                <div class="part">
+                    <div class="check-sign mr-2"></div>
+                    Shipping
+                </div>
+                <div class="part">
+                    <div class="check-sign mr-2"></div>
+                    Payment
+                </div>
+                <div class="part">
+                    <div class="check-sign mr-2"></div>
+                    Order Complete
+                </div>
+            </div>
+        </div>
         <div class="col-12">
             <div
                 class="

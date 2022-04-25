@@ -36,9 +36,9 @@ class HomeController extends Controller
 
         return response()->json([
             'products' => $products,
-            'occasions' => Occasion::select('id', 'name')->latest()->get(),
-            'recipients' => Recipient::select('id', 'name')->latest()->get(),
-            'categories' => Category::select('id', 'name')->latest()->get(),
+            'occasions' => Occasion::select('id', 'name', 'slug')->latest()->get(),
+            'recipients' => Recipient::select('id', 'name', 'slug')->latest()->get(),
+            'categories' => Category::select('id', 'name', 'slug')->latest()->get(),
             'homesliders' => HomeSlider::orderBy('order')->get(),
             'icon_cake' => Storage::disk('s3')->temporaryUrl('public/images/cake.png', '+2 minutes'),
             'icon_delivery' => Storage::disk('s3')->temporaryUrl('public/images/door-delivery.png', '+2 minutes'),
@@ -54,9 +54,9 @@ class HomeController extends Controller
         } else $userName = "Account";
 
         return response()->json([
-            'occasions' => Occasion::select('id', 'name')->latest()->get(),
-            'recipients' => Recipient::select('id', 'name')->latest()->get(),
-            'categories' => Category::select('id', 'name')->latest()->get(),
+            'occasions' => Occasion::select('id', 'name', 'slug')->latest()->get(),
+            'recipients' => Recipient::select('id', 'name', 'slug')->latest()->get(),
+            'categories' => Category::select('id', 'name', 'slug')->latest()->get(),
             'user' => $userName,
         ]);
     }

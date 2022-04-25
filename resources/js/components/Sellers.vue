@@ -51,7 +51,6 @@
                             :to="{
                                 name: 'seller_shop',
                                 params: {
-                                    slug: shop.slug,
                                     shopId: shop.id,
                                 },
                             }"

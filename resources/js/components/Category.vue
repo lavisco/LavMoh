@@ -32,7 +32,6 @@
                                     :to="{
                                         name: 'products/product',
                                         params: {
-                                            slug: product.slug,
                                             productId: product.id,
                                         },
                                     }"
@@ -285,7 +284,12 @@ export default {
         },
 
         loadCountries() {
-            if (this.category.name == "Cake" || this.category.name == "cake") {
+            if (
+                this.category.name == "Cakes" ||
+                this.category.name == "cakes" ||
+                this.category.name == "Cake" ||
+                this.category.name == "cake"
+            ) {
                 axios
                     .get("/api/locations/countries")
                     .then(({ data }) => {

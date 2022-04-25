@@ -288,7 +288,7 @@ export let routes = [
         },
     },
     {
-        path: "/seller/products/listing/:slug",
+        path: "/seller/products/listing/:productId",
         name: "seller/products/listing/edit",
         component: require("./components/seller/ProductListingEdit.vue")
             .default,
@@ -419,7 +419,7 @@ export let routes = [
         },
     },
     {
-        path: "/products/:slug",
+        path: "/products/:productId",
         name: "products/product",
         component: require("./components/Product.vue").default,
         meta: {
@@ -548,7 +548,7 @@ export let routes = [
         },
     },
     {
-        path: "/seller_shop/:slug",
+        path: "/seller_shop/:productId",
         name: "seller_shop",
         component: require("./components/Seller.vue").default,
         meta: {

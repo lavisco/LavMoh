@@ -60,7 +60,6 @@
                                         :to="{
                                             name: 'products/product',
                                             params: {
-                                                slug: product.slug,
                                                 productId: product.id,
                                             },
                                         }"

@@ -211,7 +211,10 @@
                 <menu-cart></menu-cart>
             </div>
         </nav>
-        <nav class="navbar navbar-expand-lg w-100 pt-0 hide-content-md-flex" style="z-index: 100 !important;">
+        <nav
+            class="navbar navbar-expand-lg w-100 pt-0 hide-content-md-flex"
+            style="z-index: 100 !important"
+        >
             <div class="navbar-main-menu order-3" id="navbarSupportedContent">
                 <ul
                     class="

@@ -399,8 +399,6 @@
                                             :to="{
                                                 name: 'seller_shop',
                                                 params: {
-                                                    slug: product.user.shop
-                                                        .slug,
                                                     shopId: product.user.shop
                                                         .id,
                                                 },
@@ -471,7 +469,6 @@ export default {
 
     beforeRouteEnter: function (to, from, next) {
         let uri = "/api/products/" + to.params.productId;
-
         axios
             .get(uri)
             .then((response) => {

@@ -5,7 +5,7 @@
                 <div class="col-md-9 row order-2 order-md-1">
                     <div class="col-md-3 col-6 d-flex flex-column">
                         <h5>Sell on Lavisco</h5>
-                        <router-link to="/merchant/login">Sign In</router-link>
+                        <router-link to="/merchant/login">Seller Sign In</router-link>
                         <router-link to="/seller_onboard">
                             Onboarding
                         </router-link>

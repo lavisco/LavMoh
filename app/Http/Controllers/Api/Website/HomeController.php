@@ -8,6 +8,7 @@ use App\Models\HomeSlider;
 use App\Models\Occasion;
 use App\Models\Product;
 use App\Models\Recipient;
+use App\Models\Role;
 use App\Models\Shop;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -46,6 +47,20 @@ class HomeController extends Controller
         ]);
     }
 
+    public function getNavbarData()
+    {
+        if (auth('api')->check() && auth('api')->user()->role_id == Role::IS_BUYER) {
+                $userName = auth('api')->user()->name;
+        } else $userName = "Account";
+
+        return response()->json([
+            'occasions' => Occasion::select('id', 'name')->latest()->get(),
+            'recipients' => Recipient::select('id', 'name')->latest()->get(),
+            'categories' => Category::select('id', 'name')->latest()->get(),
+            'user' => $userName,
+        ]);
+    }
+
     /**
      * Display a listing of the search result resource.
      *
@@ -64,50 +79,5 @@ class HomeController extends Controller
             'shops' => Shop::latest()->filter(request(['searchText']))->get(),
             //'all' => [$products, $shop],
         ]);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

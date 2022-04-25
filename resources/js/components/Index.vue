@@ -60,6 +60,7 @@
                                         :to="{
                                             name: 'products/product',
                                             params: {
+                                                slug: product.slug,
                                                 productId: product.id,
                                             },
                                         }"
@@ -102,8 +103,8 @@
                     ></div>
                 </swiper>
                 <div class="d-flex justify-content-center mt-5">
-                    <a href="/products" class="view-more-link"
-                        >View More
+                    <router-link class="view-more-link" to="/products">
+                        View More
                         <svg
                             width="70"
                             height="24"
@@ -117,7 +118,7 @@
                                 fill="#333333"
                             />
                         </svg>
-                    </a>
+                    </router-link>
                 </div>
             </section>
             <section class="section-special">
@@ -134,9 +135,9 @@
                             <div class="card-img">
                                 <div class="card-img-text-container">
                                     <div class="card-img-text">
-                                        <a href="/occasions">
-                                            Order by Occasion
-                                        </a>
+                                        <router-link to="/occasions">
+                                            Order by Occasions
+                                        </router-link>
                                     </div>
                                 </div>
                             </div>
@@ -166,9 +167,9 @@
                             <div class="card-img">
                                 <div class="card-img-text-container">
                                     <div class="card-img-text">
-                                        <a href="/recipients">
+                                        <router-link to="/recipients">
                                             Order by Recipient
-                                        </a>
+                                        </router-link>
                                     </div>
                                 </div>
                             </div>

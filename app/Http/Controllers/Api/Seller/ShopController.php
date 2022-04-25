@@ -8,6 +8,7 @@ use App\Models\Shipping;
 use App\Models\Shop;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Image;
 
 class ShopController extends Controller
@@ -33,7 +34,8 @@ class ShopController extends Controller
         $this->updateImage($request, $shop->banner);
 
         $request->merge([
-            'country' => "Sri Lanka"
+            'country' => "Sri Lanka",
+            'slug' => Str::slug($request->name),
         ]);
         
         $shop->update($request->all());

@@ -1370,50 +1370,66 @@ section {
 
 /*---------------------footer---------------------*/
 footer {
-    border-top: 1px solid $lav-grey;
-    padding-top: 40px;
-    padding-bottom: 40px;
-    //margin-top: auto;
+    width: 100%;
+}
+.footer-copyright {
+    padding: 12px 44px;
+    width: 100%;
+    background-color: #434343;
+    color: #f5f5f5;
+    font-size: 12px;
+}
+.footer-container {
+    padding: 44px;
     width: 100%;
     background-color: #272a2f;
-    color: #e7e7e7;
+    color: #f5f5f5;
+    font-size: 15px;
+    letter-spacing: 0.02rem;
     h5 {
         text-align: left !important;
         font-weight: 600;
-        color: $lav-grey;
+        color: #f5f5f5;
+        padding-bottom: 12px;
     }
-    a:hover {
-        color: $lav-pink;
-        svg {
-            path {
-                fill: $lav-pink;
+    a {
+        padding-bottom: 10px;
+
+        &:hover {
+            color: $lav-pink;
+            svg {
+                path {
+                    fill: $lav-pink;
+                }
             }
         }
     }
+    hr{
+        width: 100%;
+    }
 }
 .footer-logo {
-    height: 70px;
-}
-.footer-link-big {
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 37px;
-    color: $lav-grey;
-    a,
-    svg {
-        margin-right: 15px;
+    height: 50px;
+    .cls-1 {
+        fill: #f5f5f5;
     }
 }
+
 @media (max-width: 768px) {
-    footer,
-    .footer-link-big {
-        text-align: center;
+    footer {
+        h5 {
+            font-size: 15px;
+        }
     }
-    .footer h5 {
-        text-align: center !important;
+    .footer-copyright {
+        padding: 12px;
+    }
+    .footer-container {
+        padding: 44px 26px;
+        font-size: 14px;
     }
     .footer-logo {
-        height: 50px;
+        height: 40px;
     }
 }
 /*---------------------login---------------------*/

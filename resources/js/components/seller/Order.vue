@@ -240,6 +240,7 @@
                                             >
                                                 {{ nextStatus(order.status) }}
                                             </button>
+                                            <p v-else>Lavisco is shipping</p>
                                         </td>
                                         <td class="text-right">
                                             <a
@@ -973,7 +974,7 @@ export default {
         statusUpdateActive(status) {
             if (
                 status == "not acknowledged" ||
-                status == "acknowledge" ||
+                status == "acknowledged" ||
                 status == "in production"
             ) {
                 return true;

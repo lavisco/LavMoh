@@ -1340,8 +1340,8 @@ export default {
         },
 
         setCurrentStatus(order, event) {
-            this.form.status = event.target.value;
             if (confirm("Are you sure you want to change order status?")) {
+                this.form.status = event.target.value;
                 this.form
                     .put("/api/admin/orders/updateStatus/" + order)
                     .then(() => {

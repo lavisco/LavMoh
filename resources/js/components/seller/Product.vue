@@ -132,6 +132,7 @@
                                                     :to="{
                                                         name: 'seller/products/listing/edit',
                                                         params: {
+                                                            slug: product.slug,
                                                             productId:
                                                                 product.id,
                                                         },

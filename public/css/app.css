@@ -11420,52 +11420,67 @@ section h1 {
 
 /*---------------------footer---------------------*/
 footer {
-  border-top: 1px solid #c9c9c9;
-  padding-top: 40px;
-  padding-bottom: 40px;
+  width: 100%;
+}
+
+.footer-copyright {
+  padding: 12px 44px;
+  width: 100%;
+  background-color: #434343;
+  color: #f5f5f5;
+  font-size: 12px;
+}
+
+.footer-container {
+  padding: 44px;
   width: 100%;
   background-color: #272a2f;
-  color: #e7e7e7;
+  color: #f5f5f5;
+  font-size: 15px;
+  letter-spacing: 0.02rem;
 }
-footer h5 {
+.footer-container h5 {
   text-align: left !important;
   font-weight: 600;
-  color: #c9c9c9;
+  color: #f5f5f5;
+  padding-bottom: 12px;
 }
-footer a:hover {
+.footer-container a {
+  padding-bottom: 10px;
+}
+.footer-container a:hover {
   color: #ff5a7c;
 }
-footer a:hover svg path {
+.footer-container a:hover svg path {
   fill: #ff5a7c;
+}
+.footer-container hr {
+  width: 100%;
 }
 
 .footer-logo {
-  height: 70px;
+  height: 50px;
 }
-
-.footer-link-big {
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 37px;
-  color: #c9c9c9;
-}
-.footer-link-big a,
-.footer-link-big svg {
-  margin-right: 15px;
+.footer-logo .cls-1 {
+  fill: #f5f5f5;
 }
 
 @media (max-width: 768px) {
-  footer,
-.footer-link-big {
-    text-align: center;
+  footer h5 {
+    font-size: 15px;
   }
 
-  .footer h5 {
-    text-align: center !important;
+  .footer-copyright {
+    padding: 12px;
+  }
+
+  .footer-container {
+    padding: 44px 26px;
+    font-size: 14px;
   }
 
   .footer-logo {
-    height: 50px;
+    height: 40px;
   }
 }
 /*---------------------login---------------------*/

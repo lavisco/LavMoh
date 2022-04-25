@@ -288,7 +288,7 @@ export let routes = [
         },
     },
     {
-        path: "/seller/products/listing/:productId",
+        path: "/seller/products/listing/:slug",
         name: "seller/products/listing/edit",
         component: require("./components/seller/ProductListingEdit.vue")
             .default,
@@ -368,6 +368,33 @@ export let routes = [
         },
     },
     {
+        //employee or admin login
+        path: "/employee/login",
+        name: "employee/login",
+        component: require("./components/EmployeeLogin.vue").default,
+        meta: {
+            title: "Employee Login",
+        },
+    },
+    {
+        //seller login
+        path: "/merchant/login",
+        name: "merchant/login",
+        component: require("./components/MerchantLogin.vue").default,
+        meta: {
+            title: "Merchant Login",
+        },
+    },
+    {
+        //buyer login
+        path: "/login",
+        name: "/login",
+        component: require("./components/BuyerLogin.vue").default,
+        meta: {
+            title: "Login",
+        },
+    },
+    {
         path: "/about",
         name: "about",
         component: require("./components/AboutUs.vue").default,
@@ -392,7 +419,7 @@ export let routes = [
         },
     },
     {
-        path: "/products/:productId",
+        path: "/products/:slug",
         name: "products/product",
         component: require("./components/Product.vue").default,
         meta: {
@@ -472,6 +499,22 @@ export let routes = [
         },
     },
     {
+        path: "/order_complete",
+        name: "order_complete",
+        component: require("./components/OrderComplete.vue").default,
+        meta: {
+            title: "Order Complete",
+        },
+    },
+    {
+        path: "/register",
+        name: "register",
+        component: require("./components/Register.vue").default,
+        meta: {
+            title: "Registration",
+        },
+    },
+    {
         path: "/results/:searchText",
         name: "results",
         props: true,
@@ -497,14 +540,6 @@ export let routes = [
         },
     },
     {
-        path: "/order_complete",
-        name: "order_complete",
-        component: require("./components/OrderComplete.vue").default,
-        meta: {
-            title: "Order Complete",
-        },
-    },
-    {
         path: "/seller_all",
         name: "seller_all",
         component: require("./components/Sellers.vue").default,
@@ -513,7 +548,7 @@ export let routes = [
         },
     },
     {
-        path: "/seller_shop/:shopId",
+        path: "/seller_shop/:slug",
         name: "seller_shop",
         component: require("./components/Seller.vue").default,
         meta: {

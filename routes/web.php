@@ -28,15 +28,11 @@ use Illuminate\Http\Request;
 | Email & Auth Routes
 |--------------------------------------------------------------------------
 */
-Route::get('/login', function () {
-    return view('login');
-});
+// Route::get('/login', function () {
+//     return view('login');
+// });
 
 Route::get('/emailTest', [EmailController::class, 'sendWelcomeEmail']);
-
-// Route::get('/email', function() {
-//     return new StoreActiveApplicationMail();
-// });
 
 Auth::routes();
 
@@ -59,7 +55,7 @@ Route::post('/email/verification-notification', function (Request $request) {
 
 /*
 |--------------------------------------------------------------------------
-| Main Routes
+| Dashboard Routes
 |--------------------------------------------------------------------------
 */
 
@@ -73,6 +69,23 @@ Route::group(['middleware' => 'auth'],function () {
 
 });
 
+
+/*
+|--------------------------------------------------------------------------
+| Website Routes
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/employee/{path}', [HomeController::class, 'employeeIndex'])->where('path', '.*');
+Route::get('/merchant/{path}', [HomeController::class, 'websiteIndex'])->where('path', '.*');
+
 Route::get('/{path}', [HomeController::class, 'websiteIndex'])->where('path', '.*');
+
+
+/*
+|--------------------------------------------------------------------------
+| Fallback Route
+|--------------------------------------------------------------------------
+*/
 
 Route::fallback(FallbackController::class);

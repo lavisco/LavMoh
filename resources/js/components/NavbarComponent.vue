@@ -9,7 +9,7 @@
                 w-100
             "
         >
-            <a href="/" class="navbar-brand mr-4">
+            <router-link to="/" class="navbar-brand mr-4">
                 <svg
                     height="55"
                     viewBox="0 0 290 76"
@@ -38,7 +38,7 @@
                         />
                     </defs>
                 </svg>
-            </a>
+            </router-link>
 
             <div
                 class="
@@ -91,12 +91,12 @@
                             aria-labelledby="dropdownMenuLinkMobile"
                         >
                             <h6 class="dropdown-header">
-                                <a href="/categories">
+                                <router-link to="/categories">
                                     Browse All Categories
-                                </a>
+                                </router-link>
                             </h6>
                             <div class="d-flex flex-column flex-md-row">
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <router-link
                                         class="dropdown-item"
                                         v-for="category in categories"
@@ -116,13 +116,13 @@
                                 </div>
                             </div>
                             <h6 class="dropdown-header">
-                                <a href="/recipients">
+                                <router-link to="/recipients">
                                     Browse All Recipients
-                                </a>
+                                </router-link>
                             </h6>
                             <div class="d-flex flex-column flex-md-row">
                                 <div
-                                    class="col-md-4"
+                                    class="col-md-6"
                                     v-for="chunkRecipient in chunkedRecipients"
                                 >
                                     <router-link
@@ -144,11 +144,13 @@
                                 </div>
                             </div>
                             <h6 class="dropdown-header">
-                                <a href="/occasions"> Browse All Occasions </a>
+                                <router-link to="/occasions">
+                                    Browse All Occasions
+                                </router-link>
                             </h6>
                             <div class="d-flex flex-column flex-md-row">
                                 <div
-                                    class="col-md-4"
+                                    class="col-md-6"
                                     v-for="chunkOccasion in chunkedOccasions"
                                 >
                                     <router-link
@@ -177,7 +179,7 @@
             </div>
 
             <div class="d-flex justify-content-end order-1 order-lg-2">
-                <a class="nav-link nav-link-account mr-3" href="/login">
+                <router-link class="nav-link nav-link-account mr-3" to="/login">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         aria-hidden="true"
@@ -205,11 +207,11 @@
                         <span class="nav-tiny-text">Sign In</span>
                         Account
                     </div>
-                </a>
+                </router-link>
                 <menu-cart></menu-cart>
             </div>
         </nav>
-        <nav class="navbar navbar-expand-lg w-100 pt-0 hide-content-md-flex">
+        <nav class="navbar navbar-expand-lg w-100 pt-0 hide-content-md-flex" style="z-index: 100 !important;">
             <div class="navbar-main-menu order-3" id="navbarSupportedContent">
                 <ul
                     class="
@@ -259,13 +261,13 @@
                                 aria-labelledby="dropdownMenuLink1"
                             >
                                 <h6 class="dropdown-header">
-                                    <a href="/recipients">
+                                    <router-link to="/recipients">
                                         Browse All Recipients
-                                    </a>
+                                    </router-link>
                                 </h6>
                                 <div class="d-flex flex-column flex-md-row">
                                     <div
-                                        class="col-md-4"
+                                        class="col-md-6"
                                         v-for="chunkRecipient in chunkedRecipients"
                                     >
                                         <router-link
@@ -312,13 +314,13 @@
                                 aria-labelledby="dropdownMenuLink2"
                             >
                                 <h6 class="dropdown-header">
-                                    <a href="/occasions">
+                                    <router-link to="/occasions">
                                         Browse All Occasions
-                                    </a>
+                                    </router-link>
                                 </h6>
                                 <div class="d-flex flex-column flex-md-row">
                                     <div
-                                        class="col-md-4"
+                                        class="col-md-6"
                                         v-for="chunkOccasion in chunkedOccasions"
                                     >
                                         <router-link
@@ -346,7 +348,9 @@
                     <div class="vertical-divider"></div>
 
                     <li class="nav-item mx-2">
-                        <a class="nav-link" href="/seller_onboard"> Seller </a>
+                        <router-link class="nav-link" to="/seller_onboard">
+                            Seller
+                        </router-link>
                     </li>
                 </ul>
             </div>
@@ -360,11 +364,12 @@ export default {
         recipients: [],
         occasions: [],
         categories: [],
+        user: "",
     }),
 
     computed: {
         chunkedRecipients() {
-            return _.chunk(this.recipients, 7);
+            return _.chunk(this.recipients, 6);
         },
         chunkedOccasions() {
             return _.chunk(this.occasions, 6);
@@ -374,11 +379,12 @@ export default {
     methods: {
         loadData() {
             axios
-                .get("/api/home")
+                .get("/api/navdata")
                 .then((response) => {
                     this.recipients = response.data.recipients;
                     this.occasions = response.data.occasions;
                     this.categories = response.data.categories;
+                    this.user = response.data.user;
                 })
                 .catch((error) => console.log(error));
         },

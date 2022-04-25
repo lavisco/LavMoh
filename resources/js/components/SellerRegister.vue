@@ -103,7 +103,7 @@
             id="success-modal"
             msgTitle="Successfully Registered"
             msg="You are now a Lavisco Seller! You'll be redirected to the login page."
-            gotoRoute="login"
+            gotoRoute="merchant-login"
         />
         <fail-modal
             id="fail-modal"

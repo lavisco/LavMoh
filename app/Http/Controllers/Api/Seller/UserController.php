@@ -61,7 +61,7 @@ class UserController extends Controller
         $request->merge([
             'user_id' => Auth::user()->id,
             'name' => $request->shop_name,
-            'slug' => Str::slug($request->title),
+            'slug' => Str::slug($request->shop_name),
             'province' => $request->shop_province,
             'district' => $request->shop_district,
             'city' => $request->shop_city,

@@ -45,6 +45,10 @@ class ShopController extends Controller
     {
         ///$this->authorize('update', $shop);
 
+        $request->merge([
+            'slug' => Str::slug($request->name),
+        ]);
+
         $this->updateImage($request, $shop->banner);
         $shop->update($request->all());
     }

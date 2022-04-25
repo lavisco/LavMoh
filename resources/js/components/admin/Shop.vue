@@ -875,17 +875,18 @@ export default {
         },
 
         setCurrentState(shop, event) {
-            this.form.status = event.target.value;
-
-            this.form
-                .put("/api/admin/shops/updateState/" + shop.id)
-                .then(() => {
-                    if (this.form.status == 1) {
-                        this.sendStoreActiveMail(shop.user.email);
-                    }
-                    Fire.$emit("reloadRecords");
-                })
-                .catch((error) => console.log(error));
+            if (confirm("Are you sure you want to update Status?")) {
+                this.form.status = event.target.value;
+                this.form
+                    .put("/api/admin/shops/updateState/" + shop.id)
+                    .then(() => {
+                        if (this.form.status == 1) {
+                            this.sendStoreActiveMail(shop.user.email);
+                        }
+                        Fire.$emit("reloadRecords");
+                    })
+                    .catch((error) => console.log(error));
+            }
         },
 
         sendStoreActiveMail(email) {

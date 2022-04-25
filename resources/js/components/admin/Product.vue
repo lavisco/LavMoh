@@ -49,7 +49,9 @@
                                         </th>
                                         <td class="table-col-lg">
                                             {{ product.title }}
-                                            <p class="text-sm mt-2">{{product.category.name}}</p>
+                                            <p class="text-sm mt-2">
+                                                {{ product.category.name }}
+                                            </p>
                                         </td>
                                         <td>{{ product.quantity }}</td>
                                         <td>{{ product.base_price }}</td>
@@ -216,13 +218,15 @@ export default {
         },
 
         setCurrentState(product, event) {
-            this.form.product_state_id = event.target.value;
-            this.form
-                .put("/api/admin/products/updateState/" + product)
-                .then(() => {
-                    Fire.$emit("reloadRecords");
-                })
-                .catch((error) => console.log(error));
+            if (confirm("Are you sure you want to delete?")) {
+                this.form.product_state_id = event.target.value;
+                this.form
+                    .put("/api/admin/products/updateState/" + product)
+                    .then(() => {
+                        Fire.$emit("reloadRecords");
+                    })
+                    .catch((error) => console.log(error));
+            }
         },
 
         deleteProduct(id) {

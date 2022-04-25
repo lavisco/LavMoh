@@ -53,7 +53,6 @@
                     <!-- navbar section ends -->
 
                     <router-view></router-view>
-                    @yield('content')
                 </div>
                 <!-- footer section starts -->
                 <footer-component></footer-component>

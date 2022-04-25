@@ -160,6 +160,7 @@ class ProductController extends Controller
         
         $request->merge([
             'code' => 'LP'.str_pad($product->id,5,"0",STR_PAD_LEFT),
+            'slug' => Str::slug($request->title),
         ]);
 
         $product->update($request->all());

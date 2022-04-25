@@ -399,6 +399,8 @@
                                             :to="{
                                                 name: 'seller_shop',
                                                 params: {
+                                                    slug: product.user.shop
+                                                        .slug,
                                                     shopId: product.user.shop
                                                         .id,
                                                 },

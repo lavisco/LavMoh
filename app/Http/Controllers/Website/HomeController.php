@@ -12,6 +12,16 @@ class HomeController extends Controller
         return view('layouts.master');
     }
 
+    public function employeeIndex()
+    {
+        return view('layouts.employee_master');
+    }    
+
+    public function merchantIndex()
+    {
+        return view('layouts.merchant_master');
+    }
+
     public function adminIndex()
     {
         return view('layouts.admin_dashboard_master');

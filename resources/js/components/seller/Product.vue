@@ -614,12 +614,9 @@ export default {
     }),
 
     watch: {
-        // searchText(after, before) {
-        //     this.loadProducts();
-        // },
         searchText: _.debounce(function (after, before) {
             Fire.$emit("reloadRecords");
-        }, 500),
+        }, 600),
     },
 
     methods: {

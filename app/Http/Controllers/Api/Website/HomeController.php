@@ -80,4 +80,13 @@ class HomeController extends Controller
             //'all' => [$products, $shop],
         ]);
     }
+
+    public function searchSuggestion($searchText)
+    {
+        $products = Product::where('product_state_id', '1')->where('title', 'like', '%' . $searchText . '%')->latest()->take(8)->get();
+
+        return response()->json([
+            'products' => $products,
+        ]);
+    }
 }

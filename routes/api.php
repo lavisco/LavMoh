@@ -186,6 +186,7 @@ Route::prefix('email')->group(function () {
 */
 
 Route::get('/navdata', [WebsiteHomeController::class, 'getNavbarData']);
+Route::get('/search/{searchText}', [WebsiteHomeController::class, 'searchSuggestion']);
 Route::get('/search', [WebsiteHomeController::class, 'searchIndex']);
 Route::apiResource('/home', WebsiteHomeController::class);
 Route::apiResource('/products', WebsiteProductController::class);

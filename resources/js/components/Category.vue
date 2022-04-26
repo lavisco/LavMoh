@@ -131,7 +131,7 @@
                                 name="districtId"
                                 id="districtId"
                                 v-model="districtId"
-                                @change.prevent="loadCities()"
+                                @change.prevent="districtId ? loadCities() : ''"
                             >
                                 <option value="" disabled selected hidden>
                                     Select District
@@ -171,6 +171,14 @@
                     </div>
 
                     <div class="modal-footer">
+                        <button
+                            type="button"
+                            class="btn btn-secondary"
+                            @click.prevent="resetLocation()"
+                        >
+                            <i class="fas fa-redo mr-2"></i>
+                            Reset
+                        </button>
                         <button
                             type="button"
                             class="btn btn-primary"
@@ -255,6 +263,13 @@ export default {
                 .catch((error) => console.log(error));
         },
 
+        resetLocation() {
+            this.provinceMode = true;
+            this.districtMode = false;
+            this.cityMode = false;
+            this.areaMode = false;
+        },
+
         loadProvinces() {
             if (
                 this.category.name == "Cakes" ||
@@ -262,7 +277,6 @@ export default {
                 this.category.name == "Cake" ||
                 this.category.name == "cake"
             ) {
-                console.log("show");
                 axios
                     .get("/api/locations/provinces")
                     .then(({ data }) => {

@@ -50,6 +50,7 @@
                             name: 'products/product',
                             params: {
                                 productId: result.id,
+                                slug: result.slug,
                             },
                         }"
                     >

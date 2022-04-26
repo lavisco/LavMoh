@@ -1,23 +1,22 @@
 <template>
     <div class="container-fluid">
-        <div class="seller-hero">
-            <div
-                class="seller-hero-img"
-                v-bind:style="{ 'background-image': 'url(' + shop.path + ')' }"
-            ></div>
-            <div class="seller-hero-box container">
-                <h1 class="mb-4 title black">{{ shop.name }}</h1>
+        <div
+            class="hero hero-default hero-seller"
+            v-bind:style="{ 'background-image': 'url(' + shop.path + ')' }"
+        >
+            <div class="slide-content">
+                <h1 class="title mb-3">Browse {{ shop.name }}</h1>
                 <span
                     class="seller-rating"
                     v-html="shopRating(shop.rating)"
                 ></span>
-                <p class="mt-5">
+                <h1 class="sub-title mb-5">
                     {{ shop.about }}
-                </p>
+                </h1>
             </div>
         </div>
 
-        <section class="section-best-seller mb-5 mt-0">
+        <section class="section-best-seller mb-5">
             <div class="d-flex flex-wrap justify-content-center card-container">
                 <img v-if="loading" src="/images/lavisco/loading.gif" />
                 <div v-else v-for="product in products" class="product-list">
@@ -39,6 +38,7 @@
                                         name: 'products/product',
                                         params: {
                                             productId: product.id,
+                                            slug: product.slug,
                                         },
                                     }"
                                 >

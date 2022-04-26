@@ -403,27 +403,11 @@ export let routes = [
         },
     },
     {
-        path: "/contact_us",
-        name: "contact_us",
-        component: require("./components/ContactUs.vue").default,
+        path: "/cart",
+        name: "cart",
+        component: require("./components/Cart.vue").default,
         meta: {
-            title: "Contact Us",
-        },
-    },
-    {
-        path: "/products",
-        name: "products",
-        component: require("./components/Products.vue").default,
-        meta: {
-            title: "Products",
-        },
-    },
-    {
-        path: "/products/:productId",
-        name: "products/product",
-        component: require("./components/Product.vue").default,
-        meta: {
-            title: "Product",
+            title: "Cart",
         },
     },
     {
@@ -435,7 +419,7 @@ export let routes = [
         },
     },
     {
-        path: "/categories/:categoryId",
+        path: "/categories/:categoryId/:slug",
         name: "categories/category",
         component: require("./components/Category.vue").default,
         meta: {
@@ -451,11 +435,35 @@ export let routes = [
         },
     },
     {
+        path: "/contact_us",
+        name: "contact_us",
+        component: require("./components/ContactUs.vue").default,
+        meta: {
+            title: "Contact Us",
+        },
+    },
+    {
         path: "/faq",
         name: "faq",
         component: require("./components/Faq.vue").default,
         meta: {
             title: "FAQ",
+        },
+    },
+    {
+        path: "/products",
+        name: "products",
+        component: require("./components/Products.vue").default,
+        meta: {
+            title: "Products",
+        },
+    },
+    {
+        path: "/products/:productId/:slug",
+        name: "products/product",
+        component: require("./components/Product.vue").default,
+        meta: {
+            title: "Product",
         },
     },
     {
@@ -467,11 +475,19 @@ export let routes = [
         },
     },
     {
-        path: "/occasions/:occasionId",
+        path: "/occasions/:occasionId/:slug",
         name: "occasions/occasion",
         component: require("./components/Occasion.vue").default,
         meta: {
             title: "Occasion",
+        },
+    },
+    {
+        path: "/order_complete",
+        name: "order_complete",
+        component: require("./components/OrderComplete.vue").default,
+        meta: {
+            title: "Order Complete",
         },
     },
     {
@@ -483,27 +499,11 @@ export let routes = [
         },
     },
     {
-        path: "/recipients/:recipientId",
+        path: "/recipients/:recipientId/:slug",
         name: "recipients/recipient",
         component: require("./components/Recipient.vue").default,
         meta: {
             title: "Recipient",
-        },
-    },
-    {
-        path: "/cart",
-        name: "cart",
-        component: require("./components/Cart.vue").default,
-        meta: {
-            title: "Cart",
-        },
-    },
-    {
-        path: "/order_complete",
-        name: "order_complete",
-        component: require("./components/OrderComplete.vue").default,
-        meta: {
-            title: "Order Complete",
         },
     },
     {
@@ -548,7 +548,7 @@ export let routes = [
         },
     },
     {
-        path: "/seller_shop/:productId",
+        path: "/seller_shop/:shopId/:slug",
         name: "seller_shop",
         component: require("./components/Seller.vue").default,
         meta: {

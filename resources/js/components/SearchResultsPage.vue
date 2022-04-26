@@ -44,6 +44,7 @@
                                         name: 'products/product',
                                         params: {
                                             productId: product.id,
+                                            slug: product.slug,
                                         },
                                     }"
                                 >
@@ -88,6 +89,7 @@
                                         name: 'seller_shop',
                                         params: {
                                             shopId: shop.id,
+                                            slug: shop.slug,
                                         },
                                     }"
                                 >
@@ -126,6 +128,7 @@
                                         name: 'occasions/occasion',
                                         params: {
                                             occasionId: occasion.id,
+                                            slug: occasion.slug,
                                         },
                                     }"
                                 >
@@ -161,6 +164,7 @@
                                         name: 'recipients/recipient',
                                         params: {
                                             recipientId: recipient.id,
+                                            slug: recipient.slug,
                                         },
                                     }"
                                 >
@@ -196,6 +200,7 @@
                                         name: 'categories/category',
                                         params: {
                                             categoryId: category.id,
+                                            slug: category.slug,
                                         },
                                     }"
                                 >

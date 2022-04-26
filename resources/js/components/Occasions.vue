@@ -43,6 +43,7 @@
                                     name: 'products/product',
                                     params: {
                                         productId: product.id,
+                                        slug: product.slug,
                                     },
                                 }"
                             >
@@ -60,6 +61,7 @@
                         name: 'occasions/occasion',
                         params: {
                             occasionId: occasion.id,
+                            slug: occasion.slug,
                         },
                     }"
                 >

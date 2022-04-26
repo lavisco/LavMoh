@@ -24,9 +24,9 @@
                         <h1 class="sub-title mb-5">
                             {{ homeslider.description }}
                         </h1>
-                        <a :href="homeslider.link">
+                        <router-link :to="homeslider.link">
                             <button>{{ homeslider.link_text }}</button>
-                        </a>
+                        </router-link>
                     </div>
                 </swiper-slide>
                 <div class="swiper-pagination" slot="pagination"></div>
@@ -61,6 +61,7 @@
                                             name: 'products/product',
                                             params: {
                                                 productId: product.id,
+                                                slug: product.slug,
                                             },
                                         }"
                                     >
@@ -151,6 +152,7 @@
                                             name: 'occasions/occasion',
                                             params: {
                                                 occasionId: occasions[index].id,
+                                                slug: occasions[index].slug,
                                             },
                                         }"
                                     >
@@ -184,6 +186,7 @@
                                             params: {
                                                 recipientId:
                                                     recipients[index].id,
+                                                slug: recipients[index].slug,
                                             },
                                         }"
                                     >
@@ -255,6 +258,7 @@
                                         name: 'categories/category',
                                         params: {
                                             categoryId: category.id,
+                                            slug: category.slug,
                                         },
                                     }"
                                 >

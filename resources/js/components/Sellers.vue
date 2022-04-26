@@ -52,6 +52,7 @@
                                 name: 'seller_shop',
                                 params: {
                                     shopId: shop.id,
+                                    slug: shop.slug,
                                 },
                             }"
                         >

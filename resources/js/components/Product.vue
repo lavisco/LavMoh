@@ -401,6 +401,8 @@
                                                 params: {
                                                     shopId: product.user.shop
                                                         .id,
+                                                    slug: product.user.shop
+                                                        .slug,
                                                 },
                                             }"
                                         >

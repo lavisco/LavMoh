@@ -43,6 +43,7 @@
                                     name: 'products/product',
                                     params: {
                                         productId: product.id,
+                                        slug: product.slug,
                                     },
                                 }"
                             >
@@ -60,6 +61,7 @@
                         name: 'recipients/recipient',
                         params: {
                             recipientId: recipient.id,
+                            slug: recipient.slug,
                         },
                     }"
                 >

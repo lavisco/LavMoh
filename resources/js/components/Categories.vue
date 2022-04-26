@@ -44,6 +44,7 @@
                                     name: 'products/product',
                                     params: {
                                         productId: product.id,
+                                        slug: product.slug,
                                     },
                                 }"
                             >
@@ -61,6 +62,7 @@
                         name: 'categories/category',
                         params: {
                             categoryId: category.id,
+                            slug: category.slug,
                         },
                     }"
                 >

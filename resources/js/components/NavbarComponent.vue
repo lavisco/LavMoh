@@ -105,6 +105,7 @@
                                             name: 'categories/category',
                                             params: {
                                                 categoryId: category.id,
+                                                slug: category.slug,
                                             },
                                         }"
                                     >
@@ -133,6 +134,7 @@
                                             name: 'recipients/recipient',
                                             params: {
                                                 recipientId: recipient.id,
+                                                slug: recipient.slug,
                                             },
                                         }"
                                     >
@@ -161,6 +163,7 @@
                                             name: 'occasions/occasion',
                                             params: {
                                                 occasionId: occasion.id,
+                                                slug: occasion.slug,
                                             },
                                         }"
                                     >
@@ -235,6 +238,7 @@
                                 name: 'categories/category',
                                 params: {
                                     categoryId: category.id,
+                                    slug: category.slug,
                                 },
                             }"
                         >
@@ -281,6 +285,7 @@
                                                 name: 'recipients/recipient',
                                                 params: {
                                                     recipientId: recipient.id,
+                                                    slug: recipient.slug,
                                                 },
                                             }"
                                         >
@@ -334,6 +339,7 @@
                                                 name: 'occasions/occasion',
                                                 params: {
                                                     occasionId: occasion.id,
+                                                    slug: occasion.slug,
                                                 },
                                             }"
                                         >

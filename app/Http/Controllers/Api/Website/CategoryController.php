@@ -56,7 +56,7 @@ class CategoryController extends Controller
                         $query->where('city', $location);
                 });
             }])
-            ->with(['user.shop','product_image'])->latest()->paginate(25);
+            ->with(['user.shop', 'product_image'])->latest()->paginate(25);
 
         return response()->json([
             'products' => $products,

@@ -204,6 +204,6 @@ Route::apiResource('/sitetexts', WebsiteSitetextController::class);
 //location
 Route::get('/locations/countries', [LocationController::class, 'indexCountry']);
 Route::get('/locations/provinces', [LocationController::class, 'indexProvince']);
-Route::get('/locations/districts/{province}', [LocationController::class, 'indexDistrict']);
+Route::get('/locations/districts', [LocationController::class, 'indexDistrict']);
 Route::get('/locations/cities/{district}', [LocationController::class, 'indexCity']);
 Route::get('/locations/areas/{city}', [LocationController::class, 'indexArea']);

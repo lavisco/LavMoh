@@ -759,15 +759,16 @@ button.bg-black:hover {
 
 .btn-special {
     font-size: 20px;
-    background-color: rgba(239, 239, 239, 0.31);
+    background-color: $lav-l-blue;
     font-weight: 600;
-    color: $black;
+    color: $white;
+    min-width: 253px;
     &:hover {
         background-color: $lav-purple;
-        color: $white;
     }
     @media (max-width: 991.98px) {
         font-size: 17px;
+        min-width: auto;
     }
 }
 
@@ -775,8 +776,8 @@ button.bg-black:hover {
     position: relative;
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: repeat(6, 4vw);
-    grid-gap: 42px;
+    grid-template-rows: repeat(6, 6vw);
+    grid-gap: 28px;
 
     @media (max-width: 768px) {
         grid-gap: 8px;
@@ -787,14 +788,29 @@ button.bg-black:hover {
         grid-template-rows: repeat(6, 14vw);
         grid-gap: 12px;
 
-        .gallery-item--5 {
-            grid-column: 3 / span 2 !important;
-            grid-row: 4 / span 3 !important;
+        .gallery-item--5,
+        .gallery-item--6 {
+            display: none;
         }
 
-        .gallery-item--6 {
-            grid-column: 5 / span 4 !important;
+        .gallery-item--1 {
+            grid-column: 1 / span 3 !important;
+            grid-row: 1 / span 2 !important;
+        }
+        .gallery-item--2 {
+            grid-column: 4 / span 4 !important;
+            grid-row: 1 / span 3 !important;
+        }
+        .gallery-item--3 {
+            grid-column: 4 / span 4 !important;
             grid-row: 4 / span 3 !important;
+        }
+        .gallery-item--4 {
+            grid-column: 1 / span 3 !important;
+            grid-row: 3 / span 3 !important;
+        }
+        .gallery-item--7 {
+            grid-column: 1 / span 3 !important;
         }
     }
 
@@ -815,13 +831,8 @@ button.bg-black:hover {
         border-radius: 12px;
         font-size: 16px;
         color: $black;
-        font-weight: 600;
-        background-color: #ffffff8d;
-        background: linear-gradient(
-            132.89deg,
-            rgb(255 255 255 / 50%) 7.1%,
-            rgb(255 255 255 / 47%) 105.23%
-        );
+        font-weight: 500;
+        background-color: #ffffffad;
 
         @media (max-width: 991.98px) {
             height: 46px;
@@ -1258,7 +1269,7 @@ section {
 .item-card-2 {
     background-color: $white;
     width: 320px;
-    height: 498px;
+    height: 472px;
     font-size: 15px;
     border: 1px solid #e6e6eb82;
     border-radius: 7px;
@@ -1298,7 +1309,7 @@ section {
     font-weight: 500;
     line-height: 25px;
     color: $black;
-    max-height: 50px;
+    max-height: 25px;
     margin-bottom: 10px;
     word-wrap: break-word;
     overflow: hidden;

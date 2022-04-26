@@ -43,9 +43,6 @@
                                 {{ product.base_price }}
                             </div>
                             <div class="card-secondary-text">
-                                {{ product.category.name }}
-                            </div>
-                            <div class="card-secondary-text">
                                 Made by {{ product.user.shop.name }}
                             </div>
                         </div>
@@ -60,9 +57,9 @@
         <!-- Modal -->
         <div
             class="modal fade"
-            id="addRecord"
+            id="locationPopup"
             tabindex="-1"
-            aria-labelledby="addRecordLabel"
+            aria-labelledby="locationPopupLabel"
             aria-hidden="true"
         >
             <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -71,7 +68,7 @@
                     <div class="modal-header">
                         <h4
                             class="modal-title text-uppercase"
-                            id="addRecordLabel"
+                            id="locationPopupLabel"
                         >
                             Select Location
                         </h4>
@@ -90,33 +87,6 @@
 
                     <!-- Form start -->
                     <div class="modal-body modal-view">
-                        <div class="form-group" v-if="provinceMode">
-                            <label class="col-form-label" for="provinceId"
-                                >Province
-                                <strong class="text-danger"> *</strong>
-                            </label>
-
-                            <select
-                                class="
-                                    custom-select
-                                    form-control form-control-alternative
-                                "
-                                name="provinceId"
-                                id="provinceId"
-                                v-model="provinceId"
-                                @change.prevent="loadDistricts()"
-                            >
-                                <option value="" disabled selected hidden>
-                                    Select Province
-                                </option>
-                                <option
-                                    v-for="province in provinces"
-                                    :value="province.id"
-                                >
-                                    {{ province.name }}
-                                </option>
-                            </select>
-                        </div>
                         <div class="form-group" v-if="districtMode">
                             <label class="col-form-label" for="districtId"
                                 >District
@@ -158,7 +128,7 @@
                                 name="city"
                                 id="city"
                                 v-model="city"
-                                @change.prevent="cityHasArea()"
+                                @change.prevent="loadLocationBasedProducts()"
                             >
                                 <option value="" disabled selected hidden>
                                     Select City
@@ -206,20 +176,12 @@ export default {
         searchText: null,
         loading: true,
         //location data
-        countries: [],
-        provinces: [],
         districts: [],
         cities: [],
-        areas: [],
-        countryId: "",
-        provinceId: "",
         districtId: "",
         city: "",
-
-        provinceMode: false,
         districtMode: false,
         cityMode: false,
-        areaMode: false,
     }),
 
     beforeRouteEnter: function (to, from, next) {
@@ -250,7 +212,7 @@ export default {
         setData(response) {
             this.category = response.data.category;
             this.products = response.data.products.data;
-            this.loadProvinces();
+            this.loadDistricts();
             this.loading = false;
         },
         loadData() {
@@ -264,13 +226,11 @@ export default {
         },
 
         resetLocation() {
-            this.provinceMode = true;
-            this.districtMode = false;
+            this.districtMode = true;
             this.cityMode = false;
-            this.areaMode = false;
         },
 
-        loadProvinces() {
+        loadDistricts() {
             if (
                 this.category.name == "Cakes" ||
                 this.category.name == "cakes" ||
@@ -278,29 +238,15 @@ export default {
                 this.category.name == "cake"
             ) {
                 axios
-                    .get("/api/locations/provinces")
+                    .get("/api/locations/districts")
                     .then(({ data }) => {
-                        this.provinces = data;
-                        this.provinceMode = true;
-                        this.districtMode = false;
+                        this.districts = data;
+                        this.districtMode = true;
                         this.cityMode = false;
-                        this.areaMode = false;
-                        $("#addRecord").modal("show");
+                        $("#locationPopup").modal("show");
                     })
                     .catch((error) => console.log(error));
             }
-        },
-        loadDistricts() {
-            axios
-                .get("/api/locations/districts/" + this.provinceId)
-                .then(({ data }) => {
-                    this.districts = data;
-                    this.districtMode = true;
-                    this.provinceMode = false;
-                    this.cityMode = false;
-                    this.areaMode = false;
-                })
-                .catch((error) => console.log(error));
         },
         loadCities() {
             axios
@@ -308,40 +254,21 @@ export default {
                 .then(({ data }) => {
                     this.cities = data;
                     this.cityMode = true;
-                    this.provinceMode = false;
                     this.districtMode = false;
-                    this.areaMode = false;
                 })
                 .catch((error) => console.log(error));
         },
-        cityHasArea() {
-            if (this.city.has_area == true) {
-                this.loadAreas();
-            } else {
-                axios
-                    .get(
-                        "/api/categories/products/" +
-                            this.$route.params.categoryId +
-                            "/" +
-                            this.city.name
-                    )
-                    .then((response) => {
-                        //this.category = response.data.category;
-                        this.products = response.data.products.data;
-                        $("#addRecord").modal("hide");
-                    })
-                    .catch((error) => console.log(error));
-            }
-        },
-        loadAreas() {
+        loadLocationBasedProducts() {
             axios
-                .get("/api/locations/areas/" + this.city.id)
-                .then(({ data }) => {
-                    this.areas = data;
-                    this.areaMode = true;
-                    this.provinceMode = false;
-                    this.districtMode = false;
-                    this.cityMode = false;
+                .get(
+                    "/api/categories/products/" +
+                        this.$route.params.categoryId +
+                        "/" +
+                        this.city.name
+                )
+                .then((response) => {
+                    this.products = response.data.products.data;
+                    $("#locationPopup").modal("hide");
                 })
                 .catch((error) => console.log(error));
         },

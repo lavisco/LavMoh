@@ -199,12 +199,21 @@
             </section>
 
             <section class="section-category">
-                <h1>Hundreds of Gift Ideas</h1>
-                <div class="row">
-                    <div class="col-md-3 mb-4 mb-md-0">
-                        <div class="d-flex flex-column">
+                <h1>Find the perfect gift for your Loved ones</h1>
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div
+                            class="
+                                d-flex
+                                align-items-center
+                                justify-content-center
+                                justify-content-xl-between
+                                flex-wrap
+                                gap
+                            "
+                        >
                             <button
-                                class="btn-special mb-2 mb-md-4"
+                                class="btn-special"
                                 v-for="(category, i) in categories"
                                 @click.prevent="categoryActive = i"
                             >
@@ -212,7 +221,9 @@
                             </button>
                         </div>
                     </div>
-                    <div class="col-md-9 pl-md-5">
+                </div>
+                <div class="row">
+                    <div class="col-12">
                         <div
                             class="gallery"
                             v-for="(category, i) in categories"

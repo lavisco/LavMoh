@@ -48,6 +48,12 @@ class Category extends Model
         return $this->products()->with('product_image')->limit(3);
     }
 
+    //get only 3 products using \Staudenmeir\EloquentEagerLimit\HasEagerLimit package
+    public function homePageProducts()
+    {
+        return $this->products()->with('product_image')->limit(6);
+    }
+
     public function productImages()
     {
         return $this->hasManyThrough(ProductImage::class, Product::class);

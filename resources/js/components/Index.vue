@@ -120,6 +120,7 @@
                     </router-link>
                 </div>
             </section>
+
             <section class="section-special">
                 <h1>Gifts and Crafts for Every Occasion & Recipient</h1>
                 <div class="row">
@@ -196,11 +197,69 @@
                     </div>
                 </div>
             </section>
-            <section class="section-category"></section>
+
+            <section class="section-category">
+                <h1>Hundreds of Gift Ideas</h1>
+                <div class="row">
+                    <div class="col-md-3 mb-4 mb-md-0">
+                        <div class="d-flex flex-column">
+                            <button
+                                class="btn-special mb-2 mb-md-4"
+                                v-for="(category, i) in categories"
+                                @click.prevent="categoryActive = i"
+                            >
+                                {{ category.name }}
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-9 pl-md-5">
+                        <div
+                            class="gallery"
+                            v-for="(category, i) in categories"
+                            v-show="categoryActive == i"
+                        >
+                            <figure
+                                class="gallery-item"
+                                :class="`gallery-item--${index + 1}`"
+                                v-for="(
+                                    product, index
+                                ) in category.home_page_products"
+                            >
+                                <img
+                                    :src="
+                                        product.product_image
+                                            ? product.product_image.path
+                                            : ''
+                                    "
+                                    class="gallery-img"
+                                    alt="Image 1"
+                                />
+                                <div class="gallery-text">
+                                    {{ product.title }}
+                                </div>
+                            </figure>
+                            <div class="gallery-item gallery-item--7">
+                                <router-link
+                                    :to="{
+                                        name: 'categories/category',
+                                        params: {
+                                            categoryId: category.id,
+                                        },
+                                    }"
+                                >
+                                    More
+                                </router-link>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <section class="section-social-slider">
                 <h1>Share the Fun</h1>
                 <h2 class="grey">Use #Luvit #Lavisco to be Featured</h2>
             </section>
+
             <section class="section-instruction">
                 <h1>How Lavisco Works</h1>
                 <div class="row">
@@ -253,6 +312,7 @@
                     </div>
                 </div>
             </section>
+
             <section class="section-shortcuts row">
                 <div class="col-md-6 shortcut-left py-4 px-md-5">
                     <h1 class="mb-3">Start selling on Lavisco</h1>
@@ -302,6 +362,7 @@ export default {
         icon_delivery: "",
         icon_money: "",
         icon_surprise: "",
+        categoryActive: "0",
         swiperOption: {
             slidesPerView: 5,
             spaceBetween: 20,

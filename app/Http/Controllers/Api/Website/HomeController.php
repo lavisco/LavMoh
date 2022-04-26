@@ -38,7 +38,7 @@ class HomeController extends Controller
             'products' => $products,
             'occasions' => Occasion::select('id', 'name', 'slug')->latest()->get(),
             'recipients' => Recipient::select('id', 'name', 'slug')->latest()->get(),
-            'categories' => Category::select('id', 'name', 'slug')->latest()->get(),
+            'categories' => Category::with('homePageProducts.product_image')->latest()->get(),
             'homesliders' => HomeSlider::orderBy('order')->get(),
             'icon_cake' => Storage::disk('s3')->temporaryUrl('public/images/cake.png', '+2 minutes'),
             'icon_delivery' => Storage::disk('s3')->temporaryUrl('public/images/door-delivery.png', '+2 minutes'),

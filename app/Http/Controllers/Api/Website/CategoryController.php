@@ -46,14 +46,14 @@ class CategoryController extends Controller
     public function getLocationWiseProducts($id, $location)
     {
         $products = Product::where('category_id', $id)->where('product_state_id', '1')
-            ->whereHas('user', function($query){
-                $query->whereHas('seller_profile', function($query) {
-                    $query->where('city', 'Kandy');
+            ->whereHas('user', function($query) use($location){
+                $query->whereHas('shop', function($query) use($location) {
+                    $query->where('city', $location);
                 });
             })
-            ->with(['user' => function($q) {
-                $q->whereHas('seller_profile', function($query) {
-                        $query->where('city', 'Kandy');
+            ->with(['user' => function($q) use($location) {
+                $q->whereHas('shop', function($query) use($location) {
+                        $query->where('city', $location);
                 });
             }])
             ->with(['user.shop','product_image'])->latest()->paginate(25);

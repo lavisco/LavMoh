@@ -90,33 +90,6 @@
 
                     <!-- Form start -->
                     <div class="modal-body modal-view">
-                        <div class="form-group" v-if="countryMode">
-                            <label class="col-form-label" for="countryId"
-                                >Country
-                                <strong class="text-danger"> *</strong>
-                            </label>
-
-                            <select
-                                class="
-                                    custom-select
-                                    form-control form-control-alternative
-                                "
-                                name="countryId"
-                                id="countryId"
-                                v-model="countryId"
-                                @change.prevent="loadProvinces()"
-                            >
-                                <option value="" disabled selected hidden>
-                                    Select Country
-                                </option>
-                                <option
-                                    v-for="country in countries"
-                                    :value="country.id"
-                                >
-                                    {{ country.name }}
-                                </option>
-                            </select>
-                        </div>
                         <div class="form-group" v-if="provinceMode">
                             <label class="col-form-label" for="provinceId"
                                 >Province
@@ -235,7 +208,6 @@ export default {
         districtId: "",
         city: "",
 
-        countryMode: false,
         provinceMode: false,
         districtMode: false,
         cityMode: false,
@@ -270,7 +242,7 @@ export default {
         setData(response) {
             this.category = response.data.category;
             this.products = response.data.products.data;
-            this.loadCountries();
+            this.loadProvinces();
             this.loading = false;
         },
         loadData() {
@@ -283,19 +255,19 @@ export default {
                 .catch((error) => console.log(error));
         },
 
-        loadCountries() {
+        loadProvinces() {
             if (
                 this.category.name == "Cakes" ||
                 this.category.name == "cakes" ||
                 this.category.name == "Cake" ||
                 this.category.name == "cake"
             ) {
+                console.log("show");
                 axios
-                    .get("/api/locations/countries")
+                    .get("/api/locations/provinces")
                     .then(({ data }) => {
-                        this.countries = data;
-                        this.countryMode = true;
-                        this.provinceMode = false;
+                        this.provinces = data;
+                        this.provinceMode = true;
                         this.districtMode = false;
                         this.cityMode = false;
                         this.areaMode = false;
@@ -304,27 +276,12 @@ export default {
                     .catch((error) => console.log(error));
             }
         },
-
-        loadProvinces() {
-            axios
-                .get("/api/locations/provinces/" + this.countryId)
-                .then(({ data }) => {
-                    this.provinces = data;
-                    this.provinceMode = true;
-                    this.countryMode = false;
-                    this.districtMode = false;
-                    this.cityMode = false;
-                    this.areaMode = false;
-                })
-                .catch((error) => console.log(error));
-        },
         loadDistricts() {
             axios
                 .get("/api/locations/districts/" + this.provinceId)
                 .then(({ data }) => {
                     this.districts = data;
                     this.districtMode = true;
-                    this.countryMode = false;
                     this.provinceMode = false;
                     this.cityMode = false;
                     this.areaMode = false;
@@ -337,7 +294,6 @@ export default {
                 .then(({ data }) => {
                     this.cities = data;
                     this.cityMode = true;
-                    this.countryMode = false;
                     this.provinceMode = false;
                     this.districtMode = false;
                     this.areaMode = false;
@@ -369,7 +325,6 @@ export default {
                 .then(({ data }) => {
                     this.areas = data;
                     this.areaMode = true;
-                    this.countryMode = false;
                     this.provinceMode = false;
                     this.districtMode = false;
                     this.cityMode = false;

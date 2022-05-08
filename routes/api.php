@@ -34,6 +34,7 @@ use App\Http\Controllers\Api\Buyer\BuyerProfileController as BuyerBuyerProfileCo
 use App\Http\Controllers\Api\Buyer\OrderController as BuyerOrderController;
 use App\Http\Controllers\Api\Email\EmailController;
 use App\Http\Controllers\Api\Seller\DashboardController as SellerDashboardController;
+use App\Http\Controllers\Api\Seller\LocationController as SellerLocationController;
 use App\Http\Controllers\Api\Seller\OrderController as SellerOrderController;
 use App\Http\Controllers\Api\Seller\ProductController as SellerProductController;
 use App\Http\Controllers\Api\Seller\ProductImageController as SellerProductImageController;
@@ -163,6 +164,7 @@ Route::prefix('seller')->group(function () {
     Route::apiResource('/user', SellerUserController::class);
     Route::apiResource('/variations', SellerVariationController::class);
     Route::apiResource('/variation_options', SellerVariationOptionController::class);
+    Route::get('/locations/cities', [SellerLocationController::class, 'indexCity']);
 });
 
 /*
@@ -185,19 +187,23 @@ Route::prefix('email')->group(function () {
 |--------------------------------------------------------------------------
 */
 
+//home & nav
 Route::get('/navdata', [WebsiteHomeController::class, 'getNavbarData']);
+Route::apiResource('/home', WebsiteHomeController::class);
+//search
 Route::get('/search/{searchText}', [WebsiteHomeController::class, 'searchSuggestion']);
 Route::get('/search', [WebsiteHomeController::class, 'searchIndex']);
-Route::apiResource('/home', WebsiteHomeController::class);
-Route::apiResource('/products', WebsiteProductController::class);
+//pages
 Route::get('/categories/products/{id}/{location}', [WebsiteCategoryController::class, 'getLocationWiseProducts']);
 Route::apiResource('/categories', WebsiteCategoryController::class);
-Route::apiResource('/sellerprofiles', WebsiteSellerProfileController::class);
 Route::apiResource('/occasions', WebsiteOccasionController::class);
 Route::get('/orders/shippings/{shopId}', [WebsiteOrderController::class, 'getShippings']);
 Route::apiResource('/orders', WebsiteOrderController::class);
+Route::apiResource('/products', WebsiteProductController::class);
 Route::apiResource('/recipients', WebsiteRecipientController::class);
+Route::apiResource('/sellerprofiles', WebsiteSellerProfileController::class);
 Route::apiResource('/shops', WebsiteShopController::class);
+//sitetext
 Route::get('/sitetexts/about_pictures', [WebsiteSitetextController::class, 'aboutusPictures']);
 Route::get('/sitetexts/seller_pictures', [WebsiteSitetextController::class, 'sellerPictures']);
 Route::apiResource('/sitetexts', WebsiteSitetextController::class);

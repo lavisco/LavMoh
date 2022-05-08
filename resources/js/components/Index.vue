@@ -210,7 +210,6 @@
                                 d-flex
                                 align-items-center
                                 justify-content-center
-                                justify-content-xl-between
                                 flex-wrap
                                 gap
                             "

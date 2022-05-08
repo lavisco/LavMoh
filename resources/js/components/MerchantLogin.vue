@@ -38,7 +38,7 @@
                         />
                         <i
                             class="fas fa-eye"
-                            onclick="showPasswordFunction()"
+                            @click.prevent="showPassword()"
                         ></i>
                     </div>
                     <HasError :form="form" field="password" />
@@ -88,6 +88,15 @@ export default {
     }),
 
     methods: {
+        showPassword() {
+            var x = document.getElementById("password");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        },
+
         loginUser() {
             this.form
                 .post("/login")

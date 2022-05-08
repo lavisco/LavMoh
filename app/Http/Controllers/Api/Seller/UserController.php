@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\PasswordRequest;
 use App\Http\Requests\SellerRegisterRequest;
 use App\Http\Requests\UserRequest;
+use App\Models\City;
+use App\Models\District;
+use App\Models\Province;
 use App\Models\Role;
 use App\Models\SellerProfile;
 use App\Models\Shop;
@@ -50,20 +53,30 @@ class UserController extends Controller
     }
 
     public function storeShopSetup(SellerRegisterRequest $request)
-    {      
+    {   
+        $city = City::where('name', $request->city)->first();
+        $district = District::findOrFail($city->district_id);
+        $province = Province::findOrFail($district->province_id);
+
         $request->merge([
             'user_id' => Auth::user()->id,
-            'country' => "Sri Lanka"
+            'country' => "Sri Lanka",
+            'province' => $province->name,
+            'district' => $district->name,
         ]);
 
         SellerProfile::create($request->all());
+
+        $cityShop = City::where('name', $request->shop_city)->first();
+        $districtShop = District::findOrFail($cityShop->district_id);
+        $provinceShop = Province::findOrFail($districtShop->province_id);
 
         $request->merge([
             'user_id' => Auth::user()->id,
             'name' => $request->shop_name,
             'slug' => Str::slug($request->shop_name),
-            'province' => $request->shop_province,
-            'district' => $request->shop_district,
+            'province' => $provinceShop->name,
+            'district' => $districtShop->name,
             'city' => $request->shop_city,
             'area' => $request->shop_area,
             'address' => $request->shop_address,

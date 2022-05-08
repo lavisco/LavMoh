@@ -257,118 +257,13 @@
                                                 >
                                                     <label
                                                         class="col-form-label"
-                                                        for="province"
-                                                        >Province
-                                                        <strong
-                                                            class="text-danger"
-                                                        >
-                                                            *</strong
-                                                        >
-                                                    </label>
-                                                    <select
-                                                        class="
-                                                            custom-select
-                                                            form-control
-                                                            form-control-alternative
-                                                        "
-                                                        id="province"
-                                                        v-model="form.province"
-                                                        name="province"
-                                                        @change.prevent="
-                                                            loadDistricts(
-                                                                'districts',
-                                                                form.province,
-                                                                'city'
-                                                            )
-                                                        "
-                                                    >
-                                                        <option
-                                                            value=""
-                                                            disabled
-                                                            selected
-                                                            hidden
-                                                        >
-                                                            Select Province
-                                                        </option>
-                                                        <option
-                                                            v-for="province in provinces"
-                                                            :value="
-                                                                province.name
-                                                            "
-                                                        >
-                                                            {{ province.name }}
-                                                        </option>
-                                                    </select>
-                                                    <HasError
-                                                        :form="form"
-                                                        field="province"
-                                                    />
-                                                </div>
-                                                <div
-                                                    class="form-group col-md-6"
-                                                >
-                                                    <label
-                                                        class="col-form-label"
-                                                        for="district"
-                                                        >District
-                                                        <strong
-                                                            class="text-danger"
-                                                        >
-                                                            *</strong
-                                                        >
-                                                    </label>
-                                                    <select
-                                                        class="
-                                                            custom-select
-                                                            form-control
-                                                            form-control-alternative
-                                                        "
-                                                        id="district"
-                                                        v-model="form.district"
-                                                        name="district"
-                                                        @change.prevent="
-                                                            loadCities(
-                                                                'cities',
-                                                                form.district
-                                                            )
-                                                        "
-                                                    >
-                                                        <option
-                                                            value=""
-                                                            disabled
-                                                            selected
-                                                            hidden
-                                                        >
-                                                            Select District
-                                                        </option>
-                                                        <option
-                                                            v-for="district in districts"
-                                                            :value="
-                                                                district.name
-                                                            "
-                                                        >
-                                                            {{ district.name }}
-                                                        </option>
-                                                    </select>
-                                                    <HasError
-                                                        :form="form"
-                                                        field="district"
-                                                    />
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div
-                                                    class="form-group col-md-6"
-                                                >
-                                                    <label
-                                                        class="col-form-label"
                                                         for="city"
                                                         >City
                                                         <strong
                                                             class="text-danger"
                                                         >
-                                                            *</strong
-                                                        >
+                                                            *
+                                                        </strong>
                                                     </label>
                                                     <select
                                                         class="
@@ -764,6 +659,7 @@
                                                                         {{
                                                                             shipping.delivery_time
                                                                         }}
+                                                                        day(s)
                                                                         <br />
                                                                         <span
                                                                             class="
@@ -810,122 +706,13 @@
                                                 >
                                                     <label
                                                         class="col-form-label"
-                                                        for="shop_province"
-                                                        >Province
-                                                        <strong
-                                                            class="text-danger"
-                                                        >
-                                                            *</strong
-                                                        >
-                                                    </label>
-                                                    <select
-                                                        class="
-                                                            custom-select
-                                                            form-control
-                                                            form-control-alternative
-                                                        "
-                                                        id="shop_province"
-                                                        v-model="
-                                                            form.shop_province
-                                                        "
-                                                        name="shop_province"
-                                                        @change.prevent="
-                                                            loadDistricts(
-                                                                'districtsShop',
-                                                                form.shop_province,
-                                                                'shop_city'
-                                                            )
-                                                        "
-                                                    >
-                                                        <option
-                                                            value=""
-                                                            disabled
-                                                            selected
-                                                            hidden
-                                                        >
-                                                            Select Province
-                                                        </option>
-                                                        <option
-                                                            v-for="province in provinces"
-                                                            :value="
-                                                                province.name
-                                                            "
-                                                        >
-                                                            {{ province.name }}
-                                                        </option>
-                                                    </select>
-                                                    <HasError
-                                                        :form="form"
-                                                        field="shop_province"
-                                                    />
-                                                </div>
-                                                <div
-                                                    class="form-group col-md-6"
-                                                >
-                                                    <label
-                                                        class="col-form-label"
-                                                        for="shop_district"
-                                                        >District
-                                                        <strong
-                                                            class="text-danger"
-                                                        >
-                                                            *</strong
-                                                        >
-                                                    </label>
-                                                    <select
-                                                        class="
-                                                            custom-select
-                                                            form-control
-                                                            form-control-alternative
-                                                        "
-                                                        id="shop_district"
-                                                        v-model="
-                                                            form.shop_district
-                                                        "
-                                                        name="shop_district"
-                                                        @change.prevent="
-                                                            loadCities(
-                                                                'citiesShop',
-                                                                form.shop_district
-                                                            )
-                                                        "
-                                                    >
-                                                        <option
-                                                            value=""
-                                                            disabled
-                                                            selected
-                                                            hidden
-                                                        >
-                                                            Select District
-                                                        </option>
-                                                        <option
-                                                            v-for="district in districtsShop"
-                                                            :value="
-                                                                district.name
-                                                            "
-                                                        >
-                                                            {{ district.name }}
-                                                        </option>
-                                                    </select>
-                                                    <HasError
-                                                        :form="form"
-                                                        field="shop_district"
-                                                    />
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div
-                                                    class="form-group col-md-6"
-                                                >
-                                                    <label
-                                                        class="col-form-label"
                                                         for="shop_city"
                                                         >City
                                                         <strong
                                                             class="text-danger"
                                                         >
-                                                            *</strong
-                                                        >
+                                                            *
+                                                        </strong>
                                                     </label>
                                                     <select
                                                         class="
@@ -936,9 +723,6 @@
                                                         id="shop_city"
                                                         v-model="form.shop_city"
                                                         name="shop_city"
-                                                        @change.prevent="
-                                                            loadAreas()
-                                                        "
                                                     >
                                                         <option
                                                             value=""
@@ -949,7 +733,7 @@
                                                             Select City
                                                         </option>
                                                         <option
-                                                            v-for="city in citiesShop"
+                                                            v-for="city in cities"
                                                             :value="city.name"
                                                         >
                                                             {{ city.name }}
@@ -984,54 +768,6 @@
                                                     <HasError
                                                         :form="form"
                                                         field="shop_zipcode"
-                                                    />
-                                                </div>
-                                            </div>
-                                            <div
-                                                class="row"
-                                                v-show="areasShop[0] != null"
-                                            >
-                                                <div
-                                                    class="form-group col-md-6"
-                                                >
-                                                    <label
-                                                        class="col-form-label"
-                                                        for="shop_area"
-                                                        >Area
-                                                        <strong
-                                                            class="text-danger"
-                                                        >
-                                                            *</strong
-                                                        >
-                                                    </label>
-                                                    <select
-                                                        class="
-                                                            custom-select
-                                                            form-control
-                                                            form-control-alternative
-                                                        "
-                                                        id="shop_area"
-                                                        v-model="form.shop_area"
-                                                        name="shop_area"
-                                                    >
-                                                        <option
-                                                            value=""
-                                                            disabled
-                                                            selected
-                                                            hidden
-                                                        >
-                                                            Select Area
-                                                        </option>
-                                                        <option
-                                                            v-for="area in areasShop"
-                                                            :value="area.name"
-                                                        >
-                                                            {{ area.name }}
-                                                        </option>
-                                                    </select>
-                                                    <HasError
-                                                        :form="form"
-                                                        field="shop_area"
                                                     />
                                                 </div>
                                             </div>
@@ -1505,22 +1241,13 @@ export default {
         failed: false,
 
         shippings: [],
-        //location data
-        provinces: [],
-        districts: [],
         cities: [],
-        districtsShop: [],
-        citiesShop: [],
-        areasShop: [],
         form: new Form({
             id: "",
             //shop
             shop_name: "",
             banner: "",
             about: "",
-            shop_country: "",
-            shop_province: "",
-            shop_district: "",
             shop_city: "",
             shop_area: "",
             shop_address: "",
@@ -1530,9 +1257,6 @@ export default {
             last_name: "",
             phone: "",
             email: "",
-            country: "",
-            province: "",
-            district: "",
             city: "",
             address: "",
             zipcode: "",
@@ -1563,7 +1287,7 @@ export default {
                     this.shop_active = data.shopActive;
                     if (this.has_shop === false) {
                         $("#addRecord").modal("show");
-                        this.loadProvinces();
+                        this.loadCities();
                         this.loadShippings();
                     }
                     this.orders = data.orders;
@@ -1600,36 +1324,10 @@ export default {
                 .catch((error) => console.log(error));
         },
 
-        loadProvinces() {
+        loadCities() {
             axios
-                .get("/api/locations/provinces")
-                .then(({ data }) => (this.provinces = data))
-                .catch((error) => console.log(error));
-        },
-
-        loadDistricts(districts, province, city) {
-            axios
-                .get("/api/locations/districts/" + province)
-                .then(({ data }) => {
-                    this[districts] = data;
-                    city == "city"
-                        ? (this.form.city = "")
-                        : (this.form.shop_city = "");
-                })
-                .catch((error) => console.log(error));
-        },
-
-        loadCities(cities, district) {
-            axios
-                .get("/api/locations/cities/" + district)
-                .then(({ data }) => (this[cities] = data))
-                .catch((error) => console.log(error));
-        },
-
-        loadAreas() {
-            axios
-                .get("/api/locations/areas/" + this.form.shop_city)
-                .then(({ data }) => (this.areasShop = data))
+                .get("/api/seller/locations/cities")
+                .then(({ data }) => (this.cities = data))
                 .catch((error) => console.log(error));
         },
 

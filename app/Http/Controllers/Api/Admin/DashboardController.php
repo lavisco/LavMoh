@@ -21,7 +21,8 @@ class DashboardController extends Controller
     {
         return response()->json([
             'buyers' => BuyerProfile::count(),
-            'sellers' => SellerProfile::count(),
+            'sellers' => User::where('role_id', 2)->count(),
+            'shops' => Shop::count(),
             'products' => Product::count(),
             'users' => User::count(),
             'inactiveShops' => Shop::where('status', false)->with('user')->latest()->get(),

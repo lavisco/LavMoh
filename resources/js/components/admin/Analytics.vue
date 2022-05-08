@@ -21,9 +21,7 @@
                                             </h5>
                                             <span
                                                 class="h2 font-weight-bold mb-0"
-                                                >{{
-                                                    analytics.visitors[0]
-                                                }}</span
+                                                >{{ analytics.visitors }}</span
                                             >
                                         </div>
                                         <div class="col-auto">
@@ -69,8 +67,7 @@
                                             <span
                                                 class="h2 font-weight-bold mb-0"
                                                 >{{
-                                                    analytics
-                                                        .mostVisitedPages[0]
+                                                    analytics.mostVisitedPages
                                                 }}</span
                                             >
                                         </div>
@@ -117,8 +114,7 @@
                                             <span
                                                 class="h2 font-weight-bold mb-0"
                                                 >{{
-                                                    analytics.visitorsMonthly[2]
-                                                        .visitors
+                                                    analytics.visitorsMonthly
                                                 }}</span
                                             >
                                         </div>
@@ -164,9 +160,7 @@
                                             </h5>
                                             <span
                                                 class="h2 font-weight-bold mb-0"
-                                                >{{
-                                                    analytics.userType[0]
-                                                }}</span
+                                                >{{ analytics.userType }}</span
                                             >
                                         </div>
                                         <div class="col-auto">

@@ -16,11 +16,11 @@
                                                 mb-0
                                             "
                                         >
-                                            Traffic
+                                            Total Sellers
                                         </h5>
                                         <span
                                             class="h2 font-weight-bold mb-0"
-                                            >{{ users }}</span
+                                            >{{ sellers }}</span
                                         >
                                     </div>
                                     <div class="col-auto">
@@ -61,11 +61,11 @@
                                                 mb-0
                                             "
                                         >
-                                            New Sellers
+                                            Total Shops
                                         </h5>
                                         <span
                                             class="h2 font-weight-bold mb-0"
-                                            >{{ sellers }}</span
+                                            >{{ shops }}</span
                                         >
                                     </div>
                                     <div class="col-auto">
@@ -106,7 +106,7 @@
                                                 mb-0
                                             "
                                         >
-                                            New Buyers
+                                            Total Buyers
                                         </h5>
                                         <span
                                             class="h2 font-weight-bold mb-0"
@@ -195,6 +195,7 @@ export default {
     data: () => ({
         users: "",
         sellers: "",
+        shops: "",
         buyers: "",
         products: "",
     }),
@@ -206,6 +207,7 @@ export default {
                 .then(({ data }) => {
                     this.users = data.users;
                     this.sellers = data.sellers;
+                    this.shops = data.shops;
                     this.buyers = data.buyers;
                     this.products = data.products;
                 })

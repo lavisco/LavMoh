@@ -195,6 +195,79 @@
         </div>
         <div class="container-fluid mt--7 mb-5">
             <div class="row">
+                <div class="col-12 mb-5">
+                    <div class="card bg-gradient-default shadow">
+                        <div class="card-header bg-transparent border-0">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <h6
+                                        class="
+                                            text-uppercase text-light
+                                            ls-1
+                                            mb-1
+                                        "
+                                    >
+                                        Overview
+                                    </h6>
+                                    <h2 class="text-white mb-0">
+                                        Seller Statistics
+                                    </h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table
+                                    class="
+                                        table
+                                        align-items-center
+                                        table-dark table-flush
+                                    "
+                                >
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th scope="col">User name</th>
+                                            <th scope="col">Email</th>
+                                            <th scope="col">Profile created</th>
+                                            <th scope="col">Shop created</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="list">
+                                        <tr v-for="seller in analytics.sellers">
+                                            <th scope="row">
+                                                {{ seller.name }}
+                                            </th>
+                                            <td>{{ seller.email }}</td>
+                                            <td>
+                                                {{
+                                                    seller.seller_profile
+                                                        ? moment(
+                                                              seller
+                                                                  .seller_profile
+                                                                  .created_at
+                                                          ).format("DD-MM-YYYY")
+                                                        : "not created"
+                                                }}
+                                            </td>
+                                            <td>
+                                                {{
+                                                    seller.shop
+                                                        ? moment(
+                                                              seller.shop
+                                                                  .created_at
+                                                          ).format("DD-MM-YYYY")
+                                                        : "not created"
+                                                }}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-xl-8 mb-5 mb-xl-0">
                     <div class="card bg-gradient-default shadow">
                         <div class="card-header bg-transparent border-0">
@@ -255,8 +328,11 @@
 </template>
 
 <script>
+import moment from "moment";
+
 export default {
     data: () => ({
+        moment: moment,
         analytics: "",
     }),
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\BuyerProfile;
 use App\Models\Product;
+use App\Models\Role;
 use App\Models\SellerProfile;
 use App\Models\Shop;
 use App\Models\User;
@@ -21,7 +22,7 @@ class DashboardController extends Controller
     {
         return response()->json([
             'buyers' => BuyerProfile::count(),
-            'sellers' => User::where('role_id', 2)->count(),
+            'sellers' => User::where('role_id', Role::IS_SELLER)->count(),
             'shops' => Shop::count(),
             'products' => Product::count(),
             'users' => User::count(),

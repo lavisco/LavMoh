@@ -1,5 +1,5 @@
 <template>
-    <div class="header bg-primary pb-8 pt-4">
+    <div class="header bg-blue pb-8 pt-4">
         <div class="container-fluid">
             <div class="header-body">
                 <!-- Card stats -->

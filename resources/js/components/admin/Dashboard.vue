@@ -8,9 +8,6 @@
                         <div class="card-header border-0">
                             <div class="row align-items-center">
                                 <div class="col">
-                                    <h6 class="text-uppercase ls-1 mb-1">
-                                        Activation required
-                                    </h6>
                                     <h2 class="mb-0">Inactive Stores</h2>
                                 </div>
                             </div>
@@ -75,60 +72,49 @@
                         <div class="card-header bg-transparent border-0">
                             <div class="row align-items-center">
                                 <div class="col">
-                                    <h6
-                                        class="
-                                            text-uppercase text-light
-                                            ls-1
-                                            mb-1
-                                        "
-                                    >
-                                        Overview
-                                    </h6>
                                     <h2 class="text-white mb-0">
                                         Latest Products
                                     </h2>
                                 </div>
                             </div>
                         </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table
-                                    class="
-                                        table
-                                        align-items-center
-                                        table-dark table-flush
-                                    "
-                                >
-                                    <thead class="thead-dark">
-                                        <tr>
-                                            <th scope="col">Code</th>
-                                            <th scope="col">Title</th>
-                                            <th scope="col">Price</th>
-                                            <th scope="col">Seller</th>
-                                            <th scope="col">Quantity</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="list">
-                                        <tr v-for="product in latestProducts">
-                                            <th scope="row">
-                                                {{ product.id }}
-                                            </th>
-                                            <td>
-                                                {{ product.title }}
-                                            </td>
-                                            <td>
-                                                {{ product.base_price }}
-                                            </td>
-                                            <td>
-                                                {{ product.user.name }}
-                                            </td>
-                                            <td>
-                                                {{ product.quantity }}
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                        <div class="table-responsive">
+                            <table
+                                class="
+                                    table
+                                    align-items-center
+                                    table-dark table-flush
+                                "
+                            >
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">Code</th>
+                                        <th scope="col">Title</th>
+                                        <th scope="col">Price</th>
+                                        <th scope="col">Seller</th>
+                                        <th scope="col">Quantity</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="list">
+                                    <tr v-for="product in latestProducts">
+                                        <th scope="row">
+                                            {{ product.id }}
+                                        </th>
+                                        <td>
+                                            {{ product.title }}
+                                        </td>
+                                        <td>
+                                            {{ product.base_price }}
+                                        </td>
+                                        <td>
+                                            {{ product.user.name }}
+                                        </td>
+                                        <td>
+                                            {{ product.quantity }}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

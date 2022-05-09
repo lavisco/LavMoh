@@ -1,11 +1,11 @@
 <!-- Top navbar -->
 <nav
-    class="navbar navbar-top navbar-expand-md navbar-dark bg-primary"
+    class="navbar navbar-top navbar-expand-md navbar-dark bg-blue"
     id="navbar-main"
 >
     <div class="container-fluid">
         <!-- Brand -->
-        <div class="h3 mb-0 text-white text-uppercase d-none d-lg-inline-block">
+        <div class="h3 mb-0 text-white d-none d-lg-inline-block">
             @{{ $route.meta.title ? $route.meta.title : "Lavisco" }}
         </div>
 

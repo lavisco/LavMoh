@@ -2,7 +2,7 @@
     class="
         navbar navbar-vertical
         fixed-left
-        navbar-expand-md navbar-light
+        navbar-expand-md
         bg-white
     "
     id="sidenav-main"
@@ -329,10 +329,8 @@
                     </router-link>
                 </li>
             </ul>
-            <!-- Divider -->
-            <hr class="my-3" />
             <!-- Heading -->
-            <h6 class="navbar-heading text-muted">User Control</h6>
+            <h6 class="navbar-heading text-muted my-3">User Control</h6>
             <!-- Navigation -->
             <ul class="navbar-nav mb-md-3">
                 <li class="nav-item">

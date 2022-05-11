@@ -67,7 +67,7 @@
                 </div>
             </div>
             <div class="row mt-5">
-                <div class="col-xl-9 mb-5 mb-xl-0">
+                <div class="col-xl-9">
                     <div class="card bg-gradient-default shadow">
                         <div class="card-header bg-transparent border-0">
                             <div class="row align-items-center">

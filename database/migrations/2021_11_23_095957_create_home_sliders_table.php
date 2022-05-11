@@ -17,6 +17,7 @@ class CreateHomeSlidersTable extends Migration
             $table->id();
             $table->timestamps();
             $table->integer('order')->unique();
+            $table->string('link_text', 50);
             $table->string('name', 100);
             $table->string('description', 255);
             $table->string('link');

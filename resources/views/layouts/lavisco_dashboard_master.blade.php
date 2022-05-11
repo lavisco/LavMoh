@@ -41,10 +41,16 @@
     </head>
     <body class="{{ $class ?? '' }}">
         <div id="app">
-            @auth() @include('layouts.laviscoDashboard.topNav')
+            @auth()
 
-            <div class="main-content main-dashboard-content">
-                <router-view></router-view>
+            <div class="main-dashboard">
+                @include('layouts.laviscoDashboard.sideNav')
+
+                <div class="main-content main-dashboard-content">
+                    @include('layouts.laviscoDashboard.topNav')
+                    <router-view></router-view>
+                    @include('layouts.laviscoDashboard.footer')
+                </div>
             </div>
 
             @endauth @guest()

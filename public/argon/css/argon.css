@@ -444,7 +444,7 @@ h6,
 
     color: #32325d;
 }
-
+in 
 h1,
 .h1 {
     font-size: 1.625rem;
@@ -14565,6 +14565,9 @@ a.btn-icon-only {
 
 .main-content {
     position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 /* .main-content .navbar-top
 {

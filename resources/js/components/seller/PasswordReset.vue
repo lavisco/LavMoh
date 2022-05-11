@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- Body -->
-        <div class="container mt-3 mb-5">
+        <div class="container">
             <div class="row">
                 <div class="col">
                     <div class="card">
@@ -128,7 +128,7 @@
                             >
                                 <button
                                     type="button"
-                                    class="btn btn-grey mr-3"
+                                    class="btn btn-grey mr-2 mr-md-3"
                                     @click.prevent="cancel()"
                                 >
                                     <i
@@ -142,7 +142,7 @@
                                         class="fas fa-pen-nib mr-2"
                                         aria-hidden="true"
                                     ></i>
-                                    Update Password
+                                    Update
                                 </button>
                             </div>
                         </form>

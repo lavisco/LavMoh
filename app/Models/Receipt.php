@@ -13,18 +13,30 @@ class Receipt extends Model
     protected $table = 'receipts';
 
     protected $fillable = [
-        'was_paid',
-        'was_claimed',
         'status',
         'payment_method',
-        'payment_email',
-        'has_giftwrap',
+        'cms',
+        'process_currency',
+
+        'first_name',
+        'last_name',
+        'email',
+        'contact_number',
+        'address_line_one',
+        'address_line_two',
+        'postal_code',
+        'city',
+        'district',
+        'state',
+        'country',
+
         'total',
         'subtotal',
         'tax',
         'giftwrap_price',
         'shipping_price',
         'discount_price',
+        
         'order_id',
         'shop_id',
         'seller_id',

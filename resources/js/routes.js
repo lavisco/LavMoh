@@ -263,7 +263,14 @@ export let routes = [
         path: "/seller/dashboard",
         component: require("./components/seller/Dashboard.vue").default,
         meta: {
-            title: "Seller Dashboard",
+            title: "Dashboard",
+        },
+    },
+    {
+        path: "/seller/messages",
+        component: require("./components/seller/Message.vue").default,
+        meta: {
+            title: "Messages",
         },
     },
     {
@@ -284,7 +291,7 @@ export let routes = [
         path: "/seller/products/listing",
         component: require("./components/seller/ProductListing.vue").default,
         meta: {
-            title: "Product Listing",
+            title: "New Product",
         },
     },
     {
@@ -293,7 +300,7 @@ export let routes = [
         component: require("./components/seller/ProductListingEdit.vue")
             .default,
         meta: {
-            title: "Product Listing Edit",
+            title: "Edit Product",
         },
     },
     {
@@ -301,13 +308,6 @@ export let routes = [
         component: require("./components/seller/ProductVideo.vue").default,
         meta: {
             title: "Product Videos",
-        },
-    },
-    {
-        path: "/seller/receipts",
-        component: require("./components/seller/Receipt.vue").default,
-        meta: {
-            title: "Receipts",
         },
     },
     {
@@ -332,17 +332,17 @@ export let routes = [
         },
     },
     {
-        path: "/seller/messages",
-        component: require("./components/seller/Message.vue").default,
-        meta: {
-            title: "Messages",
-        },
-    },
-    {
         path: "/seller/statistics",
         component: require("./components/seller/Statistics.vue").default,
         meta: {
             title: "Statistics",
+        },
+    },
+    {
+        path: "/seller/transactions",
+        component: require("./components/seller/Transaction.vue").default,
+        meta: {
+            title: "Transactions",
         },
     },
     {

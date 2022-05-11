@@ -14,34 +14,42 @@ class Order extends Model
 
     protected $fillable = [
         'code',
-        'name',
+        'first_name',
+        'last_name',
         'email',
         'phone',
-        'country',
-        'address',
+
+        'address_line_one',
+        'address_line_two',
         'zipcode',
         'city',
         'district',
-        'province',
+        'state',
+        'country',
 
-        'recipient_name',
+        'recipient_first_name',
+        'recipient_last_name',
         'recipient_email',
         'recipient_phone',
-        'billing_country',
-        'billing_address',
+        
+        'billing_address_line_one',
+        'billing_address_line_two',
         'billing_zipcode',
         'billing_city',
         'billing_district',
-        'billing_province',
+        'billing_state',
+        'billing_country',
+
         'delivery_date',
-        
         'status',
+
         'total',
         'subtotal',
         'tax',
         'giftwrap_price',
         'shipping_price',
         'discount_price',
+        
         'shop_id',
         'shipping_id',
         'discount_id',
@@ -90,6 +98,12 @@ class Order extends Model
     public function receipt()
     {
         return $this->hasOne(Receipt::class);
+    }
+
+    //order:transaction 1:1
+    public function transaction()
+    {
+        return $this->hasOne(Transaction::class);
     }
 
     //order_products:order M:1

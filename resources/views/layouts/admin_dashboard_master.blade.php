@@ -55,6 +55,7 @@
     <body class="{{ $class ?? '' }}">
         <div id="app">
             @auth()
+
             <form
                 id="logout-form"
                 action="{{ route('logout') }}"
@@ -63,13 +64,17 @@
             >
                 @csrf
             </form>
+
             @include('layouts.navbars.sidebar')
 
             <div class="main-content">
                 @include('layouts.navbars.navbar')
                 <router-view></router-view>
+                @include('layouts.navbars.footer')
             </div>
+
             @endauth @guest()
+
             <div class="container">
                 <div class="d-flex flex-column align-items-center">
                     <h1 class="mt-5 mb-3">Session Expired</h1>

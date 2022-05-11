@@ -317,7 +317,6 @@ export default {
                 .post("/login")
                 .then(() => {
                     $("#addRecord").modal("hide");
-                    console.log("worke");
                     this.$router.push("/shipping");
                 })
                 .catch((error) => console.log(error));

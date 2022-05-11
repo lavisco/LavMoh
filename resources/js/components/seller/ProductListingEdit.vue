@@ -1,5 +1,5 @@
 <template>
-    <div class="container mt-3 mb-5">
+    <div class="container">
         <div
             v-if="loading"
             class="my-5 d-flex align-items-center justify-content-center"

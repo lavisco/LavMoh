@@ -24,6 +24,11 @@ class LocationController extends Controller
     {
         return District::select('id', 'name')->latest()->get();
     }
+    public function getDistrict($province)
+    {
+        $provinceid = Province::select('id')->where('id', $province)->orWhere('name', $province)->first();
+        return District::select('id', 'province_id', 'name')->where('province_id', $provinceid->id)->latest()->get();
+    }
     public function indexCity($district)
     {
         $districtid = District::select('id')->where('id', $district)->orWhere('name', $district)->first();

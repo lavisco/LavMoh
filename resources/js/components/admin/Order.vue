@@ -476,7 +476,11 @@
                             <div class="row mb-3">
                                 <div class="col-md-3 modal-label">Name</div>
                                 <div class="col-md-9">
-                                    {{ current_order.name }}
+                                    {{
+                                        current_order.first_name +
+                                        " " +
+                                        current_order.last_name
+                                    }}
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -496,11 +500,15 @@
                                     Billing Address
                                 </div>
                                 <div class="col-md-9">
-                                    {{ current_order.billing_address }},
-                                    {{ current_order.billing_zipcode }},
+                                    {{
+                                        current_order.billing_address_line_one
+                                    }},
+                                    {{
+                                        current_order.billing_address_line_two
+                                    }}, {{ current_order.billing_zipcode }},
                                     {{ current_order.billing_city }} <br />
                                     {{ current_order.billing_district }},
-                                    {{ current_order.billing_province }},
+                                    {{ current_order.billing_state }},
                                     {{ current_order.billing_country }}
                                 </div>
                             </div>
@@ -512,7 +520,11 @@
                             <div class="row mb-3">
                                 <div class="col-md-3 modal-label">Name</div>
                                 <div class="col-md-9">
-                                    {{ current_order.recipient_name }}
+                                    {{
+                                        current_order.recipient_first_name +
+                                        " " +
+                                        current_order.recipient_last_name
+                                    }}
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -530,11 +542,12 @@
                             <div class="row mb-3">
                                 <div class="col-md-3 modal-label">Address</div>
                                 <div class="col-md-9">
-                                    {{ current_order.address }},
+                                    {{ current_order.address_line_one }},
+                                    {{ current_order.address_line_two }},
                                     {{ current_order.zipcode }},
                                     {{ current_order.city }} <br />
                                     {{ current_order.district }},
-                                    {{ current_order.province }},
+                                    {{ current_order.state }},
                                     {{ current_order.country }}
                                 </div>
                             </div>
@@ -646,23 +659,45 @@
                             <div class="form-group row">
                                 <label
                                     class="col-md-3 col-form-label"
-                                    for="name"
-                                    >Name
+                                    for="first_name"
+                                    >First Name
                                     <strong class="text-danger"> *</strong>
                                 </label>
 
                                 <div class="col-md-9">
                                     <input
-                                        id="name"
-                                        v-model="form.name"
+                                        id="first_name"
+                                        v-model="form.first_name"
                                         type="text"
-                                        name="name"
+                                        name="first_name"
                                         class="
                                             form-control
                                             form-control-alternative
                                         "
                                     />
-                                    <HasError :form="form" field="name" />
+                                    <HasError :form="form" field="first_name" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label
+                                    class="col-md-3 col-form-label"
+                                    for="last_name"
+                                    >Last Name
+                                    <strong class="text-danger"> *</strong>
+                                </label>
+
+                                <div class="col-md-9">
+                                    <input
+                                        id="last_name"
+                                        v-model="form.last_name"
+                                        type="text"
+                                        name="last_name"
+                                        class="
+                                            form-control
+                                            form-control-alternative
+                                        "
+                                    />
+                                    <HasError :form="form" field="last_name" />
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -712,17 +747,17 @@
                             <div class="form-group row">
                                 <label
                                     class="col-md-3 col-form-label"
-                                    for="recipient_name"
-                                    >Recipient's Name
+                                    for="recipient_first_name"
+                                    >Recipient's First Name
                                     <strong class="text-danger"> *</strong>
                                 </label>
 
                                 <div class="col-md-9">
                                     <input
-                                        id="recipient_name"
-                                        v-model="form.recipient_name"
+                                        id="recipient_first_name"
+                                        v-model="form.recipient_first_name"
                                         type="text"
-                                        name="recipient_name"
+                                        name="recipient_first_name"
                                         class="
                                             form-control
                                             form-control-alternative
@@ -730,7 +765,32 @@
                                     />
                                     <HasError
                                         :form="form"
-                                        field="recipient_name"
+                                        field="recipient_first_name"
+                                    />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label
+                                    class="col-md-3 col-form-label"
+                                    for="recipient_last_name"
+                                    >Recipient's Last Name
+                                    <strong class="text-danger"> *</strong>
+                                </label>
+
+                                <div class="col-md-9">
+                                    <input
+                                        id="recipient_last_name"
+                                        v-model="form.recipient_last_name"
+                                        type="text"
+                                        name="recipient_last_name"
+                                        class="
+                                            form-control
+                                            form-control-alternative
+                                        "
+                                    />
+                                    <HasError
+                                        :form="form"
+                                        field="recipient_last_name"
                                     />
                                 </div>
                             </div>
@@ -809,23 +869,51 @@
                             <div class="form-group row">
                                 <label
                                     class="col-md-3 col-form-label"
-                                    for="address"
-                                    >address
+                                    for="address_line_one"
+                                    >Address line 1
                                     <strong class="text-danger"> *</strong>
                                 </label>
 
                                 <div class="col-md-9">
                                     <input
-                                        id="address"
-                                        v-model="form.address"
+                                        id="address_line_one"
+                                        v-model="form.address_line_one"
                                         type="text"
-                                        name="address"
+                                        name="address_line_one"
                                         class="
                                             form-control
                                             form-control-alternative
                                         "
                                     />
-                                    <HasError :form="form" field="address" />
+                                    <HasError
+                                        :form="form"
+                                        field="address_line_one"
+                                    />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label
+                                    class="col-md-3 col-form-label"
+                                    for="address_line_two"
+                                    >Address line 2
+                                    <strong class="text-danger"> *</strong>
+                                </label>
+
+                                <div class="col-md-9">
+                                    <input
+                                        id="address_line_two"
+                                        v-model="form.address_line_two"
+                                        type="text"
+                                        name="address_line_two"
+                                        class="
+                                            form-control
+                                            form-control-alternative
+                                        "
+                                    />
+                                    <HasError
+                                        :form="form"
+                                        field="address_line_two"
+                                    />
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -897,29 +985,29 @@
                             <div class="form-group row">
                                 <label
                                     class="col-md-3 col-form-label"
-                                    for="province"
-                                    >province
+                                    for="state"
+                                    >state
                                     <strong class="text-danger"> *</strong>
                                 </label>
 
                                 <div class="col-md-9">
                                     <input
-                                        id="province"
-                                        v-model="form.province"
+                                        id="state"
+                                        v-model="form.state"
                                         type="text"
-                                        name="province"
+                                        name="state"
                                         class="
                                             form-control
                                             form-control-alternative
                                         "
                                     />
-                                    <HasError :form="form" field="province" />
+                                    <HasError :form="form" field="state" />
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label
                                     class="col-md-3 col-form-label"
-                                    for="billing_country"
+                                    for="billing country"
                                     >billing_country
                                     <strong class="text-danger"> *</strong>
                                 </label>
@@ -944,17 +1032,17 @@
                             <div class="form-group row">
                                 <label
                                     class="col-md-3 col-form-label"
-                                    for="billing_address"
-                                    >billing_address
+                                    for="billing_address_line_one"
+                                    >billing address line 1
                                     <strong class="text-danger"> *</strong>
                                 </label>
 
                                 <div class="col-md-9">
                                     <input
-                                        id="billing_address"
-                                        v-model="form.billing_address"
+                                        id="billing_address_line_one"
+                                        v-model="form.billing_address_line_one"
                                         type="text"
-                                        name="billing_address"
+                                        name="billing_address_line_one"
                                         class="
                                             form-control
                                             form-control-alternative
@@ -962,7 +1050,32 @@
                                     />
                                     <HasError
                                         :form="form"
-                                        field="billing_address"
+                                        field="billing_address_line_one"
+                                    />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label
+                                    class="col-md-3 col-form-label"
+                                    for="billing_address_line_two"
+                                    >billing address line 2
+                                    <strong class="text-danger"> *</strong>
+                                </label>
+
+                                <div class="col-md-9">
+                                    <input
+                                        id="billing_address_line_two"
+                                        v-model="form.billing_address_line_two"
+                                        type="text"
+                                        name="billing_address_line_two"
+                                        class="
+                                            form-control
+                                            form-control-alternative
+                                        "
+                                    />
+                                    <HasError
+                                        :form="form"
+                                        field="billing_address_line_two"
                                     />
                                 </div>
                             </div>
@@ -970,7 +1083,7 @@
                                 <label
                                     class="col-md-3 col-form-label"
                                     for="billing_zipcode"
-                                    >billing_zipcode
+                                    >billing zipcode
                                     <strong class="text-danger"> *</strong>
                                 </label>
 
@@ -995,7 +1108,7 @@
                                 <label
                                     class="col-md-3 col-form-label"
                                     for="billing_city"
-                                    >billing_city
+                                    >billing city
                                     <strong class="text-danger"> *</strong>
                                 </label>
 
@@ -1020,7 +1133,7 @@
                                 <label
                                     class="col-md-3 col-form-label"
                                     for="billing_district"
-                                    >billing_district
+                                    >billing district
                                     <strong class="text-danger"> *</strong>
                                 </label>
 
@@ -1044,17 +1157,17 @@
                             <div class="form-group row">
                                 <label
                                     class="col-md-3 col-form-label"
-                                    for="billing_province"
-                                    >billing_province
+                                    for="billing_state"
+                                    >billing state
                                     <strong class="text-danger"> *</strong>
                                 </label>
 
                                 <div class="col-md-9">
                                     <input
-                                        id="billing_province"
-                                        v-model="form.billing_province"
+                                        id="billing_state"
+                                        v-model="form.billing_state"
                                         type="text"
-                                        name="billing_province"
+                                        name="billing_state"
                                         class="
                                             form-control
                                             form-control-alternative
@@ -1062,15 +1175,15 @@
                                     />
                                     <HasError
                                         :form="form"
-                                        field="billing_province"
+                                        field="billing_state"
                                     />
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label
                                     class="col-md-3 col-form-label"
-                                    for="delivery_date"
-                                    >delivery_date
+                                    for="delivery date"
+                                    >delivery date
                                     <strong class="text-danger"> *</strong>
                                 </label>
 
@@ -1158,7 +1271,7 @@
                                 <label
                                     class="col-md-3 col-form-label"
                                     for="giftwrap_price"
-                                    >giftwrap_price
+                                    >giftwrap price
                                     <strong class="text-danger"> *</strong>
                                 </label>
 
@@ -1183,7 +1296,7 @@
                                 <label
                                     class="col-md-3 col-form-label"
                                     for="shipping_price"
-                                    >shipping_price
+                                    >shipping price
                                     <strong class="text-danger"> *</strong>
                                 </label>
 
@@ -1207,7 +1320,7 @@
                                 <label
                                     class="col-md-3 col-form-label"
                                     for="discount_price"
-                                    >discount_price
+                                    >discount price
                                     <strong class="text-danger"> *</strong>
                                 </label>
 
@@ -1279,25 +1392,31 @@ export default {
             id: "",
             status: "",
             code: "",
-            name: "",
+            first_name: "",
+            last_name: "",
             email: "",
             phone: "",
-            country: "",
-            address: "",
+
+            address_line_one: "",
+            address_line_two: "",
             zipcode: "",
             city: "",
             district: "",
-            province: "",
+            state: "",
+            country: "",
 
-            recipient_name: "",
+            recipient_first_name: "",
+            recipient_last_name: "",
             recipient_email: "",
             recipient_phone: "",
-            billing_country: "",
-            billing_address: "",
+
+            billing_address_line_one: "",
+            billing_address_line_two: "",
             billing_zipcode: "",
             billing_city: "",
             billing_district: "",
-            billing_province: "",
+            billing_state: "",
+            billing_country: "",
 
             delivery_date: "",
             total: "",
@@ -1306,6 +1425,7 @@ export default {
             giftwrap_price: "",
             shipping_price: "",
             discount_price: "",
+
             shop_id: "",
             shipping_id: "",
             discount_id: "",

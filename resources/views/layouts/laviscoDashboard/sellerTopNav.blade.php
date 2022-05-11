@@ -48,7 +48,7 @@
             @endif
 
             <h3 class="mb-0">
-                @{{ $route.meta.title ? $route.meta.title : "BugTrack" }}
+                @{{ $route.meta.title ? $route.meta.title : "Lavisco" }}
             </h3>
         </div>
 

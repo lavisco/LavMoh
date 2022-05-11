@@ -28,6 +28,7 @@ use App\Http\Controllers\Api\Admin\SettingController;
 use App\Http\Controllers\Api\Admin\ShippingController;
 use App\Http\Controllers\Api\Admin\ShopController;
 use App\Http\Controllers\Api\Admin\SitetextController;
+use App\Http\Controllers\Api\Admin\TransactionController;
 use App\Http\Controllers\Api\Admin\VariationController;
 use App\Http\Controllers\Api\Admin\VariationOptionController;
 use App\Http\Controllers\Api\Buyer\BuyerProfileController as BuyerBuyerProfileController;
@@ -43,6 +44,7 @@ use App\Http\Controllers\Api\Seller\ProductVariationController as SellerProductV
 use App\Http\Controllers\Api\Seller\ReceiptController as SellerReceiptController;
 use App\Http\Controllers\Api\Seller\SellerProfileController as SellerSellerProfileController;
 use App\Http\Controllers\Api\Seller\ShopController as SellerShopController;
+use App\Http\Controllers\Api\Seller\TransactionController as SellerTransactionController;
 use App\Http\Controllers\Api\Seller\UserController as SellerUserController;
 use App\Http\Controllers\Api\Seller\VariationController as SellerVariationController;
 use App\Http\Controllers\Api\Seller\VariationOptionController as SellerVariationOptionController;
@@ -56,6 +58,7 @@ use App\Http\Controllers\Api\Website\RecipientController as WebsiteRecipientCont
 use App\Http\Controllers\Api\Website\SellerProfileController as WebsiteSellerProfileController;
 use App\Http\Controllers\Api\Website\ShopController as WebsiteShopController;
 use App\Http\Controllers\Api\Website\SitetextController as WebsiteSitetextController;
+use App\Http\Controllers\Api\Website\TransactionController as WebsiteTransactionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -114,6 +117,7 @@ Route::prefix('admin')->group(function () {
     Route::apiResource('/shippings', ShippingController::class);
     Route::put('/shops/updateState/{shop}', [ShopController::class, 'updateState']);
     Route::apiResource('/shops', ShopController::class);
+    Route::apiResource('/transactions', TransactionController::class);
     Route::apiResource('/variations', VariationController::class);
     Route::apiResource('/variation_options', VariationOptionController::class);
 
@@ -159,6 +163,7 @@ Route::prefix('seller')->group(function () {
     Route::apiResource('/sellerprofile', SellerSellerProfileController::class);
     Route::get('/shop/shippings', [SellerShopController::class, 'getShippings']);
     Route::apiResource('/shop', SellerShopController::class);
+    Route::apiResource('/transactions', SellerTransactionController::class);
     Route::post('/user/password_reset', [SellerUserController::class, 'updatePassword']);
     Route::post('/user/shop_setup', [SellerUserController::class, 'storeShopSetup']);
     Route::apiResource('/user', SellerUserController::class);
@@ -203,6 +208,7 @@ Route::apiResource('/products', WebsiteProductController::class);
 Route::apiResource('/recipients', WebsiteRecipientController::class);
 Route::apiResource('/sellerprofiles', WebsiteSellerProfileController::class);
 Route::apiResource('/shops', WebsiteShopController::class);
+Route::apiResource('/transactions', WebsiteTransactionController::class);
 //sitetext
 Route::get('/sitetexts/about_pictures', [WebsiteSitetextController::class, 'aboutusPictures']);
 Route::get('/sitetexts/seller_pictures', [WebsiteSitetextController::class, 'sellerPictures']);
@@ -210,6 +216,7 @@ Route::apiResource('/sitetexts', WebsiteSitetextController::class);
 //location
 Route::get('/locations/countries', [LocationController::class, 'indexCountry']);
 Route::get('/locations/provinces', [LocationController::class, 'indexProvince']);
+Route::get('/locations/districts/{province}', [LocationController::class, 'getDistrict']);
 Route::get('/locations/districts', [LocationController::class, 'indexDistrict']);
 Route::get('/locations/cities/{district}', [LocationController::class, 'indexCity']);
 Route::get('/locations/areas/{city}', [LocationController::class, 'indexArea']);

@@ -68,3 +68,21 @@ const app = new Vue({
     router: router,
     store,
 });
+
+//SIDE-NAV
+let sidenav = document.querySelector(".dashboard-side-nav");
+let openbtn = document.querySelector("#toggle-sidenav");
+let closebtn = document.querySelector("#close-sidenav");
+let navlink = document.querySelector(".dashboard-link");
+
+openbtn.addEventListener("click", () => {
+    sidenav.classList.toggle("show-nav");
+});
+closebtn.addEventListener("click", () => {
+    sidenav.classList.toggle("show-nav");
+});
+document.querySelectorAll(".dashboard-link").forEach((button) => {
+    button.onclick = function () {
+        sidenav.classList.toggle("show-nav");
+    };
+});

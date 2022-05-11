@@ -85,7 +85,10 @@ class UserController extends Controller
             'banner' => $this->storeImage($request->banner, $request->photoName)
         ]);
 
-        Shop::create($request->all());
+        $shop = Shop::create($request->all());
+
+        //sync to pivot tables
+        $shop->shippings()->sync($request->shop_shipping);
     }
 
     /**

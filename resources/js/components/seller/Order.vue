@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- Body -->
-        <div class="container-fluid mt-3 mb-5">
+        <div class="container-fluid">
             <div
                 v-if="loading"
                 class="my-5 d-flex align-items-center justify-content-center"
@@ -763,7 +763,11 @@
                             <div class="row mb-3">
                                 <div class="col-md-3 modal-label">Name</div>
                                 <div class="col-md-9">
-                                    {{ current_order.name }}
+                                    {{
+                                        current_order.first_name +
+                                        " " +
+                                        current_order.last_name
+                                    }}
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -786,7 +790,11 @@
                             <div class="row mb-3">
                                 <div class="col-md-3 modal-label">Name</div>
                                 <div class="col-md-9">
-                                    {{ current_order.recipient_name }}
+                                    {{
+                                        current_order.recipient_first_name +
+                                        " " +
+                                        current_order.recipient_last_name
+                                    }}
                                 </div>
                             </div>
                             <div

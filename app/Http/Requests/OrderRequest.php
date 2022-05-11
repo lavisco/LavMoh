@@ -25,23 +25,32 @@ class OrderRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:255',
+            'first_name' => 'required|string|max:100',
+            'last_name' => 'required|string|max:100',
             'email' => 'required|string|email|max:255',
             'phone' => 'required|max:20',
-            'address' => 'required|string|max:255',
+
+            'address_line_one' => 'required|string|max:255',
+            'address_line_two' => 'nullable|string|max:255',
             'city' => 'required|string|max:100',
             'zipcode' => 'nullable|max:12',
             'district' => 'required|string|max:100',
-            'province' => 'required|string|max:100',
-            'recipient_name' => 'required|string|max:255',
+            'state' => 'required|string|max:100',
+
+            'recipient_first_name' => 'required|string|max:100',
+            'recipient_last_name' => 'required|string|max:100',
             'recipient_email' => 'nullable|string|email|max:255',
             'recipient_phone' => 'required|max:20',
-            'billing_address' => 'required|string|max:255',
+
+            'billing_address_line_one' => 'required|string|max:255',
+            'billing_address_line_two' => 'nullable|string|max:255',
             'billing_city' => 'required|string|max:100',
             'billing_zipcode' => 'nullable|max:12',
             'billing_district' => 'required|string|max:100',
-            'billing_province' => 'nullable|string|max:100',
+            'billing_state' => 'nullable|string|max:100',
+
             'delivery_date' => 'date|required',
+
             'shipping_id' => 'required',
             'total' => 'numeric|required',
             'subtotal' => 'numeric|required',
@@ -59,11 +68,12 @@ class OrderRequest extends FormRequest
     public function attributes()
     {
         return [
-            'billing_address' => 'billing address',
+            'billing_address_line_one' => 'billing address line 1',
+            'billing_address_line_two' => 'billing address line 2',
             'billing_city' => 'billing city',
             'billing_zipcode' => 'billing zipcode',
             'billing_district' => 'billing district',
-            'billing_province' => 'billing province',
+            'billing_state' => 'billing state',
             'delivery_date' => 'delivery date',
             'shipping_id' => 'shipping method',
             'giftwrap_price' => 'giftwrap price',

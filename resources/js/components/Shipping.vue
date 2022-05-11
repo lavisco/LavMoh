@@ -38,47 +38,88 @@
                             <div class="cart-items-card">
                                 <h3 class="text-left">Your Contact Details</h3>
                                 <hr />
-                                <div class="form-group">
-                                    <label class="col-form-label" for="name"
-                                        >Name
-                                        <strong class="text-danger"> * </strong>
-                                    </label>
-                                    <input
-                                        id="name"
-                                        v-model="form.name"
-                                        type="text"
-                                        name="name"
-                                        class="form-control"
-                                    />
-                                    <HasError :form="form" field="name" />
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label
+                                            class="col-form-label"
+                                            for="first_name"
+                                            >First Name
+                                            <strong class="text-danger">
+                                                *
+                                            </strong>
+                                        </label>
+                                        <input
+                                            id="first_name"
+                                            v-model="form.first_name"
+                                            type="text"
+                                            name="first_name"
+                                            class="form-control"
+                                        />
+                                        <HasError
+                                            :form="form"
+                                            field="first_name"
+                                        />
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label
+                                            class="col-form-label"
+                                            for="last_name"
+                                            >Last Name
+                                            <strong class="text-danger">
+                                                *
+                                            </strong>
+                                        </label>
+                                        <input
+                                            id="last_name"
+                                            v-model="form.last_name"
+                                            type="text"
+                                            name="last_name"
+                                            class="form-control"
+                                        />
+                                        <HasError
+                                            :form="form"
+                                            field="last_name"
+                                        />
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-form-label" for="email"
-                                        >Email
-                                        <strong class="text-danger"> * </strong>
-                                    </label>
-                                    <input
-                                        id="email"
-                                        v-model="form.email"
-                                        type="email"
-                                        name="email"
-                                        class="form-control"
-                                    />
-                                    <HasError :form="form" field="email" />
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-form-label" for="phone"
-                                        >Phone
-                                        <strong class="text-danger"> * </strong>
-                                    </label>
-                                    <input
-                                        id="phone"
-                                        v-model="form.phone"
-                                        type="text"
-                                        name="phone"
-                                        class="form-control"
-                                    />
-                                    <HasError :form="form" field="phone" />
+
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label
+                                            class="col-form-label"
+                                            for="email"
+                                            >Email
+                                            <strong class="text-danger">
+                                                *
+                                            </strong>
+                                        </label>
+                                        <input
+                                            id="email"
+                                            v-model="form.email"
+                                            type="email"
+                                            name="email"
+                                            class="form-control"
+                                        />
+                                        <HasError :form="form" field="email" />
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label
+                                            class="col-form-label"
+                                            for="phone"
+                                            >Phone
+                                            <strong class="text-danger">
+                                                *
+                                            </strong>
+                                        </label>
+                                        <input
+                                            id="phone"
+                                            v-model="form.phone"
+                                            type="text"
+                                            name="phone"
+                                            class="form-control"
+                                        />
+                                        <HasError :form="form" field="phone" />
+                                    </div>
                                 </div>
                             </div>
 
@@ -93,39 +134,57 @@
                                 <div class="form-group">
                                     <label
                                         class="col-form-label"
-                                        for="billing_address"
-                                        >Billing Street Address
+                                        for="billing_address_line_one"
+                                        >Billing Address Line 1
                                         <strong class="text-danger"> * </strong>
                                     </label>
                                     <input
-                                        id="billing_address"
-                                        v-model="form.billing_address"
+                                        id="billing_address_line_one"
+                                        v-model="form.billing_address_line_one"
                                         type="text"
-                                        name="billing_address"
+                                        name="billing_address_line_one"
                                         class="form-control"
                                     />
                                     <HasError
                                         :form="form"
-                                        field="billing_address"
+                                        field="billing_address_line_one"
+                                    />
+                                </div>
+                                <div class="form-group">
+                                    <label
+                                        class="col-form-label"
+                                        for="billing_address_line_two"
+                                        >Billing Address Line 2
+                                    </label>
+                                    <input
+                                        id="billing_address_line_two"
+                                        v-model="form.billing_address_line_two"
+                                        type="text"
+                                        name="billing_address_line_two"
+                                        class="form-control"
+                                    />
+                                    <HasError
+                                        :form="form"
+                                        field="billing_address_line_two"
                                     />
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-md-6">
                                         <label
                                             class="col-form-label"
-                                            for="billing_province"
-                                            >Billing Province
+                                            for="billing_state"
+                                            >Billing Province/ State
                                         </label>
                                         <input
-                                            id="billing_province"
-                                            v-model="form.billing_province"
+                                            id="billing_state"
+                                            v-model="form.billing_state"
                                             type="text"
-                                            name="billing_province"
+                                            name="billing_state"
                                             class="form-control"
                                         />
                                         <HasError
                                             :form="form"
-                                            field="billing_province"
+                                            field="billing_state"
                                         />
                                     </div>
                                     <div class="form-group col-md-6">
@@ -254,20 +313,39 @@
                                 <div class="form-group">
                                     <label
                                         class="col-form-label"
-                                        for="recipient_name"
-                                        >Name
+                                        for="recipient_first_name"
+                                        >First Name
                                         <strong class="text-danger"> * </strong>
                                     </label>
                                     <input
-                                        id="recipient_name"
-                                        v-model="form.recipient_name"
+                                        id="recipient_first_name"
+                                        v-model="form.recipient_first_name"
                                         type="text"
-                                        name="recipient_name"
+                                        name="recipient_first_name"
                                         class="form-control"
                                     />
                                     <HasError
                                         :form="form"
-                                        field="recipient_name"
+                                        field="recipient_first_name"
+                                    />
+                                </div>
+                                <div class="form-group">
+                                    <label
+                                        class="col-form-label"
+                                        for="recipient_last_name"
+                                        >Last Name
+                                        <strong class="text-danger"> * </strong>
+                                    </label>
+                                    <input
+                                        id="recipient_last_name"
+                                        v-model="form.recipient_last_name"
+                                        type="text"
+                                        name="recipient_last_name"
+                                        class="form-control"
+                                    />
+                                    <HasError
+                                        :form="form"
+                                        field="recipient_last_name"
                                     />
                                 </div>
                                 <div class="form-group">
@@ -324,40 +402,60 @@
                                 <hr />
 
                                 <div class="form-group">
-                                    <label class="col-form-label" for="address"
-                                        >Street Address
+                                    <label
+                                        class="col-form-label"
+                                        for="address_line_one"
+                                        >Address line 1
                                         <strong class="text-danger"> * </strong>
                                     </label>
                                     <input
-                                        id="address"
-                                        v-model="form.address"
+                                        id="address_line_one"
+                                        v-model="form.address_line_one"
                                         type="text"
-                                        name="address"
+                                        name="address_line_one"
                                         class="form-control"
                                     />
-                                    <HasError :form="form" field="address" />
+                                    <HasError
+                                        :form="form"
+                                        field="address_line_one"
+                                    />
+                                </div>
+                                <div class="form-group">
+                                    <label
+                                        class="col-form-label"
+                                        for="address_line_two"
+                                        >Address line 2
+                                    </label>
+                                    <input
+                                        id="address_line_two"
+                                        v-model="form.address_line_two"
+                                        type="text"
+                                        name="address_line_two"
+                                        class="form-control"
+                                    />
+                                    <HasError
+                                        :form="form"
+                                        field="address_line_two"
+                                    />
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-md-6">
                                         <label
                                             class="col-form-label"
-                                            for="province"
-                                            >Province
+                                            for="state"
+                                            >Province/ State
                                             <strong class="text-danger">
                                                 *
                                             </strong>
                                         </label>
                                         <input
-                                            id="province"
-                                            v-model="form.province"
+                                            id="state"
+                                            v-model="form.state"
                                             type="text"
-                                            name="province"
+                                            name="state"
                                             class="form-control"
                                         />
-                                        <HasError
-                                            :form="form"
-                                            field="province"
-                                        />
+                                        <HasError :form="form" field="state" />
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label
@@ -590,23 +688,29 @@ export default {
 
         form: new Form({
             id: "",
-            name: "",
+            first_name: "",
+            last_name: "",
             email: "",
             phone: "",
-            address: "",
+            address_line_one: "",
+            address_line_two: "",
             zipcode: "",
-            province: "",
-            district: "",
             city: "",
+            district: "",
+            state: "",
 
-            recipient_name: "",
+            recipient_first_name: "",
+            recipient_last_name: "",
             recipient_email: "",
             recipient_phone: "",
-            billing_address: "",
+
+            billing_address_line_one: "",
+            billing_address_line_two: "",
             billing_zipcode: "",
-            billing_province: "",
-            billing_district: "",
             billing_city: "",
+            billing_district: "",
+            billing_state: "",
+
             delivery_date: "",
             total: "",
             subtotal: "",
@@ -664,12 +768,14 @@ export default {
 
         createOrder() {
             if (this.self_delivery === true) {
-                this.form.recipient_name = this.form.name;
+                this.form.recipient_first_name = this.form.first_name;
+                this.form.recipient_last_name = this.form.last_name;
                 this.form.recipient_email = this.form.email;
                 this.form.recipient_phone = this.form.phone;
-                this.form.address = this.form.billing_address;
+                this.form.address_line_one = this.form.billing_address_line_one;
+                this.form.address_line_two = this.form.billing_address_line_two;
                 this.form.zipcode = this.form.billing_zipcode;
-                this.form.province = this.form.billing_province;
+                this.form.state = this.form.billing_state;
                 this.form.district = this.form.billing_district;
                 this.form.city = this.form.billing_city;
             }

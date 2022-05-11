@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- Body -->
-        <div class="container-fluid mt-3 mt-md-5 mb-5">
+        <div class="container-fluid">
             <div class="col">
                 <div
                     v-if="shop_active === true"

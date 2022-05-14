@@ -119,7 +119,7 @@
                                                             index
                                                         )
                                                     "
-                                                    v-if="
+                                                    v-show="
                                                         disableWithdrawBtn(
                                                             transaction
                                                         )
@@ -246,7 +246,10 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="mb-4">
+                                <div
+                                    class="mb-4"
+                                    v-show="disableWithdrawBtn(transaction)"
+                                >
                                     <div class="mobile-card-sub-title">
                                         Update Status
                                     </div>
@@ -604,22 +607,15 @@ export default {
                 .catch((error) => console.log(error));
         },
 
-        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         disableWithdrawBtn(transaction) {
-            let mom = moment(
-                moment(transaction.request_withdrawal_date).format("YYYY-MM-DD")
-            ).isSame(moment().format("YYYY-MM-DD"));
-            console.log(mom);
-            let ind = this.form.transaction_ids.includes(transaction.id);
-            console.log(ind);
-
-            if (mom === false) {
-                return true;
-            } else if (mom === false && ind === false) {
-                return true;
-            } else {
-                return false;
-            }
+            return (
+                !this.form.transaction_ids.includes(transaction.id) &&
+                !moment(
+                    moment(transaction.request_withdrawal_date).format(
+                        "YYYY-MM-DD"
+                    )
+                ).isSame(moment().format("YYYY-MM-DD"))
+            );
         },
 
         setRequestedTransactions(transaction, index) {
@@ -632,11 +628,6 @@ export default {
                       )
                     : console.log("This item already exists");
             }
-            // if (confirm("Withdraw this order's payment?")) {
-            //     this.form.transaction_ids.indexOf(transaction.id) === -1
-            //         ? this.form.transaction_ids.push(transaction.id)
-            //         : console.log("This item already exists");
-            // }
         },
 
         requestWithdrawal() {

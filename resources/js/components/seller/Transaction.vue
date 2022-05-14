@@ -11,15 +11,21 @@
             <div v-else class="row">
                 <div class="col">
                     <div class="card pb-3 pb-md-1">
-                        <div class="row align-items-center">
+                        <div
+                            class="
+                                row
+                                align-items-center
+                                justify-content-center
+                            "
+                        >
                             <div
                                 class="
-                                    col-lg-4 col-9
+                                    col-lg-4
                                     input-form
                                     input-group
                                     input-group-alternative
                                     search-input
-                                    mb-0 mb-md-0
+                                    mb-3 mb-md-0
                                 "
                             >
                                 <div class="input-group-prepend">
@@ -36,12 +42,19 @@
                                     v-model="searchText"
                                 />
                             </div>
-                            <div class="col-lg-8 col-3 text-right">
+                            <div class="col-lg-8 text-md-right">
                                 <button
                                     type="button"
-                                    class="btn btn-primary mobile-add-btn"
+                                    class="
+                                        btn btn-primary
+                                        mobile-add-btn
+                                        btn-md-full
+                                    "
+                                    @click.prevent="requestWithdrawal"
                                 >
-                                    Request Withdrawal
+                                    Request
+                                    {{ form.transaction_ids.length }}
+                                    Withdrawal
                                 </button>
                             </div>
                         </div>
@@ -78,7 +91,11 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="transaction in transactions">
+                                    <tr
+                                        v-for="(
+                                            transaction, index
+                                        ) in transactions"
+                                    >
                                         <td>{{ transaction.code }}</td>
                                         <td>{{ transaction.order.code }}</td>
                                         <td>{{ transaction.total_amount }}</td>
@@ -90,34 +107,28 @@
                                             {{ transaction.payable_amount }}
                                         </td>
                                         <td>
-                                            <select
-                                                class="
-                                                    custom-select
-                                                    form-control
-                                                "
-                                                name="status"
-                                                id="status"
-                                                v-model="transaction.status"
-                                                @change.prevent="
-                                                    setCurrentState(
-                                                        transaction.id,
-                                                        $event
-                                                    )
-                                                "
-                                            >
-                                                <option
-                                                    v-for="transactionState in transactionStates"
-                                                    :value="transactionState.id"
-                                                >
-                                                    {{ transactionState.state }}
-                                                </option>
-                                            </select>
+                                            {{ transaction.status }}
                                         </td>
                                         <td class="text-right">
                                             <div class="d-flex">
                                                 <a
+                                                    class="btn btn-sm mr-3"
+                                                    @click.prevent="
+                                                        setRequestedTransactions(
+                                                            transaction,
+                                                            index
+                                                        )
+                                                    "
+                                                    v-if="
+                                                        disableWithdrawBtn(
+                                                            transaction
+                                                        )
+                                                    "
+                                                >
+                                                    Withdraw
+                                                </a>
+                                                <a
                                                     class="btn btn-sm"
-                                                    href="#"
                                                     @click.prevent="
                                                         newModal(transaction)
                                                     "
@@ -143,107 +154,146 @@
                                         d-flex
                                         flex-row
                                         justify-content-between
-                                        mb-4
+                                        mb-2
                                     "
                                 >
                                     <div class="mr-3">
                                         <div class="mobile-card-title mb-3">
                                             {{ transaction.code }}
                                         </div>
-                                        <select
-                                            class="
-                                                custom-select
-                                                form-control
-                                                mobile-btn-sm
-                                            "
-                                            name="status"
-                                            id="status"
-                                            v-model="transaction.status"
-                                            @change.prevent="
-                                                setCurrentState(
-                                                    transaction.id,
-                                                    $event
-                                                )
-                                            "
-                                        >
-                                            <option
-                                                v-for="transactionState in transactionStates"
-                                                :value="transactionState.id"
-                                            >
-                                                {{ transactionState.state }}
-                                            </option>
-                                        </select>
                                     </div>
-                                    <div class="mobile-card-dropdown">
-                                        <button
-                                            type="button"
-                                            class="btn btn-sm mobile-btn-sm"
-                                            data-toggle="dropdown"
-                                            aria-haspopup="true"
-                                            aria-expanded="false"
-                                        >
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                aria-hidden="true"
-                                                role="img"
-                                                width="23px"
-                                                height="23px"
-                                                preserveAspectRatio="xMidYMid meet"
-                                                viewBox="0 0 16 16"
-                                            >
-                                                <g
-                                                    fill="none"
-                                                    stroke="#976aff"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                                    stroke-width="1.5"
-                                                >
-                                                    <circle
-                                                        cx="8"
-                                                        cy="2.5"
-                                                        r=".75"
-                                                    />
-                                                    <circle
-                                                        cx="8"
-                                                        cy="8"
-                                                        r=".75"
-                                                    />
-                                                    <circle
-                                                        cx="8"
-                                                        cy="13.5"
-                                                        r=".75"
-                                                    />
-                                                </g>
-                                            </svg>
-                                        </button>
-                                        <div
+                                    <div
+                                        class="
+                                            d-flex
+                                            flex-row
+                                            align-items-start
+                                        "
+                                    >
+                                        <span
                                             class="
-                                                dropdown-menu
-                                                dropdown-menu-right
+                                                badge badge-pill
+                                                bg-purple
+                                                white
+                                                text-xxs
+                                                mr-2
                                             "
                                         >
+                                            {{ transaction.status }}
+                                        </span>
+
+                                        <div class="mobile-card-dropdown">
                                             <button
-                                                class="
-                                                    dropdown-item
-                                                    mobile-dropdown-item
-                                                "
                                                 type="button"
-                                                @click.prevent="
-                                                    newModal(transaction)
+                                                class="btn btn-sm mobile-btn-sm"
+                                                data-toggle="dropdown"
+                                                aria-haspopup="true"
+                                                aria-expanded="false"
+                                            >
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                    aria-hidden="true"
+                                                    role="img"
+                                                    width="23px"
+                                                    height="23px"
+                                                    preserveAspectRatio="xMidYMid meet"
+                                                    viewBox="0 0 16 16"
+                                                >
+                                                    <g
+                                                        fill="none"
+                                                        stroke="#976aff"
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                        stroke-width="1.5"
+                                                    >
+                                                        <circle
+                                                            cx="8"
+                                                            cy="2.5"
+                                                            r=".75"
+                                                        />
+                                                        <circle
+                                                            cx="8"
+                                                            cy="8"
+                                                            r=".75"
+                                                        />
+                                                        <circle
+                                                            cx="8"
+                                                            cy="13.5"
+                                                            r=".75"
+                                                        />
+                                                    </g>
+                                                </svg>
+                                            </button>
+                                            <div
+                                                class="
+                                                    dropdown-menu
+                                                    dropdown-menu-right
                                                 "
                                             >
-                                                View
-                                            </button>
+                                                <button
+                                                    class="
+                                                        dropdown-item
+                                                        mobile-dropdown-item
+                                                    "
+                                                    type="button"
+                                                    @click.prevent="
+                                                        newModal(transaction)
+                                                    "
+                                                >
+                                                    View
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="mb-4">
                                     <div class="mobile-card-sub-title">
-                                        Title
+                                        Update Status
                                     </div>
-                                    <div class="mobile-card-body">
-                                        {{ transaction.title }}
+                                    <button
+                                        @click.prevent="
+                                            setRequestedTransactions(
+                                                transaction.id
+                                            )
+                                        "
+                                        class="btn btn-sm mobile-btn-sm"
+                                        title="Withdraw"
+                                    >
+                                        Withdraw
+                                    </button>
+                                </div>
+                                <div
+                                    class="
+                                        d-flex
+                                        flex-row
+                                        align-items-center
+                                        justify-content-between
+                                        mb-4
+                                    "
+                                >
+                                    <div class="mr-2">
+                                        <div class="mobile-card-sub-title">
+                                            Order
+                                        </div>
+                                        <div class="mobile-card-body">
+                                            {{ transaction.order.code }}
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="mobile-card-sub-title">
+                                            Amount Payable
+                                        </div>
+                                        <div class="mobile-card-body">
+                                            {{ transaction.payable_amount }}
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="mobile-card-sub-title">
+                                            Total
+                                        </div>
+                                        <div class="mobile-card-body">
+                                            {{ transaction.total_amount }}
+                                        </div>
                                     </div>
                                 </div>
                                 <div
@@ -256,10 +306,18 @@
                                 >
                                     <div class="mr-3">
                                         <div class="mobile-card-sub-title">
-                                            Quantity
+                                            Lavisco fee
                                         </div>
                                         <div class="mobile-card-body">
-                                            {{ transaction.quantity }}
+                                            {{ transaction.platform_charge }}
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="mobile-card-sub-title">
+                                            Bank fee
+                                        </div>
+                                        <div class="mobile-card-body">
+                                            {{ transaction.bank_charge }}
                                         </div>
                                     </div>
                                     <div>
@@ -272,14 +330,6 @@
                                                     transaction.created_at
                                                 ).format("DD-MM-YYYY")
                                             }}
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="mobile-card-sub-title">
-                                            Base Price
-                                        </div>
-                                        <div class="mobile-card-body">
-                                            {{ transaction.base_price }}
                                         </div>
                                     </div>
                                 </div>
@@ -301,7 +351,7 @@
             aria-hidden="true"
         >
             <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content">
+                <div class="modal-content" v-if="current_transaction_mode">
                     <!-- Modal Header -->
                     <div class="modal-header bg-black">
                         <h4
@@ -518,14 +568,14 @@ export default {
     data: () => ({
         moment: moment,
         transactions: [],
-        transactionStates: [],
         current_transaction: "",
+        current_transaction_mode: false,
+        disable_withdraw_btn: false,
         searchText: null,
         loading: true,
         form: new Form({
             id: "",
-            status: "",
-            request_withdrawal_date: "",
+            transaction_ids: [],
         }),
     }),
 
@@ -538,6 +588,7 @@ export default {
     methods: {
         newModal(transaction) {
             this.current_transaction = transaction;
+            this.current_transaction_mode = true;
             $("#addRecord").modal("show");
         },
 
@@ -553,21 +604,47 @@ export default {
                 .catch((error) => console.log(error));
         },
 
-        loadTransactionStates() {
-            axios
-                .get("/api/seller/transactionstates")
-                .then(({ data }) => (this.transactionStates = data))
-                .catch((error) => console.log(error));
+        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        disableWithdrawBtn(transaction) {
+            let mom = moment(
+                moment(transaction.request_withdrawal_date).format("YYYY-MM-DD")
+            ).isSame(moment().format("YYYY-MM-DD"));
+            console.log(mom);
+            let ind = this.form.transaction_ids.includes(transaction.id);
+            console.log(ind);
+
+            if (mom === false) {
+                return true;
+            } else if (mom === false && ind === false) {
+                return true;
+            } else {
+                return false;
+            }
         },
 
-        setCurrentState(transaction, event) {
-            if (
-                confirm("Are you sure you want to change transaction status?")
-            ) {
-                this.form.status = event.target.value;
+        setRequestedTransactions(transaction, index) {
+            if (confirm("Withdraw this order's payment?")) {
+                this.form.transaction_ids.indexOf(transaction.id) === -1
+                    ? this.$set(
+                          this.form.transaction_ids,
+                          index,
+                          transaction.id
+                      )
+                    : console.log("This item already exists");
+            }
+            // if (confirm("Withdraw this order's payment?")) {
+            //     this.form.transaction_ids.indexOf(transaction.id) === -1
+            //         ? this.form.transaction_ids.push(transaction.id)
+            //         : console.log("This item already exists");
+            // }
+        },
+
+        requestWithdrawal() {
+            if (confirm("Are you sure you want to withdraw payment?")) {
                 this.form
-                    .put("/api/seller/transactions/updateState/" + transaction)
+                    .post("/api/seller/transactions")
                     .then(() => {
+                        this.form.transaction_ids = [];
                         Fire.$emit("reloadRecords");
                     })
                     .catch((error) => console.log(error));
@@ -576,7 +653,6 @@ export default {
     },
     mounted() {
         this.loadTransactions();
-        this.loadTransactionStates();
         Fire.$on("reloadRecords", () => {
             this.loadTransactions();
         });

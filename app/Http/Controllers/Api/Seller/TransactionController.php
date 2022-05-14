@@ -18,13 +18,13 @@ class TransactionController extends Controller
         return Transaction::where('user_id', auth()->id())->with('order')->latest()->paginate(25);
     }
 
-    public function show($id)
+    public function store(Request $request)
     {
-        //
-    }
-
-    public function update(TransactionRequest $request, Transaction $transaction)
-    {
-        $transaction->update($request->all());
+        for ($i=0; $i < count($request->transaction_ids); $i++) { 
+            $transactionn = Transaction::findOrFail($request->transaction_ids[$i]);
+            $transactionn->update([
+                'request_withdrawal_date' => date("Y-m-d"),
+            ]);
+        }
     }
 }

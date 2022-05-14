@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\Admin\GiftwrapController;
 use App\Http\Controllers\Api\Admin\HomeSliderController;
 use App\Http\Controllers\Api\Admin\OccasionController;
 use App\Http\Controllers\Api\Admin\OrderController;
+use App\Http\Controllers\Api\Admin\OrderStateController;
 use App\Http\Controllers\Api\Admin\PermissionController;
 use App\Http\Controllers\Api\Admin\ProductController;
 use App\Http\Controllers\Api\Admin\ProductImageController;
@@ -29,6 +30,7 @@ use App\Http\Controllers\Api\Admin\ShippingController;
 use App\Http\Controllers\Api\Admin\ShopController;
 use App\Http\Controllers\Api\Admin\SitetextController;
 use App\Http\Controllers\Api\Admin\TransactionController;
+use App\Http\Controllers\Api\Admin\TransactionStateController;
 use App\Http\Controllers\Api\Admin\VariationController;
 use App\Http\Controllers\Api\Admin\VariationOptionController;
 use App\Http\Controllers\Api\Buyer\BuyerProfileController as BuyerBuyerProfileController;
@@ -37,6 +39,7 @@ use App\Http\Controllers\Api\Email\EmailController;
 use App\Http\Controllers\Api\Seller\DashboardController as SellerDashboardController;
 use App\Http\Controllers\Api\Seller\LocationController as SellerLocationController;
 use App\Http\Controllers\Api\Seller\OrderController as SellerOrderController;
+use App\Http\Controllers\Api\Seller\OrderStateController as SellerOrderStateController;
 use App\Http\Controllers\Api\Seller\ProductController as SellerProductController;
 use App\Http\Controllers\Api\Seller\ProductImageController as SellerProductImageController;
 use App\Http\Controllers\Api\Seller\ProductStateController as SellerProductStateController;
@@ -45,6 +48,7 @@ use App\Http\Controllers\Api\Seller\ReceiptController as SellerReceiptController
 use App\Http\Controllers\Api\Seller\SellerProfileController as SellerSellerProfileController;
 use App\Http\Controllers\Api\Seller\ShopController as SellerShopController;
 use App\Http\Controllers\Api\Seller\TransactionController as SellerTransactionController;
+use App\Http\Controllers\Api\Seller\TransactionStateController as SellerTransactionStateController;
 use App\Http\Controllers\Api\Seller\UserController as SellerUserController;
 use App\Http\Controllers\Api\Seller\VariationController as SellerVariationController;
 use App\Http\Controllers\Api\Seller\VariationOptionController as SellerVariationOptionController;
@@ -97,6 +101,7 @@ Route::prefix('admin')->group(function () {
     Route::apiResource('/occasions', OccasionController::class);
     Route::put('/orders/updateStatus/{order}', [OrderController::class, 'updateStatus']);
     Route::apiResource('/orders', OrderController::class);
+    Route::apiResource('/order_states', OrderStateController::class);
     Route::apiResource('/permissions', PermissionController::class);
     //store new image for existing product
     Route::put('/products/storeNewImage/{productId}', [ProductController::class, 'storeNewImage']);
@@ -118,6 +123,7 @@ Route::prefix('admin')->group(function () {
     Route::put('/shops/updateState/{shop}', [ShopController::class, 'updateState']);
     Route::apiResource('/shops', ShopController::class);
     Route::apiResource('/transactions', TransactionController::class);
+    Route::apiResource('/transaction_states', TransactionStateController::class);
     Route::apiResource('/variations', VariationController::class);
     Route::apiResource('/variation_options', VariationOptionController::class);
 
@@ -149,6 +155,7 @@ Route::prefix('seller')->group(function () {
     Route::get('/dashboard/coming_soon', [SellerDashboardController::class, 'indexComingSoon']);
     Route::apiResource('/dashboard', SellerDashboardController::class);
     Route::apiResource('/orders', SellerOrderController::class);
+    Route::apiResource('/order_states', SellerOrderStateController::class);
     Route::get('/products/details', [SellerProductController::class, 'getDetails']);
     //store new image for existing product
     Route::put('/products/storeNewImage/{productId}', [SellerProductController::class, 'storeNewImage']);
@@ -164,6 +171,7 @@ Route::prefix('seller')->group(function () {
     Route::get('/shop/shippings', [SellerShopController::class, 'getShippings']);
     Route::apiResource('/shop', SellerShopController::class);
     Route::apiResource('/transactions', SellerTransactionController::class);
+    Route::apiResource('/transaction_states', SellerTransactionStateController::class);
     Route::post('/user/password_reset', [SellerUserController::class, 'updatePassword']);
     Route::post('/user/shop_setup', [SellerUserController::class, 'storeShopSetup']);
     Route::apiResource('/user', SellerUserController::class);

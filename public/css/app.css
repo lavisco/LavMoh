@@ -12002,12 +12002,12 @@ footer {
 .dashboard-top-nav .nav-user-options .dropdown-item {
   color: #8d8788;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 400;
   padding: 8px 18px;
 }
 .dashboard-top-nav .nav-user-options .dropdown-item svg {
-  height: 27px;
-  width: 27px;
+  height: 22px;
+  width: 22px;
 }
 .dashboard-top-nav .nav-user-options .dropdown-item svg path {
   fill: #8d8788;

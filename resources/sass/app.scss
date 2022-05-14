@@ -1849,12 +1849,12 @@ footer {
     flex-direction: column;
     min-height: 100vh;
     margin-left: 270px;
-    background-color: #fcfcfc;
+    background-color: #f8f7f7;
     .card {
         background-color: transparent;
     }
     .breadcrumb {
-        background-color: #fcfcfc;
+        background-color: #f8f7f7;
     }
 }
 .dashboard-side-nav {
@@ -1870,6 +1870,13 @@ footer {
     box-shadow: 2px 4px 6px rgba(140, 124, 124, 0.13);
     padding: 1rem;
     background-color: #fff;
+
+    transition: all 0.85s ease;
+    -webkit-transition: all 0.85s ease;
+    -moz-transition: all 0.85s ease;
+    -ms-transition: all 0.85s ease;
+    -o-transition: all 0.85s ease;
+
     .dashboard-link {
         width: 100%;
     }
@@ -1892,7 +1899,9 @@ footer {
 }
 
 .dashboard-side-nav.show-nav {
-    display: flex !important;
+    //display: flex !important;
+    clip-path: circle(170% at 0 0);
+    -webkit-clip-path: circle(170% at 0 0);
 }
 
 .navbar-close {
@@ -2057,13 +2066,16 @@ footer {
         padding-bottom: 14px;
     }
     .dashboard-side-nav {
-        display: none;
+        //display: none;
         position: absolute;
         left: 50%;
         transform: translate(-50%, 0);
         width: 100%;
         box-shadow: 2px 4px 6px rgba(140, 124, 124, 0.13);
         padding: 1.5rem;
+        clip-path: circle(0% at 0 0);
+        -webkit-clip-path: circle(0% at 0 0);
+
         .navbar-brand {
             align-self: flex-start;
         }
@@ -2074,7 +2086,7 @@ footer {
 }
 
 .dashboard-footer {
-    color: #fcfcfc;
+    color: #f8f7f7;
     background-color: $dark-grey;
     padding: 10px 20px;
     font-size: 12px;
@@ -2112,7 +2124,7 @@ footer {
                 fill: #fff;
             }
         }
-        background-color: #fcfcfc;
+        background-color: #f8f7f7;
     }
 }
 
@@ -2316,7 +2328,7 @@ footer {
         border: none !important;
         font-weight: 600;
         letter-spacing: 0.03rem;
-        color: #fcfcfc;
+        color: #f8f7f7;
         font-size: 0.8rem;
     }
     .table-col-sm {
@@ -2351,7 +2363,7 @@ footer {
     border-radius: 8px;
 }
 .dashboard-var-card {
-    background-color: #fcfcfc;
+    background-color: #f8f7f7;
     border: 1px solid #f3f3f3d8;
     padding: 10px 18px;
 
@@ -2400,7 +2412,7 @@ footer {
 }
 
 .modal-view {
-    background-color: #fcfcfc;
+    background-color: #f8f7f7;
     font-size: 16px;
     label {
         letter-spacing: 0.03rem;

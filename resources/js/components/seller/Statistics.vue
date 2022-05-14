@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- Body -->
-        <div class="container-fluid">
+        <div class="container-fluid mb-5">
             <div class="row">
                 <div class="col">
                     <div class="card">

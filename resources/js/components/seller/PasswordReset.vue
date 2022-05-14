@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- Body -->
-        <div class="container">
+        <div class="container mb-5">
             <div class="row">
                 <div class="col">
                     <div class="card">

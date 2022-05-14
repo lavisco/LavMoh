@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- Body -->
-        <div class="container mt-3 mb-5">
+        <div class="container mb-5">
             <div
                 v-if="loading"
                 class="my-5 d-flex align-items-center justify-content-center"
@@ -18,227 +18,246 @@
                             @submit.prevent="updateBuyerprofile()"
                         >
                             <div class="input-form-compact">
-                                <h4 class="mb-4">Account Information</h4>
+                                <!-- Details -->
+                                <div class="card dashboard-info-card">
+                                    <h4 class="mb-3">Account Information</h4>
 
-                                <div class="form-group row">
-                                    <div class="col-md-4">
-                                        <label
-                                            class="col-form-label"
-                                            for="first_name"
-                                            >First Name
-                                            <strong class="text-danger">
-                                                *</strong
-                                            >
-                                        </label>
-                                        <input
-                                            id="first_name"
-                                            v-model="form.first_name"
-                                            type="text"
-                                            name="first_name"
-                                            class="
-                                                form-control
-                                                form-control-alternative
-                                            "
-                                            placeholder="First Name"
-                                        />
-                                        <HasError
-                                            :form="form"
-                                            field="first_name"
-                                        />
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label
-                                            class="col-form-label"
-                                            for="last_name"
-                                            >Last Name
-                                            <strong class="text-danger">
-                                                *</strong
-                                            >
-                                        </label>
-                                        <input
-                                            id="last_name"
-                                            v-model="form.last_name"
-                                            type="text"
-                                            name="last_name"
-                                            class="
-                                                form-control
-                                                form-control-alternative
-                                            "
-                                            placeholder="Last Name"
-                                        />
-                                        <HasError
-                                            :form="form"
-                                            field="last_name"
-                                        />
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label
-                                            class="col-form-label"
-                                            for="phone"
-                                            >Phone
-                                            <strong class="text-danger">
-                                                *</strong
-                                            >
-                                        </label>
-                                        <input
-                                            id="phone"
-                                            v-model="form.phone"
-                                            type="text"
-                                            name="phone"
-                                            class="
-                                                form-control
-                                                form-control-alternative
-                                            "
-                                            placeholder="Phone"
-                                        />
-                                        <HasError :form="form" field="phone" />
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-md-12">
-                                        <label
-                                            class="col-form-label"
-                                            for="address"
-                                            >Address
-                                            <strong class="text-danger">
-                                                *</strong
-                                            >
-                                        </label>
-                                        <textarea
-                                            id="address"
-                                            class="
-                                                form-control
-                                                form-control-alternative
-                                            "
-                                            name="address"
-                                            rows="3"
-                                            cols="50"
-                                            v-model="form.address"
-                                        >
-                                        </textarea>
-                                        <HasError
-                                            :form="form"
-                                            field="address"
-                                        />
+                                    <div class="form-group row">
+                                        <div class="col-md-4">
+                                            <label
+                                                class="col-form-label"
+                                                for="first_name"
+                                                >First Name
+                                                <strong class="text-danger">
+                                                    *</strong
+                                                >
+                                            </label>
+                                            <input
+                                                id="first_name"
+                                                v-model="form.first_name"
+                                                type="text"
+                                                name="first_name"
+                                                class="
+                                                    form-control
+                                                    form-control-alternative
+                                                "
+                                                placeholder="First Name"
+                                            />
+                                            <HasError
+                                                :form="form"
+                                                field="first_name"
+                                            />
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label
+                                                class="col-form-label"
+                                                for="last_name"
+                                                >Last Name
+                                                <strong class="text-danger">
+                                                    *</strong
+                                                >
+                                            </label>
+                                            <input
+                                                id="last_name"
+                                                v-model="form.last_name"
+                                                type="text"
+                                                name="last_name"
+                                                class="
+                                                    form-control
+                                                    form-control-alternative
+                                                "
+                                                placeholder="Last Name"
+                                            />
+                                            <HasError
+                                                :form="form"
+                                                field="last_name"
+                                            />
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label
+                                                class="col-form-label"
+                                                for="phone"
+                                                >Phone
+                                                <strong class="text-danger">
+                                                    *</strong
+                                                >
+                                            </label>
+                                            <input
+                                                id="phone"
+                                                v-model="form.phone"
+                                                type="text"
+                                                name="phone"
+                                                class="
+                                                    form-control
+                                                    form-control-alternative
+                                                "
+                                                placeholder="Phone"
+                                            />
+                                            <HasError
+                                                :form="form"
+                                                field="phone"
+                                            />
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <div class="col-md-4">
-                                        <label
-                                            class="col-form-label"
-                                            for="apt_no"
-                                            >Apt No.
-                                        </label>
-                                        <input
-                                            id="apt_no"
-                                            v-model="form.apt_no"
-                                            type="text"
-                                            name="apt_no"
-                                            class="
-                                                form-control
-                                                form-control-alternative
-                                            "
-                                            placeholder="Apt no."
-                                        />
-                                        <HasError :form="form" field="apt_no" />
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label
-                                            class="col-form-label"
-                                            for="zipcode"
-                                            >Zip Code
-                                        </label>
-                                        <input
-                                            id="zipcode"
-                                            v-model="form.zipcode"
-                                            type="text"
-                                            name="zipcode"
-                                            class="
-                                                form-control
-                                                form-control-alternative
-                                            "
-                                            placeholder="Zip code"
-                                        />
-                                        <HasError
-                                            :form="form"
-                                            field="zipcode"
-                                        />
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label
-                                            class="col-form-label"
-                                            for="state"
-                                            >State
-                                        </label>
-                                        <input
-                                            id="state"
-                                            v-model="form.state"
-                                            type="text"
-                                            name="state"
-                                            class="
-                                                form-control
-                                                form-control-alternative
-                                            "
-                                            placeholder="State"
-                                        />
-                                        <HasError :form="form" field="state" />
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-md-6">
-                                        <label class="col-form-label" for="city"
-                                            >City
-                                            <strong class="text-danger">
-                                                *</strong
+
+                                <!-- Address -->
+                                <div class="card dashboard-info-card mt-4">
+                                    <h4 class="mb-3">Your Address</h4>
+                                    <div class="form-group row">
+                                        <div class="col-md-12">
+                                            <label
+                                                class="col-form-label"
+                                                for="address"
+                                                >Address
+                                                <strong class="text-danger">
+                                                    *</strong
+                                                >
+                                            </label>
+                                            <textarea
+                                                id="address"
+                                                class="
+                                                    form-control
+                                                    form-control-alternative
+                                                "
+                                                name="address"
+                                                rows="3"
+                                                cols="50"
+                                                v-model="form.address"
                                             >
-                                        </label>
-                                        <input
-                                            id="city"
-                                            v-model="form.city"
-                                            type="text"
-                                            name="city"
-                                            class="
-                                                form-control
-                                                form-control-alternative
-                                            "
-                                            placeholder="City"
-                                        />
-                                        <HasError :form="form" field="city" />
+                                            </textarea>
+                                            <HasError
+                                                :form="form"
+                                                field="address"
+                                            />
+                                        </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <label
-                                            class="col-form-label"
-                                            for="country"
-                                            >Country
-                                            <strong class="text-danger">
-                                                *</strong
-                                            >
-                                        </label>
-                                        <input
-                                            id="country"
-                                            v-model="form.country"
-                                            type="text"
-                                            name="country"
-                                            class="
-                                                form-control
-                                                form-control-alternative
-                                            "
-                                            placeholder="Country"
-                                        />
-                                        <HasError
-                                            :form="form"
-                                            field="country"
-                                        />
+                                    <div class="form-group row">
+                                        <div class="col-md-4">
+                                            <label
+                                                class="col-form-label"
+                                                for="apt_no"
+                                                >Apt No.
+                                            </label>
+                                            <input
+                                                id="apt_no"
+                                                v-model="form.apt_no"
+                                                type="text"
+                                                name="apt_no"
+                                                class="
+                                                    form-control
+                                                    form-control-alternative
+                                                "
+                                                placeholder="Apt no."
+                                            />
+                                            <HasError
+                                                :form="form"
+                                                field="apt_no"
+                                            />
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label
+                                                class="col-form-label"
+                                                for="zipcode"
+                                                >Zip Code
+                                            </label>
+                                            <input
+                                                id="zipcode"
+                                                v-model="form.zipcode"
+                                                type="text"
+                                                name="zipcode"
+                                                class="
+                                                    form-control
+                                                    form-control-alternative
+                                                "
+                                                placeholder="Zip code"
+                                            />
+                                            <HasError
+                                                :form="form"
+                                                field="zipcode"
+                                            />
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label
+                                                class="col-form-label"
+                                                for="state"
+                                                >State
+                                            </label>
+                                            <input
+                                                id="state"
+                                                v-model="form.state"
+                                                type="text"
+                                                name="state"
+                                                class="
+                                                    form-control
+                                                    form-control-alternative
+                                                "
+                                                placeholder="State"
+                                            />
+                                            <HasError
+                                                :form="form"
+                                                field="state"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-6">
+                                            <label
+                                                class="col-form-label"
+                                                for="city"
+                                                >City
+                                                <strong class="text-danger">
+                                                    *</strong
+                                                >
+                                            </label>
+                                            <input
+                                                id="city"
+                                                v-model="form.city"
+                                                type="text"
+                                                name="city"
+                                                class="
+                                                    form-control
+                                                    form-control-alternative
+                                                "
+                                                placeholder="City"
+                                            />
+                                            <HasError
+                                                :form="form"
+                                                field="city"
+                                            />
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label
+                                                class="col-form-label"
+                                                for="country"
+                                                >Country
+                                                <strong class="text-danger">
+                                                    *</strong
+                                                >
+                                            </label>
+                                            <input
+                                                id="country"
+                                                v-model="form.country"
+                                                type="text"
+                                                name="country"
+                                                class="
+                                                    form-control
+                                                    form-control-alternative
+                                                "
+                                                placeholder="Country"
+                                            />
+                                            <HasError
+                                                :form="form"
+                                                field="country"
+                                            />
+                                        </div>
                                     </div>
                                 </div>
 
                                 <!-- Billing -->
-                                <h4 class="mt-5 mb-4">Billing Address</h4>
+                                <div class="card dashboard-info-card mt-4">
+                                    <h4 class="mt-5 mb-3">Billing Address</h4>
 
-                                <div
-                                    class="input-form-compact"
-                                    id="billingSection"
-                                >
                                     <div class="form-group row">
                                         <div class="col-md-12">
                                             <label
@@ -388,8 +407,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                <!-- Billing end -->
                             </div>
 
                             <div
@@ -397,7 +414,7 @@
                                     d-flex
                                     justify-content-center
                                     align-items-center
-                                    mt-4
+                                    mt-5
                                 "
                             >
                                 <button type="submit" class="btn">

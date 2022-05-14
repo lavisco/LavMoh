@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- Body -->
-        <div class="container-fluid">
+        <div class="container-fluid mb-5">
             <div
                 v-if="loading"
                 class="d-flex align-items-center justify-content-center"

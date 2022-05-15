@@ -26,11 +26,13 @@ class BuyerProfileController extends Controller
         return BuyerProfile::create($request->all());
     }
 
-    public function update(BuyerProfileRequest $request, BuyerProfile $buyerprofile)
+    public function update(BuyerProfileRequest $request, BuyerProfile $id)
     {
         ///$this->authorize('update', $buyerprofile);
-        //$buyerprofile->update($request->all());
 
-        $buyerprofile = BuyerProfile::updateOrCreate($request->all());
+        $buyerprofile = BuyerProfile::updateOrCreate(
+            ['user_id' => auth()->id()],
+            $request->all(),
+        );
     }
 }

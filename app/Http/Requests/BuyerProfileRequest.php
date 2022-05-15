@@ -43,10 +43,6 @@ class BuyerProfileRequest extends FormRequest
             'billing_city' => 'required|string|max:100',
             'billing_district' => 'required|string|max:100',
             'billing_state' => 'required|string|max:100',
-            'user_id' => [
-                'required',
-                Rule::unique('buyer_profiles')->ignore($this->id),
-            ],
         ];
     }
 

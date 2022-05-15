@@ -92,6 +92,23 @@
                     x.type = "password";
                 }
             }
+
+            //SIDE-NAV
+            let sidenav = document.querySelector(".dashboard-side-nav");
+            let openbtn = document.querySelector("#toggle-sidenav");
+            let closebtn = document.querySelector("#close-sidenav");
+
+            openbtn.addEventListener("click", () => {
+                sidenav.classList.toggle("show-nav");
+            });
+            closebtn.addEventListener("click", () => {
+                sidenav.classList.toggle("show-nav");
+            });
+            document.querySelectorAll(".dashboard-link").forEach((button) => {
+                button.onclick = function () {
+                    sidenav.classList.toggle("show-nav");
+                };
+            });
         </script>
     </body>
 </html>

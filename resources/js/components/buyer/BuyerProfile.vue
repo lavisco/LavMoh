@@ -74,6 +74,12 @@
                                             />
                                         </div>
                                     </div>
+                                </div>
+
+                                <!-- Contact Details -->
+                                <div class="card dashboard-info-card mt-4">
+                                    <h4 class="mb-3">Contact Information</h4>
+
                                     <div class="form-group row">
                                         <div class="col-md-6">
                                             <label
@@ -312,7 +318,7 @@
 
                                 <!-- Billing -->
                                 <div class="card dashboard-info-card mt-4">
-                                    <h4 class="mt-5 mb-3">Billing Address</h4>
+                                    <h4 class="mb-3">Billing Address</h4>
 
                                     <div class="form-group row">
                                         <div class="col-md-12">

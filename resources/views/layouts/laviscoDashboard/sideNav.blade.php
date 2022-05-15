@@ -1,6 +1,5 @@
 <nav class="navbar dashboard-side-nav">
-    @if(auth()->user()->role_id == 2) @if(auth()->user()->shop &&
-    auth()->user()->shop->status == true)
+    @if(auth()->user()->role_id == 2)
     <div
         class="
             d-flex d-flex
@@ -84,6 +83,7 @@
             </div>
             Dashboard
         </router-link>
+
         <router-link to="/seller/shop" class="dashboard-link">
             <div class="dashboard-link-icon">
                 <svg
@@ -122,6 +122,8 @@
             </div>
             Account
         </router-link>
+
+        @if(auth()->user()->shop && auth()->user()->shop->status == true)
         <router-link to="/seller/products" class="dashboard-link">
             <div class="dashboard-link-icon">
                 <svg
@@ -179,6 +181,8 @@
             </div>
             Transactions
         </router-link>
+        @endif
+
         <router-link to="/seller/statistics" class="dashboard-link">
             <div class="dashboard-link-icon">
                 <svg
@@ -199,7 +203,7 @@
             Statistics
         </router-link>
     </div>
-    @endif @endif @if(auth()->user()->role_id == 3)
+    @endif @if(auth()->user()->role_id == 3)
     <div
         class="
             d-flex d-flex

@@ -11492,6 +11492,8 @@ section h1 {
   background-color: #ffffff;
   margin-bottom: 20px;
   border-radius: 7px;
+  background-position: center;
+  background-size: cover;
 }
 .card-img img {
   -o-object-fit: cover;

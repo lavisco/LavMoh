@@ -133,7 +133,13 @@
                                 mb-md-0 mb-5
                             "
                         >
-                            <div class="card-img">
+                            <div
+                                class="card-img"
+                                v-bind:style="{
+                                    'background-image':
+                                        'url(' + img_occasion + ')',
+                                }"
+                            >
                                 <div class="card-img-text-container">
                                     <div class="card-img-text">
                                         <router-link to="/occasions">
@@ -166,7 +172,13 @@
                     </div>
                     <div class="col-md-6">
                         <div class="card item-card item-card-recipient">
-                            <div class="card-img">
+                            <div
+                                class="card-img"
+                                v-bind:style="{
+                                    'background-image':
+                                        'url(' + img_recipient + ')',
+                                }"
+                            >
                                 <div class="card-img-text-container">
                                     <div class="card-img-text">
                                         <router-link to="/recipients">
@@ -376,6 +388,8 @@ export default {
         icon_delivery: "",
         icon_money: "",
         icon_surprise: "",
+        img_occasion: "",
+        img_recipient: "",
         categoryActive: "0",
         swiperOption: {
             slidesPerView: 5,
@@ -436,6 +450,8 @@ export default {
                     this.icon_delivery = response.data.icon_delivery;
                     this.icon_money = response.data.icon_money;
                     this.icon_surprise = response.data.icon_surprise;
+                    this.img_occasion = response.data.img_occasion;
+                    this.img_recipient = response.data.img_recipient;
                 })
                 .catch((error) => console.log(error));
         },

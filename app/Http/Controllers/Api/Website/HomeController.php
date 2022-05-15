@@ -44,6 +44,8 @@ class HomeController extends Controller
             'icon_delivery' => Storage::disk('s3')->temporaryUrl('public/images/door-delivery.png', '+2 minutes'),
             'icon_money' => Storage::disk('s3')->temporaryUrl('public/images/send-money.png', '+2 minutes'),
             'icon_surprise' => Storage::disk('s3')->temporaryUrl('public/images/surprise.png', '+2 minutes'),
+            'img_occasion' => Storage::disk('s3')->temporaryUrl('public/images/occasion-banner.jpg', '+2 minutes'),
+            'img_recipient' => Storage::disk('s3')->temporaryUrl('public/images/recipient-banner.jpg', '+2 minutes'),
         ]);
     }
 

@@ -15,15 +15,25 @@ class BuyerProfile extends Model
     protected $fillable = [
         'first_name',
         'last_name',
-        'phone',
         'email',
-        'country',
-        'province',
-        'district',
-        'city',
-        'address',
+        'phone',
+
+        'address_line_one',
+        'address_line_two',
         'zipcode',
-        'billing_address',
+        'city',
+        'district',
+        'state',
+        'country',
+
+        'billing_address_line_one',
+        'billing_address_line_two',
+        'billing_zipcode',
+        'billing_city',
+        'billing_district',
+        'billing_state',
+        'billing_country',
+
         'user_id',
     ];
 
@@ -38,6 +48,7 @@ class BuyerProfile extends Model
             $query
                 ->where('first_name', 'like', '%' . $searchText . '%')
                 ->orWhere('last_name', 'like', '%' . $searchText . '%')
+                ->orWhere('state', 'like', '%' . $searchText . '%')
             );
     }
 }

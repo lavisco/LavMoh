@@ -17,7 +17,7 @@ class BuyerProfileController extends Controller
     public function index()
     {
         ///$this->authorize('viewAny', BuyerProfile::class);
-        return BuyerProfile::with('user')->where('user_id', auth()->id())->first();
+        return BuyerProfile::where('user_id', auth()->id())->first();
     }
 
     public function store(BuyerProfileRequest $request)
@@ -29,6 +29,8 @@ class BuyerProfileController extends Controller
     public function update(BuyerProfileRequest $request, BuyerProfile $buyerprofile)
     {
         ///$this->authorize('update', $buyerprofile);
-        $buyerprofile->update($request->all());
+        //$buyerprofile->update($request->all());
+
+        $buyerprofile = BuyerProfile::updateOrCreate($request->all());
     }
 }

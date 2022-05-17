@@ -364,7 +364,7 @@ button.bg-black:hover {
         }
     }
     @media (max-width: 768px) {
-        font-size: 14px;
+        font-size: 15px;
     }
 }
 
@@ -989,6 +989,7 @@ button.bg-black:hover {
     .card-img-text {
         position: relative;
         z-index: 2;
+        color: $lav-orange;
     }
 
     .gallery-item--1 {
@@ -1008,7 +1009,7 @@ button.bg-black:hover {
 
     .gallery-item--4 {
         grid-column: 1 / span 2;
-        grid-row: 5/span 2;
+        grid-row: 5 / span 2;
     }
 
     .gallery-item--5 {
@@ -2666,7 +2667,7 @@ footer {
 .hide-content-sm-flex {
     display: flex !important;
 }
-.hide-content-md-flex-reverse{
+.hide-content-md-flex-reverse {
     display: none !important;
 }
 @media (max-width: 768px) {

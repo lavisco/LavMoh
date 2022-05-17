@@ -10394,7 +10394,7 @@ button.bg-black:hover {
 }
 @media (max-width: 768px) {
   .view-more-link {
-    font-size: 14px;
+    font-size: 15px;
   }
 }
 
@@ -11036,6 +11036,7 @@ button.bg-black:hover {
 .gallery .card-img-text {
   position: relative;
   z-index: 2;
+  color: #ff834c;
 }
 .gallery .gallery-item--1 {
   grid-column: 1/span 2;

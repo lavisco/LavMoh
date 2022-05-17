@@ -68,19 +68,20 @@
                                         {{ product.title }}
                                     </router-link>
                                 </div>
-                                <div class="card-secondary-text white">
-                                    {{ product.user.shop.name }}
+                                <div class="card-price">
+                                    LKR {{ product.base_price }}
                                 </div>
+
                                 <div
                                     class="
                                         d-flex
                                         align-items-end
                                         justify-content-between
-                                        mt-3
+                                        mt-2
                                     "
                                 >
-                                    <div class="card-title card-price">
-                                        {{ product.base_price }}
+                                    <div class="card-secondary-text white">
+                                        {{ product.user.shop.name }}
                                     </div>
                                     <div class="text-right">
                                         <div
@@ -102,20 +103,21 @@
                         slot="pagination"
                     ></div>
                 </swiper>
-                <div class="d-flex justify-content-center mt-5">
+                <div class="d-flex justify-content-center mt-4">
                     <router-link class="view-more-link" to="/products">
                         View More
                         <svg
-                            width="70"
-                            height="24"
-                            viewBox="0 0 90 24"
-                            fill="none"
                             xmlns="http://www.w3.org/2000/svg"
-                            class="ml-3"
+                            aria-hidden="true"
+                            role="img"
+                            width="24"
+                            height="24"
+                            preserveAspectRatio="xMidYMid meet"
+                            viewBox="0 0 24 24"
                         >
                             <path
-                                d="M2 10.5C1.17157 10.5 0.5 11.1716 0.5 12C0.5 12.8284 1.17157 13.5 2 13.5L2 10.5ZM89.0607 13.0607C89.6464 12.4749 89.6464 11.5251 89.0607 10.9393L79.5147 1.39341C78.9289 0.807618 77.9792 0.807618 77.3934 1.3934C76.8076 1.97919 76.8076 2.92894 77.3934 3.51473L85.8787 12L77.3934 20.4853C76.8076 21.0711 76.8076 22.0208 77.3934 22.6066C77.9792 23.1924 78.9289 23.1924 79.5147 22.6066L89.0607 13.0607ZM2 13.5L88 13.5L88 10.5L2 10.5L2 13.5Z"
-                                fill="#333333"
+                                fill="#666"
+                                d="M12 11V8l4 4l-4 4v-3H8v-2h4zm0-9c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12S6.48 2 12 2zm0 18c4.42 0 8-3.58 8-8s-3.58-8-8-8s-8 3.58-8 8s3.58 8 8 8z"
                             />
                         </svg>
                     </router-link>
@@ -132,21 +134,14 @@
                                 item-card item-card-occasion
                                 mb-md-0 mb-5
                             "
+                            v-bind:style="{
+                                'background-image': 'url(' + img_occasion + ')',
+                            }"
                         >
-                            <div
-                                class="card-img"
-                                v-bind:style="{
-                                    'background-image':
-                                        'url(' + img_occasion + ')',
-                                }"
-                            >
-                                <div class="card-img-text-container">
-                                    <div class="card-img-text">
-                                        <router-link to="/occasions">
-                                            Order by Occasions
-                                        </router-link>
-                                    </div>
-                                </div>
+                            <div class="card-img-text">
+                                <router-link to="/occasions">
+                                    Order by Occasion
+                                </router-link>
                             </div>
                             <div
                                 class="card-button-container"
@@ -171,21 +166,17 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="card item-card item-card-recipient">
-                            <div
-                                class="card-img"
-                                v-bind:style="{
-                                    'background-image':
-                                        'url(' + img_recipient + ')',
-                                }"
-                            >
-                                <div class="card-img-text-container">
-                                    <div class="card-img-text">
-                                        <router-link to="/recipients">
-                                            Order by Recipient
-                                        </router-link>
-                                    </div>
-                                </div>
+                        <div
+                            class="card item-card item-card-recipient"
+                            v-bind:style="{
+                                'background-image':
+                                    'url(' + img_recipient + ')',
+                            }"
+                        >
+                            <div class="card-img-text">
+                                <router-link to="/recipients">
+                                    Order by Recipient
+                                </router-link>
                             </div>
                             <div
                                 class="card-button-container"
@@ -215,67 +206,52 @@
 
             <section class="section-category">
                 <h1>Find the perfect gift for your Loved ones</h1>
-                <div class="row mb-4">
-                    <div class="col-12">
-                        <div
-                            class="
-                                d-flex
-                                align-items-center
-                                justify-content-center
-                                flex-wrap
-                                gap
-                            "
-                        >
-                            <button
-                                class="btn-special"
-                                v-for="(category, i) in categories"
-                                @click.prevent="categoryActive = i"
-                            >
-                                {{ category.name }}
-                            </button>
-                        </div>
-                    </div>
-                </div>
                 <div class="row">
                     <div class="col-12">
-                        <div
-                            class="gallery"
-                            v-for="(category, i) in categories"
-                            v-show="categoryActive == i"
-                        >
-                            <figure
+                        <div class="gallery">
+                            <div
                                 class="gallery-item"
                                 :class="`gallery-item--${index + 1}`"
-                                v-for="(
-                                    product, index
-                                ) in category.home_page_products"
+                                v-for="(category, index) in categories"
                             >
                                 <img
-                                    :src="
-                                        product.product_image
-                                            ? product.product_image.path
-                                            : ''
-                                    "
+                                    :src="category.path ? category.path : ''"
                                     class="gallery-img"
                                     alt="Image 1"
                                 />
-                                <div class="gallery-text">
-                                    {{ product.title }}
+                                <div class="card-img-text">
+                                    {{ category.name }}
                                 </div>
-                            </figure>
-                            <div class="gallery-item gallery-item--7">
-                                <router-link
-                                    :to="{
-                                        name: 'categories/category',
-                                        params: {
-                                            categoryId: category.id,
-                                            slug: category.slug,
-                                        },
-                                    }"
-                                >
-                                    More
-                                </router-link>
                             </div>
+                        </div>
+                        <div
+                            class="
+                                mt-4
+                                d-flex
+                                align-items-center
+                                justify-content-center
+                            "
+                        >
+                            <router-link
+                                class="view-more-link"
+                                to="/categories"
+                            >
+                                Browse All
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    aria-hidden="true"
+                                    role="img"
+                                    width="24"
+                                    height="24"
+                                    preserveAspectRatio="xMidYMid meet"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        fill="#666"
+                                        d="M12 11V8l4 4l-4 4v-3H8v-2h4zm0-9c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12S6.48 2 12 2zm0 18c4.42 0 8-3.58 8-8s-3.58-8-8-8s-8 3.58-8 8s3.58 8 8 8z"
+                                    />
+                                </svg>
+                            </router-link>
                         </div>
                     </div>
                 </div>
@@ -390,7 +366,6 @@ export default {
         icon_surprise: "",
         img_occasion: "",
         img_recipient: "",
-        categoryActive: "0",
         swiperOption: {
             slidesPerView: 5,
             spaceBetween: 20,

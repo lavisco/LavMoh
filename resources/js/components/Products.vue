@@ -3,56 +3,80 @@
         <div class="hero hero-default">
             <div class="slide-content">
                 <h1 class="title mb-3">Browse All Products</h1>
-                <h1 class="sub-title mb-5">
+                <h1 class="sub-title">
                     From cakes to bags, we offer everything you are looking for!
                 </h1>
             </div>
         </div>
 
         <section class="section-best-seller mb-5">
-            <div class="d-flex flex-wrap justify-content-center card-container">
+            <div
+                class="
+                    d-flex
+                    flex-wrap
+                    justify-content-center
+                    card-container
+                    product-list
+                "
+            >
                 <img v-if="loading" src="/images/lavisco/loading.gif" />
-                <div v-else v-for="product in products" class="product-list">
-                    <div class="card item-card-2">
-                        <div class="card-img card-img-2">
-                            <img
-                                :src="
-                                    product.product_image
-                                        ? product.product_image.path
-                                        : '/images/lavisco/img-bg.jpg'
-                                "
-                            />
+
+                <div
+                    v-else
+                    v-for="product in products"
+                    class="card item-card-2"
+                >
+                    <div class="card-img card-img-2">
+                        <img
+                            :src="
+                                product.product_image
+                                    ? product.product_image.path
+                                    : '/images/lavisco/img-bg.jpg'
+                            "
+                        />
+                    </div>
+                    <div class="px-2 px-md-3">
+                        <div class="card-title-2">
+                            <router-link
+                                class="card-title-2"
+                                :to="{
+                                    name: 'products/product',
+                                    params: {
+                                        productId: product.id,
+                                        slug: product.slug,
+                                    },
+                                }"
+                            >
+                                {{ product.title }}
+                            </router-link>
                         </div>
-                        <div class="px-3">
-                            <div class="card-title-2">
-                                <router-link
-                                    class="card-title-2"
-                                    :to="{
-                                        name: 'products/product',
-                                        params: {
-                                            productId: product.id,
-                                            slug: product.slug,
-                                        },
-                                    }"
-                                >
-                                    {{ product.title }}
-                                </router-link>
-                            </div>
-                            <div class="card-price">
-                                {{ product.base_price }}
-                            </div>
-                            <div class="card-secondary-text">
-                                {{ product.category.name }}
-                            </div>
-                            <div class="card-secondary-text">
-                                Made by {{ product.user.shop.name }}
-                            </div>
+                        <div class="card-price">
+                            {{ product.base_price }}
+                        </div>
+                        <div class="card-secondary-text">
+                            {{ product.user.shop.name }}
                         </div>
                     </div>
                 </div>
             </div>
             <div v-if="!loading" class="d-flex justify-content-center mt-5">
-                <a href="" class="view-more-link">View More</a>
+                <a href="" class="view-more-link"
+                    >View More
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                        role="img"
+                        width="24"
+                        height="24"
+                        preserveAspectRatio="xMidYMid meet"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            fill="#666"
+                            d="M12 11V8l4 4l-4 4v-3H8v-2h4zm0-9c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12S6.48 2 12 2zm0 18c4.42 0 8-3.58 8-8s-3.58-8-8-8s-8 3.58-8 8s3.58 8 8 8z"
+                        />
+                    </svg>
+                </a>
             </div>
         </section>
     </div>

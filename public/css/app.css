@@ -13402,6 +13402,21 @@ footer {
   opacity: 1;
 }
 
+.swiper-button-next, .swiper-button-prev {
+  width: 42px !important;
+  height: 42px !important;
+}
+.swiper-button-next svg, .swiper-button-prev svg {
+  width: 100%;
+  height: 100%;
+}
+.swiper-button-next svg path, .swiper-button-prev svg path {
+  fill: #333333;
+}
+.swiper-button-next::after, .swiper-button-prev::after {
+  display: none !important;
+}
+
 .swiper-index-product {
   height: auto !important;
   text-align: left !important;

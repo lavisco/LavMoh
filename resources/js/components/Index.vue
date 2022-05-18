@@ -98,10 +98,38 @@
                             </div>
                         </div>
                     </swiper-slide>
-                    <div
-                        class="swiper-pagination product-pagination"
-                        slot="pagination"
-                    ></div>
+                    <div class="swiper-button-prev" slot="button-prev">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            aria-hidden="true"
+                            role="img"
+                            width="24"
+                            height="24"
+                            preserveAspectRatio="xMidYMid meet"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                fill="#666"
+                                d="M12 2c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12S6.48 2 12 2zm0 9V8l-4 4l4 4v-3h4v-2h-4z"
+                            />
+                        </svg>
+                    </div>
+                    <div class="swiper-button-next" slot="button-next">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            aria-hidden="true"
+                            role="img"
+                            width="24"
+                            height="24"
+                            preserveAspectRatio="xMidYMid meet"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                fill="#666"
+                                d="M12 2c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12S6.48 2 12 2zm0 9H8v2h4v3l4-4l-4-4v3z"
+                            />
+                        </svg>
+                    </div>
                 </swiper>
                 <div class="d-flex justify-content-center mt-4">
                     <router-link class="view-more-link" to="/products">
@@ -369,10 +397,14 @@ export default {
         swiperOption: {
             slidesPerView: 5,
             spaceBetween: 20,
-            pagination: {
-                el: ".product-pagination",
-                clickable: true,
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
             },
+            // pagination: {
+            //     el: ".product-pagination",
+            //     clickable: true,
+            // },
             breakpoints: {
                 1024: {
                     slidesPerView: 5,

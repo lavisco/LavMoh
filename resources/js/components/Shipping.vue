@@ -580,7 +580,7 @@
                                                 v-for="shipping in shippings"
                                                 :value="shipping"
                                             >
-                                                {{ shipping.type }} - LKR
+                                                {{ shipping.type }} - {{ currency }}
                                                 {{ shipping.price }}
                                             </option>
                                         </select>
@@ -608,26 +608,26 @@
                                 <p>
                                     Subtotal
                                     <span class="bold"
-                                        >LKR {{ form.subtotal }}</span
+                                        >{{ currency }} {{ form.subtotal }}</span
                                     >
                                 </p>
                                 <hr />
                                 <p>
                                     Discount
                                     <span class="bold"
-                                        >LKR {{ form.discount_price }}</span
+                                        >{{ currency }} {{ form.discount_price }}</span
                                     >
                                 </p>
                                 <p>
                                     Shipping
                                     <span class="bold"
-                                        >LKR {{ form.shipping_price }}</span
+                                        >{{ currency }} {{ form.shipping_price }}</span
                                     >
                                 </p>
                                 <p>
                                     Total
                                     <span class="bold"
-                                        >LKR {{ form.total }}</span
+                                        >{{ currency }} {{ form.total }}</span
                                     >
                                 </p>
                             </div>
@@ -647,19 +647,19 @@
                     <h4 class="mb-2">Total Payment</h4>
                     <p>
                         Subtotal
-                        <span class="bold">LKR {{ form.subtotal }}</span>
+                        <span class="bold">{{ currency }} {{ form.subtotal }}</span>
                     </p>
                     <hr />
                     <p>
                         Discount
-                        <span class="bold">LKR {{ form.discount_price }}</span>
+                        <span class="bold">{{ currency }} {{ form.discount_price }}</span>
                     </p>
                     <p>
                         Shipping
-                        <span class="bold">LKR {{ form.shipping_price }}</span>
+                        <span class="bold">{{ currency }} {{ form.shipping_price }}</span>
                     </p>
                     <p>
-                        Total <span class="bold">LKR {{ form.total }}</span>
+                        Total <span class="bold">{{ currency }} {{ form.total }}</span>
                     </p>
                 </div>
             </div>
@@ -727,6 +727,9 @@ export default {
     }),
 
     computed: {
+        currency() {
+            return this.$store.getters.selectedCurrency;
+        },
         products() {
             return this.$store.getters.currentCartProducts;
         },

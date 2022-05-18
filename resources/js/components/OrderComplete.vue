@@ -56,7 +56,7 @@
                     <div>{{ product.title }}<br />{{ product.quantity }}</div>
                 </div>
 
-                <div class="price">{{ product.price * product.quantity }}</div>
+                <div class="price">{{ currency }} {{ product.price * product.quantity }}</div>
             </div>
             <div
                 class="
@@ -67,7 +67,7 @@
                 "
             >
                 Total
-                <div class="price">{{ total }}</div>
+                <div class="price">{{ currency }} {{ total }}</div>
             </div>
         </div>
     </div>
@@ -75,6 +75,9 @@
 <script>
 export default {
     computed: {
+        currency() {
+            return this.$store.getters.selectedCurrency;
+        },
         shopProducts() {
             return this.$store.getters.currentCartProducts;
         },

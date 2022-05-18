@@ -93,7 +93,7 @@
                                             {{ product.title }}
                                         </div>
                                         <div class="mb-2 cart-price hide-lg">
-                                            LKR.
+                                            {{ currency }}
                                             {{
                                                 product.price * product.quantity
                                             }}
@@ -165,13 +165,15 @@
                             </div>
 
                             <div class="ml-4 cart-price hide">
-                                LKR. {{ product.price * product.quantity }}
+                                {{ currency }}
+                                {{ product.price * product.quantity }}
                             </div>
                         </div>
                         <hr />
                     </div>
                     <div class="cart-price text-right">
-                        <span class="text-lighter">Subtotal LKR. </span
+                        <span class="text-lighter"
+                            >Subtotal {{ currency }} </span
                         >{{ cartTotal(shop) }}
                     </div>
                 </div>
@@ -300,6 +302,9 @@ export default {
     }),
 
     computed: {
+        currency() {
+            return this.$store.getters.selectedCurrency;
+        },
         products() {
             return this.$store.getters.cartProducts;
         },

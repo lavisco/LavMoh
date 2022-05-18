@@ -14,7 +14,7 @@
 
 {{-- Footer --}}
 @slot('footer') @component('mail::footer')
-<div class="social-links">
+<p>
     <a href="https://www.instagram.com/lavisco.lk/" class="social-link">
         <img
             src="{{ Storage::disk('s3')->temporaryUrl('public/images/instagram.png', '+2 minutes') }}"
@@ -29,7 +29,7 @@
             alt="Lavisco Facebook"
         />
     </a>
-</div>
+</p>
 
 <h4>Get in touch</h4>
 

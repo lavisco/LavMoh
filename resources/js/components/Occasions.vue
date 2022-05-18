@@ -51,7 +51,7 @@
                             </router-link>
                         </div>
                         <div class="card-title card-price">
-                            {{ product.base_price }}
+                            {{ currency }} {{ product.base_price }}
                         </div>
                     </div>
                 </div>
@@ -96,6 +96,12 @@ export default {
     watch: {
         searchText(after, before) {
             this.loadOccasions();
+        },
+    },
+
+    computed: {
+        currency() {
+            return this.$store.getters.selectedCurrency;
         },
     },
 

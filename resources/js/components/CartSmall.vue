@@ -62,7 +62,7 @@
                                 </div>
                             </div>
                             <div class="menu-cart-item-price">
-                                Lkr {{ product.price * product.quantity }}
+                                {{ currency }} {{ product.price * product.quantity }}
                             </div>
                         </div>
                         <a
@@ -78,7 +78,7 @@
 
                 <div v-show="products[0] != null" class="text-center">
                     <h5 class="p-0 my-3">
-                        Total LKR<span class="font-weight-bold ml-2">
+                        Total {{ currency }}<span class="font-weight-bold ml-2">
                             {{ total }}</span
                         >
                     </h5>
@@ -104,6 +104,9 @@ export default {
     data: () => ({}),
 
     computed: {
+        currency() {
+            return this.$store.getters.selectedCurrency;
+        },
         products() {
             return this.$store.getters.cartProducts;
         },

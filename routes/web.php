@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\FallbackController;
 use Illuminate\Support\Facades\Auth;
@@ -56,6 +57,8 @@ Route::post('/paymenttest', function () {
 */
 
 Auth::routes();
+Route::post('/buyer-login', [LoginController::class, 'loginBuyer']);
+Route::post('/seller-login', [LoginController::class, 'loginSeller']);
 //Auth::routes(['verify' => true]);
 
 /*
@@ -65,6 +68,7 @@ Auth::routes();
 */
 
 //Route::get('/emailTest', [EmailController::class, 'sendWelcomeEmail']);
+
 
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
@@ -109,7 +113,6 @@ Route::get('/merchant/{path}', [HomeController::class, 'websiteIndex'])->where('
 
 //main route entry for website
 Route::get('/{path}', [HomeController::class, 'websiteIndex'])->where('path', '.*');
-
 
 
 

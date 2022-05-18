@@ -125,5 +125,7 @@ class UserController extends Controller
         $user->update([
             'password' => Hash::make($request->password),
         ]);
+
+        Auth::logoutOtherDevices($request->old_password);
     }
 }

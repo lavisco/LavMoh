@@ -12,9 +12,14 @@ export default new Vuex.Store({
         cart: [], //{product id, product quantity}
         currentCart: [], //cart being currently processed
         total: "",
+        currency: "LKR",
     },
 
     getters: {
+        selectedCurrency(state) {
+            return state.currency;
+        },
+
         cartProducts(state) {
             return state.cart.map((cartItem) => {
                 return {
@@ -80,7 +85,12 @@ export default new Vuex.Store({
     },
 
     actions: {
-        //methods
+        //currency methods
+        saveCurrency(context, currency) {
+            context.commit("storeCurrency", currency);
+        },
+
+        //cart methods
         addProductToCart(context, { product, productForm }) {
             //pass multiple parameters to an action using destructuring e.g.{ product, productForm }
             //store product if it exists in state.cart
@@ -160,7 +170,14 @@ export default new Vuex.Store({
     },
 
     mutations: {
-        //alter state
+        //alter currency state
+
+        storeCurrency(state, currency) {
+            state.currency = currency;
+        },
+
+        //alter cart state
+
         pushProductToCart(state, { product, productForm }) {
             //pass multiple parameters to a mutation using destructuring e.g.{ product, productForm }
 

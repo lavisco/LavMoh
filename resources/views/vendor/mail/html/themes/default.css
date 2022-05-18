@@ -61,7 +61,7 @@ h3 {
     text-align: left;
 }
 
-h5{
+h5 {
     font-size: 13px;
     font-weight: 500;
     margin: 0 0 7px 0;
@@ -209,23 +209,24 @@ img {
     text-decoration: underline;
 }
 
-.footer-logo{
+.footer-logo {
     width: 35px;
     height: auto;
 }
 
-.social-links{
+.social-links {
     display: flex;
+    width: 100%;
     flex-direction: row;
     align-items: center;
     justify-content: center;
 }
-.social-link{
+.social-link {
     color: transparent;
-    margin-right: 40px;
+    margin-right: 20px;
 }
 
-.copyright{
+.copyright {
     font-size: 12px !important;
     margin-top: 25px;
 }

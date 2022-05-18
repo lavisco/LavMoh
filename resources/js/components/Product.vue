@@ -90,7 +90,9 @@
 
                     <!-- price -->
                     <div class="mt-4">
-                        <h3 class="price">LKR {{ this.total_price }}</h3>
+                        <h3 class="price">
+                            {{ currency }} {{ this.total_price }}
+                        </h3>
                     </div>
 
                     <!-- short description -->
@@ -153,8 +155,8 @@
                                 v-if="form.selected_variations[index]"
                                 >+
                                 {{ form.selected_variations[index].price }}
-                                LKR</span
-                            >
+                                {{ currency }}
+                            </span>
                         </div>
                         <h6 class="text-danger mt-4" v-show="formErrors">
                             {{ formErrors }}
@@ -499,6 +501,9 @@ export default {
     },
 
     computed: {
+        currency() {
+            return this.$store.getters.selectedCurrency;
+        },
         total_price() {
             let var1price = this.form.selected_variations[0]
                 ? this.form.selected_variations[0].price

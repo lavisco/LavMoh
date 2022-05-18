@@ -13,7 +13,7 @@
     >
         <h1 class="title black mb-4">Session timeout</h1>
         <h1>Your login session has expired</h1>
-        <h3><a href="/login" class="pink">Login</a> again to continue</h3>
+        <h3>Go back to <a href="/" class="pink">Home</a></h3>
     </div>
 </div>
 

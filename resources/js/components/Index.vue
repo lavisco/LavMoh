@@ -69,7 +69,7 @@
                                     </router-link>
                                 </div>
                                 <div class="card-price">
-                                    LKR {{ product.base_price }}
+                                    {{ currency }} {{ product.base_price }}
                                 </div>
 
                                 <div
@@ -410,6 +410,12 @@ export default {
             },
         },
     }),
+
+    computed: {
+        currency() {
+            return this.$store.getters.selectedCurrency;
+        },
+    },
 
     methods: {
         loadData() {

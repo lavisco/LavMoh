@@ -54,7 +54,7 @@
                             </router-link>
                         </div>
                         <div class="card-price">
-                            {{ product.base_price }}
+                            {{ currency }} {{ product.base_price }}
                         </div>
                         <div class="card-secondary-text">
                             {{ product.user.shop.name }}
@@ -98,6 +98,12 @@ export default {
     watch: {
         searchText(after, before) {
             this.loadData();
+        },
+    },
+
+    computed: {
+        currency() {
+            return this.$store.getters.selectedCurrency;
         },
     },
 

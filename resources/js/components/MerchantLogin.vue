@@ -99,7 +99,7 @@ export default {
 
         loginUser() {
             this.form
-                .post("/login")
+                .post("/seller-login")
                 .then(() => {
                     window.location.replace("/seller/dashboard");
                 })

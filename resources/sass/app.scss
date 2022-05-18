@@ -592,7 +592,29 @@ button.bg-black:hover {
     }
 }
 
+.nav-link-currency {
+    cursor: pointer;
+    height: 50px;
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: 0.025em;
+    padding: 10px;
+    text-align: center;
+    color: $black;
+    svg {
+        margin-right: 10px;
+    }
+    &:hover {
+        color: $lav-purple;
+    }
+}
+
 .nav-link-account {
+    border: none !important;
+    padding: 3px !important;
+    &:hover {
+        border: none !important;
+    }
     @media (max-width: 992px) {
         padding: 0 !important;
         &:hover {
@@ -3092,7 +3114,7 @@ footer {
 .cart-notif {
     position: absolute;
     top: 3px;
-    right: 4px;
+    right: -3px;
     width: 21px;
     height: 21px;
     display: flex;

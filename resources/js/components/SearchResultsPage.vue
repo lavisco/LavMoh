@@ -52,7 +52,7 @@
                                 </router-link>
                             </div>
                             <div class="card-price">
-                                {{ product.base_price }}
+                                {{ currency }} {{ product.base_price }}
                             </div>
                             <div class="card-secondary-text">
                                 {{ product.category.name }}
@@ -235,6 +235,12 @@ export default {
         resultsCategoryMode: true,
         resultsShopMode: true,
     }),
+
+    computed: {
+        currency() {
+            return this.$store.getters.selectedCurrency;
+        },
+    },
 
     methods: {
         setResult(event) {

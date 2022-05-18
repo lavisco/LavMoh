@@ -105,19 +105,19 @@ export default {
 
     methods: {
         snedContactMsg() {
-            // this.submitButtonText = "In Progress...";
-            // this.submitButtonDisabled = true;
-            // this.form
-            //     .post("/api/seller/user")
-            //     .then(() => {
-            //         this.submitButtonText = "Message Sent";
-            //         this.submitButtonDisabled = false;
-            //     })
-            //     .catch((error) => {
-            //         this.submitButtonText = "Send";
-            //         this.submitButtonDisabled = false;
-            //         console.log(error);
-            //     });
+            this.submitButtonText = "In Progress...";
+            this.submitButtonDisabled = true;
+            this.form
+                .post("/api/contact")
+                .then(() => {
+                    this.submitButtonText = "Message Sent";
+                    this.submitButtonDisabled = false;
+                })
+                .catch((error) => {
+                    this.submitButtonText = "Send";
+                    this.submitButtonDisabled = false;
+                    console.log(error);
+                });
         },
     },
 

@@ -16,12 +16,15 @@ class TransactionController extends Controller
 
     public function index()
     {
-        return Transaction::latest()->paginate(25);
+        return Transaction::with(['order', 'user', 'user.shop'])->orderBy('request_withdrawal_date')->paginate(25);
     }
 
     public function store(TransactionRequest $request)
     {
-        return Transaction::create($request->all());
+        $transaction = Transaction::create($request->all());
+        $transaction->update([
+            'code' => 'LT'.str_pad($transaction->id,5,"0",STR_PAD_LEFT),
+        ]);
     }
 
     public function show($id)

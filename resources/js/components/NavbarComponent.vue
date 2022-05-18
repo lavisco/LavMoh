@@ -196,8 +196,8 @@
                             xmlns="http://www.w3.org/2000/svg"
                             aria-hidden="true"
                             role="img"
-                            width="34"
-                            height="34"
+                            width="30"
+                            height="30"
                             preserveAspectRatio="xMidYMid meet"
                             viewBox="-2 -1.5 24 24"
                         >
@@ -212,7 +212,7 @@
                         style="border-radius: 8px"
                         aria-labelledby="dropdownCurrency"
                     >
-                        <div class="d-flex flex-column align-items-center">
+                        <div class="d-flex flex-column">
                             <a
                                 class="nav-link-currency"
                                 @click.prevent="saveCurrency('LKR')"

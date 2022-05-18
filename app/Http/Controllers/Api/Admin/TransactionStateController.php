@@ -16,7 +16,7 @@ class TransactionStateController extends Controller
 
     public function index()
     {
-        return TransactionState::latest()->paginate(25);
+        return TransactionState::get();
     }
 
     public function store(TransactionStateRequest $request)

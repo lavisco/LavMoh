@@ -16,7 +16,7 @@ class CreateTransactionsTable extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('code');
+            $table->string('code')->nullable();
             $table->string('status', 50);
             $table->decimal('total_amount', 14, 2);
             $table->decimal('bank_charge', 14, 2);

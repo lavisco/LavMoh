@@ -194,7 +194,12 @@
                 </li>
                 <li class="nav-item">
                     <router-link to="/admin/shops" class="nav-link">
-                        <i class="fas fa-store"></i> Shop
+                        <i class="fas fa-store"></i> Shops
+                    </router-link>
+                </li>
+                <li class="nav-item">
+                    <router-link to="/admin/transactions" class="nav-link">
+                        <i class="fas fa-credit-card"></i> Transactions
                     </router-link>
                 </li>
 

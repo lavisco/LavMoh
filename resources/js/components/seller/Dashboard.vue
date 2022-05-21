@@ -1354,7 +1354,7 @@ export default {
             axios
                 .post("/logout")
                 .then((response) => {
-                    window.location.replace("/login");
+                    window.location.replace("/merchant/login");
                 })
                 .catch((error) => {
                     console.log(error);

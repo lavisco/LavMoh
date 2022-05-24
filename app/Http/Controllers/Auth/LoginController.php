@@ -38,7 +38,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        //$this->middleware('guest')->except('logout');
     }
 
 
@@ -52,6 +52,8 @@ class LoginController extends Controller
      */
     public function login(Request $request)
     {
+        $this->logoutIfAuthenticated($request);
+
         $this->validateLogin($request);
 
         // If the class is using the ThrottlesLogins trait, we can automatically throttle
@@ -85,6 +87,8 @@ class LoginController extends Controller
      */
     public function loginSeller(Request $request)
     {
+        $this->logoutIfAuthenticated($request);
+
         $this->validateLogin($request);
 
         // uses ThrottlesLogins trait
@@ -117,6 +121,8 @@ class LoginController extends Controller
      */
     public function loginBuyer(Request $request)
     {
+        $this->logoutIfAuthenticated($request);
+
         $this->validateLogin($request);
 
         if (method_exists($this, 'hasTooManyLoginAttempts') &&
@@ -138,6 +144,25 @@ class LoginController extends Controller
 
         return $this->sendFailedLoginResponse($request);
     }
+
+    /**
+     * Log user out if they're already authenticated
+     */
+    protected function logoutIfAuthenticated(Request $request)
+    {
+        /*
+        * check if user is logged in, log them out
+        * invalidate the user's session and regenerate their CSRF token
+        */
+
+        if (Auth::check()) {
+            Auth::logout();
+
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+        }
+    }
+
 
     /**
      * Attempt to log the ADMIN user into the application.

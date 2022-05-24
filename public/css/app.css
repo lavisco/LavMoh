@@ -10641,10 +10641,8 @@ button.bg-black:hover {
     color: #ffffff;
     border: 1px solid #976aff;
   }
-  .nav-link:focus svg path {
-    fill: #ffffff;
-  }
-  .nav-link:focus svg circle {
+  .nav-link:focus svg path,
+.nav-link:focus svg circle {
     fill: #ffffff;
   }
   .nav-link:focus .nav-tiny-text {
@@ -10675,6 +10673,17 @@ button.bg-black:hover {
 }
 .nav-link-account:hover {
   border: none !important;
+}
+.nav-link-account:focus {
+  background-color: transparent;
+  color: #6452be;
+}
+.nav-link-account:focus svg path,
+.nav-link-account:focus svg circle {
+  fill: #6452be;
+}
+.nav-link-account:focus .nav-tiny-text {
+  color: #6452be;
 }
 @media (max-width: 992px) {
   .nav-link-account {
@@ -11422,9 +11431,11 @@ section h1 {
 }
 .progress-bar .progress-line .done {
   background-color: #333333 !important;
+  border-radius: 5px;
 }
 .progress-bar .progress-line .now {
   background-color: #976aff !important;
+  border-radius: 5px;
 }
 .progress-bar .activated {
   color: #976aff;
@@ -12528,6 +12539,11 @@ footer {
   padding: 20px 30px;
 }
 
+.modal-body {
+  border-bottom-left-radius: calc(0.3rem - 1px);
+  border-bottom-right-radius: calc(0.3rem - 1px);
+}
+
 .notif-modal .modal-footer,
 .notif-modal .modal-content {
   border-radius: 20px;
@@ -13402,18 +13418,22 @@ footer {
   opacity: 1;
 }
 
-.swiper-button-next, .swiper-button-prev {
+.swiper-button-next,
+.swiper-button-prev {
   width: 42px !important;
   height: 42px !important;
 }
-.swiper-button-next svg, .swiper-button-prev svg {
+.swiper-button-next svg,
+.swiper-button-prev svg {
   width: 100%;
   height: 100%;
 }
-.swiper-button-next svg path, .swiper-button-prev svg path {
+.swiper-button-next svg path,
+.swiper-button-prev svg path {
   fill: #333333;
 }
-.swiper-button-next::after, .swiper-button-prev::after {
+.swiper-button-next::after,
+.swiper-button-prev::after {
   display: none !important;
 }
 
@@ -13490,23 +13510,23 @@ footer {
 /*-------------------------Scrollbar---------------------------------*/
 .vertical-scroll::-webkit-scrollbar {
   width: 3em;
-  height: 1.4em;
+  height: 1.2em;
 }
 
 .vertical-scroll::-webkit-scrollbar-track {
-  background: #b0a5e6;
-  border-radius: 100vw;
+  background: #e5e1e1;
+  border-radius: 7px;
   margin-block: 0.5em;
 }
 
 .vertical-scroll::-webkit-scrollbar-thumb {
-  background: #4b3d91;
-  border: 0.1rem solid #a192e9;
-  border-radius: 100vw;
+  background: #4e4e4e;
+  border: 0.1rem solid #80739e;
+  border-radius: 7px;
 }
 
 .vertical-scroll::-webkit-scrollbar-thumb:hover {
-  background: #342a64;
+  background: #3d2e50;
 }
 
 /* Vertical scrolling */

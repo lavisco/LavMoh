@@ -577,9 +577,7 @@ button.bg-black:hover {
             color: $white;
             border: 1px solid $lav-purple;
             svg {
-                path {
-                    fill: $white;
-                }
+                path,
                 circle {
                     fill: $white;
                 }
@@ -614,6 +612,20 @@ button.bg-black:hover {
     padding: 3px !important;
     &:hover {
         border: none !important;
+    }
+    &:focus {
+        background-color: transparent;
+        color: $lav-dark-purple;
+        svg {
+            path,
+            circle {
+                fill: $lav-dark-purple;
+            }
+        }
+
+        .nav-tiny-text {
+            color: $lav-dark-purple;
+        }
     }
     @media (max-width: 992px) {
         padding: 0 !important;
@@ -1361,9 +1373,11 @@ section {
         }
         .done {
             background-color: $black !important;
+            border-radius: 5px;
         }
         .now {
             background-color: $lav-purple !important;
+            border-radius: 5px;
         }
     }
 
@@ -2504,6 +2518,11 @@ footer {
     padding: 20px 30px;
 }
 
+.modal-body {
+    border-bottom-left-radius: calc(0.3rem - 1px);
+    border-bottom-right-radius: calc(0.3rem - 1px);
+}
+
 .notif-modal {
     .modal-footer,
     .modal-content {
@@ -3361,17 +3380,18 @@ footer {
     opacity: 1;
 }
 
-.swiper-button-next, .swiper-button-prev{
+.swiper-button-next,
+.swiper-button-prev {
     width: 42px !important;
     height: 42px !important;
-    svg{
+    svg {
         width: 100%;
         height: 100%;
-        path{
+        path {
             fill: $black;
         }
     }
-    &::after{
+    &::after {
         display: none !important;
     }
 }
@@ -3449,23 +3469,23 @@ footer {
 
 .vertical-scroll::-webkit-scrollbar {
     width: 3em;
-    height: 1.4em;
+    height: 1.2em;
 }
 
 .vertical-scroll::-webkit-scrollbar-track {
-    background: rgb(176, 165, 230);
-    border-radius: 100vw;
+    background: #e5e1e1;
+    border-radius: 7px;
     margin-block: 0.5em;
 }
 
 .vertical-scroll::-webkit-scrollbar-thumb {
-    background: rgb(75, 61, 145);
-    border: 0.1rem solid rgb(161, 146, 233);
-    border-radius: 100vw;
+    background: #4e4e4e;
+    border: 0.1rem solid #80739e;
+    border-radius: 7px;
 }
 
 .vertical-scroll::-webkit-scrollbar-thumb:hover {
-    background: rgb(52, 42, 100);
+    background: rgb(61, 46, 80);
 }
 
 /* Vertical scrolling */

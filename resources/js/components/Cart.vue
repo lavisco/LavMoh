@@ -40,9 +40,23 @@
                     {{ products.length }} items in your Cart
                 </h1>
 
-                <h5 class="black">
-                    <router-link to="/products">Keep Shopping</router-link>
-                </h5>
+                <router-link class="view-more-link" to="/products">
+                    Keep Shopping
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                        role="img"
+                        width="24"
+                        height="24"
+                        preserveAspectRatio="xMidYMid meet"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            fill="#666"
+                            d="M12 11V8l4 4l-4 4v-3H8v-2h4zm0-9c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12S6.48 2 12 2zm0 18c4.42 0 8-3.58 8-8s-3.58-8-8-8s-8 3.58-8 8s3.58 8 8 8z"
+                        />
+                    </svg>
+                </router-link>
             </div>
 
             <h5 class="text-left" v-show="!products[0]">
@@ -224,58 +238,57 @@
                     </div>
 
                     <!-- Form start -->
-                    <div class="modal-body modal-view">
-                        <div class="card">
-                            <router-link to="/shipping">
-                                <button
-                                    class="checkout-btn btn-full btn-secondary"
-                                    data-dismiss="modal"
-                                >
-                                    Continue as Guest
-                                </button>
-                            </router-link>
-                            <h4 class="my-3 text-center">OR</h4>
-                            <form class="input-form" @submit.prevent="login()">
-                                <div class="form-group">
+                    <div class="modal-body modal-view py-4">
+                        <button
+                            class="checkout-btn btn-full btn-secondary"
+                            data-dismiss="modal"
+                            @click.prevent="guestLogin()"
+                        >
+                            Continue as Guest
+                        </button>
+                        <h4 class="my-3 text-center">OR</h4>
+                        <form class="input-form" @submit.prevent="login()">
+                            <div class="form-group">
+                                <input
+                                    id="email"
+                                    type="email"
+                                    class="form-control"
+                                    name="email"
+                                    required
+                                    placeholder="Email"
+                                    v-model="form.email"
+                                />
+                                <HasError :form="form" field="email" />
+                            </div>
+
+                            <div class="form-group">
+                                <div class="password-input">
                                     <input
-                                        id="email"
-                                        type="email"
+                                        id="password"
+                                        type="password"
                                         class="form-control"
-                                        name="email"
+                                        name="password"
                                         required
-                                        placeholder="Email"
-                                        v-model="form.email"
+                                        placeholder="Password"
+                                        v-model="form.password"
                                     />
+                                    <i
+                                        class="fas fa-eye"
+                                        onclick="showPasswordFunction()"
+                                    ></i>
                                 </div>
+                                <HasError :form="form" field="password" />
+                            </div>
 
-                                <div class="form-group">
-                                    <div class="password-input">
-                                        <input
-                                            id="password"
-                                            type="password"
-                                            class="form-control"
-                                            name="password"
-                                            required
-                                            placeholder="Password"
-                                            v-model="form.password"
-                                        />
-                                        <i
-                                            class="fas fa-eye"
-                                            onclick="showPasswordFunction()"
-                                        ></i>
-                                    </div>
-                                </div>
-
-                                <div class="d-flex justify-content-center mt-3">
-                                    <button
-                                        type="submit"
-                                        class="checkout-btn btn-full"
-                                    >
-                                        Login
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
+                            <div class="d-flex justify-content-center mt-3">
+                                <button
+                                    type="submit"
+                                    class="checkout-btn btn-full"
+                                >
+                                    Login
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -319,12 +332,23 @@ export default {
     methods: {
         login() {
             this.form
-                .post("/login")
+                .post("/buyer-login")
                 .then(() => {
                     $("#addRecord").modal("hide");
                     this.$router.push("/shipping");
                 })
                 .catch((error) => console.log(error));
+        },
+
+        guestLogin() {
+            this.form
+                .post("/logout")
+                .then(() => {
+                    $("#addRecord").modal("hide");
+                    this.$router.push("/shipping");
+                })
+                .catch((error) => console.log(error));
+            //this.$router.push("/shipping");
         },
 
         removeProductFromCart(product) {

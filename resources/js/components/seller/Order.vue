@@ -76,6 +76,7 @@
                             class="
                                 table-responsive
                                 dashboard-table
+                                vertical-scroll
                                 hide-content-sm
                             "
                         >

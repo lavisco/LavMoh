@@ -11064,6 +11064,8 @@ button.bg-black:hover {
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
+  -o-object-position: right;
+     object-position: right;
   border-radius: 12px;
 }
 .gallery .card-img-text {

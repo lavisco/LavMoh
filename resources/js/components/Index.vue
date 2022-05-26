@@ -247,9 +247,20 @@
                                     class="gallery-img"
                                     alt="Image 1"
                                 />
-                                <div class="card-img-text">
-                                    {{ category.name }}
-                                </div>
+
+                                <router-link
+                                    :to="{
+                                        name: 'categories/category',
+                                        params: {
+                                            recipientId: category.id,
+                                            slug: category.slug,
+                                        },
+                                    }"
+                                >
+                                    <div class="card-img-text">
+                                        {{ category.name }}
+                                    </div>
+                                </router-link>
                             </div>
                         </div>
                         <div

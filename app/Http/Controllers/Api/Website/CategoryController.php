@@ -29,10 +29,12 @@ class CategoryController extends Controller
     public function show($categoryId)
     {
         $category = Category::findOrFail($categoryId);
-        $products = Product::where('category_id', $categoryId)->where('product_state_id', '1')->with(['category:id,name', 'user.shop', 'product_image'])->latest()->filter(request(['searchText']))->paginate(25);
+        $sortParameter = request('sortValue');
+
+        $query = Product::where('category_id', $categoryId)->where('product_state_id', '1')->with(['category:id,name', 'user.shop', 'product_image']);
 
         return response()->json([
-            'products' => $products,
+            'products' => $sortParameter == 'base_price_low' ? $query->oldest('base_price')->paginate(25) : $query->latest(request('sortValue'))->paginate(25),
             'category' => $category,
         ]);
     }

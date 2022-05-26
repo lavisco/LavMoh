@@ -18,7 +18,11 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return Product::where('product_state_id', '1')->with(['category:id,name', 'user.shop', 'product_image'])->latest()->filter(request(['searchText']))->paginate(25);
+        $sortParameter = request('sortValue');
+
+        $query = Product::where('product_state_id', '1')->with(['category:id,name', 'user.shop', 'product_image']);
+
+        return $sortParameter == 'base_price_low' ? $query->oldest('base_price')->paginate(25) : $query->latest(request('sortValue'))->paginate(25);
     }
 
     /**

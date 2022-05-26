@@ -1,8 +1,7 @@
 <template>
     <div class="container-fluid search-result">
-        <section class="section-best-seller mt-5 mb-5">
-            <div class="col-sm-6 col-md-3 mb-4">
-                <select
+        <div class="sort-section pt-0">
+        <select
                     class="custom-select form-control form-control-alternative"
                     id="filter"
                     name="filter"
@@ -16,7 +15,8 @@
                     <option value="occasions">Occasions</option>
                     <option value="recipients">Recipients</option>
                 </select>
-            </div>
+        </div>
+        <section class="section-best-seller mt-4 mb-5">
             <div class="d-flex flex-wrap justify-content-center card-container">
                 <div
                     v-show="resultsProductMode"
@@ -86,7 +86,7 @@
                                 <router-link
                                     class="card-title-2"
                                     :to="{
-                                        name: 'seller_shop',
+                                        name: 'shop',
                                         params: {
                                             shopId: shop.id,
                                             slug: shop.slug,

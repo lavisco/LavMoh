@@ -9,7 +9,7 @@
                         <router-link to="/seller_onboard">
                             Onboarding
                         </router-link>
-                        <router-link to="/seller_all">
+                        <router-link to="/sellers">
                             Partner Vendors
                         </router-link>
                     </div>

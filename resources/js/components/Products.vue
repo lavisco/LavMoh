@@ -8,8 +8,21 @@
                 </h1>
             </div>
         </div>
-
-        <section class="section-best-seller mb-5">
+        <div class="sort-section">
+            <select
+                class="custom-select form-control form-control-alternative"
+                id="filter"
+                name="filter"
+                @change.prevent="loadProducts()"
+                v-model="sortValue"
+            >
+                <option value="" disabled selected hidden>Sort by</option>
+                <option value="base_price_low">Price low to high</option>
+                <option value="base_price">Price high to low</option>
+                <option value="created_at">Latest</option>
+            </select>
+        </div>
+        <section class="section-best-seller mb-5 mt-4">
             <div
                 class="
                     d-flex
@@ -88,6 +101,7 @@ export default {
         products: [],
         searchText: null,
         loading: true,
+        sortValue: "created_at",
     }),
 
     watch: {
@@ -106,7 +120,7 @@ export default {
         loadProducts() {
             axios
                 .get("/api/products", {
-                    params: { searchText: this.searchText },
+                    params: { sortValue: this.sortValue },
                 })
                 .then(({ data }) => {
                     this.products = data.data;

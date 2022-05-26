@@ -27,10 +27,11 @@ class OccasionController extends Controller
     public function show($occasionId)
     {
         $occasion = Occasion::findOrFail($occasionId);
-        $products = $occasion->products()->where('product_state_id', '1')->with(['category:id,name', 'user.shop', 'product_image'])->latest()->paginate(25);
+        $sortParameter = request('sortValue');
+        $query = $occasion->products()->where('product_state_id', '1')->with(['category:id,name', 'user.shop', 'product_image']);
 
         return response()->json([
-            'products' => $products,
+            'products' => $sortParameter == 'base_price_low' ? $query->oldest('base_price')->paginate(25) : $query->latest(request('sortValue'))->paginate(25),
             'occasion' => $occasion,
         ]);
     }

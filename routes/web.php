@@ -50,6 +50,9 @@ Route::post('/paymenttest', function () {
 });
 
 
+Route::get('/currency', [HomeController::class, 'currencyConverter']);
+
+
 /*
 |--------------------------------------------------------------------------
 | Auth Routes

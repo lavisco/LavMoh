@@ -423,7 +423,7 @@
                                         </p>
                                         <router-link
                                             :to="{
-                                                name: 'seller_shop',
+                                                name: 'shop',
                                                 params: {
                                                     shopId: product.user.shop
                                                         .id,

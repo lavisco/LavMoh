@@ -547,16 +547,16 @@ export let routes = [
         },
     },
     {
-        path: "/seller_all",
-        name: "seller_all",
+        path: "/sellers",
+        name: "sellers",
         component: require("./components/Sellers.vue").default,
         meta: {
             title: "Sellers",
         },
     },
     {
-        path: "/seller_shop/:shopId/:slug",
-        name: "seller_shop",
+        path: "/shop/:shopId/:slug",
+        name: "shop",
         component: require("./components/Seller.vue").default,
         meta: {
             title: "Seller",

@@ -28,10 +28,13 @@ class RecipientController extends Controller
     public function show($recipientId)
     {
         $recipient = Recipient::findOrFail($recipientId);
-        $products = $recipient->products()->where('product_state_id', '1')->with(['category:id,name', 'user.shop', 'product_image'])->latest()->paginate(25);
+
+        $sortParameter = request('sortValue');
+
+        $query = $recipient->products()->where('product_state_id', '1')->with(['category:id,name', 'user.shop', 'product_image']);
 
         return response()->json([
-            'products' => $products,
+            'products' => $sortParameter == 'base_price_low' ? $query->oldest('base_price')->paginate(25) : $query->latest(request('sortValue'))->paginate(25),
             'recipient' => $recipient,
         ]);
     }

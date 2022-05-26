@@ -252,7 +252,7 @@
                                     :to="{
                                         name: 'categories/category',
                                         params: {
-                                            recipientId: category.id,
+                                            categoryId: category.id,
                                             slug: category.slug,
                                         },
                                     }"

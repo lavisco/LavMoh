@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\Admin\BuyerProfileController;
 use App\Http\Controllers\Api\Admin\CategoryController;
 use App\Http\Controllers\Api\Admin\CityController;
 use App\Http\Controllers\Api\Admin\CountryController;
+use App\Http\Controllers\Api\Admin\CurrencyController;
 use App\Http\Controllers\Api\Admin\DashboardController;
 use App\Http\Controllers\Api\Admin\DistrictController;
 use App\Http\Controllers\Api\Admin\GiftwrapController;
@@ -54,6 +55,7 @@ use App\Http\Controllers\Api\Seller\VariationController as SellerVariationContro
 use App\Http\Controllers\Api\Seller\VariationOptionController as SellerVariationOptionController;
 use App\Http\Controllers\Api\Website\CategoryController as WebsiteCategoryController;
 use App\Http\Controllers\Api\Website\ContactController;
+use App\Http\Controllers\Api\Website\CurrencyController as WebsiteCurrencyController;
 use App\Http\Controllers\Api\Website\HomeController as WebsiteHomeController;
 use App\Http\Controllers\Api\Website\LocationController;
 use App\Http\Controllers\Api\Website\OccasionController as WebsiteOccasionController;
@@ -95,6 +97,9 @@ Route::prefix('admin')->group(function () {
     Route::apiResource('/cities', CityController::class);
     Route::apiResource('/countries', CountryController::class);
     Route::apiResource('/categories', CategoryController::class);
+
+    //Route::get('/currencies/exchangerate', [CurrencyController::class, 'getExchangerate']);
+    Route::apiResource('/currencies', CurrencyController::class);
     Route::apiResource('/dashboard', DashboardController::class);
     Route::apiResource('/districts', DistrictController::class);
     Route::apiResource('/giftwraps', GiftwrapController::class);
@@ -211,6 +216,7 @@ Route::get('/search', [WebsiteHomeController::class, 'searchIndex']);
 Route::get('/categories/products/{id}/{location}', [WebsiteCategoryController::class, 'getLocationWiseProducts']);
 Route::apiResource('/categories', WebsiteCategoryController::class);
 Route::post('/contact', [ContactController::class, 'store']);
+Route::get('/currencies', [WebsiteCurrencyController::class, 'index']);
 Route::apiResource('/occasions', WebsiteOccasionController::class);
 Route::get('/orders/shippings/{shopId}', [WebsiteOrderController::class, 'getShippings']);
 Route::apiResource('/orders', WebsiteOrderController::class);

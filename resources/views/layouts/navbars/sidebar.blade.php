@@ -287,6 +287,14 @@
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
                                 <router-link
+                                    to="/admin/currencies"
+                                    class="nav-link"
+                                >
+                                    Currencies
+                                </router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link
                                     to="/admin/settings"
                                     class="nav-link"
                                 >

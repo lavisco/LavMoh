@@ -55,6 +55,13 @@ export let routes = [
         },
     },
     {
+        path: "/admin/currencies",
+        component: require("./components/admin/Currency.vue").default,
+        meta: {
+            title: "Currency",
+        },
+    },
+    {
         path: "/admin/dashboard",
         component: require("./components/admin/Dashboard.vue").default,
         meta: {

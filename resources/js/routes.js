@@ -376,7 +376,7 @@ export let routes = [
     {
         path: "/",
         name: "index",
-        component: require("./components/Index.vue").default,
+        component: require("./components/website/Index.vue").default,
         meta: {
             title: "Lavisco",
         },
@@ -385,7 +385,7 @@ export let routes = [
         //employee or admin login
         path: "/employee/login",
         name: "employee/login",
-        component: require("./components/EmployeeLogin.vue").default,
+        component: require("./components/website/EmployeeLogin.vue").default,
         meta: {
             title: "Employee Login",
         },
@@ -394,7 +394,7 @@ export let routes = [
         //seller login
         path: "/merchant/login",
         name: "merchant/login",
-        component: require("./components/MerchantLogin.vue").default,
+        component: require("./components/website/MerchantLogin.vue").default,
         meta: {
             title: "Merchant Login",
         },
@@ -403,7 +403,7 @@ export let routes = [
         //buyer login
         path: "/login",
         name: "/login",
-        component: require("./components/BuyerLogin.vue").default,
+        component: require("./components/website/BuyerLogin.vue").default,
         meta: {
             title: "Login",
         },
@@ -411,7 +411,7 @@ export let routes = [
     {
         path: "/about",
         name: "about",
-        component: require("./components/AboutUs.vue").default,
+        component: require("./components/website/AboutUs.vue").default,
         meta: {
             title: "About Us",
         },
@@ -419,7 +419,7 @@ export let routes = [
     {
         path: "/cart",
         name: "cart",
-        component: require("./components/Cart.vue").default,
+        component: require("./components/website/Cart.vue").default,
         meta: {
             title: "Cart",
         },
@@ -427,7 +427,7 @@ export let routes = [
     {
         path: "/categories",
         name: "categories",
-        component: require("./components/Categories.vue").default,
+        component: require("./components/website/Categories.vue").default,
         meta: {
             title: "Categories",
         },
@@ -435,7 +435,7 @@ export let routes = [
     {
         path: "/categories/:categoryId/:slug",
         name: "categories/category",
-        component: require("./components/Category.vue").default,
+        component: require("./components/website/Category.vue").default,
         meta: {
             title: "Category",
         },
@@ -443,7 +443,7 @@ export let routes = [
     {
         path: "/coming_soon",
         name: "coming_soon",
-        component: require("./components/ComingSoon.vue").default,
+        component: require("./components/website/ComingSoon.vue").default,
         meta: {
             title: "Coming Soon",
         },
@@ -451,7 +451,7 @@ export let routes = [
     {
         path: "/contact_us",
         name: "contact_us",
-        component: require("./components/ContactUs.vue").default,
+        component: require("./components/website/ContactUs.vue").default,
         meta: {
             title: "Contact Us",
         },
@@ -459,7 +459,7 @@ export let routes = [
     {
         path: "/faq",
         name: "faq",
-        component: require("./components/Faq.vue").default,
+        component: require("./components/website/Faq.vue").default,
         meta: {
             title: "FAQ",
         },
@@ -467,7 +467,7 @@ export let routes = [
     {
         path: "/products",
         name: "products",
-        component: require("./components/Products.vue").default,
+        component: require("./components/website/Products.vue").default,
         meta: {
             title: "Products",
         },
@@ -475,7 +475,7 @@ export let routes = [
     {
         path: "/products/:productId/:slug",
         name: "products/product",
-        component: require("./components/Product.vue").default,
+        component: require("./components/website/Product.vue").default,
         meta: {
             title: "Product",
         },
@@ -483,7 +483,7 @@ export let routes = [
     {
         path: "/occasions",
         name: "occasions",
-        component: require("./components/Occasions.vue").default,
+        component: require("./components/website/Occasions.vue").default,
         meta: {
             title: "Occasions",
         },
@@ -491,7 +491,7 @@ export let routes = [
     {
         path: "/occasions/:occasionId/:slug",
         name: "occasions/occasion",
-        component: require("./components/Occasion.vue").default,
+        component: require("./components/website/Occasion.vue").default,
         meta: {
             title: "Occasion",
         },
@@ -499,7 +499,7 @@ export let routes = [
     {
         path: "/order_complete",
         name: "order_complete",
-        component: require("./components/OrderComplete.vue").default,
+        component: require("./components/website/OrderComplete.vue").default,
         meta: {
             title: "Order Complete",
         },
@@ -507,7 +507,7 @@ export let routes = [
     {
         path: "/recipients",
         name: "recipients",
-        component: require("./components/Recipients.vue").default,
+        component: require("./components/website/Recipients.vue").default,
         meta: {
             title: "Recipients",
         },
@@ -515,7 +515,7 @@ export let routes = [
     {
         path: "/recipients/:recipientId/:slug",
         name: "recipients/recipient",
-        component: require("./components/Recipient.vue").default,
+        component: require("./components/website/Recipient.vue").default,
         meta: {
             title: "Recipient",
         },
@@ -523,7 +523,7 @@ export let routes = [
     {
         path: "/register",
         name: "register",
-        component: require("./components/Register.vue").default,
+        component: require("./components/website/Register.vue").default,
         meta: {
             title: "Registration",
         },
@@ -532,7 +532,7 @@ export let routes = [
         path: "/results/:searchText",
         name: "results",
         props: true,
-        component: require("./components/SearchResultsPage.vue").default,
+        component: require("./components/website/SearchResultsPage.vue").default,
         meta: {
             title: "Search Results",
         },
@@ -540,7 +540,7 @@ export let routes = [
     {
         path: "/sitemap",
         name: "sitemap",
-        component: require("./components/Sitemap.vue").default,
+        component: require("./components/website/Sitemap.vue").default,
         meta: {
             title: "Sitemap",
         },
@@ -548,7 +548,7 @@ export let routes = [
     {
         path: "/shipping",
         name: "shipping",
-        component: require("./components/Shipping.vue").default,
+        component: require("./components/website/Shipping.vue").default,
         meta: {
             title: "Shipping",
         },
@@ -556,7 +556,7 @@ export let routes = [
     {
         path: "/sellers",
         name: "sellers",
-        component: require("./components/Sellers.vue").default,
+        component: require("./components/website/Sellers.vue").default,
         meta: {
             title: "Sellers",
         },
@@ -564,7 +564,7 @@ export let routes = [
     {
         path: "/shop/:shopId/:slug",
         name: "shop",
-        component: require("./components/Seller.vue").default,
+        component: require("./components/website/Seller.vue").default,
         meta: {
             title: "Seller",
         },
@@ -572,7 +572,7 @@ export let routes = [
     {
         path: "/seller_onboard",
         name: "seller_onboard",
-        component: require("./components/SellerOnboard.vue").default,
+        component: require("./components/website/SellerOnboard.vue").default,
         meta: {
             title: "Seller Onboarding",
         },
@@ -580,7 +580,7 @@ export let routes = [
     {
         path: "/seller_register",
         name: "seller_register",
-        component: require("./components/SellerRegister.vue").default,
+        component: require("./components/website/SellerRegister.vue").default,
         meta: {
             title: "Seller Registration",
         },
@@ -593,7 +593,7 @@ export let routes = [
     {
         path: "/terms_and_conditions",
         name: "terms_and_conditions",
-        component: require("./components/PolicyTermsConditions.vue").default,
+        component: require("./components/website/PolicyTermsConditions.vue").default,
         meta: {
             title: "Terms And Conditions",
         },
@@ -601,7 +601,7 @@ export let routes = [
     {
         path: "/privacy_policy",
         name: "privacy_policy",
-        component: require("./components/PolicyPrivacy.vue").default,
+        component: require("./components/website/PolicyPrivacy.vue").default,
         meta: {
             title: "Privacy Policy",
         },
@@ -609,7 +609,7 @@ export let routes = [
     {
         path: "/returns_refunds_policy",
         name: "returns_refunds_policy",
-        component: require("./components/PolicyReturnsRefunds.vue").default,
+        component: require("./components/website/PolicyReturnsRefunds.vue").default,
         meta: {
             title: "Returns & Refunds Policy",
         },
@@ -617,7 +617,7 @@ export let routes = [
     {
         path: "/delivery_policy",
         name: "delivery_policy",
-        component: require("./components/PolicyDelivery.vue").default,
+        component: require("./components/website/PolicyDelivery.vue").default,
         meta: {
             title: "Delivery Policy",
         },
@@ -625,7 +625,7 @@ export let routes = [
     {
         path: "/cookie_policy",
         name: "cookie_policy",
-        component: require("./components/PolicyCookie.vue").default,
+        component: require("./components/website/PolicyCookie.vue").default,
         meta: {
             title: "Cookie Policy",
         },
@@ -633,7 +633,7 @@ export let routes = [
     {
         path: "/payment_policy",
         name: "payment_policy",
-        component: require("./components/PolicyPayment.vue").default,
+        component: require("./components/website/PolicyPayment.vue").default,
         meta: {
             title: "Payment Policy",
         },

@@ -12,7 +12,11 @@ export default new Vuex.Store({
         cart: [], //{product id, product quantity}
         currentCart: [], //cart being currently processed
         total: "",
-        currency: "LKR",
+        currency: {
+            code: "LKR",
+            exchange_rate: 1.0,
+            symbol: "Rs",
+        },
     },
 
     getters: {
@@ -189,7 +193,10 @@ export default new Vuex.Store({
                 variation_values.push({
                     id: productForm.selected_variations[key].id,
                     name: productForm.selected_variations[key].name,
-                    price: productForm.selected_variations[key].price,
+                    price: (
+                        productForm.selected_variations[key].price *
+                        state.currency.exchange_rate
+                    ).toFixed(2),
                     parent: productForm.selected_variations[key].variation.name,
                 });
                 variation_id_values += productForm.selected_variations[key].id;
@@ -198,8 +205,12 @@ export default new Vuex.Store({
             state.cart.push({
                 id: product.id,
                 title: product.title,
-                base_price: product.base_price,
-                price: productForm.total_price,
+                base_price: (
+                    product.base_price * state.currency.exchange_rate
+                ).toFixed(2),
+                price: (
+                    productForm.total_price * state.currency.exchange_rate
+                ).toFixed(2),
                 user_id: product.user_id,
                 shop: product.user.shop.name,
                 shop_id: product.user.shop.id,

@@ -42,6 +42,7 @@ class Order extends Model
 
         'delivery_date',
         'status',
+        'currency_code',
 
         'total',
         'subtotal',

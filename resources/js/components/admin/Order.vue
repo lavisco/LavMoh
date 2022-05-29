@@ -195,7 +195,10 @@
                                                 <hr class="my-1 py-0" />
                                             </div>
                                         </td>
-                                        <td>LKR {{ order.total }}</td>
+                                        <td>
+                                            {{ order.currency_code }}
+                                            {{ order.total }}
+                                        </td>
                                         <td>
                                             <select
                                                 class="
@@ -437,7 +440,8 @@
                             <div class="row mb-3">
                                 <div class="col-md-3 modal-label">Total</div>
                                 <div class="col-md-9">
-                                    LKR {{ current_order.total }}
+                                    {{ current_order.currency_code }}
+                                    {{ current_order.total }}
                                     <div class="darkgrey">
                                         Subtotal:
                                         {{ current_order.subtotal }} +
@@ -1182,6 +1186,31 @@
                             <div class="form-group row">
                                 <label
                                     class="col-md-3 col-form-label"
+                                    for="currency_code"
+                                    >Currency Code
+                                    <strong class="text-danger"> *</strong>
+                                </label>
+
+                                <div class="col-md-9">
+                                    <input
+                                        id="currency_code"
+                                        v-model="form.currency_code"
+                                        type="text"
+                                        name="currency_code"
+                                        class="
+                                            form-control
+                                            form-control-alternative
+                                        "
+                                    />
+                                    <HasError
+                                        :form="form"
+                                        field="currency_code"
+                                    />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label
+                                    class="col-md-3 col-form-label"
                                     for="delivery date"
                                     >delivery date
                                     <strong class="text-danger"> *</strong>
@@ -1418,6 +1447,7 @@ export default {
             billing_state: "",
             billing_country: "",
 
+            currency_code: "",
             delivery_date: "",
             total: "",
             subtotal: "",

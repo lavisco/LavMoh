@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Website;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Currency;
 use App\Models\HomeSlider;
 use App\Models\Occasion;
 use App\Models\Product;
@@ -59,6 +60,7 @@ class HomeController extends Controller
             'occasions' => Occasion::select('id', 'name', 'slug')->latest()->get(),
             'recipients' => Recipient::select('id', 'name', 'slug')->latest()->get(),
             'categories' => Category::select('id', 'name', 'slug')->latest()->get(),
+            'currencies' => Currency::select('exchange_rate', 'code', 'symbol')->where('status', 1)->get(),
             'user' => $userName,
         ]);
     }

@@ -50,6 +50,7 @@ class OrderRequest extends FormRequest
             'billing_state' => 'nullable|string|max:100',
 
             'delivery_date' => 'date|required',
+            'currency_code' => 'string|required|max:5',
 
             'shipping_id' => 'required',
             'total' => 'numeric|required',

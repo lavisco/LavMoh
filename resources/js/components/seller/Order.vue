@@ -192,7 +192,10 @@
                                                 View Items Summary
                                             </a>
                                         </td>
-                                        <td>LKR {{ order.total }}</td>
+                                        <td>
+                                            {{ order.currency_code }}
+                                            {{ order.total }}
+                                        </td>
                                         <td>
                                             <span
                                                 class="
@@ -604,13 +607,14 @@
                             <div class="row">
                                 <div class="col-md-3 modal-label">Amount</div>
                                 <div class="col-md-9">
-                                    LKR
+                                    {{ current_order.currency_code }}
                                     {{
                                         parent_product.total *
                                         parent_product.quantity
                                     }}
                                     <div class="darkgrey">
-                                        Base Price : LKR
+                                        Base Price :
+                                        {{ current_order.currency_code }}
                                         {{ parent_product.product.base_price }}
                                     </div>
                                     <div
@@ -622,7 +626,7 @@
                                                 .name
                                         }}
                                         ({{ variation.variation_option.name }})
-                                        : + LKR
+                                        : + {{ current_order.currency_code }}
                                         {{ variation.variation_option.price }}
                                     </div>
                                 </div>
@@ -725,7 +729,8 @@
                             <div class="row mb-3">
                                 <div class="col-md-3 modal-label">Total</div>
                                 <div class="col-md-9">
-                                    LKR {{ current_order.total }}
+                                    {{ current_order.currency_code }}
+                                    {{ current_order.total }}
                                     <div class="darkgrey">
                                         Subtotal:
                                         {{ current_order.subtotal }} +
@@ -867,13 +872,14 @@
                             <div class="row">
                                 <div class="col-md-3 modal-label">Amount</div>
                                 <div class="col-md-9">
-                                    LKR
+                                    {{ current_order.currency_code }}
                                     {{
                                         parent_product.total *
                                         parent_product.quantity
                                     }}
                                     <div class="darkgrey">
-                                        Base Price : LKR
+                                        Base Price :
+                                        {{ current_order.currency_code }}
                                         {{ parent_product.product.base_price }}
                                     </div>
                                     <div
@@ -885,7 +891,7 @@
                                                 .name
                                         }}
                                         ({{ variation.variation_option.name }})
-                                        : + LKR
+                                        : + {{ current_order.currency_code }}
                                         {{ variation.variation_option.price }}
                                     </div>
                                 </div>

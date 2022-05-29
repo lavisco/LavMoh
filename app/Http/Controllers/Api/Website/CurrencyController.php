@@ -10,6 +10,6 @@ class CurrencyController extends Controller
 {
     public function index()
     {
-        return Currency::select('exchange_rate', 'code', 'symbol')->where('status', 'active')->get();
+        return Currency::select('exchange_rate', 'code', 'symbol')->where('status', 1)->get();
     }
 }

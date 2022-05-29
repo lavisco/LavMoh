@@ -607,6 +607,10 @@ button.bg-black:hover {
     }
 }
 
+.nav-link-currency + .active{
+    color: $lav-pink;
+}
+
 .nav-link-account {
     border: none !important;
     padding: 3px !important;
@@ -1374,11 +1378,9 @@ section {
         }
         .done {
             background-color: $black !important;
-            border-radius: 5px;
         }
         .now {
             background-color: $lav-purple !important;
-            border-radius: 5px;
         }
     }
 
@@ -1982,6 +1984,7 @@ footer {
     width: 100%;
     min-height: 100vh;
 }
+
 .main-content {
     //width: 100%;
     position: relative;
@@ -3502,5 +3505,3 @@ footer {
 .vertical-scroll::-webkit-scrollbar-thumb:hover {
     background: rgb(61, 46, 80);
 }
-
-/* Vertical scrolling */

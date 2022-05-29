@@ -50,6 +50,13 @@ class OrderController extends Controller
 
         $products = $request->input('products.*');
 
+        $this->storeOrderProduct($products, $order->id);
+
+        return $order;
+    }
+
+    public function storeOrderProduct($products, $orderId)
+    {
         for($i = 0; $i < count($products); $i++){
 
             $variations = $products[$i]['variations'];
@@ -60,7 +67,7 @@ class OrderController extends Controller
                 'total' => $products[$i]['price'],
                 'custom_text' => $products[$i]['custom_text'],
                 'has_variations' => count($variations) > 0 ? true : false,
-                'order_id' => $order->id,
+                'order_id' => $orderId,
                 'product_id' => $products[$i]['id'],
             ]);
 
@@ -76,8 +83,6 @@ class OrderController extends Controller
                 }
             }
         }
-
-        return $order;
     }
 
     /**

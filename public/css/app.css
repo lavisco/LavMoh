@@ -10667,6 +10667,10 @@ button.bg-black:hover {
   color: #976aff;
 }
 
+.nav-link-currency + .active {
+  color: #ff5a7c;
+}
+
 .nav-link-account {
   border: none !important;
   padding: 3px !important;
@@ -11433,11 +11437,9 @@ section h1 {
 }
 .progress-bar .progress-line .done {
   background-color: #333333 !important;
-  border-radius: 5px;
 }
 .progress-bar .progress-line .now {
   background-color: #976aff !important;
-  border-radius: 5px;
 }
 .progress-bar .activated {
   color: #976aff;
@@ -13543,5 +13545,3 @@ footer {
 .vertical-scroll::-webkit-scrollbar-thumb:hover {
   background: #3d2e50;
 }
-
-/* Vertical scrolling */

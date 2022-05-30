@@ -192,20 +192,9 @@
                         aria-expanded="false"
                         class="nav-link nav-link-account mr-3"
                     >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            aria-hidden="true"
-                            role="img"
-                            width="30"
-                            height="30"
-                            preserveAspectRatio="xMidYMid meet"
-                            viewBox="-2 -1.5 24 24"
-                        >
-                            <path
-                                fill="#333"
-                                d="M9 13.858h-.051A.949.949 0 0 1 8 12.909a1 1 0 1 0-2 0a2.949 2.949 0 0 0 2.949 2.949H9v1a1 1 0 0 0 2 0v-1a3 3 0 0 0 0-6v-2h.022c.54 0 .978.438.978.978a1 1 0 0 0 2 0a2.978 2.978 0 0 0-2.978-2.978H11v-1a1 1 0 0 0-2 0v1a3 3 0 1 0 0 6v2zm2 0v-2a1 1 0 0 1 0 2zm-2-6v2a1 1 0 1 1 0-2zm1 13c-5.523 0-10-4.477-10-10s4.477-10 10-10s10 4.477 10 10s-4.477 10-10 10z"
-                            />
-                        </svg>
+                        <div class="currency-icon">
+                            {{ currencyActive.symbol }}
+                        </div>
                     </a>
                     <div
                         class="dropdown-menu dropdown-menu-right"

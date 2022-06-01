@@ -42,6 +42,12 @@ class Category extends Model
         return $this->hasMany(Product::class);
     }
 
+    //sub_categories:category M:1
+    public function sub_categories()
+    {
+        return $this->hasMany(SubCategory::class);
+    }
+
     //get only 3 products using \Staudenmeir\EloquentEagerLimit\HasEagerLimit package
     public function latestProducts()
     {

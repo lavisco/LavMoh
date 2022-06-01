@@ -1211,6 +1211,31 @@
                             <div class="form-group row">
                                 <label
                                     class="col-md-3 col-form-label"
+                                    for="current_exchange_rate"
+                                    >Exchange rate
+                                    <strong class="text-danger"> *</strong>
+                                </label>
+
+                                <div class="col-md-9">
+                                    <input
+                                        id="current_exchange_rate"
+                                        v-model="form.current_exchange_rate"
+                                        type="text"
+                                        name="current_exchange_rate"
+                                        class="
+                                            form-control
+                                            form-control-alternative
+                                        "
+                                    />
+                                    <HasError
+                                        :form="form"
+                                        field="current_exchange_rate"
+                                    />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label
+                                    class="col-md-3 col-form-label"
                                     for="delivery date"
                                     >delivery date
                                     <strong class="text-danger"> *</strong>
@@ -1448,6 +1473,7 @@ export default {
             billing_country: "",
 
             currency_code: "",
+            current_exchange_rate: "",
             delivery_date: "",
             total: "",
             subtotal: "",

@@ -37,21 +37,4 @@ class HomeController extends Controller
     {
         return view('layouts.lavisco_dashboard_master');
     }
-
-    public function currencyConverter()
-    {
-        $req_url = 'https://api.exchangerate.host/latest?base=LKR&symbols=USD,AUD';
-        $response_json = file_get_contents($req_url);
-
-        if(false !== $response_json) {
-            try {
-                $response = json_decode($response_json);
-                if($response->success === true) {
-                    return $response->rates;
-                }
-            } catch(Exception $e) {
-                var_dump($e);
-            }
-        }  
-    }
 }

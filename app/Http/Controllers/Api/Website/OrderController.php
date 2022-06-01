@@ -7,8 +7,10 @@ use App\Http\Requests\OrderRequest;
 use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\OrderProductVariation;
+use App\Models\Receipt;
 use App\Models\Role;
 use App\Models\Shop;
+use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -48,23 +50,26 @@ class OrderController extends Controller
             'code' => 'LO'.str_pad($order->id,5,"0",STR_PAD_LEFT),
         ]);
 
-        $products = $request->input('products.*');
-
-        $this->storeOrderProduct($products, $order->id);
+        $this->storeOrderProduct($request, $order->id);
+        $this->storeReceipt($request, $order->id);
+        $this->storeTransaction($request, $order->id);
 
         return $order;
     }
 
-    public function storeOrderProduct($products, $orderId)
+    public function storeOrderProduct($request, $orderId)
     {
+        $products = $request->input('products.*');
+        $exchange_rate = $request->input('current_exchange_rate');
+
         for($i = 0; $i < count($products); $i++){
 
             $variations = $products[$i]['variations'];
             
             $orderProduct = new OrderProduct([
-                'base_price' => $products[$i]['base_price'],
+                'base_price' => $products[$i]['base_price'] * $exchange_rate,
                 'quantity' => $products[$i]['quantity'],
-                'total' => $products[$i]['price'],
+                'total' => $products[$i]['price'] * $exchange_rate,
                 'custom_text' => $products[$i]['custom_text'],
                 'has_variations' => count($variations) > 0 ? true : false,
                 'order_id' => $orderId,
@@ -76,13 +81,48 @@ class OrderController extends Controller
             if ($products[$i]['variations'] && count($variations)>0) {
                 for($j = 0; $j < count($variations); $j++){
                     OrderProductVariation::create([
-                        'price' => $variations[$j]['price'],
+                        'price' => $variations[$j]['price'] * $exchange_rate,
                         'variation_option_id' => $variations[$j]['id'],
                         'order_product_id' => $orderProduct->id,
                     ]);
                 }
             }
         }
+    }
+
+    public function storeReceipt($request, $orderId)
+    {
+        $request->merge([
+            'status' => "success",
+            'process_currency' => "currency_code",
+            'cms' => "PHP",
+            'payment_method' => "visa",
+            'order_id' => $orderId,
+            'contact_number' => $request->input('phone'),
+            'postal_code' => $request->input('zipcode'),
+        ]);
+
+        Receipt::create($request->all());
+    }
+
+    public function storeTransaction($request, $orderId)
+    {
+        $request->merge([
+            'status' => "customer cleared payment",
+            'order_id' => $orderId,
+            'user_id' => $request->input('products.0.seller_id'),
+            'total_amount' => $request->input('total'),
+            'bank_charge' => 0.00,
+            'platform_charge' => 0.00,
+            'shop_discount' => 0.00,
+            'payable_amount' => $request->input('total'),
+        ]);
+
+        $transaction = Transaction::create($request->all());
+
+        $transaction->update([
+            'code' => 'LT'.str_pad($transaction->id,5,"0",STR_PAD_LEFT),
+        ]);
     }
 
     /**

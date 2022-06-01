@@ -3,6 +3,12 @@ import VueRouter from "vue-router";
 import { routes } from "./routes";
 import store from "./store/index.js";
 
+// $.ajaxSetup({
+//     headers: {
+//         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+//     },
+// });
+
 window.Vue = require("vue").default;
 
 Vue.use(VueRouter);

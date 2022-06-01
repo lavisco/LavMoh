@@ -51,6 +51,7 @@ class OrderRequest extends FormRequest
 
             'delivery_date' => 'date|required',
             'currency_code' => 'string|required|max:5',
+            'current_exchange_rate' => 'numeric|required',
 
             'shipping_id' => 'required',
             'total' => 'numeric|required',

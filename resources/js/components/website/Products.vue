@@ -64,7 +64,8 @@
                             </router-link>
                         </div>
                         <div class="card-price">
-                            {{ currency.symbol }} {{ product.base_price*currency.exchange_rate }}
+                            {{ currency.symbol }}
+                            {{ product.base_price * currency.exchange_rate }}
                         </div>
                         <div class="card-secondary-text">
                             {{ product.user.shop.name }}

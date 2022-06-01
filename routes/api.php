@@ -30,6 +30,7 @@ use App\Http\Controllers\Api\Admin\SettingController;
 use App\Http\Controllers\Api\Admin\ShippingController;
 use App\Http\Controllers\Api\Admin\ShopController;
 use App\Http\Controllers\Api\Admin\SitetextController;
+use App\Http\Controllers\Api\Admin\SubCategoryController;
 use App\Http\Controllers\Api\Admin\TransactionController;
 use App\Http\Controllers\Api\Admin\TransactionStateController;
 use App\Http\Controllers\Api\Admin\VariationController;
@@ -128,6 +129,7 @@ Route::prefix('admin')->group(function () {
     Route::apiResource('/shippings', ShippingController::class);
     Route::put('/shops/updateState/{shop}', [ShopController::class, 'updateState']);
     Route::apiResource('/shops', ShopController::class);
+    Route::apiResource('/sub_categories', SubCategoryController::class);
     Route::apiResource('/transactions', TransactionController::class);
     Route::apiResource('/transaction_states', TransactionStateController::class);
     Route::apiResource('/variations', VariationController::class);

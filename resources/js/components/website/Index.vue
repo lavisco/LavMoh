@@ -412,10 +412,6 @@ export default {
                 nextEl: ".swiper-button-next",
                 prevEl: ".swiper-button-prev",
             },
-            // pagination: {
-            //     el: ".product-pagination",
-            //     clickable: true,
-            // },
             breakpoints: {
                 1024: {
                     slidesPerView: 5,
@@ -439,16 +435,12 @@ export default {
             loop: true,
             loopedSlides: 3, // looped slides should be the same
             spaceBetween: 10,
-            // navigation: {
-            //     nextEl: ".swiper-button-next",
-            //     prevEl: ".swiper-button-prev",
-            // },
             pagination: {
                 el: ".swiper-pagination",
                 clickable: true,
             },
             autoplay: {
-                delay: 3800,
+                delay: 4600,
                 disableOnInteraction: false,
             },
         },

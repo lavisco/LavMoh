@@ -17,6 +17,7 @@ export default new Vuex.Store({
             exchange_rate: 1.0,
             symbol: "Rs",
         },
+        location: "Kandy",
     },
 
     getters: {
@@ -31,6 +32,7 @@ export default new Vuex.Store({
                     title: cartItem.title,
                     base_price: cartItem.base_price,
                     price: cartItem.price,
+                    slug: cartItem.slug,
                     user_id: cartItem.user_id,
                     shop: cartItem.shop,
                     shop_image: cartItem.shop_image,
@@ -72,6 +74,7 @@ export default new Vuex.Store({
                     title: cartItem.title,
                     base_price: cartItem.base_price,
                     price: cartItem.price,
+                    slug: cartItem.slug,
                     shop: cartItem.shop,
                     image_path: cartItem.image_path,
                     quantity: cartItem.quantity,
@@ -175,13 +178,11 @@ export default new Vuex.Store({
 
     mutations: {
         //alter currency state
-
         storeCurrency(state, currency) {
             state.currency = currency;
         },
 
         //alter cart state
-
         pushProductToCart(state, { product, productForm }) {
             //pass multiple parameters to a mutation using destructuring e.g.{ product, productForm }
 
@@ -193,10 +194,7 @@ export default new Vuex.Store({
                 variation_values.push({
                     id: productForm.selected_variations[key].id,
                     name: productForm.selected_variations[key].name,
-                    price: (
-                        productForm.selected_variations[key].price *
-                        state.currency.exchange_rate
-                    ).toFixed(2),
+                    price: productForm.selected_variations[key].price,
                     parent: productForm.selected_variations[key].variation.name,
                 });
                 variation_id_values += productForm.selected_variations[key].id;
@@ -205,12 +203,9 @@ export default new Vuex.Store({
             state.cart.push({
                 id: product.id,
                 title: product.title,
-                base_price: (
-                    product.base_price * state.currency.exchange_rate
-                ).toFixed(2),
-                price: (
-                    productForm.total_price * state.currency.exchange_rate
-                ).toFixed(2),
+                base_price: product.base_price,
+                price: productForm.total_price,
+                slug: product.slug,
                 user_id: product.user_id,
                 shop: product.user.shop.name,
                 shop_id: product.user.shop.id,
@@ -230,6 +225,7 @@ export default new Vuex.Store({
                 title: product.title,
                 base_price: product.base_price,
                 price: product.price,
+                slug: product.slug,
                 shop: product.shop,
                 image_path: product.image_path,
                 quantity: product.quantity,

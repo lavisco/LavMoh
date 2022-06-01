@@ -44,19 +44,33 @@
                 "
                 v-for="product in shopProducts"
             >
-                <div class="d-flex flex-row">
-                    <img
-                        class="banner-container-xs mr-2"
-                        :src="
-                            product.image_path
-                                ? product.image_path
-                                : '/images/lavisco/img-bg.jpg'
-                        "
-                    />
-                    <div>{{ product.title }}<br />{{ product.quantity }}</div>
+                <div class="col-md-9">
+                    <div class="d-flex flex-row">
+                        <img
+                            class="banner-container-xs mr-2"
+                            :src="
+                                product.image_path
+                                    ? product.image_path
+                                    : '/images/lavisco/img-bg.jpg'
+                            "
+                        />
+                        <div>
+                            {{ product.title }}<br />{{ product.quantity }}
+                        </div>
+                    </div>
                 </div>
-
-                <div class="price">{{ currency.code }} {{ product.price * product.quantity }}</div>
+                <div class="col-md-3">
+                    <div class="price text-right">
+                        {{ currency.code }}
+                        {{
+                            (
+                                product.price *
+                                product.quantity *
+                                currency.exchange_rate
+                            ).toFixed(2)
+                        }}
+                    </div>
+                </div>
             </div>
             <div
                 class="
@@ -67,7 +81,10 @@
                 "
             >
                 Total
-                <div class="price">{{ currency.code }} {{ total }}</div>
+                <div class="price">
+                    {{ currency.code }}
+                    {{ (total * currency.exchange_rate).toFixed(2) }}
+                </div>
             </div>
         </div>
     </div>

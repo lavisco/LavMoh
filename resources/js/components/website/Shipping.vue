@@ -582,7 +582,12 @@
                                             >
                                                 {{ shipping.type }} -
                                                 {{ currency.code }}
-                                                {{ (shipping.price*currency.exchange_rate).toFixed(2) }}
+                                                {{
+                                                    (
+                                                        shipping.price *
+                                                        currency.exchange_rate
+                                                    ).toFixed(2)
+                                                }}
                                             </option>
                                         </select>
                                         <HasError
@@ -608,32 +613,52 @@
                                 <h4 class="mb-2">Total Payment</h4>
                                 <p>
                                     Subtotal
-                                    <span class="bold"
-                                        >{{ currency.code }}
-                                        {{ form.subtotal }}</span
-                                    >
+                                    <span class="bold">
+                                        {{ currency.code }}
+                                        {{
+                                            (
+                                                form.subtotal *
+                                                currency.exchange_rate
+                                            ).toFixed(2)
+                                        }}
+                                    </span>
                                 </p>
                                 <hr />
                                 <p>
                                     Discount
-                                    <span class="bold"
-                                        >{{ currency.code }}
-                                        {{ form.discount_price }}</span
-                                    >
+                                    <span class="bold">
+                                        {{ currency.code }}
+                                        {{
+                                            (
+                                                form.discount_price *
+                                                currency.exchange_rate
+                                            ).toFixed(2)
+                                        }}
+                                    </span>
                                 </p>
                                 <p>
                                     Shipping
-                                    <span class="bold"
-                                        >{{ currency.code }}
-                                        {{ form.shipping_price }}</span
-                                    >
+                                    <span class="bold">
+                                        {{ currency.code }}
+                                        {{
+                                            (
+                                                form.shipping_price *
+                                                currency.exchange_rate
+                                            ).toFixed(2)
+                                        }}
+                                    </span>
                                 </p>
                                 <p>
                                     Total
-                                    <span class="bold"
-                                        >{{ currency.code }}
-                                        {{ form.total }}</span
-                                    >
+                                    <span class="bold">
+                                        {{ currency.code }}
+                                        {{
+                                            (
+                                                form.total *
+                                                currency.exchange_rate
+                                            ).toFixed(2)
+                                        }}
+                                    </span>
                                 </p>
                             </div>
                             <button
@@ -652,28 +677,46 @@
                     <h4 class="mb-2">Total Payment</h4>
                     <p>
                         Subtotal
-                        <span class="bold"
-                            >{{ currency.code }} {{ form.subtotal }}</span
-                        >
+                        <span class="bold">
+                            {{ currency.code }}
+                            {{
+                                (
+                                    form.subtotal * currency.exchange_rate
+                                ).toFixed(2)
+                            }}
+                        </span>
                     </p>
                     <hr />
                     <p>
                         Discount
-                        <span class="bold"
-                            >{{ currency.code }} {{ form.discount_price }}</span
-                        >
+                        <span class="bold">
+                            {{ currency.code }}
+                            {{
+                                (
+                                    form.discount_price * currency.exchange_rate
+                                ).toFixed(2)
+                            }}
+                        </span>
                     </p>
                     <p>
                         Shipping
-                        <span class="bold"
-                            >{{ currency.code }} {{ form.shipping_price }}</span
-                        >
+                        <span class="bold">
+                            {{ currency.code }}
+                            {{
+                                (
+                                    form.shipping_price * currency.exchange_rate
+                                ).toFixed(2)
+                            }}
+                        </span>
                     </p>
                     <p>
                         Total
-                        <span class="bold"
-                            >{{ currency.code }} {{ form.total }}</span
-                        >
+                        <span class="bold">
+                            {{ currency.code }}
+                            {{
+                                (form.total * currency.exchange_rate).toFixed(2)
+                            }}
+                        </span>
                     </p>
                 </div>
             </div>
@@ -725,19 +768,22 @@ export default {
             billing_district: "",
             billing_state: "",
 
+            currency_code: "",
+            current_exchange_rate: "",
+
             delivery_date: "",
             total: "",
             subtotal: "",
             giftwrap_price: 0.0,
             shipping_price: 0.0,
             discount_price: 0.0,
+
             shipping_id: "",
             discount_id: "",
             giftwrap_id: "",
             shipping: "",
             //product
             products: [],
-            currency_code: "",
         }),
     }),
 
@@ -767,7 +813,7 @@ export default {
         loadProducts() {
             this.form.products = this.$store.getters.currentCartProducts;
             this.form.subtotal = this.$store.getters.shopCartTotal;
-            this.form.currency_code = this.$store.getters.selectedCurrency.code;
+
             this.form.total = (
                 this.form.subtotal +
                 this.form.giftwrap_price +
@@ -786,6 +832,19 @@ export default {
         },
 
         createOrder() {
+            this.form.currency_code = this.$store.getters.selectedCurrency.code;
+            this.form.current_exchange_rate =
+                this.$store.getters.selectedCurrency.exchange_rate;
+            this.form.total = this.form.total * this.form.current_exchange_rate;
+            this.form.subtotal =
+                this.form.subtotal * this.form.current_exchange_rate;
+            this.form.giftwrap_price =
+                this.form.giftwrap_price * this.form.current_exchange_rate;
+            this.form.shipping_price =
+                this.form.shipping_price * this.form.current_exchange_rate;
+            this.form.discount_price =
+                this.form.discount_price * this.form.current_exchange_rate;
+
             if (this.self_delivery === true) {
                 this.form.recipient_first_name = this.form.first_name;
                 this.form.recipient_last_name = this.form.last_name;

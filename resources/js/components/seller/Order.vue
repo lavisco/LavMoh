@@ -731,6 +731,14 @@
                                 <div class="col-md-9">
                                     {{ current_order.currency_code }}
                                     {{ current_order.total }}
+                                    ({{
+                                        current_order.current_exchange_rate
+                                            ? `LKR ${
+                                                  current_order.total /
+                                                  current_order.current_exchange_rate
+                                              }`
+                                            : ""
+                                    }})
                                     <div class="darkgrey">
                                         Subtotal:
                                         {{ current_order.subtotal }} +

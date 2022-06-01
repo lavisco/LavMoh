@@ -104,12 +104,26 @@
                                 <div class="d-flex flex-column gap">
                                     <div>
                                         <div class="cart-title mb-2">
-                                            {{ product.title }}
+                                            <router-link
+                                                :to="{
+                                                    name: 'products/product',
+                                                    params: {
+                                                        productId: product.id,
+                                                        slug: product.slug,
+                                                    },
+                                                }"
+                                            >
+                                                {{ product.title }}
+                                            </router-link>
                                         </div>
                                         <div class="mb-2 cart-price hide-lg">
                                             {{ currency.symbol }}
                                             {{
-                                                product.price * product.quantity
+                                                (
+                                                    product.price *
+                                                    product.quantity *
+                                                    currency.exchange_rate
+                                                ).toFixed(2)
                                             }}
                                         </div>
                                         <div class="cart-body-text">
@@ -180,7 +194,13 @@
 
                             <div class="ml-4 cart-price hide">
                                 {{ currency.symbol }}
-                                {{ product.price * product.quantity }}
+                                {{
+                                    (
+                                        product.price *
+                                        product.quantity *
+                                        currency.exchange_rate
+                                    ).toFixed(2)
+                                }}
                             </div>
                         </div>
                         <hr />
@@ -189,7 +209,11 @@
                         <span class="text-lighter">
                             Subtotal {{ currency.symbol }}
                         </span>
-                        {{ cartTotal(shop) }}
+                        {{
+                            (cartTotal(shop) * currency.exchange_rate).toFixed(
+                                2
+                            )
+                        }}
                     </div>
                 </div>
 
@@ -336,20 +360,19 @@ export default {
                 .post("/buyer-login")
                 .then(() => {
                     $("#addRecord").modal("hide");
-                    this.$router.push("/shipping");
+                    window.location.replace("/shipping");
                 })
                 .catch((error) => console.log(error));
         },
 
         guestLogin() {
             this.form
-                .post("/logout")
+                .post("/guest-logout")
                 .then(() => {
                     $("#addRecord").modal("hide");
-                    this.$router.push("/shipping");
+                    window.location.replace("/shipping");
                 })
                 .catch((error) => console.log(error));
-            //this.$router.push("/shipping");
         },
 
         removeProductFromCart(product) {

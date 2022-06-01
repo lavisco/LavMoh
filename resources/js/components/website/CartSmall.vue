@@ -63,7 +63,13 @@
                             </div>
                             <div class="menu-cart-item-price">
                                 {{ currency.symbol }}
-                                {{ product.price * product.quantity }}
+                                {{
+                                    (
+                                        product.price *
+                                        product.quantity *
+                                        currency.exchange_rate
+                                    ).toFixed(2)
+                                }}
                             </div>
                         </div>
                         <a
@@ -81,7 +87,7 @@
                     <h5 class="p-0 my-3">
                         Total {{ currency.symbol }}
                         <span class="font-weight-bold ml-2">
-                            {{ total }}
+                            {{ (total * currency.exchange_rate).toFixed(2) }}
                         </span>
                     </h5>
                     <router-link to="/cart">

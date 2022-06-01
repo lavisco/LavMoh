@@ -169,7 +169,7 @@ class LoginController extends Controller
      */
     protected function attemptLogin(Request $request)
     {
-        return $this->guard()->attempt(
+        return Auth::attempt(
           ['email' => $request->email, 'password' => $request->password, 'role_id' => Role::IS_ADMIN], $request->filled('remember')
         );
     }
@@ -180,7 +180,7 @@ class LoginController extends Controller
      */
     protected function attemptBuyerLogin(Request $request)
     {
-        return $this->guard()->attempt(
+        return Auth::attempt(
           ['email' => $request->email, 'password' => $request->password, 'role_id' => Role::IS_BUYER], $request->filled('remember')
         );
     }
@@ -190,8 +190,24 @@ class LoginController extends Controller
      */
     protected function attemptSellerLogin(Request $request)
     {
-        return $this->guard()->attempt(
+        return Auth::attempt(
           ['email' => $request->email, 'password' => $request->password, 'role_id' => Role::IS_SELLER], $request->filled('remember')
         );
+    }
+
+
+    /**
+     * Guest logout
+     */
+    protected function logoutGuest(Request $request)
+    {
+        /*
+        * check if user is logged in, log them out
+        * invalidate the user's session and regenerate their CSRF token
+        */
+
+        if (Auth::check()) {
+            $this->logout($request);
+        }
     }
 }

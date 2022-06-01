@@ -50,9 +50,6 @@ Route::post('/paymenttest', function () {
 });
 
 
-Route::get('/currency', [HomeController::class, 'currencyConverter']);
-
-
 /*
 |--------------------------------------------------------------------------
 | Auth Routes
@@ -62,6 +59,7 @@ Route::get('/currency', [HomeController::class, 'currencyConverter']);
 Auth::routes();
 Route::post('/buyer-login', [LoginController::class, 'loginBuyer']);
 Route::post('/seller-login', [LoginController::class, 'loginSeller']);
+Route::post('/guest-logout', [LoginController::class, 'logoutGuest']);
 //Auth::routes(['verify' => true]);
 
 /*

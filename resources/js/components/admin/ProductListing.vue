@@ -128,6 +128,7 @@
                                     name="category_id"
                                     id="category_id"
                                     v-model="form.category_id"
+                                    @change.prevent="loadSubcategories($event)"
                                 >
                                     <option value="" disabled selected hidden>
                                         Select Category
@@ -140,6 +141,41 @@
                                     </option>
                                 </select>
                                 <HasError :form="form" field="category_id" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label
+                                class="col-md-3 col-form-label"
+                                for="product_sub_category"
+                            >
+                                Sub-Category
+                                <strong class="text-danger"> *</strong>
+                            </label>
+
+                            <div class="col-md-4">
+                                <select
+                                    class="
+                                        custom-select
+                                        form-control form-control-alternative
+                                    "
+                                    name="product_sub_category"
+                                    id="product_sub_category"
+                                    v-model="form.product_sub_category"
+                                >
+                                    <option value="" disabled selected hidden>
+                                        Select Sub-Category
+                                    </option>
+                                    <option
+                                        v-for="sub_category in sub_categories"
+                                        :value="sub_category.id"
+                                    >
+                                        {{ sub_category.name }}
+                                    </option>
+                                </select>
+                                <HasError
+                                    :form="form"
+                                    field="product_sub_category"
+                                />
                             </div>
                         </div>
                         <div class="form-group row">
@@ -1403,6 +1439,7 @@ export default {
         occasionMode: false,
         recipientMode: false,
         categories: [],
+        sub_categories: [],
         occasions: [],
         recipients: [],
         sellers: [],
@@ -1442,6 +1479,7 @@ export default {
             //pivot table arrays
             product_occasion: [],
             product_recipient: [],
+            product_sub_category: [],
 
             //variation fields
             productVariation: [
@@ -1606,6 +1644,17 @@ export default {
                     this.categories = response.data.categories;
                     this.occasions = response.data.occasions;
                     this.recipients = response.data.recipients;
+                })
+                .catch((error) => console.log(error));
+        },
+
+        loadSubcategories(event) {
+            axios
+                .get(
+                    "/api/admin/products/sub_categories/" + event.target.value
+                )
+                .then((response) => {
+                    this.sub_categories = response.data.sub_categories;
                 })
                 .catch((error) => console.log(error));
         },

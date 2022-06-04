@@ -9,6 +9,7 @@ use App\Models\Occasion;
 use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\Recipient;
+use App\Models\SubCategory;
 use App\Models\Variation;
 use App\Models\VariationOption;
 use Carbon\Carbon;
@@ -29,7 +30,7 @@ class ProductController extends Controller
     {
         ///$this->authorize('viewAny', Product::class);
 
-        return Product::with(['product_image', 'user.shop', 'category:id,name'])->latest()->filter(request(['searchText']))->paginate(25);
+        return Product::with(['product_image', 'user.shop', 'category:id,name', 'sub_categories'])->latest()->filter(request(['searchText']))->paginate(25);
     }
 
     public function store(ProductRequest $request)
@@ -54,6 +55,7 @@ class ProductController extends Controller
         //sync to pivot tables
         $product->occasions()->sync(request('product_occasion'));
         $product->recipients()->sync(request('product_recipient'));
+        $product->sub_categories()->sync(request('product_sub_category'));
 
         //product variation
         $this->storeVariation($request, $product->id, $userId, $productStateId);
@@ -151,7 +153,7 @@ class ProductController extends Controller
     public function show($id)
     {
         ///$this->authorize('view', $product);
-        return Product::with(['occasions', 'recipients'])->findOrFail($id);
+        return Product::with(['occasions', 'recipients', 'sub_categories'])->findOrFail($id);
     }
 
     public function update(ProductRequest $request, Product $product)
@@ -166,6 +168,7 @@ class ProductController extends Controller
         $product->update($request->all());
         $product->occasions()->sync(request('product_occasion'));
         $product->recipients()->sync(request('product_recipient'));
+        $product->sub_categories()->sync(request('product_sub_category'));
     }
 
     public function updateState(Request $request, Product $product)
@@ -224,6 +227,16 @@ class ProductController extends Controller
             'categories' => Category::select('id', 'name')->latest()->get(),
             'occasions' => Occasion::select('id', 'name')->latest()->get(),
             'recipients' => Recipient::select('id', 'name')->latest()->get(),
+        ]);
+    }
+
+    /**
+     * Get data from other tables, that are needed during product listing
+     */
+    public function getSubcategories($categoryId)
+    {
+        return response()->json([
+            'sub_categories' => SubCategory::where('category_id', $categoryId)->get(),
         ]);
     }
 }

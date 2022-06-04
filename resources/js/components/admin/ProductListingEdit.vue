@@ -134,6 +134,7 @@
                                     name="category_id"
                                     id="category_id"
                                     v-model="form.category_id"
+                                    @change.prevent="loadSubcategories($event)"
                                 >
                                     <option value="" disabled selected hidden>
                                         Select Category
@@ -146,6 +147,41 @@
                                     </option>
                                 </select>
                                 <HasError :form="form" field="category_id" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label
+                                class="col-md-3 col-form-label"
+                                for="product_sub_category"
+                            >
+                                Sub-Category
+                                <strong class="text-danger"> *</strong>
+                            </label>
+
+                            <div class="col-md-4">
+                                <select
+                                    class="
+                                        custom-select
+                                        form-control form-control-alternative
+                                    "
+                                    name="product_sub_category"
+                                    id="product_sub_category"
+                                    v-model="form.product_sub_category[0]"
+                                >
+                                    <option value="" disabled selected hidden>
+                                        Select Sub-Category
+                                    </option>
+                                    <option
+                                        v-for="sub_category in sub_categories"
+                                        :value="sub_category.id"
+                                    >
+                                        {{ sub_category.name }}
+                                    </option>
+                                </select>
+                                <HasError
+                                    :form="form"
+                                    field="product_sub_category"
+                                />
                             </div>
                         </div>
                         <div class="form-group row">
@@ -1876,6 +1912,7 @@ export default {
         productStates: [],
         sellers: [],
         categories: [],
+        sub_categories: [],
         occasions: [],
         recipients: [],
         product: "",
@@ -1916,6 +1953,8 @@ export default {
             recipients: [],
             product_occasion: [],
             product_recipient: [],
+            product_sub_category: [],
+            sub_categories: [],
 
             //new image
             image_path_new: [],
@@ -2011,27 +2050,6 @@ export default {
         emptyVariationSlot() {
             return 3 - this.form.variation_id.length;
         },
-        // emptyOptionSlot() {
-        //     let emptyOptionSlotArray = [];
-
-        //     for (let i = 0; i < this.form.variation_id.length; i++) {
-        //         let count = 0;
-        //         for (let j = 0; j < this.form.option_variation_id.length; j++) {
-        //             if (
-        //                 this.form.variation_id[i] ==
-        //                 this.form.option_variation_id[j]
-        //             ) {
-        //                 count = count + 1;
-        //             }
-        //         }
-        //         emptyOptionSlotArray.push([
-        //             this.form.variation_id[i],
-        //             3 - count,
-        //         ]);
-        //     }
-
-        //     return emptyOptionSlotArray;
-        // },
     },
 
     methods: {
@@ -2252,6 +2270,27 @@ export default {
             this.emptyImageSlot = 6 - this.images.length;
         },
 
+        loadSubcategories(event) {
+            axios
+                .get("/api/admin/products/sub_categories/" + event.target.value)
+                .then((response) => {
+                    this.sub_categories = response.data.sub_categories;
+                })
+                .catch((error) => console.log(error));
+        },
+
+        loadCurrentSubcategories() {
+            axios
+                .get(
+                    "/api/admin/products/sub_categories/" +
+                        this.form.category_id
+                )
+                .then((response) => {
+                    this.sub_categories = response.data.sub_categories;
+                })
+                .catch((error) => console.log(error));
+        },
+
         loadDetails() {
             axios
                 .get("/api/admin/products/details")
@@ -2276,10 +2315,17 @@ export default {
                     this.occasionName.push(value.name);
                 });
             }
+
             if (this.form.recipients != null) {
                 this.form.recipients.forEach((value) => {
                     this.form.product_recipient.push(value.id);
                     this.recipientName.push(value.name);
+                });
+            }
+
+            if (this.form.sub_categories != null) {
+                this.form.sub_categories.forEach((value) => {
+                    this.form.product_sub_category.push(value.id);
                 });
             }
         },
@@ -2389,6 +2435,7 @@ export default {
                     this.loadProductImages();
                     this.resetVariations();
                     this.loadProductVariations();
+                    this.loadCurrentSubcategories();
                     this.loading = false;
                 })
                 .catch((error) => console.log(error));

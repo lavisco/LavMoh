@@ -74,6 +74,7 @@
                                     name="category_id"
                                     id="category_id"
                                     v-model="form.category_id"
+                                    @change.prevent="loadSubcategories($event)"
                                 >
                                     <option value="" disabled selected hidden>
                                         Select Category

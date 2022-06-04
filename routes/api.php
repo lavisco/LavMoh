@@ -114,6 +114,7 @@ Route::prefix('admin')->group(function () {
     Route::put('/products/storeNewImage/{productId}', [ProductController::class, 'storeNewImage']);
     Route::put('/products/updateState/{product}', [ProductController::class, 'updateState']);
     Route::get('/products/details', [ProductController::class, 'getDetails']);
+    Route::get('/products/sub_categories/{categoryId}', [ProductController::class, 'getSubcategories']);
     Route::apiResource('/products', ProductController::class);
     Route::apiResource('/product_images', ProductImageController::class);
     Route::apiResource('/product_variations', ProductVariationController::class);

@@ -63,6 +63,29 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label class="col-md-3 col-form-label" for="slug">
+                                Slug
+                                <strong class="text-danger"> *</strong>
+                                <p class="text-grey text-xs mt-2">
+                                    Only edit if there's no slug
+                                </p>
+                            </label>
+
+                            <div class="col-md-9">
+                                <input
+                                    id="slug"
+                                    v-model="form.slug"
+                                    type="text"
+                                    name="slug"
+                                    class="
+                                        form-control form-control-alternative
+                                    "
+                                    placeholder="slug"
+                                />
+                                <HasError :form="form" field="slug" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label class="col-md-3 col-form-label" for="user_id"
                                 >Seller & Product State
                                 <strong class="text-danger"> *</strong>
@@ -1929,6 +1952,7 @@ export default {
             id: "",
             sku: "",
             title: "",
+            slug: "",
             short_description: "",
             description: "",
             material: "",

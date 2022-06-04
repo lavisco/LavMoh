@@ -17,7 +17,7 @@ class SubCategoryController extends Controller
 
     public function index()
     {
-        return SubCategory::latest()->filter(request(['searchText']))->paginate(25);
+        return SubCategory::with('category')->latest()->filter(request(['searchText']))->paginate(25);
     }
 
     public function store(SubCategoryRequest $request)

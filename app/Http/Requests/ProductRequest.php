@@ -50,6 +50,7 @@ class ProductRequest extends FormRequest
             'quantity' => 'integer|required',
             'rating' => 'integer|nullable',
             'category_id' => 'required|sometimes',
+            'product_sub_category' => 'required',
 
             //variations
             'productVariation.*.variation_description' => 'max:100|nullable',

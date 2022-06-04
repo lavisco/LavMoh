@@ -58,23 +58,29 @@ class Product extends Model
     {
         return $this->belongsTo(ProductState::class);
     }
+    
+    //products:occasions M:M
+    public function occasions()
+    {
+        return $this->belongsToMany(Occasion::class)->withTimestamps();
+    }    
 
     //products:recipients M:M
     public function recipients()
     {
         return $this->belongsToMany(Recipient::class)->withTimestamps();
     }
-    
-    //products:occasions M:M
-    public function occasions()
-    {
-        return $this->belongsToMany(Occasion::class)->withTimestamps();
-    }
 
     //products:shippings M:M
     public function shippings()
     {
         return $this->belongsToMany(Shipping::class)->withTimestamps();
+    }
+
+    //products:sub_categories M:M
+    public function sub_categories()
+    {
+        return $this->belongsToMany(SubCategory::class)->withTimestamps();
     }
 
     //product_images:product M:1

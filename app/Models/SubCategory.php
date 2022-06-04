@@ -27,6 +27,18 @@ class SubCategory extends Model
         return $this->belongsTo(Category::class);
     }
 
+    //products:sub_categories M:M
+    public function products()
+    {
+        return $this->belongsToMany(Product::class)->withTimestamps();
+    }
+
+    //get only 3 products using \Staudenmeir\EloquentEagerLimit\HasEagerLimit package
+    public function latestProducts()
+    {
+        return $this->products()->with('product_image')->limit(3);
+    }
+
     public function scopeFilter($query, array $filters)
     {
         $query->when($filters['searchText'] ?? false, fn($query, $searchText) =>

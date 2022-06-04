@@ -165,6 +165,7 @@ Route::prefix('seller')->group(function () {
     Route::apiResource('/orders', SellerOrderController::class);
     Route::apiResource('/order_states', SellerOrderStateController::class);
     Route::get('/products/details', [SellerProductController::class, 'getDetails']);
+    Route::get('/products/sub_categories/{categoryId}', [SellerProductController::class, 'getSubcategories']);
     //store new image for existing product
     Route::put('/products/storeNewImage/{productId}', [SellerProductController::class, 'storeNewImage']);
     Route::put('/products/updateState/{product}', [SellerProductController::class, 'updateState']);

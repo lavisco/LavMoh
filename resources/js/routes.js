@@ -218,6 +218,13 @@ export let routes = [
         },
     },
     {
+        path: "/admin/subcategories",
+        component: require("./components/admin/SubCategory.vue").default,
+        meta: {
+            title: "Sub Categories",
+        },
+    },
+    {
         path: "/admin/transactions",
         component: require("./components/admin/Transaction.vue").default,
         meta: {

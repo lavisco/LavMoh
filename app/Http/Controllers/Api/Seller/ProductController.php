@@ -12,6 +12,7 @@ use App\Models\ProductImage;
 use App\Models\ProductVariation;
 use App\Models\Recipient;
 use App\Models\Shipping;
+use App\Models\SubCategory;
 use App\Models\Variation;
 use App\Models\VariationOption;
 use Carbon\Carbon;
@@ -30,7 +31,7 @@ class ProductController extends Controller
     public function index()
     {
         ///$this->authorize('viewAny', Product::class);
-        return Product::where('user_id', auth()->id())->with(['product_images', 'product_image', 'product_variations', 'variations', 'variations.variation_options', 'category'])->latest()->filter(request(['searchText']))->paginate(25);
+        return Product::where('user_id', auth()->id())->with(['product_images', 'product_image', 'product_variations', 'variations', 'variations.variation_options', 'category', 'sub_categories'])->latest()->filter(request(['searchText']))->paginate(25);
     }
 
     public function store(ProductRequest $request)
@@ -55,6 +56,7 @@ class ProductController extends Controller
         $product->occasions()->sync(request('product_occasion'));
         $product->recipients()->sync(request('product_recipient'));
         $product->shippings()->sync(request('product_shipping'));
+        $product->sub_categories()->sync(request('product_sub_category'));
 
         //product variation
         $this->storeVariation($request, $product->id);
@@ -152,7 +154,7 @@ class ProductController extends Controller
     public function show($id)
     {
         ///$this->authorize('view', $product);
-        return Product::with(['occasions', 'recipients', 'shippings'])->findOrFail($id);
+        return Product::with(['occasions', 'recipients', 'shippings', 'sub_categories'])->findOrFail($id);
     }
 
     public function update(ProductUpdateRequest $request, Product $product)
@@ -168,6 +170,7 @@ class ProductController extends Controller
         $product->occasions()->sync(request('product_occasion'));
         $product->recipients()->sync(request('product_recipient'));
         $product->shippings()->sync(request('product_shipping'));
+        $product->sub_categories()->sync(request('product_sub_category'));
     }
 
     public function updateState(Request $request, Product $product)
@@ -221,6 +224,16 @@ class ProductController extends Controller
             'occasions' => Occasion::select('id', 'name')->latest()->get(),
             'recipients' => Recipient::select('id', 'name')->latest()->get(),
             'shippings' => Shipping::latest()->get(),
+        ]);
+    }
+
+    /**
+     * Get data from other tables, that are needed during product listing
+     */
+    public function getSubcategories($categoryId)
+    {
+        return response()->json([
+            'sub_categories' => SubCategory::where('category_id', $categoryId)->get(),
         ]);
     }
 }

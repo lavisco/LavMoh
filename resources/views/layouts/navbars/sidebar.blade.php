@@ -236,6 +236,14 @@
                             </li>
                             <li class="nav-item">
                                 <router-link
+                                    to="/admin/subcategories"
+                                    class="nav-link"
+                                >
+                                    Sub-Categories
+                                </router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link
                                     to="/admin/occasions"
                                     class="nav-link"
                                 >

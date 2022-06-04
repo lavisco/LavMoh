@@ -423,6 +423,18 @@
                                     {{ form.category.name }}
                                 </div>
                             </div>
+                            <div class="row mb-3">
+                                <div class="col-md-3 modal-label">
+                                    Sub-Category
+                                </div>
+                                <div class="col-md-9">
+                                    {{
+                                        form.sub_categories[0]
+                                            ? form.sub_categories[0].name
+                                            : ""
+                                    }}
+                                </div>
+                            </div>
                             <div class="row mb-3" v-show="form.sku">
                                 <div class="col-md-3 modal-label">SKU</div>
                                 <div class="col-md-9">
@@ -606,6 +618,7 @@ export default {
             product_state_id: "",
             category_id: "",
             category: "",
+            sub_categories: [],
             product_image: null,
             product_images: null,
             product_variations: null,

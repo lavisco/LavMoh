@@ -3,13 +3,11 @@ import VueRouter from "vue-router";
 import { routes } from "./routes";
 import store from "./store/index.js";
 
-// $.ajaxSetup({
-//     headers: {
-//         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-//     },
-// });
-
 window.Vue = require("vue").default;
+
+/*
+Vue Router
+*/
 
 Vue.use(VueRouter);
 
@@ -28,20 +26,12 @@ router.beforeEach((to, from, next) => {
     next();
 });
 
-//Vue Components
+/*
+Vue Components
+*/
 
-Vue.component(
-    "navbar-component",
-    require("./components/website/NavbarComponent.vue").default
-);
-Vue.component(
-    "footer-component",
-    require("./components/website/FooterComponent.vue").default
-);
-Vue.component(
-    "topnav-component",
-    require("./components/website/TopNav.vue").default
-);
+//admin
+
 Vue.component(
     "dashboard-cards",
     require("./components/admin/DashboardCards.vue").default
@@ -50,34 +40,57 @@ Vue.component(
     "table-header",
     require("./components/admin/TableHeader.vue").default
 );
+
+//website
+
+Vue.component(
+    "menu-cart",
+    require("./components/website/parts/CartSmall.vue").default
+);
+
 Vue.component(
     "index-component",
     require("./components/website/Index.vue").default
 );
+
 Vue.component(
-    "menu-cart",
-    require("./components/website/CartSmall.vue").default
+    "fail-modal",
+    require("./components/website/parts/FailModal.vue").default
+);
+
+Vue.component(
+    "fail-toast",
+    require("./components/website/parts/FailToast.vue").default
+);
+
+Vue.component(
+    "footer-component",
+    require("./components/website/parts/FooterComponent.vue").default
+);
+
+Vue.component(
+    "navbar-component",
+    require("./components/website/parts/NavbarComponent.vue").default
+);
+
+Vue.component(
+    "searchbar",
+    require("./components/website/parts/SearchBar.vue").default
 );
 
 Vue.component(
     "success-modal",
-    require("./components/website/SuccessModal.vue").default
+    require("./components/website/parts/SuccessModal.vue").default
 );
-Vue.component(
-    "fail-modal",
-    require("./components/website/FailModal.vue").default
-);
+
 Vue.component(
     "success-toast",
-    require("./components/website/SuccessToast.vue").default
+    require("./components/website/parts/SuccessToast.vue").default
 );
+
 Vue.component(
-    "fail-toast",
-    require("./components/website/FailToast.vue").default
-);
-Vue.component(
-    "searchbar",
-    require("./components/website/SearchBar.vue").default
+    "topnav-component",
+    require("./components/website/parts/TopNav.vue").default
 );
 
 //Fire is a new instance of vue which will be used as a bus

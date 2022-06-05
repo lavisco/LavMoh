@@ -11490,16 +11490,30 @@ section h1 {
 }
 
 .sort-section {
-  padding-top: 15px;
-  padding-bottom: 15px;
-  border-bottom: 1px solid #ededed;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: #fafafa;
+  border-radius: 12px;
+  padding: 8px 20px;
+  margin-top: 10px;
+}
+.sort-section .filter-select label {
+  font-size: 14px;
+  font-weight: 400;
+  margin-right: 5px;
 }
 .sort-section .custom-select {
-  width: 250px;
-  align-self: flex-end;
+  background-color: transparent;
+  cursor: pointer;
+  width: 200px;
+  border: none;
+  padding: 6px 12px;
+}
+.sort-section .custom-select:focus {
+  background-color: #ffffff;
+  box-shadow: 0 0 0 0.02rem #976aff;
+  border: none;
 }
 
 /*---------------------section-best-seller---------------------*/

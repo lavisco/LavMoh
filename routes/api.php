@@ -218,6 +218,7 @@ Route::get('/search/{searchText}', [WebsiteHomeController::class, 'searchSuggest
 Route::get('/search', [WebsiteHomeController::class, 'searchIndex']);
 //pages
 Route::get('/categories/products/{id}/{location}', [WebsiteCategoryController::class, 'getLocationWiseProducts']);
+Route::get('/categories/sub_category/{id}', [WebsiteCategoryController::class, 'filterSubCategory']);
 Route::apiResource('/categories', WebsiteCategoryController::class);
 Route::post('/contact', [ContactController::class, 'store']);
 Route::get('/currencies', [WebsiteCurrencyController::class, 'index']);

@@ -132,4 +132,13 @@ class Product extends Model
                 ->where('sku', 'like', '%' . $searchText . '%')
                 ->orWhere('title', 'like', '%' . $searchText . '%'));
     }
+    
+    public function scopeSort($query, array $filters)
+    {
+        //latest(request('sortValue'))
+        $query->when($filters['sortValue'] ?? false, fn($query, $sortValue) =>
+            $query
+                ->latest($sortValue)
+            );
+    }
 }

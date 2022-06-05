@@ -13,18 +13,41 @@
         </div>
 
         <div class="sort-section">
-            <select
-                class="custom-select form-control form-control-alternative"
-                id="filter"
-                name="filter"
-                @change.prevent="loadData()"
-                v-model="sortValue"
-            >
-                <option value="" disabled selected hidden>Sort by</option>
-                <option value="base_price_low">Price low to high</option>
-                <option value="base_price">Price high to low</option>
-                <option value="created_at">Latest</option>
-            </select>
+            <div class="filter-select">
+                <label>Filter by</label>
+                <select
+                    class="custom-select form-control form-control-alternative"
+                    id="filter"
+                    name="filter"
+                    @change.prevent="loadSubCategory()"
+                    v-model="subCategoryValue"
+                >
+                    <option value="" disabled selected hidden>
+                        Sub-category
+                    </option>
+                    <option
+                        v-for="sub_category in sub_categories"
+                        :value="sub_category.id"
+                    >
+                        {{ sub_category.name }}
+                    </option>
+                </select>
+            </div>
+            <div class="filter-select">
+                <label>Sort by</label>
+                <select
+                    class="custom-select form-control form-control-alternative"
+                    id="filter"
+                    name="filter"
+                    @change.prevent="filterData()"
+                    v-model="sortValue"
+                >
+                    <option value="" disabled selected hidden>Sort by</option>
+                    <option value="base_price_low">Price low to high</option>
+                    <option value="base_price">Price high to low</option>
+                    <option value="created_at">Latest</option>
+                </select>
+            </div>
         </div>
 
         <section class="section-best-seller mb-5 mt-4">
@@ -69,7 +92,8 @@
                             </router-link>
                         </div>
                         <div class="card-price">
-                            {{ currency.symbol }} {{ product.base_price*currency.exchange_rate }}
+                            {{ currency.symbol }}
+                            {{ product.base_price * currency.exchange_rate }}
                         </div>
                         <div class="card-secondary-text">
                             {{ product.user.shop.name }}
@@ -200,6 +224,7 @@
 export default {
     data: () => ({
         category: [],
+        sub_categories: [],
         products: [],
         searchText: null,
         loading: true,
@@ -211,6 +236,7 @@ export default {
         districtMode: false,
         cityMode: false,
         sortValue: "created_at",
+        subCategoryValue: "",
     }),
 
     beforeRouteEnter: function (to, from, next) {
@@ -247,10 +273,18 @@ export default {
     methods: {
         setData(response) {
             this.category = response.data.category;
+            this.sub_categories = response.data.sub_categories;
             this.products = response.data.products.data;
             this.loadDistricts();
             this.loading = false;
         },
+
+        filterData() {
+            this.subCategoryValue == ""
+                ? this.loadData()
+                : this.loadSubCategory();
+        },
+
         loadData() {
             axios
                 .get("/api/categories/" + this.$route.params.categoryId, {
@@ -258,6 +292,24 @@ export default {
                 })
                 .then((response) => {
                     this.category = response.data.category;
+                    this.products = response.data.products.data;
+                })
+                .catch((error) => console.log(error));
+        },
+
+        loadSubCategory() {
+            axios
+                .get(
+                    "/api/categories/sub_category/" +
+                        this.$route.params.categoryId,
+                    {
+                        params: {
+                            sortValue: this.sortValue,
+                            subCategoryValue: this.subCategoryValue,
+                        },
+                    }
+                )
+                .then((response) => {
                     this.products = response.data.products.data;
                 })
                 .catch((error) => console.log(error));

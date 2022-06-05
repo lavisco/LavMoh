@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Website;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -29,6 +30,7 @@ class CategoryController extends Controller
     public function show($categoryId)
     {
         $category = Category::findOrFail($categoryId);
+
         $sortParameter = request('sortValue');
 
         $query = Product::where('category_id', $categoryId)->where('product_state_id', '1')->with(['category:id,name', 'user.shop', 'product_image']);
@@ -36,6 +38,20 @@ class CategoryController extends Controller
         return response()->json([
             'products' => $sortParameter == 'base_price_low' ? $query->oldest('base_price')->paginate(25) : $query->latest(request('sortValue'))->paginate(25),
             'category' => $category,
+            'sub_categories' => SubCategory::where('category_id', $categoryId)->get(),
+        ]);
+    }
+
+    public function filterSubCategory($categoryId)
+    {
+        $subCategory = SubCategory::findOrFail(request('subCategoryValue'));
+
+        $sortParameter = request('sortValue');
+
+        $query = $subCategory->products()->where('category_id', $categoryId)->where('product_state_id', '1')->with(['category:id,name', 'user.shop', 'product_image']);
+
+        return response()->json([
+            'products' => $sortParameter == 'base_price_low' ? $query->oldest('base_price')->paginate(25) : $query->latest(request('sortValue'))->paginate(25),
         ]);
     }
 

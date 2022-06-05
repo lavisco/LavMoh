@@ -4,7 +4,17 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Home</a></li>
                 <li class="breadcrumb-item">
-                    <router-link to="/products"> Products </router-link>
+                    <router-link
+                        :to="{
+                            name: 'categories/category',
+                            params: {
+                                categoryId: product.category.id,
+                                slug: product.category.slug,
+                            },
+                        }"
+                    >
+                        {{ product.category.name }}
+                    </router-link>
                 </li>
             </ol>
         </nav>
@@ -113,7 +123,7 @@
                     </div>
 
                     <!-- price -->
-                    <div class="mt-4">
+                    <div class="mt-3">
                         <h3 class="price">
                             {{ currency.symbol }}
                             {{

@@ -607,11 +607,11 @@ button.bg-black:hover {
     }
 }
 
-.nav-link-currency + .active{
+.nav-link-currency + .active {
     color: $lav-pink;
 }
 
-.currency-icon{
+.currency-icon {
     width: 34px;
     height: 34px;
     border-radius: 50%;
@@ -625,7 +625,7 @@ button.bg-black:hover {
     border: 2px dotted #e3e3e3;
     line-height: 0;
 
-    &:hover{
+    &:hover {
         color: $lav-purple;
         border-color: #d1bdff;
     }
@@ -1440,16 +1440,34 @@ section {
 }
 
 .sort-section {
-    padding-top: 15px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid #ededed;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: #fafafa;
+    border-radius: 12px;
+    padding: 8px 20px;
+    margin-top: 10px;
 
-    .custom-select{
-        width: 250px;
-        align-self: flex-end;
+    .filter-select {
+        label {
+            font-size: 14px;
+            font-weight: 400;
+            margin-right: 5px;
+        }
+    }
+
+    .custom-select {
+        background-color: transparent;
+        cursor: pointer;
+        width: 200px;
+        border: none;
+        padding: 6px 12px;
+
+        &:focus {
+            background-color: $white;
+            box-shadow: 0 0 0 0.02rem $lav-purple;
+            border: none;
+        }
     }
 }
 

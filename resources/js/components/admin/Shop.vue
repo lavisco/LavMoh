@@ -779,13 +779,13 @@ export default {
             this.editMode = true;
             this.form.clear();
             this.form.reset();
+            this.form.fill(shop);
             this.loadSellers();
             this.loadCountries();
             this.loadProvinces();
             this.loadDistricts();
             this.loadCities();
             $("#addRecord").modal("show");
-            this.form.fill(shop);
         },
 
         loadShops() {
@@ -816,16 +816,18 @@ export default {
 
         loadProvinces() {
             axios
-                .get("/api/locations/provinces/" + this.form.country)
+                .get("/api/locations/provinces")
                 .then(({ data }) => (this.provinces = data))
                 .catch((error) => console.log(error));
         },
+
         loadDistricts() {
             axios
                 .get("/api/locations/districts/" + this.form.province)
                 .then(({ data }) => (this.districts = data))
                 .catch((error) => console.log(error));
         },
+
         loadCities() {
             axios
                 .get("/api/locations/cities/" + this.form.district)

@@ -767,13 +767,13 @@ export default {
             this.editMode = true;
             this.form.clear();
             this.form.reset();
+            this.form.fill(sellerprofile);
             this.loadSellers();
             this.loadCountries();
             this.loadProvinces();
             this.loadDistricts();
             this.loadCities();
             $("#addRecord").modal("show");
-            this.form.fill(sellerprofile);
         },
 
         loadSellerprofiles() {
@@ -804,7 +804,7 @@ export default {
 
         loadProvinces() {
             axios
-                .get("/api/locations/provinces/" + this.form.country)
+                .get("/api/locations/provinces")
                 .then(({ data }) => (this.provinces = data))
                 .catch((error) => console.log(error));
         },

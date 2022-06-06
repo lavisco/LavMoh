@@ -10689,6 +10689,13 @@ button.bg-black:hover {
   color: #976aff;
   border-color: #d1bdff;
 }
+@media (max-width: 400px) {
+  .currency-icon {
+    width: 27px;
+    height: 27px;
+    font-size: 12px;
+  }
+}
 
 .nav-link-account {
   border: none !important;
@@ -10722,6 +10729,12 @@ button.bg-black:hover {
   }
   .nav-link-account .nav-link-account-text {
     display: none !important;
+  }
+}
+@media (max-width: 400px) {
+  .nav-link-account svg {
+    width: 25px;
+    height: 25px;
   }
 }
 
@@ -10882,6 +10895,12 @@ button.bg-black:hover {
 .navbar-main-menu-mobile .nav-link {
   height: 50px;
   padding: 8px 7px !important;
+}
+@media (max-width: 400px) {
+  .navbar-main-menu-mobile .nav-link {
+    height: 46px;
+    padding: 8px 5px !important;
+  }
 }
 
 .vertical-divider {
@@ -11498,6 +11517,16 @@ section h1 {
   padding: 8px 20px;
   margin-top: 10px;
 }
+@media (max-width: 640px) {
+  .sort-section {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .sort-section .filter-select label {
+    font-size: 12px !important;
+    width: 48px;
+  }
+}
 .sort-section .filter-select label {
   font-size: 14px;
   font-weight: 400;
@@ -12008,14 +12037,38 @@ footer {
     background-color: #c9c9c9 !important;
   }
 }
+@media (max-width: 400px) {
+  .home-search-input {
+    height: 46px;
+  }
+  .home-search-input input[type=text] {
+    padding: 10px 12px !important;
+    font-size: 14px;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+  }
+  .home-search-input .btn {
+    border-radius: 10px !important;
+    width: 40px !important;
+    height: 40px !important;
+  }
+  .home-search-input .btn svg {
+    width: 25px;
+    height: 25px;
+  }
+}
 .home-search-input input[type=text] {
   border: none;
   box-shadow: none;
-  padding: 6px 18px !important;
+  padding: 6px 18px;
   height: auto !important;
   border-radius: 12px;
   resize: none;
-  background-color: #ffffff;
+  background-color: transparent;
+}
+.home-search-input input[type=text]:focus {
+  background-color: transparent;
 }
 .home-search-input:focus {
   border: 1px solid #836aff9f;
@@ -13577,4 +13630,123 @@ footer {
 
 .vertical-scroll::-webkit-scrollbar-thumb:hover {
   background: #3d2e50;
+}
+
+/*-------------------------Product slider---------------------------------*/
+.slider-container {
+  width: 100%;
+  height: 630px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 15px;
+}
+.slider-container .thumbnail-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.slider-container .thumbnail-container .thumbnail {
+  width: 80px;
+  height: 80px;
+  background-color: #e5cdec;
+  border-radius: 7px;
+  cursor: pointer;
+}
+.slider-container .thumbnail-container .thumbnail img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 7px;
+}
+.slider-container .img-container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+.slider-container .img-container .img-slide {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+.slider-container .img-container .img-slide img {
+  border-radius: 12px;
+  max-width: 100%;
+  max-height: 100%;
+}
+.slider-container .slider-arrows {
+  width: 15px;
+  height: 15px;
+  background: #333333;
+  opacity: 0.6;
+}
+.slider-container .slider-arrows-active {
+  background: #ff5a7c !important;
+  opacity: 1;
+}
+@media (max-width: 992px) {
+  .slider-container {
+    flex-direction: column;
+    align-items: center;
+    height: 500px;
+  }
+  .slider-container .img-container {
+    order: 1;
+  }
+  .slider-container .thumbnail-container {
+    height: auto;
+    width: 100%;
+    flex-direction: row;
+    order: 2;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+  }
+  .slider-container .thumbnail-container .thumbnail {
+    width: 50px;
+    height: 50px;
+  }
+}
+@media (max-width: 768px) {
+  .slider-container {
+    height: 470px;
+  }
+}
+@media (max-width: 481px) {
+  .slider-container {
+    height: 390px;
+  }
+}
+@media (max-width: 400px) {
+  .slider-container {
+    height: 350px;
+  }
+}
+@media (max-width: 320px) {
+  .slider-container {
+    height: 320px;
+  }
+}
+
+/*---------------------Vue Transition animation----------------------------*/
+/*
+    product image slider - transition-group - named slide-fade
+*/
+.slide-fade-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.4s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
 }

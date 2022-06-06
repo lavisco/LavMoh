@@ -56,7 +56,7 @@
                         hide-content
                         order-1
                         navbar-main-menu navbar-main-menu-mobile
-                        mr-3
+                        mr-2 mr-sm-3
                     "
                 >
                     <div class="dropdown show">
@@ -190,7 +190,7 @@
                         data-toggle="dropdown"
                         aria-haspopup="true"
                         aria-expanded="false"
-                        class="nav-link nav-link-account mr-3"
+                        class="nav-link nav-link-account mr-2 mr-sm-3"
                     >
                         <div class="currency-icon">
                             {{ currencyActive.symbol }}
@@ -216,7 +216,7 @@
                         </div>
                     </div>
                 </div>
-                <router-link class="nav-link nav-link-account mr-3" to="/login">
+                <router-link class="nav-link nav-link-account mr-2 mr-sm-3" to="/login">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         aria-hidden="true"

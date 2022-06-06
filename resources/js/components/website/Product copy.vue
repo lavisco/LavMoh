@@ -4,7 +4,17 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Home</a></li>
                 <li class="breadcrumb-item">
-                    <router-link to="/products"> Products </router-link>
+                    <router-link
+                        :to="{
+                            name: 'categories/category',
+                            params: {
+                                categoryId: product.category.id,
+                                slug: product.category.slug,
+                            },
+                        }"
+                    >
+                        {{ product.category.name }}
+                    </router-link>
                 </li>
             </ol>
         </nav>
@@ -18,35 +28,66 @@
             <div class="row">
                 <div class="col-md-7">
                     <!-- Swiper -->
-                    <div class="slider-container">
-                        <div class="thumbnail-container">
-                            <div
-                                class="thumbnail"
-                                v-for="(
-                                    product_image, index
-                                ) in product.product_images"
+                    <div class="thumb-example">
+                        <!-- swiper1 -->
+                        <swiper
+                            class="swiper gallery-top product-swiper"
+                            :options="swiperOptionTop"
+                            ref="swiperTop"
+                        >
+                            <swiper-slide
+                                class="slide-1"
+                                v-for="product_image in product.product_images"
                                 :key="product_image.id"
-                                @click.prevent="setSliderImg(index)"
+                                ><img :src="product_image.path"
+                            /></swiper-slide>
+                            <div class="swiper-button-prev" slot="button-prev">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    aria-hidden="true"
+                                    role="img"
+                                    width="24"
+                                    height="24"
+                                    preserveAspectRatio="xMidYMid meet"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        fill="#666"
+                                        d="M12 2c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12S6.48 2 12 2zm0 9V8l-4 4l4 4v-3h4v-2h-4z"
+                                    />
+                                </svg>
+                            </div>
+                            <div class="swiper-button-next" slot="button-next">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    aria-hidden="true"
+                                    role="img"
+                                    width="24"
+                                    height="24"
+                                    preserveAspectRatio="xMidYMid meet"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        fill="#666"
+                                        d="M12 2c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12S6.48 2 12 2zm0 9H8v2h4v3l4-4l-4-4v3z"
+                                    />
+                                </svg>
+                            </div>
+                        </swiper>
+                        <!-- swiper2 Thumbs -->
+                        <swiper
+                            class="swiper gallery-thumbs"
+                            :options="swiperOptionThumbs"
+                            ref="swiperThumbs"
+                        >
+                            <swiper-slide
+                                class="slide-1"
+                                v-for="product_image in product.product_images"
+                                :key="product_image.id"
                             >
                                 <img :src="product_image.path" />
-                            </div>
-                        </div>
-                        <transition-group
-                            tag="div"
-                            class="img-container"
-                            name="slide-fade"
-                        >
-                            <div v-for="number in [currentImg]" :key="number" class="img-slide">
-                                <img
-                                    :src="
-                                        sliderImgList[
-                                            Math.abs(currentImg) %
-                                                sliderImgList.length
-                                        ]
-                                    "
-                                />
-                            </div>
-                        </transition-group>
+                            </swiper-slide>
+                        </swiper>
                     </div>
                     <!-- Swiper end -->
                 </div>
@@ -126,7 +167,7 @@
                             </h6>
 
                             <select
-                                class="custom-select col-lg-8"
+                                class="custom-select col-md-8"
                                 :class="{
                                     'border-warning': formErrors != null,
                                 }"
@@ -192,7 +233,7 @@
                             name="custom_text"
                             class="
                                 form-control form-control-alternative
-                                col-lg-8
+                                col-md-8
                             "
                             placeholder="Custom message"
                             maxlength="25"
@@ -430,28 +471,42 @@
 </template>
 
 <script>
-//import { Swiper, SwiperSlide, directive } from "vue-awesome-swiper";
+import { Swiper, SwiperSlide, directive } from "vue-awesome-swiper";
 //import Form from "vform";
 //import { HasError, AlertError } from "vform/src/components/bootstrap4";
 
-//import "swiper/css/swiper.css";
+import "swiper/css/swiper.css";
 
 export default {
-    // components: {
-    //     Swiper,
-    //     SwiperSlide,
-    // },
-    // directives: {
-    //     swiper: directive,
-    // },
+    components: {
+        Swiper,
+        SwiperSlide,
+    },
+    directives: {
+        swiper: directive,
+    },
 
     data: () => ({
         product: [],
         loading: true,
-        imgPath: "",
-        sliderImgList: [],
-        currentImg: 0,
-        show: true,
+        swiperOptionTop: {
+            //loop: true,
+            loopedSlides: 3, // looped slides should be the same
+            spaceBetween: 10,
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+        },
+        swiperOptionThumbs: {
+            //loop: true,
+            loopedSlides: 3, // looped slides should be the same
+            spaceBetween: 10,
+            centeredSlides: true,
+            slidesPerView: "auto",
+            touchRatio: 0.2,
+            slideToClickedSlide: true,
+        },
         form: {
             id: "",
             custom_text: "",
@@ -515,10 +570,6 @@ export default {
     },
 
     methods: {
-        setSliderImg(index) {
-            this.currentImg = index;
-        },
-
         displayInfoBox(name) {
             if (document.getElementById(name).style.display == "inline-block") {
                 document.getElementById(name).style.display = "none";
@@ -530,12 +581,6 @@ export default {
         setData(response) {
             this.product = response.data;
             this.loading = false;
-
-            for (let key in this.product.product_images) {
-                this.sliderImgList.push(this.product.product_images[key].path);
-            }
-
-            this.imgPath = this.product.product_image.path;
         },
 
         addProductToCart(product) {
@@ -571,6 +616,13 @@ export default {
             //pass multiple parameters to vuex action using destructuring
         },
     },
-    mounted() {},
+    mounted() {
+        this.$nextTick(() => {
+            const swiperTop = this.$refs.swiperTop.$swiper;
+            const swiperThumbs = this.$refs.swiperThumbs.$swiper;
+            swiperTop.controller.control = swiperThumbs;
+            swiperThumbs.controller.control = swiperTop;
+        });
+    },
 };
 </script>

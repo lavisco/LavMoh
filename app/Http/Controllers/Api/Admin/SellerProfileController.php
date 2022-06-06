@@ -18,7 +18,7 @@ class SellerProfileController extends Controller
     {
         ///$this->authorize('viewAny', SellerProfile::class);
 
-        return SellerProfile::with('user')->latest()->filter(request(['searchText']))->paginate(25);
+        return SellerProfile::with(['user', 'user.shop'])->latest()->filter(request(['searchText']))->paginate(25);
     }
 
     public function store(SellerProfileRequest $request)

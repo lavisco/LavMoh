@@ -19,11 +19,8 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">Name</th>
-                                        <th scope="col">Phone</th>
+                                        <th scope="col">Contact</th>
                                         <th scope="col">Address</th>
-                                        <th scope="col">City</th>
-                                        <th scope="col">Country</th>
-                                        <th scope="col">Email</th>
                                         <th scope="col"></th>
                                     </tr>
                                 </thead>
@@ -33,21 +30,20 @@
                                             {{ buyerprofile.first_name }}
                                             {{ buyerprofile.last_name }}
                                         </th>
-                                        <td>{{ buyerprofile.phone }}</td>
                                         <td>
-                                            {{ buyerprofile.address_line_one }}
-                                            <br />
-                                            {{ buyerprofile.address_line_two }}
-                                            <br />
-                                            {{ buyerprofile.zipcode }}
+                                            {{ buyerprofile.phone }}<br />
+                                            {{ buyerprofile.email }}
                                         </td>
                                         <td>
+                                            {{ buyerprofile.address_line_one }},
+                                            {{ buyerprofile.address_line_two }},
+
+                                            {{ buyerprofile.zipcode }}<br />
                                             {{ buyerprofile.city }},
                                             {{ buyerprofile.district }},
-                                            {{ buyerprofile.state }}
+                                            {{ buyerprofile.state }},
+                                            {{ buyerprofile.country }}
                                         </td>
-                                        <td>{{ buyerprofile.country }}</td>
-                                        <td>{{ buyerprofile.email }}</td>
                                         <td class="text-right">
                                             <div class="dropdown">
                                                 <a

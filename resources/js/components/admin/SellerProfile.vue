@@ -19,11 +19,10 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">Name</th>
-                                        <th scope="col">Phone</th>
+                                        <th scope="col">Contact</th>
                                         <th scope="col">Address</th>
-                                        <th scope="col">City</th>
-                                        <th scope="col">Country</th>
-                                        <th scope="col">Email</th>
+                                        <th scope="col">District</th>
+                                        <th scope="col">Shop</th>
                                         <th scope="col"></th>
                                     </tr>
                                 </thead>
@@ -33,14 +32,29 @@
                                             {{ sellerprofile.first_name }}
                                             {{ sellerprofile.last_name }}
                                         </th>
-                                        <td>{{ sellerprofile.phone }}</td>
                                         <td>
-                                            {{ sellerprofile.address }} <br />
-                                            {{ sellerprofile.zipcode }}
+                                            {{ sellerprofile.phone }} <br />
+                                            {{ sellerprofile.email }}
                                         </td>
-                                        <td>{{ sellerprofile.city }}</td>
-                                        <td>{{ sellerprofile.country }}</td>
-                                        <td>{{ sellerprofile.email }}</td>
+                                        <td>
+                                            {{ sellerprofile.address }},
+                                            {{ sellerprofile.zipcode }}<br />
+                                            {{ sellerprofile.city }},
+                                            {{ sellerprofile.district }},
+                                            {{ sellerprofile.province }},
+                                            {{ sellerprofile.country }}
+                                        </td>
+                                        <td>
+                                            {{ sellerprofile.district }}
+                                        </td>
+                                        <td>
+                                            {{
+                                                sellerprofile.user.shop
+                                                    ? sellerprofile.user.shop
+                                                          .name
+                                                    : "No shop"
+                                            }}
+                                        </td>
                                         <td class="text-right">
                                             <div class="dropdown">
                                                 <a

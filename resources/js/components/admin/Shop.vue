@@ -204,6 +204,28 @@
                                     <HasError :form="form" field="name" />
                                 </div>
                             </div>
+                            <div class="form-group row" v-show="editMode">
+                                <label
+                                    class="col-md-3 col-form-label"
+                                    for="slug"
+                                    >Slug
+                                    <strong class="text-danger"> *</strong>
+                                </label>
+
+                                <div class="col-md-9">
+                                    <input
+                                        id="slug"
+                                        v-model="form.slug"
+                                        type="text"
+                                        name="slug"
+                                        class="
+                                            form-control
+                                            form-control-alternative
+                                        "
+                                    />
+                                    <HasError :form="form" field="slug" />
+                                </div>
+                            </div>
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label" for="url"
                                     >URL
@@ -726,6 +748,7 @@ export default {
             status: "",
             user_id: "",
             user: "",
+            slug: "",
         }),
     }),
 

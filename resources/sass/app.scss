@@ -3705,3 +3705,14 @@ footer {
     transform: translateX(20px);
     opacity: 0;
 }
+
+.pages-enter-active,
+.pages-leave-active {
+    transition: all 0.4s ease-in-out;
+}
+
+.pages-enter-from,
+.pages-leave-to {
+    transform: translateY(30px);
+    opacity: 0;
+}

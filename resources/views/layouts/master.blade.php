@@ -52,7 +52,9 @@
                     <navbar-component></navbar-component>
                     <!-- navbar section ends -->
 
-                    <router-view></router-view>
+                    <Transition name="pages">
+                        <router-view></router-view>
+                    </Transition>
                 </div>
                 <!-- footer section starts -->
                 <footer-component></footer-component>

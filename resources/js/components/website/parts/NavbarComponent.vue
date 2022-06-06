@@ -186,6 +186,59 @@
                     <a
                         href="#"
                         role="button"
+                        id="dropdownLocation"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                        class="nav-link nav-link-account mr-2 mr-sm-3"
+                        @click.prevent="loadDistricts()"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            aria-hidden="true"
+                            role="img"
+                            width="34"
+                            height="34"
+                            preserveAspectRatio="xMidYMid meet"
+                            viewBox="0 0 24 24"
+                        >
+                            <circle cx="12" cy="9.5" r="1.5" fill="#333" />
+                            <path
+                                fill="#333"
+                                d="M12 2a8 8 0 0 0-8 7.92c0 5.48 7.05 11.58 7.35 11.84a1 1 0 0 0 1.3 0C13 21.5 20 15.4 20 9.92A8 8 0 0 0 12 2Zm0 11a3.5 3.5 0 1 1 3.5-3.5A3.5 3.5 0 0 1 12 13Z"
+                            />
+                        </svg>
+                    </a>
+                    <div
+                        class="dropdown-menu dropdown-menu-right"
+                        style="border-radius: 8px"
+                        aria-labelledby="dropdownLocation"
+                    >
+                        <div class="d-flex flex-column flex-md-row">
+                            <div
+                                class="col-md-6 d-flex flex-column"
+                                v-for="districts in chunkedDistricts"
+                            >
+                                <a
+                                    class="nav-link-currency"
+                                    @click.prevent="saveLocation(district.name)"
+                                    v-for="district in districts"
+                                    :key="district.id"
+                                    :class="{
+                                        active:
+                                            locationActive === district.name,
+                                    }"
+                                >
+                                    {{ district.name }}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dropdown show">
+                    <a
+                        href="#"
+                        role="button"
                         id="dropdownCurrency"
                         data-toggle="dropdown"
                         aria-haspopup="true"
@@ -216,7 +269,10 @@
                         </div>
                     </div>
                 </div>
-                <router-link class="nav-link nav-link-account mr-2 mr-sm-3" to="/login">
+                <router-link
+                    class="nav-link nav-link-account mr-2 mr-sm-3"
+                    to="/login"
+                >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         aria-hidden="true"
@@ -408,6 +464,7 @@ export default {
         occasions: [],
         categories: [],
         currencies: [],
+        districts: [],
         user: "",
     }),
 
@@ -418,14 +475,23 @@ export default {
         chunkedOccasions() {
             return _.chunk(this.occasions, 6);
         },
+        chunkedDistricts() {
+            return _.chunk(this.districts, 13);
+        },
         currencyActive() {
             return this.$store.getters.selectedCurrency;
+        },
+        locationActive() {
+            return this.$store.getters.selectedLocation;
         },
     },
 
     methods: {
         saveCurrency(currency) {
             this.$store.dispatch("saveCurrency", currency);
+        },
+        saveLocation(district) {
+            this.$store.dispatch("saveLocation", district);
         },
 
         loadData() {
@@ -437,6 +503,15 @@ export default {
                     this.categories = response.data.categories;
                     this.currencies = response.data.currencies;
                     this.user = response.data.user;
+                })
+                .catch((error) => console.log(error));
+        },
+
+        loadDistricts() {
+            axios
+                .get("/api/locations/districts")
+                .then(({ data }) => {
+                    this.districts = data;
                 })
                 .catch((error) => console.log(error));
         },

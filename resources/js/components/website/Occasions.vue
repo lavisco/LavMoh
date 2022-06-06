@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="hero hero-default">
             <div class="slide-content">
-                <h1 class="title mb-3">Browse All Occasions</h1>
+                <h1 class="title mb-3">All Occasions</h1>
                 <h1 class="sub-title mb-5">
                     From cakes to bags, Lavisco has everything you are looking
                     for!
@@ -21,24 +21,33 @@
             v-for="occasion in occasions"
         >
             <h1 class="text-left">{{ occasion.name }}</h1>
-            <div class="d-flex card-container align-items-center">
+            <div
+                class="
+                    d-flex
+                    swiper-index-product
+                    card-container-display
+                    align-items-center
+                "
+            >
                 <div
                     class="card item-card"
                     v-for="product in occasion.latest_products"
                 >
-                    <div class="card-img card-img-2">
+                    <div class="card-img">
                         <img
                             :src="
                                 product.product_image
                                     ? product.product_image.path
                                     : '/images/lavisco/img-bg.jpg'
                             "
+                            :class="{
+                                'img-cover': !product.product_image,
+                            }"
                         />
                     </div>
                     <div class="card-body">
                         <div class="card-title">
                             <router-link
-                                class="card-title"
                                 :to="{
                                     name: 'products/product',
                                     params: {
@@ -50,8 +59,9 @@
                                 {{ product.title }}
                             </router-link>
                         </div>
-                        <div class="card-title card-price">
-                            {{ currency.symbol }} {{ product.base_price*currency.exchange_rate }}
+                        <div class="card-price">
+                            {{ currency.symbol }}
+                            {{ product.base_price * currency.exchange_rate }}
                         </div>
                     </div>
                 </div>

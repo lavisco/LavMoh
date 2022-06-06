@@ -66,12 +66,12 @@ class CategoryController extends Controller
         $products = Product::where('category_id', $id)->where('product_state_id', '1')
             ->whereHas('user', function($query) use($location){
                 $query->whereHas('shop', function($query) use($location) {
-                    $query->where('city', $location);
+                    $query->where('district', $location);
                 });
             })
             ->with(['user' => function($q) use($location) {
                 $q->whereHas('shop', function($query) use($location) {
-                        $query->where('city', $location);
+                        $query->where('district', $location);
                 });
             }])
             ->with(['user.shop', 'product_image'])->latest()->paginate(25);

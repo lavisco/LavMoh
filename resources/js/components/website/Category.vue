@@ -114,15 +114,13 @@
             aria-labelledby="locationPopupLabel"
             aria-hidden="true"
         >
-            <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-dialog modal-dialog-centered modal-md">
                 <div class="modal-content">
                     <!-- Modal Header -->
                     <div class="modal-header">
-                        <h4
-                            class="modal-title text-uppercase"
-                            id="locationPopupLabel"
-                        >
-                            Select Location
+                        <h4 class="modal-title" id="locationPopupLabel">
+                            Showing products available in
+                            <strong>{{ locationActive }}</strong>
                         </h4>
                         <button
                             type="button"
@@ -134,84 +132,6 @@
                                 class="fas fa-times-circle"
                                 aria-hidden="true"
                             ></i>
-                        </button>
-                    </div>
-
-                    <!-- Form start -->
-                    <div class="modal-body modal-view">
-                        <div class="form-group" v-if="districtMode">
-                            <label class="col-form-label" for="districtId"
-                                >District
-                                <strong class="text-danger"> *</strong>
-                            </label>
-
-                            <select
-                                class="
-                                    custom-select
-                                    form-control form-control-alternative
-                                "
-                                name="districtId"
-                                id="districtId"
-                                v-model="districtId"
-                                @change.prevent="districtId ? loadCities() : ''"
-                            >
-                                <option value="" disabled selected hidden>
-                                    Select District
-                                </option>
-                                <option
-                                    v-for="district in districts"
-                                    :value="district.id"
-                                >
-                                    {{ district.name }}
-                                </option>
-                            </select>
-                        </div>
-                        <div class="form-group" v-if="cityMode">
-                            <label class="col-form-label" for="city"
-                                >City
-                                <strong class="text-danger"> *</strong>
-                            </label>
-
-                            <select
-                                class="
-                                    custom-select
-                                    form-control form-control-alternative
-                                "
-                                name="city"
-                                id="city"
-                                v-model="city"
-                                @change.prevent="loadLocationBasedProducts()"
-                            >
-                                <option value="" disabled selected hidden>
-                                    Select City
-                                </option>
-                                <option v-for="city in cities" :value="city">
-                                    {{ city.name }}
-                                </option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button
-                            type="button"
-                            class="btn btn-secondary"
-                            @click.prevent="resetLocation()"
-                        >
-                            <i class="fas fa-redo mr-2"></i>
-                            Reset
-                        </button>
-                        <button
-                            type="button"
-                            class="btn btn-primary"
-                            data-dismiss="modal"
-                            aria-label="Close"
-                        >
-                            <i
-                                class="fas fa-times-circle mr-2"
-                                aria-hidden="true"
-                            ></i>
-                            Close
                         </button>
                     </div>
                 </div>
@@ -229,12 +149,6 @@ export default {
         searchText: null,
         loading: true,
         //location data
-        districts: [],
-        cities: [],
-        districtId: "",
-        city: "",
-        districtMode: false,
-        cityMode: false,
         sortValue: "created_at",
         subCategoryValue: "",
     }),
@@ -262,11 +176,17 @@ export default {
         searchText(after, before) {
             this.loadData();
         },
+        locationActive(after, before) {
+            this.loadLocalizedProducts();
+        },
     },
 
     computed: {
         currency() {
             return this.$store.getters.selectedCurrency;
+        },
+        locationActive() {
+            return this.$store.getters.selectedLocation;
         },
     },
 
@@ -275,7 +195,7 @@ export default {
             this.category = response.data.category;
             this.sub_categories = response.data.sub_categories;
             this.products = response.data.products.data;
-            this.loadDistricts();
+            this.loadLocalizedProducts();
             this.loading = false;
         },
 
@@ -315,52 +235,25 @@ export default {
                 .catch((error) => console.log(error));
         },
 
-        resetLocation() {
-            this.districtMode = true;
-            this.cityMode = false;
-        },
-
-        loadDistricts() {
+        loadLocalizedProducts() {
             if (
                 this.category.name == "Cakes" ||
-                this.category.name == "cakes" ||
                 this.category.name == "Cake" ||
-                this.category.name == "cake"
+                this.category.name == "Fresh Flowers"
             ) {
                 axios
-                    .get("/api/locations/districts")
-                    .then(({ data }) => {
-                        this.districts = data;
-                        this.districtMode = true;
-                        this.cityMode = false;
+                    .get(
+                        "/api/categories/products/" +
+                            this.$route.params.categoryId +
+                            "/" +
+                            this.locationActive
+                    )
+                    .then((response) => {
+                        this.products = response.data.products.data;
                         $("#locationPopup").modal("show");
                     })
                     .catch((error) => console.log(error));
             }
-        },
-        loadCities() {
-            axios
-                .get("/api/locations/cities/" + this.districtId)
-                .then(({ data }) => {
-                    this.cities = data;
-                    this.cityMode = true;
-                    this.districtMode = false;
-                })
-                .catch((error) => console.log(error));
-        },
-        loadLocationBasedProducts() {
-            axios
-                .get(
-                    "/api/categories/products/" +
-                        this.$route.params.categoryId +
-                        "/" +
-                        this.city.name
-                )
-                .then((response) => {
-                    this.products = response.data.products.data;
-                    $("#locationPopup").modal("hide");
-                })
-                .catch((error) => console.log(error));
         },
     },
     mounted() {},

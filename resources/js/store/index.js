@@ -25,6 +25,10 @@ export default new Vuex.Store({
             return state.currency;
         },
 
+        selectedLocation(state) {
+            return state.location;
+        },
+
         cartProducts(state) {
             return state.cart.map((cartItem) => {
                 return {
@@ -95,6 +99,10 @@ export default new Vuex.Store({
         //currency methods
         saveCurrency(context, currency) {
             context.commit("storeCurrency", currency);
+        },
+
+        saveLocation(context, district) {
+            context.commit("storeLocation", district);
         },
 
         //cart methods
@@ -180,6 +188,10 @@ export default new Vuex.Store({
         //alter currency state
         storeCurrency(state, currency) {
             state.currency = currency;
+        },
+
+        storeLocation(state, district) {
+            state.location = district;
         },
 
         //alter cart state

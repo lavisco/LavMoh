@@ -13673,21 +13673,35 @@ footer {
   display: flex;
   align-items: flex-start;
   justify-content: center;
+  z-index: 1;
 }
 .slider-container .img-container .img-slide img {
   border-radius: 12px;
   max-width: 100%;
   max-height: 100%;
 }
-.slider-container .slider-arrows {
-  width: 15px;
-  height: 15px;
-  background: #333333;
-  opacity: 0.6;
+.slider-container .slider-arrow-container {
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  z-index: 2;
 }
-.slider-container .slider-arrows-active {
-  background: #ff5a7c !important;
-  opacity: 1;
+.slider-container .slider-arrow {
+  cursor: pointer;
+}
+.slider-container .slider-arrow svg {
+  width: 40px;
+  height: 40px;
+}
+.slider-container .slider-arrow:hover svg {
+  fill: #333333;
+}
+.slider-container .slider-arrow-inactive {
+  opacity: 0.5;
 }
 @media (max-width: 992px) {
   .slider-container {
@@ -13715,6 +13729,10 @@ footer {
 @media (max-width: 768px) {
   .slider-container {
     height: 470px;
+  }
+  .slider-container .slider-arrow svg {
+    width: 30px;
+    height: 30px;
   }
 }
 @media (max-width: 481px) {
@@ -13751,6 +13769,9 @@ footer {
   opacity: 0;
 }
 
+/*
+    router views - named pages
+*/
 .pages-enter-active,
 .pages-leave-active {
   transition: all 0.4s ease-in-out;

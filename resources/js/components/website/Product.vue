@@ -31,22 +31,79 @@
                                 <img :src="product_image.path" />
                             </div>
                         </div>
-                        <transition-group
-                            tag="div"
-                            class="img-container"
-                            name="slide-fade"
-                        >
-                            <div v-for="number in [currentImg]" :key="number" class="img-slide">
-                                <img
-                                    :src="
-                                        sliderImgList[
-                                            Math.abs(currentImg) %
-                                                sliderImgList.length
-                                        ]
-                                    "
-                                />
+                        <div class="img-container">
+                            <transition-group
+                                tag="div"
+                                class="img-container"
+                                name="slide-fade"
+                            >
+                                <div
+                                    v-for="number in [currentImg]"
+                                    :key="number"
+                                    class="img-slide"
+                                >
+                                    <img
+                                        :src="
+                                            sliderImgList[
+                                                Math.abs(currentImg) %
+                                                    sliderImgList.length
+                                            ]
+                                        "
+                                    />
+                                </div>
+                            </transition-group>
+                            <div class="slider-arrow-container">
+                                <div
+                                    class="slider-arrow"
+                                    id="button-prev"
+                                    @click.prevent="prevSliderImg()"
+                                    :class="{
+                                        'slider-arrow-inactive':
+                                            currentImg == 0,
+                                    }"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        aria-hidden="true"
+                                        role="img"
+                                        width="24"
+                                        height="24"
+                                        preserveAspectRatio="xMidYMid meet"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            fill="#4e4e4e"
+                                            d="M12 2c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12S6.48 2 12 2zm0 9V8l-4 4l4 4v-3h4v-2h-4z"
+                                        />
+                                    </svg>
+                                </div>
+                                <div
+                                    class="slider-arrow"
+                                    id="button-next"
+                                    @click.prevent="nextSliderImg()"
+                                    :class="{
+                                        'slider-arrow-inactive':
+                                            currentImg ==
+                                            sliderImgList.length - 1,
+                                    }"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        aria-hidden="true"
+                                        role="img"
+                                        width="24"
+                                        height="24"
+                                        preserveAspectRatio="xMidYMid meet"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            fill="#4e4e4e"
+                                            d="M12 2c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12S6.48 2 12 2zm0 9H8v2h4v3l4-4l-4-4v3z"
+                                        />
+                                    </svg>
+                                </div>
                             </div>
-                        </transition-group>
+                        </div>
                     </div>
                     <!-- Swiper end -->
                 </div>
@@ -430,25 +487,10 @@
 </template>
 
 <script>
-//import { Swiper, SwiperSlide, directive } from "vue-awesome-swiper";
-//import Form from "vform";
-//import { HasError, AlertError } from "vform/src/components/bootstrap4";
-
-//import "swiper/css/swiper.css";
-
 export default {
-    // components: {
-    //     Swiper,
-    //     SwiperSlide,
-    // },
-    // directives: {
-    //     swiper: directive,
-    // },
-
     data: () => ({
         product: [],
         loading: true,
-        imgPath: "",
         sliderImgList: [],
         currentImg: 0,
         show: true,
@@ -519,6 +561,18 @@ export default {
             this.currentImg = index;
         },
 
+        nextSliderImg() {
+            if (this.currentImg < this.sliderImgList.length - 1) {
+                this.currentImg += 1;
+            }
+        },
+
+        prevSliderImg() {
+            if (this.currentImg > 0) {
+                this.currentImg -= 1;
+            }
+        },
+
         displayInfoBox(name) {
             if (document.getElementById(name).style.display == "inline-block") {
                 document.getElementById(name).style.display = "none";
@@ -534,8 +588,6 @@ export default {
             for (let key in this.product.product_images) {
                 this.sliderImgList.push(this.product.product_images[key].path);
             }
-
-            this.imgPath = this.product.product_image.path;
         },
 
         addProductToCart(product) {

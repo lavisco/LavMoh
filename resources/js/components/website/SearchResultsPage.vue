@@ -1,20 +1,20 @@
 <template>
     <div class="container-fluid search-result">
-        <div class="sort-section pt-0">
-        <select
-                    class="custom-select form-control form-control-alternative"
-                    id="filter"
-                    name="filter"
-                    @change.prevent="setResult($event)"
-                >
-                    <option value="" disabled selected hidden>Filter</option>
-                    <option value="all">All</option>
-                    <option value="products">Products</option>
-                    <option value="shops">Shops</option>
-                    <option value="categories">Categories</option>
-                    <option value="occasions">Occasions</option>
-                    <option value="recipients">Recipients</option>
-                </select>
+        <div class="sort-section">
+            <select
+                class="custom-select form-control form-control-alternative"
+                id="filter"
+                name="filter"
+                @change.prevent="setResult($event)"
+            >
+                <option value="" disabled selected hidden>Filter</option>
+                <option value="all">All</option>
+                <option value="products">Products</option>
+                <option value="shops">Shops</option>
+                <option value="categories">Categories</option>
+                <option value="occasions">Occasions</option>
+                <option value="recipients">Recipients</option>
+            </select>
         </div>
         <section class="section-best-seller mt-4 mb-5">
             <div class="d-flex flex-wrap justify-content-center card-container">
@@ -24,7 +24,16 @@
                     :key="`p${product.id}`"
                     class="product-list"
                 >
-                    <div class="card item-card-2">
+                    <router-link
+                        class="card item-card-2"
+                        :to="{
+                            name: 'products/product',
+                            params: {
+                                productId: product.id,
+                                slug: product.slug,
+                            },
+                        }"
+                    >
                         <div class="card-tag bg-l-blue">Product</div>
                         <div class="card-img card-img-2">
                             <img
@@ -38,21 +47,13 @@
                         </div>
                         <div class="px-3">
                             <div class="card-title-2">
-                                <router-link
-                                    class="card-title-2"
-                                    :to="{
-                                        name: 'products/product',
-                                        params: {
-                                            productId: product.id,
-                                            slug: product.slug,
-                                        },
-                                    }"
-                                >
-                                    {{ product.title }}
-                                </router-link>
+                                {{ product.title }}
                             </div>
                             <div class="card-price">
-                                {{ currency.symbol }} {{ product.base_price*currency.exchange_rate }}
+                                {{ currency.symbol }}
+                                {{
+                                    product.base_price * currency.exchange_rate
+                                }}
                             </div>
                             <div class="card-secondary-text">
                                 {{ product.category.name }}
@@ -61,7 +62,7 @@
                                 Made by {{ product.user.shop.name }}
                             </div>
                         </div>
-                    </div>
+                    </router-link>
                 </div>
                 <div
                     v-show="resultsShopMode"
@@ -69,7 +70,16 @@
                     :key="`s${shop.id}`"
                     class="product-list"
                 >
-                    <div class="card item-card-2">
+                    <router-link
+                        class="card item-card-2"
+                        :to="{
+                            name: 'shop',
+                            params: {
+                                shopId: shop.id,
+                                slug: shop.slug,
+                            },
+                        }"
+                    >
                         <div class="card-tag bg-orange">Store</div>
                         <div class="card-img card-img-2">
                             <img
@@ -83,24 +93,13 @@
                         </div>
                         <div class="px-3">
                             <div class="card-title-2">
-                                <router-link
-                                    class="card-title-2"
-                                    :to="{
-                                        name: 'shop',
-                                        params: {
-                                            shopId: shop.id,
-                                            slug: shop.slug,
-                                        },
-                                    }"
-                                >
-                                    {{ shop.name }}
-                                </router-link>
+                                {{ shop.name }}
                             </div>
                             <div class="card-secondary-text">
                                 {{ shop.about }}
                             </div>
                         </div>
-                    </div>
+                    </router-link>
                 </div>
                 <div
                     v-show="resultsOccasionMode"
@@ -108,7 +107,16 @@
                     :key="`o${occasion.id}`"
                     class="product-list"
                 >
-                    <div class="card item-card-2">
+                    <router-link
+                        class="card item-card-2"
+                        :to="{
+                            name: 'occasions/occasion',
+                            params: {
+                                occasionId: occasion.id,
+                                slug: occasion.slug,
+                            },
+                        }"
+                    >
                         <div class="card-tag bg-orange">Occasion</div>
                         <div class="card-img card-img-2">
                             <img
@@ -122,21 +130,10 @@
                         </div>
                         <div class="px-3">
                             <div class="card-title-2">
-                                <router-link
-                                    class="card-title-2"
-                                    :to="{
-                                        name: 'occasions/occasion',
-                                        params: {
-                                            occasionId: occasion.id,
-                                            slug: occasion.slug,
-                                        },
-                                    }"
-                                >
-                                    {{ occasion.name }}
-                                </router-link>
+                                {{ occasion.name }}
                             </div>
                         </div>
-                    </div>
+                    </router-link>
                 </div>
                 <div
                     v-show="resultsRecipientMode"
@@ -144,7 +141,16 @@
                     :key="`r${recipient.id}`"
                     class="product-list"
                 >
-                    <div class="card item-card-2">
+                    <router-link
+                        class="card item-card-2"
+                        :to="{
+                            name: 'recipients/recipient',
+                            params: {
+                                recipientId: recipient.id,
+                                slug: recipient.slug,
+                            },
+                        }"
+                    >
                         <div class="card-tag bg-green">Recipient</div>
                         <div class="card-img card-img-2">
                             <img
@@ -158,21 +164,10 @@
                         </div>
                         <div class="px-3">
                             <div class="card-title-2">
-                                <router-link
-                                    class="card-title-2"
-                                    :to="{
-                                        name: 'recipients/recipient',
-                                        params: {
-                                            recipientId: recipient.id,
-                                            slug: recipient.slug,
-                                        },
-                                    }"
-                                >
-                                    {{ recipient.name }}
-                                </router-link>
+                                {{ recipient.name }}
                             </div>
                         </div>
-                    </div>
+                    </router-link>
                 </div>
                 <div
                     v-show="resultsCategoryMode"
@@ -180,7 +175,16 @@
                     :key="`c${category.id}`"
                     class="product-list"
                 >
-                    <div class="card item-card-2">
+                    <router-link
+                        class="card item-card-2"
+                        :to="{
+                            name: 'categories/category',
+                            params: {
+                                categoryId: category.id,
+                                slug: category.slug,
+                            },
+                        }"
+                    >
                         <div class="card-tag bg-pink">Category</div>
                         <div class="card-img card-img-2">
                             <img
@@ -194,21 +198,10 @@
                         </div>
                         <div class="px-3">
                             <div class="card-title-2">
-                                <router-link
-                                    class="card-title-2"
-                                    :to="{
-                                        name: 'categories/category',
-                                        params: {
-                                            categoryId: category.id,
-                                            slug: category.slug,
-                                        },
-                                    }"
-                                >
-                                    {{ category.name }}
-                                </router-link>
+                                {{ category.name }}
                             </div>
                         </div>
-                    </div>
+                    </router-link>
                 </div>
             </div>
             <div class="d-flex justify-content-center mt-5">

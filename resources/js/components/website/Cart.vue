@@ -146,37 +146,29 @@
                                             align-items-center
                                         "
                                     >
-                                        <div class="cart-qty-body">
-                                            <div>
-                                                <button
-                                                    href=""
-                                                    class="
-                                                        mr-2
-                                                        cart-qty-control
-                                                    "
-                                                    @click.prevent="
-                                                        decreaseProductQuantity(
-                                                            product
-                                                        )
-                                                    "
-                                                >
-                                                    -
-                                                </button>
+                                        <div class="product-card-counter">
+                                            <div
+                                                class="counter-minus"
+                                                @click.prevent="
+                                                    decreaseProductQuantity(
+                                                        product
+                                                    )
+                                                "
+                                            >
+                                                -
+                                            </div>
+                                            <div class="counter-num">
                                                 {{ product.quantity }}
-                                                <button
-                                                    href=""
-                                                    class="
-                                                        ml-2
-                                                        cart-qty-control
-                                                    "
-                                                    @click.prevent="
-                                                        increaseProductQuantity(
-                                                            product
-                                                        )
-                                                    "
-                                                >
-                                                    +
-                                                </button>
+                                            </div>
+                                            <div
+                                                class="counter-plus"
+                                                @click.prevent="
+                                                    increaseProductQuantity(
+                                                        product
+                                                    )
+                                                "
+                                            >
+                                                +
                                             </div>
                                         </div>
                                         <a

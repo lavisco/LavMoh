@@ -22,9 +22,22 @@
             v-for="category in categories"
         >
             <h1 class="text-left">{{ category.name }}</h1>
-            <div class="d-flex swiper-index-product card-container-display align-items-center">
-               
-                <div
+            <div
+                class="
+                    d-flex
+                    swiper-index-product
+                    card-container-display
+                    align-items-center
+                "
+            >
+                <router-link
+                    :to="{
+                        name: 'products/product',
+                        params: {
+                            productId: product.id,
+                            slug: product.slug,
+                        },
+                    }"
                     class="card item-card"
                     v-for="product in category.latest_products"
                 >
@@ -42,24 +55,14 @@
                     </div>
                     <div class="card-body">
                         <div class="card-title">
-                            <router-link
-                                :to="{
-                                    name: 'products/product',
-                                    params: {
-                                        productId: product.id,
-                                        slug: product.slug,
-                                    },
-                                }"
-                            >
-                                {{ product.title }}
-                            </router-link>
+                            {{ product.title }}
                         </div>
                         <div class="card-price">
                             {{ currency.symbol }}
                             {{ product.base_price * currency.exchange_rate }}
                         </div>
                     </div>
-                </div>
+                </router-link>
 
                 <router-link
                     class="view-more-link"

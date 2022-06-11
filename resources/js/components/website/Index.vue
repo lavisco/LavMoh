@@ -41,7 +41,16 @@
                     :options="swiperOption"
                 >
                     <swiper-slide v-for="product in products" :key="product.id">
-                        <div class="card item-card">
+                        <router-link
+                            :to="{
+                                name: 'products/product',
+                                params: {
+                                    productId: product.id,
+                                    slug: product.slug,
+                                },
+                            }"
+                            class="card item-card"
+                        >
                             <div class="card-img">
                                 <img
                                     :src="
@@ -56,20 +65,14 @@
                             </div>
                             <div class="card-body">
                                 <div class="card-title">
-                                    <router-link
-                                        :to="{
-                                            name: 'products/product',
-                                            params: {
-                                                productId: product.id,
-                                                slug: product.slug,
-                                            },
-                                        }"
-                                    >
-                                        {{ product.title }}
-                                    </router-link>
+                                    {{ product.title }}
                                 </div>
                                 <div class="card-price">
-                                    {{ currency.symbol }} {{ product.base_price*currency.exchange_rate }}
+                                    {{ currency.symbol }}
+                                    {{
+                                        product.base_price *
+                                        currency.exchange_rate
+                                    }}
                                 </div>
 
                                 <div
@@ -96,7 +99,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </router-link>
                     </swiper-slide>
                     <div class="swiper-button-prev" slot="button-prev">
                         <svg

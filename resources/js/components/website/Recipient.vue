@@ -39,10 +39,17 @@
             >
                 <img v-if="loading" src="/images/lavisco/loading.gif" />
 
-                <div
+                <router-link
                     v-else
                     v-for="product in products"
                     class="card item-card-2"
+                    :to="{
+                        name: 'products/product',
+                        params: {
+                            productId: product.id,
+                            slug: product.slug,
+                        },
+                    }"
                 >
                     <div class="card-img card-img-2">
                         <img
@@ -55,27 +62,17 @@
                     </div>
                     <div class="px-2 px-md-3">
                         <div class="card-title-2">
-                            <router-link
-                                class="card-title-2"
-                                :to="{
-                                    name: 'products/product',
-                                    params: {
-                                        productId: product.id,
-                                        slug: product.slug,
-                                    },
-                                }"
-                            >
-                                {{ product.title }}
-                            </router-link>
+                            {{ product.title }}
                         </div>
                         <div class="card-price">
-                            {{ currency.symbol }} {{ product.base_price*currency.exchange_rate }}
+                            {{ currency.symbol }}
+                            {{ product.base_price * currency.exchange_rate }}
                         </div>
                         <div class="card-secondary-text">
                             {{ product.user.shop.name }}
                         </div>
                     </div>
-                </div>
+                </router-link>
             </div>
             <div v-if="!loading" class="d-flex justify-content-center mt-5">
                 <a href="" class="view-more-link">View More</a>

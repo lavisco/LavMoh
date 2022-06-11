@@ -29,9 +29,16 @@
                     align-items-center
                 "
             >
-                <div
+                <router-link
                     class="card item-card"
                     v-for="product in recipient.latest_products"
+                    :to="{
+                        name: 'products/product',
+                        params: {
+                            productId: product.id,
+                            slug: product.slug,
+                        },
+                    }"
                 >
                     <div class="card-img">
                         <img
@@ -47,24 +54,14 @@
                     </div>
                     <div class="card-body">
                         <div class="card-title">
-                            <router-link
-                                :to="{
-                                    name: 'products/product',
-                                    params: {
-                                        productId: product.id,
-                                        slug: product.slug,
-                                    },
-                                }"
-                            >
-                                {{ product.title }}
-                            </router-link>
+                            {{ product.title }}
                         </div>
                         <div class="card-price">
                             {{ currency.symbol }}
                             {{ product.base_price * currency.exchange_rate }}
                         </div>
                     </div>
-                </div>
+                </router-link>
                 <router-link
                     class="view-more-link"
                     :to="{

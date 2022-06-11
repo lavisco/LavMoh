@@ -62,7 +62,14 @@
             >
                 <img v-if="loading" src="/images/lavisco/loading.gif" />
 
-                <div
+                <router-link
+                    :to="{
+                        name: 'products/product',
+                        params: {
+                            productId: product.id,
+                            slug: product.slug,
+                        },
+                    }"
                     v-else
                     v-for="product in products"
                     class="card item-card-2"
@@ -78,18 +85,7 @@
                     </div>
                     <div class="px-2 px-md-3">
                         <div class="card-title-2">
-                            <router-link
-                                class="card-title-2"
-                                :to="{
-                                    name: 'products/product',
-                                    params: {
-                                        productId: product.id,
-                                        slug: product.slug,
-                                    },
-                                }"
-                            >
-                                {{ product.title }}
-                            </router-link>
+                            {{ product.title }}
                         </div>
                         <div class="card-price">
                             {{ currency.symbol }}
@@ -99,7 +95,7 @@
                             {{ product.user.shop.name }}
                         </div>
                     </div>
-                </div>
+                </router-link>
             </div>
             <div v-if="!loading" class="d-flex justify-content-center mt-5">
                 <a href="" class="view-more-link">View More</a>
@@ -158,7 +154,7 @@ export default {
             .get("/api/categories/" + to.params.categoryId)
             .then((response) => {
                 next((vm) => {
-                    vm.setData(response);
+                    vm.setData(response, to.params.categoryId);
                 });
             });
     },
@@ -167,7 +163,7 @@ export default {
         axios
             .get("/api/categories/" + to.params.categoryId)
             .then((response) => {
-                this.setData(response);
+                this.setData(response, to.params.categoryId);
                 next();
             });
     },
@@ -191,11 +187,11 @@ export default {
     },
 
     methods: {
-        setData(response) {
+        setData(response, route) {
             this.category = response.data.category;
             this.sub_categories = response.data.sub_categories;
             this.products = response.data.products.data;
-            this.loadLocalizedProducts();
+            this.loadLocalizedProducts(route);
             this.loading = false;
         },
 
@@ -235,7 +231,7 @@ export default {
                 .catch((error) => console.log(error));
         },
 
-        loadLocalizedProducts() {
+        loadLocalizedProducts(route) {
             if (
                 this.category.name == "Cakes" ||
                 this.category.name == "Cake" ||
@@ -244,7 +240,7 @@ export default {
                 axios
                     .get(
                         "/api/categories/products/" +
-                            this.$route.params.categoryId +
+                            route +
                             "/" +
                             this.locationActive
                     )
@@ -256,6 +252,7 @@ export default {
             }
         },
     },
-    mounted() {},
+    mounted() {
+    },
 };
 </script>

@@ -1349,24 +1349,24 @@ section {
     border: none;
 }
 
-#locationPopup{
-    .modal-content{
+#locationPopup {
+    .modal-content {
         border-radius: 12px;
         background-color: $black;
     }
-    .modal-header{
+    .modal-header {
         align-items: center;
         padding: 24px 34px;
         border-bottom: none;
-        h4{
+        h4 {
             color: #eceaf0;
         }
-        .close{
+        .close {
             color: #eceaf0;
         }
     }
 }
-.close{
+.close {
     text-shadow: none;
 }
 
@@ -1566,6 +1566,11 @@ section {
     width: 340px;
     font-size: 16px;
     padding: 5px;
+
+    &:hover {
+        box-shadow: 2px 4px 6px rgba(212, 204, 219, 0.444);
+    }
+
     .card-body {
         padding: 0 10px 15px 10px;
     }
@@ -1577,6 +1582,17 @@ section {
     font-size: 15px;
     border: 1px solid #e6e6eb82;
     border-radius: 7px;
+
+    &:hover {
+        box-shadow: 2px 4px 6px rgb(212 204 219 / 16%);
+    }
+
+    a:hover {
+        color: $lav-l-blue !important;
+    }
+    a:focus {
+        color: #16818f !important;
+    }
 
     .card-tag {
         position: absolute;
@@ -1612,7 +1628,6 @@ section {
 .card-title-2 {
     font-weight: 500;
     line-height: 25px;
-    color: $black;
     max-height: 25px;
     margin-bottom: 4px;
     word-wrap: break-word;
@@ -1678,7 +1693,7 @@ section {
     }
     .card-price {
         font-size: 16px;
-        font-weight: 500;
+        font-weight: 600;
     }
     .card-button-container {
         button {
@@ -1714,7 +1729,7 @@ section {
         color: $lav-green;
     }
     .card-button-container {
-        background: rgba(27, 200, 148, 0.89);
+        background: $lav-green;
     }
 }
 .item-card-recipient {
@@ -1723,7 +1738,7 @@ section {
         color: $lav-l-blue;
     }
     .card-button-container {
-        background: rgba(26, 210, 234, 0.89);
+        background: $lav-l-blue;
     }
 }
 
@@ -3564,6 +3579,12 @@ footer {
         position: relative;
         height: 380px;
         justify-content: flex-end;
+
+        &:hover {
+            .card-body {
+                background: rgb(140, 100, 234);
+            }
+        }
         .card-img {
             position: absolute;
             top: 0;
@@ -3585,9 +3606,9 @@ footer {
             position: relative;
             max-height: 29%;
             z-index: 2;
-            padding: 10px;
+            padding: 10px 13px;
             border-radius: 12px;
-            background: rgba(151, 106, 255, 0.92);
+            background: #8260ac;
         }
         .card-title {
             margin-bottom: 0;
@@ -3762,6 +3783,122 @@ footer {
     }
     @media (max-width: 320px) {
         height: 320px;
+    }
+}
+
+/*---------------------------giftbox-builder--------------------------*/
+
+.giftbox-card {
+    padding: 20px 35px 35px 35px;
+    background-color: #f7f7f780;
+    border-radius: 12px;
+    .card-container {
+        gap: 10px;
+    }
+    .item-card-2 {
+        width: 230px;
+        .card-img-2 {
+            height: 230px;
+        }
+        .card-price {
+            font-size: 16px;
+            font-weight: 700;
+        }
+    }
+    @media (max-width: 768px) {
+        padding: 0;
+        background-color: #ffffff;
+        border-radius: 0;
+        .card-container {
+            gap: 5px;
+        }
+        .item-card-2 {
+            width: 48%;
+            .card-img-2 {
+                height: 160px;
+            }
+        }
+        .card-title-2 {
+            margin-bottom: 0;
+        }
+    }
+}
+.giftbox-product-card-sm {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f7f7f780;
+    border-radius: 12px;
+    padding: 0 10px 0 0;
+}
+.giftbox-product-card-body {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+    img {
+        width: 54px;
+        height: 54px;
+        border-radius: 12px;
+        object-fit: cover;
+    }
+}
+.product-card-counter {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    background-color: $white;
+    border-radius: 7px;
+    height: 40px;
+    margin: 0;
+    padding: 0;
+    .counter-minus,
+    .counter-plus,
+    .counter-num {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        width: 40px;
+    }
+    .counter-num {
+        width: 53px;
+        border-top: 1px solid #e4e7e8;
+        border-bottom: 1px solid #e4e7e8;
+    }
+    .counter-minus,
+    .counter-plus {
+        background-color: $lav-purple;
+        color: white;
+        font-weight: 700;
+        font-size: 24px;
+        cursor: pointer;
+        &:hover {
+            background-color: $lav-pink;
+        }
+        &:focus {
+            background-color: $lav-dark-purple;
+        }
+    }
+    .counter-minus {
+        border-top-left-radius: 7px;
+        border-bottom-left-radius: 7px;
+    }
+    .counter-plus {
+        border-top-right-radius: 7px;
+        border-bottom-right-radius: 7px;
+    }
+    @media (max-width: 768px) {
+        height: 37px;
+        .counter-minus,
+        .counter-plus {
+            width: 37px;
+        }
+        .counter-num {
+            width: 46px;
+        }
     }
 }
 

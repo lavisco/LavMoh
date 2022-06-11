@@ -66,6 +66,7 @@ use App\Http\Controllers\Api\Website\RecipientController as WebsiteRecipientCont
 use App\Http\Controllers\Api\Website\SellerProfileController as WebsiteSellerProfileController;
 use App\Http\Controllers\Api\Website\ShopController as WebsiteShopController;
 use App\Http\Controllers\Api\Website\SitetextController as WebsiteSitetextController;
+use App\Http\Controllers\Api\Website\SubCategoryController as WebsiteSubCategoryController;
 use App\Http\Controllers\Api\Website\TransactionController as WebsiteTransactionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -229,6 +230,8 @@ Route::apiResource('/products', WebsiteProductController::class);
 Route::apiResource('/recipients', WebsiteRecipientController::class);
 Route::apiResource('/sellerprofiles', WebsiteSellerProfileController::class);
 Route::apiResource('/shops', WebsiteShopController::class);
+Route::get('/sub_categories/products/{id}/{location}', [WebsiteSubCategoryController::class, 'getLocationWiseProducts']);
+Route::apiResource('/sub_categories', WebsiteSubCategoryController::class);
 Route::apiResource('/transactions', WebsiteTransactionController::class);
 //sitetext
 Route::get('/sitetexts/about_pictures', [WebsiteSitetextController::class, 'aboutusPictures']);

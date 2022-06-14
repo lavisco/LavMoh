@@ -288,6 +288,20 @@ export let routes = [
         },
     },
     {
+        path: "/seller/giftboxes",
+        component: require("./components/seller/Giftbox.vue").default,
+        meta: {
+            title: "Giftboxes",
+        },
+    },
+    {
+        path: "/seller/giftboxes/listing",
+        component: require("./components/seller/GiftboxListing.vue").default,
+        meta: {
+            title: "New Giftbox",
+        },
+    },
+    {
         path: "/seller/messages",
         component: require("./components/seller/Message.vue").default,
         meta: {
@@ -484,8 +498,8 @@ export let routes = [
         },
     },
     {
-        path: "/giftboxes/builder",
-        name: "giftboxes/builder",
+        path: "/giftboxes/:productId/:slug",
+        name: "giftboxes/product",
         component: require("./components/website/GiftboxBuilder.vue").default,
         meta: {
             title: "Giftbox Builder",

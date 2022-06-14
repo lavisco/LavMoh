@@ -557,6 +557,10 @@ export default {
     },
 
     methods: {
+        /*
+         *   Product Image Slider
+         */
+
         setSliderImg(index) {
             this.currentImg = index;
         },
@@ -572,6 +576,10 @@ export default {
                 this.currentImg -= 1;
             }
         },
+
+        /*
+         *   Other
+         */
 
         displayInfoBox(name) {
             if (document.getElementById(name).style.display == "inline-block") {
@@ -606,7 +614,7 @@ export default {
                 ) {
                     this.$store.dispatch("addProductToCart", {
                         product: product,
-                        productForm: this.form,
+                        form: this.form,
                     });
                     this.formErrors = null;
                 } else {
@@ -616,7 +624,7 @@ export default {
             } else {
                 this.$store.dispatch("addProductToCart", {
                     product: product,
-                    productForm: this.form,
+                    form: this.form,
                 });
             }
 

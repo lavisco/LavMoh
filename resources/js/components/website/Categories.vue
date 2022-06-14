@@ -20,6 +20,7 @@
             v-else
             class="section-best-seller mb-5"
             v-for="category in categories"
+            :key="category.id"
         >
             <h1 class="text-left">{{ category.name }}</h1>
             <div
@@ -32,7 +33,7 @@
             >
                 <router-link
                     :to="{
-                        name: 'products/product',
+                        name: product.category_id == 7 ? 'giftboxes/product' : 'products/product',
                         params: {
                             productId: product.id,
                             slug: product.slug,
@@ -40,6 +41,7 @@
                     }"
                     class="card item-card"
                     v-for="product in category.latest_products"
+                    :key="product.id"
                 >
                     <div class="card-img">
                         <img

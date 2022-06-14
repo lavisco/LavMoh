@@ -64,7 +64,7 @@
 
                 <router-link
                     :to="{
-                        name: 'products/product',
+                        name: product.category_id == 7 ? 'giftboxes/product' : 'products/product',
                         params: {
                             productId: product.id,
                             slug: product.slug,
@@ -72,6 +72,7 @@
                     }"
                     v-else
                     v-for="product in products"
+                    :key="product.id"
                     class="card item-card-2"
                 >
                     <div class="card-img card-img-2">

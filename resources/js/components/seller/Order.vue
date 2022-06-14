@@ -83,7 +83,9 @@
                             <table class="table align-items-center table-hover">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Order</th>
+                                        <th scope="col" class="table-col-sm">
+                                            Code
+                                        </th>
                                         <th scope="col" class="table-col-lg">
                                             Date
                                         </th>
@@ -584,6 +586,27 @@
                             <div
                                 class="row mb-3"
                                 v-if="
+                                    parent_product
+                                        .order_product_giftbox_variations
+                                        .length > 0
+                                "
+                            >
+                                <div class="col-md-3 modal-label">
+                                    Specification
+                                </div>
+                                <div class="col-md-9">
+                                    <div
+                                        v-for="item in parent_product.order_product_giftbox_variations"
+                                    >
+                                        {{ item.product.title }}
+                                        :
+                                        {{ item.quantity }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="row mb-3"
+                                v-if="
                                     parent_product.order_product_variations
                                         .length > 0
                                 "
@@ -605,7 +628,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-3 modal-label">Amount</div>
+                                <div class="col-md-3 modal-label">Total Amount</div>
                                 <div class="col-md-9">
                                     {{ current_order.currency_code }}
                                     {{
@@ -613,7 +636,12 @@
                                         parent_product.quantity
                                     }}
                                     <div class="darkgrey">
-                                        Base Price :
+                                        {{
+                                            parent_product.product
+                                                .category_id == 7
+                                                ? "Minimum Price"
+                                                : "Base Price"
+                                        }}
                                         {{ current_order.currency_code }}
                                         {{ parent_product.product.base_price }}
                                     </div>

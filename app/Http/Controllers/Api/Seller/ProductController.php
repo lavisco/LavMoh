@@ -9,7 +9,6 @@ use App\Models\Category;
 use App\Models\Occasion;
 use App\Models\Product;
 use App\Models\ProductImage;
-use App\Models\ProductVariation;
 use App\Models\Recipient;
 use App\Models\Shipping;
 use App\Models\SubCategory;
@@ -55,7 +54,6 @@ class ProductController extends Controller
         //sync to pivot tables
         $product->occasions()->sync(request('product_occasion'));
         $product->recipients()->sync(request('product_recipient'));
-        $product->shippings()->sync(request('product_shipping'));
         $product->sub_categories()->sync(request('product_sub_category'));
 
         //product variation
@@ -169,7 +167,6 @@ class ProductController extends Controller
         $product->update($request->all());
         $product->occasions()->sync(request('product_occasion'));
         $product->recipients()->sync(request('product_recipient'));
-        $product->shippings()->sync(request('product_shipping'));
         $product->sub_categories()->sync(request('product_sub_category'));
     }
 

@@ -37,9 +37,10 @@
                 <router-link
                     v-else
                     v-for="product in products"
+                    :key="product.id"
                     class="card item-card-2"
                     :to="{
-                        name: 'products/product',
+                        name: product.category_id == 7 ? 'giftboxes/product' : 'products/product',
                         params: {
                             productId: product.id,
                             slug: product.slug,
@@ -64,7 +65,9 @@
                             {{ product.base_price * currency.exchange_rate }}
                         </div>
                         <div class="card-secondary-text">
-                            {{ product.user.shop.name }}
+                            {{
+                                product.user.shop ? product.user.shop.name : ""
+                            }}
                         </div>
                     </div>
                 </router-link>

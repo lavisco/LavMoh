@@ -64,11 +64,10 @@ class ProductUpdateRequest extends FormRequest
     public function attributes()
     {
         return [
+            'short_description' => 'short description',
             'dimensions_unit' => 'dimension unit',
             'weight_unit' =>  'weight unit',
             'base_price' => 'base price',
-            'production_time' => 'production time',
-            'cut_off_time' => 'cut-off time',
             'processing_time' => 'processing time',
             'has_custom_text' => 'enabling or disabling custom text',
             'has_custom_image' => 'enabling or disabling custom image',

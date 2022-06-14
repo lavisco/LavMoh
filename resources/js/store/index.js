@@ -80,6 +80,7 @@ export default new Vuex.Store({
                     price: cartItem.price,
                     slug: cartItem.slug,
                     shop: cartItem.shop,
+                    category: cartItem.category,
                     image_path: cartItem.image_path,
                     quantity: cartItem.quantity,
                     shop_id: cartItem.shop_id,
@@ -106,22 +107,71 @@ export default new Vuex.Store({
         },
 
         //cart methods
-        addProductToCart(context, { product, productForm }) {
-            //pass multiple parameters to an action using destructuring e.g.{ product, productForm }
+        addGiftboxToCart(context, { product, form }) {
+            //store giftbox if it exists in state.cart
+            const cartItem = context.state.cart.find(
+                (item) => item.id === product.id
+            );
+
+            //store giftbox product id values passed in from the form
+            let giftbox_product_ids_new = product.id;
+            for (let key in form.giftbox_product) {
+                giftbox_product_ids_new += form.giftbox_product[key].id;
+            }
+
+            if (!cartItem) {
+                /*
+                 *   if giftbox doesn't exist in cart, push to cart
+                 */
+
+                context.commit("pushProductToCart", { product, form });
+            } else {
+                /*
+                 *   else check if product ids in the giftbox match
+                 *   if yes then increment quantity, else push to cart
+                 *   product ids are stored in 'variation_ids' field
+                 */
+
+                let cartItemGiftboxProducts = context.state.cart.find(
+                    (item) => item.variation_ids === giftbox_product_ids_new
+                );
+
+                //custom msg????
+                let cartItemCustomMsg = context.state.cart.find(
+                    (item) => item.custom_text === form.custom_text
+                );
+
+                if (cartItemGiftboxProducts) {
+                    context.commit(
+                        "incrementItemQuantity",
+                        cartItemGiftboxProducts
+                    );
+                } else {
+                    context.commit("pushProductToCart", {
+                        product,
+                        form,
+                    });
+                }
+            }
+        },
+
+        //cart methods
+        addProductToCart(context, { product, form }) {
+            //pass multiple parameters to an action using destructuring e.g.{ product, form }
             //store product if it exists in state.cart
             const cartItem = context.state.cart.find(
                 (item) => item.id === product.id
             );
 
-            //store variation option id values passed in productForm
+            //store variation option id values passed in form
             let variation_id_values = "";
-            for (let key in productForm.selected_variations) {
-                variation_id_values += productForm.selected_variations[key].id;
+            for (let key in form.selected_variations) {
+                variation_id_values += form.selected_variations[key].id;
             }
 
             if (!cartItem) {
                 //if product doesn't exist in cart, push to cart
-                context.commit("pushProductToCart", { product, productForm });
+                context.commit("pushProductToCart", { product, form });
             } else {
                 //else check if variations match, if yes then increment quantity, else push to cart
                 let cartItemVar = context.state.cart.find(
@@ -129,7 +179,7 @@ export default new Vuex.Store({
                 );
                 //custom msg????
                 let cartItemCustomMsg = context.state.cart.find(
-                    (item) => item.custom_text === productForm.custom_text
+                    (item) => item.custom_text === form.custom_text
                 );
 
                 if (cartItemVar) {
@@ -137,7 +187,7 @@ export default new Vuex.Store({
                 } else {
                     context.commit("pushProductToCart", {
                         product,
-                        productForm,
+                        form,
                     });
                 }
             }
@@ -195,28 +245,49 @@ export default new Vuex.Store({
         },
 
         //alter cart state
-        pushProductToCart(state, { product, productForm }) {
-            //pass multiple parameters to a mutation using destructuring e.g.{ product, productForm }
+        pushProductToCart(state, { product, form }) {
+            //pass multiple parameters to a mutation using destructuring e.g.{ product, form }
 
             //store variations
             let variation_values = [];
             //store variation option ids for checking items in cart
             let variation_id_values = "";
-            for (let key in productForm.selected_variations) {
-                variation_values.push({
-                    id: productForm.selected_variations[key].id,
-                    name: productForm.selected_variations[key].name,
-                    price: productForm.selected_variations[key].price,
-                    parent: productForm.selected_variations[key].variation.name,
-                });
-                variation_id_values += productForm.selected_variations[key].id;
+
+            /*
+             *  If product is a giftbox (check if category_id == 7)
+             *  then push products in the giftbox into variation_values
+             *  else push the variations
+             */
+
+            if (product.category_id == 7) {
+                variation_id_values = product.id;
+                for (let key in form.giftbox_product) {
+                    variation_values.push({
+                        id: form.giftbox_product[key].id,
+                        name: form.giftbox_product[key].title,
+                        price: form.giftbox_product[key].base_price,
+                        quantity: form.giftbox_product[key].quantity,
+                        parent: product.id,
+                    });
+                    variation_id_values += form.giftbox_product[key].id;
+                }
+            } else {
+                for (let key in form.selected_variations) {
+                    variation_values.push({
+                        id: form.selected_variations[key].id,
+                        name: form.selected_variations[key].name,
+                        price: form.selected_variations[key].price,
+                        parent: form.selected_variations[key].variation.name,
+                    });
+                    variation_id_values += form.selected_variations[key].id;
+                }
             }
 
             state.cart.push({
                 id: product.id,
                 title: product.title,
                 base_price: product.base_price,
-                price: productForm.total_price,
+                price: form.total_price,
                 slug: product.slug,
                 user_id: product.user_id,
                 shop: product.user.shop.name,
@@ -227,7 +298,7 @@ export default new Vuex.Store({
                 quantity: 1,
                 variations: variation_values,
                 variation_ids: variation_id_values,
-                custom_text: productForm.custom_text,
+                custom_text: form.custom_text,
             });
         },
 
@@ -239,6 +310,7 @@ export default new Vuex.Store({
                 price: product.price,
                 slug: product.slug,
                 shop: product.shop,
+                category: product.category,
                 image_path: product.image_path,
                 quantity: product.quantity,
                 shop_id: product.shop_id,

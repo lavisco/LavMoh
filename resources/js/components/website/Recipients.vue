@@ -19,6 +19,7 @@
             v-else
             class="section-best-seller mb-5"
             v-for="recipient in recipients"
+            :key="recipient.id"
         >
             <h1 class="text-left">{{ recipient.name }}</h1>
             <div
@@ -32,8 +33,9 @@
                 <router-link
                     class="card item-card"
                     v-for="product in recipient.latest_products"
+                    :key="product.id"
                     :to="{
-                        name: 'products/product',
+                        name: product.category_id == 7 ? 'giftboxes/product' : 'products/product',
                         params: {
                             productId: product.id,
                             slug: product.slug,

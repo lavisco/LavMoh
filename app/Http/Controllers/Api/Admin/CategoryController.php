@@ -43,6 +43,9 @@ class CategoryController extends Controller
     {
         ///$this->authorize('update', $category);
 
+        $request->merge([
+            'slug' => Str::slug($request->name),
+        ]);
         $this->updateImage($request, $category->banner);
         $category->update($request->all());
     }

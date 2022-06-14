@@ -39,6 +39,7 @@ use App\Http\Controllers\Api\Buyer\BuyerProfileController as BuyerBuyerProfileCo
 use App\Http\Controllers\Api\Buyer\OrderController as BuyerOrderController;
 use App\Http\Controllers\Api\Email\EmailController;
 use App\Http\Controllers\Api\Seller\DashboardController as SellerDashboardController;
+use App\Http\Controllers\Api\Seller\GiftboxController as SellerGiftboxController;
 use App\Http\Controllers\Api\Seller\LocationController as SellerLocationController;
 use App\Http\Controllers\Api\Seller\OrderController as SellerOrderController;
 use App\Http\Controllers\Api\Seller\OrderStateController as SellerOrderStateController;
@@ -164,6 +165,9 @@ Route::prefix('buyer')->group(function () {
 Route::prefix('seller')->group(function () {
     Route::get('/dashboard/coming_soon', [SellerDashboardController::class, 'indexComingSoon']);
     Route::apiResource('/dashboard', SellerDashboardController::class);
+    Route::put('/giftboxes/updateState/{product}', [SellerGiftboxController::class, 'updateState']);
+    Route::get('/giftboxes/details', [SellerGiftboxController::class, 'getDetails']);
+    Route::apiResource('/giftboxes', SellerGiftboxController::class);
     Route::apiResource('/orders', SellerOrderController::class);
     Route::apiResource('/order_states', SellerOrderStateController::class);
     Route::get('/products/details', [SellerProductController::class, 'getDetails']);

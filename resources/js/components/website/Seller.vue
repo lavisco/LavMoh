@@ -23,7 +23,7 @@
                     <router-link
                         class="card item-card-2"
                         :to="{
-                            name: 'products/product',
+                            name: product.category_id == 7 ? 'giftboxes/product' : 'products/product',
                             params: {
                                 productId: product.id,
                                 slug: product.slug,

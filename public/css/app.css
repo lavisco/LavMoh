@@ -12598,6 +12598,16 @@ footer {
   width: 130px;
 }
 
+.highlight-box {
+  color: #6452be;
+  background-color: #f8f7f7;
+  border-radius: 12px;
+  padding: 8px 20px;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.03rem;
+}
+
 .search-input .input-group-text {
   background-color: #fff;
   color: #976aff;
@@ -12806,9 +12816,8 @@ footer {
 }
 
 .note {
-  color: #868686;
-  font-style: italic;
-  font-size: 15px;
+  color: #4e4e4e;
+  font-size: 16px;
   font-weight: 400 !important;
 }
 

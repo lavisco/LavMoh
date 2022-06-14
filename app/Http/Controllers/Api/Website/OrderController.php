@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\OrderRequest;
 use App\Models\Order;
 use App\Models\OrderProduct;
+use App\Models\OrderProductGiftboxVariation;
 use App\Models\OrderProductVariation;
 use App\Models\Receipt;
 use App\Models\Role;
@@ -78,13 +79,24 @@ class OrderController extends Controller
 
             $orderProduct->save();
 
-            if ($products[$i]['variations'] && count($variations)>0) {
+            if($products[$i]['category'] == 'Gift Boxes'){
                 for($j = 0; $j < count($variations); $j++){
-                    OrderProductVariation::create([
+                    OrderProductGiftboxVariation::create([
                         'price' => $variations[$j]['price'] * $exchange_rate,
-                        'variation_option_id' => $variations[$j]['id'],
+                        'quantity' => $variations[$j]['quantity'],
+                        'product_id' => $variations[$j]['id'],
                         'order_product_id' => $orderProduct->id,
                     ]);
+                }
+            } else{
+                if ($products[$i]['variations'] && count($variations)>0) {
+                    for($j = 0; $j < count($variations); $j++){
+                        OrderProductVariation::create([
+                            'price' => $variations[$j]['price'] * $exchange_rate,
+                            'variation_option_id' => $variations[$j]['id'],
+                            'order_product_id' => $orderProduct->id,
+                        ]);
+                    }
                 }
             }
         }

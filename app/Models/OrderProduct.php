@@ -41,4 +41,10 @@ class OrderProduct extends Model
     {
         return $this->hasMany(OrderProductVariation::class);
     }
+
+    //order_product:order_product_giftbox_variations 1:M
+    public function order_product_giftbox_variations()
+    {
+        return $this->hasMany(OrderProductGiftboxVariation::class);
+    }   
 }

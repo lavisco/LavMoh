@@ -106,7 +106,11 @@
                                         <div class="cart-title mb-2">
                                             <router-link
                                                 :to="{
-                                                    name: 'products/product',
+                                                    name:
+                                                        product.category ==
+                                                        'Gift Boxes'
+                                                            ? 'giftboxes/product'
+                                                            : 'products/product',
                                                     params: {
                                                         productId: product.id,
                                                         slug: product.slug,
@@ -128,11 +132,27 @@
                                         </div>
                                         <div class="cart-body-text">
                                             <div
-                                                v-for="variation in product.variations"
+                                                v-if="
+                                                    product.category ==
+                                                    'Gift Boxes'
+                                                "
                                             >
-                                                {{ variation.parent }} :
-                                                {{ variation.name }}
+                                                <div
+                                                    v-for="giftItems in product.variations"
+                                                >
+                                                    {{ giftItems.quantity }} x
+                                                    {{ giftItems.name }}
+                                                </div>
                                             </div>
+                                            <div v-else>
+                                                <div
+                                                    v-for="variation in product.variations"
+                                                >
+                                                    {{ variation.parent }} :
+                                                    {{ variation.name }}
+                                                </div>
+                                            </div>
+
                                             <div v-show="product.custom_text">
                                                 Custom Text:
                                                 {{ product.custom_text }}

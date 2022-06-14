@@ -114,7 +114,10 @@
                                         {{ sub_category.name }}
                                     </option>
                                 </select>
-                                <HasError :form="form" field="product_sub_category" />
+                                <HasError
+                                    :form="form"
+                                    field="product_sub_category"
+                                />
                             </div>
                         </div>
                         <div class="form-group row mb-md-1">
@@ -424,8 +427,8 @@
                         <hr class="mt-0" />
                         <p class="mb-3 mb-md-4 note">
                             Add atleast 3 photos showcasing your product. The
-                            Primary photo is the first image customers see in
-                            the product page.
+                            Primary photo is the first image customers see on
+                            the website.
                         </p>
 
                         <div class="form-group row">
@@ -1404,16 +1407,13 @@ export default {
             has_inventory: "",
             has_giftwrap: "",
             quantity: "",
-            product_state_id: "",
             category_id: "",
-            user_id: "",
             image_path: [],
             photoName: [],
 
             //pivot table arrays
             product_occasion: [],
             product_recipient: [],
-            product_shipping: [],
             product_sub_category: [],
 
             //variation fields

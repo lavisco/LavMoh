@@ -263,8 +263,8 @@
                                     <label
                                         class="col-form-label"
                                         for="self_delivery"
-                                        >Billing and Shipping details will be
-                                        the same
+                                        >Billing and Shipping information will
+                                        be the same.
                                         <strong class="text-danger"> * </strong>
                                     </label>
                                     <div class="custom-control custom-radio">
@@ -310,80 +310,91 @@
                                 </h3>
                                 <hr />
 
-                                <div class="form-group">
-                                    <label
-                                        class="col-form-label"
-                                        for="recipient_first_name"
-                                        >First Name
-                                        <strong class="text-danger"> * </strong>
-                                    </label>
-                                    <input
-                                        id="recipient_first_name"
-                                        v-model="form.recipient_first_name"
-                                        type="text"
-                                        name="recipient_first_name"
-                                        class="form-control"
-                                    />
-                                    <HasError
-                                        :form="form"
-                                        field="recipient_first_name"
-                                    />
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label
+                                            class="col-form-label"
+                                            for="recipient_first_name"
+                                            >First Name
+                                            <strong class="text-danger">
+                                                *
+                                            </strong>
+                                        </label>
+                                        <input
+                                            id="recipient_first_name"
+                                            v-model="form.recipient_first_name"
+                                            type="text"
+                                            name="recipient_first_name"
+                                            class="form-control"
+                                        />
+                                        <HasError
+                                            :form="form"
+                                            field="recipient_first_name"
+                                        />
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label
+                                            class="col-form-label"
+                                            for="recipient_last_name"
+                                            >Last Name
+                                            <strong class="text-danger">
+                                                *
+                                            </strong>
+                                        </label>
+                                        <input
+                                            id="recipient_last_name"
+                                            v-model="form.recipient_last_name"
+                                            type="text"
+                                            name="recipient_last_name"
+                                            class="form-control"
+                                        />
+                                        <HasError
+                                            :form="form"
+                                            field="recipient_last_name"
+                                        />
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label
-                                        class="col-form-label"
-                                        for="recipient_last_name"
-                                        >Last Name
-                                        <strong class="text-danger"> * </strong>
-                                    </label>
-                                    <input
-                                        id="recipient_last_name"
-                                        v-model="form.recipient_last_name"
-                                        type="text"
-                                        name="recipient_last_name"
-                                        class="form-control"
-                                    />
-                                    <HasError
-                                        :form="form"
-                                        field="recipient_last_name"
-                                    />
-                                </div>
-                                <div class="form-group">
-                                    <label
-                                        class="col-form-label"
-                                        for="recipient_email"
-                                        >Email
-                                    </label>
-                                    <input
-                                        id="recipient_email"
-                                        v-model="form.recipient_email"
-                                        type="email"
-                                        name="recipient_email"
-                                        class="form-control"
-                                    />
-                                    <HasError
-                                        :form="form"
-                                        field="recipient_email"
-                                    />
-                                </div>
-                                <div class="form-group">
-                                    <label
-                                        class="col-form-label"
-                                        for="recipient_phone"
-                                        >Phone
-                                        <strong class="text-danger"> * </strong>
-                                    </label>
-                                    <input
-                                        id="recipient_phone"
-                                        v-model="form.recipient_phone"
-                                        type="text"
-                                        name="recipient_phone"
-                                        class="form-control"
-                                    />
-                                    <HasError
-                                        :form="form"
-                                        field="recipient_phone"
-                                    />
+
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label
+                                            class="col-form-label"
+                                            for="recipient_email"
+                                            >Email
+                                        </label>
+                                        <input
+                                            id="recipient_email"
+                                            v-model="form.recipient_email"
+                                            type="email"
+                                            name="recipient_email"
+                                            class="form-control"
+                                        />
+                                        <HasError
+                                            :form="form"
+                                            field="recipient_email"
+                                        />
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label
+                                            class="col-form-label"
+                                            for="recipient_phone"
+                                            >Phone
+                                            <strong class="text-danger">
+                                                *
+                                            </strong>
+                                        </label>
+                                        <input
+                                            id="recipient_phone"
+                                            v-model="form.recipient_phone"
+                                            type="text"
+                                            name="recipient_phone"
+                                            class="form-control"
+                                        />
+                                        <HasError
+                                            :form="form"
+                                            field="recipient_phone"
+                                        />
+                                    </div>
                                 </div>
                             </div>
 

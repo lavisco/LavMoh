@@ -58,6 +58,10 @@ class Product extends Model
     {
         return $this->belongsTo(ProductState::class);
     }
+
+    /**
+     * Many to many Pivot table relationships
+     */
     
     //products:occasions M:M
     public function occasions()
@@ -82,6 +86,10 @@ class Product extends Model
     {
         return $this->belongsToMany(SubCategory::class)->withTimestamps();
     }
+
+    /**
+     * Product details relationships
+     */
 
     //product_images:product M:1
     public function product_images()
@@ -119,12 +127,36 @@ class Product extends Model
         return $this->hasMany(ProductVideo::class);
     }
 
+    /**
+     * Giftbox product Relationship
+     */
+
+    //giftbox_products:product M:1
+    public function giftbox_products()
+    {
+        return $this->hasMany(GiftboxProduct::class, 'giftbox_id');
+    }
+
+    /**
+     * Order Relationship
+     */
+
     //order_products:product M:1
     public function order_products()
     {
         return $this->hasMany(OrderProduct::class);
     }
-    
+
+    //product:order_product_giftbox_variations 1:M
+    public function order_product_giftbox_variations()
+    {
+        return $this->hasMany(OrderProductGiftboxVariation::class);
+    }    
+
+    /**
+     * filter & sort
+     */
+
     public function scopeFilter($query, array $filters)
     {
         $query->when($filters['searchText'] ?? false, fn($query, $searchText) =>

@@ -54,13 +54,23 @@
                                                 <i
                                                     class="fas fa-angle-right"
                                                 ></i>
-                                                
+                                                {{
+                                                    product.sub_categories[0]
+                                                        ? product
+                                                              .sub_categories[0]
+                                                              .name
+                                                        : ""
+                                                }}
                                             </p>
                                         </td>
                                         <td>{{ product.quantity }}</td>
                                         <td>{{ product.base_price }}</td>
                                         <td>
-                                            
+                                            {{
+                                                product.user.shop
+                                                    ? product.user.shop.name
+                                                    : "no shop"
+                                            }}
                                         </td>
                                         <td>
                                             <select

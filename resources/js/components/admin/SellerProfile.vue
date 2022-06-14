@@ -195,7 +195,7 @@
                                         </option>
                                         <option
                                             v-for="seller in sellers"
-                                            :value="seller.id"
+                                            :value="seller.user_id"
                                         >
                                             {{ seller.name }}
                                         </option>

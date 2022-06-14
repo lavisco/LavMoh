@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Models\Role;
+use App\Models\Shop;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -30,7 +31,7 @@ class UserController extends Controller
     {
         ///$this->authorize('viewAny', Role::class);
 
-        return User::where('role_id', Role::IS_SELLER)->get();
+        return Shop::get();
     }
 
     public function buyer()

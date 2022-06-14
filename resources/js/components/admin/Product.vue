@@ -65,7 +65,13 @@
                                         </td>
                                         <td>{{ product.quantity }}</td>
                                         <td>{{ product.base_price }}</td>
-                                        <td>{{ product.user.shop.name }}</td>
+                                        <td>
+                                            {{
+                                                product.user.shop
+                                                    ? product.user.shop.name
+                                                    : "no shop"
+                                            }}
+                                        </td>
                                         <td>
                                             <select
                                                 class="

@@ -54,13 +54,7 @@
                                                 <i
                                                     class="fas fa-angle-right"
                                                 ></i>
-                                                {{
-                                                    product.sub_categories[0]
-                                                        ? product
-                                                              .sub_categories[0]
-                                                              .name
-                                                        : ""
-                                                }}
+                                                
                                             </p>
                                         </td>
                                         <td>{{ product.quantity }}</td>

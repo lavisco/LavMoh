@@ -316,6 +316,15 @@ export let routes = [
         },
     },
     {
+        path: "/seller/giftboxes/listing/:productId",
+        name: "seller/giftboxes/listing/edit",
+        component: require("./components/seller/GiftboxListingEdit.vue")
+            .default,
+        meta: {
+            title: "Edit Giftbox",
+        },
+    },
+    {
         path: "/seller/messages",
         component: require("./components/seller/Message.vue").default,
         meta: {

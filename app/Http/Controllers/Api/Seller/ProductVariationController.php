@@ -82,8 +82,6 @@ class ProductVariationController extends Controller
 
         if ($request->hasAny(['productNewOption.0.new_variation_type_option.0', 'productNewOption.1.new_variation_type_option.0', 'productNewOption.2.new_variation_type_option.0'])) {
 
-            
-
             $variationTypes = $request->input('productNewOption.*.new_variation_type');
             $variationDescriptions = $request->input('productNewOption.*.new_variation_description');
             $productNewOption = $request->input('productNewOption.*');

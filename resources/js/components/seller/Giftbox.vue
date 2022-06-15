@@ -125,9 +125,18 @@
                                         </td>
                                         <td class="text-right">
                                             <div class="d-flex">
-                                                <a class="btn btn-sm mr-3">
+                                                <router-link
+                                                    class="btn btn-sm mr-3"
+                                                    :to="{
+                                                        name: 'seller/giftboxes/listing/edit',
+                                                        params: {
+                                                            productId:
+                                                                product.id,
+                                                        },
+                                                    }"
+                                                >
                                                     Edit
-                                                </a>
+                                                </router-link>
                                                 <a
                                                     class="btn btn-sm"
                                                     href="#"
@@ -254,14 +263,20 @@
                                                 dropdown-menu-right
                                             "
                                         >
-                                            <a
+                                            <router-link
                                                 class="
                                                     dropdown-item
                                                     mobile-dropdown-item
                                                 "
+                                                :to="{
+                                                    name: 'seller/giftboxes/listing/edit',
+                                                    params: {
+                                                        productId: product.id,
+                                                    },
+                                                }"
                                             >
                                                 Edit
-                                            </a>
+                                            </router-link>
                                             <button
                                                 class="
                                                     dropdown-item

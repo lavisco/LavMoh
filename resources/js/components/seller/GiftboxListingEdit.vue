@@ -11,13 +11,13 @@
                             </router-link>
                         </li>
                         <li class="breadcrumb-item active" aria-current="page">
-                            New Giftbox
+                            Edit Giftbox
                         </li>
                     </ol>
                 </nav>
 
                 <!-- Form start -->
-                <form class="input-form" @submit.prevent="createProduct()">
+                <form class="input-form" @submit.prevent="updateProduct()">
                     <!-- Listing -->
                     <div class="card dashboard-info-card">
                         <!-- Header -->
@@ -285,12 +285,12 @@
                     <!-- Products -->
                     <div class="card dashboard-info-card mt-4">
                         <!-- Header -->
-                        <h4 class="mb-3">Select Products</h4>
+                        <h4 class="mb-3">Current Products in Giftbox</h4>
                         <hr class="mt-0" />
                         <p class="mb-1 note">
-                            Select the products available in this giftbox. Only
-                            products <strong>without variations</strong> can be
-                            added to a giftbox.
+                            These products are already available in this
+                            giftbox. You can remove them, or increase & decrease
+                            their quantity.
                         </p>
                         <p class="mb-3 mb-md-4 note">
                             The <strong>minimum price</strong> of this giftbox
@@ -301,6 +301,77 @@
                         <div class="highlight-box mb-3 mb-md-4">
                             Minimum Price is LKR {{ form.base_price }}
                         </div>
+
+                        <div class="table-responsive form-table">
+                            <table class="table align-items-center table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="smwidth">
+                                            Quantity
+                                        </th>
+                                        <th scope="col">Code</th>
+                                        <th scope="col">Title</th>
+                                        <th scope="col">Base Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr
+                                        v-for="product in form.new_giftbox_products"
+                                        :key="product.id"
+                                    >
+                                        <td>
+                                            <div class="product-card-counter">
+                                                <div
+                                                    class="counter-minus"
+                                                    @click.prevent="
+                                                        decrementProductQtyInBox(
+                                                            product
+                                                        )
+                                                    "
+                                                >
+                                                    -
+                                                </div>
+                                                <div class="counter-num">
+                                                    {{ product.quantity }}
+                                                </div>
+                                                <div
+                                                    class="counter-plus"
+                                                    @click.prevent="
+                                                        incrementProductQtyInBox(
+                                                            product
+                                                        )
+                                                    "
+                                                >
+                                                    +
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            {{ product.code }}
+                                        </td>
+                                        <td>
+                                            {{ product.title }}
+                                        </td>
+                                        <td>
+                                            {{ product.base_price }}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- New Products -->
+                    <div class="card dashboard-info-card mt-4">
+                        <!-- Header -->
+                        <h4 class="mb-3">Select New Products</h4>
+                        <hr class="mt-0" />
+                        <p class="mb-3 mb-md-4 note">
+                            Here are all the products you can add to your
+                            giftbox. Select any new ones you wish to add. Only
+                            products <strong>without variations</strong> can be
+                            added to a giftbox.
+                        </p>
 
                         <div class="table-responsive form-table">
                             <table class="table align-items-center table-hover">
@@ -395,6 +466,11 @@
                                                 :src="url"
                                                 class="banner-container"
                                             />
+                                            <img
+                                                v-if="!url"
+                                                :src="form.product_image.path"
+                                                class="banner-container"
+                                            />
                                             <svg
                                                 v-else
                                                 width="45"
@@ -419,7 +495,7 @@
                                             {{
                                                 form.photoName
                                                     ? form.photoName
-                                                    : `Select Image`
+                                                    : form.product_image.title
                                             }}
                                         </p>
                                     </div>
@@ -624,6 +700,7 @@ export default {
         occasionName: [],
         recipientName: [],
         products: [],
+        giftbox_products: [],
         url: "",
 
         form: new Form({
@@ -637,10 +714,18 @@ export default {
             image_path: "",
             photoName: "",
 
+            //existing product image
+            product_image: "",
+
             //pivot table arrays
             product_occasion: [],
             product_recipient: [],
-            giftbox_product: [],
+
+            //existing products in giftbox
+            giftbox_products: [],
+
+            //new products in giftbox
+            new_giftbox_products: [],
         }),
     }),
 
@@ -652,7 +737,7 @@ export default {
          */
 
         findProductInBox(productId) {
-            return this.form.giftbox_product.find(
+            return this.form.new_giftbox_products.find(
                 (item) => item.id === productId
             );
         },
@@ -660,8 +745,10 @@ export default {
             const BoxItem = this.findProductInBox(product.id);
             if (!BoxItem) {
                 //if product doesn't exist in box, push to box
-                this.form.giftbox_product.push({
+                this.form.new_giftbox_products.push({
                     id: product.id,
+                    code: product.code,
+                    title: product.title,
                     base_price: product.base_price,
                     quantity: 1,
                 });
@@ -675,8 +762,8 @@ export default {
 
             if (BoxItem) {
                 if (BoxItem.quantity === 1) {
-                    this.form.giftbox_product.splice(
-                        this.form.giftbox_product.indexOf(BoxItem),
+                    this.form.new_giftbox_products.splice(
+                        this.form.new_giftbox_products.indexOf(BoxItem),
                         1
                     );
                 } else {
@@ -694,13 +781,13 @@ export default {
         },
         giftboxMinPrice() {
             this.form.base_price = 0;
-            this.form.giftbox_product.map((product) => {
+            this.form.new_giftbox_products.map((product) => {
                 this.form.base_price += parseFloat(product.base_price);
             });
         },
         giftboxMaxPrice() {
             this.form.base_price = 0;
-            this.form.giftbox_product.map((product) => {
+            this.form.new_giftbox_products.map((product) => {
                 this.form.base_price +=
                     parseFloat(product.base_price) * product.quantity;
             });
@@ -779,12 +866,43 @@ export default {
                 .catch((error) => console.log(error));
         },
 
-        createProduct() {
+        loadProduct() {
+            axios
+                .get("/api/seller/giftboxes/" + this.$route.params.productId)
+                .then(({ data }) => {
+                    //this.form.fill(data);
+                    Object.keys(data).forEach((key) => {
+                        this.form[key] = data[key];
+                    });
+
+                    //push existing products in giftbox into the new array new_giftbox_products
+                    Object.keys(this.form.giftbox_products).forEach((key) => {
+                        this.form.new_giftbox_products.push({
+                            id: this.form.giftbox_products[key].product_id,
+                            base_price:
+                                this.form.giftbox_products[key].child_product
+                                    .base_price,
+                            code: this.form.giftbox_products[key].child_product
+                                .code,
+                            title: this.form.giftbox_products[key].child_product
+                                .title,
+                            quantity: this.form.giftbox_products[key].quantity,
+                        });
+                    });
+                })
+                .then(() => {
+                    this.loadDetails();
+                    this.loading = false;
+                })
+                .catch((error) => console.log(error));
+        },
+
+        updateProduct() {
             this.submitButtonText = "In Progress...";
             this.submitButtonDisabled = true;
 
             this.form
-                .post("/api/seller/giftboxes")
+                .put("/api/seller/giftboxes/" + this.form.id)
                 .then(() => {
                     this.submitButtonText = "Saved";
                     this.submitButtonDisabled = false;
@@ -809,7 +927,7 @@ export default {
         },
     },
     mounted() {
-        this.loadDetails();
+        this.loadProduct();
     },
 };
 </script>

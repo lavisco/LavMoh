@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Api\Seller;
+namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\GiftboxRequest;
 use App\Http\Requests\ProductUpdateRequest;
-use App\Models\Category;
 use App\Models\GiftboxProduct;
 use App\Models\Occasion;
 use App\Models\Product;
@@ -24,13 +23,13 @@ class GiftboxController extends Controller
     */
     public function __construct()
     {
-        $this->middleware(['auth:api', 'is_seller']);
+        $this->middleware(['auth:api', 'is_admin']);
     }
 
     public function index()
     {
         ///$this->authorize('viewAny', Product::class);
-        return Product::where('user_id', auth()->id())->where('category_id', 7)->with(['product_image', 'category', 'giftbox_products', 'giftbox_products.childProduct'])->latest()->filter(request(['searchText']))->paginate(25);
+        return Product::where('category_id', 7)->with(['product_image', 'category', 'giftbox_products', 'giftbox_products.childProduct'])->latest()->filter(request(['searchText']))->paginate(25);
     }
 
     public function store(GiftboxRequest $request)
@@ -90,7 +89,7 @@ class GiftboxController extends Controller
      */
     public function updateGiftboxProducts(Request $request, $productId)
     {
-            //!!!!!!!!!!!!!!or find all products in agiftbox, delete them all and save again newly
+            //!!!!!!!!!!!!!!or find all products in a giftbox, delete them all and save again newly
         $giftboxProducts = $request->input('giftbox_product.*');
        
         for ($i=0; $i < count($giftboxProducts); $i++) { 
@@ -182,7 +181,7 @@ class GiftboxController extends Controller
         return response()->json([
             'occasions' => Occasion::select('id', 'name')->latest()->get(),
             'recipients' => Recipient::select('id', 'name')->latest()->get(),
-            'products' => Product::where('user_id', auth()->id())->where('has_variations', false)->where('product_state_id', 1)->where('category_id','!=', 7)->select('id', 'code', 'title', 'base_price')->latest()->get(),
+            'products' => Product::where('has_variations', false)->where('product_state_id', 1)->where('category_id','!=', 7)->select('id', 'code', 'title', 'base_price')->latest()->get(),
         ]);
     }
 }

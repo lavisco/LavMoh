@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\Admin\CountryController;
 use App\Http\Controllers\Api\Admin\CurrencyController;
 use App\Http\Controllers\Api\Admin\DashboardController;
 use App\Http\Controllers\Api\Admin\DistrictController;
+use App\Http\Controllers\Api\Admin\GiftboxController;
 use App\Http\Controllers\Api\Admin\GiftwrapController;
 use App\Http\Controllers\Api\Admin\HomeSliderController;
 use App\Http\Controllers\Api\Admin\OccasionController;
@@ -105,6 +106,9 @@ Route::prefix('admin')->group(function () {
     Route::apiResource('/currencies', CurrencyController::class);
     Route::apiResource('/dashboard', DashboardController::class);
     Route::apiResource('/districts', DistrictController::class);
+    Route::put('/giftboxes/updateState/{product}', [GiftboxController::class, 'updateState']);
+    Route::get('/giftboxes/details', [GiftboxController::class, 'getDetails']);
+    Route::apiResource('/giftboxes', GiftboxController::class);
     Route::apiResource('/giftwraps', GiftwrapController::class);
     Route::apiResource('/homesliders', HomeSliderController::class);
     Route::apiResource('/occasions', OccasionController::class);

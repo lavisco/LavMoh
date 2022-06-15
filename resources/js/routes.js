@@ -76,6 +76,20 @@ export let routes = [
         },
     },
     {
+        path: "/admin/giftboxes",
+        component: require("./components/admin/Giftbox.vue").default,
+        meta: {
+            title: "Giftboxes",
+        },
+    },
+    {
+        path: "/admin/giftboxes/listing",
+        component: require("./components/admin/GiftboxListing.vue").default,
+        meta: {
+            title: "New Giftbox",
+        },
+    },
+    {
         path: "/admin/giftwraps",
         component: require("./components/admin/Giftwrap.vue").default,
         meta: {

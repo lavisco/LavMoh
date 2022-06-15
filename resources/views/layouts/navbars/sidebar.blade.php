@@ -188,6 +188,11 @@
                     </router-link>
                 </li>
                 <li class="nav-item">
+                    <router-link to="/admin/giftboxes" class="nav-link">
+                        <i class="fas fa-gift"></i> Giftboxes
+                    </router-link>
+                </li>
+                <li class="nav-item">
                     <router-link to="/admin/orders" class="nav-link">
                         <i class="fas fa-dolly-flatbed"></i> Orders
                     </router-link>

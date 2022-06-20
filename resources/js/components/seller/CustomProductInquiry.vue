@@ -36,22 +36,6 @@
                                     v-model="searchText"
                                 />
                             </div>
-                            <div class="col-lg-8 col-3 text-right">
-                                <router-link to="/seller/products/listing">
-                                    <button
-                                        type="button"
-                                        class="btn btn-primary mobile-add-btn"
-                                    >
-                                        <i
-                                            class="fas fa-plus mr-md-2"
-                                            aria-hidden="true"
-                                        ></i>
-                                        <span class="hide-content-sm-inline"
-                                            >Add</span
-                                        >
-                                    </button>
-                                </router-link>
-                            </div>
                         </div>
                     </div>
                     <div class="card">
@@ -68,81 +52,79 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">Image</th>
-                                        <th scope="col">Code</th>
+                                        <th scope="col">Customer</th>
                                         <th scope="col" class="table-col-lg">
-                                            Title
+                                            Product
                                         </th>
-                                        <th scope="col">Quantity</th>
-                                        <th scope="col" class="table-col-sm">
-                                            Base Price
-                                        </th>
+                                        <th class="table-col-sm">Delivery Date</th>
                                         <th class="table-col-sm">Status</th>
                                         <th scope="col"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="product in products">
+                                    <tr v-for="inquiry in inquiries">
                                         <td>
                                             <img
                                                 width="150px"
                                                 height="150px"
                                                 class="banner-container-sm"
-                                                :src="
-                                                    product.product_image
-                                                        ? product.product_image
-                                                              .path
-                                                        : '/images/lavisco/img-bg.jpg'
-                                                "
+                                                :src="inquiry.path"
                                             />
                                         </td>
-                                        <td>{{ product.code }}</td>
-                                        <td>{{ product.title }}</td>
-                                        <td>{{ product.quantity }}</td>
-                                        <td>{{ product.base_price }}</td>
+                                        <td>
+                                            {{
+                                                inquiry.first_name +
+                                                " " +
+                                                inquiry.last_name
+                                            }}<br />
+                                            {{ inquiry.email }}<br />
+                                            {{ inquiry.phone }}<br />
+                                            {{ inquiry.city }}, 
+                                            {{ inquiry.district }},
+                                            {{ inquiry.state }},
+                                            {{ inquiry.country }}
+                                        </td>
+                                        <td>
+                                            {{ inquiry.short_description }}
+                                        </td>
+                                        <td>
+                                            {{
+                                                moment(
+                                                    inquiry.delivery_date
+                                                ).format("DD-MM-YYYY")
+                                            }}
+                                        </td>
                                         <td>
                                             <select
                                                 class="
                                                     custom-select
                                                     form-control
                                                 "
-                                                name="product_state_id"
-                                                id="product_state_id"
-                                                v-model="
-                                                    product.product_state_id
-                                                "
-                                                @change.prevent="
-                                                    setCurrentState(
-                                                        product.id,
-                                                        $event
-                                                    )
-                                                "
+                                                name="status"
+                                                id="status"
+                                                v-model="inquiry.status"
                                             >
-                                                <option
-                                                    v-for="productState in productStates"
-                                                    :value="productState.id"
-                                                >
-                                                    {{ productState.state }}
+                                                <option value="pending">
+                                                    Pending
+                                                </option>
+                                                <option value="conditional">
+                                                    Conditional
+                                                </option>
+                                                <option value="reject">
+                                                    Reject
+                                                </option>
+                                                <option value="accept">
+                                                    Accept
                                                 </option>
                                             </select>
                                         </td>
                                         <td class="text-right">
                                             <div class="d-flex">
-                                                <router-link
-                                                    class="btn btn-sm mr-3"
-                                                    :to="{
-                                                        name: 'seller/products/listing/edit',
-                                                        params: {
-                                                            productId:
-                                                                product.id,
-                                                        },
-                                                    }"
-                                                    >Edit
-                                                </router-link>
                                                 <a
                                                     class="btn btn-sm"
                                                     href="#"
                                                     @click.prevent="
-                                                        newModal(product)
+                                                        newModal(inquiry)
                                                     "
                                                 >
                                                     View
@@ -159,7 +141,7 @@
                         <div class="hide-content">
                             <div
                                 class="card dashboard-info-card mb-4 pb-3"
-                                v-for="product in products"
+                                v-for="inquiry in inquiries"
                             >
                                 <div
                                     class="
@@ -178,15 +160,15 @@
                                                 banner-container-xs
                                                 mr-3
                                             "
-                                            :src="
-                                                product.product_image
-                                                    ? product.product_image.path
-                                                    : '/images/lavisco/img-bg.jpg'
-                                            "
+                                            :src="inquiry.path"
                                         />
                                         <div>
                                             <div class="mobile-card-title mb-3">
-                                                {{ product.code }}
+                                                {{
+                                                    inquiry.first_name +
+                                                    " " +
+                                                    inquiry.last_name
+                                                }}
                                             </div>
                                             <select
                                                 class="
@@ -194,23 +176,21 @@
                                                     form-control
                                                     mobile-btn-sm
                                                 "
-                                                name="product_state_id"
-                                                id="product_state_id"
-                                                v-model="
-                                                    product.product_state_id
-                                                "
-                                                @change.prevent="
-                                                    setCurrentState(
-                                                        product.id,
-                                                        $event
-                                                    )
-                                                "
+                                                name="status"
+                                                id="status"
+                                                v-model="inquiry.status"
                                             >
-                                                <option
-                                                    v-for="productState in productStates"
-                                                    :value="productState.id"
-                                                >
-                                                    {{ productState.state }}
+                                                <option value="pending">
+                                                    Pending
+                                                </option>
+                                                <option value="conditional">
+                                                    Conditional
+                                                </option>
+                                                <option value="reject">
+                                                    Reject
+                                                </option>
+                                                <option value="accept">
+                                                    Accept
                                                 </option>
                                             </select>
                                         </div>
@@ -264,19 +244,6 @@
                                                 dropdown-menu-right
                                             "
                                         >
-                                            <router-link
-                                                class="
-                                                    dropdown-item
-                                                    mobile-dropdown-item
-                                                "
-                                                :to="{
-                                                    name: 'seller/products/listing/edit',
-                                                    params: {
-                                                        productId: product.id,
-                                                    },
-                                                }"
-                                                >Edit
-                                            </router-link>
                                             <button
                                                 class="
                                                     dropdown-item
@@ -284,7 +251,7 @@
                                                 "
                                                 type="button"
                                                 @click.prevent="
-                                                    newModal(product)
+                                                    newModal(inquiry)
                                                 "
                                             >
                                                 View
@@ -292,12 +259,25 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="mb-4">
+                                <div class="mb-3">
                                     <div class="mobile-card-sub-title">
-                                        Title
+                                        Contact Customer
                                     </div>
                                     <div class="mobile-card-body">
-                                        {{ product.title }}
+                                        {{ inquiry.email }}<br />
+                                        {{ inquiry.phone }}<br />
+                                        {{ inquiry.city }},
+                                        {{ inquiry.district }},
+                                        {{ inquiry.state }},
+                                        {{ inquiry.country }}
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="mobile-card-sub-title">
+                                        Customisation Details
+                                    </div>
+                                    <div class="mobile-card-body">
+                                        {{ inquiry.short_description }}
                                     </div>
                                 </div>
                                 <div
@@ -310,10 +290,14 @@
                                 >
                                     <div class="mr-3">
                                         <div class="mobile-card-sub-title">
-                                            Quantity
+                                            Delivery Date
                                         </div>
                                         <div class="mobile-card-body">
-                                            {{ product.quantity }}
+                                            {{
+                                                moment(
+                                                    inquiry.delivery_date
+                                                ).format("DD-MM-YYYY")
+                                            }}
                                         </div>
                                     </div>
                                     <div>
@@ -323,17 +307,9 @@
                                         <div class="mobile-card-body">
                                             {{
                                                 moment(
-                                                    product.created_at
+                                                    inquiry.created_at
                                                 ).format("DD-MM-YYYY")
                                             }}
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="mobile-card-sub-title">
-                                            Base Price
-                                        </div>
-                                        <div class="mobile-card-body">
-                                            {{ product.base_price }}
                                         </div>
                                     </div>
                                 </div>
@@ -362,7 +338,8 @@
                             class="modal-title white text-uppercase mb-0"
                             id="addRecordLabel"
                         >
-                            {{ form.title }}
+                            Request from
+                            {{ form.first_name + " " + form.last_name }}
                         </h4>
                         <button
                             type="button"
@@ -381,27 +358,16 @@
                     <div class="modal-body modal-view">
                         <div class="card dashboard-info-card">
                             <!-- Header -->
-                            <h4 class="mb-3">Images</h4>
+                            <h4 class="mb-3">Image provided by customer</h4>
                             <hr class="mt-0" />
                             <div class="d-flex flex-row flex-wrap gap">
-                                <div
-                                    class="image-upload-box"
-                                    :class="{
-                                        'image-upload-box-primary':
-                                            image.primary_image == 1,
-                                    }"
-                                    v-for="image in form.product_images"
-                                >
+                                <div class="image-upload-box">
                                     <img
                                         class="
                                             banner-container
                                             seller-banner-container
                                         "
-                                        :src="
-                                            image
-                                                ? image.path
-                                                : '/images/lavisco/img-bg.jpg'
-                                        "
+                                        :src="form.path"
                                     />
                                 </div>
                             </div>
@@ -409,50 +375,18 @@
 
                         <div class="card dashboard-info-card mt-4">
                             <!-- Header -->
-                            <h4 class="mb-3">Details</h4>
+                            <h4 class="mb-3">Customisation Details</h4>
                             <hr class="mt-0" />
                             <div class="row mb-3">
-                                <div class="col-md-3 modal-label">Title</div>
-                                <div class="col-md-9">
-                                    {{ form.title }}
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-md-3 modal-label">Category</div>
-                                <div class="col-md-9">
-                                    {{ form.category.name }}
-                                </div>
-                            </div>
-                            <div class="row mb-3">
                                 <div class="col-md-3 modal-label">
-                                    Sub-Category
+                                    Delivery Date
                                 </div>
                                 <div class="col-md-9">
                                     {{
-                                        form.sub_categories[0]
-                                            ? form.sub_categories[0].name
-                                            : ""
+                                        moment(form.delivery_date).format(
+                                            "DD-MM-YYYY"
+                                        )
                                     }}
-                                </div>
-                            </div>
-                            <div class="row mb-3" v-show="form.sku">
-                                <div class="col-md-3 modal-label">SKU</div>
-                                <div class="col-md-9">
-                                    {{ form.sku }}
-                                </div>
-                            </div>
-                            <div class="row mb-3" v-show="form.base_price">
-                                <div class="col-md-3 modal-label">
-                                    Base Price
-                                </div>
-                                <div class="col-md-9">
-                                    {{ form.base_price }}
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-md-3 modal-label">Quantity</div>
-                                <div class="col-md-9">
-                                    {{ form.quantity }}
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -471,89 +405,33 @@
                                     {{ form.description }}
                                 </div>
                             </div>
-                            <div class="row mb-3">
-                                <div class="col-md-3 modal-label">
-                                    Dimensions
-                                </div>
-                                <div class="col-md-9">
-                                    {{
-                                        form.dimensions_unit
-                                            ? `${form.length} * ${form.width} * ${form.height} ${form.dimensions_unit}`
-                                            : ""
-                                    }}
-                                </div>
-                            </div>
-                            <div class="row mb-3" v-show="form.weight">
-                                <div class="col-md-3 modal-label">Weight</div>
-                                <div class="col-md-9">
-                                    {{
-                                        form.weight
-                                            ? `${form.weight} ${form.weight_unit}`
-                                            : ""
-                                    }}
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-md-3 modal-label">
-                                    Processing Time
-                                </div>
-                                <div class="col-md-9">
-                                    {{ form.processing_time }}
-                                </div>
-                            </div>
                         </div>
-
-                        <div v-if="form.variations">
-                            <div
-                                class="card dashboard-info-card mt-4"
-                                v-for="(variation, index) in form.variations"
-                            >
-                                <!-- Header -->
-                                <h4 class="mb-3">Variation {{ index + 1 }}</h4>
-                                <hr class="mt-0" />
-                                <div class="row mb-3">
-                                    <div class="col-md-3 modal-label">Type</div>
-                                    <div class="col-md-9">
-                                        {{ variation.name }}
-                                    </div>
+                        <div class="card dashboard-info-card mt-4">
+                            <!-- Header -->
+                            <h4 class="mb-3">Customer Details</h4>
+                            <hr class="mt-0" />
+                            <div class="row mb-3">
+                                <div class="col-md-3 modal-label">Name</div>
+                                <div class="col-md-9">
+                                    {{ form.first_name }}
+                                    {{ form.last_name }}
                                 </div>
-                                <div
-                                    class="row mb-3"
-                                    v-if="variation.description"
-                                >
-                                    <div class="col-md-3 modal-label">
-                                        Description
-                                    </div>
-                                    <div class="col-md-9">
-                                        {{ variation.description }}
-                                    </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-3 modal-label">Contact</div>
+                                <div class="col-md-9">
+                                    {{ form.email }} <br />
+                                    {{ form.phone }}
                                 </div>
-                                <div
-                                    class="row mb-3"
-                                    v-for="(
-                                        option, index
-                                    ) in variation.variation_options"
-                                >
-                                    <div class="col-md-3 modal-label">
-                                        Option {{ index + 1 }}
-                                    </div>
-                                    <div class="col-md-9">
-                                        {{ option.name }}
-                                        <span class="grey">-</span>
-                                        LKR {{ option.price }}
-                                        <div>
-                                            {{ option.quantity }}
-                                            <span class="grey text-xxs">
-                                                Quantity
-                                            </span>
-                                        </div>
-                                        <div v-if="option.sku">
-                                            {{ option.sku }}
-                                            <span class="grey text-xxs">
-                                                SKU
-                                            </span>
-                                        </div>
-                                    </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-3 modal-label">Address</div>
+                                <div class="col-md-9">
+                                    {{ form.address }}
+                                    <br />
+                                    {{ form.city }}, {{ form.district }},
+                                    {{ form.state }},
+                                    {{ form.country }}
                                 </div>
                             </div>
                         </div>
@@ -592,37 +470,26 @@ export default {
     },
     data: () => ({
         moment: moment,
-        products: [],
-        productStates: [],
+        inquiries: [],
         searchText: null,
         loading: true,
         form: new Form({
             id: "",
-            sku: "",
-            title: "",
-            short_description: "",
+            first_name: "",
+            last_name: "",
+            email: "",
+            phone: "",
+            address: "",
+            city: "",
+            district: "",
+            state: "",
+            delivery_date: "",
+            size: "",
+            tiers: "",
             description: "",
-            length: "",
-            width: "",
-            height: "",
-            dimensions_unit: "",
-            weight: "",
-            weight_unit: "",
-            base_price: "",
-            processing_time: "",
-            has_custom_text: "",
-            has_custom_image: "",
-            has_variations: "",
-            has_inventory: "",
-            quantity: "",
-            product_state_id: "",
-            category_id: "",
-            category: "",
-            sub_categories: [],
-            product_image: null,
-            product_images: null,
-            product_variations: null,
-            variations: null,
+            short_description: "",
+            image_path: "",
+            path: "",
         }),
     }),
 
@@ -633,9 +500,9 @@ export default {
     },
 
     methods: {
-        newModal(product) {
+        newModal(inquiry) {
             $("#addRecord").modal("show");
-            this.form.fill(product);
+            this.form.fill(inquiry);
         },
 
         loadProducts() {
@@ -644,24 +511,17 @@ export default {
                     params: { searchText: this.searchText },
                 })
                 .then(({ data }) => {
-                    this.products = data.data;
+                    this.inquiries = data.data;
                     this.loading = false;
                 })
                 .catch((error) => console.log(error));
         },
 
-        loadProductStates() {
-            axios
-                .get("/api/seller/productstates")
-                .then(({ data }) => (this.productStates = data))
-                .catch((error) => console.log(error));
-        },
-
-        setCurrentState(product, event) {
-            if (confirm("Are you sure you want to change product status?")) {
+        setCurrentState(inquiry, event) {
+            if (confirm("Are you sure you want to change inquiry status?")) {
                 this.form.product_state_id = event.target.value;
                 this.form
-                    .put("/api/seller/products/updateState/" + product)
+                    .put("/api/seller/inquiries/updateState/" + inquiry)
                     .then(() => {
                         Fire.$emit("reloadRecords");
                     })
@@ -671,7 +531,6 @@ export default {
     },
     mounted() {
         this.loadProducts();
-        this.loadProductStates();
         Fire.$on("reloadRecords", () => {
             this.loadProducts();
         });

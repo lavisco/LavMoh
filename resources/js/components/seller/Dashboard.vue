@@ -1103,15 +1103,15 @@
                                                     Confirmation
                                                 </h3>
                                                 <h4 class="mb-2">
-                                                    We'll review your business &
-                                                    activation agreement once
-                                                    you Save changes.
+                                                    Once you have submitted this
+                                                    form you may proceed to add
+                                                    a new product to your store.
                                                 </h4>
                                                 <p>
-                                                    Review will take upto 4
-                                                    days. Once your store is
-                                                    activated you will receive
-                                                    an email.
+                                                    You can review & update your
+                                                    profile and store details at
+                                                    any moment from the
+                                                    dashboard.
                                                 </p>
                                             </div>
 
@@ -1288,9 +1288,7 @@ export default {
                     this.form.first_name = this.user.name
                         .trim()
                         .split(/\s+/)[0];
-                    this.form.last_name = this.user.name
-                        .trim()
-                        .split(/\s+/)[1];
+                    this.form.last_name = this.user.name.trim().split(/\s+/)[1];
                     this.form.email = this.user.email;
                     this.form.phone = this.user.phone;
 

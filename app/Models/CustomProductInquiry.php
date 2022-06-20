@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 
 class CustomProductInquiry extends Model
 {
@@ -31,6 +32,20 @@ class CustomProductInquiry extends Model
         'product_id',
         'user_id',
     ];
+
+    /*
+    |--------------------------------------------------------------------------
+    | Banner Image Path
+    |--------------------------------------------------------------------------
+    */
+    protected $appends = ['path'];
+
+    public function getPathAttribute()
+    {
+        return $this->image_path ? 
+            Storage::disk('s3')->temporaryUrl('public/' . $this->image_path, '+2 minutes') 
+            : "/images/lavisco/img-bg.jpg";
+    }
 
     //custom_product_inquiries:user M:1
     public function user()

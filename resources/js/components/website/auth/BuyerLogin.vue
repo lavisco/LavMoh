@@ -1,7 +1,7 @@
 <template>
     <!-- Body -->
     <div class="container-fluid login">
-        <h1>Sign In</h1>
+        <h1>Shopper Sign In</h1>
         <h5>Welcome back</h5>
 
         <p>

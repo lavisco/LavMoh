@@ -21,7 +21,7 @@
                     <!-- Listing -->
                     <div class="card dashboard-info-card">
                         <!-- Header -->
-                        <h4 class="mb-3">Create a new Giftbox</h4>
+                        <h4 class="mb-3">Edit Giftbox {{ form.code }}</h4>
                         <hr class="mt-0" />
                         <p class="mb-3 mb-md-4 note">
                             Setup a giftbox using your best products for the
@@ -705,6 +705,7 @@ export default {
 
         form: new Form({
             id: "",
+            code: "",
             sku: "",
             title: "",
             short_description: "",

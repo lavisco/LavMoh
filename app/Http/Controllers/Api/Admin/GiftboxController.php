@@ -83,25 +83,6 @@ class GiftboxController extends Controller
         }
     }
 
-    
-    /**
-     * Update products a particular giftbox in storage.
-     */
-    public function updateGiftboxProducts(Request $request, $productId)
-    {
-            //!!!!!!!!!!!!!!or find all products in a giftbox, delete them all and save again newly
-        $giftboxProducts = $request->input('giftbox_product.*');
-       
-        for ($i=0; $i < count($giftboxProducts); $i++) { 
-            $giftboxProduct = GiftboxProduct::findOrFail($giftboxProducts[$i]['id']);
-            
-            $giftboxProduct->update([
-                'product_id' => $giftboxProducts[$i]['id'],
-                'quantity' => $giftboxProducts[$i]['quantity'],
-            ]);
-        }
-    }
-
     public function uploadImage($request, $productId)
     {
         ProductImage::create([
@@ -114,13 +95,14 @@ class GiftboxController extends Controller
 
     public function show($id)
     {
-        ///$this->authorize('view', $product);
-        return Product::with(['occasions', 'recipients', 'shippings', 'sub_categories'])->findOrFail($id);
+        return Product::with(['product_image', 'occasions', 'recipients', 'shippings', 'sub_categories', 'giftbox_products.childProduct'])->findOrFail($id);
     }
 
-    public function update(ProductUpdateRequest $request, Product $product)
+    public function update(Request $request, $id)
     {
-        $this->authorize('update', $product);
+        //$this->authorize('update', $product);
+
+        $product = Product::findOrFail($id);
 
         $request->merge([
             'code' => 'LP'.str_pad($product->id,5,"0",STR_PAD_LEFT),
@@ -128,8 +110,37 @@ class GiftboxController extends Controller
         ]);
 
         $product->update($request->all());
+
+        $this->updateImage($request);
+        $this->updateGiftboxProducts($request, $product->id);
+
         $product->occasions()->sync(request('product_occasion'));
         $product->recipients()->sync(request('product_recipient'));
+    }
+
+    /**
+     * Update products of a particular giftbox in storage.
+     */
+    public function updateGiftboxProducts(Request $request, $productId)
+    {
+        /*  
+        *   delete existing record and create new ones
+        */
+        $oldProducts = GiftboxProduct::where('giftbox_id', $productId)->get();
+
+        for ($i=0; $i < count($oldProducts); $i++) {
+            $oldProducts[$i]->delete();
+        }
+
+        $giftboxProducts = $request->input('new_giftbox_products.*');
+       
+        for ($i=0; $i < count($giftboxProducts); $i++) {
+            GiftboxProduct::create([
+                'product_id' => $giftboxProducts[$i]['id'],
+                'quantity' => $giftboxProducts[$i]['quantity'],
+                'giftbox_id' => $productId,
+            ]);
+        }
     }
 
     public function updateState(Request $request, Product $product)
@@ -161,15 +172,24 @@ class GiftboxController extends Controller
      * Update image in storage(delete existing image and save the newly upload one), & save the path to db.
      */
 
-    public function updateImage($request, $requestImage, $currentImage)
+    public function updateImage($request)
     {
-        if($requestImage != $currentImage){
-            $request->merge(['image_path' => $this->storeImage($requestImage, $request->photoName)]);
+        $productImage = ProductImage::findOrFail($request->product_image->id);
 
-            $existingImage = storage_path('app/public/').$currentImage;
-            if(file_exists($existingImage)){
-                @unlink($existingImage);
-            }
+        if ($request->image_path != $productImage->image_path) {
+
+            $file_name = time().'_'.$request->photoName;
+            $image = $request->image_path;
+
+            $img = Image::make($image)->encode();
+            Storage::disk('s3')->put('/public/products/'.$file_name, $img->stream());
+
+            $productPhoto = 'products/'.$file_name;
+
+            $productImage->update([
+                'image_path' => $productPhoto,
+                'title' => $request->photoName,
+            ]);
         }
     }
 

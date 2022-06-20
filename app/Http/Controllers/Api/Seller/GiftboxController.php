@@ -120,7 +120,7 @@ class GiftboxController extends Controller
     }
 
     /**
-     * Update products a particular giftbox in storage.
+     * Update products of a particular giftbox in storage.
      */
     public function updateGiftboxProducts(Request $request, $productId)
     {

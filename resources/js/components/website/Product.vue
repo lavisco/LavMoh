@@ -259,7 +259,34 @@
                     <!-- buttons -->
                     <div class="mt-4">
                         <div class="d-md-flex">
+                            <router-link
+                                class="w-100"
+                                :to="{
+                                    name: 'custom_product_inquiry',
+                                    params: {
+                                        productId: product.id,
+                                    },
+                                }"
+                                v-if="
+                                    product.sub_categories &&
+                                    product.sub_categories[0].name == 'Custom'
+                                "
+                            >
+                                <button
+                                    class="
+                                        checkout-btn
+                                        btn-full
+                                        checkout-btn-cart
+                                        mt-2 mt-md-0
+                                        col-md-8
+                                    "
+                                    type="button"
+                                >
+                                    Inquire
+                                </button>
+                            </router-link>
                             <button
+                                v-else
                                 class="
                                     checkout-btn
                                     btn-full

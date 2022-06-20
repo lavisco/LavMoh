@@ -27,6 +27,7 @@ class DashboardController extends Controller
         }
         
         return response()->json([
+            'user' => $user,
             'orders' => Order::where('seller_id', auth()->id())->count(),
             'products' => Product::where('user_id', auth()->id())->count(),
             'sellerShop' => Shop::where('user_id', auth()->id())->get(),

@@ -430,6 +430,9 @@ button.bg-black:hover {
 .bg-pale-grey {
     background-color: #fcfafa;
 }
+.bg-light-grey {
+    background-color: #fafafa;
+}
 .white {
     color: $white !important;
 }
@@ -1059,6 +1062,10 @@ button.bg-black:hover {
         justify-content: start;
         align-items: center;
         padding: 10px;
+
+        &:hover{
+            box-shadow: 2px 4px 6px rgb(212 204 219 / 44%);
+        }
     }
 
     .gallery-img {
@@ -1724,21 +1731,19 @@ section {
     height: 480px;
 }
 .item-card-occasion {
-    .card-img-text,
-    .bg-black {
-        color: $lav-green;
+    .card-img-text{
+        color: #00A574;
     }
     .card-button-container {
-        background: $lav-green;
+        background: #00a573f5;
     }
 }
 .item-card-recipient {
-    .card-img-text,
-    .bg-black {
-        color: $lav-l-blue;
+    .card-img-text {
+        color: #149BAC;
     }
     .card-button-container {
-        background: $lav-l-blue;
+        background: #149aacf2;
     }
 }
 
@@ -1767,10 +1772,13 @@ section {
     padding: 16px 14px;
 
     .bg-black {
-        background: #ffffff;
+        color: #ffffff;
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.467);
         border-radius: 12px;
-        padding: 5px 16px;
+        padding: 5px 14px;
         font-size: 15px;
+        letter-spacing: 0.01rem;
     }
 }
 

@@ -36,6 +36,7 @@ class UserRequest extends FormRequest
             'password' => 'sometimes|required|string|min:8',
             'role_id' => 'sometimes|required',
             'avatar' => 'nullable',
+            //'phone' => 'nullable|max:20',
         ];
     }
 

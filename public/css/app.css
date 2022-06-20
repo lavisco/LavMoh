@@ -10474,6 +10474,10 @@ button.bg-black:hover {
   background-color: #fcfafa;
 }
 
+.bg-light-grey {
+  background-color: #fafafa;
+}
+
 .white {
   color: #ffffff !important;
 }
@@ -11107,6 +11111,9 @@ button.bg-black:hover {
   justify-content: start;
   align-items: center;
   padding: 10px;
+}
+.gallery .gallery-item:hover {
+  box-shadow: 2px 4px 6px rgba(212, 204, 219, 0.44);
 }
 .gallery .gallery-img {
   position: absolute;
@@ -11774,20 +11781,18 @@ section h1 {
   height: 480px;
 }
 
-.item-card-occasion .card-img-text,
-.item-card-occasion .bg-black {
-  color: #16b485;
+.item-card-occasion .card-img-text {
+  color: #00A574;
 }
 .item-card-occasion .card-button-container {
-  background: #16b485;
+  background: #00a573f5;
 }
 
-.item-card-recipient .card-img-text,
-.item-card-recipient .bg-black {
-  color: #1aafc4;
+.item-card-recipient .card-img-text {
+  color: #149BAC;
 }
 .item-card-recipient .card-button-container {
-  background: #1aafc4;
+  background: #149aacf2;
 }
 
 .card-img-text {
@@ -11817,10 +11822,13 @@ section h1 {
   padding: 16px 14px;
 }
 .card-button-container .bg-black {
-  background: #ffffff;
+  color: #ffffff;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.467);
   border-radius: 12px;
-  padding: 5px 16px;
+  padding: 5px 14px;
   font-size: 15px;
+  letter-spacing: 0.01rem;
 }
 
 @media (max-width: 768px) {

@@ -240,31 +240,28 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="gallery">
-                            <div
+                            <router-link
+                                :to="{
+                                    name: 'categories/category',
+                                    params: {
+                                        categoryId: category.id,
+                                        slug: category.slug,
+                                    },
+                                }"
                                 class="gallery-item"
                                 :class="`gallery-item--${index + 1}`"
                                 v-for="(category, index) in categories"
+                                :key="category.id"
                             >
                                 <img
                                     :src="category.path ? category.path : ''"
                                     class="gallery-img"
                                     alt="Image 1"
                                 />
-
-                                <router-link
-                                    :to="{
-                                        name: 'categories/category',
-                                        params: {
-                                            categoryId: category.id,
-                                            slug: category.slug,
-                                        },
-                                    }"
-                                >
-                                    <div class="card-img-text">
-                                        {{ category.name }}
-                                    </div>
-                                </router-link>
-                            </div>
+                                <div class="card-img-text">
+                                    {{ category.name }}
+                                </div>
+                            </router-link>
                         </div>
                         <div
                             class="

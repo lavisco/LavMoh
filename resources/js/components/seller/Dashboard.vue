@@ -1228,6 +1228,7 @@ export default {
         orders: "",
         products: "",
         sellerShop: "",
+        user: "",
         has_shop: "",
         shop_active: "",
         url: "",
@@ -1283,6 +1284,16 @@ export default {
             axios
                 .get("/api/seller/dashboard")
                 .then(({ data }) => {
+                    this.user = data.user;
+                    this.form.first_name = this.user.name
+                        .trim()
+                        .split(/\s+/)[0];
+                    this.form.last_name = this.user.name
+                        .trim()
+                        .split(/\s+/)[1];
+                    this.form.email = this.user.email;
+                    this.form.phone = this.user.phone;
+
                     this.has_shop = data.hasShop;
                     this.shop_active = data.shopActive;
                     if (this.has_shop === false) {

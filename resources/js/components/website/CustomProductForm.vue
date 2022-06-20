@@ -86,53 +86,62 @@
                         <hr />
 
                         <div class="form-group">
-                            <label class="col-form-label" for="delivery_address"
+                            <label class="col-form-label" for="address"
                                 >Address
                                 <strong class="text-danger"> * </strong>
                             </label>
                             <input
-                                id="delivery_address"
-                                v-model="form.delivery_address"
+                                id="address"
+                                v-model="form.address"
                                 type="text"
-                                name="delivery_address"
+                                name="address"
                                 class="form-control"
                             />
-                            <HasError :form="form" field="delivery_address" />
+                            <HasError :form="form" field="address" />
                         </div>
                         <div class="row">
                             <div class="form-group col-md-6">
-                                <label
-                                    class="col-form-label"
-                                    for="delivery_city"
+                                <label class="col-form-label" for="city"
                                     >City
                                 </label>
                                 <input
-                                    id="delivery_city"
-                                    v-model="form.delivery_city"
+                                    id="city"
+                                    v-model="form.city"
                                     type="text"
-                                    name="delivery_city"
+                                    name="city"
                                     class="form-control"
                                 />
-                                <HasError :form="form" field="delivery_city" />
+                                <HasError :form="form" field="city" />
                             </div>
                             <div class="form-group col-md-6">
-                                <label
-                                    class="col-form-label"
-                                    for="delivery_district"
+                                <label class="col-form-label" for="district"
                                     >District
                                     <strong class="text-danger"> * </strong>
                                 </label>
                                 <input
-                                    id="delivery_district"
-                                    v-model="form.delivery_district"
+                                    id="district"
+                                    v-model="form.district"
                                     type="text"
-                                    name="delivery_district"
+                                    name="district"
                                     class="form-control"
                                 />
-                                <HasError
-                                    :form="form"
-                                    field="delivery_district"
+                                <HasError :form="form" field="district" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label class="col-form-label" for="state">
+                                    State
+                                    <strong class="text-danger"> * </strong>
+                                </label>
+                                <input
+                                    id="state"
+                                    v-model="form.state"
+                                    type="text"
+                                    name="state"
+                                    class="form-control"
                                 />
+                                <HasError :form="form" field="state" />
                             </div>
                         </div>
                     </div>
@@ -143,9 +152,8 @@
                         <hr />
 
                         <div class="mb-3 large-img-upload-box">
-                            <label class="col-form-label" for="event_date"
-                                >Upload Product Image
-                                <strong class="text-danger"> * </strong>
+                            <label class="col-form-label" for="image_path">
+                                Upload Product Image
                             </label>
                             <img v-if="url" :src="url" class="display-banner" />
                             <img
@@ -189,43 +197,20 @@
 
                         <div class="row">
                             <div class="form-group col-md-6">
-                                <label class="col-form-label" for="event_date"
-                                    >Event Date
+                                <label
+                                    class="col-form-label"
+                                    for="delivery_date"
+                                    >Delivery Date
                                     <strong class="text-danger"> * </strong>
                                 </label>
                                 <input
-                                    id="event_date"
-                                    v-model="form.event_date"
+                                    id="delivery_date"
+                                    v-model="form.delivery_date"
                                     type="date"
-                                    name="event_date"
+                                    name="delivery_date"
                                     class="form-control"
-                                    :max="dateTo"
-                                    :min="dateFrom"
                                 />
-                                <HasError :form="form" field="event_date" />
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label class="col-form-label" for="type"
-                                    >Cake type
-                                    <strong class="text-danger"> * </strong>
-                                </label>
-                                <select
-                                    class="
-                                        custom-select
-                                        form-control form-control-alternative
-                                    "
-                                    id="type"
-                                    v-model="form.type"
-                                    name="type"
-                                >
-                                    <option value="" disabled selected hidden>
-                                        Select Type
-                                    </option>
-                                    <option value="chocolate">Chocolate</option>
-                                    <option value="vanilla">Vanilla</option>
-                                    <option value="other">Other</option>
-                                </select>
-                                <HasError :form="form" field="type" />
+                                <HasError :form="form" field="delivery_date" />
                             </div>
                         </div>
 
@@ -329,14 +314,15 @@ export default {
             last_name: "",
             email: "",
             phone: "",
-            delivery_address: "",
-            delivery_city: "",
-            delivery_district: "",
-            event_date: "",
-            type: "",
+            address: "",
+            city: "",
+            district: "",
+            state: "",
+            delivery_date: "",
             size: "",
             tiers: "",
             description: "",
+            short_description: "",
             image_path: "",
             photoName: "",
         }),
@@ -360,10 +346,14 @@ export default {
         },
 
         sendCustomRequest() {
+            this.form.short_description = `Size: ${this.form.size}, Tiers: ${this.form.tiers}`;
+
             this.submitButtonText = "In Progress...";
             this.submitButtonDisabled = true;
             this.form
-                .post("/api/seller/custom_product")
+                .put(
+                    "/api/custom_product_inquiries/" + this.$route.params.productId
+                )
                 .then(() => {
                     this.submitButtonText = "Submitted";
                     this.submitButtonDisabled = false;

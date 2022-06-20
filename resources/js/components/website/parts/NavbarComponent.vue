@@ -271,7 +271,7 @@
                 </div>
                 <router-link
                     class="nav-link nav-link-account mr-2 mr-sm-3"
-                    to="/login"
+                    to="/select_login"
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"

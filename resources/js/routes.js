@@ -90,6 +90,14 @@ export let routes = [
         },
     },
     {
+        path: "/admin/giftboxes/listing/:productId",
+        name: "admin/giftboxes/listing/edit",
+        component: require("./components/admin/GiftboxListingEdit.vue").default,
+        meta: {
+            title: "Edit Giftbox",
+        },
+    },
+    {
         path: "/admin/giftwraps",
         component: require("./components/admin/Giftwrap.vue").default,
         meta: {
@@ -295,6 +303,14 @@ export let routes = [
     */
 
     {
+        path: "/seller/custom_product_inquiries",
+        component: require("./components/seller/CustomProductInquiry.vue")
+            .default,
+        meta: {
+            title: "Custom Cake Inquiries",
+        },
+    },
+    {
         path: "/seller/dashboard",
         component: require("./components/seller/Dashboard.vue").default,
         meta: {
@@ -455,6 +471,15 @@ export let routes = [
         },
     },
     {
+        //buyer login
+        path: "/select_login",
+        name: "select_login",
+        component: require("./components/website/auth/LoginSelection.vue").default,
+        meta: {
+            title: "Select Login",
+        },
+    },
+    {
         path: "/about",
         name: "about",
         component: require("./components/website/static/AboutUs.vue").default,
@@ -504,8 +529,8 @@ export let routes = [
         },
     },
     {
-        path: "/custom_product_request",
-        name: "custom_product_request",
+        path: "/custom_product_inquiry/:productId",
+        name: "custom_product_inquiry",
         component: require("./components/website/CustomProductForm.vue")
             .default,
         meta: {

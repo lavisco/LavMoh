@@ -37,6 +37,21 @@
                     />
                     <HasError :form="form" field="email" />
                 </div>
+                <div class="form-group">
+                    <label class="col-form-label" for="phone">
+                        Phone
+                        <strong class="text-danger"> * </strong>
+                    </label>
+                    <input
+                        id="phone"
+                        v-model="form.phone"
+                        type="text"
+                        name="phone"
+                        class="form-control"
+                        placeholder="Phone"
+                    />
+                    <HasError :form="form" field="phone" />
+                </div>
 
                 <div class="form-group">
                     <label class="col-form-label" for="password">
@@ -125,6 +140,7 @@ export default {
             id: "",
             name: "",
             email: "",
+            phone: "",
             password: "",
             password_confirmation: "",
         }),

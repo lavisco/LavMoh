@@ -20,7 +20,7 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">Name</th>
-                                        <th scope="col">Email</th>
+                                        <th scope="col">Contact</th>
                                         <th scope="col">Status</th>
                                         <th scope="col">Date joined</th>
                                         <th scope="col">Email verified</th>
@@ -49,7 +49,10 @@
                                                 </div>
                                             </div>
                                         </th>
-                                        <td>{{ user.email }}</td>
+                                        <td>
+                                            {{ user.email }}<br />
+                                            {{ user.phone }}
+                                        </td>
                                         <td>
                                             <span
                                                 v-if="user.status == 1"
@@ -325,6 +328,30 @@
                                     <HasError :form="form" field="email" />
                                 </div>
                             </div>
+
+                            <div class="form-group row">
+                                <label
+                                    class="col-md-3 col-form-label"
+                                    for="phone"
+                                    >Phone
+                                    <strong class="text-danger"> *</strong>
+                                </label>
+
+                                <div class="col-md-9">
+                                    <input
+                                        id="phone"
+                                        v-model="form.phone"
+                                        type="text"
+                                        name="phone"
+                                        class="
+                                            form-control
+                                            form-control-alternative
+                                        "
+                                        placeholder="phone"
+                                    />
+                                    <HasError :form="form" field="phone" />
+                                </div>
+                            </div>
                             <div v-show="!editMode" class="form-group row">
                                 <label
                                     class="col-md-3 col-form-label"
@@ -482,6 +509,7 @@ export default {
             id: "",
             name: "",
             email: "",
+            phone: "",
             password: "",
             role_id: "",
             avatar: "",

@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\Admin\CategoryController;
 use App\Http\Controllers\Api\Admin\CityController;
 use App\Http\Controllers\Api\Admin\CountryController;
 use App\Http\Controllers\Api\Admin\CurrencyController;
+use App\Http\Controllers\Api\Admin\CustomProductInquiryController;
 use App\Http\Controllers\Api\Admin\DashboardController;
 use App\Http\Controllers\Api\Admin\DistrictController;
 use App\Http\Controllers\Api\Admin\GiftboxController;
@@ -39,6 +40,7 @@ use App\Http\Controllers\Api\Admin\VariationOptionController;
 use App\Http\Controllers\Api\Buyer\BuyerProfileController as BuyerBuyerProfileController;
 use App\Http\Controllers\Api\Buyer\OrderController as BuyerOrderController;
 use App\Http\Controllers\Api\Email\EmailController;
+use App\Http\Controllers\Api\Seller\CustomProductInquiryController as SellerCustomProductInquiryController;
 use App\Http\Controllers\Api\Seller\DashboardController as SellerDashboardController;
 use App\Http\Controllers\Api\Seller\GiftboxController as SellerGiftboxController;
 use App\Http\Controllers\Api\Seller\LocationController as SellerLocationController;
@@ -59,6 +61,7 @@ use App\Http\Controllers\Api\Seller\VariationOptionController as SellerVariation
 use App\Http\Controllers\Api\Website\CategoryController as WebsiteCategoryController;
 use App\Http\Controllers\Api\Website\ContactController;
 use App\Http\Controllers\Api\Website\CurrencyController as WebsiteCurrencyController;
+use App\Http\Controllers\Api\Website\CustomProductInquiryController as WebsiteCustomProductInquiryController;
 use App\Http\Controllers\Api\Website\HomeController as WebsiteHomeController;
 use App\Http\Controllers\Api\Website\LocationController;
 use App\Http\Controllers\Api\Website\OccasionController as WebsiteOccasionController;
@@ -104,6 +107,7 @@ Route::prefix('admin')->group(function () {
 
     //Route::get('/currencies/exchangerate', [CurrencyController::class, 'getExchangerate']);
     Route::apiResource('/currencies', CurrencyController::class);
+    Route::apiResource('/custom_product_inquiries', CustomProductInquiryController::class);
     Route::apiResource('/dashboard', DashboardController::class);
     Route::apiResource('/districts', DistrictController::class);
     Route::put('/giftboxes/updateState/{product}', [GiftboxController::class, 'updateState']);
@@ -167,6 +171,7 @@ Route::prefix('buyer')->group(function () {
 */
 
 Route::prefix('seller')->group(function () {
+    Route::apiResource('/custom_product_inquiries', SellerCustomProductInquiryController::class);
     Route::get('/dashboard/coming_soon', [SellerDashboardController::class, 'indexComingSoon']);
     Route::apiResource('/dashboard', SellerDashboardController::class);
     Route::put('/giftboxes/updateState/{product}', [SellerGiftboxController::class, 'updateState']);
@@ -231,6 +236,7 @@ Route::get('/categories/sub_category/{id}', [WebsiteCategoryController::class, '
 Route::apiResource('/categories', WebsiteCategoryController::class);
 Route::post('/contact', [ContactController::class, 'store']);
 Route::get('/currencies', [WebsiteCurrencyController::class, 'index']);
+Route::put('/custom_product_inquiries/{productId}', [WebsiteCustomProductInquiryController::class, 'update']);
 Route::apiResource('/occasions', WebsiteOccasionController::class);
 Route::get('/orders/shippings/{shopId}', [WebsiteOrderController::class, 'getShippings']);
 Route::apiResource('/orders', WebsiteOrderController::class);

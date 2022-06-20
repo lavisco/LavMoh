@@ -37,6 +37,7 @@ class UserController extends Controller
     {
         $this->validate($request,[
             'name' => ['required', 'string', 'max:255'],
+            'phone' => ['required', 'max:20'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'password_confirmation' => ['required', 'min:8'],
@@ -45,6 +46,7 @@ class UserController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'phone' => $request->phone,
             'password' => Hash::make($request->password),
             'role_id' => Role::IS_SELLER,
         ]);
@@ -81,7 +83,7 @@ class UserController extends Controller
             'area' => $request->shop_area,
             'address' => $request->shop_address,
             'zipcode' => $request->shop_zipcode,
-            'status' => false,
+            'status' => true,
             'banner' => $this->storeImage($request->banner, $request->photoName)
         ]);
 

@@ -38,9 +38,9 @@ class HomeController extends Controller
 
         return response()->json([
             'products' => $products,
-            'occasions' => Occasion::select('id', 'name', 'slug')->latest()->get(),
-            'recipients' => Recipient::select('id', 'name', 'slug')->latest()->get(),
-            'categories' => Category::latest()->get(),
+            'occasions' => Occasion::where('status', 1)->select('id', 'name', 'slug')->latest()->get(),
+            'recipients' => Recipient::where('status', 1)->select('id', 'name', 'slug')->latest()->get(),
+            'categories' => Category::where('status', 1)->latest()->get(),
             'homesliders' => HomeSlider::orderBy('order')->get(),
             'icon_cake' => Storage::disk('s3')->temporaryUrl('public/images/cake.png', '+2 minutes'),
             'icon_delivery' => Storage::disk('s3')->temporaryUrl('public/images/door-delivery.png', '+2 minutes'),
@@ -58,9 +58,9 @@ class HomeController extends Controller
         } else $userName = "Account";
 
         return response()->json([
-            'occasions' => Occasion::select('id', 'name', 'slug')->latest()->get(),
-            'recipients' => Recipient::select('id', 'name', 'slug')->latest()->get(),
-            'categories' => Category::select('id', 'name', 'slug')->latest()->get(),
+            'occasions' => Occasion::where('status', 1)->select('id', 'name', 'slug')->latest()->get(),
+            'recipients' => Recipient::where('status', 1)->select('id', 'name', 'slug')->latest()->get(),
+            'categories' => Category::where('status', 1)->select('id', 'name', 'slug')->latest()->get(),
             'currencies' => Currency::select('exchange_rate', 'code', 'symbol')->where('status', 1)->get(),
             'user' => $userName,
         ]);
@@ -78,9 +78,9 @@ class HomeController extends Controller
 
         return response()->json([
             'products' => $products,
-            'occasions' => Occasion::filter(request(['searchText']))->latest()->get(),
-            'recipients' => Recipient::latest()->filter(request(['searchText']))->get(),
-            'categories' => Category::latest()->filter(request(['searchText']))->get(),
+            'occasions' => Occasion::where('status', 1)->filter(request(['searchText']))->latest()->get(),
+            'recipients' => Recipient::where('status', 1)->latest()->filter(request(['searchText']))->get(),
+            'categories' => Category::where('status', 1)->latest()->filter(request(['searchText']))->get(),
             'shops' => Shop::latest()->filter(request(['searchText']))->get(),
             //'all' => [$products, $shop],
         ]);

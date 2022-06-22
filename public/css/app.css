@@ -10121,6 +10121,7 @@ h6 {
   line-height: 64px;
   text-transform: capitalize;
   color: #ffffff;
+  width: 100%;
 }
 
 .sub-title {
@@ -10130,6 +10131,9 @@ h6 {
   line-height: 36px;
   color: #ffffff;
   text-transform: none;
+  max-height: 110px;
+  overflow: hidden;
+  width: 100%;
 }
 
 .text-sm {
@@ -10179,6 +10183,7 @@ h6 {
   .title {
     font-size: 29px;
     line-height: 36px;
+    text-align: center !important;
   }
 
   .sub-title {
@@ -10188,6 +10193,7 @@ h6 {
     overflow: hidden;
     text-overflow: ellipsis;
     max-height: 50px;
+    text-align: center !important;
   }
 
   section h1,
@@ -10965,7 +10971,12 @@ button.bg-black:hover {
 .hero .slide-content .title,
 .hero .slide-content .sub-title {
   color: #333333;
-  text-align: left !important;
+  text-align: left;
+}
+@media (max-width: 768px) {
+  .hero .slide-content {
+    align-items: center;
+  }
 }
 @media (max-width: 991.98px) {
   .hero {
@@ -10973,7 +10984,7 @@ button.bg-black:hover {
     padding: 0 !important;
   }
   .hero .slide-content {
-    height: 40%;
+    height: 50%;
     width: 100%;
     padding: 20px;
   }
@@ -11303,7 +11314,8 @@ section h1 {
 }
 
 .seller-rating {
-  font-size: 32px;
+  font-size: 16px;
+  width: 100%;
 }
 
 .seller-padding {
@@ -11366,6 +11378,10 @@ section h1 {
 
   .section-seller {
     border-top: none;
+  }
+
+  .seller-rating {
+    text-align: center;
   }
 }
 /*---------------------card---------------------*/

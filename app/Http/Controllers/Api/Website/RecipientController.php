@@ -16,7 +16,8 @@ class RecipientController extends Controller
     public function index()
     {
         return Recipient::with('latestProducts.product_image')
-        ->latest()->paginate(25);
+                ->where('status', 1)
+                ->latest()->paginate(25);
     }
 
     /**

@@ -105,6 +105,7 @@ h6 {
     line-height: 64px;
     text-transform: capitalize;
     color: $white;
+    width: 100%;
 }
 .sub-title {
     text-align: center;
@@ -113,6 +114,9 @@ h6 {
     line-height: 36px;
     color: $white;
     text-transform: none;
+    max-height: 110px;
+    overflow: hidden;
+    width: 100%;
 }
 
 .text-sm {
@@ -161,6 +165,7 @@ h6 {
     .title {
         font-size: 29px;
         line-height: 36px;
+        text-align: center !important;
     }
     .sub-title {
         font-size: 16px;
@@ -169,6 +174,7 @@ h6 {
         overflow: hidden;
         text-overflow: ellipsis;
         max-height: 50px;
+        text-align: center !important;
     }
     section h1,
     h1 {
@@ -906,7 +912,13 @@ button.bg-black:hover {
         .title,
         .sub-title {
             color: $black;
-            text-align: left !important;
+            text-align: left;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .slide-content {
+            align-items: center;
         }
     }
 
@@ -915,7 +927,7 @@ button.bg-black:hover {
         padding: 0 !important;
 
         .slide-content {
-            height: 40%;
+            height: 50%;
             width: 100%;
             padding: 20px;
 
@@ -1255,7 +1267,8 @@ section {
     }
 }
 .seller-rating {
-    font-size: 32px;
+    font-size: 16px;
+    width: 100%;
 }
 .seller-padding {
     padding-top: 40px;
@@ -1314,6 +1327,9 @@ section {
     }
     .section-seller {
         border-top: none;
+    }
+    .seller-rating {
+        text-align: center;
     }
 }
 /*---------------------card---------------------*/

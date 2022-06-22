@@ -15,7 +15,8 @@ class OccasionController extends Controller
     public function index()
     {
         return Occasion::with('latestProducts.product_image')
-        ->latest()->paginate(25);
+                ->where('status', 1)
+                ->latest()->paginate(25);
     }
 
     /**

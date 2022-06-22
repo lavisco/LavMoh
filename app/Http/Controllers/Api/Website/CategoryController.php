@@ -18,7 +18,9 @@ class CategoryController extends Controller
     public function index()
     {
         return Category::with('latestProducts.product_image')
-                    ->latest()->paginate(25);
+                ->where('status', 1)
+                ->latest()
+                ->paginate(25);
     }
 
     /**

@@ -16,7 +16,7 @@ class ShopController extends Controller
      */
     public function index()
     {
-        return Shop::with('products')->latest()->paginate(25);
+        return Shop::with('products')->where('status', 1)->latest()->paginate(25);
     }
 
     /**

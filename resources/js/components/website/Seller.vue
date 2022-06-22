@@ -5,56 +5,68 @@
             v-bind:style="{ 'background-image': 'url(' + shop.path + ')' }"
         >
             <div class="slide-content">
-                <h1 class="title mb-3">Browse {{ shop.name }}</h1>
+                <h1 class="title mb-3">{{ shop.name }}</h1>
                 <span
                     class="seller-rating"
                     v-html="shopRating(shop.rating)"
                 ></span>
-                <h1 class="sub-title mb-5">
+                <h1 class="sub-title">
                     {{ shop.about }}
                 </h1>
             </div>
         </div>
 
         <section class="section-best-seller mb-5">
-            <div class="d-flex flex-wrap justify-content-center card-container">
+            <div
+                class="
+                    d-flex
+                    flex-wrap
+                    justify-content-center
+                    card-container
+                    product-list
+                "
+            >
                 <img v-if="loading" src="/images/lavisco/loading.gif" />
-                <div v-else v-for="product in products" class="product-list">
-                    <router-link
-                        class="card item-card-2"
-                        :to="{
-                            name: product.category_id == 7 ? 'giftboxes/product' : 'products/product',
-                            params: {
-                                productId: product.id,
-                                slug: product.slug,
-                            },
-                        }"
-                    >
-                        <div class="card-img card-img-2">
-                            <img
-                                :src="
-                                    product.product_image
-                                        ? product.product_image.path
-                                        : '/images/lavisco/img-bg.jpg'
-                                "
-                            />
+                <router-link
+                    v-else
+                    v-for="product in products"
+                    :key="product.id"
+                    class="card item-card-2"
+                    :to="{
+                        name:
+                            product.category_id == 7
+                                ? 'giftboxes/product'
+                                : 'products/product',
+                        params: {
+                            productId: product.id,
+                            slug: product.slug,
+                        },
+                    }"
+                >
+                    <div class="card-img card-img-2">
+                        <img
+                            :src="
+                                product.product_image
+                                    ? product.product_image.path
+                                    : '/images/lavisco/img-bg.jpg'
+                            "
+                        />
+                    </div>
+                    <div class="px-2 px-md-3">
+                        <div class="card-title-2">
+                            {{ product.title }}
                         </div>
-                        <div class="px-3">
-                            <div class="card-title-2">
-                                {{ product.title }}
-                            </div>
-                            <div class="card-price">
-                                {{ currency.symbol }}
-                                {{
-                                    product.base_price * currency.exchange_rate
-                                }}
-                            </div>
-                            <div class="card-secondary-text">
-                                {{ product.category.name }}
-                            </div>
+                        <div class="card-price">
+                            {{ currency.symbol }}
+                            {{ product.base_price * currency.exchange_rate }}
                         </div>
-                    </router-link>
-                </div>
+                        <div class="card-secondary-text">
+                            {{
+                                product.user.shop ? product.user.shop.name : ""
+                            }}
+                        </div>
+                    </div>
+                </router-link>
             </div>
             <div class="d-flex justify-content-center mt-5">
                 <a href="" class="view-more-link">View More</a>

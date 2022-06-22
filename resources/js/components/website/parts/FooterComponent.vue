@@ -28,9 +28,6 @@
                             Delivery
                         </router-link>
                         <router-link to="/payment_policy">Payment</router-link>
-                        <router-link to="/returns_refunds_policy">
-                            Return & Refunds
-                        </router-link>
                     </div>
                     <div class="col-md-3 col-6 d-flex flex-column mt-5 mt-md-0">
                         <h5>Help</h5>

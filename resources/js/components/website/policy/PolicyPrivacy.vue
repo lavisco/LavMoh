@@ -21,7 +21,7 @@
                 <a href="#4"><h4>04 - Children's Privacy</h4></a>
                 <a href="#5"><h4>05 - Links to Other Websites</h4></a>
                 <a href="#6"><h4>06 - Changes to this Privacy Policy</h4></a>
-                <a href="#7"><h4>07 - Contact Us</h4></a>
+                <a href="#7"><h4>07 - Questions & Contact Information</h4></a>
             </section>
             <section id="1">
                 <h1 class="text-left">01 - Privacy Clause</h1>
@@ -564,14 +564,19 @@
             </section>
 
             <section id="7" class="mb-5">
-                <h1 class="text-left">07 - Contact Us</h1>
+                <h1 class="text-left">07 - Questions & Contact Information</h1>
                 <p>
-                    If you have any questions about this Privacy Policy, You can
-                    contact us:
+                    If you would like to: access, correct, amend or delete any
+                    personal information we have about you, register a
+                    complaint, or simply want more information contact us at
+                    <strong>hi@lavisco.lk</strong> or at
+                    <strong>077 468 4436</strong>
                 </p>
-                <ul>
-                    <li>By phone number: +94 77 700 9826</li>
-                </ul>
+                <p>
+                    Lavisco Global (Private) Limited<br />
+                    71, Kurunegala Road, Katugastota,
+                    <br />Kandy, 20800, <br />Sri Lanka
+                </p>
             </section>
         </div>
     </div>

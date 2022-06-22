@@ -24,6 +24,8 @@
                     ><h4>05 - Modifications to the service/prices</h4></a
                 >
                 <a href="#6"><h4>06 - Products or services</h4></a>
+                <a href="#7"><h4>07 - Card usage</h4></a>
+                <a href="#8"><h4>08 - Questions & Contact Information</h4></a>
             </section>
             <section id="1">
                 <h1 class="text-left">01 - Overview</h1>
@@ -57,10 +59,7 @@
                     our website. It is your responsibility to check this page
                     periodically for changes. Your continued use of or access to
                     the website following the posting of any changes constitutes
-                    acceptance of those changes. Our store is hosted on
-                    WooCommerce. They provide us with the online e-commerce
-                    platform that allows us to sell our products and services to
-                    you.
+                    acceptance of those changes.
                 </p>
             </section>
             <section id="2">
@@ -133,7 +132,7 @@
                     suspension or discontinuance of the Service.
                 </p>
             </section>
-            <section id="6" class="mb-5">
+            <section id="6">
                 <h1 class="text-left">06 - Products or services</h1>
                 <p>
                     Certain products or services may be available exclusively
@@ -156,18 +155,7 @@
                     prohibited. We do not warrant that the quality of any
                     products, services, information, or other material purchased
                     or obtained by you will meet your expectations, or that any
-                    errors in the Service will be corrected. Delivery Terms and
-                    Guarantee Delivery of all our products is free island-wide
-                    for invoices or purchases valued at LKR 1500 and above. Cash
-                    on delivery is available for products that are not
-                    customized. Depending on the location, your order will be
-                    sent through our delivery partners or through parcel
-                    post(Srilanka Post) We guarantee your delivery within 5
-                    working days (Maximum 7 days). If you do not receive your
-                    order within 7 days of ordering, you reserve the right to
-                    cancel the order and receive a full refund (if applicable)
-                    or to receive the order for free ( Bulk orders and orders
-                    valued at LKR 5000 does not include). Our products mostly
+                    errors in the Service will be corrected. Our products mostly
                     are fragile. We take all necessary steps to ensure that the
                     product is safe and undamaged throughout the delivery
                     process. Whereas you encounter a delivery that has been
@@ -179,6 +167,24 @@
                     decision is final. In Case you failed to notify us of the
                     damage you may be refused for a replacement of order or
                     refund.
+                </p>
+            </section>
+            <section id="7">
+                <h1 class="text-left">07 - Card Usage</h1>
+                <p>Will be updated soon.</p>
+            </section>
+            <section id="8" class="mb-5">
+                <h1 class="text-left">08 - Questions & Contact Information</h1>
+                <p>
+                    If you would like to: access, correct, amend or delete any
+                    personal information we have about you, register a
+                    complaint, or simply want more information contact us
+                    at <strong>hi@lavisco.lk</strong> or at <strong>077 468 4436</strong>
+                </p>
+                <p>
+                    Lavisco Global (Private) Limited<br />
+                    71, Kurunegala Road, Katugastota,
+                    <br />Kandy, 20800, <br />Sri Lanka
                 </p>
             </section>
         </div>

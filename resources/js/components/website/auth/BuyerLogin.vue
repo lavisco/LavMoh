@@ -55,7 +55,9 @@
                             Remember Me
                         </label>
                     </div>
-                    <a class="" href=""> Forgot Password? </a>
+                    <router-link to="/reset_password">
+                        Forgot Password?
+                    </router-link>
                 </div>
 
                 <div class="d-flex justify-content-center mt-3 mb-5">

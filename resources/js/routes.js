@@ -474,9 +474,20 @@ export let routes = [
         //buyer login
         path: "/select_login",
         name: "select_login",
-        component: require("./components/website/auth/LoginSelection.vue").default,
+        component: require("./components/website/auth/LoginSelection.vue")
+            .default,
         meta: {
             title: "Select Login",
+        },
+    },
+    {
+        //buyer login
+        path: "/reset_password",
+        name: "reset_password",
+        component: require("./components/website/auth/PasswordReset.vue")
+            .default,
+        meta: {
+            title: "Reset Password",
         },
     },
     {

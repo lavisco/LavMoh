@@ -43,7 +43,7 @@
                         <img :src="siteInfo.icon_1" class="section-seller-details-img" />
                         <div>
                             <h4 class="mb-3">5-10 % Transaction fee + Bank online payment processing Fee</h4>
-                            <p>No hidden fees. You only pay for lavisco if you sell through the platform. Depending on product category the commision rate will be 5-10% plus a flat 2.5% bank fee charged to process online payments.</p>
+                            <p>No hidden fees. You only pay for lavisco if you sell through the platform. Depending on product category, the commision rate will be 5-10%, and 2.5% bank fee charged to process online payments.</p>
                         </div>
                     </div>
                     <div class="d-flex flex-md-row flex-column align-items-md-start align-items-center mb-5">

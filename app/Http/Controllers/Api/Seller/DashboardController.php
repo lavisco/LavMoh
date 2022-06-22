@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\Shop;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -28,6 +29,7 @@ class DashboardController extends Controller
         
         return response()->json([
             'user' => $user,
+            'revenue' => Order::where('seller_id', auth()->id())->whereMonth('created_at', Carbon::now()->month)->sum('total'),
             'orders' => Order::where('seller_id', auth()->id())->count(),
             'products' => Product::where('user_id', auth()->id())->count(),
             'sellerShop' => Shop::where('user_id', auth()->id())->get(),

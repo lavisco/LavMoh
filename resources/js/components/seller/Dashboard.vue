@@ -1299,6 +1299,7 @@ export default {
                         this.loadCities();
                         this.loadShippings();
                     }
+                    this.revenue = data.revenue;
                     this.orders = data.orders;
                     this.products = data.products;
                     this.sellerShop = data.sellerShop;

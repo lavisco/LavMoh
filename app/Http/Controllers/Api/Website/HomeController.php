@@ -38,7 +38,7 @@ class HomeController extends Controller
 
         return response()->json([
             'products' => $products,
-            'occasions' => Occasion::where('status', 1)->select('id', 'name', 'slug')->latest()->get(),
+            'occasions' => Occasion::where('status', 1)->latest()->get(),
             'recipients' => Recipient::where('status', 1)->select('id', 'name', 'slug')->latest()->get(),
             'categories' => Category::where('status', 1)->latest()->get(),
             'homesliders' => HomeSlider::orderBy('order')->get(),

@@ -796,10 +796,9 @@
                                     <option value="" disabled selected hidden>
                                         Select unit
                                     </option>
-                                    <option>lb</option>
-                                    <option>kg</option>
-                                    <option>gm</option>
-                                    <option>oz</option>
+                                    <option>Pounds (lb)</option>
+                                    <option>Kilograms (kg)</option>
+                                    <option>Grams (gm)</option>
                                 </select>
                                 <HasError :form="form" field="weight_unit" />
                             </div>
@@ -857,8 +856,8 @@
                             </div>
                         </div>
                         <div v-show="form.has_variations == 1">
-                            <div class="form-group row">
-                                <label class="col-md-3 col-form-label" for="">
+                            <div class="form-group">
+                                <label class="col-form-label" for="">
                                     Add new Variations
                                     <strong class="text-danger"> *</strong>
                                     <p class="text-grey text-xs mt-2 mb-0">
@@ -868,22 +867,12 @@
                                         <strong>3</strong> options.
                                     </p>
                                 </label>
-                                <div class="col-md-9">
-                                    <button
-                                        class="btn btn-sm"
-                                        type="button"
-                                        @click.prevent="setVariationMode"
-                                    >
-                                        Add a Variation
-                                    </button>
-                                </div>
                             </div>
                             <div
                                 class="
                                     card
                                     dashboard-info-card dashboard-var-card
-                                    mt-2
-                                    mb-3
+                                    mb-4
                                 "
                                 v-show="variation.variationMode"
                                 v-for="(
@@ -971,23 +960,18 @@
                                         />
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label
-                                        class="col-md-3 col-form-label"
-                                        for=""
-                                    >
+                                <div class="form-group">
+                                    <label class="col-form-label">
                                         Variation Options
                                         <strong class="text-danger"> *</strong>
                                         <p class="text-grey text-xs mt-2 mb-0">
                                             Variation will not be saved if no
-                                            options are given.
-                                        </p>
-                                        <p class="text-grey text-xs mt-1 mb-0">
-                                            If options don't have individual
-                                            prices, then input 0 in price.
+                                            options are given. If options don't
+                                            have individual prices, then input 0
+                                            in price.
                                         </p>
                                     </label>
-                                    <div class="col-md-9">
+                                    <div class="">
                                         <div
                                             class="
                                                 table-responsive
@@ -1010,7 +994,7 @@
                                                                 *
                                                             </strong>
                                                         </th>
-                                                        <th class="smwidth">
+                                                        <th>
                                                             Price
                                                             <strong
                                                                 class="
@@ -1019,11 +1003,28 @@
                                                             >
                                                                 *
                                                             </strong>
+                                                            <i
+                                                                class="
+                                                                    fas
+                                                                    fa-info-circle
+                                                                    ml-2
+                                                                "
+                                                                data-toggle="modal"
+                                                                data-target="#infoModal"
+                                                            ></i>
                                                         </th>
-                                                        <th class="smwidth">
+                                                        <th
+                                                            class="smwidth"
+                                                            v-show="
+                                                                form.has_inventory ==
+                                                                1
+                                                            "
+                                                        >
                                                             Inventory
                                                         </th>
-                                                        <th>SKU</th>
+                                                        <th class="smwidth">
+                                                            SKU
+                                                        </th>
                                                         <th
                                                             class="tiny-col"
                                                         ></th>
@@ -1057,7 +1058,35 @@
                                                                 :field="`productVariation.${index}.option_name.${i}`"
                                                             />
                                                         </td>
-                                                        <td>
+                                                        <td
+                                                            class="
+                                                                d-flex
+                                                                align-items-center
+                                                            "
+                                                        >
+                                                            <p
+                                                                class="
+                                                                    text-grey
+                                                                    text-xs
+                                                                    mb-0
+                                                                    mr-1
+                                                                "
+                                                            >
+                                                                {{
+                                                                    form.base_price
+                                                                }}
+                                                            </p>
+                                                            <p
+                                                                class="
+                                                                    text-grey
+                                                                    text-xs
+                                                                    mb-0
+                                                                    mr-2
+                                                                "
+                                                            >
+                                                                +
+                                                            </p>
+
                                                             <input
                                                                 id="option_price"
                                                                 v-model="
@@ -1079,7 +1108,12 @@
                                                                 :field="`productVariation.${index}.option_price.${i}`"
                                                             />
                                                         </td>
-                                                        <td>
+                                                        <td
+                                                            v-show="
+                                                                form.has_inventory ==
+                                                                1
+                                                            "
+                                                        >
                                                             <input
                                                                 id="option_quantity"
                                                                 v-model="
@@ -1181,6 +1215,15 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="form-group">
+                                <button
+                                    class="btn btn-sm"
+                                    type="button"
+                                    @click.prevent="setVariationMode"
+                                >
+                                    Add a Variation
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -1347,6 +1390,90 @@
             </div>
         </div>
 
+        <!-- Info Modal -->
+        <div
+            class="modal fade"
+            id="infoModal"
+            tabindex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="addRecordLabel">
+                            How does variation pricing work?
+                        </h4>
+                        <button
+                            type="button"
+                            class="close"
+                            data-dismiss="modal"
+                            aria-label="Close"
+                        >
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            Variation option prices will be added to the product
+                            Base Price. The formula for Product price
+                            calculation is:
+                        </p>
+                        <p>
+                            <strong>
+                                Product price = Base Price + Variation Option
+                                Price
+                            </strong>
+                        </p>
+                        <p>
+                            For example, your Product Base Price is LKR 2000 and
+                            your variation option price is LKR 500, then if the
+                            customer selects this option on the website, the
+                            price of your product will be LKR 2500(2000 + 500).
+                            An example is given below.
+                        </p>
+                        <div class="rounded bg-light-grey p-3">
+                            <p>
+                                <strong>Product: </strong>White Chocolate Cake
+                            </p>
+                            <p><strong>Base Price: </strong>LKR 2000.00</p>
+                            <p><strong>1st Variation: </strong>Weight</p>
+                            <p><strong>1st Variation Options:</strong></p>
+                            <div class="table-responsive form-table">
+                                <table class="table align-items-center">
+                                    <thead>
+                                        <tr>
+                                            <td>Option Name</td>
+                                            <td>Price</td>
+                                            <td>Product Price</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1 kg</td>
+                                            <td>500</td>
+                                            <td>
+                                                2000 + 500 =
+                                                <strong>2500</strong>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>2 kg</td>
+                                            <td>700</td>
+                                            <td>
+                                                2000 + 700 =
+                                                <strong>2700</strong>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Notification Modal -->
         <success-modal
             id="success-modal"
@@ -1372,7 +1499,7 @@ export default {
         AlertError,
     },
     data: () => ({
-        submitButtonText: "Save & Continue",
+        submitButtonText: "Save",
         submitButtonDisabled: false,
         occasionMode: false,
         recipientMode: false,
@@ -1459,6 +1586,14 @@ export default {
     },
 
     methods: {
+        displayInfoBox(name) {
+            if (document.getElementById(name).style.display == "inline-block") {
+                document.getElementById(name).style.display = "none";
+            } else {
+                document.getElementById(name).style.display = "inline-block";
+            }
+        },
+
         /*
          * Image
          */
@@ -1634,7 +1769,7 @@ export default {
                     this.sendProductListingConfirmedMail();
                 })
                 .catch((error) => {
-                    this.submitButtonText = "Save & Continue";
+                    this.submitButtonText = "Save";
                     this.submitButtonDisabled = false;
                     console.log(error);
                     $("#fail-modal").modal("show");

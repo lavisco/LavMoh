@@ -307,7 +307,7 @@ export let routes = [
         component: require("./components/seller/CustomProductInquiry.vue")
             .default,
         meta: {
-            title: "Custom Cake Inquiries",
+            title: "Custom Requests",
         },
     },
     {
@@ -471,7 +471,7 @@ export let routes = [
         },
     },
     {
-        //buyer login
+        //login selection page
         path: "/select_login",
         name: "select_login",
         component: require("./components/website/auth/LoginSelection.vue")
@@ -481,7 +481,7 @@ export let routes = [
         },
     },
     {
-        //buyer login
+        //password reset
         path: "/reset_password",
         name: "reset_password",
         component: require("./components/website/auth/PasswordReset.vue")

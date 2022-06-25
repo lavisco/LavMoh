@@ -267,10 +267,7 @@
                                         productId: product.id,
                                     },
                                 }"
-                                v-if="
-                                    product.sub_categories &&
-                                    product.sub_categories[0].name == 'Custom'
-                                "
+                                v-if="custom"
                             >
                                 <button
                                     class="
@@ -286,7 +283,7 @@
                                 </button>
                             </router-link>
                             <button
-                                v-else
+                                v-if="!custom"
                                 class="
                                     checkout-btn
                                     btn-full
@@ -517,6 +514,7 @@
 export default {
     data: () => ({
         product: [],
+        custom: false,
         loading: true,
         sliderImgList: [],
         currentImg: 0,
@@ -608,6 +606,16 @@ export default {
          *   Other
          */
 
+        customCategory() {
+            if (this.product.sub_categories) {
+                if (this.product.sub_categories[0].name == "Custom") {
+                    this.custom = true;
+                } else {
+                    this.custom = false;
+                }
+            }
+        },
+
         displayInfoBox(name) {
             if (document.getElementById(name).style.display == "inline-block") {
                 document.getElementById(name).style.display = "none";
@@ -618,6 +626,7 @@ export default {
 
         setData(response) {
             this.product = response.data;
+            this.customCategory();
             this.loading = false;
 
             for (let key in this.product.product_images) {

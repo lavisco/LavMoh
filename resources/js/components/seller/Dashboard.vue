@@ -253,6 +253,34 @@
 
                                             <div class="row">
                                                 <div
+                                                    class="form-group col-md-12"
+                                                >
+                                                    <label
+                                                        class="col-form-label"
+                                                        for="address"
+                                                        >Address
+                                                        <strong
+                                                            class="text-danger"
+                                                        >
+                                                            *
+                                                        </strong>
+                                                    </label>
+                                                    <input
+                                                        id="address"
+                                                        v-model="form.address"
+                                                        type="text"
+                                                        name="address"
+                                                        class="form-control"
+                                                        placeholder="Address"
+                                                    />
+                                                    <HasError
+                                                        :form="form"
+                                                        field="address"
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div
                                                     class="form-group col-md-6"
                                                 >
                                                     <label
@@ -320,34 +348,6 @@
                                                     />
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                <div
-                                                    class="form-group col-md-12"
-                                                >
-                                                    <label
-                                                        class="col-form-label"
-                                                        for="address"
-                                                        >Address
-                                                        <strong
-                                                            class="text-danger"
-                                                        >
-                                                            *
-                                                        </strong>
-                                                    </label>
-                                                    <input
-                                                        id="address"
-                                                        v-model="form.address"
-                                                        type="text"
-                                                        name="address"
-                                                        class="form-control"
-                                                        placeholder="Address"
-                                                    />
-                                                    <HasError
-                                                        :form="form"
-                                                        field="address"
-                                                    />
-                                                </div>
-                                            </div>
                                         </div>
 
                                         <div
@@ -386,7 +386,7 @@
                                                 mt-4
                                             "
                                         >
-                                            <h4 class="mb-2 mb-3">
+                                            <h4 class="mb-2">
                                                 Store Setup Information
                                             </h4>
 
@@ -683,12 +683,87 @@
                                             </div>
                                         </div>
 
+                                        <!-- Self delivery -->
                                         <div
                                             class="
                                                 card
                                                 dashboard-info-card
                                                 mt-4
                                             "
+                                        >
+                                            <h4 class="mb-2">
+                                                Same store address?
+                                            </h4>
+                                            <hr />
+
+                                            <div class="form-group">
+                                                <label
+                                                    class="col-form-label"
+                                                    for="same_address"
+                                                    >Personal address and store
+                                                    address will be the same.
+                                                    <strong class="text-danger">
+                                                        *
+                                                    </strong>
+                                                </label>
+                                                <div
+                                                    class="
+                                                        custom-control
+                                                        custom-radio
+                                                    "
+                                                >
+                                                    <input
+                                                        type="radio"
+                                                        id="same_address1"
+                                                        name="same_address"
+                                                        class="
+                                                            custom-control-input
+                                                        "
+                                                        v-model="same_address"
+                                                        :value="true"
+                                                    />
+                                                    <label
+                                                        class="
+                                                            custom-control-label
+                                                        "
+                                                        for="same_address1"
+                                                        >Yes
+                                                    </label>
+                                                </div>
+                                                <div
+                                                    class="
+                                                        custom-control
+                                                        custom-radio
+                                                    "
+                                                >
+                                                    <input
+                                                        type="radio"
+                                                        id="same_address2"
+                                                        name="same_address"
+                                                        class="
+                                                            custom-control-input
+                                                        "
+                                                        v-model="same_address"
+                                                        :value="false"
+                                                    />
+                                                    <label
+                                                        class="
+                                                            custom-control-label
+                                                        "
+                                                        for="same_address2"
+                                                        >No
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div
+                                            class="
+                                                card
+                                                dashboard-info-card
+                                                mt-4
+                                            "
+                                            v-show="same_address === false"
                                         >
                                             <h4 class="mb-2">Store Address</h4>
                                             <p class="text-xs mb-3">
@@ -700,6 +775,36 @@
                                                 certain customers
                                             </p>
 
+                                            <div class="row">
+                                                <div
+                                                    class="form-group col-md-12"
+                                                >
+                                                    <label
+                                                        class="col-form-label"
+                                                        for="shop_address"
+                                                        >Address
+                                                        <strong
+                                                            class="text-danger"
+                                                        >
+                                                            *
+                                                        </strong>
+                                                    </label>
+                                                    <input
+                                                        id="shop_address"
+                                                        v-model="
+                                                            form.shop_address
+                                                        "
+                                                        type="text"
+                                                        name="shop_address"
+                                                        class="form-control"
+                                                        placeholder="Address"
+                                                    />
+                                                    <HasError
+                                                        :form="form"
+                                                        field="shop_address"
+                                                    />
+                                                </div>
+                                            </div>
                                             <div class="row">
                                                 <div
                                                     class="form-group col-md-6"
@@ -768,37 +873,6 @@
                                                     <HasError
                                                         :form="form"
                                                         field="shop_zipcode"
-                                                    />
-                                                </div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div
-                                                    class="form-group col-md-12"
-                                                >
-                                                    <label
-                                                        class="col-form-label"
-                                                        for="shop_address"
-                                                        >Address
-                                                        <strong
-                                                            class="text-danger"
-                                                        >
-                                                            *
-                                                        </strong>
-                                                    </label>
-                                                    <input
-                                                        id="shop_address"
-                                                        v-model="
-                                                            form.shop_address
-                                                        "
-                                                        type="text"
-                                                        name="shop_address"
-                                                        class="form-control"
-                                                        placeholder="Address"
-                                                    />
-                                                    <HasError
-                                                        :form="form"
-                                                        field="shop_address"
                                                     />
                                                 </div>
                                             </div>
@@ -1223,6 +1297,7 @@ export default {
     data: () => ({
         submitButtonText: "Submit",
         submitButtonDisabled: false,
+        same_address: false,
 
         revenue: "",
         orders: "",
@@ -1250,7 +1325,6 @@ export default {
             banner: "",
             about: "",
             shop_city: "",
-            shop_area: "",
             shop_address: "",
             shop_zipcode: "",
             //seller profile
@@ -1344,6 +1418,14 @@ export default {
         createSellerprofile() {
             this.submitButtonText = "In Progress...";
             this.submitButtonDisabled = true;
+
+            //autofill if address is the same
+            if (this.same_address === true) {
+                this.form.address = this.form.shop_address;
+                this.form.city = this.form.shop_city;
+                this.form.zipcode = this.form.shop_zipcode;
+            }
+
             this.form
                 .post("/api/seller/user/shop_setup")
                 .then(() => {

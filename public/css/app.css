@@ -10174,6 +10174,10 @@ h6 {
   }
 }
 @media (max-width: 768px) {
+  .gap {
+    gap: 10px;
+  }
+
   section {
     margin-top: 62px !important;
     margin-left: 0 !important;
@@ -11365,9 +11369,6 @@ section h1 {
 .seller-onboard h5 {
     font-size: 19px !important;
   }
-  .seller-onboard .gap {
-    gap: 10px;
-  }
   .seller-onboard .section-seller-details-img {
     margin-bottom: 2rem;
     margin-right: 0;
@@ -11798,14 +11799,14 @@ section h1 {
 }
 
 .item-card-occasion .card-img-text {
-  color: #00A574;
+  color: #00a574;
 }
 .item-card-occasion .card-button-container {
   background: #00a573f5;
 }
 
 .item-card-recipient .card-img-text {
-  color: #149BAC;
+  color: #149bac;
 }
 .item-card-recipient .card-button-container {
   background: #149aacf2;
@@ -13095,7 +13096,7 @@ footer {
 
 @media (max-width: 768px) {
   .img-full {
-    width: 47% !important;
+    width: 46% !important;
   }
 
   .image-upload-box,
@@ -13216,6 +13217,8 @@ footer {
   position: absolute;
   color: #ffffff;
   background-color: #4e4e4e;
+  padding: 5px;
+  border-radius: 5px;
 }
 
 .breadcrumb {

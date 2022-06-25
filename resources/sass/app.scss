@@ -157,6 +157,9 @@ h6 {
 }
 
 @media (max-width: 768px) {
+    .gap {
+        gap: 10px;
+    }
     section {
         margin-top: 62px !important;
         margin-left: 0 !important;
@@ -1075,7 +1078,7 @@ button.bg-black:hover {
         align-items: center;
         padding: 10px;
 
-        &:hover{
+        &:hover {
             box-shadow: 2px 4px 6px rgb(212 204 219 / 44%);
         }
     }
@@ -1314,9 +1317,7 @@ section {
         h5 {
             font-size: 19px !important;
         }
-        .gap {
-            gap: 10px;
-        }
+
         .section-seller-details-img {
             margin-bottom: 2rem;
             margin-right: 0;
@@ -1747,8 +1748,8 @@ section {
     height: 480px;
 }
 .item-card-occasion {
-    .card-img-text{
-        color: #00A574;
+    .card-img-text {
+        color: #00a574;
     }
     .card-button-container {
         background: #00a573f5;
@@ -1756,7 +1757,7 @@ section {
 }
 .item-card-recipient {
     .card-img-text {
-        color: #149BAC;
+        color: #149bac;
     }
     .card-button-container {
         background: #149aacf2;
@@ -2603,7 +2604,7 @@ footer {
     }
 }
 
-.highlight-box{
+.highlight-box {
     color: $lav-dark-purple;
     background-color: #f8f7f7;
     border-radius: 12px;
@@ -3061,7 +3062,7 @@ footer {
 
 @media (max-width: 768px) {
     .img-full {
-        width: 47% !important;
+        width: 46% !important;
     }
     .image-upload-box,
     .image-upload-filename {
@@ -3180,6 +3181,8 @@ footer {
     position: absolute;
     color: #ffffff;
     background-color: $dark-grey;
+    padding: 5px;
+    border-radius: 5px;
 }
 
 .breadcrumb {

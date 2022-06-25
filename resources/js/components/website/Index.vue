@@ -178,18 +178,18 @@
                                 class="card-button-container"
                                 v-if="occasions[0]"
                             >
-                                <a href="" v-for="(n, index) in 10">
+                                <a href="" v-for="occasion in occasions">
                                     <router-link
                                         :to="{
                                             name: 'occasions/occasion',
                                             params: {
-                                                occasionId: occasions[index].id,
-                                                slug: occasions[index].slug,
+                                                occasionId: occasion.id,
+                                                slug: occasion.slug,
                                             },
                                         }"
                                     >
                                         <button class="bg-black">
-                                            {{ occasions[index].name }}
+                                            {{ occasion.name }}
                                         </button>
                                     </router-link>
                                 </a>

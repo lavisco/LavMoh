@@ -155,6 +155,85 @@
                 </div>
             </section>
 
+            <section class="section-special">
+                <h1>Gifts and Crafts for Every Occasion & Recipient</h1>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div
+                            class="
+                                card
+                                item-card item-card-occasion
+                                mb-md-0 mb-5
+                            "
+                            v-bind:style="{
+                                'background-image': 'url(' + img_occasion + ')',
+                            }"
+                        >
+                            <div class="card-img-text">
+                                <router-link to="/occasions">
+                                    Order by Occasion
+                                </router-link>
+                            </div>
+                            <div
+                                class="card-button-container"
+                                v-if="occasions[0]"
+                            >
+                                <a href="" v-for="occasion in occasions" :key="occasion.id">
+                                    <router-link
+                                        :to="{
+                                            name: 'occasions/occasion',
+                                            params: {
+                                                occasionId: occasion.id,
+                                                slug: occasion.slug,
+                                            },
+                                        }"
+                                    >
+                                        <button class="bg-black">
+                                            {{ occasion.name }}
+                                        </button>
+                                    </router-link>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div
+                            class="card item-card item-card-recipient"
+                            v-bind:style="{
+                                'background-image':
+                                    'url(' + img_recipient + ')',
+                            }"
+                        >
+                            <div class="card-img-text">
+                                <router-link to="/recipients">
+                                    Order by Recipient
+                                </router-link>
+                            </div>
+                            <div
+                                class="card-button-container"
+                                v-if="recipients[0]"
+                            >
+                                <a href="" v-for="(n, index) in 10">
+                                    <router-link
+                                        :to="{
+                                            name: 'recipients/recipient',
+                                            params: {
+                                                recipientId:
+                                                    recipients[index].id,
+                                                slug: recipients[index].slug,
+                                            },
+                                        }"
+                                    >
+                                        <button class="bg-black">
+                                            {{ recipients[index].name }}
+                                        </button>
+                                    </router-link>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
             <section class="section-category">
                 <h1>Find the perfect gift for your Loved ones</h1>

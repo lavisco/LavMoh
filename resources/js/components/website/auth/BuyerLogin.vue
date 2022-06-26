@@ -6,7 +6,9 @@
 
         <p>
             Don't have an account?
-            <a href="/register" class="pink">Register today</a>
+            <router-link to="/register" class="pink">
+                Register today
+            </router-link>
         </p>
 
         <div class="card">

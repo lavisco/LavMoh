@@ -10552,6 +10552,14 @@ button.bg-black:hover {
   background-color: #d3edc8;
 }
 
+.bg-dull-blue {
+  background-color: #f0f7f980;
+}
+
+.bg-dull-pink {
+  background-color: #f9f0f280;
+}
+
 .border-dull-red {
   border-color: #e3342f !important;
   box-shadow: 0 0 2px #d400005c;

@@ -1278,8 +1278,8 @@
         <success-modal
             id="success-modal"
             msgTitle="Business Activation Form Submitted"
-            msg="Your request for selling on Lavisco has been successfully submitted. Please await approval from our team."
-            gotoRoute="noroute"
+            msg="Your request for selling on Lavisco has been successfully submitted. You can proceed to add products now. Please refresh the page."
+            gotoRoute="/seller/dashboard"
         />
     </div>
 </template>
@@ -1421,9 +1421,9 @@ export default {
 
             //autofill if address is the same
             if (this.same_address === true) {
-                this.form.address = this.form.shop_address;
-                this.form.city = this.form.shop_city;
-                this.form.zipcode = this.form.shop_zipcode;
+                this.form.shop_address = this.form.address;
+                this.form.shop_city = this.form.city;
+                this.form.shop_zipcode = this.form.zipcode;
             }
 
             this.form

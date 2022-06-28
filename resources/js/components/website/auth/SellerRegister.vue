@@ -7,21 +7,39 @@
         <div class="card">
             <!-- Form start -->
             <form class="input-form" @submit.prevent="createSellerUser()">
-                <div class="form-group">
-                    <label class="col-form-label" for="name">
-                        Name
-                        <strong class="text-danger"> * </strong>
-                    </label>
-                    <input
-                        id="name"
-                        v-model="form.name"
-                        type="text"
-                        name="name"
-                        class="form-control"
-                        placeholder="Name"
-                    />
-                    <HasError :form="form" field="name" />
+                <div class="row">
+                    <div class="col-6 form-group">
+                        <label class="col-form-label" for="first_name">
+                            First Name
+                            <strong class="text-danger"> * </strong>
+                        </label>
+                        <input
+                            id="first_name"
+                            v-model="form.first_name"
+                            type="text"
+                            name="first_name"
+                            class="form-control"
+                            placeholder="First Name"
+                        />
+                        <HasError :form="form" field="name" />
+                    </div>
+                    <div class="col-6 form-group">
+                        <label class="col-form-label" for="last_name">
+                            Last Name
+                            <strong class="text-danger"> * </strong>
+                        </label>
+                        <input
+                            id="last_name"
+                            v-model="form.last_name"
+                            type="text"
+                            name="last_name"
+                            class="form-control"
+                            placeholder="Last Name"
+                        />
+                        <HasError :form="form" field="name" />
+                    </div>
                 </div>
+
                 <div class="form-group">
                     <label class="col-form-label" for="email">
                         Email
@@ -143,6 +161,8 @@ export default {
         submitButtonDisabled: false,
         form: new Form({
             id: "",
+            first_name: "",
+            last_name: "",
             name: "",
             email: "",
             phone: "",
@@ -153,6 +173,7 @@ export default {
 
     methods: {
         createSellerUser() {
+            this.form.name = `${this.form.first_name} ${this.form.last_name}`;
             this.submitButtonText = "In Progress...";
             this.submitButtonDisabled = true;
             this.form

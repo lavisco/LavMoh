@@ -147,6 +147,14 @@
                                     2
                                 )
                             }}
+                            <span
+                                v-if="
+                                    product.has_variations == 1 &&
+                                    form.selected_variations.length !=
+                                        product.variations.length
+                                "
+                                >+</span
+                            >
                         </h3>
                     </div>
 
@@ -607,12 +615,10 @@ export default {
          */
 
         customCategory() {
-            if (this.product.sub_categories) {
-                if (this.product.sub_categories[0].name == "Custom") {
-                    this.custom = true;
-                } else {
-                    this.custom = false;
-                }
+            if (this.product.sub_categories[0].name == "Custom") {
+                this.custom = true;
+            } else {
+                this.custom = false;
             }
         },
 
@@ -626,7 +632,9 @@ export default {
 
         setData(response) {
             this.product = response.data;
-            this.customCategory();
+            if (this.product.sub_categories.length > 0) {
+                this.customCategory();
+            }
             this.loading = false;
 
             for (let key in this.product.product_images) {

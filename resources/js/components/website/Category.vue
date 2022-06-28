@@ -91,6 +91,7 @@
                         <div class="card-price">
                             {{ currency.symbol }}
                             {{ product.base_price * currency.exchange_rate }}
+                            <span v-show="product.has_variations == 1">+</span>
                         </div>
                         <div class="card-secondary-text">
                             {{ product.user.shop.name }}

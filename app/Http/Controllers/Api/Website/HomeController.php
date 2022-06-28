@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $products = Product::select('id', 'title', 'base_price', 'user_id', 'category_id', 'product_state_id', 'slug')
+        $products = Product::select('id', 'title', 'base_price', 'user_id', 'category_id', 'product_state_id', 'slug', 'has_variations')
                     ->where('product_state_id', '1')
                     ->with(['user' => function($query){
                         $query->select('id', 'name');

@@ -147,7 +147,7 @@
                         <div class="hide-content">
                             <div
                                 class="card dashboard-info-card mb-4 pb-3"
-                                v-for="transaction in transactions"
+                                v-for="(transaction, index) in transactions"
                             >
                                 <div
                                     class="
@@ -157,92 +157,83 @@
                                         mb-2
                                     "
                                 >
-                                    <div class="mr-3">
-                                        <div class="mobile-card-title mb-3">
+                                    <div class="mr-3 mb-3">
+                                        <div class="mobile-card-title mb-1">
                                             {{ transaction.code }}
                                         </div>
-                                    </div>
-                                    <div
-                                        class="
-                                            d-flex
-                                            flex-row
-                                            align-items-start
-                                        "
-                                    >
                                         <span
                                             class="
                                                 badge badge-pill
                                                 bg-purple
                                                 white
                                                 text-xxs
-                                                mr-2
                                             "
                                         >
                                             {{ transaction.status }}
                                         </span>
+                                    </div>
 
-                                        <div class="mobile-card-dropdown">
-                                            <button
-                                                type="button"
-                                                class="btn btn-sm mobile-btn-sm"
-                                                data-toggle="dropdown"
-                                                aria-haspopup="true"
-                                                aria-expanded="false"
+                                    <div class="mobile-card-dropdown">
+                                        <button
+                                            type="button"
+                                            class="btn btn-sm mobile-btn-sm"
+                                            data-toggle="dropdown"
+                                            aria-haspopup="true"
+                                            aria-expanded="false"
+                                        >
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                aria-hidden="true"
+                                                role="img"
+                                                width="23px"
+                                                height="23px"
+                                                preserveAspectRatio="xMidYMid meet"
+                                                viewBox="0 0 16 16"
                                             >
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                    aria-hidden="true"
-                                                    role="img"
-                                                    width="23px"
-                                                    height="23px"
-                                                    preserveAspectRatio="xMidYMid meet"
-                                                    viewBox="0 0 16 16"
+                                                <g
+                                                    fill="none"
+                                                    stroke="#976aff"
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="1.5"
                                                 >
-                                                    <g
-                                                        fill="none"
-                                                        stroke="#976aff"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                        stroke-width="1.5"
-                                                    >
-                                                        <circle
-                                                            cx="8"
-                                                            cy="2.5"
-                                                            r=".75"
-                                                        />
-                                                        <circle
-                                                            cx="8"
-                                                            cy="8"
-                                                            r=".75"
-                                                        />
-                                                        <circle
-                                                            cx="8"
-                                                            cy="13.5"
-                                                            r=".75"
-                                                        />
-                                                    </g>
-                                                </svg>
-                                            </button>
-                                            <div
+                                                    <circle
+                                                        cx="8"
+                                                        cy="2.5"
+                                                        r=".75"
+                                                    />
+                                                    <circle
+                                                        cx="8"
+                                                        cy="8"
+                                                        r=".75"
+                                                    />
+                                                    <circle
+                                                        cx="8"
+                                                        cy="13.5"
+                                                        r=".75"
+                                                    />
+                                                </g>
+                                            </svg>
+                                        </button>
+                                        <div
+                                            class="
+                                                dropdown-menu
+                                                dropdown-menu-right
+                                            "
+                                        >
+                                            <button
                                                 class="
-                                                    dropdown-menu
-                                                    dropdown-menu-right
+                                                    dropdown-item
+                                                    mobile-dropdown-item
+                                                "
+                                                type="button"
+                                                @click.prevent="
+                                                    newModal(transaction)
                                                 "
                                             >
-                                                <button
-                                                    class="
-                                                        dropdown-item
-                                                        mobile-dropdown-item
-                                                    "
-                                                    type="button"
-                                                    @click.prevent="
-                                                        newModal(transaction)
-                                                    "
-                                                >
-                                                    View
-                                                </button>
-                                            </div>
+                                                View
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -254,13 +245,14 @@
                                         Update Status
                                     </div>
                                     <button
+                                        class="btn btn-sm mobile-btn-sm"
+                                        type="button"
                                         @click.prevent="
                                             setRequestedTransactions(
-                                                transaction.id
+                                                transaction,
+                                                index
                                             )
                                         "
-                                        class="btn btn-sm mobile-btn-sm"
-                                        title="Withdraw"
                                     >
                                         Withdraw
                                     </button>

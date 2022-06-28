@@ -185,36 +185,15 @@
                                             "
                                         />
                                         <div>
-                                            <div class="mobile-card-title mb-3">
+                                            <div class="mobile-card-sub-title">
+                                                Code
+                                            </div>
+                                            <div class="mobile-card-body">
                                                 {{ product.code }}
                                             </div>
-                                            <select
-                                                class="
-                                                    custom-select
-                                                    form-control
-                                                    mobile-btn-sm
-                                                "
-                                                name="product_state_id"
-                                                id="product_state_id"
-                                                v-model="
-                                                    product.product_state_id
-                                                "
-                                                @change.prevent="
-                                                    setCurrentState(
-                                                        product.id,
-                                                        $event
-                                                    )
-                                                "
-                                            >
-                                                <option
-                                                    v-for="productState in productStates"
-                                                    :value="productState.id"
-                                                >
-                                                    {{ productState.state }}
-                                                </option>
-                                            </select>
                                         </div>
                                     </div>
+
                                     <div class="mobile-card-dropdown">
                                         <button
                                             type="button"
@@ -292,6 +271,7 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="mb-4">
                                     <div class="mobile-card-sub-title">
                                         Title
@@ -308,7 +288,10 @@
                                         justify-content-between
                                     "
                                 >
-                                    <div class="mr-3">
+                                    <div
+                                        class="mr-2"
+                                        v-if="product.has_inventory == 1"
+                                    >
                                         <div class="mobile-card-sub-title">
                                             Quantity
                                         </div>
@@ -318,23 +301,39 @@
                                     </div>
                                     <div>
                                         <div class="mobile-card-sub-title">
-                                            Date
-                                        </div>
-                                        <div class="mobile-card-body">
-                                            {{
-                                                moment(
-                                                    product.created_at
-                                                ).format("DD-MM-YYYY")
-                                            }}
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="mobile-card-sub-title">
                                             Base Price
                                         </div>
                                         <div class="mobile-card-body">
                                             {{ product.base_price }}
                                         </div>
+                                    </div>
+                                    <div class="ml-3">
+                                        <div class="mobile-card-sub-title">
+                                            Status
+                                        </div>
+                                        <select
+                                            class="
+                                                custom-select
+                                                form-control
+                                                mobile-btn-sm
+                                            "
+                                            name="product_state_id"
+                                            id="product_state_id"
+                                            v-model="product.product_state_id"
+                                            @change.prevent="
+                                                setCurrentState(
+                                                    product.id,
+                                                    $event
+                                                )
+                                            "
+                                        >
+                                            <option
+                                                v-for="productState in productStates"
+                                                :value="productState.id"
+                                            >
+                                                {{ productState.state }}
+                                            </option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>

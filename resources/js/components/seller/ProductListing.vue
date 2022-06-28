@@ -310,7 +310,7 @@
                                 </p>
                             </label>
 
-                            <div class="col-md-3 col-6">
+                            <div class="col-md-3 col-4 pr-1 pr-md-2">
                                 <label
                                     class="col-form-label pt-md-auto pt-0"
                                     for="length"
@@ -325,11 +325,10 @@
                                     class="
                                         form-control form-control-alternative
                                     "
-                                    placeholder="Length"
                                 />
                                 <HasError :form="form" field="length" />
                             </div>
-                            <div class="col-md-3 col-6">
+                            <div class="col-md-3 col-4 px-1 px-md-2">
                                 <label
                                     class="col-form-label pt-md-auto pt-0"
                                     for="width"
@@ -344,12 +343,11 @@
                                     class="
                                         form-control form-control-alternative
                                     "
-                                    placeholder="Breadth"
                                 />
                                 <HasError :form="form" field="width" />
                             </div>
-                            <div class="col-md-3 col-6 mt-2 mt-md-0">
-                                <label class="col-form-label" for="height">
+                            <div class="col-md-3 col-4 pl-1 pl-md-2">
+                                <label class="col-form-label pt-md-auto pt-0" for="height">
                                     Height
                                 </label>
                                 <input
@@ -360,7 +358,6 @@
                                     class="
                                         form-control form-control-alternative
                                     "
-                                    placeholder="Height"
                                 />
                                 <HasError :form="form" field="height" />
                             </div>

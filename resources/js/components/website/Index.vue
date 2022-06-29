@@ -73,7 +73,9 @@
                                         product.base_price *
                                         currency.exchange_rate
                                     }}
-                                    <span v-show="product.has_variations == 1">+</span>
+                                    <span v-show="product.has_variations == 1"
+                                        >+</span
+                                    >
                                 </div>
 
                                 <div
@@ -179,7 +181,11 @@
                                 class="card-button-container"
                                 v-if="occasions[0]"
                             >
-                                <a href="" v-for="occasion in occasions" :key="occasion.id">
+                                <a
+                                    href=""
+                                    v-for="occasion in occasions"
+                                    :key="occasion.id"
+                                >
                                     <router-link
                                         :to="{
                                             name: 'occasions/occasion',
@@ -214,22 +220,21 @@
                                 class="card-button-container"
                                 v-if="recipients[0]"
                             >
-                                <a href="" v-for="(n, index) in 10">
-                                    <router-link
-                                        :to="{
-                                            name: 'recipients/recipient',
-                                            params: {
-                                                recipientId:
-                                                    recipients[index].id,
-                                                slug: recipients[index].slug,
-                                            },
-                                        }"
-                                    >
-                                        <button class="bg-black">
-                                            {{ recipients[index].name }}
-                                        </button>
-                                    </router-link>
-                                </a>
+                                <router-link
+                                    v-for="recipient in recipients"
+                                    :key="recipient.id"
+                                    :to="{
+                                        name: 'recipients/recipient',
+                                        params: {
+                                            recipientId: recipient.id,
+                                            slug: recipient.slug,
+                                        },
+                                    }"
+                                >
+                                    <button class="bg-black">
+                                        {{ recipient.name }}
+                                    </button>
+                                </router-link>
                             </div>
                         </div>
                     </div>

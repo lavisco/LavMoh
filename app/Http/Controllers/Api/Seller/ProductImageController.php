@@ -63,8 +63,6 @@ class ProductImageController extends Controller
         for ($i=0; $i < count($request->image_id); $i++) { 
             $productImage = ProductImage::findOrFail($request->image_id[$i]);
 
-            $primary = $request->image_path[$i] == $request->image_path[0] ? true : false;
-
             if ($request->image_path[$i] != $productImage->image_path) {
 
                 $file_name = time().'_'.$request->image_title[$i];
@@ -78,7 +76,7 @@ class ProductImageController extends Controller
                 $productImage->update([
                     'image_path' => $productPhoto,
                     'title' => $request->image_title[$i],
-                    'primary_image' => $primary,
+                    'primary_image' => $request->primary_image[$i],
                 ]);
             }
         }

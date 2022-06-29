@@ -448,7 +448,7 @@
 
                     <li class="nav-item mx-2">
                         <router-link class="nav-link" to="/seller_onboard">
-                            Seller
+                            Sell
                         </router-link>
                     </li>
                 </ul>

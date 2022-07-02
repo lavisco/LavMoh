@@ -10643,12 +10643,12 @@ button.bg-black:hover {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  height: 50px;
+  height: 43px;
   font-style: normal;
   font-weight: 600;
-  font-size: 16px;
-  letter-spacing: 0.025em;
-  padding: 8px 16px !important;
+  font-size: 14px;
+  letter-spacing: 0.01rem;
+  padding: 6px 14px !important;
   text-align: center;
   text-transform: capitalize;
   color: #333333;

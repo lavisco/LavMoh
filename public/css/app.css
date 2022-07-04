@@ -12446,6 +12446,29 @@ footer {
   letter-spacing: 0.02rem;
 }
 
+.dashboard-link-sm {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-weight: 600;
+  font-size: 16px;
+  color: #df4e6b;
+  cursor: pointer;
+}
+.dashboard-link-sm svg {
+  width: 18px;
+  height: 18px;
+}
+.dashboard-link-sm svg path {
+  fill: #df4e6b;
+}
+.dashboard-link-sm:hover {
+  color: #333333;
+}
+.dashboard-link-sm:hover svg path {
+  fill: #333333;
+}
+
 .dashboard-link {
   display: flex;
   flex-direction: row;
@@ -12698,13 +12721,14 @@ footer {
   padding: 40px;
   min-width: 350px;
 }
-.dashboard-card h4 {
-  color: #df4e6b;
-}
 .dashboard-card h2 {
   text-align: left;
   font-size: 40px !important;
   font-weight: 500;
+}
+
+.dashboard-card-sm {
+  padding: 20px 30px;
 }
 
 .dashboard-info-card {

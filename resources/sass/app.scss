@@ -2416,6 +2416,32 @@ footer {
     letter-spacing: 0.02rem;
 }
 
+.dashboard-link-sm {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-weight: 600;
+    font-size: 16px;
+    color: $lav-red;
+    cursor: pointer;
+
+    svg {
+        width: 18px;
+        height: 18px;
+        path {
+            fill: $lav-red;
+        }
+    }
+    &:hover {
+        color: $black;
+        svg {
+            path {
+                fill: $black;
+            }
+        }
+    }
+}
+
 .dashboard-link {
     display: flex;
     flex-direction: row;
@@ -2679,14 +2705,14 @@ footer {
     color: $dark-grey;
     padding: 40px;
     min-width: 350px;
-    h4 {
-        color: $lav-red;
-    }
     h2 {
         text-align: left;
         font-size: 40px !important;
         font-weight: 500;
     }
+}
+.dashboard-card-sm{
+    padding: 20px 30px;
 }
 .dashboard-info-card {
     background-color: #fff !important;

@@ -30,8 +30,10 @@ class DashboardController extends Controller
         return response()->json([
             'user' => $user,
             'revenue' => Order::where('seller_id', auth()->id())->whereMonth('created_at', Carbon::now()->month)->sum('total'),
-            'orders' => Order::where('seller_id', auth()->id())->count(),
-            'products' => Product::where('user_id', auth()->id())->count(),
+            'orderCount' => Order::where('seller_id', auth()->id())->whereMonth('created_at', Carbon::now()->month)->count(),
+            'orders' => Order::where('seller_id', auth()->id())->select('id', 'code', 'delivery_date', 'total')->latest()->paginate(10),
+            'productCount' => Product::where('user_id', auth()->id())->count(),
+            'products' => Product::where('user_id', auth()->id())->select('id', 'code', 'title', 'base_price')->latest()->paginate(10),
             'sellerShop' => Shop::where('user_id', auth()->id())->get(),
             'hasShop' => $user->shop()->exists(),
             'shopActive' => $shopActive,

@@ -10689,8 +10689,7 @@ button.bg-black:hover {
   font-weight: 600;
   font-size: 16px;
   letter-spacing: 0.025em;
-  padding: 4px;
-  text-align: center;
+  padding: 6px 0;
   color: #333333;
 }
 .nav-link-currency svg {

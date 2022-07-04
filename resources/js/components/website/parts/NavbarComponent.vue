@@ -197,10 +197,11 @@
                             xmlns="http://www.w3.org/2000/svg"
                             aria-hidden="true"
                             role="img"
-                            width="34"
-                            height="34"
+                            width="23"
+                            height="23"
                             preserveAspectRatio="xMidYMid meet"
                             viewBox="0 0 24 24"
+                            class="mr-md-1"
                         >
                             <circle cx="12" cy="9.5" r="1.5" fill="#333" />
                             <path
@@ -208,15 +209,30 @@
                                 d="M12 2a8 8 0 0 0-8 7.92c0 5.48 7.05 11.58 7.35 11.84a1 1 0 0 0 1.3 0C13 21.5 20 15.4 20 9.92A8 8 0 0 0 12 2Zm0 11a3.5 3.5 0 1 1 3.5-3.5A3.5 3.5 0 0 1 12 13Z"
                             />
                         </svg>
+                        <div
+                            class="
+                                nav-link-account-text
+                                d-flex
+                                flex-column
+                                align-items-start
+                                line-height-min
+                            "
+                        >
+                            <span class="nav-tiny-text">Deliver to</span>
+                            Location
+                        </div>
                     </a>
                     <div
                         class="dropdown-menu dropdown-menu-right"
                         style="border-radius: 8px"
                         aria-labelledby="dropdownLocation"
                     >
+                        <h6 class="dropdown-header">
+                            Select product delivery location
+                        </h6>
                         <div class="d-flex flex-column flex-md-row">
                             <div
-                                class="col-md-6 d-flex flex-column"
+                                class="col-6 d-flex flex-column px-4"
                                 v-for="districts in chunkedDistricts"
                             >
                                 <a
@@ -414,7 +430,7 @@
 
                     <li class="nav-item mx-2">
                         <router-link class="nav-link" to="/seller_onboard">
-                            Sell
+                            Sell on Lavisco
                         </router-link>
                     </li>
                 </ul>

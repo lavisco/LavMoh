@@ -11943,19 +11943,9 @@ section h1 {
 /*---------------------section-shortcuts---------------------*/
 .section-shortcuts {
   text-align: center;
-  margin-bottom: 120px;
 }
-.section-shortcuts .shortcut-left {
-  border-right: 2px solid #d2d2d2;
-}
-.section-shortcuts .shortcut-right {
-  border-left: 2px solid #d2d2d2;
-}
-@media (max-width: 768px) {
-  .section-shortcuts .shortcut-left,
-.section-shortcuts .shortcut-right {
-    border: none;
-  }
+.section-shortcuts .card {
+  height: 315px;
 }
 
 /*---------------------footer---------------------*/
@@ -13705,12 +13695,23 @@ footer {
 }
 @media (max-width: 640px) {
   .swiper-index-product .item-card {
+    padding: 4px;
+    position: relative;
+    height: 270px;
     width: 100%;
   }
-  .swiper-index-product .item-card .item-card {
-    padding: 10px;
-    position: relative;
-    height: 360px;
+  .swiper-index-product .item-card .card-body {
+    max-height: 35%;
+    padding: 10px 13px;
+    border-radius: 8px;
+  }
+  .swiper-index-product .item-card .card-title {
+    font-size: 13px;
+  }
+  .swiper-index-product .item-card .card-price {
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 15px;
   }
 }
 @media (min-width: 640px) {

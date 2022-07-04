@@ -1383,7 +1383,7 @@ section {
         border-radius: 12px;
         background-color: $black;
     }
-    .modal-body{
+    .modal-body {
         background-color: $white;
     }
     .modal-header {
@@ -1894,19 +1894,10 @@ section {
 
 .section-shortcuts {
     text-align: center;
-    margin-bottom: 120px;
-    .shortcut-left {
-        border-right: 2px solid #d2d2d2;
+    .card{
+        height: 315px;
     }
-    .shortcut-right {
-        border-left: 2px solid #d2d2d2;
-    }
-    @media (max-width: 768px) {
-        .shortcut-left,
-        .shortcut-right {
-            border: none;
-        }
-    }
+    //margin-bottom: 120px;
 }
 
 /*---------------------footer---------------------*/
@@ -3665,12 +3656,23 @@ footer {
         }
 
         @media (max-width: 640px) {
-            .item-card {
-                padding: 10px;
-                position: relative;
-                height: 360px;
-            }
+            padding: 4px;
+            position: relative;
+            height: 270px;
             width: 100%;
+            .card-body {
+                max-height: 35%;
+                padding: 10px 13px;
+                border-radius: 8px;
+            }
+            .card-title {
+                font-size: 13px;
+            }
+            .card-price {
+                color: #ffffff;
+                font-weight: 600;
+                font-size: 15px;
+            }
         }
         @media (min-width: 640px) {
             width: auto;

@@ -78,28 +78,12 @@
                                     >
                                 </div>
 
-                                <div
-                                    class="
-                                        d-flex
-                                        align-items-end
-                                        justify-content-between
-                                        mt-2
-                                    "
-                                >
-                                    <div class="card-secondary-text white">
-                                        {{ product.user.shop.name }}
-                                    </div>
-                                    <div class="text-right">
-                                        <div
-                                            class="
-                                                card-secondary-text
-                                                white
-                                                text-right
-                                            "
-                                        >
-                                            {{ product.category.name }}
-                                        </div>
-                                    </div>
+                                <div class="card-secondary-text white mt-md-2">
+                                    {{
+                                        product.user
+                                            ? product.user.shop.name
+                                            : ""
+                                    }}
                                 </div>
                             </div>
                         </router-link>
@@ -203,9 +187,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        
-                    </div>
+                    <div class="col-md-6"></div>
                 </div>
             </section>
 
@@ -328,26 +310,30 @@
                 </div>
             </section>
 
-            <section class="section-shortcuts row">
-                <div class="col-md-6 shortcut-left py-4 px-md-5">
-                    <h1 class="mb-3">Start selling on Lavisco</h1>
-                    <h4 class="mb-5">
-                        Join a one of a kind marketplace and get an edge over
-                        your competitors.
-                    </h4>
-                    <router-link to="/seller_onboard">
-                        <button class="bg-orange">Become a Seller</button>
-                    </router-link>
+            <section class="section-shortcuts row mb-5">
+                <div class="col-md-6 pr-md-2">
+                    <div class="card bg-light-grey px-4 py-5 mb-4 mb-md-0">
+                        <h1 class="mb-2">Become a Seller on Lavisco</h1>
+                        <h4 class="mb-4">
+                            Join a one of a kind marketplace and get an edge
+                            over your competitors.
+                        </h4>
+                        <router-link to="/seller_onboard">
+                            <button class="bg-orange">Become a Seller</button>
+                        </router-link>
+                    </div>
                 </div>
-                <div class="col-md-6 shortcut-right py-4 px-md-5">
-                    <h1 class="mb-3">Create an account today!</h1>
-                    <h4 class="mb-5">
-                        Sign up with Lavisco today to unlock exclusive drops and
-                        discounts!
-                    </h4>
-                    <a href="/register">
-                        <button class="bg-green">Sign up</button>
-                    </a>
+                <div class="col-md-6 pl-md-2">
+                    <div class="card bg-light-grey px-4 py-5">
+                        <h1 class="mb-2">Start buying today</h1>
+                        <h4 class="mb-4">
+                            Sign up with Lavisco as a buyer to unlock exclusive
+                            drops and discounts!
+                        </h4>
+                        <a href="/register">
+                            <button class="bg-green">Sign up</button>
+                        </a>
+                    </div>
                 </div>
             </section>
         </div>
@@ -386,6 +372,10 @@ export default {
                 nextEl: ".swiper-button-next",
                 prevEl: ".swiper-button-prev",
             },
+            autoplay: {
+                delay: 4600,
+                disableOnInteraction: false,
+            },
             breakpoints: {
                 1024: {
                     slidesPerView: 5,
@@ -396,11 +386,11 @@ export default {
                     spaceBetween: 10,
                 },
                 640: {
-                    slidesPerView: 1,
+                    slidesPerView: 2,
                     spaceBetween: 10,
                 },
                 320: {
-                    slidesPerView: 1,
+                    slidesPerView: 2,
                     spaceBetween: 10,
                 },
             },

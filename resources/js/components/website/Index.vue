@@ -187,7 +187,41 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6"></div>
+                    <div class="col-md-6">
+                        <div
+                            class="card item-card item-card-recipient"
+                            v-bind:style="{
+                                'background-image':
+                                    'url(' + img_recipient + ')',
+                            }"
+                        >
+                            <div class="card-img-text">
+                                <router-link to="/recipients">
+                                    Order by Recipient
+                                </router-link>
+                            </div>
+                            <div
+                                class="card-button-container"
+                                v-if="recipients[0]"
+                            >
+                                <router-link
+                                    v-for="recipient in recipients"
+                                    :key="recipient.id"
+                                    :to="{
+                                        name: 'recipients/recipient',
+                                        params: {
+                                            recipientId: recipient.id,
+                                            slug: recipient.slug,
+                                        },
+                                    }"
+                                >
+                                    <button class="bg-black">
+                                        {{ recipient.name }}
+                                    </button>
+                                </router-link>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 

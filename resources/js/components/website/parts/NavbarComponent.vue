@@ -235,40 +235,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="dropdown show">
-                    <a
-                        href="#"
-                        role="button"
-                        id="dropdownCurrency"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                        class="nav-link nav-link-account mr-2 mr-sm-3"
-                    >
-                        <div class="currency-icon">
-                            {{ currencyActive.symbol }}
-                        </div>
-                    </a>
-                    <div
-                        class="dropdown-menu dropdown-menu-right"
-                        style="border-radius: 8px"
-                        aria-labelledby="dropdownCurrency"
-                    >
-                        <div class="d-flex flex-column">
-                            <a
-                                class="nav-link-currency"
-                                @click.prevent="saveCurrency(currency)"
-                                v-for="currency in currencies"
-                                :class="{
-                                    active:
-                                        currencyActive.code === currency.code,
-                                }"
-                            >
-                                {{ currency.code }}
-                            </a>
-                        </div>
-                    </div>
-                </div>
                 <router-link
                     class="nav-link nav-link-account mr-2 mr-sm-3"
                     to="/select_login"

@@ -10613,8 +10613,8 @@ button.bg-black:hover {
 }
 
 .navbar {
-  padding-top: 14px;
-  padding-bottom: 14px;
+  padding-top: 12px;
+  padding-bottom: 12px;
   z-index: 999 !important;
 }
 
@@ -11443,6 +11443,9 @@ section h1 {
 #locationPopup .modal-content {
   border-radius: 12px;
   background-color: #333333;
+}
+#locationPopup .modal-body {
+  background-color: #ffffff;
 }
 #locationPopup .modal-header {
   align-items: center;

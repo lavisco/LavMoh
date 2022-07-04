@@ -64,7 +64,10 @@
 
                 <router-link
                     :to="{
-                        name: product.category_id == 7 ? 'giftboxes/product' : 'products/product',
+                        name:
+                            product.category_id == 7
+                                ? 'giftboxes/product'
+                                : 'products/product',
                         params: {
                             productId: product.id,
                             slug: product.slug,
@@ -132,6 +135,27 @@
                             ></i>
                         </button>
                     </div>
+                    <div class="modal-body text-center">
+                        <div class="d-flex flex-column flex-md-row">
+                            <div
+                                class="col-md-6 d-flex flex-column"
+                                v-for="districts in chunkedDistricts"
+                            >
+                                <a
+                                    class="nav-link-currency"
+                                    @click.prevent="saveLocation(district.name)"
+                                    v-for="district in districts"
+                                    :key="district.id"
+                                    :class="{
+                                        active:
+                                            locationActive === district.name,
+                                    }"
+                                >
+                                    {{ district.name }}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -147,6 +171,8 @@ export default {
         searchText: null,
         loading: true,
         //location data
+        districts: [],
+        //filter data
         sortValue: "created_at",
         subCategoryValue: "",
     }),
@@ -175,13 +201,16 @@ export default {
             this.loadData();
         },
         locationActive(after, before) {
-            this.loadLocalizedProducts();
+            this.loadLocalizedProducts(this.category.id);
         },
     },
 
     computed: {
         currency() {
             return this.$store.getters.selectedCurrency;
+        },
+        chunkedDistricts() {
+            return _.chunk(this.districts, 13);
         },
         locationActive() {
             return this.$store.getters.selectedLocation;
@@ -193,8 +222,22 @@ export default {
             this.category = response.data.category;
             this.sub_categories = response.data.sub_categories;
             this.products = response.data.products.data;
-            this.loadLocalizedProducts(route);
+
             this.loading = false;
+        },
+
+        saveLocation(district) {
+            this.$store.dispatch("saveLocation", district);
+            this.loadLocalizedProducts(this.category.id);
+        },
+
+        loadDistricts() {
+            axios
+                .get("/api/locations/districts")
+                .then(({ data }) => {
+                    this.districts = data;
+                })
+                .catch((error) => console.log(error));
         },
 
         filterData() {
@@ -233,28 +276,34 @@ export default {
                 .catch((error) => console.log(error));
         },
 
-        loadLocalizedProducts(route) {
+        loadLocationSelector() {
             if (
                 this.category.name == "Cakes" ||
                 this.category.name == "Cake" ||
                 this.category.name == "Fresh Flowers"
             ) {
-                axios
-                    .get(
-                        "/api/categories/products/" +
-                            route +
-                            "/" +
-                            this.locationActive
-                    )
-                    .then((response) => {
-                        this.products = response.data.products.data;
-                        $("#locationPopup").modal("show");
-                    })
-                    .catch((error) => console.log(error));
+                this.loadDistricts();
+                $("#locationPopup").modal("show");
             }
+        },
+
+        loadLocalizedProducts(route) {
+            axios
+                .get(
+                    "/api/categories/products/" +
+                        route +
+                        "/" +
+                        this.locationActive
+                )
+                .then((response) => {
+                    this.products = response.data.products.data;
+                    $("#locationPopup").modal("hide");
+                })
+                .catch((error) => console.log(error));
         },
     },
     mounted() {
+        this.loadLocationSelector();
     },
 };
 </script>

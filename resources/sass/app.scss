@@ -545,8 +545,8 @@ button.bg-black:hover {
 }
 
 .navbar {
-    padding-top: 14px;
-    padding-bottom: 14px;
+    padding-top: 12px;
+    padding-bottom: 12px;
     z-index: 999 !important;
 }
 .navbar-collapse {
@@ -1383,6 +1383,9 @@ section {
     .modal-content {
         border-radius: 12px;
         background-color: $black;
+    }
+    .modal-body{
+        background-color: $white;
     }
     .modal-header {
         align-items: center;

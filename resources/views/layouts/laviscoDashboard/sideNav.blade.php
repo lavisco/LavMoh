@@ -123,7 +123,6 @@
             Account
         </router-link>
 
-        @if(auth()->user()->shop && auth()->user()->shop->status == true)
         <router-link to="/seller/products" class="dashboard-link">
             <div class="dashboard-link-icon">
                 <svg
@@ -220,7 +219,6 @@
             </div>
             Giftboxes
         </router-link>
-        @endif
 
         <router-link to="/seller/statistics" class="dashboard-link">
             <div class="dashboard-link-icon">

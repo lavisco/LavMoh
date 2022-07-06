@@ -282,11 +282,12 @@
                                 class="col-md-3 col-form-label"
                                 for="material"
                             >
-                                Ingredients
+                                Ingredients/ Materials
                                 <p class="text-xs mt-2">
-                                    Mention the ingredients used in your
-                                    product, seperated by a comma. E.g. milk,
-                                    sugar, honey
+                                    If your product is a food item, then list
+                                    it's ingredients, else list the materials
+                                    that went into making it. E.g. milk, sugar,
+                                    honey
                                 </p>
                             </label>
 
@@ -846,9 +847,9 @@
                                     <option value="" disabled selected hidden>
                                         Select unit
                                     </option>
-                                    <option>Pounds (lb)</option>
-                                    <option>Kilograms (kg)</option>
-                                    <option>Grams (gm)</option>
+                                    <option value="lb">Pounds (lb)</option>
+                                    <option value="kg">Kilograms (kg)</option>
+                                    <option value="gm">Grams (gm)</option>
                                 </select>
                                 <HasError :form="form" field="weight_unit" />
                             </div>

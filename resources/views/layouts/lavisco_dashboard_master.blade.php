@@ -109,6 +109,18 @@
                     sidenav.classList.toggle("show-nav");
                 };
             });
+
+            //Usetiful script start
+            (function (w, d, s) {
+                var a = d.getElementsByTagName("head")[0];
+                var r = d.createElement("script");
+                r.async = 1;
+                r.src = s;
+                r.setAttribute("id", "usetifulScript");
+                r.dataset.token = "a927c0fe10f0c1e70e837ef472b68edd";
+                a.appendChild(r);
+            })(window, document, "https://www.usetiful.com/dist/usetiful.js");
+            //Usetiful script end
         </script>
     </body>
 </html>

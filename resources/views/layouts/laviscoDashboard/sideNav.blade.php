@@ -64,7 +64,7 @@
             </button>
         </div>
 
-        <router-link to="/seller/dashboard" class="dashboard-link">
+        <router-link to="/seller/dashboard" class="dashboard-link" id="seller-dashboard-main">
             <div class="dashboard-link-icon">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -84,7 +84,7 @@
             Dashboard
         </router-link>
 
-        <router-link to="/seller/shop" class="dashboard-link">
+        <router-link to="/seller/shop" class="dashboard-link" id="seller-dashboard-store">
             <div class="dashboard-link-icon">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -103,7 +103,7 @@
             </div>
             Store
         </router-link>
-        <router-link to="/seller/sellerprofile" class="dashboard-link">
+        <router-link to="/seller/sellerprofile" class="dashboard-link"  id="seller-dashboard-profile">
             <div class="dashboard-link-icon">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -123,7 +123,7 @@
             Account
         </router-link>
 
-        <router-link to="/seller/products" class="dashboard-link">
+        <router-link to="/seller/products" class="dashboard-link"  id="seller-dashboard-product">
             <div class="dashboard-link-icon">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -143,7 +143,7 @@
             Products
         </router-link>
 
-        <router-link to="/seller/orders" class="dashboard-link">
+        <router-link to="/seller/orders" class="dashboard-link"  id="seller-dashboard-order">
             <div class="dashboard-link-icon">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -162,7 +162,7 @@
             </div>
             Orders
         </router-link>
-        <router-link to="/seller/transactions" class="dashboard-link">
+        <router-link to="/seller/transactions" class="dashboard-link"  id="seller-dashboard-transaction">
             <div class="dashboard-link-icon">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"

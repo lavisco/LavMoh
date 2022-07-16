@@ -6,7 +6,7 @@
                     <h3 class="pink text-left mb-4">Main Links</h3>
                     <ul>
                         <li><a href="/">Home</a></li>
-                        <li><a href="/seller_onboard">Sell on Lavisco</a></li>
+                        <li><a href="/sell_on_lavisco">Sell on Lavisco</a></li>
                         <li><a href="/products">All products</a></li>
                         <li><a href="/categories">Browse by Nature</a></li>
                         <li><a href="/recipients">Browse by Recipient</a></li>

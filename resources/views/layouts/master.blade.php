@@ -67,6 +67,8 @@
         <script src="{{ asset('js/app.js') }}" defer></script>
         <!-- <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script> -->
         <script>
+            
+
             function showPasswordFunction() {
                 var x = document.getElementById("password");
                 if (x.type === "password") {

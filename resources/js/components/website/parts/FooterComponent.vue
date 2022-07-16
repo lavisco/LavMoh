@@ -6,7 +6,7 @@
                     <div class="col-md-3 col-6 d-flex flex-column">
                         <h5>Sell on Lavisco</h5>
                         <router-link to="/merchant/login">Seller Sign In</router-link>
-                        <router-link to="/seller_onboard">
+                        <router-link to="/sell_on_lavisco">
                             Onboarding
                         </router-link>
                         <router-link to="/sellers">

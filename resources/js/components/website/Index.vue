@@ -352,7 +352,7 @@
                             Join a one of a kind marketplace and get an edge
                             over your competitors.
                         </h4>
-                        <router-link to="/seller_onboard">
+                        <router-link to="/sell_on_lavisco">
                             <button class="bg-orange">Become a Seller</button>
                         </router-link>
                     </div>

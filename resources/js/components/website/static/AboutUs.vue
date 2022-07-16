@@ -54,7 +54,7 @@
             <div class="container">
                 <h1>Ready to Start Selling?</h1>
                 <div class="text-center">
-                    <router-link to="/seller_onboard">
+                    <router-link to="/sell_on_lavisco">
                         <button>Lets open my shop</button>
                     </router-link>
                 </div>

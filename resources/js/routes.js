@@ -671,8 +671,8 @@ export let routes = [
         },
     },
     {
-        path: "/seller_onboard",
-        name: "seller_onboard",
+        path: "/sell_on_lavisco",
+        name: "sell_on_lavisco",
         component: require("./components/website/static/SellerOnboard.vue")
             .default,
         meta: {

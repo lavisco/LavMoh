@@ -178,7 +178,7 @@
 export default {
     data: () => ({
         siteInfo: [],
-        keyValue: "seller_onboard_banner",
+        keyValue: "sell_on_lavisco_banner",
     }),
 
     methods: {

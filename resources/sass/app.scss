@@ -190,7 +190,7 @@ h6 {
         line-height: 32px;
     }
     h3 {
-        font-size: 18px;
+        font-size: 19px;
     }
     h4 {
         font-size: 17px !important;
@@ -275,6 +275,14 @@ button {
     color: $black !important;
     &:hover {
         background-color: #adadad !important;
+    }
+}
+
+.btn-sm-black {
+    background-color: #2f2f2f !important;
+    border-color: #2f2f2f !important;
+    &:hover {
+        background-color: #616161 !important;
     }
 }
 
@@ -448,6 +456,9 @@ button.bg-black:hover {
 .black {
     color: $black !important;
 }
+.red {
+    color: $lav-red;
+}
 .purple {
     color: $lav-purple;
 }
@@ -579,7 +590,7 @@ button.bg-black:hover {
     padding: 6px 14px !important;
     text-align: center;
     text-transform: capitalize;
-    color: $black;
+    color: $dark-grey;
     border: 1px solid transparent;
     border-radius: 12px;
     transition: all 150ms ease;
@@ -714,6 +725,8 @@ button.bg-black:hover {
     line-height: 10px;
     color: $black;
     margin-bottom: 3px;
+    min-width: 60px;
+    text-align: left;
 }
 
 .line-height-min {
@@ -1935,7 +1948,7 @@ section {
 
 .section-shortcuts {
     text-align: center;
-    .card{
+    .card {
         height: 315px;
     }
     //margin-bottom: 120px;
@@ -2626,6 +2639,17 @@ footer {
     }
 }
 
+.form-number {
+    background-color: #595959;
+    font-size: 17px;
+    font-weight: 500;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    text-align: center;
+}
+
 .form-table {
     background-color: #ffffff;
     border: 1px solid #b9b9b9;
@@ -2752,7 +2776,7 @@ footer {
         font-weight: 500;
     }
 }
-.dashboard-card-sm{
+.dashboard-card-sm {
     padding: 20px 30px;
 }
 .dashboard-info-card {
@@ -3026,15 +3050,25 @@ footer {
 
     .modal-body {
         padding: 0;
+        background-color: #f8f7f7;
+        border-radius: 12px;
     }
 
     .shop-setup-menu {
-        background-color: #f5f5f5;
+        background-color: #4e4e4e;
+        color: $white;
         border-radius: 12px;
-        padding: 34px 28px;
+        padding: 24px 28px;
     }
     .shop-setup-content {
-        padding: 30px 24px;
+        padding: 24px;
+    }
+
+    @media (max-width: 768px) {
+        .shop-setup-menu,
+        .shop-setup-content {
+            padding: 20px 16px;
+        }
     }
 }
 

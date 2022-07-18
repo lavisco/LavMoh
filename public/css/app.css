@@ -10213,7 +10213,7 @@ h1 {
   }
 
   h3 {
-    font-size: 18px;
+    font-size: 19px;
   }
 
   h4 {
@@ -10298,6 +10298,14 @@ button:hover {
 }
 .btn-sm-grey:hover {
   background-color: #adadad !important;
+}
+
+.btn-sm-black {
+  background-color: #2f2f2f !important;
+  border-color: #2f2f2f !important;
+}
+.btn-sm-black:hover {
+  background-color: #616161 !important;
 }
 
 .close:hover {
@@ -10496,6 +10504,10 @@ button.bg-black:hover {
   color: #333333 !important;
 }
 
+.red {
+  color: #df4e6b;
+}
+
 .purple {
   color: #976aff;
 }
@@ -10651,7 +10663,7 @@ button.bg-black:hover {
   padding: 6px 14px !important;
   text-align: center;
   text-transform: capitalize;
-  color: #333333;
+  color: #4e4e4e;
   border: 1px solid transparent;
   border-radius: 12px;
   transition: all 150ms ease;
@@ -10776,6 +10788,8 @@ button.bg-black:hover {
   line-height: 10px;
   color: #333333;
   margin-bottom: 3px;
+  min-width: 60px;
+  text-align: left;
 }
 
 .line-height-min {
@@ -12643,6 +12657,17 @@ footer {
   margin-bottom: 0;
 }
 
+.form-number {
+  background-color: #595959;
+  font-size: 17px;
+  font-weight: 500;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  text-align: center;
+}
+
 .form-table {
   background-color: #ffffff;
   border: 1px solid #b9b9b9;
@@ -13048,14 +13073,23 @@ footer {
 }
 .shop-setup .modal-body {
   padding: 0;
+  background-color: #f8f7f7;
+  border-radius: 12px;
 }
 .shop-setup .shop-setup-menu {
-  background-color: #f5f5f5;
+  background-color: #4e4e4e;
+  color: #ffffff;
   border-radius: 12px;
-  padding: 34px 28px;
+  padding: 24px 28px;
 }
 .shop-setup .shop-setup-content {
-  padding: 30px 24px;
+  padding: 24px;
+}
+@media (max-width: 768px) {
+  .shop-setup .shop-setup-menu,
+.shop-setup .shop-setup-content {
+    padding: 20px 16px;
+  }
 }
 
 .shop-setup-content .input-form-compact {

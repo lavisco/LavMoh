@@ -221,23 +221,46 @@
                     <div class="modal-body">
                         <div class="d-flex flex-md-row flex-column">
                             <div class="col-md-3 shop-setup-menu">
-                                <h3 class="text-left white">Activation Form</h3>
-                                <h6 class="mb-4 white">Setup your shop to start selling today!</h6>
-
-                                <h4 :class="{ pink: part1, white: part2 }">
-                                    <div class="form-number mr-2">1</div>
-                                    Your Details
-                                </h4>
-                                <h4 :class="{ red: part2, white: part1 }">
-                                    <div class="form-number mr-2">2</div>
-                                    Store Details
-                                </h4>
+                                <h3 class="text-left">Activation Form</h3>
+                                <p>Setup your shop to start selling today!</p>
+                                <hr />
 
                                 <button
                                     type="button"
+                                    class="btn-sm btn-sm-cart btn-full"
+                                    :class="{ active: part1 }"
+                                    @click.prevent="toggleForm('part1')"
+                                >
+                                    Your Details
+                                </button>
+                                <button
+                                    type="button"
+                                    class="btn-sm btn-sm-cart btn-full mt-3"
+                                    :class="{ active: part2 }"
+                                    @click.prevent="toggleForm('part2')"
+                                >
+                                    Store Details
+                                </button>
+                                <button
+                                    type="button"
+                                    class="btn-sm btn-sm-cart btn-full mt-3"
+                                    :class="{ active: part3 }"
+                                    @click.prevent="toggleForm('part3')"
+                                >
+                                    Remittance Bank Details
+                                </button>
+                                <button
+                                    type="button"
+                                    class="btn-sm btn-sm-cart btn-full mt-3"
+                                    :class="{ active: part4 }"
+                                    @click.prevent="toggleForm('part4')"
+                                >
+                                    Confirmation
+                                </button>
+                                <button
+                                    type="button"
                                     class="
-                                        btn-sm btn-sm-cart btn-sm-black btn-full
-                                        white
+                                        btn-sm btn-sm-cart btn-sm-grey btn-full
                                         mt-3
                                     "
                                     @click.prevent="logout"
@@ -255,7 +278,7 @@
                                         class="input-form-compact"
                                         v-show="part1"
                                     >
-                                        <h3 class="text-left mb-0">
+                                        <h3 class="text-left mb-3">
                                             Your Details
                                         </h3>
 
@@ -264,7 +287,7 @@
                                             class="
                                                 card
                                                 dashboard-info-card
-                                                mt-3
+                                                mt-4
                                             "
                                         >
                                             <h4 class="mb-3">
@@ -498,18 +521,16 @@
                                             </div>
                                         </div>
 
+
                                         <!-- Bank Details -->
                                         <div
                                             class="
                                                 card
                                                 dashboard-info-card
-                                                my-4
+                                                mt-4
                                             "
                                         >
-                                            <h4 class="mb-2">
-                                                Your Earnings Deposit Bank
-                                                Account
-                                            </h4>
+                                            <h4 class="mb-2">Your Earnings Deposit Bank Account</h4>
                                             <p class="text-xs mb-3">
                                                 Please make sure the details you
                                                 provide is accurate and updated.
@@ -714,37 +735,12 @@
                                             </div>
                                         </div>
 
-                                        <!-- Fail alert -->
-                                        <div
-                                            class="
-                                                alert
-                                                alert-danger
-                                                alert-dismissible
-                                                fade
-                                                show
-                                            "
-                                            v-show="failed"
-                                            role="alert"
-                                        >
-                                            Please re-check the form. There are
-                                            errors in your input.
-                                            <button
-                                                type="button"
-                                                class="close"
-                                                data-dismiss="alert"
-                                                aria-label="Close"
-                                            >
-                                                <span aria-hidden="true"
-                                                    >&times;</span
-                                                >
-                                            </button>
-                                        </div>
-
                                         <!-- Button -->
                                         <div
                                             class="
                                                 d-flex
                                                 justify-content-end
+                                                align-items-center
                                                 mt-4
                                             "
                                         >
@@ -752,7 +748,7 @@
                                                 type="button"
                                                 class="btn"
                                                 @click.prevent="
-                                                    validateSellerprofile()
+                                                    toggleForm('part2')
                                                 "
                                             >
                                                 Next
@@ -765,7 +761,7 @@
                                         class="input-form-compact"
                                         v-show="part2"
                                     >
-                                        <h3 class="text-left mb-0">
+                                        <h3 class="text-left mb-3">
                                             Your Store Details
                                         </h3>
 
@@ -775,7 +771,7 @@
                                             class="
                                                 card
                                                 dashboard-info-card
-                                                mt-3
+                                                mt-4
                                             "
                                         >
                                             <h4 class="mb-2">
@@ -1273,50 +1269,6 @@
 
                                         <div
                                             class="
-                                                card
-                                                dashboard-info-card
-                                                my-4
-                                            "
-                                        >
-                                            <h4 class="mb-2">Confirmation</h4>
-                                            <p>
-                                                Once you have submitted this
-                                                form you may proceed to add a
-                                                new product to your store. You
-                                                can review & update your profile
-                                                and store details at any moment
-                                                from the dashboard.
-                                            </p>
-                                        </div>
-
-                                        <!-- Fail alert -->
-                                        <div
-                                            class="
-                                                alert
-                                                alert-danger
-                                                alert-dismissible
-                                                fade
-                                                show
-                                            "
-                                            v-show="failed2"
-                                            role="alert"
-                                        >
-                                            Please re-check the form. There are
-                                            errors in your input.
-                                            <button
-                                                type="button"
-                                                class="close"
-                                                data-dismiss="alert"
-                                                aria-label="Close"
-                                            >
-                                                <span aria-hidden="true"
-                                                    >&times;</span
-                                                >
-                                            </button>
-                                        </div>
-
-                                        <div
-                                            class="
                                                 d-flex
                                                 justify-content-between
                                                 align-items-center
@@ -1333,13 +1285,374 @@
                                                 Previous
                                             </button>
                                             <button
-                                                type="submit"
+                                                type="button"
                                                 class="btn"
-                                                :disabled="submitButtonDisabled"
+                                                @click.prevent="
+                                                    toggleForm('part3')
+                                                "
                                             >
-                                                <i class="fas fa-save mr-2"></i>
-                                                {{ submitButtonText }}
+                                                Next
                                             </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Bank Account -->
+                                    <div
+                                        class="input-form-compact"
+                                        v-show="part3"
+                                    >
+                                        <h3 class="text-left mb-3">
+                                            Your Remittance Bank Details
+                                        </h3>
+
+                                        <div
+                                            class="
+                                                card
+                                                dashboard-info-card
+                                                mt-4
+                                            "
+                                        >
+                                            <h4 class="mb-2">
+                                                Earnings Deposit Account
+                                                Information
+                                            </h4>
+                                            <p class="text-xs mb-3">
+                                                Please make sure the details you
+                                                provide is accurate and updated.
+                                                All payments will be made weekly
+                                                into this account and lavisco.lk
+                                                will not deposit into any other
+                                                accounts not stated below
+                                            </p>
+
+                                            <div class="row">
+                                                <div
+                                                    class="form-group col-md-8"
+                                                >
+                                                    <label
+                                                        class="col-form-label"
+                                                        for="deposit_account"
+                                                        >Account no.
+                                                        <strong
+                                                            class="text-danger"
+                                                        >
+                                                            *
+                                                        </strong>
+                                                    </label>
+                                                    <input
+                                                        id="deposit_account"
+                                                        v-model="
+                                                            form.deposit_account
+                                                        "
+                                                        type="text"
+                                                        name="deposit_account"
+                                                        class="form-control"
+                                                        placeholder="deposit account no."
+                                                    />
+                                                    <HasError
+                                                        :form="form"
+                                                        field="deposit_account"
+                                                    />
+                                                </div>
+                                                <div
+                                                    class="form-group col-md-4"
+                                                >
+                                                    <label
+                                                        class="col-form-label"
+                                                        for="deposit_account_status"
+                                                        >Status
+                                                        <strong
+                                                            class="text-danger"
+                                                        >
+                                                            *
+                                                        </strong>
+                                                    </label>
+                                                    <div>
+                                                        <div
+                                                            class="
+                                                                custom-control
+                                                                custom-radio
+                                                                custom-control-inline
+                                                            "
+                                                        >
+                                                            <input
+                                                                type="radio"
+                                                                id="status1"
+                                                                name="deposit_account_status"
+                                                                class="
+                                                                    custom-control-input
+                                                                "
+                                                                v-model="
+                                                                    form.deposit_account_status
+                                                                "
+                                                                value="1"
+                                                            />
+                                                            <label
+                                                                class="
+                                                                    custom-control-label
+                                                                "
+                                                                for="status1"
+                                                                >Active</label
+                                                            >
+                                                        </div>
+                                                        <div
+                                                            class="
+                                                                custom-control
+                                                                custom-radio
+                                                                custom-control-inline
+                                                            "
+                                                        >
+                                                            <input
+                                                                type="radio"
+                                                                id="status2"
+                                                                name="deposit_account_status"
+                                                                class="
+                                                                    custom-control-input
+                                                                "
+                                                                v-model="
+                                                                    form.deposit_account_status
+                                                                "
+                                                                value="0"
+                                                            />
+                                                            <label
+                                                                class="
+                                                                    custom-control-label
+                                                                "
+                                                                for="status2"
+                                                                >Inactive</label
+                                                            >
+                                                        </div>
+                                                    </div>
+
+                                                    <HasError
+                                                        :form="form"
+                                                        field="deposit_account_status"
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div
+                                                    class="form-group col-md-12"
+                                                >
+                                                    <label
+                                                        class="col-form-label"
+                                                        for="deposit_name"
+                                                        >Account Name
+                                                        <strong
+                                                            class="text-danger"
+                                                        >
+                                                            *
+                                                        </strong>
+                                                    </label>
+                                                    <input
+                                                        id="deposit_name"
+                                                        v-model="
+                                                            form.deposit_name
+                                                        "
+                                                        type="text"
+                                                        name="deposit_name"
+                                                        class="form-control"
+                                                        placeholder="deposit account name"
+                                                    />
+                                                    <HasError
+                                                        :form="form"
+                                                        field="deposit_name"
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div
+                                                    class="form-group col-md-6"
+                                                >
+                                                    <label
+                                                        class="col-form-label"
+                                                        for="deposit_bank"
+                                                        >Bank name
+                                                        <strong
+                                                            class="text-danger"
+                                                        >
+                                                            *
+                                                        </strong>
+                                                    </label>
+                                                    <input
+                                                        id="deposit_bank"
+                                                        v-model="
+                                                            form.deposit_bank
+                                                        "
+                                                        type="text"
+                                                        name="deposit_bank"
+                                                        class="form-control"
+                                                        placeholder="Deposit bank name"
+                                                    />
+                                                    <HasError
+                                                        :form="form"
+                                                        field="deposit_bank"
+                                                    />
+                                                </div>
+                                                <div
+                                                    class="form-group col-md-6"
+                                                >
+                                                    <label
+                                                        class="col-form-label"
+                                                        for="deposit_bank_branch"
+                                                        >Branch name
+                                                        <strong
+                                                            class="text-danger"
+                                                        >
+                                                            *
+                                                        </strong>
+                                                    </label>
+                                                    <input
+                                                        id="deposit_bank_branch"
+                                                        v-model="
+                                                            form.deposit_bank_branch
+                                                        "
+                                                        type="text"
+                                                        name="deposit_bank_branch"
+                                                        class="form-control"
+                                                        placeholder="Deposit bank branch"
+                                                    />
+                                                    <HasError
+                                                        :form="form"
+                                                        field="deposit_bank_branch"
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div
+                                            class="
+                                                d-flex
+                                                justify-content-between
+                                                align-items-center
+                                                mt-4
+                                            "
+                                        >
+                                            <button
+                                                type="button"
+                                                class="btn mr-4 btn-grey"
+                                                @click.prevent="
+                                                    toggleForm('part2')
+                                                "
+                                            >
+                                                Previous
+                                            </button>
+                                            <button
+                                                type="button"
+                                                class="btn"
+                                                @click.prevent="
+                                                    toggleForm('part4')
+                                                "
+                                            >
+                                                Next
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div
+                                        class="input-form-compact"
+                                        v-show="part4"
+                                    >
+                                        <div
+                                            class="
+                                                h-100
+                                                d-flex
+                                                flex-column
+                                                justify-content-between
+                                            "
+                                        >
+                                            <div>
+                                                <h3 class="text-left mb-3">
+                                                    Confirmation
+                                                </h3>
+                                                <h4 class="mb-2">
+                                                    Once you have submitted this
+                                                    form you may proceed to add
+                                                    a new product to your store.
+                                                </h4>
+                                                <p>
+                                                    You can review & update your
+                                                    profile and store details at
+                                                    any moment from the
+                                                    dashboard.
+                                                </p>
+                                            </div>
+
+                                            <div>
+                                                <div
+                                                    class="
+                                                        alert
+                                                        alert-danger
+                                                        alert-dismissible
+                                                        fade
+                                                        show
+                                                    "
+                                                    v-show="failed"
+                                                    role="alert"
+                                                >
+                                                    <h4>
+                                                        Activation Failed!
+                                                        <button
+                                                            type="button"
+                                                            class="close"
+                                                            data-dismiss="alert"
+                                                            aria-label="Close"
+                                                        >
+                                                            <span
+                                                                aria-hidden="true"
+                                                                >&times;</span
+                                                            >
+                                                        </button>
+                                                    </h4>
+                                                    <hr />
+                                                    <p class="mb-0">
+                                                        There are errors in your
+                                                        input. You should
+                                                        re-check the entire
+                                                        form.
+                                                    </p>
+                                                </div>
+
+                                                <div
+                                                    class="
+                                                        d-flex
+                                                        justify-content-between
+                                                        align-items-center
+                                                        mt-auto
+                                                    "
+                                                >
+                                                    <button
+                                                        type="button"
+                                                        class="
+                                                            btn
+                                                            mr-4
+                                                            btn-grey
+                                                        "
+                                                        @click.prevent="
+                                                            toggleForm('part3')
+                                                        "
+                                                    >
+                                                        Previous
+                                                    </button>
+                                                    <button
+                                                        type="submit"
+                                                        class="btn"
+                                                        :disabled="
+                                                            submitButtonDisabled
+                                                        "
+                                                    >
+                                                        <i
+                                                            class="
+                                                                fas
+                                                                fa-pen-nib
+                                                                mr-2
+                                                            "
+                                                            aria-hidden="true"
+                                                        ></i>
+                                                        {{ submitButtonText }}
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </form>
@@ -1393,8 +1706,8 @@ export default {
         part1: true,
         part2: false,
         part3: false,
+        part4: false,
         failed: false,
-        failed2: false,
 
         shippings: [],
         cities: [],
@@ -1430,6 +1743,7 @@ export default {
             this.part1 = false;
             this.part2 = false;
             this.part3 = false;
+            this.part4 = false;
             this[formpart] = true;
         },
 
@@ -1496,19 +1810,6 @@ export default {
                 .catch((error) => console.log(error));
         },
 
-        validateSellerprofile() {
-            this.form
-                .post("/api/seller/user/shop_setup_validate_profile")
-                .then(() => {
-                    this.failed = false;
-                    this.toggleForm("part2");
-                })
-                .catch((error) => {
-                    console.log(error);
-                    this.failed = true;
-                });
-        },
-
         createSellerprofile() {
             this.submitButtonText = "In Progress...";
             this.submitButtonDisabled = true;
@@ -1532,7 +1833,7 @@ export default {
                     this.submitButtonText = "Submit";
                     this.submitButtonDisabled = false;
                     console.log(error);
-                    this.failed2 = true;
+                    this.failed = true;
                 });
         },
 

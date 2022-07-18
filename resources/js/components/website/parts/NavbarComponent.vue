@@ -307,7 +307,7 @@
                         >
                             <circle cx="12" cy="9.5" r="1.5" fill="#333" />
                             <path
-                                fill="#333"
+                                fill="#4e4e4e"
                                 d="M12 2a8 8 0 0 0-8 7.92c0 5.48 7.05 11.58 7.35 11.84a1 1 0 0 0 1.3 0C13 21.5 20 15.4 20 9.92A8 8 0 0 0 12 2Zm0 11a3.5 3.5 0 1 1 3.5-3.5A3.5 3.5 0 0 1 12 13Z"
                             />
                         </svg>
@@ -321,7 +321,7 @@
                             "
                         >
                             <span class="nav-tiny-text">Deliver to</span>
-                            Location
+                            {{locationActive}}
                         </div>
                     </a>
                     <div
@@ -368,7 +368,7 @@
                         class="mr-md-1"
                     >
                         <path
-                            fill="#333"
+                            fill="#4e4e4e"
                             d="M12 4a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4Z"
                         />
                     </svg>

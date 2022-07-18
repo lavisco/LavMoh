@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class SellerRegisterRequest extends FormRequest
+class SellerRegisterProfileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -38,18 +37,10 @@ class SellerRegisterRequest extends FormRequest
             'deposit_bank' => 'required',
             'deposit_bank_branch' => 'required',
             'deposit_account_status' => 'required|boolean',
-
-            //shop
-            'shop_name' => 'required|max:400',
-            'banner' => 'nullable',
-            'about' => 'required|max:500',
-            'shop_city' => 'required',
-            'shop_address' => 'required|max:500',
-            'shop_zipcode' => 'max:12|nullable',
         ];
     }
 
-    /**
+        /**
      * Get custom attributes for validator errors.
      *
      * @return array

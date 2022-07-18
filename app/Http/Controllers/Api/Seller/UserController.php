@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Seller;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PasswordRequest;
+use App\Http\Requests\SellerRegisterProfileRequest;
 use App\Http\Requests\SellerRegisterRequest;
 use App\Http\Requests\UserRequest;
 use App\Models\City;
@@ -91,6 +92,11 @@ class UserController extends Controller
 
         //sync to pivot tables
         $shop->shippings()->sync($request->shop_shipping);
+    }
+
+    public function sellerProfileValidate(SellerRegisterProfileRequest $request)
+    {   
+        return $request;
     }
 
     /**

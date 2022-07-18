@@ -197,6 +197,7 @@ Route::prefix('seller')->group(function () {
     Route::apiResource('/transactions', SellerTransactionController::class);
     Route::apiResource('/transaction_states', SellerTransactionStateController::class);
     Route::post('/user/password_reset', [SellerUserController::class, 'updatePassword']);
+    Route::post('/user/shop_setup_validate_profile', [SellerUserController::class, 'sellerProfileValidate']);
     Route::post('/user/shop_setup', [SellerUserController::class, 'storeShopSetup']);
     Route::apiResource('/user', SellerUserController::class);
     Route::apiResource('/variations', SellerVariationController::class);

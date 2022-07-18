@@ -323,7 +323,7 @@
                             aria-expanded="false"
                             aria-controls="collapseMaterial"
                         >
-                            <h5 class="mb-0">Ingredients</h5>
+                            <h5 class="mb-0">Ingredients/ Materials</h5>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 xmlns:xlink="http://www.w3.org/1999/xlink"

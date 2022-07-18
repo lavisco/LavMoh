@@ -40,7 +40,7 @@
                                 <router-link to="/seller/products/listing">
                                     <button
                                         type="button"
-                                        class="btn btn-primary mobile-add-btn"
+                                        class="btn mobile-add-btn"
                                     >
                                         <i
                                             class="fas fa-plus mr-md-2"
@@ -214,7 +214,7 @@
                                             >
                                                 <g
                                                     fill="none"
-                                                    stroke="#976aff"
+                                                    stroke="#df4e6b"
                                                     stroke-linecap="round"
                                                     stroke-linejoin="round"
                                                     stroke-width="1.5"
@@ -561,7 +561,7 @@
                     <div class="modal-footer bg-black">
                         <button
                             type="button"
-                            class="btn btn-primary"
+                            class="btn"
                             data-dismiss="modal"
                             aria-label="Close"
                         >

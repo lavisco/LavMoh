@@ -45,11 +45,7 @@
                             <div class="col-lg-8 text-md-right">
                                 <button
                                     type="button"
-                                    class="
-                                        btn btn-primary
-                                        mobile-add-btn
-                                        btn-md-full
-                                    "
+                                    class="btn mobile-add-btn btn-md-full"
                                     @click.prevent="requestWithdrawal"
                                 >
                                     Request
@@ -72,15 +68,15 @@
                             <table class="table align-items-center table-hover">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Code</th>
+                                        <th scope="col">Transaction Code</th>
                                         <th scope="col">Order Code</th>
                                         <th scope="col" class="table-col-sm">
                                             Total Amount
                                         </th>
-                                        <th class="table-col-sm">
+                                        <th>
                                             Bank Charge
                                         </th>
-                                        <th class="table-col-sm">
+                                        <th>
                                             Lavisco Commission
                                         </th>
                                         <th class="table-col-sm">
@@ -107,7 +103,16 @@
                                             {{ transaction.payable_amount }}
                                         </td>
                                         <td>
-                                            {{ transaction.status }}
+                                            <span
+                                                class="
+                                                    badge badge-pill
+                                                    bg-red
+                                                    white
+                                                    text-sm
+                                                "
+                                            >
+                                                {{ transaction.status }}
+                                            </span>
                                         </td>
                                         <td class="text-right">
                                             <div class="d-flex">
@@ -164,7 +169,7 @@
                                         <span
                                             class="
                                                 badge badge-pill
-                                                bg-purple
+                                                bg-red
                                                 white
                                                 text-xxs
                                             "
@@ -193,7 +198,7 @@
                                             >
                                                 <g
                                                     fill="none"
-                                                    stroke="#976aff"
+                                                    stroke="#df4e6b"
                                                     stroke-linecap="round"
                                                     stroke-linejoin="round"
                                                     stroke-width="1.5"
@@ -532,7 +537,7 @@
                     <div class="modal-footer bg-black">
                         <button
                             type="button"
-                            class="btn btn-primary"
+                            class="btn"
                             data-dismiss="modal"
                             aria-label="Close"
                         >

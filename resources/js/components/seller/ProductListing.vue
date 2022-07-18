@@ -1380,10 +1380,9 @@
                     <div class="modal-footer">
                         <button
                             type="button"
-                            class="btn btn-primary"
+                            class="btn"
                             @click.prevent="closeModal"
                         >
-                            <i class="fas fa-pen-nib mr-2"></i>
                             Save
                         </button>
                     </div>

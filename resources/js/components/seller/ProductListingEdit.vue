@@ -1877,10 +1877,13 @@
                         </button>
                         <button
                             type="submit"
-                            class="btn btn-primary"
+                            class="btn"
                             :disabled="submitButtonDisabled"
                         >
-                            <i class="fas fa-save mr-2" aria-hidden="true"></i>
+                            <i
+                                class="fas fa-pen-nib mr-2"
+                                aria-hidden="true"
+                            ></i>
                             {{ submitButtonText }}
                         </button>
                     </div>
@@ -1969,10 +1972,9 @@
                     <div class="modal-footer pt-0">
                         <button
                             type="button"
-                            class="btn btn-primary"
+                            class="btn"
                             @click.prevent="closeModal"
                         >
-                            <i class="fas fa-pen-nib mr-2"></i>
                             Save
                         </button>
                     </div>
@@ -2737,7 +2739,7 @@ export default {
                     );
                 })
                 .then(() => {
-                    this.submitButtonText = "Submit";
+                    this.submitButtonText = "Update";
                     this.submitButtonDisabled = false;
                     $("#success-modal").modal("show");
                     return this.loadProduct();

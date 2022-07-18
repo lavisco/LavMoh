@@ -66,13 +66,13 @@ class Product extends Model
     //products:occasions M:M
     public function occasions()
     {
-        return $this->belongsToMany(Occasion::class)->withTimestamps();
+        return $this->belongsToMany(Occasion::class)->where('status', 1)->withTimestamps();
     }    
 
     //products:recipients M:M
     public function recipients()
     {
-        return $this->belongsToMany(Recipient::class)->withTimestamps();
+        return $this->belongsToMany(Recipient::class)->where('status', 1)->withTimestamps();
     }
 
     //products:shippings M:M

@@ -10274,7 +10274,7 @@ button:hover {
 .btn-sm, .btn-group-sm > .btn {
   padding: 8px 20px;
   background-color: #ffffff;
-  border: 1px solid #976aff;
+  border: 1px solid #df4e6b;
   color: #333333;
   font-size: 14px;
   font-weight: 600;
@@ -10458,6 +10458,10 @@ button.bg-black:hover {
 
 .bg-purple {
   background-color: #976aff;
+}
+
+.bg-red {
+  background-color: #df4e6b;
 }
 
 .bg-blue {
@@ -12434,7 +12438,7 @@ footer {
     padding: 8px 10px;
     font-weight: 400;
     font-size: 14px;
-    color: #976aff;
+    color: #df4e6b;
   }
   .main-dashboard-content .card {
     padding: 0;
@@ -12724,7 +12728,7 @@ footer {
 
 .search-input .input-group-text {
   background-color: #fff;
-  color: #976aff;
+  color: #df4e6b;
   border: none;
   box-shadow: rgba(226, 226, 226, 0.596) 0 0 0 1px;
   border-radius: 12px;
@@ -12736,7 +12740,7 @@ footer {
 }
 .search-input .form-control:focus {
   background-color: #ffffff !important;
-  box-shadow: #836aff9f 0 0 0 1px !important;
+  box-shadow: #ff6aad9f 0 0 0 1px !important;
   transition: all 0.3s ease;
   -webkit-transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;
@@ -12747,7 +12751,7 @@ footer {
 .custom-select {
   padding: 8px 20px;
   background-color: #ffffff;
-  border: 1px solid #976aff;
+  border: 1px solid #df4e6b;
   color: #333333;
   font-size: 14px;
   font-weight: 600;
@@ -12963,7 +12967,7 @@ footer {
 }
 
 .mobile-btn-sm {
-  color: #976aff;
+  color: #df4e6b;
   font-weight: 500 !important;
   padding: 6px 8px !important;
   height: 38px;

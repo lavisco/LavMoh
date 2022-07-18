@@ -217,9 +217,9 @@ class ProductController extends Controller
     public function getDetails()
     {
         return response()->json([
-            'categories' => Category::select('id', 'name')->latest()->get(),
-            'occasions' => Occasion::select('id', 'name')->latest()->get(),
-            'recipients' => Recipient::select('id', 'name')->latest()->get(),
+            'categories' => Category::select('id', 'name')->where('status', 1)->latest()->get(),
+            'occasions' => Occasion::select('id', 'name')->where('status', 1)->latest()->get(),
+            'recipients' => Recipient::select('id', 'name')->where('status', 1)->latest()->get(),
             'shippings' => Shipping::latest()->get(),
         ]);
     }
@@ -230,7 +230,7 @@ class ProductController extends Controller
     public function getSubcategories($categoryId)
     {
         return response()->json([
-            'sub_categories' => SubCategory::where('category_id', $categoryId)->get(),
+            'sub_categories' => SubCategory::where('category_id', $categoryId)->where('status', 1)->get(),
         ]);
     }
 }

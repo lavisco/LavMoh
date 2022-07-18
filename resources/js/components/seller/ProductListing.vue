@@ -1011,7 +1011,7 @@
                                                                     ml-2
                                                                 "
                                                                 data-toggle="modal"
-                                                                data-target="#infoModal"
+                                                                data-target="#infoModalPricing"
                                                             ></i>
                                                         </th>
                                                         <th
@@ -1391,89 +1391,6 @@
             </div>
         </div>
 
-        <!-- Info Modal -->
-        <div
-            class="modal fade"
-            id="infoModal"
-            tabindex="-1"
-            aria-labelledby="exampleModalLabel"
-            aria-hidden="true"
-        >
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="addRecordLabel">
-                            How does variation pricing work?
-                        </h4>
-                        <button
-                            type="button"
-                            class="close"
-                            data-dismiss="modal"
-                            aria-label="Close"
-                        >
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <p>
-                            Variation option prices will be added to the product
-                            Base Price. The formula for Product price
-                            calculation is:
-                        </p>
-                        <p>
-                            <strong>
-                                Product price = Base Price + Variation Option
-                                Price
-                            </strong>
-                        </p>
-                        <p>
-                            For example, your Product Base Price is LKR 2000 and
-                            your variation option price is LKR 500, then if the
-                            customer selects this option on the website, the
-                            price of your product will be LKR 2500(2000 + 500).
-                            An example is given below.
-                        </p>
-                        <div class="rounded bg-light-grey p-3">
-                            <p>
-                                <strong>Product: </strong>White Chocolate Cake
-                            </p>
-                            <p><strong>Base Price: </strong>LKR 2000.00</p>
-                            <p><strong>1st Variation: </strong>Weight</p>
-                            <p><strong>1st Variation Options:</strong></p>
-                            <div class="table-responsive form-table">
-                                <table class="table align-items-center">
-                                    <thead>
-                                        <tr>
-                                            <td>Option Name</td>
-                                            <td>Price</td>
-                                            <td>Product Price</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1 kg</td>
-                                            <td>500</td>
-                                            <td>
-                                                2000 + 500 =
-                                                <strong>2500</strong>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>2 kg</td>
-                                            <td>700</td>
-                                            <td>
-                                                2000 + 700 =
-                                                <strong>2700</strong>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <!-- Notification Modal -->
         <success-modal

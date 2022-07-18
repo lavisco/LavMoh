@@ -957,6 +957,11 @@
                                     >
                                         Status
                                         <strong class="text-danger"> *</strong>
+                                        <i
+                                            class="fas fa-info-circle ml-2"
+                                            data-toggle="modal"
+                                            data-target="#infoModalStatus"
+                                        ></i>
                                     </label>
                                     <div class="col-md-4">
                                         <select
@@ -1073,7 +1078,7 @@
                                                                     ml-2
                                                                 "
                                                                 data-toggle="modal"
-                                                                data-target="#infoModal"
+                                                                data-target="#infoModalPricing"
                                                             ></i>
                                                         </th>
                                                         <th
@@ -1089,7 +1094,16 @@
                                                             SKU
                                                         </th>
                                                         <th class="smwidth">
-                                                            State
+                                                            Status
+                                                            <i
+                                                                class="
+                                                                    fas
+                                                                    fa-info-circle
+                                                                    ml-2
+                                                                "
+                                                                data-toggle="modal"
+                                                                data-target="#infoModalStatus"
+                                                            ></i>
                                                         </th>
                                                     </tr>
                                                 </thead>
@@ -1600,7 +1614,7 @@
                                                                 ml-2
                                                             "
                                                             data-toggle="modal"
-                                                            data-target="#infoModal"
+                                                            data-target="#infoModalPricing"
                                                         ></i>
                                                     </th>
                                                     <th
@@ -1966,10 +1980,10 @@
             </div>
         </div>
 
-        <!-- Info Modal -->
+        <!-- Info Modal Pricing -->
         <div
             class="modal fade"
-            id="infoModal"
+            id="infoModalPricing"
             tabindex="-1"
             aria-labelledby="exampleModalLabel"
             aria-hidden="true"
@@ -2044,6 +2058,52 @@
                                     </tbody>
                                 </table>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Info Modal Status -->
+        <div
+            class="modal fade"
+            id="infoModalStatus"
+            tabindex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="addRecordLabel">
+                            How does status work?
+                        </h4>
+                        <button
+                            type="button"
+                            class="close"
+                            data-dismiss="modal"
+                            aria-label="Close"
+                        >
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            Status determines if this variation or option will
+                            display on the website for customers. The statuses
+                            are explained below.
+                        </p>
+                        <div class="mb-2">
+                            <strong class="red">active</strong>: Variation or
+                            option will display on the website
+                        </div>
+                        <div class="mb-2">
+                            <strong class="red">inactive</strong>: Variation or
+                            option will not display on the website
+                        </div>
+                        <div>
+                            <strong class="red">removed</strong>: Request admin
+                            to remove variation or option
                         </div>
                     </div>
                 </div>

@@ -71,18 +71,18 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function searchIndex()
+    public function searchIndex($searchText)
     {
-        $products = Product::where('product_state_id', '1')->with(['category:id,name', 'user.shop', 'product_image'])->latest()->filter(request(['searchText']))->get();
-        $shop = Shop::latest()->filter(request(['searchText']))->get();
+        $request = $searchText;
+
+        $products = $request ? Product::where('product_state_id', '1')->with(['category:id,name', 'user.shop', 'product_image'])->latest()->where('title', 'like', '%' . $searchText . '%')->get() : '';
 
         return response()->json([
             'products' => $products,
-            'occasions' => Occasion::where('status', 1)->filter(request(['searchText']))->latest()->get(),
-            'recipients' => Recipient::where('status', 1)->latest()->filter(request(['searchText']))->get(),
-            'categories' => Category::where('status', 1)->latest()->filter(request(['searchText']))->get(),
-            'shops' => Shop::latest()->filter(request(['searchText']))->get(),
-            //'all' => [$products, $shop],
+            'occasions' => $request ? Occasion::where('status', 1)->where('name', 'like', '%' . $searchText . '%')->latest()->get() : '',
+            'recipients' => $request ? Recipient::where('status', 1)->latest()->where('name', 'like', '%' . $searchText . '%')->get() : '',
+            'categories' => $request ? Category::where('status', 1)->latest()->where('name', 'like', '%' . $searchText . '%')->get() : '',
+            'shops' => $request ? Shop::latest()->where('name', 'like', '%' . $searchText . '%')->get() : '',
         ]);
     }
 

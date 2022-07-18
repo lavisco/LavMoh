@@ -230,7 +230,7 @@ Route::get('/navdata', [WebsiteHomeController::class, 'getNavbarData']);
 Route::apiResource('/home', WebsiteHomeController::class);
 //search
 Route::get('/search/{searchText}', [WebsiteHomeController::class, 'searchSuggestion']);
-Route::get('/search', [WebsiteHomeController::class, 'searchIndex']);
+Route::get('/searchIndex/{searchText}', [WebsiteHomeController::class, 'searchIndex']);
 //pages
 Route::get('/categories/products/{id}/{location}', [WebsiteCategoryController::class, 'getLocationWiseProducts']);
 Route::get('/categories/sub_category/{id}', [WebsiteCategoryController::class, 'filterSubCategory']);

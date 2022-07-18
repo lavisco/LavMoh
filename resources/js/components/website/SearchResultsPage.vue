@@ -27,7 +27,10 @@
                     <router-link
                         class="card item-card-2"
                         :to="{
-                            name: product.category_id == 7 ? 'giftboxes/product' : 'products/product',
+                            name:
+                                product.category_id == 7
+                                    ? 'giftboxes/product'
+                                    : 'products/product',
                             params: {
                                 productId: product.id,
                                 slug: product.slug,
@@ -45,7 +48,7 @@
                                 :alt="product.title"
                             />
                         </div>
-                        <div class="px-3">
+                        <div class="px-2 px-md-3">
                             <div class="card-title-2">
                                 {{ product.title }}
                             </div>
@@ -54,12 +57,16 @@
                                 {{
                                     product.base_price * currency.exchange_rate
                                 }}
+                                <span v-show="product.has_variations == 1"
+                                    >+</span
+                                >
                             </div>
                             <div class="card-secondary-text">
-                                {{ product.category.name }}
-                            </div>
-                            <div class="card-secondary-text">
-                                Made by {{ product.user.shop.name }}
+                                {{
+                                    product.user.shop
+                                        ? product.user.shop.name
+                                        : ""
+                                }}
                             </div>
                         </div>
                     </router-link>
@@ -268,6 +275,27 @@ export default {
                     break;
             }
         },
+
+        fetchResults() {
+            axios
+                .get("/api/searchIndex/" + this.$route.params.searchText)
+                .then((response) => {
+                    this.resultsProduct = response.data.products;
+                    this.resultsOccasion = response.data.occasions;
+                    this.resultsRecipient = response.data.recipients;
+                    this.resultsCategory = response.data.categories;
+                    this.resultsShop = response.data.shops;
+                })
+                .catch((error) => console.log(error));
+        },
+    },
+
+    async created() {
+        // first check if prop exist
+        //if (this.post) return (this.form = this.post);
+
+        //check the parameter ?searchText exist
+        if (this.$route.params.searchText) return this.fetchResults();
     },
 };
 </script>

@@ -95,9 +95,7 @@ export default {
 
         fetchResults() {
             axios
-                .get("/api/search", {
-                    params: { searchText: this.searchText },
-                })
+                .get("/api/searchIndex/" + this.searchText)
                 .then((response) => {
                     this.resetResults();
                     this.$router.replace({

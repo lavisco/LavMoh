@@ -35,7 +35,10 @@
             style="border-radius: 8px"
             aria-labelledby="dropdownCartLink"
         >
-            <div class="menu-cart">
+            <div
+                class="menu-cart"
+                @click.prevent="preventDropdownClose($event)"
+            >
                 <div>
                     <h5>Your cart</h5>
                 </div>
@@ -132,6 +135,9 @@ export default {
     methods: {
         removeProductFromCart(product) {
             this.$store.dispatch("removeProductFromCart", product);
+        },
+        preventDropdownClose(e) {
+            e.stopPropagation();
         },
     },
 

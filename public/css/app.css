@@ -11813,13 +11813,6 @@ section h1 {
      object-fit: cover !important;
 }
 
-.search-result .item-card-2 {
-  height: 428px;
-}
-.search-result .card-title-2 {
-  max-height: 25px;
-}
-
 @media (max-width: 768px) {
   .item-card-2 {
     width: 48%;

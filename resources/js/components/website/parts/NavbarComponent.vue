@@ -321,35 +321,41 @@
                             "
                         >
                             <span class="nav-tiny-text">Deliver to</span>
-                            {{locationActive}}
+                            {{ locationActive }}
                         </div>
                     </a>
                     <div
                         class="dropdown-menu dropdown-menu-right"
                         style="border-radius: 8px"
                         aria-labelledby="dropdownLocation"
+                        id="dropdownLocation"
+                        @click.prevent="preventDropdownClose($event)"
                     >
                         <h6 class="dropdown-header">
                             Select product delivery location
                         </h6>
-                        <div class="d-flex flex-column flex-md-row">
-                            <div
-                                class="col-6 d-flex flex-column px-4"
-                                v-for="districts in chunkedDistricts"
+                        <div class="col-12 px-3 pt-2 pb-3">
+                            <select
+                                class="
+                                    custom-select
+                                    form-control form-control-alternative
+                                "
+                                id="filter"
+                                name="filter"
+                                @change.prevent="saveLocation(districtName)"
+                                v-model="districtName"
                             >
-                                <a
-                                    class="nav-link-currency"
-                                    @click.prevent="saveLocation(district.name)"
+                                <option value="" disabled selected hidden>
+                                    Select District
+                                </option>
+                                <option
                                     v-for="district in districts"
                                     :key="district.id"
-                                    :class="{
-                                        active:
-                                            locationActive === district.name,
-                                    }"
+                                    :value="district.name"
                                 >
                                     {{ district.name }}
-                                </a>
-                            </div>
+                                </option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -550,6 +556,7 @@ export default {
         currencies: [],
         districts: [],
         user: "",
+        districtName: "",
     }),
 
     computed: {
@@ -576,28 +583,15 @@ export default {
         },
         saveLocation(district) {
             this.$store.dispatch("saveLocation", district);
+            $("#dropdownLocation").dropdown("hide");
         },
         displayMenu() {
             let sidenav = document.querySelector(".dashboard-side-nav");
             sidenav.classList.toggle("show-nav");
-            /*
-            //SIDE-NAV
-            
-            let openbtn = document.querySelector("#toggle-sidenav");
-            let closebtn = document.querySelector("#close-sidenav");
+        },
 
-            openbtn.addEventListener("click", () => {
-                sidenav.classList.toggle("show-nav");
-            });
-            closebtn.addEventListener("click", () => {
-                sidenav.classList.toggle("show-nav");
-            });
-            document.querySelectorAll(".dashboard-link").forEach((button) => {
-                button.onclick = function () {
-                    sidenav.classList.toggle("show-nav");
-                };
-            });
-            */
+        preventDropdownClose(e) {
+            e.stopPropagation();
         },
 
         loadData() {

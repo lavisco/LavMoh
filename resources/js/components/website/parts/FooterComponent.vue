@@ -14,12 +14,12 @@
                         </router-link>
                     </div>
                     <div class="col-md-3 col-6 d-flex flex-column">
-                        <h5>About</h5>
+                        <h5>About Lavisco</h5>
                         <router-link to="/about">About us</router-link>
                         <router-link to="/coming_soon">FAQ</router-link>
                     </div>
                     <div class="col-md-3 col-6 d-flex flex-column mt-5 mt-md-0">
-                        <h5>Policies</h5>
+                        <h5>Shop on Lavisco</h5>
                         <router-link to="/terms_and_conditions">
                             Terms & Conditions
                         </router-link>

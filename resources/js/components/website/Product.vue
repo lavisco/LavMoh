@@ -267,31 +267,7 @@
                     <!-- buttons -->
                     <div class="mt-4">
                         <div class="d-md-flex">
-                            <router-link
-                                class="w-100"
-                                :to="{
-                                    name: 'custom_product_inquiry',
-                                    params: {
-                                        productId: product.id,
-                                    },
-                                }"
-                                v-if="custom"
-                            >
-                                <button
-                                    class="
-                                        checkout-btn
-                                        btn-full
-                                        checkout-btn-cart
-                                        mt-2 mt-md-0
-                                        col-md-8
-                                    "
-                                    type="button"
-                                >
-                                    Inquire
-                                </button>
-                            </router-link>
                             <button
-                                v-if="!custom"
                                 class="
                                     checkout-btn
                                     btn-full
@@ -632,9 +608,11 @@ export default {
 
         setData(response) {
             this.product = response.data;
-            if (this.product.sub_categories.length > 0) {
-                this.customCategory();
-            }
+
+            //for products in category- custom
+            // if (this.product.sub_categories.length > 0) {
+            //     this.customCategory();
+            // }
             this.loading = false;
 
             for (let key in this.product.product_images) {

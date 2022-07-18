@@ -32,10 +32,7 @@
                     :key="`p${product.id}`"
                     class="card item-card-2"
                     :to="{
-                        name:
-                            product.category_id == 7
-                                ? 'giftboxes/product'
-                                : 'products/product',
+                        name: 'products/product',
                         params: {
                             productId: product.id,
                             slug: product.slug,

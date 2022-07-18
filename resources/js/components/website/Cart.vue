@@ -106,11 +106,7 @@
                                         <div class="cart-title mb-2">
                                             <router-link
                                                 :to="{
-                                                    name:
-                                                        product.category ==
-                                                        'Gift Boxes'
-                                                            ? 'giftboxes/product'
-                                                            : 'products/product',
+                                                    name: 'products/product',
                                                     params: {
                                                         productId: product.id,
                                                         slug: product.slug,

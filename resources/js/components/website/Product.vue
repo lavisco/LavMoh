@@ -649,8 +649,17 @@ export default {
                     form: this.form,
                 });
             }
+            
 
             //pass multiple parameters to vuex action using destructuring
+        },
+
+        increaseProductQuantity(product) {
+            this.$store.dispatch("increaseProductQuantity", product);
+        },
+
+        decreaseProductQuantity(product) {
+            this.$store.dispatch("decreaseProductQuantity", product);
         },
     },
     mounted() {},

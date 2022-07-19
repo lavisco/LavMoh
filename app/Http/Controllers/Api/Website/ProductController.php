@@ -20,7 +20,11 @@ class ProductController extends Controller
     {
         $sortParameter = request('sortValue');
 
-        $query = Product::where('product_state_id', '1')->with(['category:id,name', 'user.shop', 'product_image']);
+        $query = Product::whereHas('user.shop', function($q) {
+                        return $q->where('status', 1);
+                    })
+                    ->where('product_state_id', '1')
+                    ->with(['category:id,name', 'user.shop', 'product_image']);
 
         return $sortParameter == 'base_price_low' ? $query->oldest('base_price')->paginate(25) : $query->latest(request('sortValue'))->paginate(25);
     }

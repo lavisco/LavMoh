@@ -28,7 +28,14 @@ class ShopController extends Controller
     public function show($shopId)
     {               
         $shop = Shop::findOrFail($shopId);
-        $products = Product::where('user_id', $shop->user_id)->where('product_state_id', '1')->with(['category:id,name', 'user.shop', 'product_image'])->latest()->paginate(25);
+        $products = Product::where('user_id', $shop->user_id)
+                        ->whereHas('user.shop', function($q) {
+                            return $q->where('status', 1);
+                        })
+                        ->where('product_state_id', '1')
+                        ->with(['category:id,name', 'user.shop', 'product_image'])
+                        ->latest()
+                        ->paginate(25);
 
         return response()->json([
             'products' => $products,

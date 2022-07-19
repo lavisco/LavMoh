@@ -35,7 +35,13 @@ class CategoryController extends Controller
 
         $sortParameter = request('sortValue');
 
-        $query = Product::where('category_id', $categoryId)->where('product_state_id', '1')->with(['category:id,name', 'user.shop', 'product_image']);
+        $query = Product::
+                    whereHas('user.shop', function($q) {
+                        return $q->where('status', 1);
+                    })
+                    ->where('category_id', $categoryId)
+                    ->where('product_state_id', '1')
+                    ->with(['category:id,name', 'user.shop', 'product_image']);
 
         return response()->json([
             'products' => $sortParameter == 'base_price_low' ? $query->oldest('base_price')->paginate(25) : $query->latest(request('sortValue'))->paginate(25),
@@ -50,7 +56,13 @@ class CategoryController extends Controller
 
         $sortParameter = request('sortValue');
 
-        $query = $subCategory->products()->where('category_id', $categoryId)->where('product_state_id', '1')->with(['category:id,name', 'user.shop', 'product_image']);
+        $query = $subCategory->products()
+                    ->whereHas('user.shop', function($q) {
+                        return $q->where('status', 1);
+                    })
+                    ->where('category_id', $categoryId)
+                    ->where('product_state_id', '1')
+                    ->with(['category:id,name', 'user.shop', 'product_image']);
 
         return response()->json([
             'products' => $sortParameter == 'base_price_low' ? $query->oldest('base_price')->paginate(25) : $query->latest(request('sortValue'))->paginate(25),
@@ -65,7 +77,11 @@ class CategoryController extends Controller
      */
     public function getLocationWiseProducts($id, $location)
     {
-        $products = Product::where('category_id', $id)->where('product_state_id', '1')
+        $products = Product::where('category_id', $id)
+            ->where('product_state_id', '1')
+            ->whereHas('user.shop', function($q) {
+                return $q->where('status', 1);
+            })
             ->whereHas('user', function($query) use($location){
                 $query->whereHas('shop', function($query) use($location) {
                     $query->where('district', $location);

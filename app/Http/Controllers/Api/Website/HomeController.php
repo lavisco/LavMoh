@@ -24,7 +24,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $products = Product::select('id', 'title', 'base_price', 'user_id', 'category_id', 'product_state_id', 'slug', 'has_variations')
+        $products = Product::whereHas('user.shop', function($q) {
+                        return $q->where('status', 1);
+                    })
+                    ->select('id', 'title', 'base_price', 'user_id', 'category_id', 'product_state_id', 'slug', 'has_variations')
                     ->where('product_state_id', '1')
                     ->with(['user' => function($query){
                         $query->select('id', 'name');
@@ -75,7 +78,15 @@ class HomeController extends Controller
     {
         $request = $searchText;
 
-        $products = $request ? Product::where('product_state_id', '1')->with(['category:id,name', 'user.shop', 'product_image'])->latest()->where('title', 'like', '%' . $searchText . '%')->get() : '';
+        $products = $request ? 
+                        Product::whereHas('user.shop', function($q) {
+                            return $q->where('status', 1);
+                        })
+                        ->where('product_state_id', '1')
+                        ->with(['category:id,name', 'user.shop', 'product_image'])
+                        ->latest()
+                        ->where('title', 'like', '%' . $searchText . '%')->get() : 
+                        '';
 
         return response()->json([
             'products' => $products,
@@ -88,7 +99,13 @@ class HomeController extends Controller
 
     public function searchSuggestion($searchText)
     {
-        $products = Product::where('product_state_id', '1')->where('title', 'like', '%' . $searchText . '%')->select('id', 'slug', 'title')->latest()->take(8)->get();
+        $products = Product::whereHas('user.shop', function($q) {
+                        return $q->where('status', 1);
+                    })
+                    ->where('product_state_id', '1')
+                    ->where('title', 'like', '%' . $searchText . '%')
+                    ->select('id', 'slug', 'title')
+                    ->latest()->take(8)->get();
 
         return response()->json([
             'products' => $products,

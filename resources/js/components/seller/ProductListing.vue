@@ -890,7 +890,7 @@
                                     "
                                 >
                                     <h5>
-                                        Variation
+                                        Variation {{ index + 1 }}
                                         {{ variation.variation_name }}
                                     </h5>
                                     <button
@@ -1217,7 +1217,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div
+                                class="form-group"
+                                v-show="showAddVariationBtn()"
+                            >
                                 <button
                                     class="btn btn-sm"
                                     type="button"
@@ -1390,7 +1393,6 @@
             </div>
         </div>
 
-
         <!-- Notification Modal -->
         <success-modal
             id="success-modal"
@@ -1555,6 +1557,16 @@ export default {
                     this.form.productVariation[2].variationMode = true;
                     break;
             }
+        },
+
+        showAddVariationBtn() {
+            if (
+                this.form.productVariation[0].variationMode == false ||
+                this.form.productVariation[1].variationMode == false ||
+                this.form.productVariation[2].variationMode == false
+            ) {
+                return true;
+            } else return false;
         },
 
         addRow(count) {

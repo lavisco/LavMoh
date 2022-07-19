@@ -3,7 +3,7 @@
 
 Thank you for registering with Lavisco.
 
-@component('mail::button', ['url' => 'https://lavisco.lk/login'])
+@component('mail::button', ['url' => 'https://lavisco.lk/merchant/login'])
 Login
 @endcomponent
 

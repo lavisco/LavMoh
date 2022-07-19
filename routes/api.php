@@ -212,6 +212,7 @@ Route::prefix('seller')->group(function () {
 */
 
 Route::prefix('email')->group(function () {
+    Route::get('/seller_welcome/{email}', [EmailController::class, 'sendSellerWelcomeMail']);
     Route::get('/store_active_application', [EmailController::class, 'sendStoreActiveApplicationMail']);
     Route::get('/store_active/{email}', [EmailController::class, 'sendStoreActiveMail']);
     Route::get('/new_product_listed', [EmailController::class, 'sendProductListingConfirmedMail']);

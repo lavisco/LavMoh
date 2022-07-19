@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Mail\OrderMail;
 use App\Mail\PasswordResetMail;
 use App\Mail\ProductListingConfirmMail;
+use App\Mail\SellerWelcomeMail;
 use App\Mail\StoreActiveApplicationMail;
 use App\Mail\StoreActiveMail;
 use Illuminate\Http\Request;
@@ -24,7 +25,18 @@ class EmailController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:api');
+        $this->middleware('auth:api')->except('sendSellerWelcomeMail');
+    }
+
+    /** 
+    * Sends welcome email to seller after registration.
+    */
+
+    public function sendSellerWelcomeMail($email)
+    {
+        Mail::to($email)->send(new SellerWelcomeMail($email));
+
+        return Mail::failures() != 0 ? "Email has been sent successfully." : "Oops! There was some error sending the email.";
     }
 
     /** 

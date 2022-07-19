@@ -6,5 +6,9 @@
     Your journey on Lavisco starts from now! Sign into your dashboard and list your first product today. We are excited to have you on our platform and hope to work with you for years to come.
 </p>
 
-@component('mail::button', ['url' => 'https://lavisco.lk/login']) Sign In @endcomponent Regards,<br />
-Lavisco Team @endcomponent
+@component('mail::button', ['url' => 'https://lavisco.lk/merchant/login']) Sign In @endcomponent 
+
+Regards,<br />
+Lavisco Team 
+
+@endcomponent

@@ -31,11 +31,11 @@
     </a>
 </p>
 
-<h4>Get in touch</h4>
+<h4>Lavisco Global Private Limited</h4>
 
 <p>+94 77 700 9826</p>
-<p>71, Kurunegala Rd,Katugastota 20000 Kandy, Sri Lanka</p>
+<p>71, Kurunegala Road, Katugastota, Kandy, Sri Lanka 20800</p>
 <p class="copyright">
-    © {{ date("Y") }} @lang('Lavisco. All rights reserved.')
+    Copyright © {{ date("Y") }} lavisco.lk <br />All Rights Reserved.
 </p>
 @endcomponent @endslot @endcomponent

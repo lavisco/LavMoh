@@ -272,12 +272,22 @@ export default {
                     this.submitButtonText = "Submitted";
                     this.submitButtonDisabled = false;
                     $("#success-modal").modal("show");
+                    this.sendSellerWelcomeMail(this.form.email);
                 })
                 .catch((error) => {
                     this.submitButtonText = "Submit";
                     this.submitButtonDisabled = false;
                     console.log(error);
                     $("#fail-modal").modal("show");
+                });
+        },
+
+        sendSellerWelcomeMail(email) {
+            axios
+                .get("/api/email/seller_welcome/" + email)
+                .then(() => {})
+                .catch((error) => {
+                    console.log(error);
                 });
         },
     },

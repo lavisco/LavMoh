@@ -757,4 +757,13 @@ export let routes = [
             title: "Payment Policy",
         },
     },
+    {
+        path: "*",
+        name: "404",
+        component: require("./components/website/static/NotFound.vue")
+            .default,
+        meta: {
+            title: "404 Not Found",
+        },
+    },
 ];

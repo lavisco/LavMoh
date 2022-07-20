@@ -267,6 +267,31 @@
                     <!-- buttons -->
                     <div class="mt-4">
                         <div class="d-md-flex">
+                            <div class="product-card-counter mt-2">
+                                <div
+                                    class="counter-minus"
+                                    @click.prevent="
+                                        form.quantity > 0 ? form.quantity-- : ''
+                                    "
+                                >
+                                    -
+                                </div>
+                                <div class="counter-num">
+                                    {{ form.quantity }}
+                                </div>
+                                <div
+                                    class="counter-plus"
+                                    @click.prevent="form.quantity++"
+                                >
+                                    +
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- buttons -->
+                    <div class="mt-4">
+                        <div class="d-md-flex">
                             <button
                                 class="
                                     checkout-btn
@@ -508,6 +533,7 @@ export default {
             custom_text: "",
             selected_variations: [],
             total_price: "",
+            quantity: 0,
         },
         formErrors: null,
     }),
@@ -649,7 +675,6 @@ export default {
                     form: this.form,
                 });
             }
-            
 
             //pass multiple parameters to vuex action using destructuring
         },

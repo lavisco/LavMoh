@@ -197,7 +197,7 @@ export default {
                 .post("/api/seller/user/password_reset")
                 .then(() => {
                     $("#success-modal").modal("show");
-                    this.sendProductListingConfirmedMail();
+                    //this.sendProductListingConfirmedMail();
                 })
                 .catch((error) => {
                     console.log(error);

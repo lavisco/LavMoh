@@ -77,6 +77,8 @@ export default {
                     window.location.replace("/login");
                 } else if (this.gotoRoute === "merchant-login") {
                     window.location.replace("/merchant/login");
+                } else if (this.gotoRoute === "home") {
+                    window.location.replace("/");
                 } else if (this.gotoRoute === "verify-email") {
                     window.location.replace("/email/verify");
                 } else {

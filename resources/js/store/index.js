@@ -183,7 +183,7 @@ export default new Vuex.Store({
                 );
 
                 if (cartItemVar) {
-                    context.commit("incrementItemQuantity", cartItemVar);
+                    context.commit("updateItemQuantity", { cartItemVar, form });
                 } else {
                     context.commit("pushProductToCart", {
                         product,
@@ -295,7 +295,7 @@ export default new Vuex.Store({
                 shop_image: product.user.shop.path,
                 category: product.category.name,
                 image_path: product.product_image.path,
-                quantity: 1,
+                quantity: form.quantity,
                 variations: variation_values,
                 variation_ids: variation_id_values,
                 custom_text: form.custom_text,
@@ -327,6 +327,10 @@ export default new Vuex.Store({
 
         incrementItemQuantity(state, cartItem) {
             cartItem.quantity++;
+        },
+
+        updateItemQuantity(state, { cartItemVar, form }) {
+            cartItemVar.quantity = form.quantity;
         },
 
         decrementItemQuantity(state, cartItem) {

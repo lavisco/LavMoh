@@ -266,25 +266,24 @@
 
                     <!-- buttons -->
                     <div class="mt-4">
-                        <div class="d-md-flex">
-                            <div class="product-card-counter mt-2">
-                                <div
-                                    class="counter-minus"
-                                    @click.prevent="
-                                        form.quantity > 0 ? form.quantity-- : ''
-                                    "
-                                >
-                                    -
-                                </div>
-                                <div class="counter-num">
-                                    {{ form.quantity }}
-                                </div>
-                                <div
-                                    class="counter-plus"
-                                    @click.prevent="form.quantity++"
-                                >
-                                    +
-                                </div>
+                        <h6>Quantity</h6>
+                        <div class="product-card-counter">
+                            <div
+                                class="counter-minus"
+                                @click.prevent="
+                                    form.quantity > 0 ? form.quantity-- : ''
+                                "
+                            >
+                                -
+                            </div>
+                            <div class="counter-num">
+                                {{ form.quantity }}
+                            </div>
+                            <div
+                                class="counter-plus"
+                                @click.prevent="form.quantity++"
+                            >
+                                +
                             </div>
                         </div>
                     </div>

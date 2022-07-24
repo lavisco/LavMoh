@@ -40,27 +40,143 @@
                 </svg>
             </router-link>
 
+            <!-- search bar -->
+            <searchbar></searchbar>
+
+            <!-- account, location & cart -->
             <div
                 class="
-                    order-2
                     d-flex
-                    flex-row
+                    justify-content-end
                     align-items-center
-                    mr-0
-                    w-100
-                    pt-2 pt-lg-0
+                    order-1 order-lg-2
                 "
             >
+                <!-- desktop location -->
+                <div class="dropdown show hide-content-md-flex">
+                    <a
+                        href="#"
+                        role="button"
+                        id="dropdownLocation"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                        class="nav-link nav-link-account mr-2 mr-sm-3"
+                        @click.prevent="loadDistricts()"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            aria-hidden="true"
+                            role="img"
+                            width="20"
+                            height="20"
+                            preserveAspectRatio="xMidYMid meet"
+                            viewBox="0 0 24 24"
+                            class="mr-md-1"
+                        >
+                            <circle cx="12" cy="9.5" r="1.5" fill="#333" />
+                            <path
+                                fill="#4e4e4e"
+                                d="M12 2a8 8 0 0 0-8 7.92c0 5.48 7.05 11.58 7.35 11.84a1 1 0 0 0 1.3 0C13 21.5 20 15.4 20 9.92A8 8 0 0 0 12 2Zm0 11a3.5 3.5 0 1 1 3.5-3.5A3.5 3.5 0 0 1 12 13Z"
+                            />
+                        </svg>
+                        <div
+                            class="
+                                nav-link-account-text
+                                d-flex
+                                flex-column
+                                align-items-start
+                                line-height-min
+                            "
+                        >
+                            <span class="nav-tiny-text">Deliver to</span>
+                            {{ locationActive }}
+                        </div>
+                    </a>
+                    <div
+                        class="dropdown-menu dropdown-menu-right"
+                        style="border-radius: 8px"
+                        aria-labelledby="dropdownLocation"
+                        id="dropdownLocation"
+                        @click.prevent="preventDropdownClose($event)"
+                    >
+                        <h6 class="dropdown-header">
+                            Select product delivery location
+                        </h6>
+                        <div class="col-12 px-3 pt-2 pb-3">
+                            <select
+                                class="
+                                    custom-select
+                                    form-control form-control-alternative
+                                "
+                                id="filter"
+                                name="filter"
+                                @change.prevent="saveLocation(districtName)"
+                                v-model="districtName"
+                            >
+                                <option value="" disabled selected hidden>
+                                    Select District
+                                </option>
+                                <option
+                                    v-for="district in districts"
+                                    :key="district.id"
+                                    :value="district.name"
+                                >
+                                    {{ district.name }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- login -->
+                <router-link
+                    class="nav-link nav-link-account mr-2 mr-sm-3"
+                    to="/select_login"
+                >
+                    <span class="hide-content nav-tiny-text mr-1">Sign In</span>
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                        role="img"
+                        width="23"
+                        height="23"
+                        preserveAspectRatio="xMidYMid meet"
+                        viewBox="0 0 24 24"
+                        class="mr-md-1"
+                    >
+                        <path
+                            fill="#4e4e4e"
+                            d="M12 4a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4Z"
+                        />
+                    </svg>
+                    <div
+                        class="
+                            nav-link-account-text
+                            d-flex
+                            flex-column
+                            align-items-start
+                            line-height-min
+                        "
+                    >
+                        <span class="nav-tiny-text">Sign In</span>
+                        Account
+                    </div>
+                </router-link>
+
+                <!-- cart -->
+                <menu-cart></menu-cart>
+
+                <!-- mobile menu -->
                 <div
                     class="
                         hide-content
-                        order-1
                         navbar-main-menu navbar-main-menu-mobile
-                        mr-2 mr-sm-3
+                        ml-2 ml-sm-3
                     "
                 >
                     <a
-                        class="nav-link"
+                        class="nav-link hamburger"
                         role="button"
                         id="toggle-sidenav"
                         @click.prevent="displayMenu"
@@ -268,132 +384,30 @@
                                 </div>
                             </div>
 
-                            <h6 class="dropdown-header mt-2">
+                            <div class="d-flex align-items-center w-100 mt-4">
+                                <router-link
+                                    @click.native="displayMenu"
+                                    to="/select_login"
+                                >
+                                    <button class="bg-red mr-4">Login</button>
+                                </router-link>
+
                                 <router-link
                                     @click.native="displayMenu"
                                     to="/sell_on_lavisco"
                                 >
-                                    Sell on Lavisco
+                                    <button class="bg-grey">
+                                        Sell on Lavisco
+                                    </button>
                                 </router-link>
-                            </h6>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-                <searchbar></searchbar>
-            </div>
-
-            <div class="d-flex justify-content-end order-1 order-lg-2">
-                <div class="dropdown show">
-                    <a
-                        href="#"
-                        role="button"
-                        id="dropdownLocation"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                        class="nav-link nav-link-account mr-2 mr-sm-3"
-                        @click.prevent="loadDistricts()"
-                    >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            aria-hidden="true"
-                            role="img"
-                            width="23"
-                            height="23"
-                            preserveAspectRatio="xMidYMid meet"
-                            viewBox="0 0 24 24"
-                            class="mr-md-1"
-                        >
-                            <circle cx="12" cy="9.5" r="1.5" fill="#333" />
-                            <path
-                                fill="#4e4e4e"
-                                d="M12 2a8 8 0 0 0-8 7.92c0 5.48 7.05 11.58 7.35 11.84a1 1 0 0 0 1.3 0C13 21.5 20 15.4 20 9.92A8 8 0 0 0 12 2Zm0 11a3.5 3.5 0 1 1 3.5-3.5A3.5 3.5 0 0 1 12 13Z"
-                            />
-                        </svg>
-                        <div
-                            class="
-                                nav-link-account-text
-                                d-flex
-                                flex-column
-                                align-items-start
-                                line-height-min
-                            "
-                        >
-                            <span class="nav-tiny-text">Deliver to</span>
-                            {{ locationActive }}
-                        </div>
-                    </a>
-                    <div
-                        class="dropdown-menu dropdown-menu-right"
-                        style="border-radius: 8px"
-                        aria-labelledby="dropdownLocation"
-                        id="dropdownLocation"
-                        @click.prevent="preventDropdownClose($event)"
-                    >
-                        <h6 class="dropdown-header">
-                            Select product delivery location
-                        </h6>
-                        <div class="col-12 px-3 pt-2 pb-3">
-                            <select
-                                class="
-                                    custom-select
-                                    form-control form-control-alternative
-                                "
-                                id="filter"
-                                name="filter"
-                                @change.prevent="saveLocation(districtName)"
-                                v-model="districtName"
-                            >
-                                <option value="" disabled selected hidden>
-                                    Select District
-                                </option>
-                                <option
-                                    v-for="district in districts"
-                                    :key="district.id"
-                                    :value="district.name"
-                                >
-                                    {{ district.name }}
-                                </option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <router-link
-                    class="nav-link nav-link-account mr-2 mr-sm-3"
-                    to="/select_login"
-                >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        aria-hidden="true"
-                        role="img"
-                        width="23"
-                        height="23"
-                        preserveAspectRatio="xMidYMid meet"
-                        viewBox="0 0 24 24"
-                        class="mr-md-1"
-                    >
-                        <path
-                            fill="#4e4e4e"
-                            d="M12 4a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4Z"
-                        />
-                    </svg>
-                    <div
-                        class="
-                            nav-link-account-text
-                            d-flex
-                            flex-column
-                            align-items-start
-                            line-height-min
-                        "
-                    >
-                        <span class="nav-tiny-text">Sign In</span>
-                        Account
-                    </div>
-                </router-link>
-                <menu-cart></menu-cart>
             </div>
         </nav>
+
+        <!-- desktop menu -->
         <nav
             class="navbar navbar-expand-lg w-100 pt-0 hide-content-md-flex"
             style="z-index: 100 !important"
@@ -544,6 +558,73 @@
                 </ul>
             </div>
         </nav>
+
+        <!-- mobile location picker -->
+        <div class="hide-content">
+            <div class="dropdown show mobile-location-picker">
+                <a
+                    href="#"
+                    role="button"
+                    id="dropdownLocation"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    class=""
+                    @click.prevent="loadDistricts()"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                        role="img"
+                        width="18px"
+                        height="17px"
+                        preserveAspectRatio="xMidYMid meet"
+                        viewBox="0 0 24 24"
+                        class="mr-1"
+                    >
+                        <circle cx="12" cy="9.5" r="1.5" fill="#333" />
+                        <path
+                            fill="#ffffff"
+                            d="M12 2a8 8 0 0 0-8 7.92c0 5.48 7.05 11.58 7.35 11.84a1 1 0 0 0 1.3 0C13 21.5 20 15.4 20 9.92A8 8 0 0 0 12 2Zm0 11a3.5 3.5 0 1 1 3.5-3.5A3.5 3.5 0 0 1 12 13Z"
+                        />
+                    </svg>
+                    Deliver to <strong>{{ locationActive }}</strong>
+                </a>
+                <div
+                    class="dropdown-menu"
+                    aria-labelledby="dropdownLocation"
+                    id="dropdownLocation"
+                    @click.prevent="preventDropdownClose($event)"
+                >
+                    <h6 class="dropdown-header">
+                        Select product delivery location
+                    </h6>
+                    <div class="col-12 px-3 pt-2 pb-3">
+                        <select
+                            class="
+                                custom-select
+                                form-control form-control-alternative
+                            "
+                            id="filter"
+                            name="filter"
+                            @change.prevent="saveLocation(districtName)"
+                            v-model="districtName"
+                        >
+                            <option value="" disabled selected hidden>
+                                Select District
+                            </option>
+                            <option
+                                v-for="district in districts"
+                                :key="district.id"
+                                :value="district.name"
+                            >
+                                {{ district.name }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 

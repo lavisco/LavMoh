@@ -1,6 +1,6 @@
 <template>
     <div
-        class="mr-0 mr-lg-3 order-2 order-lg-1 w-100"
+        class="mr-0 mr-lg-3 order-2 order-lg-1 w-100 mt-2 mt-md-0"
         style="position: relative"
     >
         <div class="input-group home-search-input">

@@ -232,6 +232,12 @@ export default new Vuex.Store({
                 context.commit("deleteAllProductsFromCurrentCart");
             }
         },
+
+        clearOrderedProductFromCart(context) {
+            if (context.state.currentCart != []) {
+                context.commit("deleteOrderedProductsFromCart");
+            }
+        },
     },
 
     mutations: {
@@ -322,6 +328,22 @@ export default new Vuex.Store({
         },
 
         deleteAllProductsFromCurrentCart(state) {
+            state.currentCart = [];
+        },
+
+        deleteOrderedProductsFromCart(state) {
+            //state.currentCart = [];
+
+            state.currentCart.map((product) => {
+                let index = state.cart.findIndex(
+                    (c) => c.id === product.id
+                );
+    
+                if (index > -1) {
+                    state.cart.splice(index, 1);
+                }
+            });
+
             state.currentCart = [];
         },
 

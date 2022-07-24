@@ -10265,7 +10265,7 @@ button:hover {
 }
 
 .btn-primary {
-  background-color: #976aff !important;
+  background-color: #df4e6b !important;
 }
 .btn-primary:hover, .btn-primary:focus {
   background-color: #ff5a7c !important;
@@ -10638,11 +10638,11 @@ button.bg-black:hover {
 }
 
 .navbar-brand svg {
-  height: 54px;
+  height: 42px;
 }
 @media (max-width: 991.98px) {
   .navbar-brand svg {
-    height: 32px;
+    height: 28px;
   }
 }
 
@@ -10664,23 +10664,23 @@ button.bg-black:hover {
   transition: all 150ms ease;
 }
 .nav-link:hover {
-  color: #976aff;
-  border: 1px solid #976aff;
+  color: #df4e6b;
+  border: 1px solid #df4e6b;
 }
 .nav-link:hover svg path {
-  fill: #976aff;
+  fill: #df4e6b;
 }
 .nav-link:hover svg circle {
-  fill: #976aff;
+  fill: #df4e6b;
 }
 .nav-link:hover .nav-tiny-text {
-  color: #976aff;
+  color: #df4e6b;
 }
 @media (min-width: 991.98px) {
   .nav-link:focus {
-    background-color: #976aff;
+    background-color: #df4e6b;
     color: #ffffff;
-    border: 1px solid #976aff;
+    border: 1px solid #df4e6b;
   }
   .nav-link:focus svg path,
 .nav-link:focus svg circle {
@@ -10703,7 +10703,7 @@ button.bg-black:hover {
   margin-right: 10px;
 }
 .nav-link-currency:hover {
-  color: #976aff;
+  color: #df4e6b;
 }
 
 .nav-link-currency + .active {
@@ -10969,22 +10969,13 @@ button.bg-black:hover {
   width: auto;
 }
 .navbar-main-menu-mobile .hamburger {
-  padding: 2px !important;
-  height: 38px;
   border: none;
 }
 .navbar-main-menu-mobile .hamburger:hover {
   border: none;
 }
-.navbar-main-menu-mobile .nav-link {
-  height: 50px;
-  padding: 8px 7px !important;
-}
-@media (max-width: 400px) {
-  .navbar-main-menu-mobile .nav-link {
-    height: 46px;
-    padding: 8px 5px !important;
-  }
+.navbar-main-menu-mobile .hamburger:hover svg path {
+  fill: #df4e6b;
 }
 .navbar-main-menu-mobile .dropdown-header {
   cursor: pointer;
@@ -12352,7 +12343,7 @@ footer {
   fill: #dc1e3d;
 }
 .dashboard-side-nav .navbar-brand svg {
-  height: 41px;
+  height: 34px;
 }
 .dashboard-side-nav .navbar-brand svg path {
   fill: #dc1e3d;

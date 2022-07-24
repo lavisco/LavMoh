@@ -43,6 +43,21 @@
             }}/vendor/@fortawesome/fontawesome-free/css/all.min.css"
             rel="stylesheet"
         />
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=G-SYY3G21Q5S"
+        ></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag("js", new Date());
+
+            gtag("config", "G-SYY3G21Q5S");
+        </script>
     </head>
     <body>
         <div id="app">
@@ -67,8 +82,6 @@
         <script src="{{ asset('js/app.js') }}" defer></script>
         <!-- <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script> -->
         <script>
-            
-
             function showPasswordFunction() {
                 var x = document.getElementById("password");
                 if (x.type === "password") {

@@ -242,7 +242,7 @@ button {
 }
 
 .btn-primary {
-    background-color: $lav-purple !important;
+    background-color: $lav-red !important;
     &:hover,
     &:focus {
         background-color: $lav-pink !important;
@@ -567,9 +567,9 @@ button.bg-black:hover {
 }
 .navbar-brand {
     svg {
-        height: 54px;
+        height: 42px;
         @media (max-width: 991.98px) {
-            height: 32px;
+            height: 28px;
         }
     }
 }
@@ -592,27 +592,27 @@ button.bg-black:hover {
     transition: all 150ms ease;
 
     &:hover {
-        color: $lav-purple;
-        border: 1px solid $lav-purple;
+        color: $lav-red;
+        border: 1px solid $lav-red;
         svg {
             path {
-                fill: $lav-purple;
+                fill: $lav-red;
             }
             circle {
-                fill: $lav-purple;
+                fill: $lav-red;
             }
         }
 
         .nav-tiny-text {
-            color: $lav-purple;
+            color: $lav-red;
         }
     }
 
     @media (min-width: 991.98px) {
         &:focus {
-            background-color: $lav-purple;
+            background-color: $lav-red;
             color: $white;
-            border: 1px solid $lav-purple;
+            border: 1px solid $lav-red;
             svg {
                 path,
                 circle {
@@ -638,7 +638,7 @@ button.bg-black:hover {
         margin-right: 10px;
     }
     &:hover {
-        color: $lav-purple;
+        color: $lav-red;
     }
 }
 
@@ -899,7 +899,7 @@ button.bg-black:hover {
     }
 }
 
-.hr-red{
+.hr-red {
     border-top: 1px solid $lav-grey;
     width: 100%;
 }
@@ -907,20 +907,15 @@ button.bg-black:hover {
 .navbar-main-menu-mobile {
     width: auto;
 
-    .hamburger{
-        padding: 2px !important;
-        height: 38px;
+    .hamburger {
         border: none;
-        &:hover{
+        &:hover {
             border: none;
-        }
-    }
-    .nav-link {
-        height: 50px;
-        padding: 8px 7px !important;
-        @media (max-width: 400px) {
-            height: 46px;
-            padding: 8px 5px !important;
+            svg {
+                path {
+                    fill: $lav-red;
+                }
+            }
         }
     }
     .dropdown-header {
@@ -2308,7 +2303,7 @@ footer {
     }
     .navbar-brand {
         svg {
-            height: 41px;
+            height: 34px;
             path {
                 fill: #dc1e3d;
             }

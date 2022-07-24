@@ -25,7 +25,7 @@
                             {{ homeslider.description }}
                         </h1>
                         <router-link :to="homeslider.link">
-                            <button>{{ homeslider.link_text }}</button>
+                            <button class="btn-primary">{{ homeslider.link_text }}</button>
                         </router-link>
                     </div>
                 </swiper-slide>

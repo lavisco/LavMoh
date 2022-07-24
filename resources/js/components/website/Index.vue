@@ -25,7 +25,9 @@
                             {{ homeslider.description }}
                         </h1>
                         <router-link :to="homeslider.link">
-                            <button class="btn-primary">{{ homeslider.link_text }}</button>
+                            <button class="btn-primary">
+                                {{ homeslider.link_text }}
+                            </button>
                         </router-link>
                     </div>
                 </swiper-slide>
@@ -344,29 +346,35 @@
                 </div>
             </section>
 
-            <section class="section-shortcuts row mb-5">
-                <div class="col-md-6 pr-md-2">
-                    <div class="card bg-light-grey px-4 py-5 mb-4 mb-md-0">
-                        <h1 class="mb-2">Become a Seller on Lavisco</h1>
-                        <h4 class="mb-4">
-                            Join a one of a kind marketplace and get an edge
-                            over your competitors.
-                        </h4>
-                        <router-link to="/sell_on_lavisco">
-                            <button class="bg-orange">Become a Seller</button>
-                        </router-link>
+            <section class="section-shortcuts mb-5">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card bg-light-grey p-5 mb-4 mb-md-0">
+                            <h1 class="mb-2 text-left">
+                                Become a Seller on Lavisco
+                            </h1>
+                            <h4 class="mb-4">
+                                Join a one of a kind marketplace and get an edge
+                                over your competitors.
+                            </h4>
+                            <router-link to="/sell_on_lavisco">
+                                <button class="bg-orange">
+                                    Become a Seller
+                                </button>
+                            </router-link>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-6 pl-md-2">
-                    <div class="card bg-light-grey px-4 py-5">
-                        <h1 class="mb-2">Start buying today</h1>
-                        <h4 class="mb-4">
-                            Sign up with Lavisco as a buyer to unlock exclusive
-                            drops and discounts!
-                        </h4>
-                        <a href="/register">
-                            <button class="bg-green">Sign up</button>
-                        </a>
+                    <div class="col-md-6">
+                        <div class="card bg-light-grey p-5">
+                            <h1 class="mb-2 text-left">Start buying today</h1>
+                            <h4 class="mb-4">
+                                Sign up with Lavisco as a buyer to unlock
+                                exclusive drops and discounts!
+                            </h4>
+                            <a href="/register">
+                                <button class="bg-green">Sign up</button>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </section>

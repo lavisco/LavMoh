@@ -1973,9 +1973,11 @@ section {
 /*---------------------section-shortcuts---------------------*/
 
 .section-shortcuts {
-    text-align: center;
+    margin-bottom: 66px;
     .card {
-        height: 315px;
+        @media (min-width: 768px) {
+            min-height: 100%;
+        }
     }
     //margin-bottom: 120px;
 }

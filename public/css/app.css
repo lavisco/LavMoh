@@ -12019,10 +12019,12 @@ section h1 {
 
 /*---------------------section-shortcuts---------------------*/
 .section-shortcuts {
-  text-align: center;
+  margin-bottom: 66px;
 }
-.section-shortcuts .card {
-  height: 315px;
+@media (min-width: 768px) {
+  .section-shortcuts .card {
+    min-height: 100%;
+  }
 }
 
 /*---------------------footer---------------------*/

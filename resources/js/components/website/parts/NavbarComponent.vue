@@ -228,11 +228,10 @@
                                             >
                                                 <path
                                                     fill="#dc1e3d"
-                                                    d="M285.42,74.61v66s.66,7.28,5.13,7.94-2.16,8.12-10.68,7.68C268,155.64,264.19,149,264.19,149s-3.66,7.2-20.17,7.2-33.91-12.93-33.91-34.2,19-32.44,34.84-32.44,18.12,7.94,18.12,7.94V74.59s-.84-15-15.81-15-17.69,12.52-18.7,14.86a8,8,0,0,1-7.15,5.07c-2.68,0-5.94-.67-6-5.54,0-2.3,2.29-29.36,32.74-28.45S285.72,69.09,285.42,74.61Z"
-                                                />
-                                                <path
-                                                    fill="#fff"
-                                                    d="M263.27,115.27v16.8s-4.41,10.18-15.33,10.18-19.12-7.86-19.12-17.67,9.62-18.12,17.22-18.12S260.22,109.52,263.27,115.27Z"
+                                                    d="M290.5,148.5c-4.5-0.7-5.1-7.9-5.1-7.9v-66c0.3-5.5-6.8-28.2-37.3-29.1c-30.5-0.9-32.7,26.1-32.7,28.4
+                                                    c0.1,4.9,3.3,5.5,6,5.5c3.2-0.1,6-2.1,7.2-5.1c1-2.3,3.7-14.9,18.7-14.9c15,0,15.8,15,15.8,15v22.9c0,0-2.3-7.9-18.1-7.9
+                                                    c-15.8,0-34.8,11.2-34.8,32.4s17.4,34.2,33.9,34.2s20.2-7.2,20.2-7.2s3.8,6.6,15.7,7.2C288.4,156.7,295,149.2,290.5,148.5z
+                                                    M263.3,132.1c0,0-4.4,10.2-15.3,10.2s-19.1-7.9-19.1-17.7s9.6-18.1,17.2-18.1c7.6,0,14.2,3.1,17.2,8.8V132.1z"
                                                 />
                                                 <path
                                                     fill="#dc1e3d"
@@ -307,6 +306,30 @@
                                     </svg>
                                 </button>
                             </div>
+
+                            <div class="d-flex align-items-center w-100 mb-2">
+                                <router-link
+                                    @click.native="displayMenu"
+                                    to="/select_login"
+                                >
+                                    <button
+                                        class="mr-3 btn-sm btn bg-red white"
+                                    >
+                                        Login
+                                    </button>
+                                </router-link>
+
+                                <router-link
+                                    @click.native="displayMenu"
+                                    to="/sell_on_lavisco"
+                                >
+                                    <button class="btn-sm btn">
+                                        Sell on Lavisco
+                                    </button>
+                                </router-link>
+                            </div>
+
+                            <hr class="hr-red" />
 
                             <h6
                                 class="dropdown-header"
@@ -421,24 +444,6 @@
                                         </span>
                                     </router-link>
                                 </div>
-                            </div>
-
-                            <div class="d-flex align-items-center w-100 mt-4">
-                                <router-link
-                                    @click.native="displayMenu"
-                                    to="/select_login"
-                                >
-                                    <button class="bg-red mr-4">Login</button>
-                                </router-link>
-
-                                <router-link
-                                    @click.native="displayMenu"
-                                    to="/sell_on_lavisco"
-                                >
-                                    <button class="bg-grey">
-                                        Sell on Lavisco
-                                    </button>
-                                </router-link>
                             </div>
                         </div>
                     </div>

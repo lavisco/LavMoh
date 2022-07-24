@@ -10960,6 +10960,11 @@ button.bg-black:hover {
   }
 }
 
+.hr-red {
+  border-top: 1px solid #c9c9c9;
+  width: 100%;
+}
+
 .navbar-main-menu-mobile {
   width: auto;
 }
@@ -10989,8 +10994,8 @@ button.bg-black:hover {
   letter-spacing: 0.03rem;
   text-transform: capitalize;
   color: #333333 !important;
-  padding-left: 1.3rem;
-  padding-right: 1.3rem;
+  padding-left: 0rem;
+  padding-right: 0rem;
 }
 .navbar-main-menu-mobile .dropdown-item {
   font-size: 16px;
@@ -12343,8 +12348,14 @@ footer {
 .dashboard-side-nav .active svg path {
   fill: #fff;
 }
+.dashboard-side-nav .active .navbar-brand svg path {
+  fill: #dc1e3d;
+}
 .dashboard-side-nav .navbar-brand svg {
-  height: 50px;
+  height: 41px;
+}
+.dashboard-side-nav .navbar-brand svg path {
+  fill: #dc1e3d;
 }
 
 .dashboard-side-nav.show-nav {

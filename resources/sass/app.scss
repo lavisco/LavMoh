@@ -899,6 +899,11 @@ button.bg-black:hover {
     }
 }
 
+.hr-red{
+    border-top: 1px solid $lav-grey;
+    width: 100%;
+}
+
 .navbar-main-menu-mobile {
     width: auto;
 
@@ -926,8 +931,8 @@ button.bg-black:hover {
         letter-spacing: 0.03rem;
         text-transform: capitalize;
         color: $black !important;
-        padding-left: 1.3rem;
-        padding-right: 1.3rem;
+        padding-left: 0rem;
+        padding-right: 0rem;
     }
     .dropdown-item {
         font-size: 16px;
@@ -2293,10 +2298,20 @@ footer {
                 fill: #fff;
             }
         }
+        .navbar-brand {
+            svg {
+                path {
+                    fill: #dc1e3d;
+                }
+            }
+        }
     }
     .navbar-brand {
         svg {
-            height: 50px;
+            height: 41px;
+            path {
+                fill: #dc1e3d;
+            }
         }
     }
 }

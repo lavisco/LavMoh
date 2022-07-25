@@ -726,27 +726,22 @@
                                                     <td>
                                                         {{ shipping.type }}
                                                         <br />
-                                                        <div class="text-xxs">
-                                                            Price
-                                                        </div>
-                                                        LKR
+                                                        Price - LKR
                                                         {{ shipping.price }}
-                                                        <div class="text-xxs">
-                                                            Delivery Time
-                                                        </div>
+                                                        <br />
+                                                        Delivery Time -
                                                         {{
                                                             shipping.delivery_time
                                                         }}
                                                         day
                                                         <br />
-                                                        <div
-                                                            class="text-xxs"
+                                                        <span
                                                             v-if="
                                                                 shipping.locations
                                                             "
                                                         >
-                                                            Locations
-                                                        </div>
+                                                            Locations -
+                                                        </span>
                                                         {{ shipping.locations }}
                                                     </td>
                                                 </tr>

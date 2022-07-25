@@ -391,7 +391,7 @@
                                             v-for="seller in sellers"
                                             :value="seller.user_id"
                                         >
-                                            {{ seller.name }}
+                                            {{ seller.first_name+' '+seller.last_name }}
                                         </option>
                                     </select>
                                     <HasError :form="form" field="user_id" />
@@ -921,7 +921,7 @@ export default {
 
         loadSellers() {
             axios
-                .get("/api/admin/users/seller")
+                .get("/api/admin/sellerprofiles")
                 .then(({ data }) => (this.sellers = data))
                 .catch((error) => console.log(error));
         },

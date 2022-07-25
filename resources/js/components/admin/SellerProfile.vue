@@ -195,7 +195,7 @@
                                         </option>
                                         <option
                                             v-for="seller in sellers"
-                                            :value="seller.user_id"
+                                            :value="seller.id"
                                         >
                                             {{ seller.name }}
                                         </option>
@@ -804,7 +804,7 @@ export default {
 
         loadSellers() {
             axios
-                .get("/api/admin/users/seller")
+                .get("/api/admin/users")
                 .then(({ data }) => (this.sellers = data))
                 .catch((error) => console.log(error));
         },

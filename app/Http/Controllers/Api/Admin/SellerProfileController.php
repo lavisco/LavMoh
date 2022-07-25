@@ -18,9 +18,7 @@ class SellerProfileController extends Controller
     {
         ///$this->authorize('viewAny', SellerProfile::class);
 
-        return response()->json([
-            'sellerprofiles' => SellerProfile::with(['user', 'user.shop'])->latest()->filter(request(['searchText']))->get(),
-        ]);
+        return SellerProfile::with(['user', 'user.shop'])->latest()->filter(request(['searchText']))->get();
     }
 
     public function store(SellerProfileRequest $request)

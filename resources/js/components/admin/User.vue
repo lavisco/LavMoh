@@ -572,8 +572,8 @@ export default {
                 .get("/api/admin/users", {
                     params: { searchText: this.searchText },
                 })
-                .then((response) => {
-                    this.users = response.data.users;
+                .then(({ data }) => {
+                    this.users = data;
                     this.loading = false;
                 })
                 .catch((error) => console.log(error));

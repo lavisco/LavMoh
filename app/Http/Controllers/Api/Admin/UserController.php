@@ -21,11 +21,9 @@ class UserController extends Controller
     public function index()
     {
         ///$this->authorize('viewAny', User::class);
-        return response()->json([
-            'users' => User::with('role') 
-                            ->latest()
-                            ->filter(request(['searchText']))->get(),
-        ]);
+        return User::with('role') 
+                    ->latest()
+                    ->filter(request(['searchText']))->get();
     }
 
     public function seller()

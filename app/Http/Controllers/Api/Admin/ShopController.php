@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ShopRequest;
+use App\Models\Shipping;
 use App\Models\Shop;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Storage;
@@ -51,6 +52,11 @@ class ShopController extends Controller
 
         $this->updateImage($request, $shop->banner);
         $shop->update($request->all());
+
+        //sync to pivot tables
+        $shop->shippings()->sync(request('shop_shipping'));
+
+        return ['message' => "Update Successful"];
     }
 
     public function destroy(Shop $shop)
@@ -97,6 +103,17 @@ class ShopController extends Controller
         ///$this->authorize('update', $shop);
         $shop->update([
             'status' => request('status'),
+        ]);
+    }
+
+        
+    /**
+     * Get data from other tables, that are needed
+     */
+    public function getShippings()
+    {
+        return response()->json([
+            'shippings' => Shipping::latest()->get(),
         ]);
     }
 }

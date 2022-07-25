@@ -674,6 +674,87 @@
                                     <HasError :form="form" field="area" />
                                 </div>
                             </div>
+
+                            <!-- Shipping -->
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label" for=""
+                                    >Shipping types
+                                    <strong class="text-danger"> *</strong>
+                                </label>
+
+                                <div class="col-md-9">
+                                    <div
+                                        class="
+                                            table-responsive
+                                            form-table
+                                            mt-md-2
+                                        "
+                                    >
+                                        <table
+                                            class="
+                                                table
+                                                align-items-center
+                                                table-hover
+                                            "
+                                        >
+                                            <thead>
+                                                <tr>
+                                                    <th
+                                                        scope="col"
+                                                        class="tiny-col"
+                                                    ></th>
+                                                    <th scope="col">
+                                                        Type Details
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr
+                                                    v-for="shipping in shippings"
+                                                    :key="shipping.id"
+                                                >
+                                                    <th scope="row">
+                                                        <input
+                                                            type="checkbox"
+                                                            name="shop_shipping"
+                                                            v-model="
+                                                                form.shop_shipping
+                                                            "
+                                                            :value="shipping.id"
+                                                        />
+                                                    </th>
+                                                    <td>
+                                                        {{ shipping.type }}
+                                                        <br />
+                                                        <div class="text-xxs">
+                                                            Price
+                                                        </div>
+                                                        LKR
+                                                        {{ shipping.price }}
+                                                        <div class="text-xxs">
+                                                            Delivery Time
+                                                        </div>
+                                                        {{
+                                                            shipping.delivery_time
+                                                        }}
+                                                        day
+                                                        <br />
+                                                        <div
+                                                            class="text-xxs"
+                                                            v-if="
+                                                                shipping.locations
+                                                            "
+                                                        >
+                                                            Locations
+                                                        </div>
+                                                        {{ shipping.locations }}
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="modal-footer pt-0">
@@ -724,6 +805,7 @@ export default {
         loading: true,
         shops: [],
         sellers: [],
+        shippings: [],
         //location data
         countries: [],
         provinces: [],
@@ -749,6 +831,8 @@ export default {
             user_id: "",
             user: "",
             slug: "",
+            shop_shipping: [],
+            shippings: [],
         }),
     }),
 
@@ -818,7 +902,24 @@ export default {
                 })
                 .then(({ data }) => {
                     this.shops = data.data;
+                    this.loadShippings();
                     this.loading = false;
+                })
+                .catch((error) => console.log(error));
+        },
+
+        loadShippings() {
+            axios
+                .get("/api/admin/shops/shippings")
+                .then((response) => {
+                    this.shippings = response.data.shippings;
+
+                    this.form.shop_shipping = [];
+                    if (this.form.shippings != null) {
+                        this.form.shippings.forEach((value) => {
+                            this.form.shop_shipping.push(value.id);
+                        });
+                    }
                 })
                 .catch((error) => console.log(error));
         },

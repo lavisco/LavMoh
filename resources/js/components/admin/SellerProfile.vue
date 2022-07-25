@@ -795,8 +795,8 @@ export default {
                 .get("/api/admin/sellerprofiles", {
                     params: { searchText: this.searchText },
                 })
-                .then(({ data }) => {
-                    this.sellerprofiles = data.data;
+                .then((response) => {
+                    this.sellerprofiles = response.data.sellerprofiles;
                     this.loading = false;
                 })
                 .catch((error) => console.log(error));

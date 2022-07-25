@@ -139,6 +139,7 @@ Route::prefix('admin')->group(function () {
     Route::apiResource('/sitetexts', SitetextController::class);
     Route::apiResource('/shippings', ShippingController::class);
     Route::put('/shops/updateState/{shop}', [ShopController::class, 'updateState']);
+    Route::get('/shops/shippings', [ShopController::class, 'getShippings']);
     Route::apiResource('/shops', ShopController::class);
     Route::apiResource('/sub_categories', SubCategoryController::class);
     Route::apiResource('/transactions', TransactionController::class);

@@ -21,10 +21,11 @@ class UserController extends Controller
     public function index()
     {
         ///$this->authorize('viewAny', User::class);
-        return User::with('role') 
-            ->latest()
-            ->filter(request(['searchText']))
-            ->paginate(25);
+        return response()->json([
+            'users' => User::with('role') 
+                            ->latest()
+                            ->filter(request(['searchText']))->get(),
+        ]);
     }
 
     public function seller()

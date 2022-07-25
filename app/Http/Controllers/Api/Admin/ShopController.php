@@ -22,7 +22,7 @@ class ShopController extends Controller
     {
         ///$this->authorize('viewAny', Shop::class);
 
-        return Shop::with('user')->latest()->filter(request(['searchText']))->paginate(25);
+        return Shop::with(['user', 'shippings:id'])->latest()->filter(request(['searchText']))->paginate(25);
     }
 
     public function store(ShopRequest $request)

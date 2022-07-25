@@ -391,7 +391,11 @@
                                             v-for="seller in sellers"
                                             :value="seller.user_id"
                                         >
-                                            {{ seller.first_name+' '+seller.last_name }}
+                                            {{
+                                                seller.first_name +
+                                                " " +
+                                                seller.last_name
+                                            }}
                                         </option>
                                     </select>
                                     <HasError :form="form" field="user_id" />
@@ -874,6 +878,7 @@ export default {
             this.form.reset();
             this.loadSellers();
             this.loadCountries();
+            this.loadShippings();
             $("#addRecord").modal("show");
         },
 
@@ -887,6 +892,7 @@ export default {
             this.loadProvinces();
             this.loadDistricts();
             this.loadCities();
+            this.loadShippings();
             $("#addRecord").modal("show");
         },
 
@@ -897,7 +903,6 @@ export default {
                 })
                 .then(({ data }) => {
                     this.shops = data.data;
-                    this.loadShippings();
                     this.loading = false;
                 })
                 .catch((error) => console.log(error));
@@ -987,9 +992,9 @@ export default {
                 .put("/api/admin/shops/" + this.form.id)
                 .then(() => {
                     $("#addRecord").modal("hide");
-                    if (this.form.status == 1) {
-                        this.sendStoreActiveMail(this.form.user.email);
-                    }
+                    // if (this.form.status == 1) {
+                    //     this.sendStoreActiveMail(this.form.user.email);
+                    // }
                     Fire.$emit("reloadRecords");
                 })
                 .catch((error) => console.log(error));

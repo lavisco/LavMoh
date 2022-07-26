@@ -95,7 +95,7 @@ class GiftboxController extends Controller
 
     public function show($id)
     {
-        return Product::with(['product_image', 'occasions', 'recipients', 'shippings', 'sub_categories', 'giftbox_products.childProduct'])->findOrFail($id);
+        return Product::with(['product_image', 'occasions', 'recipients', 'sub_categories', 'giftbox_products.childProduct'])->findOrFail($id);
     }
 
     public function update(Request $request, $id)

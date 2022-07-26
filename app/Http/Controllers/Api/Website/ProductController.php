@@ -37,6 +37,6 @@ class ProductController extends Controller
      */
     public function show($productId)
     {
-        return Product::with(['user.shop', 'category:id,name,slug', 'sub_categories:id,name', 'shippings',  'product_images', 'product_image', 'product_variations', 'variations', 'variations.variation_options', 'variations.variation_options.variation:id,name', 'giftbox_products.childProduct.product_image'])->findOrFail($productId);
+        return Product::with(['user.shop', 'category:id,name,slug', 'sub_categories:id,name', 'product_images', 'product_image', 'product_variations', 'variations', 'variations.variation_options', 'variations.variation_options.variation:id,name', 'giftbox_products.childProduct.product_image'])->findOrFail($productId);
     }
 }

@@ -152,7 +152,7 @@ class ProductController extends Controller
     public function show($id)
     {
         ///$this->authorize('view', $product);
-        return Product::with(['occasions', 'recipients', 'shippings', 'sub_categories'])->findOrFail($id);
+        return Product::with(['occasions', 'recipients', 'sub_categories'])->findOrFail($id);
     }
 
     public function update(ProductUpdateRequest $request, Product $product)

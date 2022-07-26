@@ -229,7 +229,13 @@
                     *Shipping calculations and discounts on next step
                 </p>
                 <div class="text-right my-2">
-                    <button class="checkout-btn" type="button">Proceed to Checkout</button>
+                    <button
+                        class="checkout-btn"
+                        @click.prevent="saveShopCartTotal(shop)"
+                        disabled
+                    >
+                        Proceed to Checkout
+                    </button>
                 </div>
             </div>
         </div>
@@ -390,10 +396,7 @@ export default {
             this.$store.dispatch("decreaseProductQuantity", product);
         },
 
-        //removed 'Proceed to checkout' function
         saveShopCartTotal(shop) {
-            //@click.prevent="saveShopCartTotal(shop)"
-
             this.$store.dispatch("saveShopCartTotal", this.cartTotal(shop));
             this.$store.dispatch("addProductToCurrentCart", shop);
             $("#addRecord").modal("show");

@@ -2254,12 +2254,12 @@ footer {
     flex-direction: column;
     min-height: 100vh;
     margin-left: 270px;
-    background-color: #f8f7f7;
+    background-color: #faf7f8;
     .card {
         background-color: transparent;
     }
     .breadcrumb {
-        background-color: #f8f7f7;
+        background-color: #faf7f8;
     }
 }
 .dashboard-side-nav {
@@ -2272,7 +2272,6 @@ footer {
     left: 0;
     width: 270px;
     height: 100vh;
-    box-shadow: 2px 4px 6px rgba(140, 124, 124, 0.13);
     padding: 1rem;
     background-color: #fff;
 
@@ -2321,7 +2320,7 @@ footer {
 
 .navbar-close {
     display: none !important;
-    background-color: #eeeeee;
+    background-color: #eae2e5;
     width: 41px;
     height: 41px;
     border-radius: 7px;
@@ -2348,10 +2347,11 @@ footer {
 }
 
 .dashboard-top-nav {
-    background-color: #fff;
-    margin-bottom: 20px;
-    padding-top: 7px;
-    padding-bottom: 7px;
+    padding-top: 16px;
+    padding-bottom: 22px;
+    h3{
+        color: $dark-grey;
+    }
     .nav-user-options {
         font-size: 14px;
         font-weight: 400;
@@ -2365,10 +2365,14 @@ footer {
             }
         }
         svg {
-            height: 30px;
-            width: 30px;
+            height: 26px;
+            width: 26px;
             path {
                 fill: #8d8788;
+            }
+            @media (max-width: 768px) {
+                height: 32px;
+            width: 32px;
             }
         }
         .dropdown-item {
@@ -2476,10 +2480,6 @@ footer {
     .main-content {
         margin-left: 0;
     }
-    .dashboard-top-nav {
-        padding-top: 14px;
-        padding-bottom: 14px;
-    }
     .dashboard-side-nav {
         //display: none;
         position: absolute;
@@ -2539,9 +2539,9 @@ footer {
     flex-direction: row;
     align-items: center;
     font-weight: 600;
-    font-size: 16px;
+    font-size: 15px;
     padding: 6px;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
     text-transform: capitalize;
     color: #8d8788;
     border-radius: 12px;
@@ -2549,8 +2549,8 @@ footer {
     width: 100%;
 
     svg {
-        width: 27px;
-        height: 27px;
+        width: 22px;
+        height: 22px;
         path {
             fill: #8d8788;
         }
@@ -2570,9 +2570,9 @@ footer {
 }
 
 .dashboard-link-icon {
-    width: 41px;
-    height: 41px;
-    border-radius: 7px;
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -2786,11 +2786,11 @@ footer {
         color: $black;
     }
     .table thead th {
-        background-color: $dark-grey;
+        background-color: #eae2e5;
         border: none !important;
         font-weight: 600;
         letter-spacing: 0.03rem;
-        color: #f8f7f7;
+        color: $black;
         font-size: 0.8rem;
     }
     .table-col-sm {
@@ -2966,7 +2966,7 @@ footer {
     font-weight: 400;
     font-size: 11px;
     color: #7b7b7b;
-    margin-bottom: 7px;
+    margin-bottom: 3px;
 }
 
 .mobile-card-body {
@@ -2978,6 +2978,7 @@ footer {
 
 .mobile-card-price {
     font-weight: 500;
+    min-width: 30px;
 }
 
 .mobile-btn-sm {
@@ -2992,8 +2993,8 @@ footer {
 }
 
 .mobile-card-banner-container {
-    width: 78px !important;
-    height: 78px !important;
+    width: 62px !important;
+    height: 62px !important;
 }
 
 .mobile-add-btn {

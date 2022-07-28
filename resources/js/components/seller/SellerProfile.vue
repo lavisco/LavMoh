@@ -10,7 +10,7 @@
             </div>
             <div v-else class="row">
                 <div class="col">
-                    <div class="card">
+                    <div class="card pt-0">
                         <!-- Form start -->
                         <form
                             class="input-form"

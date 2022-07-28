@@ -12301,13 +12301,13 @@ footer {
   flex-direction: column;
   min-height: 100vh;
   margin-left: 270px;
-  background-color: #f8f7f7;
+  background-color: #faf7f8;
 }
 .main-content .card {
   background-color: transparent;
 }
 .main-content .breadcrumb {
-  background-color: #f8f7f7;
+  background-color: #faf7f8;
 }
 
 .dashboard-side-nav {
@@ -12320,7 +12320,6 @@ footer {
   left: 0;
   width: 270px;
   height: 100vh;
-  box-shadow: 2px 4px 6px rgba(140, 124, 124, 0.13);
   padding: 1rem;
   background-color: #fff;
   transition: all 0.85s ease;
@@ -12358,7 +12357,7 @@ footer {
 
 .navbar-close {
   display: none !important;
-  background-color: #eeeeee;
+  background-color: #eae2e5;
   width: 41px;
   height: 41px;
   border-radius: 7px;
@@ -12382,10 +12381,11 @@ footer {
 }
 
 .dashboard-top-nav {
-  background-color: #fff;
-  margin-bottom: 20px;
-  padding-top: 7px;
-  padding-bottom: 7px;
+  padding-top: 16px;
+  padding-bottom: 22px;
+}
+.dashboard-top-nav h3 {
+  color: #4e4e4e;
 }
 .dashboard-top-nav .nav-user-options {
   font-size: 14px;
@@ -12399,11 +12399,17 @@ footer {
   fill: #df4e6b;
 }
 .dashboard-top-nav .nav-user-options svg {
-  height: 30px;
-  width: 30px;
+  height: 26px;
+  width: 26px;
 }
 .dashboard-top-nav .nav-user-options svg path {
   fill: #8d8788;
+}
+@media (max-width: 768px) {
+  .dashboard-top-nav .nav-user-options svg {
+    height: 32px;
+    width: 32px;
+  }
 }
 .dashboard-top-nav .nav-user-options .dropdown-item {
   color: #8d8788;
@@ -12500,11 +12506,6 @@ footer {
     margin-left: 0;
   }
 
-  .dashboard-top-nav {
-    padding-top: 14px;
-    padding-bottom: 14px;
-  }
-
   .dashboard-side-nav {
     position: absolute;
     left: 50%;
@@ -12559,9 +12560,9 @@ footer {
   flex-direction: row;
   align-items: center;
   font-weight: 600;
-  font-size: 16px;
+  font-size: 15px;
   padding: 6px;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
   text-transform: capitalize;
   color: #8d8788;
   border-radius: 12px;
@@ -12569,8 +12570,8 @@ footer {
   width: 100%;
 }
 .dashboard-link svg {
-  width: 27px;
-  height: 27px;
+  width: 22px;
+  height: 22px;
 }
 .dashboard-link svg path {
   fill: #8d8788;
@@ -12587,9 +12588,9 @@ footer {
 }
 
 .dashboard-link-icon {
-  width: 41px;
-  height: 41px;
-  border-radius: 7px;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12795,11 +12796,11 @@ footer {
   color: #333333;
 }
 .dashboard-table .table thead th {
-  background-color: #4e4e4e;
+  background-color: #eae2e5;
   border: none !important;
   font-weight: 600;
   letter-spacing: 0.03rem;
-  color: #f8f7f7;
+  color: #333333;
   font-size: 0.8rem;
 }
 .dashboard-table .table-col-sm {
@@ -12977,7 +12978,7 @@ footer {
   font-weight: 400;
   font-size: 11px;
   color: #7b7b7b;
-  margin-bottom: 7px;
+  margin-bottom: 3px;
 }
 
 .mobile-card-body {
@@ -12989,6 +12990,7 @@ footer {
 
 .mobile-card-price {
   font-weight: 500;
+  min-width: 30px;
 }
 
 .mobile-btn-sm {
@@ -13003,8 +13005,8 @@ footer {
 }
 
 .mobile-card-banner-container {
-  width: 78px !important;
-  height: 78px !important;
+  width: 62px !important;
+  height: 62px !important;
 }
 
 @media (max-width: 768px) {

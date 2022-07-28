@@ -10,7 +10,7 @@
             </div>
             <div v-else class="row">
                 <div class="col">
-                    <div class="card pb-3 pb-md-1">
+                    <div class="card pb-3 pb-md-1 pt-0">
                         <div class="row align-items-center">
                             <div
                                 class="
@@ -418,7 +418,7 @@
                                     </div>
                                 </div>
                                 <div
-                                    class="mb-4"
+                                    class="mb-3"
                                     v-if="
                                         statusUpdateActive(order.status) == true
                                     "
@@ -438,19 +438,11 @@
                                     class="
                                         d-flex
                                         flex-row
-                                        align-items-center
-                                        mb-4
+                                        justify-content-between
+                                        mb-3
                                     "
                                 >
                                     <div class="mr-5">
-                                        <div class="mobile-card-sub-title">
-                                            Total
-                                        </div>
-                                        <div class="mobile-card-body">
-                                            {{ order.total }}
-                                        </div>
-                                    </div>
-                                    <div>
                                         <div class="mobile-card-sub-title">
                                             Items
                                         </div>
@@ -458,14 +450,24 @@
                                             class="mobile-card-body d-flex"
                                             v-for="parent_product in order.order_products"
                                         >
-                                            <div class="fixed-title mr-4">
+                                            <span
+                                                class="mobile-card-price mr-2"
+                                            >
+                                                {{ parent_product.quantity }} x
+                                            </span>
+                                            <div class="fixed-title">
                                                 {{
                                                     parent_product.product.title
                                                 }}
                                             </div>
-                                            <span class="mobile-card-price">{{
-                                                parent_product.quantity
-                                            }}</span>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="mobile-card-sub-title">
+                                            Total
+                                        </div>
+                                        <div class="mobile-card-body">
+                                            LKR {{ order.total }}
                                         </div>
                                     </div>
                                 </div>
@@ -628,7 +630,9 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-3 modal-label">Total Amount</div>
+                                <div class="col-md-3 modal-label">
+                                    Total Amount
+                                </div>
                                 <div class="col-md-9">
                                     {{ current_order.currency_code }}
                                     {{

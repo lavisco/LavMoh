@@ -33,7 +33,7 @@
 
         <div class="d-flex nav-user-options justify-content-end">
             <a
-                class="mr-2 mr-md-4"
+                class="mr-3 mr-md-4"
                 id="navbarDropdown"
                 href="#"
                 role="button"
@@ -42,6 +42,7 @@
                 aria-expanded="false"
                 v-pre
             >
+                <span class="hide-content-md-inline mr-2">Account</span>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     aria-hidden="true"
@@ -63,7 +64,7 @@
                 onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();"
             >
-                <span class="hide-content-md-inline">Logout</span>
+                <span class="hide-content-md-inline mr-2">Logout</span>
 
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -73,7 +74,6 @@
                     height="24"
                     preserveAspectRatio="xMidYMid meet"
                     viewBox="0 0 24 24"
-                    class="ml-2"
                 >
                     <path
                         fill="#666"

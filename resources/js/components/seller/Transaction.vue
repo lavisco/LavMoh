@@ -10,7 +10,7 @@
             </div>
             <div v-else class="row">
                 <div class="col">
-                    <div class="card pb-3 pb-md-1">
+                    <div class="card pb-3 pb-md-1 pt-0">
                         <div
                             class="
                                 row
@@ -45,7 +45,7 @@
                             <div class="col-lg-8 text-md-right">
                                 <button
                                     type="button"
-                                    class="btn mobile-add-btn btn-md-full"
+                                    class="btn btn-primary mobile-add-btn btn-md-full"
                                     @click.prevent="requestWithdrawal"
                                 >
                                     Request
@@ -243,7 +243,7 @@
                                     </div>
                                 </div>
                                 <div
-                                    class="mb-4"
+                                    class="mb-3"
                                     v-show="disableWithdrawBtn(transaction)"
                                 >
                                     <div class="mobile-card-sub-title">
@@ -266,9 +266,8 @@
                                     class="
                                         d-flex
                                         flex-row
-                                        align-items-center
                                         justify-content-between
-                                        mb-4
+                                        mb-3
                                     "
                                 >
                                     <div class="mr-2">
@@ -300,7 +299,6 @@
                                     class="
                                         d-flex
                                         flex-row
-                                        align-items-center
                                         justify-content-between
                                     "
                                 >

@@ -33,7 +33,7 @@
                         <h4 class="mb-0">New Product Listing</h4>
                         <h6 class="mb-3">Add a new product to your store</h6>
                         <router-link to="/seller/products/listing">
-                            <button type="button" class="btn mobile-add-btn">
+                            <button type="button" class="btn btn-primary mobile-add-btn">
                                 <i class="fas fa-plus mr-2"></i>
                                 Add Product
                             </button>

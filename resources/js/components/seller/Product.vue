@@ -10,7 +10,7 @@
             </div>
             <div v-else class="row">
                 <div class="col">
-                    <div class="card pb-3 pb-md-1">
+                    <div class="card pb-3 pb-md-1 pt-0">
                         <div class="row align-items-center">
                             <div
                                 class="
@@ -40,7 +40,7 @@
                                 <router-link to="/seller/products/listing">
                                     <button
                                         type="button"
-                                        class="btn mobile-add-btn"
+                                        class="btn btn-primary mobile-add-btn"
                                     >
                                         <i
                                             class="fas fa-plus mr-md-2"
@@ -166,7 +166,7 @@
                                         d-flex
                                         flex-row
                                         justify-content-between
-                                        mb-4
+                                        mb-3
                                     "
                                 >
                                     <div class="d-flex flex-row mr-3">
@@ -272,7 +272,7 @@
                                     </div>
                                 </div>
 
-                                <div class="mb-4">
+                                <div class="mb-3">
                                     <div class="mobile-card-sub-title">
                                         Title
                                     </div>
@@ -284,7 +284,6 @@
                                     class="
                                         d-flex
                                         flex-row
-                                        align-items-center
                                         justify-content-between
                                     "
                                 >

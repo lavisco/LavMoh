@@ -10,7 +10,7 @@
             </div>
             <div v-else class="row">
                 <div class="col">
-                    <div class="card pb-3 pb-md-1">
+                    <div class="card pb-3 pb-md-1 pt-0">
                         <div class="row align-items-center">
                             <div
                                 class="

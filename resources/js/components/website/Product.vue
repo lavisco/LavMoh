@@ -264,7 +264,7 @@
                         />
                     </div>
 
-                    <!-- buttons -->
+                    <!-- quantity -->
                     <div class="mt-4">
                         <h6>Quantity</h6>
                         <div class="product-card-counter">
@@ -286,6 +286,9 @@
                                 +
                             </div>
                         </div>
+                        <h6 class="text-danger mt-4" v-show="formQtyError">
+                            {{ formQtyError }}
+                        </h6>
                     </div>
 
                     <!-- buttons -->
@@ -535,6 +538,7 @@ export default {
             quantity: 0,
         },
         formErrors: null,
+        formQtyError: null,
     }),
 
     beforeRouteEnter: function (to, from, next) {
@@ -654,25 +658,29 @@ export default {
                 }
             });
 
-            if (this.product.has_variations === 1) {
-                if (
-                    this.form.selected_variations.length ===
-                    activeVariation.length
-                ) {
+            if (this.form.quantity > 0) {
+                if (this.product.has_variations === 1) {
+                    if (
+                        this.form.selected_variations.length ===
+                        activeVariation.length
+                    ) {
+                        this.$store.dispatch("addProductToCart", {
+                            product: product,
+                            form: this.form,
+                        });
+                        this.formErrors = null;
+                    } else {
+                        this.formErrors =
+                            "Please select an option in all the variations above to add product to cart";
+                    }
+                } else {
                     this.$store.dispatch("addProductToCart", {
                         product: product,
                         form: this.form,
                     });
-                    this.formErrors = null;
-                } else {
-                    this.formErrors =
-                        "Please select an option in all the variations above to add product to cart";
                 }
             } else {
-                this.$store.dispatch("addProductToCart", {
-                    product: product,
-                    form: this.form,
-                });
+                this.formQtyError = "Please select quantity";
             }
 
             //pass multiple parameters to vuex action using destructuring

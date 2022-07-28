@@ -225,8 +225,8 @@
         <success-modal
             id="success-modal"
             msgTitle="Successfully Registered"
-            msg="You are now a Lavisco Seller! You'll be redirected to the login page."
-            gotoRoute="merchant-login"
+            msg="You are now a Lavisco Seller! You'll be redirected to your dashboard."
+            gotoRoute="seller-dashboard"
         />
         <fail-modal
             id="fail-modal"
@@ -271,8 +271,17 @@ export default {
                 .then(() => {
                     this.submitButtonText = "Submitted";
                     this.submitButtonDisabled = false;
-                    $("#success-modal").modal("show");
-                    this.sendSellerWelcomeMail(this.form.email);
+                    //this.sendSellerWelcomeMail(this.form.email);
+                })
+                .then(() => {
+                    this.form
+                        .post("/seller-login")
+                        .then(() => {
+                            $("#success-modal").modal("show");
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
                 })
                 .catch((error) => {
                     this.submitButtonText = "Submit";

@@ -4,7 +4,7 @@
         <div class="container-fluid">
             <div class="col">
                 <div class="row">
-                    <div class="col-md-4 mb-4 mb-md-0">
+                    <div class="col-md-3 mb-4 mb-md-0">
                         <div class="dashboard-card dashboard-card-sm">
                             <h4 class="mb-0">Products</h4>
                             <h6 class="mb-3">
@@ -13,14 +13,14 @@
                             <h2>{{ productCount }}</h2>
                         </div>
                     </div>
-                    <div class="col-md-4 mb-4 mb-md-0">
+                    <div class="col-md-3 mb-4 mb-md-0">
                         <div class="dashboard-card dashboard-card-sm">
                             <h4 class="mb-0">Orders</h4>
                             <h6 class="mb-3">New Orders placed this month</h6>
                             <h2>{{ orderCount }}</h2>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3 mb-4 mb-md-0">
                         <div class="dashboard-card dashboard-card-sm">
                             <h4 class="mb-0">Revenue</h4>
                             <h6 class="mb-3">
@@ -28,6 +28,16 @@
                             </h6>
                             <h2>LKR {{ revenue }}</h2>
                         </div>
+                    </div>
+                    <div class="col-md-3">
+                        <h4 class="mb-0">New Product Listing</h4>
+                        <h6 class="mb-3">Add a new product to your store</h6>
+                        <router-link to="/seller/products/listing">
+                            <button type="button" class="btn mobile-add-btn">
+                                <i class="fas fa-plus mr-2"></i>
+                                Add Product
+                            </button>
+                        </router-link>
                     </div>
                 </div>
             </div>
@@ -222,7 +232,10 @@
                         <div class="d-flex flex-md-row flex-column">
                             <div class="col-md-3 shop-setup-menu">
                                 <h3 class="text-left white">Activation Form</h3>
-                                <h6 class="mb-4 white">Setup your shop to start selling today!</h6>
+                                <h6 class="mb-4 white">
+                                    Please fill out the form to setup your shop.
+                                    Start selling today!
+                                </h6>
 
                                 <h4 :class="{ pink: part1, white: part2 }">
                                     <div class="form-number mr-2">1</div>
@@ -1451,6 +1464,7 @@ export default {
                         $("#addRecord").modal("show");
                         this.loadCities();
                         this.loadShippings();
+                        this.sendSellerWelcomeMail(this.user.email);
                     }
                     this.revenue = data.revenue;
                     this.orders = data.orders.data;
@@ -1542,6 +1556,15 @@ export default {
                 .then((response) => {
                     window.location.replace("/merchant/login");
                 })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
+
+        sendSellerWelcomeMail(email) {
+            axios
+                .get("/api/email/seller_welcome/" + email)
+                .then(() => {})
                 .catch((error) => {
                     console.log(error);
                 });

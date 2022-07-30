@@ -17,7 +17,6 @@
                 class="custom-select form-control form-control-alternative"
                 id="filter"
                 name="filter"
-                @change.prevent="loadData()"
                 v-model="sortValue"
             >
                 <option value="" disabled selected hidden>Sort by</option>
@@ -76,9 +75,17 @@
                     </div>
                 </router-link>
             </div>
-            <div v-if="!loading" class="d-flex justify-content-center mt-5">
-                <a href="" class="view-more-link">View More</a>
-            </div>
+            <!-- Pagination Start -->
+
+            <pagination
+                class="mt-4"
+                v-if="pagination.last_page > 1"
+                :pagination="pagination"
+                :offset="5"
+                @paginate="loadData()"
+            ></pagination>
+
+            <!-- Pagination end -->
         </section>
     </div>
 </template>
@@ -90,11 +97,12 @@ export default {
         searchText: null,
         loading: true,
         sortValue: "created_at",
+        pagination: { current_page: 1 },
     }),
 
     beforeRouteEnter: function (to, from, next) {
         axios
-            .get("/api/recipients/" + to.params.recipientId)
+            .get("/api/recipients/" + to.params.recipientId + "?page=" + 1)
             .then((response) => {
                 next((vm) => {
                     vm.setData(response);
@@ -104,7 +112,7 @@ export default {
 
     beforeRouteUpdate: function (to, from, next) {
         axios
-            .get("/api/recipients/" + to.params.recipientId)
+            .get("/api/recipients/" + to.params.recipientId + "?page=" + 1)
             .then((response) => {
                 this.setData(response);
                 next();
@@ -112,8 +120,8 @@ export default {
     },
 
     watch: {
-        searchText(after, before) {
-            this.loadData();
+        sortValue(after, before) {
+            Fire.$emit("reloadRecords");
         },
     },
 
@@ -127,20 +135,37 @@ export default {
         setData(response) {
             this.products = response.data.products.data;
             this.recipient = response.data.recipient;
+            this.pagination.last_page = response.data.products.last_page;
+            this.pagination.current_page = response.data.products.current_page;
             this.loading = false;
         },
         loadData() {
             axios
-                .get("/api/recipients/" + this.$route.params.recipientId, {
-                    params: { sortValue: this.sortValue },
-                })
+                .get(
+                    "/api/recipients/" +
+                        this.$route.params.recipientId +
+                        "?page=" +
+                        this.pagination.current_page,
+                    {
+                        params: { sortValue: this.sortValue },
+                    }
+                )
                 .then((response) => {
                     this.products = response.data.products.data;
                     this.recipient = response.data.recipient;
+                    this.pagination.last_page =
+                        response.data.products.last_page;
+                    this.pagination.current_page =
+                        response.data.products.current_page;
                 })
                 .catch((error) => console.log(error));
         },
     },
-    mounted() {},
+    mounted() {
+        Fire.$on("reloadRecords", () => {
+            this.pagination.current_page = 1;
+            this.loadData();
+        });
+    },
 };
 </script>

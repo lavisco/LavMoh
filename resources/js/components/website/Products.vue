@@ -13,7 +13,6 @@
                 class="custom-select form-control form-control-alternative"
                 id="filter"
                 name="filter"
-                @change.prevent="loadProducts()"
                 v-model="sortValue"
             >
                 <option value="" disabled selected hidden>Sort by</option>
@@ -73,25 +72,17 @@
                     </div>
                 </router-link>
             </div>
-            <div v-if="!loading" class="d-flex justify-content-center mt-5">
-                <a href="" class="view-more-link"
-                    >View More
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        aria-hidden="true"
-                        role="img"
-                        width="24"
-                        height="24"
-                        preserveAspectRatio="xMidYMid meet"
-                        viewBox="0 0 24 24"
-                    >
-                        <path
-                            fill="#666"
-                            d="M12 11V8l4 4l-4 4v-3H8v-2h4zm0-9c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12S6.48 2 12 2zm0 18c4.42 0 8-3.58 8-8s-3.58-8-8-8s-8 3.58-8 8s3.58 8 8 8z"
-                        />
-                    </svg>
-                </a>
-            </div>
+            <!-- Pagination Start -->
+
+            <pagination
+                class="mt-4"
+                v-if="pagination.last_page > 1"
+                :pagination="pagination"
+                :offset="5"
+                @paginate="loadProducts()"
+            ></pagination>
+
+            <!-- Pagination end -->
         </section>
     </div>
 </template>
@@ -103,11 +94,12 @@ export default {
         searchText: null,
         loading: true,
         sortValue: "created_at",
+        pagination: { current_page: 1 },
     }),
 
     watch: {
-        searchText(after, before) {
-            this.loadProducts();
+        sortValue(after, before) {
+            Fire.$emit("reloadRecords");
         },
     },
 
@@ -120,11 +112,13 @@ export default {
     methods: {
         loadProducts() {
             axios
-                .get("/api/products", {
+                .get("/api/products?page=" + this.pagination.current_page, {
                     params: { sortValue: this.sortValue },
                 })
                 .then(({ data }) => {
                     this.products = data.data;
+                    this.pagination.last_page = data.last_page;
+                    this.pagination.current_page = data.current_page;
                     this.loading = false;
                 })
                 .catch((error) => console.log(error));
@@ -133,6 +127,7 @@ export default {
     mounted() {
         this.loadProducts();
         Fire.$on("reloadRecords", () => {
+            this.pagination.current_page = 1;
             this.loadProducts();
         });
     },

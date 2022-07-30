@@ -63,6 +63,18 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Pagination Start -->
+
+            <pagination
+                class="mt-4"
+                v-if="pagination.last_page > 1"
+                :pagination="pagination"
+                :offset="5"
+                @paginate="loadShops()"
+            ></pagination>
+
+            <!-- Pagination end -->
         </section>
     </div>
 </template>
@@ -72,20 +84,23 @@ export default {
         shops: [],
         searchText: null,
         loading: true,
+        pagination: { current_page: 1 },
     }),
 
     watch: {
         searchText(after, before) {
-            this.loadShops();
+            Fire.$emit("reloadRecords");
         },
     },
 
     methods: {
         loadShops() {
             axios
-                .get("/api/shops")
+                .get("/api/shops?page=" + this.pagination.current_page)
                 .then(({ data }) => {
                     this.shops = data.data;
+                    this.pagination.last_page = data.last_page;
+                    this.pagination.current_page = data.current_page;
                     this.loading = false;
                 })
                 .catch((error) => console.log(error));
@@ -111,6 +126,7 @@ export default {
     mounted() {
         this.loadShops();
         Fire.$on("reloadRecords", () => {
+            this.pagination.current_page = 1;
             this.loadShops();
         });
     },

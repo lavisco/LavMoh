@@ -19,7 +19,6 @@
                     class="custom-select form-control form-control-alternative"
                     id="filter"
                     name="filter"
-                    @change.prevent="filterData()"
                     v-model="sortValue"
                 >
                     <option value="" disabled selected hidden>Sort by</option>
@@ -79,9 +78,17 @@
                     </div>
                 </router-link>
             </div>
-            <div v-if="!loading" class="d-flex justify-content-center mt-5">
-                <a href="" class="view-more-link">View More</a>
-            </div>
+            <!-- Pagination Start -->
+
+            <pagination
+                class="mt-4"
+                v-if="pagination.last_page > 1"
+                :pagination="pagination"
+                :offset="5"
+                @paginate="loadData()"
+            ></pagination>
+
+            <!-- Pagination end -->
         </section>
 
         <!-- Modal -->
@@ -128,11 +135,14 @@ export default {
         loading: true,
         //location data
         sortValue: "created_at",
+        pagination: { current_page: 1 },
     }),
 
     beforeRouteEnter: function (to, from, next) {
         axios
-            .get("/api/sub_categories/" + to.params.subCategoryId)
+            .get(
+                "/api/sub_categories/" + to.params.subCategoryId + "?page=" + 1
+            )
             .then((response) => {
                 next((vm) => {
                     vm.setData(response);
@@ -142,7 +152,9 @@ export default {
 
     beforeRouteUpdate: function (to, from, next) {
         axios
-            .get("/api/sub_categories/" + to.params.subCategoryId)
+            .get(
+                "/api/sub_categories/" + to.params.subCategoryId + "?page=" + 1
+            )
             .then((response) => {
                 this.setData(response);
                 next();
@@ -150,10 +162,11 @@ export default {
     },
 
     watch: {
-        searchText(after, before) {
-            this.loadData();
+        sortValue(after, before) {
+            Fire.$emit("reloadRecords");
         },
         locationActive(after, before) {
+            this.pagination.current_page = 1;
             this.loadLocalizedProducts();
         },
     },
@@ -172,6 +185,8 @@ export default {
             this.sub_category = response.data.sub_category;
             this.products = response.data.products.data;
             this.category = this.products[0].category;
+            this.pagination.last_page = response.data.products.last_page;
+            this.pagination.current_page = response.data.products.current_page;
             //this.loadLocalizedProducts();
             this.loading = false;
         },
@@ -183,7 +198,10 @@ export default {
         loadData() {
             axios
                 .get(
-                    "/api/sub_categories/" + this.$route.params.subCategoryId,
+                    "/api/sub_categories/" +
+                        this.$route.params.subCategoryId +
+                        "?page=" +
+                        this.pagination.current_page,
                     {
                         params: { sortValue: this.sortValue },
                     }
@@ -191,6 +209,10 @@ export default {
                 .then((response) => {
                     this.sub_category = response.data.sub_category;
                     this.products = response.data.products.data;
+                    this.pagination.last_page =
+                        response.data.products.last_page;
+                    this.pagination.current_page =
+                        response.data.products.current_page;
                 })
                 .catch((error) => console.log(error));
         },
@@ -206,16 +228,27 @@ export default {
                         "/api/sub_categories/products/" +
                             this.$route.params.subCategoryId +
                             "/" +
-                            this.locationActive
+                            this.locationActive +
+                            "?page=" +
+                            this.pagination.current_page
                     )
                     .then((response) => {
                         this.products = response.data.products.data;
+                        this.pagination.last_page =
+                            response.data.products.last_page;
+                        this.pagination.current_page =
+                            response.data.products.current_page;
                         $("#locationPopup").modal("show");
                     })
                     .catch((error) => console.log(error));
             }
         },
     },
-    mounted() {},
+    mounted() {
+        Fire.$on("reloadRecords", () => {
+            this.pagination.current_page = 1;
+            this.loadData();
+        });
+    },
 };
 </script>

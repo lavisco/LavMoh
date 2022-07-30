@@ -156,6 +156,7 @@
                         <!-- Table end -->
 
                         <!-- Mobile View start -->
+
                         <div class="hide-content">
                             <div
                                 class="card dashboard-info-card mb-4 pb-3"
@@ -339,6 +340,17 @@
                         </div>
 
                         <!-- Mobile View end -->
+
+                        <!-- Pagination Start -->
+
+                        <pagination
+                            v-if="pagination.last_page > 1"
+                            :pagination="pagination"
+                            :offset="5"
+                            @paginate="loadProducts()"
+                        ></pagination>
+
+                        <!-- Pagination end -->
                     </div>
                 </div>
             </div>
@@ -622,6 +634,7 @@ export default {
             product_variations: null,
             variations: null,
         }),
+        pagination: { current_page: 1 },
     }),
 
     watch: {
@@ -638,11 +651,14 @@ export default {
 
         loadProducts() {
             axios
-                .get("/api/seller/products", {
+                .get("/api/seller/products?page=" +
+                        this.pagination.current_page, {
                     params: { searchText: this.searchText },
                 })
                 .then(({ data }) => {
                     this.products = data.data;
+                    this.pagination.last_page = data.last_page;
+                    this.pagination.current_page = data.current_page;
                     this.loading = false;
                 })
                 .catch((error) => console.log(error));
@@ -671,6 +687,7 @@ export default {
         this.loadProducts();
         this.loadProductStates();
         Fire.$on("reloadRecords", () => {
+            this.pagination.current_page = 1;
             this.loadProducts();
         });
     },

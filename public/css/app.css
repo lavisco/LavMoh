@@ -12288,6 +12288,37 @@ footer {
   }
 }
 
+/*----------------------------pagination-------------------------------*/
+.page-link {
+  cursor: pointer;
+  color: #4e4e4e;
+  background-color: #4e4e4e14;
+  border: none;
+  border-radius: 50%;
+  height: 36px;
+  width: 36px;
+  text-align: center;
+  margin: 0 2px;
+  font-weight: 600;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-item.disabled .page-link {
+  color: #9e9e9e;
+  background-color: #4e4e4e14;
+  border: none;
+}
+
+.page-item.active .page-link {
+  z-index: 3;
+  color: #ffffff;
+  background-color: #df4e6b;
+  border: none;
+}
+
 /*------------------------------dashboard------------------------------*/
 .main-dashboard {
   position: relative;

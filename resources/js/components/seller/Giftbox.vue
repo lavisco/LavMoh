@@ -321,6 +321,17 @@
                         </div>
 
                         <!-- Mobile View end -->
+
+                        <!-- Pagination Start -->
+
+                        <pagination
+                            v-if="pagination.last_page > 1"
+                            :pagination="pagination"
+                            :offset="5"
+                            @paginate="loadProducts()"
+                        ></pagination>
+
+                        <!-- Pagination end -->
                     </div>
                 </div>
             </div>
@@ -560,6 +571,7 @@ export default {
             product_image: null,
             giftbox_products: null,
         }),
+        pagination: { current_page: 1 },
     }),
 
     watch: {
@@ -576,11 +588,17 @@ export default {
 
         loadProducts() {
             axios
-                .get("/api/seller/giftboxes", {
-                    params: { searchText: this.searchText },
-                })
+                .get(
+                    "/api/seller/giftboxes?page=" +
+                        this.pagination.current_page,
+                    {
+                        params: { searchText: this.searchText },
+                    }
+                )
                 .then(({ data }) => {
                     this.products = data.data;
+                    this.pagination.last_page = data.last_page;
+                    this.pagination.current_page = data.current_page;
                     this.loading = false;
                 })
                 .catch((error) => console.log(error));
@@ -609,6 +627,7 @@ export default {
         this.loadProducts();
         this.loadProductStates();
         Fire.$on("reloadRecords", () => {
+            this.pagination.current_page = 1;
             this.loadProducts();
         });
     },

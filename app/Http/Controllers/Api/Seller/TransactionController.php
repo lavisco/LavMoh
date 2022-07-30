@@ -15,7 +15,7 @@ class TransactionController extends Controller
     }
     public function index()
     {
-        return Transaction::where('user_id', auth()->id())->with('order')->latest()->paginate(25);
+        return Transaction::where('user_id', auth()->id())->with('order')->latest()->paginate(20);
     }
 
     public function store(Request $request)

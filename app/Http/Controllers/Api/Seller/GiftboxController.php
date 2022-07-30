@@ -30,7 +30,7 @@ class GiftboxController extends Controller
     public function index()
     {
         ///$this->authorize('viewAny', Product::class);
-        return Product::where('user_id', auth()->id())->where('category_id', 7)->with(['product_image', 'category', 'giftbox_products', 'giftbox_products.childProduct'])->latest()->filter(request(['searchText']))->paginate(25);
+        return Product::where('user_id', auth()->id())->where('category_id', 7)->with(['product_image', 'category', 'giftbox_products', 'giftbox_products.childProduct'])->latest()->filter(request(['searchText']))->paginate(20);
     }
 
     public function store(GiftboxRequest $request)

@@ -514,6 +514,17 @@
 
                         <!-- Mobile View end -->
 
+                        <!-- Pagination Start -->
+
+                        <pagination
+                            v-if="pagination.last_page > 1"
+                            :pagination="pagination"
+                            :offset="5"
+                            @paginate="loadOrders()"
+                        ></pagination>
+
+                        <!-- Pagination end -->
+
                         <h4
                             class="text-center mt-4"
                             v-show="orders.length == 0"
@@ -985,6 +996,7 @@ export default {
             id: "",
             status: "",
         }),
+        pagination: { current_page: 1 },
     }),
 
     watch: {
@@ -1013,14 +1025,19 @@ export default {
 
         loadOrders() {
             axios
-                .get("/api/seller/orders", {
-                    params: {
-                        searchText: this.searchText,
-                        statusFilter: this.statusFilter,
-                    },
-                })
+                .get(
+                    "/api/seller/orders?page=" + this.pagination.current_page,
+                    {
+                        params: {
+                            searchText: this.searchText,
+                            statusFilter: this.statusFilter,
+                        },
+                    }
+                )
                 .then(({ data }) => {
                     this.orders = data.data;
+                    this.pagination.last_page = data.last_page;
+                    this.pagination.current_page = data.current_page;
                     this.loading = false;
                 })
                 .catch((error) => console.log(error));
@@ -1081,6 +1098,7 @@ export default {
     mounted() {
         this.loadOrders();
         Fire.$on("reloadRecords", () => {
+            this.pagination.current_page = 1;
             this.loadOrders();
         });
     },

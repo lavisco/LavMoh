@@ -22,7 +22,7 @@ class OrderController extends Controller
                 ->latest()
                 ->filterstatus(request(['statusFilter']))
                 ->filter(request(['searchText']))
-                ->paginate(25);
+                ->paginate(20);
     }
 
     public function show($id)

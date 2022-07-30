@@ -83,6 +83,17 @@
                             </table>
                         </div>
                         <!-- Table end -->
+
+                        <!-- Pagination Start -->
+
+                        <pagination
+                            v-if="pagination.last_page > 1"
+                            :pagination="pagination"
+                            :offset="5"
+                            @paginate="loadProvinces()"
+                        ></pagination>
+
+                        <!-- Pagination end -->
                     </div>
                 </div>
             </div>
@@ -251,6 +262,7 @@ export default {
             name: "",
             country_id: "",
         }),
+        pagination: { current_page: 1 },
     }),
 
     watch: {
@@ -278,11 +290,16 @@ export default {
         },
         loadProvinces() {
             axios
-                .get("/api/admin/provinces", {
-                    params: { searchText: this.searchText },
-                })
+                .get(
+                    "/api/admin/provinces?page=" + this.pagination.current_page,
+                    {
+                        params: { searchText: this.searchText },
+                    }
+                )
                 .then(({ data }) => {
                     this.provinces = data.data;
+                    this.pagination.last_page = data.last_page;
+                    this.pagination.current_page = data.current_page;
                     this.loading = false;
                 })
                 .catch((error) => console.log(error));
@@ -329,6 +346,7 @@ export default {
     mounted() {
         this.loadProvinces();
         Fire.$on("reloadRecords", () => {
+            this.pagination.current_page = 1;
             this.loadProvinces();
         });
     },

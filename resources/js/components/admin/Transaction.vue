@@ -103,6 +103,17 @@
                             </table>
                         </div>
                         <!-- Table end -->
+
+                        <!-- Pagination Start -->
+
+                        <pagination
+                            v-if="pagination.last_page > 1"
+                            :pagination="pagination"
+                            :offset="5"
+                            @paginate="loadTransactions()"
+                        ></pagination>
+
+                        <!-- Pagination end -->
                     </div>
                 </div>
             </div>
@@ -560,6 +571,7 @@ export default {
             order: "",
             user: "",
         }),
+        pagination: { current_page: 1 },
     }),
 
     watch: {
@@ -586,11 +598,17 @@ export default {
 
         loadTransactions() {
             axios
-                .get("/api/admin/transactions", {
-                    params: { searchText: this.searchText },
-                })
+                .get(
+                    "/api/admin/transactions?page=" +
+                        this.pagination.current_page,
+                    {
+                        params: { searchText: this.searchText },
+                    }
+                )
                 .then(({ data }) => {
                     this.transactions = data.data;
+                    this.pagination.last_page = data.last_page;
+                    this.pagination.current_page = data.current_page;
                     this.loading = false;
                 })
                 .catch((error) => console.log(error));
@@ -652,6 +670,7 @@ export default {
         this.loadTransactions();
         this.loadTransactionStates();
         Fire.$on("reloadRecords", () => {
+            this.pagination.current_page = 1;
             this.loadTransactions();
         });
     },

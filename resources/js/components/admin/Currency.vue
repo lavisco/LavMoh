@@ -112,6 +112,17 @@
                             </table>
                         </div>
                         <!-- Table end -->
+
+                        <!-- Pagination Start -->
+
+                        <pagination
+                            v-if="pagination.last_page > 1"
+                            :pagination="pagination"
+                            :offset="5"
+                            @paginate="loadCurrencies()"
+                        ></pagination>
+
+                        <!-- Pagination end -->
                     </div>
                 </div>
             </div>
@@ -386,6 +397,7 @@ export default {
             exchange_rate: "",
             status: "",
         }),
+        pagination: { current_page: 1 },
     }),
 
     watch: {
@@ -411,11 +423,17 @@ export default {
         },
         loadCurrencies() {
             axios
-                .get("/api/admin/currencies", {
-                    params: { searchText: this.searchText },
-                })
+                .get(
+                    "/api/admin/currencies?page=" +
+                        this.pagination.current_page,
+                    {
+                        params: { searchText: this.searchText },
+                    }
+                )
                 .then(({ data }) => {
                     this.currencies = data.data;
+                    this.pagination.last_page = data.last_page;
+                    this.pagination.current_page = data.current_page;
                     this.loading = false;
                 })
                 .catch((error) => console.log(error));
@@ -454,6 +472,7 @@ export default {
     mounted() {
         this.loadCurrencies();
         Fire.$on("reloadRecords", () => {
+            this.pagination.current_page = 1;
             this.loadCurrencies();
         });
     },

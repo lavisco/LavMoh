@@ -38,9 +38,8 @@
                                 <div class="card-body">
                                     <ol>
                                         <li>
-                                            Each word in the key / key name
-                                            must be seperated by an underscore
-                                            _
+                                            Each word in the key / key name must
+                                            be seperated by an underscore _
                                         </li>
                                         <li>
                                             Key name for text content - Add
@@ -51,9 +50,9 @@
                                             '_image' at the end of name
                                         </li>
                                         <li>
-                                            Key name for multiple text/ image content
-                                            - Add serial number e.g. '_1', '_2',
-                                            at the end of name
+                                            Key name for multiple text/ image
+                                            content - Add serial number e.g.
+                                            '_1', '_2', at the end of name
                                         </li>
                                         <li>
                                             For more information refer to the
@@ -136,6 +135,17 @@
                             </table>
                         </div>
                         <!-- Table end -->
+
+                        <!-- Pagination Start -->
+
+                        <pagination
+                            v-if="pagination.last_page > 1"
+                            :pagination="pagination"
+                            :offset="5"
+                            @paginate="loadSitetexts()"
+                        ></pagination>
+
+                        <!-- Pagination end -->
                     </div>
                 </div>
             </div>
@@ -381,6 +391,7 @@ export default {
             content: "",
             contentType: "",
         }),
+        pagination: { current_page: 1 },
     }),
 
     watch: {
@@ -422,11 +433,16 @@ export default {
         },
         loadSitetexts() {
             axios
-                .get("/api/admin/sitetexts", {
-                    params: { searchText: this.searchText },
-                })
+                .get(
+                    "/api/admin/sitetexts?page=" + this.pagination.current_page,
+                    {
+                        params: { searchText: this.searchText },
+                    }
+                )
                 .then(({ data }) => {
                     this.sitetexts = data.data;
+                    this.pagination.last_page = data.last_page;
+                    this.pagination.current_page = data.current_page;
                     this.loading = false;
                 })
                 .catch((error) => console.log(error));
@@ -465,6 +481,7 @@ export default {
     mounted() {
         this.loadSitetexts();
         Fire.$on("reloadRecords", () => {
+            this.pagination.current_page = 1;
             this.loadSitetexts();
         });
     },

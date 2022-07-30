@@ -85,6 +85,17 @@
                             </table>
                         </div>
                         <!-- Table end -->
+
+                        <!-- Pagination Start -->
+
+                        <pagination
+                            v-if="pagination.last_page > 1"
+                            :pagination="pagination"
+                            :offset="5"
+                            @paginate="loadAreas()"
+                        ></pagination>
+
+                        <!-- Pagination end -->
                     </div>
                 </div>
             </div>
@@ -297,6 +308,7 @@ export default {
             longitude: "",
             city_id: "",
         }),
+        pagination: { current_page: 1 },
     }),
 
     watch: {
@@ -324,13 +336,23 @@ export default {
         },
         loadAreas() {
             axios
-                .get("/api/admin/areas", {
+                .get("/api/admin/areas?page=" + this.pagination.current_page, {
                     params: { searchText: this.searchText },
                 })
                 .then(({ data }) => {
-                    this.areas = data.areas.data;
-                    this.cities = data.cities;
+                    this.areas = data.data;
+                    this.pagination.last_page = data.last_page;
+                    this.pagination.current_page = data.current_page;
                     this.loading = false;
+                    this.loadCities();
+                })
+                .catch((error) => console.log(error));
+        },
+        loadCities() {
+            axios
+                .get("/api/admin/areas/cities")
+                .then(({ data }) => {
+                    this.cities = data.data;
                 })
                 .catch((error) => console.log(error));
         },
@@ -368,6 +390,7 @@ export default {
     mounted() {
         this.loadAreas();
         Fire.$on("reloadRecords", () => {
+            this.pagination.current_page = 1;
             this.loadAreas();
         });
     },

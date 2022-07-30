@@ -19,10 +19,14 @@ class AreaController extends Controller
     {
         ///$this->authorize('viewAny', Area::class);
 
-        return response()->json([
-            'areas' => Area::with('city')->latest()->filter(request(['searchText']))->paginate(25),
-            'cities' => City::where('has_area', true)->get(),
-        ]);
+        return Area::with('city')->latest()->filter(request(['searchText']))->paginate(25);
+    }
+
+    public function getCities()
+    {
+        ///$this->authorize('viewAny', Area::class);
+
+        return City::where('has_area', true)->get();
     }
 
     public function store(AreaRequest $request)

@@ -83,6 +83,17 @@
                             </table>
                         </div>
                         <!-- Table end -->
+
+                        <!-- Pagination Start -->
+
+                        <pagination
+                            v-if="pagination.last_page > 1"
+                            :pagination="pagination"
+                            :offset="5"
+                            @paginate="loadDistricts()"
+                        ></pagination>
+
+                        <!-- Pagination end -->
                     </div>
                 </div>
             </div>
@@ -193,7 +204,10 @@
                                             {{ province.name }}
                                         </option>
                                     </select>
-                                    <HasError :form="form" field="province_id" />
+                                    <HasError
+                                        :form="form"
+                                        field="province_id"
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -251,6 +265,7 @@ export default {
             name: "",
             province_id: "",
         }),
+        pagination: { current_page: 1 },
     }),
 
     watch: {
@@ -278,11 +293,16 @@ export default {
         },
         loadDistricts() {
             axios
-                .get("/api/admin/districts", {
-                    params: { searchText: this.searchText },
-                })
+                .get(
+                    "/api/admin/districts?page=" + this.pagination.current_page,
+                    {
+                        params: { searchText: this.searchText },
+                    }
+                )
                 .then(({ data }) => {
                     this.districts = data.data;
+                    this.pagination.last_page = data.last_page;
+                    this.pagination.current_page = data.current_page;
                     this.loading = false;
                 })
                 .catch((error) => console.log(error));
@@ -329,6 +349,7 @@ export default {
     mounted() {
         this.loadDistricts();
         Fire.$on("reloadRecords", () => {
+            this.pagination.current_page = 1;
             this.loadDistricts();
         });
     },

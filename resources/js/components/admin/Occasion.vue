@@ -116,6 +116,17 @@
                             </table>
                         </div>
                         <!-- Table end -->
+
+                        <!-- Pagination Start -->
+
+                        <pagination
+                            v-if="pagination.last_page > 1"
+                            :pagination="pagination"
+                            :offset="5"
+                            @paginate="loadOccasions()"
+                        ></pagination>
+
+                        <!-- Pagination end -->
                     </div>
                 </div>
             </div>
@@ -368,6 +379,7 @@ export default {
             banner: "",
             status: "",
         }),
+        pagination: { current_page: 1 },
     }),
 
     watch: {
@@ -409,11 +421,16 @@ export default {
 
         loadOccasions() {
             axios
-                .get("/api/admin/occasions", {
-                    params: { searchText: this.searchText },
-                })
+                .get(
+                    "/api/admin/occasions?page=" + this.pagination.current_page,
+                    {
+                        params: { searchText: this.searchText },
+                    }
+                )
                 .then(({ data }) => {
                     this.occasions = data.data;
+                    this.pagination.last_page = data.last_page;
+                    this.pagination.current_page = data.current_page;
                     this.loading = false;
                 })
                 .catch((error) => console.log(error));
@@ -454,6 +471,7 @@ export default {
     mounted() {
         this.loadOccasions();
         Fire.$on("reloadRecords", () => {
+            this.pagination.current_page = 1;
             this.loadOccasions();
         });
     },

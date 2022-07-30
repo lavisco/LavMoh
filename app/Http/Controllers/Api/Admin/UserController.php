@@ -26,6 +26,14 @@ class UserController extends Controller
                     ->filter(request(['searchText']))->get();
     }
 
+    public function list()
+    {
+        ///$this->authorize('viewAny', User::class);
+        return User::with('role') 
+                    ->latest()
+                    ->filter(request(['searchText']))->paginate(25);
+    }
+
     public function seller()
     {
         ///$this->authorize('viewAny', Role::class);

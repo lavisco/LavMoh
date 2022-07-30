@@ -117,6 +117,17 @@
                             </table>
                         </div>
                         <!-- Table end -->
+
+                        <!-- Pagination Start -->
+
+                        <pagination
+                            v-if="pagination.last_page > 1"
+                            :pagination="pagination"
+                            :offset="5"
+                            @paginate="loadRecipients()"
+                        ></pagination>
+
+                        <!-- Pagination end -->
                     </div>
                 </div>
             </div>
@@ -369,6 +380,7 @@ export default {
             banner: "",
             status: "",
         }),
+        pagination: { current_page: 1 },
     }),
 
     watch: {
@@ -409,11 +421,17 @@ export default {
         },
         loadRecipients() {
             axios
-                .get("/api/admin/recipients", {
-                    params: { searchText: this.searchText },
-                })
+                .get(
+                    "/api/admin/recipients?page=" +
+                        this.pagination.current_page,
+                    {
+                        params: { searchText: this.searchText },
+                    }
+                )
                 .then(({ data }) => {
                     this.recipients = data.data;
+                    this.pagination.last_page = data.last_page;
+                    this.pagination.current_page = data.current_page;
                     this.loading = false;
                 })
                 .catch((error) => console.log(error));
@@ -453,6 +471,7 @@ export default {
     mounted() {
         this.loadRecipients();
         Fire.$on("reloadRecords", () => {
+            this.pagination.current_page = 1;
             this.loadRecipients();
         });
     },

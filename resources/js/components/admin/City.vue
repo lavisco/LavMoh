@@ -74,9 +74,7 @@
                                                         class="dropdown-item"
                                                         href=""
                                                         @click.prevent="
-                                                            deleteCity(
-                                                                city.id
-                                                            )
+                                                            deleteCity(city.id)
                                                         "
                                                     >
                                                         Delete
@@ -89,6 +87,17 @@
                             </table>
                         </div>
                         <!-- Table end -->
+
+                        <!-- Pagination Start -->
+
+                        <pagination
+                            v-if="pagination.last_page > 1"
+                            :pagination="pagination"
+                            :offset="5"
+                            @paginate="loadCities()"
+                        ></pagination>
+
+                        <!-- Pagination end -->
                     </div>
                 </div>
             </div>
@@ -137,9 +146,7 @@
 
                     <form
                         class="input-form"
-                        @submit.prevent="
-                            editMode ? updateCity() : createCity()
-                        "
+                        @submit.prevent="editMode ? updateCity() : createCity()"
                     >
                         <div class="modal-body">
                             <div class="form-group row">
@@ -319,7 +326,10 @@
                                             {{ district.name }}
                                         </option>
                                     </select>
-                                    <HasError :form="form" field="district_id" />
+                                    <HasError
+                                        :form="form"
+                                        field="district_id"
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -381,6 +391,7 @@ export default {
             longitude: "",
             district_id: "",
         }),
+        pagination: { current_page: 1 },
     }),
 
     watch: {
@@ -408,11 +419,13 @@ export default {
         },
         loadCities() {
             axios
-                .get("/api/admin/cities", {
+                .get("/api/admin/cities?page=" + this.pagination.current_page, {
                     params: { searchText: this.searchText },
                 })
                 .then(({ data }) => {
                     this.cities = data.data;
+                    this.pagination.last_page = data.last_page;
+                    this.pagination.current_page = data.current_page;
                     this.loading = false;
                 })
                 .catch((error) => console.log(error));
@@ -459,6 +472,7 @@ export default {
     mounted() {
         this.loadCities();
         Fire.$on("reloadRecords", () => {
+            this.pagination.current_page = 1;
             this.loadCities();
         });
     },

@@ -90,6 +90,17 @@
                             </table>
                         </div>
                         <!-- Table end -->
+
+                        <!-- Pagination Start -->
+
+                        <pagination
+                            v-if="pagination.last_page > 1"
+                            :pagination="pagination"
+                            :offset="5"
+                            @paginate="loadGiftwraps()"
+                        ></pagination>
+
+                        <!-- Pagination end -->
                     </div>
                 </div>
             </div>
@@ -299,6 +310,7 @@ export default {
             image_url: "",
             user_id: "",
         }),
+        pagination: { current_page: 1 },
     }),
 
     watch: {
@@ -339,11 +351,14 @@ export default {
         },
         loadGiftwraps() {
             axios
-                .get("/api/admin/giftwraps", {
+                .get("/api/admin/giftwraps?page=" +
+                        this.pagination.current_page, {
                     params: { searchText: this.searchText },
                 })
                 .then(({ data }) => {
                     this.giftwraps = data.data;
+                    this.pagination.last_page = data.last_page;
+                    this.pagination.current_page = data.current_page;
                     this.loading = false;
                 })
                 .catch((error) => console.log(error));
@@ -388,6 +403,7 @@ export default {
     mounted() {
         this.loadGiftwraps();
         Fire.$on("reloadRecords", () => {
+            this.pagination.current_page = 1;
             this.loadGiftwraps();
         });
     },

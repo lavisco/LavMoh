@@ -14,6 +14,8 @@
             <div v-else class="row">
                 <div class="col">
                     <div class="card">
+                        <!-- Table start -->
+
                         <div class="table-responsive">
                             <table class="table align-items-center table-hover">
                                 <thead>
@@ -85,6 +87,19 @@
                                 </tbody>
                             </table>
                         </div>
+
+                        <!-- Table end -->
+
+                        <!-- Pagination Start -->
+
+                        <pagination
+                            v-if="pagination.last_page > 1"
+                            :pagination="pagination"
+                            :offset="5"
+                            @paginate="loadPermissions()"
+                        ></pagination>
+
+                        <!-- Pagination end -->
                     </div>
                 </div>
             </div>
@@ -242,6 +257,7 @@ export default {
             name: "",
             description: "",
         }),
+        pagination: { current_page: 1 },
     }),
 
     watch: {
@@ -267,11 +283,17 @@ export default {
         },
         loadPermissions() {
             axios
-                .get("/api/admin/permissions", {
-                    params: { searchText: this.searchText },
-                })
+                .get(
+                    "/api/admin/permissions?page=" +
+                        this.pagination.current_page,
+                    {
+                        params: { searchText: this.searchText },
+                    }
+                )
                 .then(({ data }) => {
                     this.permissions = data.data;
+                    this.pagination.last_page = data.last_page;
+                    this.pagination.current_page = data.current_page;
                     this.loading = false;
                 })
                 .catch((error) => console.log(error));
@@ -311,6 +333,7 @@ export default {
     mounted() {
         this.loadPermissions();
         Fire.$on("reloadRecords", () => {
+            this.pagination.current_page = 1;
             this.loadPermissions();
         });
     },

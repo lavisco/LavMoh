@@ -116,6 +116,17 @@
                             </table>
                         </div>
                         <!-- Table end -->
+
+                        <!-- Pagination Start -->
+
+                        <pagination
+                            v-if="pagination.last_page > 1"
+                            :pagination="pagination"
+                            :offset="5"
+                            @paginate="loadSubCategories()"
+                        ></pagination>
+
+                        <!-- Pagination end -->
                     </div>
                 </div>
             </div>
@@ -365,6 +376,7 @@ export default {
             status: "",
             category_id: "",
         }),
+        pagination: { current_page: 1 },
     }),
 
     watch: {
@@ -392,11 +404,17 @@ export default {
         },
         loadSubCategories() {
             axios
-                .get("/api/admin/sub_categories", {
-                    params: { searchText: this.searchText },
-                })
+                .get(
+                    "/api/admin/sub_categories?page=" +
+                        this.pagination.current_page,
+                    {
+                        params: { searchText: this.searchText },
+                    }
+                )
                 .then(({ data }) => {
                     this.sub_categories = data.data;
+                    this.pagination.last_page = data.last_page;
+                    this.pagination.current_page = data.current_page;
                     this.loading = false;
                 })
                 .catch((error) => console.log(error));
@@ -443,6 +461,7 @@ export default {
     mounted() {
         this.loadSubCategories();
         Fire.$on("reloadRecords", () => {
+            this.pagination.current_page = 1;
             this.loadSubCategories();
         });
     },

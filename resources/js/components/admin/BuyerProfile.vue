@@ -14,6 +14,8 @@
             <div v-else class="row">
                 <div class="col">
                     <div class="card">
+                        <!-- Table start -->
+
                         <div class="table-responsive">
                             <table class="table align-items-center table-hover">
                                 <thead>
@@ -100,6 +102,19 @@
                                 </tbody>
                             </table>
                         </div>
+
+                        <!-- Table end -->
+
+                        <!-- Pagination Start -->
+
+                        <pagination
+                            v-if="pagination.last_page > 1"
+                            :pagination="pagination"
+                            :offset="5"
+                            @paginate="loadBuyerprofiles()"
+                        ></pagination>
+
+                        <!-- Pagination end -->
                     </div>
                 </div>
             </div>
@@ -705,6 +720,7 @@ export default {
 
             user_id: "",
         }),
+        pagination: { current_page: 1 },
     }),
 
     watch: {
@@ -733,11 +749,17 @@ export default {
 
         loadBuyerprofiles() {
             axios
-                .get("/api/admin/buyerprofiles", {
-                    params: { searchText: this.searchText },
-                })
+                .get(
+                    "/api/admin/buyerprofiles?page=" +
+                        this.pagination.current_page,
+                    {
+                        params: { searchText: this.searchText },
+                    }
+                )
                 .then(({ data }) => {
                     this.buyerprofiles = data.data;
+                    this.pagination.last_page = data.last_page;
+                    this.pagination.current_page = data.current_page;
                     this.loading = false;
                 })
                 .catch((error) => console.log(error));
@@ -796,6 +818,7 @@ export default {
     mounted() {
         this.loadBuyerprofiles();
         Fire.$on("reloadRecords", () => {
+            this.pagination.current_page = 1;
             this.loadBuyerprofiles();
         });
     },

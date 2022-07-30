@@ -40,6 +40,10 @@ Vue.component(
     "table-header",
     require("./components/admin/TableHeader.vue").default
 );
+Vue.component(
+    "pagination",
+    require("./components/admin/Pagination.vue").default
+);
 
 //website
 

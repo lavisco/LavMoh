@@ -14,6 +14,7 @@
             <div v-else class="row">
                 <div class="col">
                     <div class="card">
+                        <!-- Table start -->
                         <div class="table-responsive">
                             <table class="table align-items-center table-hover">
                                 <thead>
@@ -83,6 +84,7 @@
                                 </tbody>
                             </table>
                         </div>
+                        <!-- Table end -->
                     </div>
                 </div>
             </div>

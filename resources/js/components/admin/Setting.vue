@@ -83,6 +83,17 @@
                             </table>
                         </div>
                         <!-- Table end -->
+
+                        <!-- Pagination Start -->
+
+                        <pagination
+                            v-if="pagination.last_page > 1"
+                            :pagination="pagination"
+                            :offset="5"
+                            @paginate="loadSettings()"
+                        ></pagination>
+
+                        <!-- Pagination end -->
                     </div>
                 </div>
             </div>
@@ -137,9 +148,7 @@
                     >
                         <div class="modal-body">
                             <div class="form-group row">
-                                <label
-                                    class="col-md-3 col-form-label"
-                                    for="key"
+                                <label class="col-md-3 col-form-label" for="key"
                                     >Key
                                     <strong class="text-danger"> *</strong>
                                 </label>
@@ -179,10 +188,7 @@
                                         v-model="form.value"
                                     >
                                     </textarea>
-                                    <HasError
-                                        :form="form"
-                                        field="value"
-                                    />
+                                    <HasError :form="form" field="value" />
                                 </div>
                             </div>
                         </div>
@@ -239,6 +245,7 @@ export default {
             key: "",
             value: "",
         }),
+        pagination: { current_page: 1 },
     }),
 
     watch: {
@@ -264,11 +271,16 @@ export default {
         },
         loadSettings() {
             axios
-                .get("/api/admin/settings", {
-                    params: { searchText: this.searchText },
-                })
+                .get(
+                    "/api/admin/settings?page=" + this.pagination.current_page,
+                    {
+                        params: { searchText: this.searchText },
+                    }
+                )
                 .then(({ data }) => {
                     this.settings = data.data;
+                    this.pagination.last_page = data.last_page;
+                    this.pagination.current_page = data.current_page;
                     this.loading = false;
                 })
                 .catch((error) => console.log(error));
@@ -307,6 +319,7 @@ export default {
     mounted() {
         this.loadSettings();
         Fire.$on("reloadRecords", () => {
+            this.pagination.current_page = 1;
             this.loadSettings();
         });
     },

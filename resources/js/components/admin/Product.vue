@@ -156,6 +156,17 @@
                             </table>
                         </div>
                         <!-- Table end -->
+
+                        <!-- Pagination Start -->
+
+                        <pagination
+                            v-if="pagination.last_page > 1"
+                            :pagination="pagination"
+                            :offset="5"
+                            @paginate="loadProducts()"
+                        ></pagination>
+
+                        <!-- Pagination end -->
                     </div>
                 </div>
             </div>
@@ -201,6 +212,7 @@ export default {
             category_id: "",
             user_id: "",
         }),
+        pagination: { current_page: 1 },
     }),
 
     watch: {
@@ -216,11 +228,16 @@ export default {
 
         loadProducts() {
             axios
-                .get("/api/admin/products", {
-                    params: { searchText: this.searchText },
-                })
+                .get(
+                    "/api/admin/products?page=" + this.pagination.current_page,
+                    {
+                        params: { searchText: this.searchText },
+                    }
+                )
                 .then(({ data }) => {
                     this.products = data.data;
+                    this.pagination.last_page = data.last_page;
+                    this.pagination.current_page = data.current_page;
                     this.loading = false;
                 })
                 .catch((error) => console.log(error));
@@ -260,6 +277,7 @@ export default {
         this.loadProducts();
         this.loadProductStates();
         Fire.$on("reloadRecords", () => {
+            this.pagination.current_page = 1;
             this.loadProducts();
         });
     },

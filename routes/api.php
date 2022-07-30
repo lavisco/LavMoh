@@ -99,6 +99,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::prefix('admin')->group(function () {
     Route::apiResource('/analytics', AnalyticController::class);
+    Route::get('/areas/cities', [AreaController::class, 'getCities']);
     Route::apiResource('/areas', AreaController::class);
     Route::apiResource('/buyerprofiles', BuyerProfileController::class);
     Route::apiResource('/cities', CityController::class);
@@ -134,6 +135,7 @@ Route::prefix('admin')->group(function () {
     Route::apiResource('/receipts', ReceiptController::class);
     Route::apiResource('/recipients', RecipientController::class);
     Route::apiResource('/roles', RoleController::class);
+    Route::get('/sellerprofiles/list', [SellerProfileController::class, 'list']);
     Route::apiResource('/sellerprofiles', SellerProfileController::class);
     Route::apiResource('/settings', SettingController::class);
     Route::apiResource('/sitetexts', SitetextController::class);
@@ -148,6 +150,7 @@ Route::prefix('admin')->group(function () {
     Route::apiResource('/variation_options', VariationOptionController::class);
 
     /* User */
+    Route::get('/users/list', [UserController::class, 'list']);
     Route::get('/users/buyer', [UserController::class, 'buyer']);
     Route::get('/users/seller', [UserController::class, 'seller']);
     Route::put('/users/password_reset/{user}', [UserController::class, 'updatePassword']);

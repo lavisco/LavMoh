@@ -21,6 +21,11 @@ class SellerProfileController extends Controller
         return SellerProfile::with(['user', 'user.shop'])->latest()->filter(request(['searchText']))->get();
     }
 
+    public function list()
+    {
+        return SellerProfile::with(['user', 'user.shop'])->latest()->filter(request(['searchText']))->paginate(25);
+    }
+
     public function store(SellerProfileRequest $request)
     {
         ///$this->authorize('create', SellerProfile::class);

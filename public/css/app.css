@@ -13315,7 +13315,7 @@ footer {
 /*------------------------------product page------------------------------*/
 @media (max-width: 768px) {
   .product-page h3 {
-    font-size: 22px;
+    font-size: 21px;
   }
 }
 .product-page h5 {
@@ -13327,10 +13327,10 @@ footer {
 }
 
 .product-detail-header:hover {
-  color: #6452be;
+  color: #df4e6b;
 }
 .product-detail-header:hover svg > path {
-  fill: #6452be;
+  fill: #df4e6b;
 }
 
 .product-detail-card {
@@ -13370,7 +13370,9 @@ footer {
 }
 
 .badge-tag {
-  background-color: #ff5a7c36;
+  background-color: #ff834c;
+  color: white;
+  font-size: 11px !important;
 }
 
 .info-msg-box {
@@ -13407,7 +13409,12 @@ footer {
 .price {
   font-weight: 600;
   text-align: left;
-  color: #6452be;
+  font-size: 26px;
+}
+@media (max-width: 768px) {
+  .price {
+    font-size: 24px !important;
+  }
 }
 
 .addon-price {
@@ -13553,8 +13560,8 @@ footer {
   align-items: center;
   z-index: 2;
   border-radius: 50%;
-  background-color: #ff5a7c;
-  color: white;
+  background-color: white;
+  color: #df4e6b;
   font-size: 11px;
   font-weight: 600;
 }
@@ -14116,33 +14123,23 @@ footer {
   width: 40px;
 }
 .product-card-counter .counter-num {
-  width: 53px;
-  border-top: 1px solid #e4e7e8;
-  border-bottom: 1px solid #e4e7e8;
+  width: 60px;
+  font-size: 16px;
+  font-weight: 600;
 }
 .product-card-counter .counter-minus,
 .product-card-counter .counter-plus {
-  background-color: #976aff;
-  color: white;
+  background-color: #eeeeee79;
+  color: #df4e6b;
   font-weight: 700;
   font-size: 24px;
   cursor: pointer;
+  border-radius: 8px;
 }
-.product-card-counter .counter-minus:hover,
-.product-card-counter .counter-plus:hover {
-  background-color: #ff5a7c;
-}
-.product-card-counter .counter-minus:focus,
+.product-card-counter .counter-minus:hover, .product-card-counter .counter-minus:focus,
+.product-card-counter .counter-plus:hover,
 .product-card-counter .counter-plus:focus {
-  background-color: #6452be;
-}
-.product-card-counter .counter-minus {
-  border-top-left-radius: 7px;
-  border-bottom-left-radius: 7px;
-}
-.product-card-counter .counter-plus {
-  border-top-right-radius: 7px;
-  border-bottom-right-radius: 7px;
+  background-color: #eeeeeeed;
 }
 @media (max-width: 768px) {
   .product-card-counter {

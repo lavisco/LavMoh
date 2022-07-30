@@ -39,4 +39,11 @@ class ProductController extends Controller
     {
         return Product::with(['user.shop', 'category:id,name,slug', 'sub_categories:id,name', 'product_images', 'product_image', 'variations', 'variations.variation_options', 'variations.variation_options.variation:id,name', 'giftbox_products.childProduct.product_image'])->findOrFail($productId);
     }
+
+    public function getPrice($productIds)
+    {
+        $jsonArray = json_decode($productIds,true);
+
+        return Product::with(['variation_options'])->findMany($jsonArray);
+    }
 }

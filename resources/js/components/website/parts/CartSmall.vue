@@ -93,13 +93,12 @@
                             {{ (total * currency.exchange_rate).toFixed(2) }}
                         </span>
                     </h5>
-                    <router-link to="/cart">
-                        <button
-                            class="btn-sm btn-full btn-sm-cart purple mt-auto"
-                        >
-                            Open Cart Page
-                        </button>
-                    </router-link>
+                    <button
+                        class="btn-sm btn-full btn-sm-cart purple mt-auto"
+                        @click.prevent="goToCart()"
+                    >
+                        Open Cart Page
+                    </button>
                 </div>
 
                 <div v-show="products[0] == null" class="text-center">
@@ -112,7 +111,11 @@
 
 <script>
 export default {
-    data: () => ({}),
+    data: () => ({
+        product_ids: [],
+        variation_option_ids: [],
+        product_prices: [],
+    }),
 
     computed: {
         currency() {
@@ -139,8 +142,37 @@ export default {
         preventDropdownClose(e) {
             e.stopPropagation();
         },
+        goToCart() {
+            window.location.replace("/cart");
+        },
+        reloadPrice() {
+            this.products.map((product) => {
+                if (this.product_ids.indexOf(product.id) === -1) {
+                    this.product_ids.push(product.id);
+                }
+                product.variations.map((variation_option) => {
+                    if (
+                        this.variation_option_ids.indexOf(
+                            variation_option.id
+                        ) === -1
+                    ) {
+                        this.variation_option_ids.push(variation_option.id);
+                    }
+                });
+            });
+
+            axios
+                .get("/api/products/prices/" + JSON.stringify(this.product_ids))
+                .then(({ data }) => {
+                    this.product_prices = data;
+                    this.$store.dispatch("refreshPrice", this.product_prices);
+                })
+                .catch((error) => console.log(error));
+        },
     },
 
-    mounted() {},
+    mounted() {
+        this.reloadPrice();
+    },
 };
 </script>

@@ -110,37 +110,25 @@
                 <div class="col-md-5 input-form">
                     <!-- title -->
 
-                    <div class="row">
-                        <h3 class="text-left col-12 mt-md-0 mt-3">
-                            {{ product.title }}
-                        </h3>
-                    </div>
-                    <p class="mb-1">{{ product.user.shop.name }}</p>
-                    <!-- tags -->
+                    <p class="mt-md-0 mt-4 mb-0">
+                        {{ product.user.shop.name }}
+                    </p>
+
+                    <h3 class="text-left mb-0">
+                        {{ product.title }}
+                    </h3>
+
+                    <!-- price & tags -->
                     <div
                         class="
                             d-flex
-                            justify-content-between
                             align-items-center
+                            justify-content-between
+                            my-0
                         "
                     >
-                        <div>
-                            <span
-                                class="badge badge-pill badge-tag"
-                                v-show="product.quantity > 0"
-                                >In Stock</span
-                            >
-                            <span
-                                class="badge badge-pill badge-tag"
-                                v-show="product.has_inventory == 0"
-                                >Made to Order</span
-                            >
-                        </div>
-                    </div>
-
-                    <!-- price -->
-                    <div class="mt-3">
-                        <h3 class="price">
+                        <!-- price -->
+                        <h3 class="price mb-0">
                             {{ currency.symbol }}
                             {{
                                 (total_price * currency.exchange_rate).toFixed(
@@ -156,6 +144,20 @@
                                 >+</span
                             >
                         </h3>
+
+                        <!-- tags -->
+                        <div class="d-flex align-items-center">
+                            <span
+                                class="badge badge-pill badge-tag"
+                                v-show="product.quantity > 0"
+                                >In Stock</span
+                            >
+                            <span
+                                class="badge badge-pill badge-tag"
+                                v-show="product.has_inventory == 0"
+                                >Made to Order</span
+                            >
+                        </div>
                     </div>
 
                     <!-- short description -->
@@ -227,7 +229,7 @@
                                 }}
                             </span>
                         </div>
-                        <h6 class="text-danger mt-4" v-show="formErrors">
+                        <h6 class="text-danger mt-3" v-show="formErrors">
                             {{ formErrors }}
                         </h6>
                     </div>
@@ -286,7 +288,7 @@
                                 +
                             </div>
                         </div>
-                        <h6 class="text-danger mt-4" v-show="formQtyError">
+                        <h6 class="text-danger mt-3" v-show="formQtyError">
                             {{ formQtyError }}
                         </h6>
                     </div>
@@ -297,7 +299,7 @@
                             <button
                                 class="
                                     checkout-btn
-                                    btn-full
+                                    btn-full btn-primary
                                     checkout-btn-cart
                                     mt-2 mt-md-0
                                     col-md-8
@@ -518,6 +520,109 @@
                 </div>
             </div>
         </div>
+
+        <!-- Modal -->
+        <div
+            class="modal fade"
+            id="addedToCartPopup"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="exampleModalCenterTitle"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-body">
+                        <div
+                            class="
+                                d-flex
+                                align-items-center
+                                justify-content-between
+                            "
+                        >
+                            <div class="d-flex align-items-center">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                                    aria-hidden="true"
+                                    role="img"
+                                    width="36"
+                                    height="36"
+                                    preserveAspectRatio="xMidYMid meet"
+                                    viewBox="0 0 36 36"
+                                >
+                                    <path
+                                        fill="#FDD888"
+                                        d="M33 31c0 2.2-1.8 4-4 4H7c-2.2 0-4-1.8-4-4V14c0-2.2 1.8-4 4-4h22c2.2 0 4 1.8 4 4v17z"
+                                    />
+                                    <path
+                                        fill="#FDD888"
+                                        d="M36 11c0 2.2-1.8 4-4 4H4c-2.2 0-4-1.8-4-4s1.8-4 4-4h28c2.2 0 4 1.8 4 4z"
+                                    />
+                                    <path fill="#FCAB40" d="M3 15h30v2H3z" />
+                                    <path
+                                        fill="#DA2F47"
+                                        d="M19 3h-2a3 3 0 0 0-3 3v29h8V6a3 3 0 0 0-3-3z"
+                                    />
+                                    <path
+                                        fill="#DA2F47"
+                                        d="M16 7c1.1 0 1.263-.516.361-1.147L9.639 1.147a1.795 1.795 0 0 0-2.631.589L4.992 5.264C4.446 6.219 4.9 7 6 7h10zm4 0c-1.1 0-1.263-.516-.361-1.147l6.723-4.706a1.796 1.796 0 0 1 2.631.589l2.016 3.527C31.554 6.219 31.1 7 30 7H20z"
+                                    />
+                                </svg>
+                                <h3
+                                    class="modal-title ml-3 mr-5 red"
+                                    id="locationPopupLabel"
+                                >
+                                    Product Added to Cart!
+                                </h3>
+                            </div>
+                            <button
+                                type="button"
+                                class="btn-modal-close close"
+                                data-dismiss="modal"
+                                aria-label="Close"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                                    aria-hidden="true"
+                                    role="img"
+                                    width="30"
+                                    height="30"
+                                    preserveAspectRatio="xMidYMid meet"
+                                    viewBox="0 0 48 48"
+                                >
+                                    <mask id="svgIDa">
+                                        <g
+                                            fill="none"
+                                            stroke-linejoin="round"
+                                            stroke-width="4"
+                                        >
+                                            <path
+                                                fill="#fff"
+                                                stroke="#fff"
+                                                d="M24 44c11.046 0 20-8.954 20-20S35.046 4 24 4S4 12.954 4 24s8.954 20 20 20Z"
+                                            />
+                                            <path
+                                                stroke="#000"
+                                                stroke-linecap="round"
+                                                d="M29.657 18.343L18.343 29.657m0-11.314l11.314 11.314"
+                                            />
+                                        </g>
+                                    </mask>
+                                    <path
+                                        fill="#df4e6b"
+                                        d="M0 0h48v48H0z"
+                                        mask="url(#svgIDa)"
+                                    />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -542,9 +647,8 @@ export default {
     }),
 
     beforeRouteEnter: function (to, from, next) {
-        let uri = "/api/products/" + to.params.productId;
         axios
-            .get(uri)
+            .get("/api/products/" + to.params.productId)
             .then((response) => {
                 next((vm) => {
                     vm.setData(response);
@@ -554,9 +658,8 @@ export default {
     },
 
     beforeRouteUpdate: function (to, from, next) {
-        let uri = "/api/products/" + to.params.productId;
         axios
-            .get(uri)
+            .get("/api/products/" + to.params.productId)
             .then((response) => {
                 this.setData(response);
                 next();
@@ -668,7 +771,9 @@ export default {
                             product: product,
                             form: this.form,
                         });
+                        $("#addedToCartPopup").modal("show");
                         this.formErrors = null;
+                        this.formQtyError = null;
                     } else {
                         this.formErrors =
                             "Please select an option in all the variations above to add product to cart";
@@ -678,6 +783,9 @@ export default {
                         product: product,
                         form: this.form,
                     });
+                    $("#addedToCartPopup").modal("show");
+                    this.formErrors = null;
+                    this.formQtyError = null;
                 }
             } else {
                 this.formQtyError = "Please select quantity";

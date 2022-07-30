@@ -65,6 +65,12 @@ class UserController extends Controller
         ///$this->authorize('view', $user);
         return User::findOrFail($id);
     }
+    
+    public function showPassword($id)
+    {
+        ///$this->authorize('view', $user);
+        return User::findOrFail($id);
+    }
 
     public function update(UserRequest $request, User $user)
     {

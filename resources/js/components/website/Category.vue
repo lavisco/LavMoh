@@ -134,16 +134,36 @@
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink"
                                 aria-hidden="true"
                                 role="img"
                                 width="30"
                                 height="30"
                                 preserveAspectRatio="xMidYMid meet"
-                                viewBox="0 0 24 24"
+                                viewBox="0 0 48 48"
                             >
+                                <mask id="svgIDa">
+                                    <g
+                                        fill="none"
+                                        stroke-linejoin="round"
+                                        stroke-width="4"
+                                    >
+                                        <path
+                                            fill="#fff"
+                                            stroke="#fff"
+                                            d="M24 44c11.046 0 20-8.954 20-20S35.046 4 24 4S4 12.954 4 24s8.954 20 20 20Z"
+                                        />
+                                        <path
+                                            stroke="#000"
+                                            stroke-linecap="round"
+                                            d="M29.657 18.343L18.343 29.657m0-11.314l11.314 11.314"
+                                        />
+                                    </g>
+                                </mask>
                                 <path
-                                    fill="#fff"
-                                    d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10s-4.477 10-10 10zm0-2a8 8 0 1 0 0-16a8 8 0 0 0 0 16zm0-9.414l2.828-2.829l1.415 1.415L13.414 12l2.829 2.828l-1.415 1.415L12 13.414l-2.828 2.829l-1.415-1.415L10.586 12L7.757 9.172l1.415-1.415L12 10.586z"
+                                    fill="white"
+                                    d="M0 0h48v48H0z"
+                                    mask="url(#svgIDa)"
                                 />
                             </svg>
                         </button>

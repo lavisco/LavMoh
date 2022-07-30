@@ -246,6 +246,8 @@ Route::put('/custom_product_inquiries/{productId}', [WebsiteCustomProductInquiry
 Route::apiResource('/occasions', WebsiteOccasionController::class);
 Route::get('/orders/shippings/{shopId}', [WebsiteOrderController::class, 'getShippings']);
 Route::apiResource('/orders', WebsiteOrderController::class);
+
+Route::get('/products/prices/{productIds}', [WebsiteProductController::class, 'getPrice']);
 Route::apiResource('/products', WebsiteProductController::class);
 Route::apiResource('/recipients', WebsiteRecipientController::class);
 Route::apiResource('/sellerprofiles', WebsiteSellerProfileController::class);

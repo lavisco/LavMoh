@@ -238,6 +238,36 @@ export default new Vuex.Store({
                 context.commit("deleteOrderedProductsFromCart");
             }
         },
+
+        refreshPrice(context, updatedProduct) {
+            updatedProduct.map((product) => {
+                context.state.cart.map((cartProduct) => {
+                    if (cartProduct.id === product.id) {
+                        context.commit("updateProductPrice", {
+                            cartProduct,
+                            product,
+                        });
+
+                        if (product.has_variations == 1) {
+                            product.variation_options.map((option) => {
+                                cartProduct.variations.forEach((opt, index) => {
+                                    if (opt.id == option.id) {
+                                        context.commit(
+                                            "updateProductVariationPrice",
+                                            {
+                                                cartProduct,
+                                                opt,
+                                                option,
+                                            }
+                                        );
+                                    }
+                                });
+                            });
+                        }
+                    }
+                });
+            });
+        },
     },
 
     mutations: {
@@ -335,16 +365,24 @@ export default new Vuex.Store({
             //state.currentCart = [];
 
             state.currentCart.map((product) => {
-                let index = state.cart.findIndex(
-                    (c) => c.id === product.id
-                );
-    
+                let index = state.cart.findIndex((c) => c.id === product.id);
+
                 if (index > -1) {
                     state.cart.splice(index, 1);
                 }
             });
 
             state.currentCart = [];
+        },
+
+        deleteProductFromCart(state, product) {
+            let index = state.cart.findIndex(
+                (c) => c.variation_ids === product.variation_ids
+            );
+
+            if (index > -1) {
+                state.cart.splice(index, 1);
+            }
         },
 
         incrementItemQuantity(state, cartItem) {
@@ -363,14 +401,22 @@ export default new Vuex.Store({
             state.total = total;
         },
 
-        deleteProductFromCart(state, product) {
-            let index = state.cart.findIndex(
-                (c) => c.variation_ids === product.variation_ids
-            );
+        updateProductPrice(state, { cartProduct, product }) {
+            cartProduct.base_price = product.base_price;
+            cartProduct.price = product.base_price;
+        },
 
-            if (index > -1) {
-                state.cart.splice(index, 1);
-            }
+        updateProductVariationPrice(state, { cartProduct, opt, option }) {
+            opt.price = option.price;
+
+            let variationSum = 0;
+            cartProduct.variations.map((v) => {
+                variationSum += parseFloat(v.price);
+            });
+
+            cartProduct.price = (
+                parseFloat(cartProduct.base_price) + parseFloat(variationSum)
+            ).toFixed(2);
         },
     },
 });

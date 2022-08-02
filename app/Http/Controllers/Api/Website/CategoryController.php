@@ -19,6 +19,7 @@ class CategoryController extends Controller
     {
         return Category::with('latestProducts.product_image')
                 ->where('status', 1)
+                ->where('id', '!=', '11')
                 ->latest()
                 ->paginate(25);
     }

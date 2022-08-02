@@ -43,7 +43,7 @@ class HomeController extends Controller
             'products' => $products,
             'occasions' => Occasion::where('status', 1)->latest()->get(),
             'recipients' => Recipient::where('status', 1)->select('id', 'name', 'slug')->latest()->get(),
-            'categories' => Category::where('status', 1)->latest()->get(),
+            'categories' => Category::where('status', 1)->where('id', '!=', '11')->latest()->get(),
             'homesliders' => HomeSlider::orderBy('order')->get(),
             'icon_cake' => Storage::disk('s3')->temporaryUrl('public/images/cake.png', '+2 minutes'),
             'icon_delivery' => Storage::disk('s3')->temporaryUrl('public/images/door-delivery.png', '+2 minutes'),
@@ -63,7 +63,7 @@ class HomeController extends Controller
         return response()->json([
             'occasions' => Occasion::where('status', 1)->select('id', 'name', 'slug')->latest()->get(),
             'recipients' => Recipient::where('status', 1)->select('id', 'name', 'slug')->latest()->get(),
-            'categories' => Category::where('status', 1)->select('id', 'name', 'slug')->latest()->get(),
+            'categories' => Category::where('status', 1)->where('id', '!=', '11')->select('id', 'name', 'slug')->latest()->get(),
             'currencies' => Currency::select('exchange_rate', 'code', 'symbol')->where('status', 1)->get(),
             'user' => $userName,
         ]);
@@ -92,7 +92,7 @@ class HomeController extends Controller
             'products' => $products,
             'occasions' => $request ? Occasion::where('status', 1)->where('name', 'like', '%' . $searchText . '%')->latest()->get() : '',
             'recipients' => $request ? Recipient::where('status', 1)->latest()->where('name', 'like', '%' . $searchText . '%')->get() : '',
-            'categories' => $request ? Category::where('status', 1)->latest()->where('name', 'like', '%' . $searchText . '%')->get() : '',
+            'categories' => $request ? Category::where('status', 1)->where('id', '!=', '11')->latest()->where('name', 'like', '%' . $searchText . '%')->get() : '',
             'shops' => $request ? Shop::latest()->where('name', 'like', '%' . $searchText . '%')->get() : '',
         ]);
     }

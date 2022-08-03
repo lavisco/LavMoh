@@ -1,7 +1,7 @@
 <?php
 
 // unique_order_id|total_amount
-$plaintext = '525|10';
+$plaintext = '525|5';
 $publickey = "-----BEGIN PUBLIC KEY-----
 MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC6nVc/ykIWsT1ktI8/49nfBUOQ
 IHCCu9bC+pxEYbPvUth28MWitvm7y2u2nX/3/nVXMdvl2yiAbB7aBw4dGnAhXoAM

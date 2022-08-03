@@ -7,21 +7,21 @@
                 <div class=""></div>
                 <div class=""></div>
             </div>
-            <div class="d-flex align-items-center">
+            <div class="d-flex align-items-center progress-content">
                 <div class="part completed">
-                    <div class="check-sign mr-2"></div>
+                    <div class="check-sign">1</div>
                     Choose Cart
                 </div>
                 <div class="part activated">
-                    <div class="check-sign mr-2"></div>
+                    <div class="check-sign">2</div>
                     Shipping
                 </div>
                 <div class="part">
-                    <div class="check-sign mr-2"></div>
+                    <div class="check-sign">3</div>
                     Payment
                 </div>
                 <div class="part">
-                    <div class="check-sign mr-2"></div>
+                    <div class="check-sign">4</div>
                     Order Complete
                 </div>
             </div>
@@ -758,23 +758,14 @@ export default {
             id: "",
             first_name: "Mohorima",
             last_name: "Islam",
-            contact_number: "01244877215",
-            address_line_one: "flat f3, equity villa",
+            email: "islammohrima@gmail.com",
+            phone: "0215214578",
+            address_line_one: "flat f3",
             address_line_two: "",
+            zipcode: "",
             city: "",
-            postal_code: "",
-            country: "",
             district: "",
             state: "",
-            secret_key: "f94682c3-c986-426e-b68f-9cbdd5f8d904",
-            payment: "",
-            cms: "",
-            process_currency: "",
-
-            email: "islammohorima@gmail.com",
-            phone: "",
-
-            zipcode: "",
 
             recipient_first_name: "",
             recipient_last_name: "",
@@ -888,7 +879,8 @@ export default {
                     // this.submitButtonText = "Saved";
                     // this.submitButtonDisabled = false;
                     // this.$router.push("/order_complete");
-                    console.log(response);
+                    //console.log(response);
+                    result.json()
                 })
                 .catch((error) => {
                     // this.submitButtonText = "Proceed to Payment";

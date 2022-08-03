@@ -22,6 +22,7 @@
                                         <th>Image</th>
                                         <th>Code</th>
                                         <th class="table-col-lg">Title</th>
+                                        <th>Created at</th>
                                         <th>Quantity</th>
                                         <th>Price</th>
                                         <th class="table-col-sm">Shop</th>
@@ -62,6 +63,13 @@
                                                         : ""
                                                 }}
                                             </p>
+                                        </td>
+                                        <td>
+                                            {{
+                                                moment(
+                                                    product.created_at
+                                                ).format("DD-MM-YYYY")
+                                            }}
                                         </td>
                                         <td>{{ product.quantity }}</td>
                                         <td>{{ product.base_price }}</td>
@@ -177,6 +185,7 @@
 <script>
 import Form from "vform";
 import { HasError, AlertError } from "vform/src/components/bootstrap4";
+import moment from "moment";
 
 export default {
     components: {
@@ -184,6 +193,7 @@ export default {
         AlertError,
     },
     data: () => ({
+        moment: moment,
         editMode: false,
         loading: true,
         products: [],

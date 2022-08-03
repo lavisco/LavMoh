@@ -7,21 +7,21 @@
                 <div class=""></div>
                 <div class=""></div>
             </div>
-            <div class="d-flex align-items-center">
+            <div class="d-flex align-items-center progress-content">
                 <div class="part activated">
-                    <div class="check-sign mr-2"></div>
+                    <div class="check-sign">1</div>
                     Choose Cart
                 </div>
                 <div class="part">
-                    <div class="check-sign mr-2"></div>
+                    <div class="check-sign">2</div>
                     Shipping
                 </div>
                 <div class="part">
-                    <div class="check-sign mr-2"></div>
+                    <div class="check-sign">3</div>
                     Payment
                 </div>
                 <div class="part">
-                    <div class="check-sign mr-2"></div>
+                    <div class="check-sign">4</div>
                     Order Complete
                 </div>
             </div>

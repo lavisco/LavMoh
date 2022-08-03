@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Website\OrderController as WebsiteOrderController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\FallbackController;
@@ -26,28 +27,18 @@ use Illuminate\Support\Facades\Http;
 
 Route::get('/paymenttest', function () {
     require(public_path() . "/testFile.php");
-
-
-//     $plaintext = '525|10';
-//     $publickey = "-----BEGIN PUBLIC KEY-----
-// MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC9l2HykxDIDVZeyDPJU4pA0imf
-// 3nWsvyJgb3zTsnN8B0mFX6u5squ5NQcnQ03L8uQ56b4/isHBgiyKwfMr4cpEpCTY
-// /t1WSdJ5EokCI/F7hCM7aSSSY85S7IYOiC6pKR4WbaOYMvAMKn5gCobEPtosmPLz
-// gh8Lo3b8UsjPq2W26QIDAQAB
-// -----END PUBLIC KEY-----";
-//     openssl_public_encrypt($plaintext, $encrypt, $publickey);
-
-//     $payment = base64_encode($encrypt);
-//     $custom_fields = base64_encode('cus_1|cus_2|cus_3|cus_4');
-
-//     return view('payment', [$payment, $custom_fields]);
-
 })->name('paymenttest');
 
 Route::post('/paymenttest', function () {
     $response = Http::post('https://webxpay.com/index.php?route=checkout/billing');
     return $response;
 });
+
+Route::get('/payment-gateway', function () {
+    return view('auth.payment');
+});
+
+Route::post('/payment-gateway', [HomeController::class, 'paymentProcess'])->name('paymentgate');
 
 
 /*

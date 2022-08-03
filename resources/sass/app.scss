@@ -1516,7 +1516,7 @@ section {
     width: 350px;
     border-radius: 12px;
     /* border: 2px solid #d8c2ff; */
-    background-color: #fbfbfb;
+    background-color: #FDFCFC;
     padding-bottom: 20px;
     box-shadow: 0px 0px 11px -5px #d3d3d3;
 
@@ -1526,22 +1526,18 @@ section {
 
     .bold {
         font-weight: 600;
-        color: $lav-dark-purple;
+        color: $lav-red;
     }
     hr {
-        border-top: 1px solid #d8c2ff;
+        border-top: 1px solid #f6eaec;
     }
     h4 {
         padding: 20px;
-        background-color: #6452be;
+        background-color: #F7F7F7;
         border-top-left-radius: 12px;
         border-top-right-radius: 12px;
-        color: #fbfbfb !important;
+        color: $dark-grey !important;
         font-weight: 600;
-
-        @media (max-width: 768px) {
-            background-color: #ababab !important;
-        }
     }
     p {
         font-size: 16px;
@@ -1556,11 +1552,14 @@ section {
 }
 
 .progress-bar {
-    background-color: $white;
+    background-color: #ffffff;
+    display: block;
     font-size: 14px;
     font-weight: 500;
-    color: $lav-grey;
+    color: #c9c9c9;
     width: 850px;
+    position: relative;
+    height: 51px;
 
     @media (max-width: 851px) {
         font-size: 11px;
@@ -1568,12 +1567,13 @@ section {
         .part {
             padding: 11px !important;
         }
-        .check-sign {
-            display: none;
-        }
-        .progress-line {
-            height: 10px !important;
-        }
+    }
+
+    .progress-content {
+        position: absolute;
+        width: 100%;
+        height: 53px;
+        z-index: 10;
     }
 
     .progress-line {
@@ -1583,31 +1583,35 @@ section {
         justify-content: center;
         width: 100%;
         border-radius: 5px;
-        height: 15px;
+        height: 2px;
         background-color: #e4e4e4;
+        opacity: 0.5;
+        z-index: 1;
+        margin-top: 13px;
+        position: absolute;
         div {
             width: 25%;
             height: 100%;
         }
         .done {
-            background-color: $black !important;
+            background-color: $dark-grey !important;
         }
         .now {
-            background-color: $lav-purple !important;
+            background-color: $lav-red !important;
         }
     }
 
     .activated {
-        color: $lav-purple;
+        color: $lav-red;
         .check-sign {
-            background-color: $lav-purple;
+            background-color: $lav-red;
         }
     }
 
     .completed {
-        color: $black;
+        color: $dark-grey;
         .check-sign {
-            background-color: $black;
+            background-color: $dark-grey
         }
     }
 
@@ -1617,13 +1621,19 @@ section {
         display: flex;
         align-items: center;
         justify-content: center;
+        flex-direction: column;
     }
 
     .check-sign {
         border-radius: 50%;
-        width: 12px;
-        height: 12px;
+        width: 24px;
+        height: 24px;
         background-color: $lav-grey;
+        color: white;
+        margin-bottom: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         svg {
             path {
                 fill: $white;

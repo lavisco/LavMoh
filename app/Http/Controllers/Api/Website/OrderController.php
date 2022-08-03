@@ -24,42 +24,41 @@ class OrderController extends Controller
 {
     public function store(OrderRequest $request)
     {
-        // $guestUser = User::select('id')->where('email', User::GUEST_USER_MAIL)->first();
+        $guestUser = User::select('id')->where('email', User::GUEST_USER_MAIL)->first();
 
-        // if (auth('api')->check()) {
-        //     if(auth('api')->user()->role_id == Role::IS_BUYER){
-        //         $userId = auth('api')->user()->id;
-        //     } else {
-        //         $userId = $guestUser->id;
-        //     }
-        // } else {
-        //     $userId = $guestUser->id;
-        // }
+        if (auth('api')->check()) {
+            if(auth('api')->user()->role_id == Role::IS_BUYER){
+                $userId = auth('api')->user()->id;
+            } else {
+                $userId = $guestUser->id;
+            }
+        } else {
+            $userId = $guestUser->id;
+        }
         
-        // $request->merge([
-        //     'status' => "not acknowledged",
-        //     'tax' => 0.00,
-        //     'buyer_id' => $userId,
-        //     'country' => "Sri Lanka",
-        //     'billing_country' => "Sri Lanka",
-        //     'seller_id' => $request->input('products.0.seller_id'),
-        //     'shop_id' => $request->input('products.0.shop_id'),
-        // ]);
+        $request->merge([
+            'status' => "not acknowledged",
+            'tax' => 0.00,
+            'buyer_id' => $userId,
+            'country' => "Sri Lanka",
+            'billing_country' => "Sri Lanka",
+            'seller_id' => $request->input('products.0.seller_id'),
+            'shop_id' => $request->input('products.0.shop_id'),
+        ]);
 
-        // $order = Order::create($request->all());
+        $order = Order::create($request->all());
 
-        // $order->update([
-        //     'code' => 'LO'.str_pad($order->id,5,"0",STR_PAD_LEFT),
-        // ]);
+        $order->update([
+            'code' => 'LO'.str_pad($order->id,5,"0",STR_PAD_LEFT),
+        ]);
 
-        // $this->storeOrderProduct($request, $order->id);
-        // $this->storeReceipt($request, $order->id);
-        // $this->storeTransaction($request, $order->id);
+        $this->storeOrderProduct($request, $order->id);
+        $this->storeReceipt($request, $order->id);
+        $this->storeTransaction($request, $order->id);
 
-        // return $order;
-
-        Http::post('https://webxpay.com/index.php?route=checkout/billing');
+        return $order;
     }
+
 
     public function storeOrderProduct($request, $orderId)
     {

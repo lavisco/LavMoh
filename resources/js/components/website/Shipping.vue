@@ -756,16 +756,25 @@ export default {
 
         form: new Form({
             id: "",
-            first_name: "",
-            last_name: "",
-            email: "",
-            phone: "",
-            address_line_one: "",
+            first_name: "Mohorima",
+            last_name: "Islam",
+            contact_number: "01244877215",
+            address_line_one: "flat f3, equity villa",
             address_line_two: "",
-            zipcode: "",
             city: "",
+            postal_code: "",
+            country: "",
             district: "",
             state: "",
+            secret_key: "f94682c3-c986-426e-b68f-9cbdd5f8d904",
+            payment: "",
+            cms: "",
+            process_currency: "",
+
+            email: "islammohorima@gmail.com",
+            phone: "",
+
+            zipcode: "",
 
             recipient_first_name: "",
             recipient_last_name: "",
@@ -843,46 +852,47 @@ export default {
         },
 
         createOrder() {
-            this.form.currency_code = this.$store.getters.selectedCurrency.code;
-            this.form.current_exchange_rate =
-                this.$store.getters.selectedCurrency.exchange_rate;
-            this.form.total = this.form.total * this.form.current_exchange_rate;
-            this.form.subtotal =
-                this.form.subtotal * this.form.current_exchange_rate;
-            this.form.giftwrap_price =
-                this.form.giftwrap_price * this.form.current_exchange_rate;
-            this.form.shipping_price =
-                this.form.shipping_price * this.form.current_exchange_rate;
-            this.form.discount_price =
-                this.form.discount_price * this.form.current_exchange_rate;
+            // this.form.currency_code = this.$store.getters.selectedCurrency.code;
+            // this.form.current_exchange_rate =
+            //     this.$store.getters.selectedCurrency.exchange_rate;
+            // this.form.total = this.form.total * this.form.current_exchange_rate;
+            // this.form.subtotal =
+            //     this.form.subtotal * this.form.current_exchange_rate;
+            // this.form.giftwrap_price =
+            //     this.form.giftwrap_price * this.form.current_exchange_rate;
+            // this.form.shipping_price =
+            //     this.form.shipping_price * this.form.current_exchange_rate;
+            // this.form.discount_price =
+            //     this.form.discount_price * this.form.current_exchange_rate;
 
-            if (this.self_delivery === true) {
-                this.form.recipient_first_name = this.form.first_name;
-                this.form.recipient_last_name = this.form.last_name;
-                this.form.recipient_email = this.form.email;
-                this.form.recipient_phone = this.form.phone;
-                this.form.address_line_one = this.form.billing_address_line_one;
-                this.form.address_line_two = this.form.billing_address_line_two;
-                this.form.zipcode = this.form.billing_zipcode;
-                this.form.state = this.form.billing_state;
-                this.form.district = this.form.billing_district;
-                this.form.city = this.form.billing_city;
-            }
+            // if (this.self_delivery === true) {
+            //     this.form.recipient_first_name = this.form.first_name;
+            //     this.form.recipient_last_name = this.form.last_name;
+            //     this.form.recipient_email = this.form.email;
+            //     this.form.recipient_phone = this.form.phone;
+            //     this.form.address_line_one = this.form.billing_address_line_one;
+            //     this.form.address_line_two = this.form.billing_address_line_two;
+            //     this.form.zipcode = this.form.billing_zipcode;
+            //     this.form.state = this.form.billing_state;
+            //     this.form.district = this.form.billing_district;
+            //     this.form.city = this.form.billing_city;
+            // }
 
-            this.submitButtonText = "In Progress...";
-            this.submitButtonDisabled = true;
+            // this.submitButtonText = "In Progress...";
+            // this.submitButtonDisabled = true;
 
             this.form
                 .post("/api/orders")
-                .then(() => {
-                    this.$store.dispatch("clearOrderedProductFromCart");
-                    this.submitButtonText = "Saved";
-                    this.submitButtonDisabled = false;
-                    this.$router.push("/order_complete");
+                .then((response) => {
+                    // this.$store.dispatch("clearOrderedProductFromCart");
+                    // this.submitButtonText = "Saved";
+                    // this.submitButtonDisabled = false;
+                    // this.$router.push("/order_complete");
+                    console.log(response);
                 })
                 .catch((error) => {
-                    this.submitButtonText = "Proceed to Payment";
-                    this.submitButtonDisabled = false;
+                    // this.submitButtonText = "Proceed to Payment";
+                    // this.submitButtonDisabled = false;
                     console.log(error);
                 });
         },

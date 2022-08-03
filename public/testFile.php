@@ -3,10 +3,10 @@
 // unique_order_id|total_amount
 $plaintext = '525|10';
 $publickey = "-----BEGIN PUBLIC KEY-----
-MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDNCPEkmw52ZWPv+J5N1rwkr6Ky
-wi3Q07qHvffTvdkrEHNvAY7EmEB7xyjBkONF58CfJP7TPSd7yR1pbpr9cLELbJzR
-kb61y2tkVIV+SXvxdwpD5gNEMmtndeKz/rIU6XvRp1nnICbK/5tLNY4sdVTZTbfK
-sUt1suOUmQn13v3bVQIDAQAB
+MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC6nVc/ykIWsT1ktI8/49nfBUOQ
+IHCCu9bC+pxEYbPvUth28MWitvm7y2u2nX/3/nVXMdvl2yiAbB7aBw4dGnAhXoAM
+9WB8nw3AZS1VGqBBEKFs23EqUvjsBxrj+QasVkeZwC+oxvGuuprCIFW9o7w290c0
+pJ28AUyd0dWx1YWu1wIDAQAB
 -----END PUBLIC KEY-----";
 //load public key for encrypting
 openssl_public_encrypt($plaintext, $encrypt, $publickey);
@@ -27,13 +27,13 @@ $custom_fields = base64_encode('cus_1|cus_2|cus_3|cus_4');
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="Webxpay">
+    <meta name="author" content="Pavan Welihinda">
     <title>WebXPay | Sample checkout form</title>
   </head>
   <body>     	  
        <form action="<?php echo $url; ?>" method="POST">
-			First name: <input type="text" name="first_name" value="Customer First Name"><br>
-			Last name: <input type="text" name="last_name" value="Customer Last Name"><br>
+			First name: <input type="text" name="first_name" value="Pavan"><br>
+			Last name: <input type="text" name="last_name" value="Welihinda"><br>
 			Email: <input type="text" name="email" value="customer_email@email.com"><br>
 			Contact Number: <input type="text" name="contact_number" value="0773606370"><br>
 			Address Line 1: <input type="text" name="address_line_one" value="46/46, Green Lanka Building"><br>
@@ -48,7 +48,7 @@ $custom_fields = base64_encode('cus_1|cus_2|cus_3|cus_4');
 			Mechanism: <input type="text" name="enc_method" value="JCs3J+6oSz4V0LgE0zi/Bg==">
 			<br/>		   
 			<!-- POST parameters -->
-			<input type="hidden" name="secret_key" value="5460b737-77ea-425a-801a-75438d0dddcb" >  
+			<input type="hidden" name="secret_key" value="f94682c3-c986-426e-b68f-9cbdd5f8d904" >  
 			<input type="hidden" name="payment" value="<?php echo $payment; ?>" >                         
 			<input type="submit" value="Pay Now" >
         </form>      

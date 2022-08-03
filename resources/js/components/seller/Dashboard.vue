@@ -1537,16 +1537,17 @@ export default {
             this.form
                 .post("/api/seller/user/shop_setup")
                 .then(() => {
-                    this.submitButtonDisabled = false;
+                    //this.submitButtonDisabled = false;
+                    this.failed2 = false;
                     $("#addRecord").modal("hide");
                     $("#success-modal").modal("show");
                     this.sendStoreActiveApplicationMail();
                 })
                 .catch((error) => {
+                    this.failed2 = true;
                     this.submitButtonText = "Submit";
                     this.submitButtonDisabled = false;
                     console.log(error);
-                    this.failed2 = true;
                 });
         },
 

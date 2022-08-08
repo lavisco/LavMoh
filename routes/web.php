@@ -29,13 +29,17 @@ Route::get('/paymenttest', function () {
     require(public_path() . "/testFile.php");
 })->name('paymenttest');
 
+Route::get('/paymenttest-response', function () {
+    return view('payment.payment-response');
+});
+
 Route::post('/paymenttest', function () {
     $response = Http::post('https://webxpay.com/index.php?route=checkout/billing');
     return $response;
 });
 
 Route::get('/payment-gateway', function () {
-    return view('auth.payment');
+    return view('payment.payment');
 });
 
 Route::post('/payment-gateway', [HomeController::class, 'paymentProcess'])->name('paymentgate');

@@ -34,7 +34,7 @@ body {
     background-color: #ffffff;
     font-size: 1rem;
     @media (max-width: 768px) {
-        font-size: 0.9rem;
+        font-size: 15px;
     }
 }
 a {
@@ -64,7 +64,7 @@ h1 {
 h2 {
     color: $black;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 600;
     font-size: 30px;
     line-height: 45px;
     text-align: center;
@@ -73,23 +73,24 @@ h2 {
 h3 {
     color: $black;
     font-style: normal;
-    font-weight: 500;
-    font-size: 23px;
+    font-weight: 600;
+    font-size: 24px;
     text-align: center;
     text-transform: capitalize;
-    line-height: 2;
+    line-height: 36px;
 }
 h4 {
     font-size: 19px;
-    font-weight: 500;
+    font-weight: 600;
     line-height: 1.7;
     font-style: normal;
-    color: $dark-grey;
+    color: $black;
+    letter-spacing: 0.01em;
 }
 h5 {
     font-size: 18px;
     text-align: center;
-    font-weight: 400;
+    font-weight: 600;
 }
 h6 {
     font-size: 14px;
@@ -243,6 +244,7 @@ button {
 
 .btn-primary {
     background-color: $lav-red !important;
+    color: $white !important;
     &:hover,
     &:focus {
         background-color: $lav-pink !important;
@@ -250,12 +252,22 @@ button {
 }
 
 .btn-sm {
-    padding: 8px 20px;
-    background-color: $white;
-    border: 1px solid $lav-red;
-    color: $black;
-    font-size: 14px;
-    font-weight: 600;
+    display: flex;
+    align-items: center;
+    padding: 8px 16px;
+    background-color: #f7f7f7;
+    color: #4e4e4e;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 6px;
+    &:hover,
+    &:focus {
+        svg {
+            path {
+                fill: $white;
+            }
+        }
+    }
 }
 
 .btn-xs {
@@ -1314,10 +1326,6 @@ section {
     }
 }
 .seller-onboard {
-    h4 {
-        color: $black !important;
-        font-weight: 600;
-    }
     .gap {
         gap: 50px;
     }
@@ -1467,26 +1475,34 @@ section {
     border: none;
 }
 
-#locationPopup {
-    .modal-content {
-        border-radius: 12px;
-        background-color: $black;
-    }
-    .modal-body {
-        background-color: $white;
-    }
-    .modal-header {
-        align-items: center;
-        padding: 24px 34px;
-        border-bottom: none;
-        h4 {
-            color: #eceaf0;
-        }
-        .close {
-            color: #eceaf0;
-        }
+.modal-content {
+    border-radius: 12px;
+    border: 1px solid #f7f7f7;
+}
+.modal-body {
+    background-color: #fdfcfc;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    padding: 20px 30px;
+}
+.modal-header {
+    border-bottom: none;
+    background-color: #f7f7f7;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    padding: 20px 30px;
+    .close {
+        color: $black;
     }
 }
+.modal-footer {
+    border-top: none;
+    background-color: #f7f7f7;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    padding: 20px 30px;
+}
+
 .close {
     text-shadow: none;
 }
@@ -1516,7 +1532,7 @@ section {
     width: 350px;
     border-radius: 12px;
     /* border: 2px solid #d8c2ff; */
-    background-color: #FDFCFC;
+    background-color: #fdfcfc;
     padding-bottom: 20px;
     box-shadow: 0px 0px 11px -5px #d3d3d3;
 
@@ -1533,11 +1549,10 @@ section {
     }
     h4 {
         padding: 20px;
-        background-color: #F7F7F7;
+        background-color: #f7f7f7;
         border-top-left-radius: 12px;
         border-top-right-radius: 12px;
         color: $dark-grey !important;
-        font-weight: 600;
     }
     p {
         font-size: 16px;
@@ -1611,7 +1626,7 @@ section {
     .completed {
         color: $dark-grey;
         .check-sign {
-            background-color: $dark-grey
+            background-color: $dark-grey;
         }
     }
 
@@ -2295,12 +2310,12 @@ footer {
     flex-direction: column;
     min-height: 100vh;
     margin-left: 270px;
-    background-color: #faf7f8;
+    background-color: #fafafa;
     .card {
         background-color: transparent;
     }
     .breadcrumb {
-        background-color: #faf7f8;
+        background-color: #fafafa;
     }
 }
 .dashboard-side-nav {
@@ -2315,6 +2330,7 @@ footer {
     height: 100vh;
     padding: 1rem;
     background-color: #fff;
+    border-right: 2px solid #f0f0f0;
 
     transition: all 0.85s ease;
     -webkit-transition: all 0.85s ease;
@@ -2361,9 +2377,9 @@ footer {
 
 .navbar-close {
     display: none !important;
-    background-color: #eae2e5;
-    width: 41px;
-    height: 41px;
+    background-color: #f0f0f0;
+    width: 38px;
+    height: 38px;
     border-radius: 7px;
     display: flex;
     align-items: center;
@@ -2389,14 +2405,13 @@ footer {
 
 .dashboard-top-nav {
     padding-top: 16px;
-    padding-bottom: 22px;
-    h3 {
-        color: $dark-grey;
-    }
+    padding-bottom: 16px;
+    border-bottom: 2px solid #f0f0f0;
+    margin-bottom: 24px;
     .nav-user-options {
-        font-size: 14px;
+        font-size: 13px;
         font-weight: 400;
-        color: #8d8788;
+        color: #707070;
         a:hover {
             color: $lav-red;
             svg {
@@ -2406,18 +2421,22 @@ footer {
             }
         }
         svg {
-            height: 26px;
-            width: 26px;
+            height: 34px;
+            width: 34px;
+            background-color: #f0f0f0;
+            border-radius: 6px;
+            padding: 4px;
             path {
-                fill: #8d8788;
+                fill: #707070;
             }
             @media (max-width: 768px) {
                 height: 32px;
                 width: 32px;
+                padding: 3px;
             }
         }
         .dropdown-item {
-            color: #8d8788;
+            color: #707070;
             font-size: 14px;
             font-weight: 400;
             padding: 8px 18px;
@@ -2425,7 +2444,7 @@ footer {
                 height: 22px;
                 width: 22px;
                 path {
-                    fill: #8d8788;
+                    fill: #707070;
                 }
             }
             &:hover {
@@ -2444,6 +2463,9 @@ footer {
     }
 
     @media (max-width: 768px) {
+        h5 {
+            font-size: 15px;
+        }
         .input-form {
             input[type="text"],
             input[type="email"],
@@ -2458,9 +2480,6 @@ footer {
             .form-group {
                 margin-bottom: 1.4rem;
             }
-            h5 {
-                font-size: 15px;
-            }
         }
         .search-input {
             .input-group-text {
@@ -2470,20 +2489,12 @@ footer {
                 padding: 8px 20px !important;
             }
         }
-        .btn {
-            font-weight: 600;
-            font-size: 16px;
-        }
         .btn-sm {
-            padding: 8px 10px;
-            font-weight: 600;
-            font-size: 0.8rem;
+            font-size: 15px;
         }
         .custom-select {
-            padding: 8px 10px;
-            font-weight: 400;
-            font-size: 14px;
-            color: $lav-red;
+            font-size: 15px;
+            padding: 7px 12px;
         }
         .card {
             padding: 0;
@@ -2494,7 +2505,7 @@ footer {
             padding: 20px;
         }
         .dashboard-info-card {
-            padding: 20px !important;
+            padding: 16px !important;
         }
         .dashboard-var-card {
             padding: 8px 14px !important;
@@ -2554,13 +2565,13 @@ footer {
     flex-direction: row;
     align-items: center;
     font-weight: 600;
-    font-size: 16px;
+    font-size: 15px;
     color: $lav-red;
     cursor: pointer;
 
     svg {
-        width: 18px;
-        height: 18px;
+        width: 17px;
+        height: 17px;
         path {
             fill: $lav-red;
         }
@@ -2582,10 +2593,10 @@ footer {
     font-weight: 600;
     font-size: 15px;
     padding: 6px;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     text-transform: capitalize;
-    color: #8d8788;
-    border-radius: 12px;
+    color: #707070;
+    border-radius: 8px;
     transition: all 150ms ease;
     width: 100%;
 
@@ -2593,13 +2604,13 @@ footer {
         width: 22px;
         height: 22px;
         path {
-            fill: #8d8788;
+            fill: #707070;
         }
     }
     &:hover {
-        color: #8d8788;
+        color: #707070;
         .dashboard-link-icon {
-            background-color: #8d8788;
+            background-color: #707070;
         }
         svg {
             path {
@@ -2613,7 +2624,7 @@ footer {
 .dashboard-link-icon {
     width: 34px;
     height: 34px;
-    border-radius: 8px;
+    border-radius: 6px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -2808,31 +2819,31 @@ footer {
 }
 
 .custom-select {
-    padding: 8px 20px;
-    background-color: $white;
-    border: 1px solid $lav-red;
-    color: $black;
-    font-size: 14px;
-    font-weight: 600;
+    padding: 7px 20px;
+    border: none;
+    color: $dark-grey;
+    font-size: 16px;
+    font-weight: 500;
     height: auto !important;
-    border-radius: 12px;
+    background-color: #f7f7f7;
+    border-radius: 6px;
 }
 
 .dashboard-table {
     background-color: #fff;
-    border: 1px solid #f7f7f7d8;
-    border-radius: 8px;
+    border: 1px solid #f0f0f0;
+    border-radius: 6px;
     tbody {
-        font-size: 16px;
+        //font-size: 16px;
         color: $black;
     }
     .table thead th {
-        background-color: #eae2e5;
+        background-color: #f0f0f0;
         border: none !important;
-        font-weight: 600;
         letter-spacing: 0.03rem;
-        color: $black;
-        font-size: 0.8rem;
+        font-weight: 400;
+        font-size: 14px;
+        color: $dark-grey;
     }
     .table-col-sm {
         min-width: 160px;
@@ -2843,30 +2854,47 @@ footer {
 }
 
 .dashboard-card {
-    background-color: #fff !important;
-    border: 1px solid #f7f7f7d8;
-    border-radius: 8px;
+    background: #ffffff;
+    border: 1px solid #f0f0f0;
+    border-radius: 6px;
     color: $dark-grey;
     padding: 40px;
     h2 {
         text-align: left;
-        font-size: 40px !important;
-        font-weight: 500;
+        font-size: 34px !important;
+        font-weight: 600;
+        line-height: 110%;
+        color: $lav-red;
+        margin-bottom: 0;
     }
 }
 .dashboard-card-sm {
-    padding: 20px 30px;
+    padding: 16px 22px;
+    h6 {
+        font-weight: 400;
+    }
+    .dashboard-table {
+        background-color: #fff;
+        border: none;
+        border-radius: 0;
+        .table th {
+            padding: 8px 0.75rem;
+        }
+        .table td {
+            border-top: none;
+        }
+    }
 }
 .dashboard-info-card {
     background-color: #fff !important;
-    border: 1px solid #f7f7f7d8;
+    border: 1px solid #f0f0f0;
     padding: 30px;
     padding-bottom: 23px;
     border-radius: 8px;
 }
 .dashboard-var-card {
     background-color: #f8f7f7;
-    border: 1px solid #f3f3f3d8;
+    border: 1px solid #f0f0f0;
     padding: 10px 18px;
 
     .btn {
@@ -2878,8 +2906,28 @@ footer {
     }
 }
 
+.no-padding-sm {
+    @media (max-width: 768px) {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+.badge-special {
+    border-top-right-radius: 8px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 12px !important;
+    color: $white;
+    text-transform: uppercase;
+    font-weight: 500;
+    border-bottom-left-radius: 8px;
+    padding: 3px 12px;
+}
+
 .fixed-title {
-    width: 280px;
+    width: 270px;
     overflow: hidden;
     text-overflow: ellipsis;
     max-height: 27px;
@@ -2888,16 +2936,6 @@ footer {
         width: auto;
         word-break: break-all;
     }
-}
-
-.modal-header,
-.modal-body {
-    padding: 20px 30px;
-}
-
-.modal-body {
-    border-bottom-left-radius: calc(0.3rem - 1px);
-    border-bottom-right-radius: calc(0.3rem - 1px);
 }
 
 .notif-modal {
@@ -2919,8 +2957,6 @@ footer {
 }
 
 .modal-view {
-    background-color: #f8f7f7;
-    font-size: 16px;
     label {
         letter-spacing: 0.03rem;
         font-size: 0.8rem;
@@ -2934,16 +2970,15 @@ footer {
         }
     }
     .modal-label {
-        font-size: 13px;
-        text-transform: uppercase;
         font-weight: 400;
+        font-size: 14px;
         letter-spacing: 0.02rem;
-        color: #b579c0;
+        color: #707070;
     }
     @media (max-width: 768px) {
         padding: 8px !important;
         .modal-label {
-            font-size: 11px;
+            font-size: 12px;
             letter-spacing: 0.01rem;
         }
     }
@@ -3023,7 +3058,6 @@ footer {
 }
 
 .mobile-btn-sm {
-    color: $lav-red;
     font-weight: 500 !important;
     padding: 6px 8px !important;
     height: 38px;
@@ -3119,9 +3153,6 @@ footer {
         color: $white !important;
     }
 
-    h4 {
-        font-size: 18px;
-    }
     .dashboard-info-card {
         padding: 22px;
         padding-bottom: 14px;
@@ -3250,6 +3281,10 @@ footer {
     .banner-container {
         width: calc(100% - 10px) !important;
         height: calc(100% - 10px) !important;
+    }
+    .banner-container-xs {
+        width: 56px;
+        height: 56px;
     }
 }
 
@@ -3883,19 +3918,18 @@ footer {
 }
 
 .vertical-scroll::-webkit-scrollbar-track {
-    background: #e5e1e1;
-    border-radius: 7px;
+    background: #f0f0f0;
+    border-radius: 6px;
     margin-block: 0.5em;
 }
 
 .vertical-scroll::-webkit-scrollbar-thumb {
-    background: #4e4e4e;
-    border: 0.1rem solid #80739e;
-    border-radius: 7px;
+    background: #686868;
+    border-radius: 6px;
 }
 
 .vertical-scroll::-webkit-scrollbar-thumb:hover {
-    background: rgb(61, 46, 80);
+    background: rgb(108, 77, 92);
 }
 
 /*-------------------------Product slider---------------------------------*/

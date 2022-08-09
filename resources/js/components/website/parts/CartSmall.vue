@@ -97,7 +97,7 @@
                         class="btn-sm btn-full btn-sm-cart purple mt-auto"
                         @click.prevent="goToCart()"
                     >
-                        Open Cart Page
+                        Go to Cart
                     </button>
                 </div>
 

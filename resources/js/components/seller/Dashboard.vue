@@ -2,214 +2,279 @@
     <div>
         <!-- Body -->
         <div class="container-fluid">
-            <div class="col">
+            <div class="col no-padding-sm">
                 <div class="row">
                     <div class="col-md-3 mb-4 mb-md-0">
-                        <div class="dashboard-card dashboard-card-sm">
-                            <h4 class="mb-0">Products</h4>
-                            <h6 class="mb-3">
-                                Total number of products in your store
-                            </h6>
-                            <h2>{{ productCount }}</h2>
+                        <div class="dashboard-card dashboard-card-sm h-100">
+                            <h4 class="mb-0">Total Products</h4>
+                            <h6 class="mb-3">All time</h6>
+
+                            <div
+                                class="
+                                    d-flex
+                                    flex-row
+                                    align-items-end
+                                    justify-content-between
+                                "
+                            >
+                                <h2>{{ productCount }}</h2>
+                                <router-link
+                                    class="dashboard-link-sm"
+                                    to="/seller/products"
+                                >
+                                    View
+                                </router-link>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-3 mb-4 mb-md-0">
-                        <div class="dashboard-card dashboard-card-sm">
-                            <h4 class="mb-0">Orders</h4>
-                            <h6 class="mb-3">New Orders placed this month</h6>
-                            <h2>{{ orderCount }}</h2>
+                        <div class="dashboard-card dashboard-card-sm h-100">
+                            <h4 class="mb-0">New Orders</h4>
+                            <h6 class="mb-3">This month</h6>
+                            <div
+                                class="
+                                    d-flex
+                                    flex-row
+                                    align-items-end
+                                    justify-content-between
+                                "
+                            >
+                                <h2>{{ orderCount }}</h2>
+                                <router-link
+                                    class="dashboard-link-sm"
+                                    to="/seller/orders"
+                                >
+                                    View
+                                </router-link>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-3 mb-4 mb-md-0">
-                        <div class="dashboard-card dashboard-card-sm">
-                            <h4 class="mb-0">Revenue</h4>
-                            <h6 class="mb-3">
-                                Total Revenue earned this month
-                            </h6>
-                            <h2>LKR {{ revenue }}</h2>
+                        <div class="dashboard-card dashboard-card-sm h-100">
+                            <h4 class="mb-0">Total Revenue</h4>
+                            <h6 class="mb-3">This month</h6>
+                            <div
+                                class="
+                                    d-flex
+                                    flex-row
+                                    align-items-end
+                                    justify-content-between
+                                "
+                            >
+                                <h2>{{ revenue }}</h2>
+                                <router-link
+                                    class="dashboard-link-sm"
+                                    to="/seller/transactions"
+                                >
+                                    View
+                                </router-link>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <h4 class="mb-0">New Product Listing</h4>
-                        <h6 class="mb-3">Add a new product to your store</h6>
-                        <router-link to="/seller/products/listing">
-                            <button type="button" class="btn btn-primary mobile-add-btn">
-                                <i class="fas fa-plus mr-2"></i>
-                                Add Product
-                            </button>
-                        </router-link>
+                        <div class="dashboard-card dashboard-card-sm">
+                            <h4 class="mb-0">Add Product</h4>
+                            <h6 class="mb-3">Quick listing</h6>
+                            <router-link to="/seller/products/listing">
+                                <button
+                                    type="button"
+                                    class="btn btn-sm mobile-add-btn"
+                                >
+                                    <i class="fas fa-plus mr-2"></i>
+                                    Add Product
+                                </button>
+                            </router-link>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col my-4">
+            <div class="col my-4 no-padding-sm">
                 <div class="row">
                     <div class="col-md-6 mb-4 mb-md-0">
-                        <div class="d-flex justify-content-between mb-3">
-                            <div>
-                                <h4 class="mb-0">Latest Products</h4>
-                                <h6>New product listings</h6>
-                            </div>
-                            <router-link
-                                to="/seller/products"
-                                class="dashboard-link-sm"
+                        <div class="dashboard-card dashboard-card-sm">
+                            <div
+                                class="
+                                    d-flex
+                                    justify-content-between
+                                    mb-3
+                                    align-items-center
+                                "
                             >
-                                All
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    aria-hidden="true"
-                                    role="img"
-                                    width="24px"
-                                    height="24px"
-                                    preserveAspectRatio="xMidYMid meet"
-                                    viewBox="0 0 20 20"
-                                    class="ml-2"
-                                >
-                                    <path
-                                        fill="currentColor"
-                                        d="m6 15l5-5l-5-5l1-2l7 7l-7 7z"
-                                    />
-                                </svg>
-                            </router-link>
-                        </div>
+                                <div>
+                                    <h4 class="mb-0">Latest Products</h4>
+                                    <router-link
+                                        class="dashboard-link-sm"
+                                        to="/seller/products"
+                                    >
+                                        View
+                                    </router-link>
+                                </div>
+                                <router-link to="/seller/products/listing">
+                                    <button
+                                        type="button"
+                                        class="
+                                            btn btn-sm btn-primary
+                                            mobile-add-btn
+                                        "
+                                    >
+                                        Add
+                                    </button>
+                                </router-link>
+                            </div>
 
-                        <!-- Table start -->
-                        <div
-                            class="
-                                table-responsive
-                                dashboard-table
-                                vertical-scroll
-                            "
-                        >
-                            <table class="table align-items-center table-hover">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Title</th>
-                                        <th scope="col">Price</th>
-                                        <th scope="col"></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr v-for="product in products">
-                                        <td>
-                                            {{ product.code }} <br />
-                                            {{ product.title }}
-                                        </td>
-                                        <td>{{ product.base_price }}</td>
-                                        <td class="text-right">
-                                            <router-link
-                                                :to="{
-                                                    name: 'seller/products/listing/edit',
-                                                    params: {
-                                                        productId: product.id,
-                                                    },
-                                                }"
-                                            >
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                    aria-hidden="true"
-                                                    role="img"
-                                                    width="20px"
-                                                    height="20px"
-                                                    preserveAspectRatio="xMidYMid meet"
-                                                    viewBox="0 0 16 16"
+                            <!-- Table start -->
+                            <div
+                                class="
+                                    table-responsive
+                                    dashboard-table
+                                    vertical-scroll
+                                "
+                            >
+                                <table
+                                    class="table align-items-center table-hover"
+                                >
+                                    <thead>
+                                        <tr>
+                                            <th scope="col"></th>
+                                            <th scope="col">Title</th>
+                                            <th scope="col" class="hide-content-sm">Price</th>
+                                            <th scope="col"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="product in products">
+                                            <td>
+                                                <img
+                                                    class="
+                                                        banner-container-xs
+                                                        mr-2
+                                                    "
+                                                    :src="
+                                                        product.product_image
+                                                            ? product
+                                                                  .product_image
+                                                                  .path
+                                                            : '/images/lavisco/img-bg.jpg'
+                                                    "
+                                                />
+                                            </td>
+                                            <td>
+                                                {{ product.title }}
+                                                <div class="hide-content">
+                                                    {{ product.base_price }}
+                                                </div>
+                                            </td>
+                                            <td class="hide-content-sm">{{ product.base_price }}</td>
+                                            <td class="text-right">
+                                                <router-link
+                                                    :to="{
+                                                        name: 'seller/products/listing/edit',
+                                                        params: {
+                                                            productId:
+                                                                product.id,
+                                                        },
+                                                    }"
                                                 >
-                                                    <g
-                                                        fill="none"
-                                                        stroke="#df4e6b"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                        stroke-width="1.5"
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                        aria-hidden="true"
+                                                        role="img"
+                                                        width="20px"
+                                                        height="20px"
+                                                        preserveAspectRatio="xMidYMid meet"
+                                                        viewBox="0 0 16 16"
                                                     >
-                                                        <circle
-                                                            cx="8"
-                                                            cy="2.5"
-                                                            r=".75"
-                                                        />
-                                                        <circle
-                                                            cx="8"
-                                                            cy="8"
-                                                            r=".75"
-                                                        />
-                                                        <circle
-                                                            cx="8"
-                                                            cy="13.5"
-                                                            r=".75"
-                                                        />
-                                                    </g>
-                                                </svg>
-                                            </router-link>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- Table end -->
-                    </div>
-                    <div class="col-md-6">
-                        <div class="d-flex justify-content-between mb-3">
-                            <div>
-                                <h4 class="mb-0">Latest Orders</h4>
-                                <h6>Most recent Orders placed</h6>
+                                                        <g
+                                                            fill="none"
+                                                            stroke="#4e4e4e"
+                                                            stroke-linecap="round"
+                                                            stroke-linejoin="round"
+                                                            stroke-width="1.5"
+                                                        >
+                                                            <circle
+                                                                cx="8"
+                                                                cy="2.5"
+                                                                r=".75"
+                                                            />
+                                                            <circle
+                                                                cx="8"
+                                                                cy="8"
+                                                                r=".75"
+                                                            />
+                                                            <circle
+                                                                cx="8"
+                                                                cy="13.5"
+                                                                r=".75"
+                                                            />
+                                                        </g>
+                                                    </svg>
+                                                </router-link>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
-
-                            <router-link
-                                to="/seller/orders"
-                                class="dashboard-link-sm"
+                            <!-- Table end -->
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4 mb-md-0">
+                        <div class="dashboard-card dashboard-card-sm">
+                            <div
+                                class="
+                                    d-flex
+                                    justify-content-between
+                                    mb-3
+                                    align-items-center
+                                "
                             >
-                                All
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    aria-hidden="true"
-                                    role="img"
-                                    width="24px"
-                                    height="24px"
-                                    preserveAspectRatio="xMidYMid meet"
-                                    viewBox="0 0 20 20"
-                                    class="ml-2"
+                                <div>
+                                    <h4 class="mb-0">Latest Orders</h4>
+                                    <router-link
+                                        class="dashboard-link-sm"
+                                        to="/seller/orders"
+                                    >
+                                        View
+                                    </router-link>
+                                </div>
+                            </div>
+                            <!-- Table start -->
+                            <div
+                                class="
+                                    table-responsive
+                                    dashboard-table
+                                    vertical-scroll
+                                "
+                            >
+                                <table
+                                    class="table align-items-center table-hover"
                                 >
-                                    <path
-                                        fill="currentColor"
-                                        d="m6 15l5-5l-5-5l1-2l7 7l-7 7z"
-                                    />
-                                </svg>
-                            </router-link>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Code</th>
+                                            <th scope="col">Dispatch</th>
+                                            <th scope="col">Amount</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="order in orders">
+                                            <td>
+                                                {{ order.code }}
+                                            </td>
+                                            <td>
+                                                {{
+                                                    moment(
+                                                        order.delivery_date
+                                                    ).format("DD-MM-YYYY")
+                                                }}
+                                            </td>
+                                            <td>{{ order.total }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- Table end -->
                         </div>
-
-                        <!-- Table start -->
-                        <div
-                            class="
-                                table-responsive
-                                dashboard-table
-                                vertical-scroll
-                            "
-                        >
-                            <table class="table align-items-center table-hover">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Code</th>
-                                        <th scope="col">Dispatch</th>
-                                        <th scope="col">Amount</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr v-for="order in orders">
-                                        <td>
-                                            {{ order.code }}
-                                        </td>
-                                        <td>
-                                            {{
-                                                moment(
-                                                    order.delivery_date
-                                                ).format("DD-MM-YYYY")
-                                            }}
-                                        </td>
-                                        <td>{{ order.total }}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- Table end -->
                     </div>
                 </div>
             </div>

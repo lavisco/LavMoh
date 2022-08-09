@@ -136,7 +136,24 @@
                                                                 product.id,
                                                         },
                                                     }"
-                                                    >Edit
+                                                >
+                                                    <svg
+                                                        class="mr-2"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                        aria-hidden="true"
+                                                        role="img"
+                                                        width="21"
+                                                        height="21"
+                                                        preserveAspectRatio="xMidYMid meet"
+                                                        viewBox="0 0 16 16"
+                                                    >
+                                                        <path
+                                                            fill="#707070"
+                                                            d="M5 1a.5.5 0 0 1 .5.5V2h2v-.5a.5.5 0 0 1 1 0V2h2v-.5a.5.5 0 0 1 1 0V2A1.5 1.5 0 0 1 13 3.5v2.536a2.547 2.547 0 0 0-1 .406V3.5a.5.5 0 0 0-.5-.5h-7a.5.5 0 0 0-.5.5v10a.5.5 0 0 0 .5.5h1.547v.002a1.59 1.59 0 0 0 .068.998H4.5A1.5 1.5 0 0 1 3 13.5v-10A1.5 1.5 0 0 1 4.5 2v-.5A.5.5 0 0 1 5 1Zm5 7c.107 0 .206.034.288.091L9.378 9H6a.5.5 0 0 1 0-1h4Zm-3.004 3.435A.5.5 0 0 0 6.5 11H6a.5.5 0 0 0 0 1h.5a.498.498 0 0 0 .157-.025c.097-.189.21-.37.339-.54ZM6 5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1H6Zm6.338 2.455a1.56 1.56 0 0 1 2.207 2.207l-4.289 4.288a2.777 2.777 0 0 1-1.29.731l-1.211.303a.61.61 0 0 1-.74-.74l.304-1.21c.122-.489.374-.935.73-1.29l4.289-4.289Z"
+                                                        />
+                                                    </svg>
+                                                    Edit
                                                 </router-link>
                                                 <a
                                                     class="btn btn-sm"
@@ -162,134 +179,54 @@
                                 class="card dashboard-info-card mb-4 pb-3"
                                 v-for="product in products"
                             >
-                                <div
-                                    class="
-                                        d-flex
-                                        flex-row
-                                        justify-content-between
-                                        mb-3
-                                    "
-                                >
-                                    <div class="d-flex flex-row mr-3">
-                                        <img
-                                            width="150px"
-                                            height="150px"
-                                            class="
-                                                mobile-card-banner-container
-                                                banner-container-xs
-                                                mr-3
-                                            "
-                                            :src="
-                                                product.product_image
-                                                    ? product.product_image.path
-                                                    : '/images/lavisco/img-bg.jpg'
-                                            "
-                                        />
-                                        <div>
-                                            <div class="mobile-card-sub-title">
-                                                Code
-                                            </div>
-                                            <div class="mobile-card-body">
-                                                {{ product.code }}
-                                            </div>
+                                <div class="d-flex flex-row mb-3">
+                                    <img
+                                        width="150px"
+                                        height="150px"
+                                        class="
+                                            mobile-card-banner-container
+                                            banner-container-xs
+                                            mr-3
+                                        "
+                                        :src="
+                                            product.product_image
+                                                ? product.product_image.path
+                                                : '/images/lavisco/img-bg.jpg'
+                                        "
+                                    />
+                                    <div>
+                                        <div class="mobile-card-body">
+                                            {{ product.code }}
                                         </div>
-                                    </div>
-
-                                    <div class="mobile-card-dropdown">
-                                        <button
-                                            type="button"
-                                            class="btn btn-sm mobile-btn-sm"
-                                            data-toggle="dropdown"
-                                            aria-haspopup="true"
-                                            aria-expanded="false"
-                                        >
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                aria-hidden="true"
-                                                role="img"
-                                                width="23px"
-                                                height="23px"
-                                                preserveAspectRatio="xMidYMid meet"
-                                                viewBox="0 0 16 16"
-                                            >
-                                                <g
-                                                    fill="none"
-                                                    stroke="#df4e6b"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                                    stroke-width="1.5"
-                                                >
-                                                    <circle
-                                                        cx="8"
-                                                        cy="2.5"
-                                                        r=".75"
-                                                    />
-                                                    <circle
-                                                        cx="8"
-                                                        cy="8"
-                                                        r=".75"
-                                                    />
-                                                    <circle
-                                                        cx="8"
-                                                        cy="13.5"
-                                                        r=".75"
-                                                    />
-                                                </g>
-                                            </svg>
-                                        </button>
-                                        <div
-                                            class="
-                                                dropdown-menu
-                                                dropdown-menu-right
-                                            "
-                                        >
-                                            <router-link
-                                                class="
-                                                    dropdown-item
-                                                    mobile-dropdown-item
-                                                "
-                                                :to="{
-                                                    name: 'seller/products/listing/edit',
-                                                    params: {
-                                                        productId: product.id,
-                                                    },
-                                                }"
-                                                >Edit
-                                            </router-link>
-                                            <button
-                                                class="
-                                                    dropdown-item
-                                                    mobile-dropdown-item
-                                                "
-                                                type="button"
-                                                @click.prevent="
-                                                    newModal(product)
-                                                "
-                                            >
-                                                View
-                                            </button>
-                                        </div>
+                                        <h5 class="text-left mb-0">
+                                            {{ product.title }}
+                                        </h5>
                                     </div>
                                 </div>
 
-                                <div class="mb-3">
-                                    <div class="mobile-card-sub-title">
-                                        Title
+                                <div class="d-flex flex-row mb-3">
+                                    <div class="col-5 pl-0 pr-2">
+                                        <div class="mobile-card-sub-title">
+                                            Date created
+                                        </div>
+                                        <div class="mobile-card-body">
+                                            {{
+                                                moment(
+                                                    product.created_at
+                                                ).format("DD-MM-YYYY")
+                                            }}
+                                        </div>
                                     </div>
-                                    <div class="mobile-card-body">
-                                        {{ product.title }}
+                                    <div class="col-4 pl-0 pr-2">
+                                        <div class="mobile-card-sub-title">
+                                            Base Price
+                                        </div>
+                                        <div class="mobile-card-body">
+                                            {{ product.base_price }}
+                                        </div>
                                     </div>
-                                </div>
-                                <div
-                                    class="
-                                        d-flex
-                                        flex-row
-                                        justify-content-between
-                                    "
-                                >
                                     <div
-                                        class="mr-2"
+                                        class="col-3 px-0"
                                         v-if="product.has_inventory == 1"
                                     >
                                         <div class="mobile-card-sub-title">
@@ -299,24 +236,20 @@
                                             {{ product.quantity }}
                                         </div>
                                     </div>
-                                    <div>
-                                        <div class="mobile-card-sub-title">
-                                            Base Price
-                                        </div>
-                                        <div class="mobile-card-body">
-                                            {{ product.base_price }}
-                                        </div>
-                                    </div>
-                                    <div class="ml-3">
+                                </div>
+                                <div
+                                    class="
+                                        d-flex
+                                        flex-row
+                                        justify-content-between
+                                    "
+                                >
+                                    <div class="col-5 pl-0 pr-3">
                                         <div class="mobile-card-sub-title">
                                             Status
                                         </div>
                                         <select
-                                            class="
-                                                custom-select
-                                                form-control
-                                                mobile-btn-sm
-                                            "
+                                            class="custom-select form-control"
                                             name="product_state_id"
                                             id="product_state_id"
                                             v-model="product.product_state_id"
@@ -334,6 +267,45 @@
                                                 {{ productState.state }}
                                             </option>
                                         </select>
+                                    </div>
+                                    <div class="col-7 px-0">
+                                        <div class="mobile-card-sub-title">
+                                            Actions
+                                        </div>
+                                        <router-link
+                                            class="btn btn-sm mr-2"
+                                            :to="{
+                                                name: 'seller/products/listing/edit',
+                                                params: {
+                                                    productId: product.id,
+                                                },
+                                            }"
+                                        >
+                                            <svg
+                                                class="mr-2"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                aria-hidden="true"
+                                                role="img"
+                                                width="19"
+                                                height="19"
+                                                preserveAspectRatio="xMidYMid meet"
+                                                viewBox="0 0 16 16"
+                                            >
+                                                <path
+                                                    fill="#707070"
+                                                    d="M5 1a.5.5 0 0 1 .5.5V2h2v-.5a.5.5 0 0 1 1 0V2h2v-.5a.5.5 0 0 1 1 0V2A1.5 1.5 0 0 1 13 3.5v2.536a2.547 2.547 0 0 0-1 .406V3.5a.5.5 0 0 0-.5-.5h-7a.5.5 0 0 0-.5.5v10a.5.5 0 0 0 .5.5h1.547v.002a1.59 1.59 0 0 0 .068.998H4.5A1.5 1.5 0 0 1 3 13.5v-10A1.5 1.5 0 0 1 4.5 2v-.5A.5.5 0 0 1 5 1Zm5 7c.107 0 .206.034.288.091L9.378 9H6a.5.5 0 0 1 0-1h4Zm-3.004 3.435A.5.5 0 0 0 6.5 11H6a.5.5 0 0 0 0 1h.5a.498.498 0 0 0 .157-.025c.097-.189.21-.37.339-.54ZM6 5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1H6Zm6.338 2.455a1.56 1.56 0 0 1 2.207 2.207l-4.289 4.288a2.777 2.777 0 0 1-1.29.731l-1.211.303a.61.61 0 0 1-.74-.74l.304-1.21c.122-.489.374-.935.73-1.29l4.289-4.289Z"
+                                                />
+                                            </svg>
+                                            Edit
+                                        </router-link>
+                                        <a
+                                            class="btn btn-sm"
+                                            href="#"
+                                            @click.prevent="newModal(product)"
+                                        >
+                                            View
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -367,23 +339,46 @@
             <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
                     <!-- Modal Header -->
-                    <div class="modal-header bg-black">
-                        <h4
-                            class="modal-title white text-uppercase mb-0"
-                            id="addRecordLabel"
-                        >
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="addRecordLabel">
                             {{ form.title }}
                         </h4>
                         <button
                             type="button"
-                            class="close"
+                            class="btn-modal-close close"
                             data-dismiss="modal"
                             aria-label="Close"
                         >
-                            <i
-                                class="fas fa-times-circle white"
-                                aria-hidden="true"
-                            ></i>
+                            <svg
+                                width="34"
+                                height="34"
+                                viewBox="0 0 34 34"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <rect
+                                    width="34"
+                                    height="34"
+                                    rx="17"
+                                    fill="white"
+                                />
+                                <g clip-path="url(#clip0_355_858)">
+                                    <path
+                                        d="M21.5803 10.9735L23.0266 12.4199C23.2275 12.6208 23.328 12.8618 23.328 13.1431C23.328 13.4243 23.2275 13.6653 23.0266 13.8662L19.8929 17L23.0266 20.1338C23.2275 20.3347 23.328 20.5757 23.328 20.8569C23.328 21.1382 23.2275 21.3792 23.0266 21.5801L21.5803 23.0265C21.3794 23.2274 21.1383 23.3278 20.8571 23.3278C20.5759 23.3278 20.3348 23.2274 20.1339 23.0265L17.0002 19.8927L13.8664 23.0265C13.6655 23.2274 13.4244 23.3278 13.1432 23.3278C12.862 23.3278 12.6209 23.2274 12.42 23.0265L10.9737 21.5801C10.7728 21.3792 10.6724 21.1382 10.6724 20.8569C10.6724 20.5757 10.7728 20.3347 10.9737 20.1338L14.1074 17L10.9737 13.8662C10.7728 13.6653 10.6724 13.4243 10.6724 13.1431C10.6724 12.8618 10.7728 12.6208 10.9737 12.4199L12.42 10.9735C12.6209 10.7726 12.862 10.6722 13.1432 10.6722C13.4244 10.6722 13.6655 10.7726 13.8664 10.9735L17.0002 14.1073L20.1339 10.9735C20.3348 10.7726 20.5759 10.6722 20.8571 10.6722C21.1383 10.6722 21.3794 10.7726 21.5803 10.9735Z"
+                                        fill="#333333"
+                                    />
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_355_858">
+                                        <rect
+                                            width="15"
+                                            height="15"
+                                            fill="white"
+                                            transform="translate(9.5 9.5)"
+                                        />
+                                    </clipPath>
+                                </defs>
+                            </svg>
                         </button>
                     </div>
 
@@ -569,17 +564,13 @@
                         </div>
                     </div>
 
-                    <div class="modal-footer bg-black">
+                    <div class="modal-footer">
                         <button
                             type="button"
-                            class="btn"
+                            class="btn bg-black"
                             data-dismiss="modal"
                             aria-label="Close"
                         >
-                            <i
-                                class="fas fa-times-circle mr-2"
-                                aria-hidden="true"
-                            ></i>
                             Close
                         </button>
                     </div>
@@ -651,10 +642,12 @@ export default {
 
         loadProducts() {
             axios
-                .get("/api/seller/products?page=" +
-                        this.pagination.current_page, {
-                    params: { searchText: this.searchText },
-                })
+                .get(
+                    "/api/seller/products?page=" + this.pagination.current_page,
+                    {
+                        params: { searchText: this.searchText },
+                    }
+                )
                 .then(({ data }) => {
                     this.products = data.data;
                     this.pagination.last_page = data.last_page;

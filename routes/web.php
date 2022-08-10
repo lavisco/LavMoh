@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Website\HomeController;
 use App\Http\Controllers\Website\OrderController;
+use App\Http\Controllers\Website\PaymentController;
 use App\Mail\StoreActiveApplicationMail;
 use App\Mail\WelcomeMail;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -42,7 +43,8 @@ Route::get('/payment-gateway', function () {
     return view('payment.payment');
 });
 
-Route::post('/payment-gateway', [HomeController::class, 'paymentProcess'])->name('paymentgate');
+Route::post('/payment-gateway', [PaymentController::class, 'paymentProcess'])->name('paymentgate');
+Route::post('/payment/response', [PaymentController::class, 'paymentResponse']);
 
 
 /*

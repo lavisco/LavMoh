@@ -876,15 +876,18 @@ export default {
                 .post("/api/orders")
                 .then((response) => {
                     // this.$store.dispatch("clearOrderedProductFromCart");
-                    // this.submitButtonText = "Saved";
-                    // this.submitButtonDisabled = false;
-                    // this.$router.push("/order_complete");
+                    // this.$store.dispatch("saveOrder", response);
+                    //window.location.href = 'url';
+
                     //console.log(response);
-                    result.json()
+
+                    //setCookie('cookieName', myItem, 7);
+
+                    window.location.href = 'https://webxpay.com/index.php?route=checkout/billing';
                 })
                 .catch((error) => {
-                    // this.submitButtonText = "Proceed to Payment";
-                    // this.submitButtonDisabled = false;
+                    this.submitButtonText = "Proceed to Payment";
+                    this.submitButtonDisabled = false;
                     console.log(error);
                 });
         },

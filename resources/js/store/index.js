@@ -18,9 +18,14 @@ export default new Vuex.Store({
             symbol: "Rs",
         },
         location: "Kandy",
+        order: "",
     },
 
     getters: {
+        currentOrder(state) {
+            return state.order;
+        },
+
         selectedCurrency(state) {
             return state.currency;
         },
@@ -97,6 +102,11 @@ export default new Vuex.Store({
     },
 
     actions: {
+        //store order
+        saveOrder(context, order) {
+            context.commit("storeOrder", order);
+        },
+
         //currency methods
         saveCurrency(context, currency) {
             context.commit("storeCurrency", currency);
@@ -271,6 +281,11 @@ export default new Vuex.Store({
     },
 
     mutations: {
+        //alter order state
+        storeOrder(state, order) {
+            state.order = order;
+        },
+
         //alter currency state
         storeCurrency(state, currency) {
             state.currency = currency;

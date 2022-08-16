@@ -50,13 +50,8 @@
                     <span class="bold"> </span>
                 </p>
             </div>
-            <form
-                method="POST"
-                action="{{ route('paymentgate') }}"
-                class="input-form"
-            >
+            <form method="POST" action="{{ route('paymentgate') }}">
                 @csrf
-                <input type="hidden" id="custId" name="custId" value="" />
                 <button type="submit" class="checkout-btn">
                     Proceed to Payment
                 </button>
@@ -64,11 +59,4 @@
         </div>
     </div>
 </div>
-
-@endsection @section('scripts')
-<script type="text/javascript">
-    var myItem = localStorage.getItem("vuex");
-    console.log(JSON.parse(myItem));
-    document.getElementById("custId").value = JSON.parse(myItem);
-</script>
-@stop
+@endsection

@@ -10282,6 +10282,7 @@ button:hover {
   font-size: 16px;
   font-weight: 500;
   border-radius: 6px;
+  text-align: center;
 }
 .btn-sm:hover svg path, .btn-group-sm > .btn:hover svg path, .btn-sm:focus svg path, .btn-group-sm > .btn:focus svg path {
   fill: #ffffff;

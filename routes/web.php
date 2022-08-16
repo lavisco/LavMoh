@@ -39,11 +39,9 @@ Route::post('/paymenttest', function () {
     return $response;
 });
 
-Route::get('/payment-gateway', function () {
-    return view('payment.payment');
-});
+Route::get('/payment', [PaymentController::class, 'show'])->name('payment');
 
-Route::post('/payment-gateway', [PaymentController::class, 'paymentProcess'])->name('paymentgate');
+Route::post('/payment', [PaymentController::class, 'paymentProcess'])->name('paymentgate');
 Route::post('/payment/response', [PaymentController::class, 'paymentResponse']);
 
 

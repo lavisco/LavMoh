@@ -22,41 +22,85 @@ use PhpParser\Node\Stmt\If_;
 
 class OrderController extends Controller
 {
-    public function store(OrderRequest $request)
+    public function store(Request $request)
     {
-        $guestUser = User::select('id')->where('email', User::GUEST_USER_MAIL)->first();
+        // $guestUser = User::select('id')->where('email', User::GUEST_USER_MAIL)->first();
 
-        if (auth('api')->check()) {
-            if(auth('api')->user()->role_id == Role::IS_BUYER){
-                $userId = auth('api')->user()->id;
-            } else {
-                $userId = $guestUser->id;
-            }
-        } else {
-            $userId = $guestUser->id;
-        }
+        // if (auth('api')->check()) {
+        //     if(auth('api')->user()->role_id == Role::IS_BUYER){
+        //         $userId = auth('api')->user()->id;
+        //     } else {
+        //         $userId = $guestUser->id;
+        //     }
+        // } else {
+        //     $userId = $guestUser->id;
+        // }
         
-        $request->merge([
-            'status' => "not acknowledged",
-            'tax' => 0.00,
-            'buyer_id' => $userId,
-            'country' => "Sri Lanka",
-            'billing_country' => "Sri Lanka",
-            'seller_id' => $request->input('products.0.seller_id'),
-            'shop_id' => $request->input('products.0.shop_id'),
+        // $request->merge([
+        //     'status' => "not acknowledged",
+        //     'tax' => 0.00,
+        //     'buyer_id' => $userId,
+        //     'country' => "Sri Lanka",
+        //     'billing_country' => "Sri Lanka",
+        //     'seller_id' => $request->input('products.0.seller_id'),
+        //     'shop_id' => $request->input('products.0.shop_id'),
+        // ]);
+
+        // $order = Order::create($request->all());
+
+        // $order->update([
+        //     'code' => 'LO'.str_pad($order->id,5,"0",STR_PAD_LEFT),
+        // ]);
+
+        // $this->storeOrderProduct($request, $order->id);
+        // $this->storeReceipt($request, $order->id);
+        // $this->storeTransaction($request, $order->id);
+
+        //return $order->id;
+
+        //return view('payment.payment', ['order' => 'LO2']);
+
+        // $order = [
+        //         'status' => "not acknowledged",
+        //         'tax' => 0.00,
+        //         'country' => "Sri Lanka",
+        //         'billing_country' => "Sri Lanka",
+        //     ];
+
+        // return ['redirect' => view('payment', compact('order'))];
+
+        //return view('projects.index', compact('projects'));
+
+        // unique_order_id|total_amount
+        $plaintext = '525|10';
+        $publickey = "-----BEGIN PUBLIC KEY-----
+MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC6nVc/ykIWsT1ktI8/49nfBUOQ
+IHCCu9bC+pxEYbPvUth28MWitvm7y2u2nX/3/nVXMdvl2yiAbB7aBw4dGnAhXoAM
+9WB8nw3AZS1VGqBBEKFs23EqUvjsBxrj+QasVkeZwC+oxvGuuprCIFW9o7w290c0
+pJ28AUyd0dWx1YWu1wIDAQAB
+-----END PUBLIC KEY-----";
+        //load public key for encrypting
+        openssl_public_encrypt($plaintext, $encrypt, $publickey);
+
+        //encode for data passing
+        $payment = base64_encode($encrypt);
+
+
+        $response = Http::post('https://webxpay.com/index.php?route=checkout/billing', [
+            'first_name' => "Mohorima",
+            'last_name' => "Islam",
+            'email' => "islammohrima@gmail.com",
+            'phone' => "0215214578",
+            'address_line_one' => "flat f3",
+            
+            'secret_key' => "f94682c3-c986-426e-b68f-9cbdd5f8d904",
+            'cms' => "PHP",
+            'payment' => "$payment",
         ]);
 
-        $order = Order::create($request->all());
+        return $response;
 
-        $order->update([
-            'code' => 'LO'.str_pad($order->id,5,"0",STR_PAD_LEFT),
-        ]);
-
-        $this->storeOrderProduct($request, $order->id);
-        $this->storeReceipt($request, $order->id);
-        $this->storeTransaction($request, $order->id);
-
-        return $order;
+        return ['redirect' => Http::get('https://webxpay.com/index.php?route=checkout/billing')];
     }
 
 

@@ -33,6 +33,29 @@ class ProductController extends Controller
         return Product::where('user_id', auth()->id())->with(['product_images', 'product_image', 'variations', 'variations.variation_options', 'category', 'sub_categories'])->latest()->filter(request(['searchText']))->paginate(20);
     }
 
+    /**
+     * Get data from other tables, that are needed during product listing
+     */
+    public function getDetails()
+    {
+        return response()->json([
+            'categories' => Category::select('id', 'name')->where('status', 1)->latest()->get(),
+            'occasions' => Occasion::select('id', 'name')->where('status', 1)->latest()->get(),
+            'recipients' => Recipient::select('id', 'name')->where('status', 1)->latest()->get(),
+            'shippings' => Shipping::latest()->get(),
+        ]);
+    }
+
+    /**
+     * Get data from other tables, that are needed during product listing
+     */
+    public function getSubcategories($categoryId)
+    {
+        return response()->json([
+            'sub_categories' => SubCategory::where('category_id', $categoryId)->where('status', 1)->get(),
+        ]);
+    }
+    
     public function store(ProductRequest $request)
     {
         //$this->authorize('create', Product::class);
@@ -211,26 +234,4 @@ class ProductController extends Controller
         }
     }
 
-    /**
-     * Get data from other tables, that are needed during product listing
-     */
-    public function getDetails()
-    {
-        return response()->json([
-            'categories' => Category::select('id', 'name')->where('status', 1)->latest()->get(),
-            'occasions' => Occasion::select('id', 'name')->where('status', 1)->latest()->get(),
-            'recipients' => Recipient::select('id', 'name')->where('status', 1)->latest()->get(),
-            'shippings' => Shipping::latest()->get(),
-        ]);
-    }
-
-    /**
-     * Get data from other tables, that are needed during product listing
-     */
-    public function getSubcategories($categoryId)
-    {
-        return response()->json([
-            'sub_categories' => SubCategory::where('category_id', $categoryId)->where('status', 1)->get(),
-        ]);
-    }
 }

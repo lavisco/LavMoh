@@ -8,16 +8,21 @@ use Illuminate\Support\Facades\Http;
 
 class PaymentController extends Controller
 {
+    public function show()
+    {
+        return view('payment.payment');
+    }
+
     public function paymentProcess(Request $request)
     {
         // unique_order_id|total_amount
         $plaintext = '525|10';
         $publickey = "-----BEGIN PUBLIC KEY-----
-        MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC6nVc/ykIWsT1ktI8/49nfBUOQ
-        IHCCu9bC+pxEYbPvUth28MWitvm7y2u2nX/3/nVXMdvl2yiAbB7aBw4dGnAhXoAM
-        9WB8nw3AZS1VGqBBEKFs23EqUvjsBxrj+QasVkeZwC+oxvGuuprCIFW9o7w290c0
-        pJ28AUyd0dWx1YWu1wIDAQAB
-        -----END PUBLIC KEY-----";
+MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC6nVc/ykIWsT1ktI8/49nfBUOQ
+IHCCu9bC+pxEYbPvUth28MWitvm7y2u2nX/3/nVXMdvl2yiAbB7aBw4dGnAhXoAM
+9WB8nw3AZS1VGqBBEKFs23EqUvjsBxrj+QasVkeZwC+oxvGuuprCIFW9o7w290c0
+pJ28AUyd0dWx1YWu1wIDAQAB
+-----END PUBLIC KEY-----";
         //load public key for encrypting
         openssl_public_encrypt($plaintext, $encrypt, $publickey);
 

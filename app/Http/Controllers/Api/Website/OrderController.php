@@ -98,7 +98,7 @@ pJ28AUyd0dWx1YWu1wIDAQAB
             'payment' => "$payment",
         ]);
 
-        return $response;
+        //return $response;
 
         return ['redirect' => Http::get('https://webxpay.com/index.php?route=checkout/billing')];
     }

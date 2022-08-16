@@ -14,6 +14,11 @@ class HomeController extends Controller
         return view('layouts.master');
     }
 
+    public function nonVueWebsiteIndex()
+    {
+        return view('layouts.master');
+    }
+
     public function employeeIndex()
     {
         return view('layouts.employee_master');

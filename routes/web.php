@@ -42,6 +42,7 @@ Route::post('/paymenttest', function () {
 Route::get('/payment', [PaymentController::class, 'show'])->name('payment');
 
 Route::post('/payment', [PaymentController::class, 'paymentProcess'])->name('paymentgate');
+
 Route::post('/payment/response', [PaymentController::class, 'paymentResponse']);
 
 
@@ -103,12 +104,17 @@ Route::group(['middleware' => 'auth'],function () {
 |--------------------------------------------------------------------------
 */
 
+
+
 //route entry for login pages
 Route::get('/employee/{path}', [HomeController::class, 'employeeIndex'])->where('path', '.*');
 Route::get('/merchant/{path}', [HomeController::class, 'websiteIndex'])->where('path', '.*');
 
 //main route entry for website
 Route::get('/{path}', [HomeController::class, 'websiteIndex'])->where('path', '.*');
+
+//Route::get('/{path}', [HomeController::class, 'websiteIndex'])->where('path', '^(?!payment|contact)$');
+
 
 
 

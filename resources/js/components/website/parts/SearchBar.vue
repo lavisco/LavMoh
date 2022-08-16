@@ -40,22 +40,10 @@
             v-if="results.length > 0 && this.searchText != ''"
         >
             <ul>
-                <li
-                    v-for="result in results"
-                    :key="result.id"
-                    @click.prevent="resetResults()"
-                >
-                    <router-link
-                        :to="{
-                            name: 'products/product',
-                            params: {
-                                productId: result.id,
-                                slug: result.slug,
-                            },
-                        }"
-                    >
+                <li v-for="result in results" :key="result.id">
+                    <a :href="`/products/${result.id}/${result.slug}`">
                         {{ result.title }}
-                    </router-link>
+                    </a>
                 </li>
             </ul>
         </div>

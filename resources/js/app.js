@@ -73,8 +73,17 @@ Vue.component(
 );
 
 Vue.component(
+    "footer-component-static",
+    require("./components/website/parts/FooterComponentStatic.vue").default
+);
+
+Vue.component(
     "navbar-component",
     require("./components/website/parts/NavbarComponent.vue").default
+);
+Vue.component(
+    "navbar-component-static",
+    require("./components/website/parts/NavbarComponentStatic.vue").default
 );
 
 Vue.component(
@@ -95,6 +104,15 @@ Vue.component(
 Vue.component(
     "topnav-component",
     require("./components/website/parts/TopNav.vue").default
+);
+
+Vue.component(
+    "order-summary",
+    require("./components/website/checkout/OrderSummary.vue").default
+);
+Vue.component(
+    "shipping-option",
+    require("./components/website/checkout/ShippingOption.vue").default
 );
 
 //Fire is a new instance of vue which will be used as a bus

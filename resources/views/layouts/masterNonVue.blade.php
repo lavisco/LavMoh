@@ -60,13 +60,13 @@
             <main>
                 <div>
                     <!-- navbar section starts -->
-                    <navbar-component></navbar-component>
+                    <navbar-component-static></navbar-component-static>
                     <!-- navbar section ends -->
 
                     <div>@yield('content')</div>
                 </div>
                 <!-- footer section starts -->
-                <footer-component></footer-component>
+                <footer-component-static></footer-component-static>
                 <!-- footer section ends -->
             </main>
         </div>
@@ -84,6 +84,5 @@
                 }
             }
         </script>
-        @yield('scripts');
     </body>
 </html>

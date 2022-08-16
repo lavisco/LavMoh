@@ -114,7 +114,7 @@
                         {{ product.user.shop.name }}
                     </p>
 
-                    <h3 class="text-left mb-0">
+                    <h3 class="text-left mb-2">
                         {{ product.title }}
                     </h3>
 
@@ -299,8 +299,7 @@
                             <button
                                 class="
                                     checkout-btn
-                                    btn-full btn-primary
-                                    checkout-btn-cart
+                                    btn-full
                                     mt-2 mt-md-0
                                     col-md-8
                                 "

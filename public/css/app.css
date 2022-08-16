@@ -10274,7 +10274,7 @@ button:hover {
 }
 
 .btn-primary {
-  background-color: #df4e6b !important;
+  background-color: #df4e76 !important;
   color: #ffffff !important;
 }
 .btn-primary:hover, .btn-primary:focus {
@@ -10430,13 +10430,13 @@ button.bg-black:hover {
   fill: #4e4e4e;
 }
 .view-more-link:hover {
-  color: #976aff;
+  color: #df4e76;
 }
 .view-more-link:hover svg {
   margin-left: 16px !important;
 }
 .view-more-link:hover svg path {
-  fill: #976aff;
+  fill: #df4e76;
 }
 @media (max-width: 768px) {
   .view-more-link {
@@ -10477,7 +10477,7 @@ button.bg-black:hover {
 }
 
 .bg-red {
-  background-color: #df4e6b;
+  background-color: #df4e76;
 }
 
 .bg-blue {
@@ -10525,7 +10525,7 @@ button.bg-black:hover {
 }
 
 .red {
-  color: #df4e6b;
+  color: #df4e76;
 }
 
 .purple {
@@ -10680,23 +10680,23 @@ button.bg-black:hover {
   transition: all 150ms ease;
 }
 .nav-link:hover {
-  color: #df4e6b;
-  border: 1px solid #df4e6b;
+  color: #df4e76;
+  border: 1px solid #df4e76;
 }
 .nav-link:hover svg path {
-  fill: #df4e6b;
+  fill: #df4e76;
 }
 .nav-link:hover svg circle {
-  fill: #df4e6b;
+  fill: #df4e76;
 }
 .nav-link:hover .nav-tiny-text {
-  color: #df4e6b;
+  color: #df4e76;
 }
 @media (min-width: 991.98px) {
   .nav-link:focus {
-    background-color: #df4e6b;
+    background-color: #df4e76;
     color: #ffffff;
-    border: 1px solid #df4e6b;
+    border: 1px solid #df4e76;
   }
   .nav-link:focus svg path,
 .nav-link:focus svg circle {
@@ -10719,7 +10719,7 @@ button.bg-black:hover {
   margin-right: 10px;
 }
 .nav-link-currency:hover {
-  color: #df4e6b;
+  color: #df4e76;
 }
 
 .nav-link-currency + .active {
@@ -10991,7 +10991,7 @@ button.bg-black:hover {
   border: none;
 }
 .navbar-main-menu-mobile .hamburger:hover svg path {
-  fill: #df4e6b;
+  fill: #df4e76;
 }
 .navbar-main-menu-mobile .dropdown-header {
   cursor: pointer;
@@ -11021,7 +11021,7 @@ button.bg-black:hover {
 }
 .navbar-main-menu-mobile .dropdown-item.active,
 .navbar-main-menu-mobile .dropdown-item:active {
-  background-color: #df4e6b !important;
+  background-color: #df4e76 !important;
   border-radius: 8px !important;
   color: #ffffff;
 }
@@ -11609,7 +11609,6 @@ section h1 {
 }
 .price-card .bold {
   font-weight: 600;
-  color: #df4e6b;
 }
 .price-card hr {
   border-top: 1px solid #f6eaec;
@@ -11679,13 +11678,13 @@ section h1 {
   background-color: #4e4e4e !important;
 }
 .progress-bar .progress-line .now {
-  background-color: #df4e6b !important;
+  background-color: #df4e76 !important;
 }
 .progress-bar .activated {
-  color: #df4e6b;
+  color: #df4e76;
 }
 .progress-bar .activated .check-sign {
-  background-color: #df4e6b;
+  background-color: #df4e76;
 }
 .progress-bar .completed {
   color: #4e4e4e;
@@ -12346,7 +12345,7 @@ footer {
 .page-item.active .page-link {
   z-index: 3;
   color: #ffffff;
-  background-color: #df4e6b;
+  background-color: #df4e76;
   border: none;
 }
 
@@ -12395,10 +12394,10 @@ footer {
   width: 100%;
 }
 .dashboard-side-nav .active {
-  color: #df4e6b;
+  color: #df4e76;
 }
 .dashboard-side-nav .active .dashboard-link-icon {
-  background-color: #df4e6b;
+  background-color: #df4e76;
 }
 .dashboard-side-nav .active svg path {
   fill: #fff;
@@ -12437,7 +12436,7 @@ footer {
   fill: #333333;
 }
 .navbar-close:hover, .navbar-close:active {
-  background-color: #df4e6b;
+  background-color: #df4e76;
 }
 .navbar-close:hover svg path, .navbar-close:active svg path {
   fill: #ffffff;
@@ -12455,10 +12454,10 @@ footer {
   color: #707070;
 }
 .dashboard-top-nav .nav-user-options a:hover {
-  color: #df4e6b;
+  color: #df4e76;
 }
 .dashboard-top-nav .nav-user-options a:hover svg path {
-  fill: #df4e6b;
+  fill: #df4e76;
 }
 .dashboard-top-nav .nav-user-options svg {
   height: 34px;
@@ -12596,7 +12595,7 @@ footer {
   align-items: center;
   font-weight: 600;
   font-size: 15px;
-  color: #df4e6b;
+  color: #df4e76;
   cursor: pointer;
 }
 .dashboard-link-sm svg {
@@ -12604,7 +12603,7 @@ footer {
   height: 17px;
 }
 .dashboard-link-sm svg path {
-  fill: #df4e6b;
+  fill: #df4e76;
 }
 .dashboard-link-sm:hover {
   color: #333333;
@@ -12813,7 +12812,7 @@ footer {
 
 .search-input .input-group-text {
   background-color: #fff;
-  color: #df4e6b;
+  color: #df4e76;
   border: none;
   box-shadow: rgba(226, 226, 226, 0.596) 0 0 0 1px;
   border-radius: 12px;
@@ -12879,7 +12878,7 @@ footer {
   font-size: 34px !important;
   font-weight: 600;
   line-height: 110%;
-  color: #df4e6b;
+  color: #df4e76;
   margin-bottom: 0;
 }
 
@@ -13362,6 +13361,10 @@ footer {
 /*------------------------------lavisco website------------------------------*/
 /*------------------------------product page------------------------------*/
 @media (max-width: 768px) {
+  .product-page {
+    padding-left: 0;
+    padding-right: 0;
+  }
   .product-page h3 {
     font-size: 21px;
   }
@@ -13375,10 +13378,10 @@ footer {
 }
 
 .product-detail-header:hover {
-  color: #df4e6b;
+  color: #df4e76;
 }
 .product-detail-header:hover svg > path {
-  fill: #df4e6b;
+  fill: #df4e76;
 }
 
 .product-detail-card {
@@ -13457,7 +13460,7 @@ footer {
 .price {
   font-weight: 600;
   text-align: left;
-  font-size: 26px;
+  font-size: 28px;
 }
 @media (max-width: 768px) {
   .price {
@@ -13590,7 +13593,7 @@ footer {
   cursor: pointer;
   font-size: 12px;
   padding: 10px;
-  color: #976aff;
+  color: #df4e76;
   font-weight: 500;
 }
 .menu-cart .menu-cart-remove-btn:hover, .menu-cart .menu-cart-remove-btn:focus {
@@ -13609,7 +13612,7 @@ footer {
   z-index: 2;
   border-radius: 50%;
   background-color: white;
-  color: #df4e6b;
+  color: #df4e76;
   font-size: 11px;
   font-weight: 600;
 }
@@ -13680,7 +13683,7 @@ footer {
   width: 150px;
 }
 .cart-table .cart-remove-btn {
-  color: #976aff;
+  color: #df4e76;
   cursor: pointer;
   font-size: 14px;
   font-weight: 600;
@@ -14015,6 +14018,11 @@ footer {
   max-width: 100%;
   max-height: 100%;
 }
+@media (max-width: 768px) {
+  .slider-container .img-container .img-slide img {
+    border-radius: 8px;
+  }
+}
 .slider-container .slider-arrow-container {
   position: absolute;
   display: flex;
@@ -14177,7 +14185,7 @@ footer {
 .product-card-counter .counter-minus,
 .product-card-counter .counter-plus {
   background-color: #eeeeee79;
-  color: #df4e6b;
+  color: #df4e76;
   font-weight: 700;
   font-size: 24px;
   cursor: pointer;

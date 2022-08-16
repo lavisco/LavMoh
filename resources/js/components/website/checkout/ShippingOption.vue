@@ -95,7 +95,15 @@ export default {
 
     methods: {
         setDateRange() {
-            this.dateFrom = moment().format("YYYY-MM-DD");
+            let minTimeArray = [];
+
+            this.$store.getters.currentCartProducts.map((cartItem) => {
+                minTimeArray.push(cartItem.processing_time);
+            });
+
+            let minTime = Math.max(...minTimeArray);
+
+            this.dateFrom = moment().add(minTime, "d").format("YYYY-MM-DD");
             this.dateTo = moment().add(30, "d").format("YYYY-MM-DD");
         },
 
@@ -122,8 +130,8 @@ export default {
     },
 
     mounted() {
-        this.setDateRange();
         this.loadProducts();
+        this.setDateRange();
         this.loadShippings();
     },
 };

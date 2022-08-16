@@ -1282,14 +1282,15 @@
                                     <option value="" disabled selected hidden>
                                         Select processing time
                                     </option>
-                                    <option>12 hours</option>
-                                    <option>24 hours</option>
-                                    <option>48 hours</option>
-                                    <option>72 hours</option>
-                                    <option>1 week</option>
-                                    <option>2 weeks</option>
-                                    <option>3 weeks</option>
-                                    <option>1 month</option>
+                                    <option value="1">1 day</option>
+                                    <option value="2">2 days</option>
+                                    <option value="3">3 days</option>
+                                    <option value="4">4 days</option>
+                                    <option value="5">5 days</option>
+                                    <option value="6">6 days</option>
+                                    <option value="7">7 days</option>
+                                    <option value="8">8 days</option>
+                                    <option value="9">9 days</option>
                                 </select>
                                 <HasError
                                     :form="form"

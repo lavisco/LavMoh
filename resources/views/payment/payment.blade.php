@@ -1,6 +1,6 @@
 @extends('layouts.masterNonVue') @section('content')
 <div class="container-fluid shipping">
-    <div class="progress-bar mb-3 mb-md-5">
+    <div class="progress-bar mb-5 mb-md-5">
         <div class="progress-line">
             <div class="done"></div>
             <div class="now"></div>
@@ -22,7 +22,7 @@
             </div>
             <div class="part">
                 <div class="check-sign">4</div>
-                Order Complete
+                Order Placed
             </div>
         </div>
     </div>

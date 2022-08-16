@@ -40,6 +40,7 @@ export default new Vuex.Store({
                     id: cartItem.id,
                     title: cartItem.title,
                     base_price: cartItem.base_price,
+                    processing_time: cartItem.processing_time,
                     price: cartItem.price,
                     slug: cartItem.slug,
                     user_id: cartItem.user_id,
@@ -82,6 +83,7 @@ export default new Vuex.Store({
                     id: cartItem.id,
                     title: cartItem.title,
                     base_price: cartItem.base_price,
+                    processing_time: cartItem.processing_time,
                     price: cartItem.price,
                     slug: cartItem.slug,
                     shop: cartItem.shop,
@@ -334,10 +336,53 @@ export default new Vuex.Store({
                 }
             }
 
+            let process_time = "";
+            switch (product.processing_time) {
+                case "12 hours":
+                    process_time = 1;
+                    break;
+                case "24 hours":
+                    process_time = 1;
+                    break;
+                case "48 hours":
+                    process_time = 2;
+                    break;
+                case "72 hours":
+                    process_time = 3;
+                    break;
+                case "1 week":
+                    process_time = 7;
+                    break;
+                case "2 weeks":
+                    process_time = 14;
+                    break;
+                case "3 weeks":
+                    process_time = 21;
+                    break;
+                case "1 month":
+                    process_time = 30;
+                    break;
+                default:
+                    process_time = product.processing_time;
+                    break;
+            }
+
+            /*
+<option>12 hours</option>
+<option>24 hours</option>
+<option>48 hours</option>
+<option>72 hours</option>
+<option>1 week</option>
+<option>2 weeks</option>
+<option>3 weeks</option>
+<option>1 month</option>
+            */
+
             state.cart.push({
                 id: product.id,
                 title: product.title,
                 base_price: product.base_price,
+                processing_time: process_time,
                 price: form.total_price,
                 slug: product.slug,
                 user_id: product.user_id,
@@ -358,6 +403,7 @@ export default new Vuex.Store({
                 id: product.id,
                 title: product.title,
                 base_price: product.base_price,
+                processing_time: product.processing_time,
                 price: product.price,
                 slug: product.slug,
                 shop: product.shop,

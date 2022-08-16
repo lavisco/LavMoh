@@ -50,11 +50,11 @@ class OrderRequest extends FormRequest
             'billing_district' => 'required|string|max:100',
             'billing_state' => 'nullable|string|max:100',
 
-            // 'delivery_date' => 'date|required',
+            'delivery_date' => 'date|required',
             // 'currency_code' => 'string|required|max:5',
             // 'current_exchange_rate' => 'numeric|required',
 
-            // 'shipping_id' => 'required',
+            'shipping_id' => 'required',
             // 'total' => 'numeric|required',
             // 'subtotal' => 'numeric|required',
             // 'giftwrap_price' => 'numeric|nullable',

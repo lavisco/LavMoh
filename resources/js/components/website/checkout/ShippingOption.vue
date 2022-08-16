@@ -19,7 +19,9 @@
                     :max="dateTo"
                     :min="dateFrom"
                 />
-                <HasError :form="form" field="delivery_date" />
+                <span class="error-msg">
+                    <strong>{{ error_msg_delivery_date }}</strong>
+                </span>
             </div>
             <div class="form-group col-md-6">
                 <label class="col-form-label" for="shipping_id"
@@ -43,7 +45,9 @@
                         }}
                     </option>
                 </select>
-                <HasError :form="form" field="shipping_id" />
+                <span class="error-msg">
+                    <strong>{{ error_msg_shipping_id }}</strong>
+                </span>
             </div>
         </div>
 
@@ -63,14 +67,10 @@
 </template>
 <script>
 import Form from "vform";
-import { HasError, AlertError } from "vform/src/components/bootstrap4";
 import moment from "moment";
 
 export default {
-    components: {
-        HasError,
-        AlertError,
-    },
+    props: ["error_msg_delivery_date", "error_msg_shipping_id"],
 
     data: () => ({
         moment: moment,

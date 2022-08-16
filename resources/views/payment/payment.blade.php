@@ -534,7 +534,11 @@
                             </div>
                         </div>
 
-                        <shipping-option></shipping-option>
+                        <shipping-option @error('delivery_date')
+                        error_msg_delivery_date="The delivery date field is required"
+                        @enderror @error('shipping_id')
+                        error_msg_shipping_id="The shipping method field is required"
+                        @enderror></shipping-option>
                     </div>
 
                     <!-- order summary mobile -->

@@ -148,7 +148,7 @@ pJ28AUyd0dWx1YWu1wIDAQAB
         
         //payment fields
         $data = $request;
-        $plaintext = $order->code.'|'.$total;
+        $plaintext = $order->id.'|'.$total;
 
         $publickey = "-----BEGIN PUBLIC KEY-----
 MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC6nVc/ykIWsT1ktI8/49nfBUOQ

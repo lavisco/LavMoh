@@ -63,6 +63,12 @@
             name="exchange_rate"
             v-model="form.exchange_rate"
         />
+        <input
+            type="hidden"
+            id="currency_code"
+            name="currency_code"
+            v-model="form.currency_code"
+        />
     </div>
 </template>
 <script>
@@ -83,6 +89,7 @@ export default {
             shipping_id: "",
             shipping_price: 0.0,
             exchange_rate: "",
+            currency_code: "",
             products: [],
         }),
     }),
@@ -112,6 +119,7 @@ export default {
 
             this.form.products = JSON.stringify(item);
             this.form.exchange_rate = this.currency.exchange_rate;
+            this.form.currency_code = this.currency.code;
         },
 
         loadShippings() {

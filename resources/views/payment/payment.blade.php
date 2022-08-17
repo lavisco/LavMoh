@@ -60,7 +60,7 @@
                     />
                     <input
                         type="hidden"
-                        name="phone"
+                        name="contact_number"
                         value="{{ $data->phone }}"
                     />
                     <input
@@ -76,13 +76,18 @@
                     <input type="hidden" name="cms" value="PHP" />
                     <input
                         type="hidden"
+                        name="process_currency"
+                        value="{{ $data->currency_code }}"
+                    />
+                    <input
+                        type="hidden"
                         name="payment"
                         value="{{ $payment }}"
                     />
-                        <order-summary></order-summary>
-                        <button type="submit" class="checkout-btn">
-                            Proceed to Payment
-                        </button>
+                    <order-summary></order-summary>
+                    <button type="submit" class="checkout-btn">
+                        Proceed to Payment
+                    </button>
                 </form>
             </div>
         </div>

@@ -116,7 +116,7 @@ export default {
 
         loadShippings() {
             axios
-                .get("/api/orders/shippings/" + 1)
+                .get("/api/orders/shippings/" + this.$store.getters.currentCartProducts[0].shop_id)
                 .then((response) => {
                     this.shippings = response.data.shippings;
                 })

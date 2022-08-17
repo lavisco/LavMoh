@@ -44,6 +44,6 @@ class ProductController extends Controller
     {
         $jsonArray = json_decode($productIds,true);
 
-        return Product::with(['variation_options'])->findMany($jsonArray);
+        return Product::with(['variation_options', 'product_image'])->findMany($jsonArray);
     }
 }

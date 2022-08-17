@@ -27,12 +27,18 @@ class PaymentController extends Controller
         return view('payment.payment');
     }
 
-    public function paymentProcess(OrderRequest $request)
+    public function showShipping()
     {
-        $order = $this->storeOrder($request);
+        return view('payment.shipping');
+    }
+
+    public function paymentProcess(Request $request)
+    {
+        //$order = $this->storeOrder($request);
 
         // unique_order_id|total_amount
-        $plaintext = $order['id'].'|'.$order['total'];
+        //$plaintext = $order['id'].'|'.$order['total'];
+        $plaintext = '15|5';
 
         $publickey = "-----BEGIN PUBLIC KEY-----
 MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC6nVc/ykIWsT1ktI8/49nfBUOQ
@@ -72,9 +78,15 @@ pJ28AUyd0dWx1YWu1wIDAQAB
         );
 
         //redirect to the url given by payment gateway
-        $lastLocation = end($response->getHeaders()['X-Guzzle-Redirect-History']);
+        //$lastLocation = end($response->getHeaders()['X-Guzzle-Redirect-History']);
+        // $lastLocation = $response->getHeaderLine('X-Guzzle-Redirect-History');
 
-        return redirect($lastLocation);
+        // return redirect($lastLocation);
+
+        $headersRedirect = $response->getHeader(\GuzzleHttp\RedirectMiddleware::HISTORY_HEADER);
+
+        //return $headersRedirect[0];
+        return redirect($headersRedirect[0]);
     }
 
     /*
@@ -121,7 +133,6 @@ pJ28AUyd0dWx1YWu1wIDAQAB
         ]);
 
         $total = $this->storeOrderProduct($products, $exchange_rate, $order->id);
-        //return $total;
 
         $order->update([
             'total' => $total,
@@ -130,7 +141,12 @@ pJ28AUyd0dWx1YWu1wIDAQAB
         $this->storeReceipt($request, $order->id);
         $this->storeTransaction($request, $total, $defaultProduct->user_id, $order->id);
 
-        return ['total' => $total, 'id' => $order->code];
+        //return ['total' => $total, 'id' => $order->code];
+        $data = $request;
+        $total = $total;
+        $code = $order->code;
+
+        return view('payment.payment', compact('data', 'total', 'code'));
     }
 
     public function storeOrderProduct($products, $exchange_rate, $orderId)

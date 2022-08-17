@@ -369,7 +369,7 @@ export default {
                 .post("/buyer-login")
                 .then(() => {
                     $("#addRecord").modal("hide");
-                    window.location.replace("/payment");
+                    window.location.replace("/payment/shipping");
                 })
                 .catch((error) => console.log(error));
         },
@@ -379,7 +379,7 @@ export default {
                 .post("/guest-logout")
                 .then(() => {
                     $("#addRecord").modal("hide");
-                    window.location.replace("/payment");
+                    window.location.replace("/payment/shipping");
                 })
                 .catch((error) => console.log(error));
         },

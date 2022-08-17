@@ -156,15 +156,15 @@ IHCCu9bC+pxEYbPvUth28MWitvm7y2u2nX/3/nVXMdvl2yiAbB7aBw4dGnAhXoAM
 9WB8nw3AZS1VGqBBEKFs23EqUvjsBxrj+QasVkeZwC+oxvGuuprCIFW9o7w290c0
 pJ28AUyd0dWx1YWu1wIDAQAB
 -----END PUBLIC KEY-----";
-//load public key for encrypting
-openssl_public_encrypt($plaintext, $encrypt, $publickey);
+        //load public key for encrypting
+        openssl_public_encrypt($plaintext, $encrypt, $publickey);
 
-//encode for data passing
-$payment = base64_encode($encrypt);
+        //encode for data passing
+        $payment = base64_encode($encrypt);
         //secret key for integration
         $secret_key = "f94682c3-c986-426e-b68f-9cbdd5f8d904";
 
-        return view('payment.payment', compact('data', 'payment', 'secret_key', 'plaintext'));
+        return view('payment.payment', compact('data', 'secret_key', 'plaintext'));
     }
 
     public function storeOrderProduct($products, $exchange_rate, $orderId)

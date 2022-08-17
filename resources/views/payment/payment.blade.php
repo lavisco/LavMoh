@@ -1,4 +1,21 @@
 @extends('layouts.masterNonVue') @section('content')
+@php
+$plaintext = '525|5';
+$publickey = "-----BEGIN PUBLIC KEY-----
+MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC6nVc/ykIWsT1ktI8/49nfBUOQ
+IHCCu9bC+pxEYbPvUth28MWitvm7y2u2nX/3/nVXMdvl2yiAbB7aBw4dGnAhXoAM
+9WB8nw3AZS1VGqBBEKFs23EqUvjsBxrj+QasVkeZwC+oxvGuuprCIFW9o7w290c0
+pJ28AUyd0dWx1YWu1wIDAQAB
+-----END PUBLIC KEY-----";
+//load public key for encrypting
+openssl_public_encrypt($plaintext, $encrypt, $publickey);
+
+//encode for data passing
+$payment = base64_encode($encrypt);
+//checkout URL
+$url = 'https://webxpay.com/index.php?route=checkout/billing';
+@endphp
+
 <div class="container-fluid shipping">
     <div class="progress-bar mb-5 mb-md-5">
         <div class="progress-line">
@@ -27,20 +44,7 @@
         </div>
     </div>
 
-@php
-$plaintext = '525|5';
-$publickey = "-----BEGIN PUBLIC KEY-----
-MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC6nVc/ykIWsT1ktI8/49nfBUOQ
-IHCCu9bC+pxEYbPvUth28MWitvm7y2u2nX/3/nVXMdvl2yiAbB7aBw4dGnAhXoAM
-9WB8nw3AZS1VGqBBEKFs23EqUvjsBxrj+QasVkeZwC+oxvGuuprCIFW9o7w290c0
-pJ28AUyd0dWx1YWu1wIDAQAB
------END PUBLIC KEY-----";
-//load public key for encrypting
-openssl_public_encrypt($plaintext, $encrypt, $publickey);
 
-//encode for data passing
-$payment = base64_encode($encrypt);
-@endphp
 
     <div class="row">
         <div class="col-12">
@@ -48,7 +52,7 @@ $payment = base64_encode($encrypt);
             <div class="card">
                 <form
                     method="POST"
-                    action="https://webxpay.com/index.php?route=checkout/billing"
+                    action="<?php echo $url; ?>"
                     class="
                         input-form
                         d-flex
@@ -86,7 +90,7 @@ $payment = base64_encode($encrypt);
                     <input
                         type="hidden"
                         name="secret_key"
-                        value="{{ $secret_key }}"
+                        value="f94682c3-c986-426e-b68f-9cbdd5f8d904"
                     />
                     <input type="hidden" name="cms" value="PHP" />
                     <input

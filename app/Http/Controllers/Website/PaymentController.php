@@ -277,21 +277,15 @@ pJ28AUyd0dWx1YWu1wIDAQAB
             $signature_status = true ;
         }
 
-        //get payment response in segments
-        //payment format: order_id|order_refference_number|date_time_transaction|payment_gateway_used|status_code|comment;
-        $responseVariables = explode('|', $payment);      
-
         if($signature_status == true)
         {
-            //display values
-            echo $signature_status;
-            echo '<br/>';
-            var_dump($responseVariables);
+            //get payment response in segments
+            //payment format: order_id|order_refference_number|date_time_transaction|payment_gateway_used|status_code|comment;
+            $responseVariables = explode('|', $payment);  
+            return view('payment.payment-response', compact('responseVariables'));
         } else
         {
-            echo 'Error Validation'; 
+            return view('payment.payment-error');
         }
-
-        echo $request;
     }
 }

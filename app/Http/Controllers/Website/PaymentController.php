@@ -15,6 +15,8 @@ use App\Models\Shipping;
 use App\Models\Transaction;
 use App\Models\User;
 use App\Models\VariationOption;
+use GuzzleHttp\Client;
+use GuzzleHttp\RequestOptions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
@@ -31,6 +33,7 @@ class PaymentController extends Controller
 
         // unique_order_id|total_amount
         $plaintext = $order['id'].'|'.$order['total'];
+
         $publickey = "-----BEGIN PUBLIC KEY-----
 MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC6nVc/ykIWsT1ktI8/49nfBUOQ
 IHCCu9bC+pxEYbPvUth28MWitvm7y2u2nX/3/nVXMdvl2yiAbB7aBw4dGnAhXoAM
@@ -43,21 +46,35 @@ pJ28AUyd0dWx1YWu1wIDAQAB
         //encode for data passing
         $payment = base64_encode($encrypt);
 
+        //new Guzzle http client to send post data to external url
+        $httpClient = new Client();
 
-        $response = Http::post('https://webxpay.com/index.php?route=checkout/billing', [
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'address_line_one' => $request->address_line_one,
-            
-            'secret_key' => "f94682c3-c986-426e-b68f-9cbdd5f8d904",
-            'cms' => "PHP",
-            'payment' => "$payment",
-        ]);
+        //post data
+        $response = $httpClient->post(
+            'https://webxpay.com/index.php?route=checkout/billing',
+            [
+                RequestOptions::ALLOW_REDIRECTS => [
+                    'max' => 5,
+                    'track_redirects' => true,
+                ],
+                RequestOptions::FORM_PARAMS => [
+                    'first_name' => $request->first_name,
+                    'last_name' => $request->last_name,
+                    'email' => $request->email,
+                    'phone' => $request->phone,
+                    'address_line_one' => $request->address_line_one,
+    
+                    'secret_key' => "f94682c3-c986-426e-b68f-9cbdd5f8d904",
+                    'cms' => "PHP",
+                    'payment' => "$payment",
+                ],
+            ]
+        );
 
-        return $response;
+        //redirect to the url given by payment gateway
+        $lastLocation = end($response->getHeaders()['X-Guzzle-Redirect-History']);
 
+        return redirect($lastLocation);
     }
 
     /*

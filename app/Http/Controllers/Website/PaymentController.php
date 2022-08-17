@@ -164,7 +164,7 @@ pJ28AUyd0dWx1YWu1wIDAQAB
         //secret key for integration
         $secret_key = "f94682c3-c986-426e-b68f-9cbdd5f8d904";
 
-        return view('payment.payment', compact('data', 'secret_key'));
+        return view('payment.payment', compact('data', 'secret_key', 'payment'));
     }
 
     public function storeOrderProduct($products, $exchange_rate, $orderId)

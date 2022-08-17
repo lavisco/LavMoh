@@ -1,20 +1,4 @@
 @extends('layouts.masterNonVue') @section('content')
-@php
-$plaintext = '525|5';
-$publickey = "-----BEGIN PUBLIC KEY-----
-MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC6nVc/ykIWsT1ktI8/49nfBUOQ
-IHCCu9bC+pxEYbPvUth28MWitvm7y2u2nX/3/nVXMdvl2yiAbB7aBw4dGnAhXoAM
-9WB8nw3AZS1VGqBBEKFs23EqUvjsBxrj+QasVkeZwC+oxvGuuprCIFW9o7w290c0
-pJ28AUyd0dWx1YWu1wIDAQAB
------END PUBLIC KEY-----";
-//load public key for encrypting
-openssl_public_encrypt($plaintext, $encrypt, $publickey);
-
-//encode for data passing
-$payment = base64_encode($encrypt);
-//checkout URL
-$url = 'https://webxpay.com/index.php?route=checkout/billing';
-@endphp
 
 <div class="container-fluid shipping">
     <div class="progress-bar mb-5 mb-md-5">
@@ -44,15 +28,13 @@ $url = 'https://webxpay.com/index.php?route=checkout/billing';
         </div>
     </div>
 
-
-
     <div class="row">
         <div class="col-12">
             <h1 class="mb-4">Proceed to payment page</h1>
             <div class="card">
                 <form
                     method="POST"
-                    action="<?php echo $url; ?>"
+                    action="https://webxpay.com/index.php?route=checkout/billing"
                     class="
                         input-form
                         d-flex
@@ -92,19 +74,23 @@ $url = 'https://webxpay.com/index.php?route=checkout/billing';
                         name="process_currency"
                         value="{{ $data->currency_code }}"
                     />
-                    
+
                     <input type="hidden" name="cms" value="PHP" />
-                    
-                    <input type="text" name="enc_method" value="JCs3J+6oSz4V0LgE0zi/Bg==">
+
+                    <input
+                        type="hidden"
+                        name="enc_method"
+                        value="JCs3J+6oSz4V0LgE0zi/Bg=="
+                    />
                     <input
                         type="hidden"
                         name="secret_key"
-                        value="f94682c3-c986-426e-b68f-9cbdd5f8d904"
+                        value="{{ $secret_key }}"
                     />
                     <input
                         type="hidden"
                         name="payment"
-                        value="<?php echo $payment; ?>"
+                        value="{{ $payment }}"
                     />
                     <order-summary></order-summary>
                     <button type="submit" class="checkout-btn">

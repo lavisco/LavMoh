@@ -89,14 +89,17 @@ $url = 'https://webxpay.com/index.php?route=checkout/billing';
                     />
                     <input
                         type="hidden"
-                        name="secret_key"
-                        value="f94682c3-c986-426e-b68f-9cbdd5f8d904"
-                    />
-                    <input type="hidden" name="cms" value="PHP" />
-                    <input
-                        type="hidden"
                         name="process_currency"
                         value="{{ $data->currency_code }}"
+                    />
+                    
+                    <input type="hidden" name="cms" value="PHP" />
+                    
+                    <input type="text" name="enc_method" value="JCs3J+6oSz4V0LgE0zi/Bg==">
+                    <input
+                        type="hidden"
+                        name="secret_key"
+                        value="f94682c3-c986-426e-b68f-9cbdd5f8d904"
                     />
                     <input
                         type="hidden"

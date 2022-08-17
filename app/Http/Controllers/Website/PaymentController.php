@@ -283,11 +283,10 @@ pJ28AUyd0dWx1YWu1wIDAQAB
         {
             //get payment response in segments
             //payment format: order_id|order_refference_number|date_time_transaction|payment_gateway_used|status_code|comment;
-            //return view('payment.payment-response', compact('responseVariables'));
+            return view('payment.payment-response', compact('responseVariables'));
         } else
         {
-            //return view('payment.payment-error');
+            return view('payment.payment-error');
         }
-        return 'works';
     }
 }

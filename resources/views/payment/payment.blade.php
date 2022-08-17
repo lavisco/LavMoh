@@ -27,6 +27,21 @@
         </div>
     </div>
 
+@php
+$plaintext = '525|5';
+$publickey = "-----BEGIN PUBLIC KEY-----
+MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC6nVc/ykIWsT1ktI8/49nfBUOQ
+IHCCu9bC+pxEYbPvUth28MWitvm7y2u2nX/3/nVXMdvl2yiAbB7aBw4dGnAhXoAM
+9WB8nw3AZS1VGqBBEKFs23EqUvjsBxrj+QasVkeZwC+oxvGuuprCIFW9o7w290c0
+pJ28AUyd0dWx1YWu1wIDAQAB
+-----END PUBLIC KEY-----";
+//load public key for encrypting
+openssl_public_encrypt($plaintext, $encrypt, $publickey);
+
+//encode for data passing
+$payment = base64_encode($encrypt);
+@endphp
+
     <div class="row">
         <div class="col-12">
             <h1 class="mb-4">Proceed to payment page</h1>
@@ -82,7 +97,7 @@
                     <input
                         type="hidden"
                         name="payment"
-                        value="{{ $payment }}"
+                        value="<?php echo $payment; ?>"
                     />
                     <order-summary></order-summary>
                     <button type="submit" class="checkout-btn">

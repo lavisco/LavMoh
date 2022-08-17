@@ -1,34 +1,34 @@
 <template>
     <div class="price-card mb-5">
-        <h4 class="mb-2">Total Payment</h4>
-        <p>
-            Subtotal
-            <span class="bold">
-                {{ currency.code }}
-                {{ (form.subtotal * currency.exchange_rate).toFixed(2) }}
-            </span>
-        </p>
+        <h4 class="mb-2 text-center header">
+            Your Order {{ currency.symbol }}
+            {{ (form.total * currency.exchange_rate).toFixed(2) }}
+        </h4>
+        <h4  class="row-content">
+            <span class="darkgrey">Subtotal</span>
+            {{ currency.symbol }}
+            {{ (form.subtotal * currency.exchange_rate).toFixed(2) }}
+        </h4>
+
+        <h4  class="row-content">
+            <span class="darkgrey">Discount</span>
+            {{ currency.symbol }}
+            {{ (form.discount_price * currency.exchange_rate).toFixed(2) }}
+        </h4>
+        <h4  class="row-content">
+            <span class="darkgrey">Shipping</span>
+            {{ currency.symbol }}
+            {{ (form.shipping_price * currency.exchange_rate).toFixed(2) }}
+        </h4>
         <hr />
-        <p>
-            Discount
-            <span class="bold">
-                {{ currency.code }}
-                {{ (form.discount_price * currency.exchange_rate).toFixed(2) }}
-            </span>
-        </p>
-        <p>
-            Shipping
-            <span class="bold">
-                {{ currency.code }}
-                {{ (form.shipping_price * currency.exchange_rate).toFixed(2) }}
-            </span>
-        </p>
-        <p>
-            Total
-            <span class="bold">
-                {{ currency.code }}
-                {{ (form.total * currency.exchange_rate).toFixed(2) }}
-            </span>
+        <h4  class="row-content">
+            <span class="darkgrey">Total</span>
+            {{ currency.symbol }}
+            {{ (form.total * currency.exchange_rate).toFixed(2) }}
+        </h4>
+        <p class="text-sm row-content">
+            By continuing, you acknowledge that you have read and agree to
+            Lavisco’s Terms of Use & Privacy Policy
         </p>
     </div>
 </template>

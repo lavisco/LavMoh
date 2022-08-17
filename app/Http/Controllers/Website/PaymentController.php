@@ -92,7 +92,7 @@ pJ28AUyd0dWx1YWu1wIDAQAB
     /*
     * order store methods start
     */
-    public function storeOrder(Request $request)
+    public function storeOrder(OrderRequest $request)
     {       
         /*
         * User ID
@@ -118,6 +118,8 @@ pJ28AUyd0dWx1YWu1wIDAQAB
         $request->merge([
             'status' => "not acknowledged",
             'tax' => 0.00,
+            'discount_price' => 0.00,
+            'giftwrap_price' => 0.00,
             'buyer_id' => $userId,
             'country' => "Sri Lanka",
             'billing_country' => "Sri Lanka",
@@ -136,17 +138,34 @@ pJ28AUyd0dWx1YWu1wIDAQAB
 
         $order->update([
             'total' => $total,
+            'subtotal' => $total-$shipping->price,
         ]);
 
         $this->storeReceipt($request, $order->id);
         $this->storeTransaction($request, $total, $defaultProduct->user_id, $order->id);
 
         //return ['total' => $total, 'id' => $order->code];
+        
+        //payment fields
         $data = $request;
-        $total = $total;
-        $code = $order->code;
+        $plaintext = $order->code.'|'.$total;
 
-        return view('payment.payment', compact('data', 'total', 'code'));
+        $publickey = "-----BEGIN PUBLIC KEY-----
+MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC6nVc/ykIWsT1ktI8/49nfBUOQ
+IHCCu9bC+pxEYbPvUth28MWitvm7y2u2nX/3/nVXMdvl2yiAbB7aBw4dGnAhXoAM
+9WB8nw3AZS1VGqBBEKFs23EqUvjsBxrj+QasVkeZwC+oxvGuuprCIFW9o7w290c0
+pJ28AUyd0dWx1YWu1wIDAQAB
+-----END PUBLIC KEY-----";
+        //load public key for encrypting
+        openssl_public_encrypt($plaintext, $encrypt, $publickey);
+
+        //encode for data passing
+        $payment = base64_encode($encrypt);
+
+        //secret key for integration
+        $secret_key = "f94682c3-c986-426e-b68f-9cbdd5f8d904";
+
+        return view('payment.payment', compact('data', 'payment', 'secret_key'));
     }
 
     public function storeOrderProduct($products, $exchange_rate, $orderId)

@@ -70,7 +70,15 @@
         <div class="col-12" v-show="products[0]">
             <div v-for="shop in shopProducts" class="mb-5">
                 <div class="cart-items-card">
-                    <h3 class="text-left d-flex flex-row align-items-center">
+                    <h4
+                        class="
+                            header
+                            text-left
+                            d-flex
+                            flex-row
+                            align-items-center
+                        "
+                    >
                         <img
                             class="cart-shop-banner mr-2"
                             :src="
@@ -80,149 +88,157 @@
                             "
                         />
                         {{ shop[0].shop }}
-                    </h3>
-                    <hr />
-                    <div v-for="product in shop">
-                        <div
-                            class="
-                                d-flex
-                                flex-row
-                                justify-content-between
-                                my-2
-                                cart-table
-                            "
-                        >
-                            <div class="d-flex flex-row gap">
-                                <img
-                                    class="banner-container"
-                                    :src="
-                                        product.image_path
-                                            ? product.image_path
-                                            : '/images/lavisco/img-bg.jpg'
-                                    "
-                                />
-                                <div class="d-flex flex-column gap">
-                                    <div>
-                                        <div class="cart-title mb-2">
-                                            <router-link
-                                                :to="{
-                                                    name: 'products/product',
-                                                    params: {
-                                                        productId: product.id,
-                                                        slug: product.slug,
-                                                    },
-                                                }"
-                                            >
-                                                {{ product.title }}
-                                            </router-link>
-                                        </div>
-                                        <div class="mb-2 cart-price hide-lg">
-                                            {{ currency.symbol }}
-                                            {{
-                                                (
-                                                    product.price *
-                                                    product.quantity *
-                                                    currency.exchange_rate
-                                                ).toFixed(2)
-                                            }}
-                                        </div>
-                                        <div class="cart-body-text">
-                                            <div
-                                                v-if="
-                                                    product.category ==
-                                                    'Gift Boxes'
-                                                "
-                                            >
-                                                <div
-                                                    v-for="giftItems in product.variations"
-                                                >
-                                                    {{ giftItems.quantity }} x
-                                                    {{ giftItems.name }}
-                                                </div>
-                                            </div>
-                                            <div v-else>
-                                                <div
-                                                    v-for="variation in product.variations"
-                                                >
-                                                    {{ variation.parent }} :
-                                                    {{ variation.name }}
-                                                </div>
-                                            </div>
-
-                                            <div v-show="product.custom_text">
-                                                Custom Text:
-                                                {{ product.custom_text }}
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div
-                                        class="
-                                            d-flex
-                                            flex-row
-                                            align-items-center
+                    </h4>
+                    <div class="row-content">
+                        <div v-for="product in shop">
+                            <div
+                                class="
+                                    d-flex
+                                    flex-row
+                                    justify-content-between
+                                    my-4
+                                    cart-table
+                                "
+                            >
+                                <div class="d-flex flex-row gap">
+                                    <img
+                                        class="banner-container"
+                                        :src="
+                                            product.image_path
+                                                ? product.image_path
+                                                : '/images/lavisco/img-bg.jpg'
                                         "
-                                    >
-                                        <div class="product-card-counter">
-                                            <div
-                                                class="counter-minus"
-                                                @click.prevent="
-                                                    decreaseProductQuantity(
-                                                        product
-                                                    )
-                                                "
-                                            >
-                                                -
+                                    />
+                                    <div class="d-flex flex-column gap">
+                                        <div>
+                                            <div class="cart-title mb-2">
+                                                <router-link
+                                                    :to="{
+                                                        name: 'products/product',
+                                                        params: {
+                                                            productId:
+                                                                product.id,
+                                                            slug: product.slug,
+                                                        },
+                                                    }"
+                                                >
+                                                    {{ product.title }}
+                                                </router-link>
                                             </div>
-                                            <div class="counter-num">
-                                                {{ product.quantity }}
-                                            </div>
                                             <div
-                                                class="counter-plus"
-                                                @click.prevent="
-                                                    increaseProductQuantity(
-                                                        product
-                                                    )
-                                                "
+                                                class="mb-2 cart-price hide-lg"
                                             >
-                                                +
+                                                {{ currency.symbol }}
+                                                {{
+                                                    (
+                                                        product.price *
+                                                        product.quantity *
+                                                        currency.exchange_rate
+                                                    ).toFixed(2)
+                                                }}
+                                            </div>
+                                            <div class="cart-body-text">
+                                                <div
+                                                    v-if="
+                                                        product.category ==
+                                                        'Gift Boxes'
+                                                    "
+                                                >
+                                                    <div
+                                                        v-for="giftItems in product.variations"
+                                                    >
+                                                        {{ giftItems.quantity }}
+                                                        x
+                                                        {{ giftItems.name }}
+                                                    </div>
+                                                </div>
+                                                <div v-else>
+                                                    <div
+                                                        v-for="variation in product.variations"
+                                                    >
+                                                        {{ variation.parent }} :
+                                                        {{ variation.name }}
+                                                    </div>
+                                                </div>
+
+                                                <div
+                                                    v-show="product.custom_text"
+                                                >
+                                                    Custom Text:
+                                                    {{ product.custom_text }}
+                                                </div>
                                             </div>
                                         </div>
-                                        <a
-                                            class="cart-remove-btn ml-4"
-                                            title="Remove from cart"
-                                            @click.prevent="
-                                                removeProductFromCart(product)
+                                        <div
+                                            class="
+                                                d-flex
+                                                flex-row
+                                                align-items-center
                                             "
                                         >
-                                            Remove
-                                        </a>
+                                            <div class="product-card-counter">
+                                                <div
+                                                    class="counter-minus"
+                                                    @click.prevent="
+                                                        decreaseProductQuantity(
+                                                            product
+                                                        )
+                                                    "
+                                                >
+                                                    -
+                                                </div>
+                                                <div class="counter-num">
+                                                    {{ product.quantity }}
+                                                </div>
+                                                <div
+                                                    class="counter-plus"
+                                                    @click.prevent="
+                                                        increaseProductQuantity(
+                                                            product
+                                                        )
+                                                    "
+                                                >
+                                                    +
+                                                </div>
+                                            </div>
+                                            <a
+                                                class="cart-remove-btn ml-4"
+                                                title="Remove from cart"
+                                                @click.prevent="
+                                                    removeProductFromCart(
+                                                        product
+                                                    )
+                                                "
+                                            >
+                                                Remove
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="ml-4 cart-price hide">
-                                {{ currency.symbol }}
-                                {{
-                                    (
-                                        product.price *
-                                        product.quantity *
-                                        currency.exchange_rate
-                                    ).toFixed(2)
-                                }}
+                                <div class="ml-4 cart-price hide">
+                                    {{ currency.symbol }}
+                                    {{
+                                        (
+                                            product.price *
+                                            product.quantity *
+                                            currency.exchange_rate
+                                        ).toFixed(2)
+                                    }}
+                                </div>
                             </div>
                         </div>
-                        <hr />
                     </div>
-                    <div class="cart-price text-right">
-                        <span class="text-lighter">
-                            Subtotal {{ currency.symbol }}
-                        </span>
+
+                    <h4 class="bottom text-right mb-0">
+                        <span class="darkgrey"> Subtotal </span>
+                        {{ currency.symbol }}
                         {{
                             (cartTotal(shop) * currency.exchange_rate).toFixed(
                                 2
                             )
                         }}
-                    </div>
+                    </h4>
                 </div>
 
                 <p class="mt-4">
@@ -232,7 +248,6 @@
                     <button
                         class="checkout-btn"
                         @click.prevent="saveShopCartTotal(shop)"
-                        
                     >
                         Proceed to Checkout
                     </button>

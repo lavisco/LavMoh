@@ -41,7 +41,6 @@ class OrderRequest extends FormRequest
             'recipient_last_name' => 'required|string|max:100',
             'recipient_email' => 'nullable|string|email|max:255',
             'recipient_phone' => 'required|max:20',
-            'self_delivery' => 'required',
 
             'billing_address_line_one' => 'required|string|max:255',
             'billing_address_line_two' => 'nullable|string|max:255',
@@ -51,15 +50,8 @@ class OrderRequest extends FormRequest
             'billing_state' => 'nullable|string|max:100',
 
             'delivery_date' => 'date|required',
-            // 'currency_code' => 'string|required|max:5',
-            // 'current_exchange_rate' => 'numeric|required',
 
             'shipping_id' => 'required',
-            // 'total' => 'numeric|required',
-            // 'subtotal' => 'numeric|required',
-            // 'giftwrap_price' => 'numeric|nullable',
-            // 'shipping_price' => 'numeric|required',
-            // 'discount_price' => 'numeric|nullable',
         ];
     }
 

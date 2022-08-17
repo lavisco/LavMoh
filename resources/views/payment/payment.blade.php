@@ -28,46 +28,63 @@
     </div>
 
     <div class="row">
-        <div class="col-lg-8">
-            <h1 class="text-left mb-4">Enter your Shipping Details</h1>
+        <div class="col-12">
+            <h1 class="mb-4">Proceed to payment page</h1>
             <div class="card">
                 <form
                     method="POST"
                     action="https://webxpay.com/index.php?route=checkout/billing"
-                    class="input-form"
+                    class="
+                        input-form
+                        d-flex
+                        flex-column
+                        justify-content-center
+                        align-items-center
+                    "
                 >
                     @csrf
                     <input
                         type="hidden"
-                        name="secret_key"
-                        value="f94682c3-c986-426e-b68f-9cbdd5f8d904"
+                        name="first_name"
+                        value="{{ $data->first_name }}"
                     />
-                    <p>
-                        {{ $total }}
-                    </p>
-
-                    <!-- order summary mobile -->
-                    <div
-                        class="
-                            d-flex
-                            flex-column
-                            justify-content-center
-                            align-items-center
-                            mt-5
-                        "
-                    >
-                        <order-summary class="hide-content"></order-summary>
+                    <input
+                        type="hidden"
+                        name="last_name"
+                        value="{{ $data->last_name }}"
+                    />
+                    <input
+                        type="hidden"
+                        name="email"
+                        value="{{ $data->email }}"
+                    />
+                    <input
+                        type="hidden"
+                        name="phone"
+                        value="{{ $data->phone }}"
+                    />
+                    <input
+                        type="hidden"
+                        name="address_line_one"
+                        value="{{ $data->address_line_one }}"
+                    />
+                    <input
+                        type="hidden"
+                        name="secret_key"
+                        value="{{ $secret_key }}"
+                    />
+                    <input type="hidden" name="cms" value="PHP" />
+                    <input
+                        type="hidden"
+                        name="payment"
+                        value="{{ $payment }}"
+                    />
+                        <order-summary></order-summary>
                         <button type="submit" class="checkout-btn">
                             Proceed to Payment
                         </button>
-                    </div>
                 </form>
             </div>
-        </div>
-
-        <!-- order summary desktop -->
-        <div class="col-lg-4 hide-content-sm">
-            <order-summary></order-summary>
         </div>
     </div>
 </div>

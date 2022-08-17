@@ -53,7 +53,7 @@ main {
 
 /*---------------------text---------------------*/
 h1 {
-    color: $black;
+    color: $dark-grey;
     font-style: normal;
     font-weight: 600;
     font-size: 34px;
@@ -62,7 +62,7 @@ h1 {
     text-transform: capitalize;
 }
 h2 {
-    color: $black;
+    color: $dark-grey;
     font-style: normal;
     font-weight: 600;
     font-size: 30px;
@@ -71,7 +71,7 @@ h2 {
     text-transform: capitalize;
 }
 h3 {
-    color: $black;
+    color: $dark-grey;
     font-style: normal;
     font-weight: 600;
     font-size: 24px;
@@ -84,7 +84,7 @@ h4 {
     font-weight: 600;
     line-height: 1.7;
     font-style: normal;
-    color: $black;
+    color: $dark-grey;
     letter-spacing: 0.01em;
 }
 h5 {
@@ -96,7 +96,7 @@ h6 {
     font-size: 14px;
     font-weight: 500;
     font-style: normal;
-    color: #747474 !important;
+    color: $dark-grey;
     margin-bottom: 12px;
 }
 .title {
@@ -121,11 +121,11 @@ h6 {
 }
 
 .text-sm {
-    font-size: 12px;
+    font-size: 12px !important;
 }
 
 .text-xs {
-    font-size: 0.8rem;
+    font-size: 0.8rem !important;
     letter-spacing: 0.02rem;
     font-weight: 400 !important;
     color: #868686;
@@ -134,7 +134,7 @@ h6 {
 .text-xxs {
     font-weight: 400;
     font-size: 11px !important;
-    color: #7b7b7b;
+    color: #868686;
 }
 
 .invalid-feedback {
@@ -474,6 +474,7 @@ button.bg-black:hover {
 .bg-light-grey {
     background-color: #fafafa;
 }
+
 .white {
     color: $white !important;
 }
@@ -1542,8 +1543,8 @@ section {
     border-radius: 12px;
     /* border: 2px solid #d8c2ff; */
     background-color: #fdfcfc;
-    padding-bottom: 20px;
-    box-shadow: 0px 0px 11px -5px #d3d3d3;
+    padding-bottom: 22px;
+    border: 1px solid #f6f5f5;
 
     @media (max-width: 1170px) {
         width: 100% !important;
@@ -1555,21 +1556,19 @@ section {
     hr {
         border-top: 1px solid #f6eaec;
     }
-    h4 {
-        padding: 20px;
+    .header {
+        padding: 16px 28px;
         background-color: #f7f7f7;
         border-top-left-radius: 12px;
         border-top-right-radius: 12px;
         color: $dark-grey !important;
+        text-align: center;
     }
-    p {
-        font-size: 16px;
-        font-weight: 500;
-        color: #373737;
+    .row-content {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        padding: 8px 20px;
+        padding: 6px 28px;
         margin-bottom: 0;
     }
 }
@@ -3247,8 +3246,8 @@ footer {
     transform: translate(-50%, -50%);
 }
 .banner-container {
-    width: 190px;
-    height: 190px;
+    width: 170px;
+    height: 170px;
     border-radius: 4px;
     object-fit: cover;
     object-position: center;
@@ -3595,10 +3594,10 @@ footer {
 
 .cart-items-card {
     border-radius: 12px;
-    padding: 30px;
+    //padding: 30px;
     width: 100%;
-    background-color: #f7f7f780;
-    box-shadow: 0px 0px 11px -5px #d3d3d3;
+    background-color: $white;
+    border: 1px solid #f6f5f5;
     .hide-lg {
         display: none;
     }
@@ -3606,6 +3605,26 @@ footer {
         font-size: 18px;
         font-weight: 600;
         color: $black;
+    }
+    .header {
+        padding: 16px 28px;
+        background-color: #FDFCFC;
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+        color: $dark-grey !important;
+        text-align: center;
+    }
+    .bottom {
+        padding: 16px 28px;
+        background-color: #FDFCFC;
+        border-bottom-left-radius: 12px;
+        border-bottom-right-radius: 12px;
+        color: $dark-grey !important;
+        text-align: center;
+        margin-bottom: 0;
+    }
+    .row-content {
+        padding: 6px 28px;
     }
 }
 

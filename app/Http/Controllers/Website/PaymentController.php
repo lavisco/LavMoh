@@ -270,7 +270,7 @@ pJ28AUyd0dWx1YWu1wIDAQAB
 -----END PUBLIC KEY-----";
         openssl_public_decrypt($signature, $value, $publickey);
 
-        $testpayment = $request->payment;
+        $testpayment = base64_decode($request->payment);
 
         $signature_status = false ;
 

@@ -93,11 +93,10 @@ h5 {
     font-weight: 600;
 }
 h6 {
-    font-size: 14px;
-    font-weight: 500;
+    font-size: 16px;
+    font-weight: 600;
     font-style: normal;
     color: $dark-grey;
-    margin-bottom: 12px;
 }
 .title {
     font-style: normal;
@@ -1578,7 +1577,7 @@ section {
     display: block;
     font-size: 14px;
     font-weight: 500;
-    color: #c9c9c9;
+    color: #acacac;
     width: 850px;
     position: relative;
     height: 51px;
@@ -1607,7 +1606,7 @@ section {
         border-radius: 5px;
         height: 2px;
         background-color: #e4e4e4;
-        opacity: 0.5;
+        opacity: 0.2;
         z-index: 1;
         margin-top: 13px;
         position: absolute;
@@ -1616,24 +1615,24 @@ section {
             height: 100%;
         }
         .done {
-            background-color: $dark-grey !important;
+            background-color: $lav-green !important;
         }
         .now {
-            background-color: $lav-red !important;
+            background-color: $dark-grey !important;
         }
     }
 
     .activated {
-        color: $lav-red;
+        color: $dark-grey;
         .check-sign {
-            background-color: $lav-red;
+            background-color: $dark-grey;
         }
     }
 
     .completed {
-        color: $dark-grey;
+        color: $lav-green;
         .check-sign {
-            background-color: $dark-grey;
+            background-color: $lav-green;
         }
     }
 
@@ -1650,7 +1649,7 @@ section {
         border-radius: 50%;
         width: 24px;
         height: 24px;
-        background-color: $lav-grey;
+        background-color: #acacac;
         color: white;
         margin-bottom: 6px;
         display: flex;
@@ -3587,8 +3586,8 @@ footer {
 }
 
 .cart-shop-banner {
-    width: 46px;
-    height: 46px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
 }
 

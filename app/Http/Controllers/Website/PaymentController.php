@@ -270,8 +270,6 @@ pJ28AUyd0dWx1YWu1wIDAQAB
 -----END PUBLIC KEY-----";
         openssl_public_decrypt($signature, $value, $publickey);
 
-        $testpayment = base64_decode($request->payment);
-
         $signature_status = false ;
 
         if($value == $payment)
@@ -279,13 +277,19 @@ pJ28AUyd0dWx1YWu1wIDAQAB
             $signature_status = true ;
         }
 
+        //get payment response in segments
+        //payment format: order_id|order_refference_number|date_time_transaction|payment_gateway_used|status_code|comment;
         $responseVariables = explode('|', $payment); 
+
+        //find order
+        $order = Order::with(['shop', 'order_products', 'order_products.product', 'order_products.product.product_image', 'order_products.order_product_variations.variation_option.variation', 'shipping'])->findOrFail($responseVariables[0]);
+
+        //show date_time_transaction
+        $order_time = $responseVariables[2];
 
         if($signature_status == true)
         {
-            //get payment response in segments
-            //payment format: order_id|order_refference_number|date_time_transaction|payment_gateway_used|status_code|comment;
-            return view('payment.payment-response', compact('responseVariables', 'testpayment'));
+            return view('payment.payment-response', compact('order', 'order_time'));
         } else
         {
             return view('payment.payment-error');

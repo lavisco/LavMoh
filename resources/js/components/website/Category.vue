@@ -83,14 +83,14 @@
                             "
                         />
                     </div>
-                    <div class="px-2 px-md-3">
-                        <div class="card-title-2">
-                            {{ product.title }}
-                        </div>
+                    <div class="px-md-3">
                         <div class="card-price">
                             {{ currency.symbol }}
                             {{ product.base_price * currency.exchange_rate }}
                             <span v-show="product.has_variations == 1">+</span>
+                        </div>
+                        <div class="card-title-2">
+                            {{ product.title }}
                         </div>
                         <div class="card-secondary-text">
                             {{ product.user.shop.name }}
@@ -169,9 +169,9 @@
                             Displaying products available in
                             <strong>{{ locationActive }}</strong>
                         </p>
-                        <div class="d-flex row">
+                        <div class="d-flex flex-row">
                             <div
-                                class="col-6 d-flex flex-column"
+                                class="col-6 px-1"
                                 v-for="districts in chunkedDistricts"
                             >
                                 <a

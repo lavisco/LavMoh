@@ -50,14 +50,14 @@
                             :alt="product.title"
                         />
                     </div>
-                    <div class="px-2 px-md-3">
-                        <div class="card-title-2">
-                            {{ product.title }}
-                        </div>
+                    <div class="px-md-3">
                         <div class="card-price">
                             {{ currency.symbol }}
                             {{ product.base_price * currency.exchange_rate }}
                             <span v-show="product.has_variations == 1">+</span>
+                        </div>
+                        <div class="card-title-2">
+                            {{ product.title }}
                         </div>
                         <div class="card-secondary-text">
                             {{

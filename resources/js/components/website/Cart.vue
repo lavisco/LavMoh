@@ -67,7 +67,7 @@
             </h5>
         </div>
 
-        <div class="col-12" v-show="products[0]">
+        <div class="col-12 no-padding-sm" v-show="products[0]">
             <div v-for="shop in shopProducts" class="mb-5">
                 <div class="cart-items-card">
                     <h4
@@ -77,6 +77,7 @@
                             d-flex
                             flex-row
                             align-items-center
+                            mb-0
                         "
                     >
                         <img

@@ -240,7 +240,7 @@ button {
     padding: 15px 30px;
     border-radius: 12px;
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 600;
     transition: all 150ms ease-in-out;
 
     &:hover {
@@ -261,11 +261,12 @@ button {
 .btn-sm {
     display: flex;
     align-items: center;
+    justify-content: center;
     padding: 8px 16px;
     background-color: #f7f7f7;
     color: #4e4e4e;
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 600;
     border-radius: 6px;
     text-align: center;
     &:hover,
@@ -275,6 +276,9 @@ button {
                 fill: $white;
             }
         }
+    }
+    @media (max-width: 768px) {
+        font-size: 15px;
     }
 }
 
@@ -1449,7 +1453,7 @@ section {
     gap: 20px;
     @media (max-width: 768px) {
         flex-direction: row;
-        gap: 7px;
+        gap: 6%;
     }
 }
 
@@ -1492,14 +1496,14 @@ section {
     background-color: #fdfcfc;
     border-bottom-left-radius: 12px;
     border-bottom-right-radius: 12px;
-    padding: 20px 30px;
+    padding: 20px 28px;
 }
 .modal-header {
     border-bottom: none;
     background-color: #f7f7f7;
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
-    padding: 20px 30px;
+    padding: 20px 28px;
     .close {
         color: $black;
     }
@@ -1509,7 +1513,13 @@ section {
     background-color: #f7f7f7;
     border-bottom-left-radius: 12px;
     border-bottom-right-radius: 12px;
-    padding: 20px 30px;
+    padding: 20px 28px;
+}
+
+@media (max-width: 768px) {
+    .modal-body, .modal-header, .modal-footer {
+        padding: 16px 20px;
+    }
 }
 
 .close {
@@ -1569,6 +1579,13 @@ section {
         justify-content: space-between;
         padding: 6px 28px;
         margin-bottom: 0;
+    }
+
+    @media (max-width: 768px) {
+        .header, .row-content {
+            padding-left: 16px;
+            padding-right: 16px;
+        }
     }
 }
 
@@ -1778,7 +1795,7 @@ section {
     }
 }
 .card-title-2 {
-    font-weight: 500;
+    //font-weight: 500;
     line-height: 25px;
     max-height: 25px;
     margin-bottom: 4px;
@@ -1787,8 +1804,8 @@ section {
     text-overflow: ellipsis;
 }
 .card-price {
-    font-size: 19px;
-    font-weight: 500;
+    font-size: 17px;
+    font-weight: 600;
 }
 .card-secondary-text {
     font-size: 13px;
@@ -1824,19 +1841,24 @@ section {
 
 @media (max-width: 768px) {
     .item-card-2 {
-        width: 48%;
+        width: 47%;
+        border: none;
     }
     .card-img-2 {
         margin-bottom: 9px;
-        height: 240px;
+        height: 200px;
     }
     .card-title-2 {
         font-size: 14px;
         font-weight: 400;
+        margin-bottom: 0;
     }
     .card-price {
         font-size: 16px;
         font-weight: 600;
+    }
+    .card-secondary-text {
+        font-size: 12px;
     }
     .card-button-container {
         button {
@@ -1846,7 +1868,7 @@ section {
         }
     }
     .product-list > .card {
-        padding: 0px 0px 10px 0px !important;
+        margin-bottom: 12px;
     }
 }
 
@@ -2482,6 +2504,7 @@ footer {
             optgroup,
             textarea {
                 padding: 8px 20px !important;
+                border-radius: 8px;
             }
             .form-group {
                 margin-bottom: 1.4rem;
@@ -3625,6 +3648,13 @@ footer {
     .row-content {
         padding: 6px 28px;
     }
+
+    @media (max-width: 768px) {
+        .header, .row-content, .bottom {
+            padding-left: 16px;
+            padding-right: 16px;
+        }
+    }
 }
 
 .cart-table {
@@ -3728,8 +3758,8 @@ footer {
         background-color: transparent;
         box-shadow: none;
         .banner-container {
-            width: 30% !important;
-            height: auto !important;
+            width: 60px !important;
+            height: 60px !important;
         }
         .hide {
             display: none;
@@ -4107,13 +4137,10 @@ footer {
             gap: 5px;
         }
         .item-card-2 {
-            width: 48%;
+            width: 47%;
             .card-img-2 {
                 height: 160px;
             }
-        }
-        .card-title-2 {
-            margin-bottom: 0;
         }
     }
 }

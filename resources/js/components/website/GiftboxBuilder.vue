@@ -50,7 +50,7 @@
                                 </div>
                                 <div
                                     class="
-                                        px-2 px-md-3
+                                        px-md-3
                                         pb-3
                                         d-flex
                                         flex-column

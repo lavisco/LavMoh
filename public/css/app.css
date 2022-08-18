@@ -10264,7 +10264,7 @@ button:hover {
   padding: 15px 30px;
   border-radius: 12px;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 600;
   transition: all 150ms ease-in-out;
 }
 .btn:hover {
@@ -10283,16 +10283,22 @@ button:hover {
 .btn-sm, .btn-group-sm > .btn {
   display: flex;
   align-items: center;
+  justify-content: center;
   padding: 8px 16px;
   background-color: #f7f7f7;
   color: #4e4e4e;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 600;
   border-radius: 6px;
   text-align: center;
 }
 .btn-sm:hover svg path, .btn-group-sm > .btn:hover svg path, .btn-sm:focus svg path, .btn-group-sm > .btn:focus svg path {
   fill: #ffffff;
+}
+@media (max-width: 768px) {
+  .btn-sm, .btn-group-sm > .btn {
+    font-size: 15px;
+  }
 }
 
 .btn-xs {
@@ -11494,7 +11500,7 @@ section h1 {
 @media (max-width: 768px) {
   .card-container {
     flex-direction: row;
-    gap: 7px;
+    gap: 6%;
   }
 }
 
@@ -11543,7 +11549,7 @@ section h1 {
   background-color: #fdfcfc;
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 12px;
-  padding: 20px 30px;
+  padding: 20px 28px;
 }
 
 .modal-header {
@@ -11551,7 +11557,7 @@ section h1 {
   background-color: #f7f7f7;
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
-  padding: 20px 30px;
+  padding: 20px 28px;
 }
 .modal-header .close {
   color: #333333;
@@ -11562,9 +11568,14 @@ section h1 {
   background-color: #f7f7f7;
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 12px;
-  padding: 20px 30px;
+  padding: 20px 28px;
 }
 
+@media (max-width: 768px) {
+  .modal-body, .modal-header, .modal-footer {
+    padding: 16px 20px;
+  }
+}
 .close {
   text-shadow: none;
 }
@@ -11626,6 +11637,12 @@ section h1 {
   justify-content: space-between;
   padding: 6px 28px;
   margin-bottom: 0;
+}
+@media (max-width: 768px) {
+  .price-card .header, .price-card .row-content {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
 }
 
 .progress-bar {
@@ -11818,7 +11835,6 @@ section h1 {
 }
 
 .card-title-2 {
-  font-weight: 500;
   line-height: 25px;
   max-height: 25px;
   margin-bottom: 4px;
@@ -11828,8 +11844,8 @@ section h1 {
 }
 
 .card-price {
-  font-size: 19px;
-  font-weight: 500;
+  font-size: 17px;
+  font-weight: 600;
 }
 
 .card-secondary-text {
@@ -11867,22 +11883,28 @@ section h1 {
 
 @media (max-width: 768px) {
   .item-card-2 {
-    width: 48%;
+    width: 47%;
+    border: none;
   }
 
   .card-img-2 {
     margin-bottom: 9px;
-    height: 240px;
+    height: 200px;
   }
 
   .card-title-2 {
     font-size: 14px;
     font-weight: 400;
+    margin-bottom: 0;
   }
 
   .card-price {
     font-size: 16px;
     font-weight: 600;
+  }
+
+  .card-secondary-text {
+    font-size: 12px;
   }
 
   .card-button-container button {
@@ -11892,7 +11914,7 @@ section h1 {
   }
 
   .product-list > .card {
-    padding: 0px 0px 10px 0px !important;
+    margin-bottom: 12px;
   }
 }
 /*---------------------section-special---------------------*/
@@ -12509,6 +12531,7 @@ footer {
 .main-dashboard-content .input-form optgroup,
 .main-dashboard-content .input-form textarea {
     padding: 8px 20px !important;
+    border-radius: 8px;
   }
   .main-dashboard-content .input-form .form-group {
     margin-bottom: 1.4rem;
@@ -13659,6 +13682,12 @@ footer {
 .cart-items-card .row-content {
   padding: 6px 28px;
 }
+@media (max-width: 768px) {
+  .cart-items-card .header, .cart-items-card .row-content, .cart-items-card .bottom {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
 
 .cart-table .cart-title {
   font-size: 18px;
@@ -13763,8 +13792,8 @@ footer {
     box-shadow: none;
   }
   .cart-items-card .banner-container {
-    width: 30% !important;
-    height: auto !important;
+    width: 60px !important;
+    height: 60px !important;
   }
   .cart-items-card .hide {
     display: none;
@@ -14139,13 +14168,10 @@ footer {
     gap: 5px;
   }
   .giftbox-card .item-card-2 {
-    width: 48%;
+    width: 47%;
   }
   .giftbox-card .item-card-2 .card-img-2 {
     height: 160px;
-  }
-  .giftbox-card .card-title-2 {
-    margin-bottom: 0;
   }
 }
 

@@ -647,14 +647,6 @@ export let routes = [
         },
     },
     {
-        path: "/shipping",
-        name: "shipping",
-        component: require("./components/website/Shipping.vue").default,
-        meta: {
-            title: "Shipping",
-        },
-    },
-    {
         path: "/sellers",
         name: "sellers",
         component: require("./components/website/Sellers.vue").default,

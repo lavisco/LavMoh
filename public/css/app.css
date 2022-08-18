@@ -11733,15 +11733,14 @@ section h1 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #fafafa;
-  border-radius: 12px;
-  padding: 8px 20px;
+  padding: 6px 16px;
   margin-top: 10px;
 }
 @media (max-width: 640px) {
   .sort-section {
     flex-direction: column;
     align-items: flex-start;
+    gap: 8px;
   }
   .sort-section .filter-select label {
     font-size: 12px !important;
@@ -11752,13 +11751,18 @@ section h1 {
   font-size: 14px;
   font-weight: 400;
   margin-right: 5px;
+  color: #4e4e4e;
 }
 .sort-section .custom-select {
-  background-color: transparent;
+  background-color: #fafafa;
+  border-radius: 8px;
   cursor: pointer;
   width: 200px;
   border: none;
-  padding: 6px 12px;
+  padding: 8px 16px;
+  font-weight: 600;
+  color: #4e4e4e;
+  font-size: 14px;
 }
 .sort-section .custom-select:focus {
   background-color: #ffffff;

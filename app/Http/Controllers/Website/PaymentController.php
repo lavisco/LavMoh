@@ -270,6 +270,8 @@ pJ28AUyd0dWx1YWu1wIDAQAB
 -----END PUBLIC KEY-----";
         openssl_public_decrypt($signature, $value, $publickey);
 
+        $testpayment = $request->payment;
+
         $signature_status = false ;
 
         if($value == $payment)
@@ -283,7 +285,7 @@ pJ28AUyd0dWx1YWu1wIDAQAB
         {
             //get payment response in segments
             //payment format: order_id|order_refference_number|date_time_transaction|payment_gateway_used|status_code|comment;
-            return view('payment.payment-response', compact('responseVariables'));
+            return view('payment.payment-response', compact('responseVariables', 'testpayment'));
         } else
         {
             return view('payment.payment-error');

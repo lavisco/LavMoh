@@ -29,8 +29,11 @@
 
     <div class="row">
         <div class="col d-flex align-items-center flex-column">
-            <h1 class="mb-4">Your payment was unsuccessfull</h1>
-            <p>There was an error in processing your payment. Please call our hotline to report issue.</p>
+            <h1 class="mb-4">Your payment was unsuccessful</h1>
+            <p>
+                There was an error in processing your payment. Please try again
+                or call our hotline to report issue.
+            </p>
         </div>
     </div>
 </div>

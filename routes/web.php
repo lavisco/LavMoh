@@ -1,19 +1,13 @@
 <?php
 
-use App\Http\Controllers\Api\Website\OrderController as WebsiteOrderController;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\EmailController;
 use App\Http\Controllers\FallbackController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Website\HomeController;
-use App\Http\Controllers\Website\OrderController;
 use App\Http\Controllers\Website\PaymentController;
-use App\Mail\StoreActiveApplicationMail;
-use App\Mail\WelcomeMail;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,23 +20,19 @@ use Illuminate\Support\Facades\Http;
 |
 */
 
-Route::get('/paymenttest', function () {
-    require(public_path() . "/testFile.php");
-})->name('paymenttest');
+/*
+|--------------------------------------------------------------------------
+| Payment Routes
+|--------------------------------------------------------------------------
+*/
 
-Route::get('/paymenttest-response', function () {
-    return view('payment.payment-response');
-});
+// Route::get('/paymenttest', function () {
+//     require(public_path() . "/testFile.php");
+// })->name('paymenttest');
 
-Route::post('/paymenttest', function () {
-    $response = Http::post('https://webxpay.com/index.php?route=checkout/billing');
-    return $response;
-});
-
-Route::get('/payment/shipping', [PaymentController::class, 'showShipping'])->name('paymentShipping');
-Route::post('/payment/shipping', [PaymentController::class, 'storeOrder'])->name('storeOrder');
+Route::get('/payment', [PaymentController::class, 'showShipping'])->name('paymentShipping');
+Route::post('/payment', [PaymentController::class, 'storeOrder'])->name('storeOrder');
 Route::post('/payment/response', [PaymentController::class, 'paymentResponse']);
-
 
 /*
 |--------------------------------------------------------------------------
@@ -64,7 +54,6 @@ Route::post('/guest-logout', [LoginController::class, 'logoutGuest']);
 
 //Route::get('/emailTest', [EmailController::class, 'sendWelcomeEmail']);
 
-
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
 })->middleware('auth')->name('verification.notice');
@@ -78,7 +67,6 @@ Route::post('/email/verification-notification', function (Request $request) {
     $request->user()->sendEmailVerificationNotification();
     return back()->with('message', 'Verification link sent!');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
-
 
 /*
 |--------------------------------------------------------------------------
@@ -95,14 +83,11 @@ Route::group(['middleware' => 'auth'],function () {
 
 });
 
-
 /*
 |--------------------------------------------------------------------------
 | Website Routes
 |--------------------------------------------------------------------------
 */
-
-
 
 //route entry for login pages
 Route::get('/employee/{path}', [HomeController::class, 'employeeIndex'])->where('path', '.*');
@@ -110,11 +95,6 @@ Route::get('/merchant/{path}', [HomeController::class, 'websiteIndex'])->where('
 
 //main route entry for website
 Route::get('/{path}', [HomeController::class, 'websiteIndex'])->where('path', '.*');
-
-//Route::get('/{path}', [HomeController::class, 'websiteIndex'])->where('path', '^(?!payment|contact)$');
-
-
-
 
 /*
 |--------------------------------------------------------------------------

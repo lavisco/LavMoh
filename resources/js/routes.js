@@ -597,11 +597,11 @@ export let routes = [
         },
     },
     {
-        path: "/order_complete",
-        name: "order_complete",
-        component: require("./components/website/OrderComplete.vue").default,
+        path: "/order/:orderCode",
+        name: "order_detail",
+        component: require("./components/website/OrderDetail.vue").default,
         meta: {
-            title: "Order Complete",
+            title: "Order Detail",
         },
     },
     {
@@ -749,13 +749,28 @@ export let routes = [
             title: "Payment Policy",
         },
     },
+
+    /*
+     Blank route titles
+    */
+
+    {
+        path: "/payment",
+        meta: {
+            title: "Checkout",
+        },
+    },
+
+    /*
+     404 Page not Found
+    */
+
     {
         path: "*",
         name: "404",
-        component: require("./components/website/static/NotFound.vue")
-            .default,
+        component: require("./components/website/static/NotFound.vue").default,
         meta: {
-            title: "404 Not Found",
+            title: "404 Page Not Found",
         },
     },
 ];

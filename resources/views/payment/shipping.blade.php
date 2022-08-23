@@ -31,7 +31,7 @@
         <div class="col-lg-8">
             <h1 class="text-left mb-4">Enter your Shipping Details</h1>
             <div class="card">
-                <form method="POST" action="/payment/shipping" class="input-form">
+                <form method="POST" action="/payment" class="input-form">
                     @csrf
 
                         <shipping-option 

@@ -385,7 +385,7 @@ export default {
                 .post("/buyer-login")
                 .then(() => {
                     $("#addRecord").modal("hide");
-                    window.location.replace("/payment/shipping");
+                    window.location.replace("/payment");
                 })
                 .catch((error) => console.log(error));
         },
@@ -395,7 +395,7 @@ export default {
                 .post("/guest-logout")
                 .then(() => {
                     $("#addRecord").modal("hide");
-                    window.location.replace("/payment/shipping");
+                    window.location.replace("/payment");
                 })
                 .catch((error) => console.log(error));
         },

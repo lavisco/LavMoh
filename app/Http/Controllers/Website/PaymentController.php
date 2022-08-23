@@ -227,12 +227,11 @@ pJ28AUyd0dWx1YWu1wIDAQAB
     * order store methods end
     */
 
+    /*
+    * response page and data returned by payment gateway
+    */
     public function paymentResponse(Request $request)
     {
-        /*
-        * response page and data returned by payment gateway
-        */
-
         //decode & get POST parameters
         $payment = base64_decode($_POST ["payment"]);
         $signature = base64_decode($_POST ["signature"]);

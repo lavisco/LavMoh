@@ -22,71 +22,9 @@ use Illuminate\Support\Facades\Http;
 
 class PaymentController extends Controller
 {
-    public function show()
-    {
-        return view('payment.payment');
-    }
-
     public function showShipping()
     {
         return view('payment.shipping');
-    }
-
-    public function paymentProcess(Request $request)
-    {
-        //$order = $this->storeOrder($request);
-
-        // unique_order_id|total_amount
-        //$plaintext = $order['id'].'|'.$order['total'];
-        $plaintext = '15|5';
-
-        $publickey = "-----BEGIN PUBLIC KEY-----
-MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC6nVc/ykIWsT1ktI8/49nfBUOQ
-IHCCu9bC+pxEYbPvUth28MWitvm7y2u2nX/3/nVXMdvl2yiAbB7aBw4dGnAhXoAM
-9WB8nw3AZS1VGqBBEKFs23EqUvjsBxrj+QasVkeZwC+oxvGuuprCIFW9o7w290c0
-pJ28AUyd0dWx1YWu1wIDAQAB
------END PUBLIC KEY-----";
-        //load public key for encrypting
-        openssl_public_encrypt($plaintext, $encrypt, $publickey);
-
-        //encode for data passing
-        $payment = base64_encode($encrypt);
-
-        //new Guzzle http client to send post data to external url
-        $httpClient = new Client();
-
-        //post data
-        $response = $httpClient->post(
-            'https://webxpay.com/index.php?route=checkout/billing',
-            [
-                RequestOptions::ALLOW_REDIRECTS => [
-                    'max' => 5,
-                    'track_redirects' => true,
-                ],
-                RequestOptions::FORM_PARAMS => [
-                    'first_name' => $request->first_name,
-                    'last_name' => $request->last_name,
-                    'email' => $request->email,
-                    'phone' => $request->phone,
-                    'address_line_one' => $request->address_line_one,
-    
-                    'secret_key' => "f94682c3-c986-426e-b68f-9cbdd5f8d904",
-                    'cms' => "PHP",
-                    'payment' => "$payment",
-                ],
-            ]
-        );
-
-        //redirect to the url given by payment gateway
-        //$lastLocation = end($response->getHeaders()['X-Guzzle-Redirect-History']);
-        // $lastLocation = $response->getHeaderLine('X-Guzzle-Redirect-History');
-
-        // return redirect($lastLocation);
-
-        $headersRedirect = $response->getHeader(\GuzzleHttp\RedirectMiddleware::HISTORY_HEADER);
-
-        //return $headersRedirect[0];
-        return redirect($headersRedirect[0]);
     }
 
     /*
@@ -109,8 +47,15 @@ pJ28AUyd0dWx1YWu1wIDAQAB
             $userId = $guestUser->id;
         }
 
+        /*
+        * extract data from request
+        */
         $products = json_decode($request->cartItems);
         $exchange_rate = $request->exchange_rate;
+
+        /*
+        * find product & shipping data from db, merge to request
+        */
         $shipping = Shipping::FindOrFail($request->shipping_id);
 
         $defaultProduct = Product::findOrFail($products[0]->id);
@@ -134,6 +79,10 @@ pJ28AUyd0dWx1YWu1wIDAQAB
             'code' => 'LO'.str_pad($order->id,5,"0",STR_PAD_LEFT),
         ]);
 
+        /*
+        * store order items via storeOrderProduct method
+        * get the returned total value and update order table
+        */
         $total = $this->storeOrderProduct($products, $exchange_rate, $order->id);
 
         $order->update([
@@ -141,12 +90,14 @@ pJ28AUyd0dWx1YWu1wIDAQAB
             'subtotal' => $total-$shipping->price,
         ]);
 
+        // store receipt & transaction
         $this->storeReceipt($request, $order->id);
         $this->storeTransaction($request, $total, $defaultProduct->user_id, $order->id);
 
-        //return ['total' => $total, 'id' => $order->code];
         
-        //payment fields
+        /*
+        * payment proccessing
+        */
         $data = $request;
         $plaintext = $order->id.'|'.$total;
 
@@ -164,11 +115,20 @@ pJ28AUyd0dWx1YWu1wIDAQAB
         //secret key for integration
         $secret_key = "f94682c3-c986-426e-b68f-9cbdd5f8d904";
 
+        /*
+        * return payment view (contains webxpay payment form) with required parameters
+        */
         return view('payment.payment', compact('data', 'secret_key', 'payment'));
     }
 
     public function storeOrderProduct($products, $exchange_rate, $orderId)
     {
+        /*
+        * store order items in OrderProduct table
+        * store relevant order item variation in OrderProductVariation table
+        * loop through the items sent in request
+        */
+
         $total = 0;
 
         for($i = 0; $i < count($products); $i++){
@@ -214,12 +174,19 @@ pJ28AUyd0dWx1YWu1wIDAQAB
                 'total' => $subtotal,
             ]);
         }
+
+        /*
+        * return total to be stored in order table
+        */
         
         return $total;
     }
 
     public function storeReceipt($request, $orderId)
     {
+        /*
+        * store order receipt
+        */
         $request->merge([
             'status' => "success",
             'process_currency' => "currency_code",
@@ -235,6 +202,9 @@ pJ28AUyd0dWx1YWu1wIDAQAB
 
     public function storeTransaction($request, $total, $user_id, $orderId)
     {
+        /*
+        * store order transaction
+        */
         $request->merge([
             'status' => "customer cleared payment",
             'order_id' => $orderId,
@@ -252,12 +222,17 @@ pJ28AUyd0dWx1YWu1wIDAQAB
             'code' => 'LT'.str_pad($transaction->id,5,"0",STR_PAD_LEFT),
         ]);
     }
+
     /*
     * order store methods end
     */
 
     public function paymentResponse(Request $request)
     {
+        /*
+        * response page and data returned by payment gateway
+        */
+
         //decode & get POST parameters
         $payment = base64_decode($_POST ["payment"]);
         $signature = base64_decode($_POST ["signature"]);
@@ -292,6 +267,18 @@ pJ28AUyd0dWx1YWu1wIDAQAB
             return view('payment.payment-response', compact('order', 'order_time'));
         } else
         {
+            //delete order record if payment fails
+            Transaction::where('order_id', $order->id)->delete();
+            Receipt::where('order_id', $order->id)->delete();
+            $orderProducts = OrderProduct::where('order_id', $order->id)->get();
+    
+            foreach ($orderProducts as $orderProduct) {
+                OrderProductVariation::where('order_product_id', $orderProduct->id)->delete();
+                $orderProduct->delete();
+            }
+           
+            $order->delete();
+
             return view('payment.payment-error');
         }
     }

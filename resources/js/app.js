@@ -114,6 +114,10 @@ Vue.component(
     "shipping-option",
     require("./components/website/checkout/ShippingOption.vue").default
 );
+Vue.component(
+    "cart-clear",
+    require("./components/website/checkout/CartClear.vue").default
+);
 
 //Fire is a new instance of vue which will be used as a bus
 window.Fire = new Vue();

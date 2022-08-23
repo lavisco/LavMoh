@@ -18,7 +18,6 @@ export default new Vuex.Store({
             symbol: "Rs",
         },
         location: "Kandy",
-        order: "",
     },
 
     getters: {
@@ -104,11 +103,6 @@ export default new Vuex.Store({
     },
 
     actions: {
-        //store order
-        saveOrder(context, order) {
-            context.commit("storeOrder", order);
-        },
-
         //currency methods
         saveCurrency(context, currency) {
             context.commit("storeCurrency", currency);
@@ -239,12 +233,6 @@ export default new Vuex.Store({
             });
         },
 
-        emptyCurrentCart(context) {
-            if (context.state.currentCart != []) {
-                context.commit("deleteAllProductsFromCurrentCart");
-            }
-        },
-
         clearOrderedProductFromCart(context) {
             if (context.state.currentCart != []) {
                 context.commit("deleteOrderedProductsFromCart");
@@ -283,11 +271,6 @@ export default new Vuex.Store({
     },
 
     mutations: {
-        //alter order state
-        storeOrder(state, order) {
-            state.order = order;
-        },
-
         //alter currency state
         storeCurrency(state, currency) {
             state.currency = currency;
@@ -418,12 +401,9 @@ export default new Vuex.Store({
             });
         },
 
-        deleteAllProductsFromCurrentCart(state) {
-            state.currentCart = [];
-        },
-
         deleteOrderedProductsFromCart(state) {
-            //state.currentCart = [];
+            //remove the items that have been ordered from the main Cart
+            //after this remove items from currenctCart
 
             state.currentCart.map((product) => {
                 let index = state.cart.findIndex((c) => c.id === product.id);

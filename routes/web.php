@@ -41,11 +41,6 @@ Route::post('/paymenttest', function () {
 
 Route::get('/payment/shipping', [PaymentController::class, 'showShipping'])->name('paymentShipping');
 Route::post('/payment/shipping', [PaymentController::class, 'storeOrder'])->name('storeOrder');
-
-Route::get('/payment', [PaymentController::class, 'show'])->name('payment');
-
-Route::post('/payment', [PaymentController::class, 'paymentProcess'])->name('paymentgate');
-
 Route::post('/payment/response', [PaymentController::class, 'paymentResponse']);
 
 

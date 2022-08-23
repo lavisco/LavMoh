@@ -161,5 +161,6 @@
             </div>
         </div>
     </div>
+    <cart-clear></cart-clear>
 </div>
 @endsection

@@ -290,7 +290,7 @@
                                 form-control form-control-alternative
                                 col-lg-8
                             "
-                            placeholder="Custom message"
+                            placeholder="Wish Happy Birthday or Congrats ..."
                             maxlength="25"
                         />
                     </div>

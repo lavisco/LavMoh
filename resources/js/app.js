@@ -82,6 +82,10 @@ Vue.component(
     require("./components/website/parts/NavbarComponent.vue").default
 );
 Vue.component(
+    "navbar-category",
+    require("./components/website/parts/NavbarCategory.vue").default
+);
+Vue.component(
     "navbar-component-static",
     require("./components/website/parts/NavbarComponentStatic.vue").default
 );

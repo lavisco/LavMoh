@@ -91,6 +91,7 @@ h5 {
     font-size: 18px;
     text-align: center;
     font-weight: 600;
+    color: $dark-grey;
 }
 h6 {
     font-size: 16px;
@@ -203,6 +204,9 @@ h6 {
     h4 {
         font-size: 17px !important;
     }
+    h5 {
+        font-size: 15px;
+    }
     .instruction-card {
         h1 {
             font-size: 50px !important;
@@ -217,8 +221,8 @@ h6 {
 
 /*---------------------buttons---------------------*/
 button {
-    background-color: $lav-purple;
-    border: none;
+    background-color: $lav-red;
+    border: 1px solid $lav-red;
     color: $white;
     padding: 14px 28px;
     border-radius: 12px;
@@ -226,7 +230,13 @@ button {
     font-weight: 600;
     transition: all 150ms ease-in-out;
     &:hover {
+        background-color: $lav-pink;
+        border: 1px solid $lav-pink;
+    }
+    &:focus {
         background-color: $black;
+        border: 1px solid $black;
+        outline: none;
     }
     @media (max-width: 768px) {
         padding: 12px 21px;
@@ -235,7 +245,7 @@ button {
 
 .btn {
     background-color: $lav-green;
-    border: none;
+    border: 1px solid $lav-green;
     color: $white;
     padding: 15px 30px;
     border-radius: 12px;
@@ -245,6 +255,7 @@ button {
 
     &:hover {
         background-color: $black;
+        border-color: $black;
         color: $white;
     }
 }
@@ -252,9 +263,13 @@ button {
 .btn-primary {
     background-color: $lav-red !important;
     color: $white !important;
-    &:hover,
-    &:focus {
+    &:hover {
         background-color: $lav-pink !important;
+        border: 1px solid $lav-pink !important;
+    }
+    &:focus {
+        background-color: $black !important;
+        border: 1px solid $black;
     }
 }
 
@@ -264,6 +279,7 @@ button {
     justify-content: center;
     padding: 8px 16px;
     background-color: #f7f7f7;
+    border-color: #f7f7f7;
     color: #4e4e4e;
     font-size: 16px;
     font-weight: 600;
@@ -310,8 +326,14 @@ button {
     }
 }
 
-.close:hover {
-    background-color: transparent !important;
+.close {
+    color: $black;
+    opacity: 0.8;
+    cursor: pointer;
+    &:hover {
+        opacity: 1 !important;
+        background-color: transparent !important;
+    }
 }
 
 button.bg-black:hover {
@@ -328,51 +350,51 @@ button.bg-black:hover {
 }
 
 .checkout-btn {
-    background-color: $black;
-    color: $white;
-    &:hover {
-        background-color: $lav-purple;
-    }
     &-cart {
-        background-color: $lav-pink;
+        background-color: $lav-red;
     }
     @media (max-width: 768px) {
         width: 100%;
     }
 }
 .btn-sm-cart {
-    color: $lav-purple !important;
+    color: $lav-red !important;
+    border: 1px solid $lav-red;
     border-radius: 8px;
     &:hover {
-        border-color: $lav-l-blue;
-        background-color: $lav-l-blue;
+        border-color: $lav-pink;
+        background-color: $lav-pink;
         color: $white !important;
     }
     &:focus {
-        background-color: $lav-purple;
+        background-color: $black;
         color: $white !important;
     }
 }
+
 .btn-secondary {
-    border: 2px solid $black;
+    border: 1px solid $lav-red;
     background-color: $white !important;
-    color: $black !important;
+    color: $lav-red !important;
     transition: all 250ms ease;
     &:hover {
-        background-color: $black !important;
-        border-color: transparent;
-        color: $white !important;
+        border-color: $lav-pink;
+        color: $lav-pink !important;
+    }
+    &:focus {
+        border-color: $black;
+        color: $black;
     }
 }
 
 .btn-special {
     font-size: 20px;
-    background-color: $lav-l-blue;
+    background-color: $lav-red;
     font-weight: 600;
     color: $white;
     min-width: 253px;
     &:hover {
-        background-color: $lav-purple;
+        background-color: $lav-pink;
     }
     @media (max-width: 991.98px) {
         font-size: 17px;
@@ -386,9 +408,9 @@ button.bg-black:hover {
     padding: 0;
     margin: 0;
     box-shadow: none;
-    color: $pink;
+    color: $lav-red;
     &:hover {
-        color: $lav-purple;
+        color: $lav-pink;
         background-color: transparent;
     }
 }
@@ -423,7 +445,7 @@ button.bg-black:hover {
 
 .simple-link {
     font-size: 14px;
-    color: $lav-dark-purple;
+    color: $lav-red;
     font-weight: 500;
     letter-spacing: 0.01rem;
 }
@@ -580,7 +602,7 @@ button.bg-black:hover {
 
 .main-top-nav {
     background: rgba(239, 239, 239, 0.31);
-    margin-bottom: 20px;
+    margin-bottom: 8px;
 }
 
 .navbar {
@@ -591,8 +613,15 @@ button.bg-black:hover {
     flex-grow: 0;
 }
 .navbar-brand {
+    padding-top: 0;
+    padding-bottom: 0;
+    &-desktop {
+        @media (max-width: 768px) {
+            display: none;
+        }
+    }
     svg {
-        height: 42px;
+        height: 38px;
         @media (max-width: 991.98px) {
             height: 28px;
         }
@@ -617,27 +646,26 @@ button.bg-black:hover {
     transition: all 150ms ease;
 
     &:hover {
-        color: $lav-red;
-        border: 1px solid $lav-red;
+        color: $white;
+        background-color: $lav-red;
         svg {
             path {
-                fill: $lav-red;
+                fill: $white;
             }
             circle {
-                fill: $lav-red;
+                fill: $white;
             }
         }
 
         .nav-tiny-text {
-            color: $lav-red;
+            color: $white;
         }
     }
 
     @media (min-width: 991.98px) {
         &:focus {
-            background-color: $lav-red;
+            background-color: $lav-pink;
             color: $white;
-            border: 1px solid $lav-red;
             svg {
                 path,
                 circle {
@@ -658,7 +686,7 @@ button.bg-black:hover {
     font-size: 16px;
     letter-spacing: 0.025em;
     padding: 6px 0;
-    color: $black;
+    color: $dark-grey;
     svg {
         margin-right: 10px;
     }
@@ -686,7 +714,7 @@ button.bg-black:hover {
     line-height: 0;
 
     &:hover {
-        color: $lav-purple;
+        color: $lav-red;
         border-color: #d1bdff;
     }
 
@@ -701,20 +729,32 @@ button.bg-black:hover {
     border: none !important;
     padding: 3px !important;
     &:hover {
-        border: none !important;
+        background-color: transparent;
+        color: $lav-red;
+        svg {
+            path {
+                fill: $lav-red;
+            }
+            circle {
+                fill: $lav-red;
+            }
+        }
+        .nav-tiny-text {
+            color: $lav-red;
+        }
     }
     &:focus {
         background-color: transparent;
-        color: $lav-dark-purple;
+        color: $lav-pink;
         svg {
             path,
             circle {
-                fill: $lav-dark-purple;
+                fill: $lav-pink;
             }
         }
 
         .nav-tiny-text {
-            color: $lav-dark-purple;
+            color: $lav-pink;
         }
     }
     @media (max-width: 992px) {
@@ -725,8 +765,8 @@ button.bg-black:hover {
             border-color: transparent !important;
         }
         svg {
-            width: 30px;
-            height: 30px;
+            width: 28px;
+            height: 28px;
         }
         .nav-link-account-text {
             display: none !important;
@@ -738,6 +778,12 @@ button.bg-black:hover {
             width: 25px;
             height: 25px;
         }
+    }
+}
+
+.cart-icon {
+    @media (max-width: 768px) {
+        height: 38px;
     }
 }
 
@@ -769,18 +815,23 @@ button.bg-black:hover {
 }
 
 .mobile-location-picker {
-    padding: 3px 15px;
-    background: $dark-grey;
-    color: #f8f8f8;
+    padding: 8px 16px;
+    background: #ededed;
+    color: $dark-grey;
     font-size: 13px;
     font-weight: 400;
     vertical-align: middle;
     a:hover {
-        color: white;
+        color: $lav-red;
+        svg {
+            path {
+                fill: $lav-red;
+            }
+        }
     }
     svg {
         path {
-            fill: #f8f8f8;
+            fill: $dark-grey;
         }
     }
     .dropdown-menu {
@@ -836,8 +887,8 @@ button.bg-black:hover {
 .navbar-main-menu {
     width: 100%;
     a[aria-expanded="true"] {
-        color: $lav-purple;
-        border: 1px solid $lav-purple;
+        color: $lav-red;
+        border: 1px solid $lav-red;
         //border-bottom: 1px solid $white;
         //border-radius: 12px 12px 0 0;
         border-radius: 12px;
@@ -856,7 +907,7 @@ button.bg-black:hover {
         margin-top: 0px;
         left: 50%;
         transform: translate(-50%, 0);
-        border: 1px solid $lav-purple;
+        border: 1px solid $lav-red;
         border-radius: 12px;
         padding: 10px;
         //width: 850px !important;
@@ -893,7 +944,7 @@ button.bg-black:hover {
         }
         .dropdown-item.active,
         .dropdown-item:active {
-            background-color: $lav-l-blue !important;
+            background-color: $lav-red !important;
             border-radius: 8px !important;
             .dropdown-item-arrow {
                 color: #ffffff;
@@ -921,6 +972,107 @@ button.bg-black:hover {
                 padding: 6px 14px;
             }
         }
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        min-width: 230px;
+        z-index: 1;
+        //border: 1px solid $lav-red;
+        border-radius: 12px;
+        padding: 10px;
+        background-color: white;
+        font-size: 15px;
+
+        .dropdown-header {
+            font-weight: 600;
+            font-size: 15px;
+            letter-spacing: 0.03rem;
+            text-transform: capitalize;
+            color: $black;
+            padding-left: 1.3rem;
+            padding-right: 1.3rem;
+            a:hover{
+                color: $lav-red;
+            }
+        }
+        .dropdown-item {
+            width: 230px;
+            margin-top: 5px;
+            padding-left: 1.3rem;
+            padding-right: 1.3rem;
+            display: flex;
+            flex-wrap: nowrap;
+            align-items: center;
+            justify-content: space-between;
+            &:hover,
+            &:focus {
+                background-color: #eaeaea;
+                border-radius: 8px;
+            }
+        }
+        .dropdown-item.active,
+        .dropdown-item:active {
+            background-color: $lav-red !important;
+            border-radius: 8px !important;
+            .dropdown-item-arrow {
+                color: #ffffff;
+            }
+        }
+        .dropdown-item-arrow {
+            font-size: 18px;
+            font-weight: 600;
+            color: #a0a0a0;
+        }
+    }
+
+    /* Show the dropdown menu on hover */
+    .dropdown-1:hover .dropdown-content-1 {
+        display: block;
+    }
+    .dropdown-2:hover .dropdown-content-2 {
+        display: block;
+    }
+    .dropdown-3:hover .dropdown-content-3 {
+        display: block;
+    }
+
+    /* Change the background color of the dropdown button when the dropdown content is shown */
+    .dropdown-1:hover .dropbtn-1 {
+        background-color: $lav-red;
+        color: white;
+    }
+    .dropdown-2:hover .dropbtn-2 {
+        background-color: $lav-red;
+        color: white;
+    }
+    .dropdown-3:hover .dropbtn-3 {
+        background-color: $lav-red;
+        color: white;
+    }
+}
+
+.category-link-box {
+    margin-left: 16px;
+    margin-right: 16px;
+    background-color: #f7f7f7;
+    border-radius: 12px;
+    margin-bottom: 16px;
+}
+
+.category-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $dark-grey;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    padding: 12px 16px;
+    min-width: 110px;
+    &:hover {
+        color: $lav-red;
     }
 }
 
@@ -950,13 +1102,35 @@ button.bg-black:hover {
         font-size: 16px;
         letter-spacing: 0.03rem;
         text-transform: capitalize;
-        color: $black !important;
+        color: $dark-grey !important;
         padding-left: 0rem;
         padding-right: 0rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        &:hover {
+            color: $lav-red !important;
+            svg {
+                path {
+                    fill: $lav-red !important;
+                }
+            }
+        }
+    }
+    .active {
+        color: $lav-red !important;
+        h6 {
+            color: $lav-red !important;
+        }
+        svg {
+            path {
+                fill: $lav-red !important;
+            }
+        }
     }
     .dropdown-item {
         font-size: 16px;
-        color: $black;
+        color: $dark-grey;
         width: 100%;
         margin-top: 5px;
         padding: 0.5rem 1.3rem;
@@ -1266,7 +1440,7 @@ section {
     position: relative;
     background-size: cover;
     background-position: center;
-    background-color: $lav-purple;
+    background-color: $lav-red;
     min-height: 800px;
     z-index: -1;
 }
@@ -1504,9 +1678,6 @@ section {
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
     padding: 20px 28px;
-    .close {
-        color: $black;
-    }
 }
 .modal-footer {
     border-top: none;
@@ -1517,7 +1688,9 @@ section {
 }
 
 @media (max-width: 768px) {
-    .modal-body, .modal-header, .modal-footer {
+    .modal-body,
+    .modal-header,
+    .modal-footer {
         padding: 16px 20px;
     }
 }
@@ -1567,10 +1740,10 @@ section {
     }
     .header {
         padding: 16px 28px;
-        background-color: #f7f7f7;
+        background-color: $dark-grey;
         border-top-left-radius: 12px;
         border-top-right-radius: 12px;
-        color: $dark-grey !important;
+        color: #fdfcfc !important;
         text-align: center;
     }
     .row-content {
@@ -1582,7 +1755,8 @@ section {
     }
 
     @media (max-width: 768px) {
-        .header, .row-content {
+        .header,
+        .row-content {
             padding-left: 16px;
             padding-right: 16px;
         }
@@ -1635,18 +1809,12 @@ section {
             background-color: $lav-green !important;
         }
         .now {
-            background-color: $dark-grey !important;
+            background-color: $lav-green !important;
         }
     }
 
+    .completed,
     .activated {
-        color: $dark-grey;
-        .check-sign {
-            background-color: $dark-grey;
-        }
-    }
-
-    .completed {
         color: $lav-green;
         .check-sign {
             background-color: $lav-green;
@@ -1684,18 +1852,24 @@ section {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 6px 16px;
+    padding: 8px 16px;
     margin-top: 10px;
 
     @media (max-width: 640px) {
-        flex-direction: column;
-        align-items: flex-start;
+        flex-direction: row;
         gap: 8px;
+        padding: 8px 0px;
         .filter-select {
+            width: 45%;
+            display: flex;
+            flex-direction: column;
             label {
                 font-size: 12px !important;
                 width: 48px;
             }
+        }
+        .custom-select{
+            width: 100% !important;
         }
     }
 
@@ -1721,7 +1895,7 @@ section {
 
         &:focus {
             background-color: $white;
-            box-shadow: 0 0 0 0.02rem $lav-purple;
+            box-shadow: 0 0 0 0.02rem $lav-red;
             border: none;
         }
     }
@@ -1735,7 +1909,7 @@ section {
 .item-card {
     background-position: center;
     background-size: cover;
-    background-color: $lav-purple;
+    background-color: $lav-red;
     width: 340px;
     font-size: 16px;
     padding: 5px;
@@ -1761,10 +1935,7 @@ section {
     }
 
     a:hover {
-        color: $lav-l-blue !important;
-    }
-    a:focus {
-        color: #16818f !important;
+        color: $lav-red !important;
     }
 
     .card-tag {
@@ -2087,11 +2258,6 @@ footer {
 }
 
 @media (max-width: 768px) {
-    footer {
-        h5 {
-            font-size: 15px;
-        }
-    }
     .footer-copyright {
         padding: 12px;
     }
@@ -2127,7 +2293,7 @@ footer {
         }
     }
     .forgot-pwd {
-        color: $lav-purple;
+        color: $lav-red;
         &:hover {
             filter: brightness(0.7);
         }
@@ -2191,15 +2357,8 @@ footer {
 
 @media (max-width: 768px) {
     .login {
-        h1 {
-            margin-bottom: 10px !important;
-        }
         h5 {
-            font-size: 16px;
-            line-height: 26px;
             text-align: center;
-            font-weight: 400;
-            color: $dark-grey;
         }
     }
 }
@@ -2208,7 +2367,7 @@ footer {
 
 .home-search-input {
     height: 50px;
-    border: 1px solid rgba(196, 196, 196, 0.61);
+    border: 1px solid rgba(196, 196, 196, 0.24);
     background-color: #fff;
     border-radius: 12px;
     padding: 2px;
@@ -2219,9 +2378,6 @@ footer {
         input[type="text"] {
             padding: 6px 13px !important;
         }
-        .btn {
-            background-color: $lav-grey !important;
-        }
     }
     @media (max-width: 400px) {
         height: 46px;
@@ -2230,7 +2386,7 @@ footer {
             font-size: 14px;
             height: fit-content;
         }
-        .btn {
+        button {
             border-radius: 10px !important;
             width: 40px !important;
             height: 40px !important;
@@ -2254,8 +2410,8 @@ footer {
         }
     }
 
-    &:focus {
-        border: 1px solid #836aff9f;
+    &:focus-within {
+        border: 1px solid $lav-red;
         outline: none;
         transition: all 0.3s ease;
         -webkit-transition: all 0.3s ease;
@@ -2264,11 +2420,27 @@ footer {
         -o-transition: all 0.3s ease;
     }
 
-    .btn {
-        border-radius: 12px !important;
+    button {
+        border-radius: 10px !important;
         width: 44px;
         height: 44px;
         padding: 0 !important;
+        background-color: #ededed;
+        border-color: #ededed;
+        &:hover {
+            background-color: $lav-red;
+            border-color: $lav-red;
+            svg {
+                path {
+                    fill: $white;
+                }
+            }
+        }
+        svg {
+            path {
+                fill: $dark-grey;
+            }
+        }
     }
 }
 .search-suggestion {
@@ -2355,6 +2527,7 @@ footer {
     z-index: 1000 !important;
     overflow: auto;
     display: flex;
+    flex-direction: column;
     align-items: flex-start;
     top: 0;
     left: 0;
@@ -2495,9 +2668,6 @@ footer {
     }
 
     @media (max-width: 768px) {
-        h5 {
-            font-size: 15px;
-        }
         .input-form {
             input[type="text"],
             input[type="email"],
@@ -2666,9 +2836,9 @@ footer {
 
 .dashboard-topnav {
     .active {
-        background-color: $lav-purple;
+        background-color: $lav-red;
         color: $white;
-        border-color: $lav-purple;
+        border-color: $lav-red;
     }
     .navbar-toggler {
         background-color: $white;
@@ -2683,7 +2853,7 @@ footer {
         &:hover,
         &:focus {
             svg > path {
-                fill: $lav-purple;
+                fill: $lav-red;
             }
         }
     }
@@ -2755,9 +2925,7 @@ footer {
     }
 
     h5 {
-        font-size: 17px;
         text-align: left;
-        font-weight: 500;
         margin-bottom: 0;
     }
 }
@@ -2983,8 +3151,6 @@ footer {
         border: none;
     }
     h5 {
-        font-weight: 500;
-        line-height: 150%;
         margin: 0;
     }
 }
@@ -3123,7 +3289,7 @@ footer {
         font-size: 17px;
     }
     .nav-link.active {
-        background-color: $lav-purple;
+        background-color: $lav-red;
         color: $white;
     }
 }
@@ -3181,7 +3347,7 @@ footer {
     border-radius: 12px;
 
     .active {
-        background-color: $lav-purple;
+        background-color: $lav-red;
         color: $white !important;
     }
 
@@ -3369,10 +3535,6 @@ footer {
             font-size: 21px;
         }
     }
-    h5 {
-        font-size: 16px;
-        font-weight: 600;
-    }
     h6 {
         font-size: 13px;
     }
@@ -3389,8 +3551,7 @@ footer {
 
 .product-detail-card {
     background-color: #eeeeee79;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    padding: 16px 24px;
     p {
         margin-bottom: 0;
     }
@@ -3399,7 +3560,7 @@ footer {
         height: 120px;
     }
     @media (max-width: 768px) {
-        padding: 15px;
+        padding: 16px;
         .product-seller-img {
             width: 54px;
             height: 54px;
@@ -3422,7 +3583,7 @@ footer {
 }
 
 .badge-tag {
-    background-color: $lav-orange;
+    background-color: $dark-grey;
     color: white;
     font-size: 11px !important;
 }
@@ -3433,6 +3594,15 @@ footer {
     background-color: $dark-grey;
     padding: 5px;
     border-radius: 5px;
+}
+
+.info-location-box {
+    border-radius: 12px;
+    color: $dark-grey;
+    background-color: #eeeeee79;
+    padding: 16px;
+    display: flex;
+    align-items: center;
 }
 
 .breadcrumb {
@@ -3457,6 +3627,7 @@ footer {
     font-weight: 600;
     text-align: left;
     font-size: 28px;
+    color: $lav-red;
     @media (max-width: 768px) {
         font-size: 24px !important;
     }
@@ -3535,9 +3706,6 @@ footer {
         padding: 10px;
         margin: 0;
     }
-    h5 {
-        font-size: 17px;
-    }
     .green {
         background-color: $lav-green;
     }
@@ -3603,12 +3771,12 @@ footer {
     align-items: center;
     z-index: 2;
     border-radius: 50%;
-    background-color: white;
-    color: $lav-red;
+    background-color: $lav-red;
+    color: $white;
     font-size: 11px;
     font-weight: 600;
     @media (max-width: 768px) {
-        right: -9px;
+        right: -10px;
     }
 }
 
@@ -3634,7 +3802,7 @@ footer {
     }
     .header {
         padding: 16px 28px;
-        background-color: #FDFCFC;
+        background-color: #f7f7f7;
         border-top-left-radius: 12px;
         border-top-right-radius: 12px;
         color: $dark-grey !important;
@@ -3642,7 +3810,7 @@ footer {
     }
     .bottom {
         padding: 16px 28px;
-        background-color: #FDFCFC;
+        background-color: #f7f7f7;
         border-bottom-left-radius: 12px;
         border-bottom-right-radius: 12px;
         color: $dark-grey !important;
@@ -3654,7 +3822,9 @@ footer {
     }
 
     @media (max-width: 768px) {
-        .header, .row-content, .bottom {
+        .header,
+        .row-content,
+        .bottom {
             padding-left: 16px;
             padding-right: 16px;
         }
@@ -3752,9 +3922,6 @@ footer {
         }
         .menu-cart-remove-btn {
             padding: 0;
-        }
-        h5 {
-            font-size: 16px;
         }
     }
     .cart-items-card {
@@ -4192,6 +4359,7 @@ footer {
         width: 60px;
         font-size: 16px;
         font-weight: 600;
+        color: $dark-grey;
     }
     .counter-minus,
     .counter-plus {

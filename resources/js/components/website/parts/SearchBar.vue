@@ -1,6 +1,6 @@
 <template>
     <div
-        class="mr-0 mr-lg-3 order-2 order-lg-1 w-100 mt-2 mt-md-0"
+        class="mr-0 mr-lg-3 order-2 order-lg-1 w-100 mt-3 mt-md-0"
         style="position: relative"
     >
         <div class="input-group home-search-input">
@@ -14,7 +14,6 @@
 
             <div class="input-group-append">
                 <button
-                    class="btn btn-primary"
                     type="button"
                     @click.prevent="fetchResults"
                 >
@@ -22,8 +21,8 @@
                         xmlns="http://www.w3.org/2000/svg"
                         aria-hidden="true"
                         role="img"
-                        width="29"
-                        height="29"
+                        width="28"
+                        height="28"
                         preserveAspectRatio="xMidYMid meet"
                         viewBox="0 0 24 24"
                     >

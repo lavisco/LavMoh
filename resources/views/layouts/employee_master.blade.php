@@ -61,6 +61,7 @@
                 <div>
                     <!-- navbar section starts -->
                     <navbar-component></navbar-component>
+                    <navbar-category></navbar-category>
                     <!-- navbar section ends -->
 
                     <router-view></router-view>

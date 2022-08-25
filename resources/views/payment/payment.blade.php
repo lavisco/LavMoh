@@ -93,7 +93,7 @@
                         value="{{ $payment }}"
                     />
                     <order-summary></order-summary>
-                    <button type="submit" class="checkout-btn">
+                    <button type="submit" class="btn-md-full checkout-btn">
                         Proceed to Payment
                     </button>
                 </form>

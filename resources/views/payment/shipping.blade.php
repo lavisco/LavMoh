@@ -35,6 +35,8 @@
                     @csrf
 
                         <shipping-option 
+                            :init-form="{{ json_encode(old()) }}"
+                            
                             @error('first_name')
                                 error_msg_first_name='{{ $message }}'
                             @enderror 
@@ -115,9 +117,25 @@
                         "
                     >
                         <order-summary class="hide-content"></order-summary>
-                        <button type="submit" class="checkout-btn">
-                            Save & Continue
-                        </button>
+                        <div
+                            class="
+                                d-flex
+                                justify-content-center
+                                align-items-center
+                                flex-column
+                                flex-md-row
+                                w-100
+                            "
+                        >
+                            <a href="/cart" class="btn-md-full mr-md-2 mb-md-0 mb-2">
+                                <button type="button" class="btn-md-full btn-secondary">
+                                    Edit Cart
+                                </button> 
+                            </a>
+                            <button type="submit" class="checkout-btn btn-md-full">
+                                Proceed to Payment
+                            </button>
+                        </div>
                     </div>
                 </form>
             </div>

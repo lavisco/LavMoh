@@ -61,6 +61,7 @@
                 <div>
                     <!-- navbar section starts -->
                     <navbar-component-static></navbar-component-static>
+                    <navbar-category></navbar-category>
                     <!-- navbar section ends -->
 
                     <div>@yield('content')</div>

@@ -96,7 +96,9 @@
                         class="form-control"
                     />
                     <span class="error-msg">
-                        <strong>{{ error_msg_billing_address_line_one }}</strong>
+                        <strong>{{
+                            error_msg_billing_address_line_one
+                        }}</strong>
                     </span>
                 </div>
                 <div class="form-group">
@@ -111,7 +113,9 @@
                         class="form-control"
                     />
                     <span class="error-msg">
-                        <strong>{{ error_msg_billing_address_line_two }}</strong>
+                        <strong>{{
+                            error_msg_billing_address_line_two
+                        }}</strong>
                     </span>
                 </div>
                 <div class="row">
@@ -135,13 +139,25 @@
                             >Billing District
                             <strong class="text-danger"> * </strong>
                         </label>
-                        <input
+                        <select
+                            class="
+                                custom-select
+                                form-control form-control-alternative
+                            "
                             id="billing_district"
                             v-model="form.billing_district"
-                            type="text"
                             name="billing_district"
-                            class="form-control"
-                        />
+                        >
+                            <option value="" disabled selected hidden>
+                                Select Billing District
+                            </option>
+                            <option
+                                v-for="district in districts"
+                                :value="district.name"
+                            >
+                                {{ district.name }}
+                            </option>
+                        </select>
                         <span class="error-msg">
                             <strong>{{ error_msg_billing_district }}</strong>
                         </span>
@@ -242,7 +258,9 @@
                             class="form-control"
                         />
                         <span class="error-msg">
-                            <strong>{{ error_msg_recipient_first_name }}</strong>
+                            <strong>{{
+                                error_msg_recipient_first_name
+                            }}</strong>
                         </span>
                     </div>
                     <div class="form-group col-md-6">
@@ -362,13 +380,25 @@
                             >District
                             <strong class="text-danger"> * </strong>
                         </label>
-                        <input
+                        <select
+                            class="
+                                custom-select
+                                form-control form-control-alternative
+                            "
                             id="district"
                             v-model="form.district"
-                            type="text"
                             name="district"
-                            class="form-control"
-                        />
+                        >
+                            <option value="" disabled selected hidden>
+                                Select District
+                            </option>
+                            <option
+                                v-for="district in districts"
+                                :value="district.name"
+                            >
+                                {{ district.name }}
+                            </option>
+                        </select>
                         <span class="error-msg">
                             <strong>{{ error_msg_district }}</strong>
                         </span>
@@ -495,34 +525,36 @@ import Form from "vform";
 import moment from "moment";
 
 export default {
-    props: [
-        "error_msg_delivery_date",
-        "error_msg_shipping_id",
-        "error_msg_first_name",
-        "error_msg_last_name",
-        "error_msg_email",
-        "error_msg_phone",
-        "error_msg_address_line_one",
-        "error_msg_address_line_two",
-        "error_msg_zipcode",
-        "error_msg_city",
-        "error_msg_district",
-        "error_msg_state",
-        "error_msg_recipient_first_name",
-        "error_msg_recipient_last_name",
-        "error_msg_recipient_email",
-        "error_msg_recipient_phone",
-        "error_msg_billing_address_line_one",
-        "error_msg_billing_address_line_two",
-        "error_msg_billing_zipcode",
-        "error_msg_billing_city",
-        "error_msg_billing_district",
-        "error_msg_billing_state",
-    ],
+    props: {
+        initForm: Object,
+        error_msg_delivery_date: String,
+        error_msg_shipping_id: String,
+        error_msg_first_name: String,
+        error_msg_last_name: String,
+        error_msg_email: String,
+        error_msg_phone: String,
+        error_msg_address_line_one: String,
+        error_msg_address_line_two: String,
+        error_msg_zipcode: String,
+        error_msg_city: String,
+        error_msg_district: String,
+        error_msg_state: String,
+        error_msg_recipient_first_name: String,
+        error_msg_recipient_last_name: String,
+        error_msg_recipient_email: String,
+        error_msg_recipient_phone: String,
+        error_msg_billing_address_line_one: String,
+        error_msg_billing_address_line_two: String,
+        error_msg_billing_zipcode: String,
+        error_msg_billing_city: String,
+        error_msg_billing_district: String,
+        error_msg_billing_state: String,
+    },
 
     data: () => ({
         moment: moment,
         shippings: [],
+        districts: [],
         dateTo: "",
         dateFrom: "",
         self_delivery: false,
@@ -618,6 +650,15 @@ export default {
                 .catch((error) => console.log(error));
         },
 
+        loadDistricts() {
+            axios
+                .get("/api/locations/districts")
+                .then(({ data }) => {
+                    this.districts = data;
+                })
+                .catch((error) => console.log(error));
+        },
+
         setShipping() {
             this.form.shipping_id = JSON.stringify(this.form.shipping.id);
             this.form.shipping_price = this.form.shipping.price;
@@ -625,9 +666,14 @@ export default {
     },
 
     mounted() {
+        //this.form.first_name = this.initForm.first_name;
+        Object.keys(this.initForm).forEach((key) => {
+            this.form[key] = this.initForm[key];
+        });
         this.loadProducts();
         this.setDateRange();
         this.loadShippings();
+        this.loadDistricts();
     },
 };
 </script>

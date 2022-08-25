@@ -234,9 +234,17 @@ export default new Vuex.Store({
         },
 
         clearOrderedProductFromCart(context) {
+            //clear items that have been ordered from both current & main cart
+
             if (context.state.currentCart != []) {
                 context.commit("deleteOrderedProductsFromCart");
             }
+        },
+
+        emptyCurrentCart(context) {
+            //clear out current cart only
+
+            context.commit("deleteProductsFromCurrentCart");
         },
 
         refreshPrice(context, updatedProduct) {
@@ -416,6 +424,11 @@ export default new Vuex.Store({
             state.currentCart = [];
         },
 
+        deleteProductsFromCurrentCart(state) {
+            //remove items from currenctCart
+            state.currentCart = [];
+        },
+
         deleteProductFromCart(state, product) {
             let index = state.cart.findIndex(
                 (c) => c.variation_ids === product.variation_ids
@@ -445,6 +458,8 @@ export default new Vuex.Store({
         updateProductPrice(state, { cartProduct, product }) {
             cartProduct.base_price = product.base_price;
             cartProduct.price = product.base_price;
+            cartProduct.image_path = product.product_image.path;
+            cartProduct.shop_image = product.user.shop.path;
         },
 
         updateProductVariationPrice(state, { cartProduct, opt, option }) {

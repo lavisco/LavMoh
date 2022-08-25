@@ -160,6 +160,35 @@
                         </div>
                     </div>
 
+                    <!-- location -->
+                    <div
+                        class="mt-4 info-location-box"
+                        v-if="product.category.name == 'Cakes'"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            aria-hidden="true"
+                            role="img"
+                            width="20"
+                            height="20"
+                            preserveAspectRatio="xMidYMid meet"
+                            viewBox="0 0 24 24"
+                            class="mr-2"
+                        >
+                            <circle cx="12" cy="9.5" r="1.5" fill="#333" />
+                            <path
+                                fill="#4e4e4e"
+                                d="M12 2a8 8 0 0 0-8 7.92c0 5.48 7.05 11.58 7.35 11.84a1 1 0 0 0 1.3 0C13 21.5 20 15.4 20 9.92A8 8 0 0 0 12 2Zm0 11a3.5 3.5 0 1 1 3.5-3.5A3.5 3.5 0 0 1 12 13Z"
+                            />
+                        </svg>
+                        <div>
+                            This item is available only in
+                            <strong>
+                                {{ product.user.shop.district }}
+                            </strong>
+                        </div>
+                    </div>
+
                     <!-- short description -->
                     <div class="mt-4">
                         <h6>About this item</h6>
@@ -536,9 +565,8 @@
                         <h4 class="modal-title" id="locationPopupLabel">
                             Item added to cart
                         </h4>
-                        <button
-                            type="button"
-                            class="btn-modal-close close"
+                        <a
+                            class="close"
                             data-dismiss="modal"
                             aria-label="Close"
                         >
@@ -553,12 +581,12 @@
                                     width="34"
                                     height="34"
                                     rx="17"
-                                    fill="white"
+                                    fill="#333333"
                                 />
                                 <g clip-path="url(#clip0_355_858)">
                                     <path
                                         d="M21.5803 10.9735L23.0266 12.4199C23.2275 12.6208 23.328 12.8618 23.328 13.1431C23.328 13.4243 23.2275 13.6653 23.0266 13.8662L19.8929 17L23.0266 20.1338C23.2275 20.3347 23.328 20.5757 23.328 20.8569C23.328 21.1382 23.2275 21.3792 23.0266 21.5801L21.5803 23.0265C21.3794 23.2274 21.1383 23.3278 20.8571 23.3278C20.5759 23.3278 20.3348 23.2274 20.1339 23.0265L17.0002 19.8927L13.8664 23.0265C13.6655 23.2274 13.4244 23.3278 13.1432 23.3278C12.862 23.3278 12.6209 23.2274 12.42 23.0265L10.9737 21.5801C10.7728 21.3792 10.6724 21.1382 10.6724 20.8569C10.6724 20.5757 10.7728 20.3347 10.9737 20.1338L14.1074 17L10.9737 13.8662C10.7728 13.6653 10.6724 13.4243 10.6724 13.1431C10.6724 12.8618 10.7728 12.6208 10.9737 12.4199L12.42 10.9735C12.6209 10.7726 12.862 10.6722 13.1432 10.6722C13.4244 10.6722 13.6655 10.7726 13.8664 10.9735L17.0002 14.1073L20.1339 10.9735C20.3348 10.7726 20.5759 10.6722 20.8571 10.6722C21.1383 10.6722 21.3794 10.7726 21.5803 10.9735Z"
-                                        fill="#333333"
+                                        fill="#f7f7f7"
                                     />
                                 </g>
                                 <defs>
@@ -566,13 +594,13 @@
                                         <rect
                                             width="15"
                                             height="15"
-                                            fill="white"
+                                            fill="#333333"
                                             transform="translate(9.5 9.5)"
                                         />
                                     </clipPath>
                                 </defs>
                             </svg>
-                        </button>
+                        </a>
                     </div>
                     <div class="modal-body">
                         <div class="d-flex align-items-center flex-row">
@@ -594,13 +622,31 @@
                                 </span>
                             </div>
                         </div>
-                        <button
-                            class="checkout-btn btn-full mt-4"
-                            type="button"
-                            @click.prevent="goToCart()"
+                        <div
+                            class="
+                                d-flex
+                                justify-content-center
+                                align-items-center
+                                flex-column
+                                flex-md-row
+                                mt-4
+                            "
                         >
-                            Go to Cart
-                        </button>
+                            <button
+                                type="button"
+                                class="btn-secondary btn-full mr-md-2 mb-md-0 mb-2"
+                                data-dismiss="modal"
+                            >
+                                Keep shopping
+                            </button>
+                            <button
+                                type="button"
+                                @click.prevent="goToCart()"
+                                class="btn-full"
+                            >
+                                Go to Cart
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

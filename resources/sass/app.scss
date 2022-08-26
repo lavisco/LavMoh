@@ -602,11 +602,10 @@ button.bg-black:hover {
 
 .main-top-nav {
     background: rgba(239, 239, 239, 0.31);
-    margin-bottom: 8px;
 }
 
 .navbar {
-    padding: 12px 15px;
+    padding: 10px 15px;
     z-index: 999 !important;
 }
 .navbar-collapse {
@@ -1054,10 +1053,7 @@ button.bg-black:hover {
 }
 
 .category-link-box {
-    margin-left: 16px;
-    margin-right: 16px;
-    background-color: #f7f7f7;
-    border-radius: 12px;
+    background-color: #ededed;
     margin-bottom: 16px;
 }
 
@@ -1069,7 +1065,7 @@ button.bg-black:hover {
     font-size: 14px;
     font-weight: 600;
     text-align: center;
-    padding: 12px 16px;
+    padding: 8px 16px;
     min-width: 110px;
     &:hover {
         color: $lav-red;

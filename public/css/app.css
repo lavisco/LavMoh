@@ -12597,6 +12597,26 @@ footer {
   fill: #dc1e3d;
 }
 
+.dashboard-side-nav::-webkit-scrollbar {
+  width: 12px;
+  height: 1.2em;
+}
+
+.dashboard-side-nav::-webkit-scrollbar-track {
+  background: #f7f7f7;
+  border-radius: 2px;
+  margin-block: 0.1em;
+}
+
+.dashboard-side-nav::-webkit-scrollbar-thumb {
+  background: #aaaaaa;
+  border-radius: 2px;
+}
+
+.dashboard-side-nav::-webkit-scrollbar-thumb:hover {
+  background: #686868;
+}
+
 .dashboard-side-nav.show-nav {
   clip-path: circle(170% at 0 0);
   -webkit-clip-path: circle(170% at 0 0);
@@ -12747,7 +12767,7 @@ footer {
   }
 
   .dashboard-side-nav {
-    position: absolute;
+    position: fixed;
     left: 50%;
     transform: translate(-50%, 0);
     width: 100%;
@@ -14157,22 +14177,22 @@ footer {
 /*-------------------------Scrollbar---------------------------------*/
 .vertical-scroll::-webkit-scrollbar {
   width: 3em;
-  height: 1.2em;
+  height: 12px;
 }
 
 .vertical-scroll::-webkit-scrollbar-track {
-  background: #f0f0f0;
-  border-radius: 6px;
-  margin-block: 0.5em;
+  background: #f7f7f7;
+  border-radius: 2px;
+  margin-block: 0.1em;
 }
 
 .vertical-scroll::-webkit-scrollbar-thumb {
   background: #686868;
-  border-radius: 6px;
+  border-radius: 2px;
 }
 
 .vertical-scroll::-webkit-scrollbar-thumb:hover {
-  background: #6c4d5c;
+  background: #3d3d3d;
 }
 
 /*-------------------------Product slider---------------------------------*/

@@ -25,7 +25,7 @@
                             {{ homeslider.description }}
                         </h1>
                         <router-link :to="homeslider.link">
-                            <button class="btn-primary">
+                            <button>
                                 {{ homeslider.link_text }}
                             </button>
                         </router-link>
@@ -353,7 +353,7 @@
                                 over your competitors.
                             </h4>
                             <router-link to="/sell_on_lavisco">
-                                <button class="bg-orange">
+                                <button>
                                     Become a Seller
                                 </button>
                             </router-link>
@@ -367,7 +367,7 @@
                                 exclusive drops and discounts!
                             </h4>
                             <a href="/register">
-                                <button class="bg-green">Sign up</button>
+                                <button class="btn-secondary">Sign up</button>
                             </a>
                         </div>
                     </div>

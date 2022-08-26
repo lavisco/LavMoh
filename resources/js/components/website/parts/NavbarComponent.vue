@@ -309,12 +309,11 @@
                             </a>
                             <div
                                 class="w-100"
-                                v-for="chunkRecipient in chunkedRecipients"
                             >
                                 <router-link
                                     @click.native="displayMenu"
                                     class="dropdown-item"
-                                    v-for="recipient in chunkRecipient"
+                                    v-for="recipient in recipients"
                                     :key="recipient.id"
                                     :to="{
                                         name: 'recipients/recipient',
@@ -360,12 +359,11 @@
                             </a>
                             <div
                                 class="w-100"
-                                v-for="chunkOccasion in chunkedOccasions"
                             >
                                 <router-link
                                     @click.native="displayMenu"
                                     class="dropdown-item"
-                                    v-for="occasion in chunkOccasion"
+                                    v-for="occasion in occasions"
                                     :key="occasion.id"
                                     :to="{
                                         name: 'occasions/occasion',
@@ -382,7 +380,7 @@
                         </div>
                     </div>
 
-                    <div class="d-flex align-items-center w-100 mb-2 mt-auto">
+                    <div class="d-flex align-items-center w-100 mb-2 mt-auto pt-4">
                         <router-link
                             @click.native="displayMenu"
                             to="/select_login"

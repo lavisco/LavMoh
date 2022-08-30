@@ -89,7 +89,7 @@ class EmailController extends Controller
 
     public function sendOrderMail()
     {
-        Mail::to('mohorimaislamtamanna@gmail.com')->send(new OrderMail());
+        Mail::to('mohorimaislamtamanna@gmail.com')->send(new OrderMail($order));
 
         return Mail::failures() != 0 ? "Email has been sent successfully." : "Oops! There was some error sending the email.";
     }

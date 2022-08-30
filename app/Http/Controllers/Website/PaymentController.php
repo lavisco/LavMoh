@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\OrderRequest;
+use App\Mail\OrderMail;
 use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\OrderProductGiftboxVariation;
@@ -19,6 +20,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Mail;
 
 class PaymentController extends Controller
 {
@@ -263,6 +265,8 @@ pJ28AUyd0dWx1YWu1wIDAQAB
 
         if($signature_status == true)
         {
+            Mail::to($order->email)->send(new OrderMail($order));
+            //Mail::to($order->email)->send(new OrderMail($order));
             return view('payment.payment-response', compact('order', 'order_time'));
         } else
         {

@@ -14,6 +14,15 @@
                 .footer {
                     width: 100% !important;
                 }
+                .w-50 {
+                    width: 100% !important;
+                }
+                .w-30 {
+                    width: 100% !important;
+                }
+                .content-cell{
+                    padding: 24px !important;
+                }
             }
 
             @media only screen and (max-width: 500px) {

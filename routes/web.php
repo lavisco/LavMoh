@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Website\HomeController;
 use App\Http\Controllers\Website\PaymentController;
+use App\Mail\OrderMail;
+use App\Models\Order;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 
@@ -53,6 +55,10 @@ Route::post('/guest-logout', [LoginController::class, 'logoutGuest']);
 */
 
 //Route::get('/emailTest', [EmailController::class, 'sendWelcomeEmail']);
+Route::get('/emailTest', function() {  
+    $order = Order::with(['shop', 'order_products', 'order_products.product', 'order_products.product.product_image', 'order_products.order_product_variations.variation_option.variation'])->findOrFail(41);  
+    return new OrderMail($order);
+});
 
 Route::get('/email/verify', function () {
     return view('auth.verify-email');

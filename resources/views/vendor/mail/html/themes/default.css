@@ -39,7 +39,7 @@ a img {
 /* Typography */
 
 h1 {
-    color: #323232;
+    color: #333333;
     font-size: 26px;
     text-align: center !important;
     font-weight: bold;
@@ -48,17 +48,19 @@ h1 {
 }
 
 h2 {
-    font-size: 18px;
-    font-weight: bold;
+    color: #333333;
+    font-size: 19px;
+    font-weight: bolder;
     margin-top: 0;
     text-align: left;
 }
 
 h3 {
+    color: #333333;
     font-size: 16px;
     font-weight: bold;
     margin-top: 0;
-    text-align: left;
+    margin-bottom: 0;
 }
 
 h5 {
@@ -69,7 +71,8 @@ h5 {
 }
 
 p {
-    font-size: 17px;
+    color: #333333;
+    font-size: 16px;
     line-height: 1.5em;
     margin-top: 0;
     text-align: left;
@@ -150,7 +153,7 @@ img {
     border-width: 1px;
     margin: 0 auto;
     padding: 0;
-    width: 570px;
+    width: 640px;
 }
 
 /* Subcopy */
@@ -329,4 +332,112 @@ img {
 
 .break-all {
     word-break: break-all;
+}
+
+
+.flex-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.card{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border: 2px solid #F7F7F7;
+    border-radius: 8px;
+}
+
+.card-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.card-row-compact{
+    display: flex;
+    flex-direction: row;
+}
+.card-col{
+    display: flex;
+    flex-direction: column;
+}
+
+.card-header{
+    background-color: #F7F7F7;
+    border-bottom: 2px solid #eeeded;
+    padding: 8px 16px;
+    color: #707070;
+    font-size: 14px;
+}
+
+.card-footer{
+    background-color: #F7F7F7;
+    border-top: 2px solid #eeeded;
+    padding: 8px 16px;
+    display: flex;
+    flex-direction: row;
+    justify-content:flex-end;
+    font-size: 19px;
+    font-weight: bolder;
+    color: #333333;
+}
+
+.card-sub-footer{
+    padding: 8px 16px;
+    display: flex;
+    flex-direction: row;
+    justify-content:flex-end;
+}
+
+.card-body{
+    padding: 16px;
+    border-bottom: 2px solid #F7F7F7;
+}
+
+.card-price{
+    width: 90px;
+    text-align: right !important;
+}
+
+.grey{
+    color:#707070;
+}
+
+.text-sm {
+    font-size: 14px;
+}
+
+.w-50{
+    width: 46%;
+}
+
+.w-30{
+    width: 31%;
+}
+
+.img-box{
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+}
+
+.mr-2{
+    margin-right: 16px;
+}
+.mr-3{
+    margin-right: 24px;
+}
+.mb-1{
+    margin-bottom: 8px;
+}
+.mb-2{
+    margin-bottom: 16px;
+}
+.mb-3{
+    margin-bottom: 24px;
+}
+.mb-4{
+    margin-bottom: 32px;
 }

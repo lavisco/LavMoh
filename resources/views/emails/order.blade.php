@@ -33,58 +33,16 @@
 
 <h2>Here is what you ordered</h2>
 
-<div class="card mb-4">
-    <div class="card-row card-header">
-        <div>Item</div>
-        <div class="card-price">Price</div>
-    </div>
-    @foreach ($order->order_products as $order_product)
-    <div class="card-row card-body">
-        <div class="card-row-compact">
-            <img
-                class="img-box mr-2"
-                src="{{ $order_product->product->product_image->path ? $order_product->product->product_image->path : '/images/lavisco/img-bg.jpg' }}"
-            />
-            <div class="card-col mr-3">
-                <h3>{{ $order_product->product->title }}</h3>
-                @foreach ($order_product->order_product_variations as
-                $variation)
-                <div class="text-sm grey">
-                    {{ $variation->variation_option->name }}
-                </div>
-                @endforeach
-            </div>
-        </div>
-        <div class="card-price">
-            <h3>Rs {{$order_product->total}}</h3>
-            <div class="text-sm grey">
-                {{ $order_product->quantity }}
-            </div>
-        </div>
-    </div>
-    @endforeach
-    <div class="card-sub-footer">
-        <div class="grey mr-2">Sub total</div>
-        <div class="card-price"><h3>Rs 5300</h3></div>
-    </div>
-    <div class="card-footer">
-        <div class="grey mr-2">Total</div>
-        <div class="card-price">Rs 5300</div>
-    </div>
-</div>
-
-<h2>Shipping Details</h2>
-
-<table>
-    <thead>
+<table class="card-product mb-4">
+    <thead class="card-header">
         <tr>
             <td>Item</td>
-            <td>Price</td>
+            <td class="card-price">Price</td>
         </tr>
     </thead>
     <tbody>
         @foreach ($order->order_products as $order_product)
-        <tr>
+        <tr class="card-body">
             <td>
                 <div class="card-row-compact">
                     <img
@@ -112,13 +70,20 @@
             </td>
         </tr>
         @endforeach
-    </tbody>
-    <tfoot>
-        <tr>
+        <tr class="card-sub-footer">
             <td>Sub total</td>
+            <td>Rs {{ $order->subtotal }}</td>
+        </tr>
+    </tbody>
+    <tfoot class="card-footer">
+        <tr>
+            <td class="grey">Total</td>
+            <td class="card-price">Rs {{ $order->total }}</td>
         </tr>
     </tfoot>
 </table>
+
+<h2>Shipping Details</h2>
 
 <div class="flex-container mb-4">
     <div class="w-50 mb-sm-2 card-grey mr-2">

@@ -17,7 +17,7 @@ class OrderController extends Controller
 
     public function index()
     {
-        return Order::where('seller_id', auth()->id())
+        return Order::where('seller_id', auth()->id())->where('status', '!=', 'pending order')
                 ->with(['buyer', 'order_products', 'order_products.product', 'order_products.order_product_variations.variation_option.variation', 'order_products.order_product_giftbox_variations.product', 'receipt', 'shipping'])
                 ->latest()
                 ->filterstatus(request(['statusFilter']))

@@ -58,7 +58,7 @@ Route::post('/guest-logout', [LoginController::class, 'logoutGuest']);
 //Route::get('/emailTest', [EmailController::class, 'sendWelcomeEmail']);
 Route::get('/emailTest', function() {  
     $order = Order::with(['shop', 'order_products', 'order_products.product', 'order_products.product.product_image', 'order_products.order_product_variations.variation_option.variation'])->findOrFail(41);  
-    //Mail::to('islammohorima@gmail.com')->send(new OrderMail($order));
+    Mail::to('islammohorima@gmail.com')->send(new OrderMail($order));
     return new OrderMail($order);
 });
 

@@ -29,43 +29,47 @@
                 flex-direction: column;
             }
 
-            .card-header {
+            .card-product {
+                width: 100%;
+            }
+
+            .card-header tr {
+                border-radius: 8px;
                 background-color: #f7f7f7;
                 border-bottom: 2px solid #eeeded;
-                padding: 8px 16px;
                 color: #707070;
                 font-size: 14px;
                 width: 100%;
             }
+            .card-header td {
+                padding: 8px 16px;
+            }
 
-            .card-footer {
+            .card-footer tr {
                 background-color: #f7f7f7;
                 border-top: 2px solid #eeeded;
-                padding: 8px 16px;
-                display: flex;
-                flex-direction: row;
-                justify-content: flex-end;
                 font-size: 19px;
                 font-weight: bolder;
                 color: #333333;
-                width: 100%;
+                text-align: right;
             }
-
-            .card-sub-footer {
+            .card-footer td {
                 padding: 8px 16px;
-                display: flex;
-                flex-direction: row;
-                justify-content: flex-end;
-                width: 100%;
             }
 
-            .card-body {
+            .card-sub-footer td {
+                padding: 2px 16px;
+                text-align: right;
+            }
+
+            .card-body td {
                 padding: 16px;
                 border-bottom: 2px solid #f7f7f7;
+                vertical-align: top;
             }
 
             .card-price {
-                width: 90px;
+                width: 120px;
                 text-align: right !important;
             }
 

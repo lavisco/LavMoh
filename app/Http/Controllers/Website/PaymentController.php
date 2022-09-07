@@ -63,7 +63,7 @@ class PaymentController extends Controller
         $defaultProduct = Product::findOrFail($products[0]->id);
       
         $request->merge([
-            'status' => "not acknowledged",
+            'status' => "pending order",
             'tax' => 0.00,
             'discount_price' => 0.00,
             'giftwrap_price' => 0.00,

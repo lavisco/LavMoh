@@ -266,6 +266,10 @@ pJ28AUyd0dWx1YWu1wIDAQAB
         if($signature_status == true)
         {
             //Mail::to($order->email)->send(new OrderMail($order));
+            $order->update([
+                'status' => 'accept & start production',
+            ]);
+
             return view('payment.payment-response', compact('order', 'order_time'));
         } else
         {

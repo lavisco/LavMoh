@@ -149,6 +149,6 @@ class OrderController extends Controller
      */
     public function show($orderCode)
     {
-        return Order::with(['shop', 'order_products', 'order_products.product', 'order_products.product.product_image', 'order_products.order_product_variations.variation_option.variation', 'shipping'])->where('code', $orderCode);
+        return Order::with(['shop', 'order_products', 'order_products.product', 'order_products.product.product_image', 'order_products.order_product_variations.variation_option.variation', 'shipping'])->where('code', $orderCode)->first();
     }
 }

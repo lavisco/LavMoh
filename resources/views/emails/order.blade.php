@@ -51,12 +51,13 @@
                     />
                     <div class="card-col mr-3">
                         <h3>{{ $order_product->product->title }}</h3>
+                        @isset($order_product->order_product_variations)
                         @foreach ($order_product->order_product_variations as
                         $variation)
                         <div class="text-sm grey">
                             {{ $variation->variation_option->name }}
                         </div>
-                        @endforeach
+                        @endforeach @endisset
                     </div>
                 </div>
             </td>
@@ -74,6 +75,10 @@
             <td>Sub total</td>
             <td>Rs {{ $order->subtotal }}</td>
         </tr>
+        <tr class="card-sub-footer">
+            <td>Shipping</td>
+            <td>Rs {{ $order->shipping_price }}</td>
+        </tr>
     </tbody>
     <tfoot class="card-footer">
         <tr>
@@ -85,37 +90,41 @@
 
 <h2>Shipping Details</h2>
 
-<div class="flex-container mb-4">
-    <div class="w-50 mb-sm-2 card-grey mr-2">
-        <h3 class="mb-2">Shipping Address</h3>
-        <p>
-            {{ $order->recipient_first_name }}
-            {{ $order->recipient_last_name }} <br />
-            {{ $order->recipient_email }} <br />
-            {{ $order->recipient_phone }}
-        </p>
-        <p>
-            {{ $order->address_line_one }}, {{ $order->address_line_two }}
-            <br />
-            {{ $order->city }}, {{ $order->district }}, {{ $order->state }},
-            {{ $order->country }}
-        </p>
-    </div>
-    <div class="w-50 card-grey">
-        <h3 class="mb-2">Billing Address</h3>
-        <p>
-            {{ $order->first_name }}
-            {{ $order->last_name }} <br />
-            {{ $order->phone }}
-        </p>
-        <p>
-            {{ $order->billing_address_line_one }},
-            {{ $order->billing_address_line_two }} <br />
-            {{ $order->billing_city }}, {{ $order->billing_district }},
-            {{ $order->billing_state }},
-            {{ $order->billing_country }}
-        </p>
-    </div>
+<div class="w-100 mb-2 card-grey">
+    <h3 class="mb-2">Shipping Address</h3>
+    <p>
+        {{ $order->recipient_first_name }}
+        {{ $order->recipient_last_name }} <br />
+        {{ $order->recipient_email }} <br />
+        {{ $order->recipient_phone }}
+    </p>
+    <p>
+        {{ $order->address_line_one }}, {{ $order->address_line_two }}
+        <br />
+        {{ $order->city }}, {{ $order->district }}, {{ $order->state }},
+        {{ $order->country }}
+    </p>
+</div>
+<div class="w-100 card-grey mb-4">
+    <h3 class="mb-2">Billing Address</h3>
+    <p>
+        {{ $order->first_name }}
+        {{ $order->last_name }} <br />
+        {{ $order->phone }}
+    </p>
+    <p>
+        {{ $order->billing_address_line_one }},
+        {{ $order->billing_address_line_two }} <br />
+        {{ $order->billing_city }}, {{ $order->billing_district }},
+        {{ $order->billing_state }},
+        {{ $order->billing_country }}
+    </p>
+</div>
+
+<div class="mb-4">
+    <a href="{{ url('https://lavisco.lk/order/'.$order->code) }}">
+        <button class="button button-primary">View Order</button>
+    </a>
 </div>
 
 Regards,<br />

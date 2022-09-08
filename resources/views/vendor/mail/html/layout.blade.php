@@ -24,6 +24,13 @@
                 display: flex;
                 flex-direction: row;
             }
+
+            .card-row-compact-center {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+            }
+
             .card-col {
                 display: flex;
                 flex-direction: column;
@@ -31,6 +38,8 @@
 
             .card-product {
                 width: 100%;
+                border: 2px solid #eeeded;
+                border-radius: 8px !important;
             }
 
             .card-header tr {
@@ -58,7 +67,7 @@
             }
 
             .card-sub-footer td {
-                padding: 2px 16px;
+                padding: 4px 16px;
                 text-align: right;
             }
 
@@ -91,6 +100,10 @@
                 text-align: left;
             }
 
+            .w-100 {
+                width: 100%;
+            }
+
             .w-50 {
                 width: 47%;
             }
@@ -106,6 +119,7 @@
                 width: 60px;
                 height: 60px;
                 border-radius: 8px;
+                object-fit: cover;
             }
 
             .mr-2 {
@@ -145,6 +159,12 @@
                 }
                 .content-cell {
                     padding: 24px !important;
+                }
+                .card-price {
+                    width: 90px !important;
+                }
+                .card-footer tr{
+                    font-size: 17px !important;
                 }
             }
 

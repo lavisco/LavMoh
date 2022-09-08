@@ -96,7 +96,10 @@
                 <div class="cart-items-card">
                     <h4 class="text-left header mb-0">Order Items</h4>
                     <div class="row-content mt-4">
-                        <div class="row mb-4" v-for="order_product in order.order_products">
+                        <div
+                            class="row mb-4"
+                            v-for="order_product in order.order_products"
+                        >
                             <div class="col-md-8 d-flex flex-row">
                                 <img
                                     class="banner-container-xs mr-3"
@@ -165,7 +168,7 @@ export default {
     methods: {
         loadData() {
             axios
-                .get("/api/orders/" + this.route.params.orderCode)
+                .get("/api/orders/" + this.$route.params.orderCode)
                 .then(({ data }) => {
                     this.order = data;
                 })

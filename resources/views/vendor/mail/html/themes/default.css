@@ -264,6 +264,7 @@ img {
 
 .button {
     -webkit-text-size-adjust: none;
+    cursor: pointer;
     font-size: 16px;
     border-radius: 8px;
     color: #fff;
@@ -334,8 +335,7 @@ img {
     word-break: break-all;
 }
 
-
-.flex-container{
+.flex-container {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -343,3 +343,30 @@ img {
     align-items: stretch;
 }
 
+.num-active {
+    border-radius: 50%;
+    background-color: #df4e66;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 700;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 16px;
+}
+
+.num-default {
+    border-radius: 50%;
+    background-color: #e8e5ef;
+    color: #333333;
+    font-size: 18px;
+    font-weight: 700;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 16px;
+}

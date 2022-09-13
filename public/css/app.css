@@ -14119,14 +14119,17 @@ footer {
   height: auto !important;
   text-align: left !important;
 }
+.swiper-index-product a:hover {
+  color: #df4e66 !important;
+}
 .swiper-index-product .item-card {
-  padding: 10px;
+  padding: 6px;
   position: relative;
   height: 380px;
   justify-content: flex-end;
 }
 .swiper-index-product .item-card:hover .card-body {
-  background: #8c64ea;
+  background: #ffffff;
 }
 .swiper-index-product .item-card .card-img {
   position: absolute;
@@ -14147,20 +14150,21 @@ footer {
 }
 .swiper-index-product .item-card .card-body {
   position: relative;
-  max-height: 29%;
+  max-height: 33%;
   z-index: 2;
-  padding: 10px 13px;
-  border-radius: 12px;
-  background: #8260ac;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #fffffff0;
 }
 .swiper-index-product .item-card .card-title {
   margin-bottom: 0;
+  color: #333333;
 }
 .swiper-index-product .item-card .card-price {
-  color: #ffffff;
   font-weight: 700;
   letter-spacing: 0.02rem;
   font-size: 16px;
+  color: #333333;
 }
 @media (max-width: 640px) {
   .swiper-index-product .item-card {

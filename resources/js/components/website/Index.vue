@@ -80,13 +80,11 @@
                                     >
                                 </div>
 
-                                <div class="card-secondary-text white mt-md-2">
-                                    {{
-                                        product.user
-                                            ? product.user.shop.name
-                                            : ""
-                                    }}
-                                </div>
+                                <button
+                                    class="btn-secondary btn-sm btn-full mt-1"
+                                >
+                                    View
+                                </button>
                             </div>
                         </router-link>
                     </swiper-slide>

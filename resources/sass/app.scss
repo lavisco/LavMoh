@@ -4096,15 +4096,19 @@ footer {
     height: auto !important;
     text-align: left !important;
 
+    a:hover{
+        color: $lav-red !important;
+    }
+
     .item-card {
-        padding: 10px;
+        padding: 6px;
         position: relative;
         height: 380px;
         justify-content: flex-end;
 
         &:hover {
             .card-body {
-                background: rgb(140, 100, 234);
+                background: #ffffff;
             }
         }
         .card-img {
@@ -4126,20 +4130,21 @@ footer {
         }
         .card-body {
             position: relative;
-            max-height: 29%;
+            max-height: 33%;
             z-index: 2;
-            padding: 10px 13px;
-            border-radius: 12px;
-            background: #8260ac;
+            padding: 10px 12px;
+            border-radius: 8px;
+            background: #fffffff0;
         }
         .card-title {
             margin-bottom: 0;
+            color: $black;
         }
         .card-price {
-            color: #ffffff;
             font-weight: 700;
             letter-spacing: 0.02rem;
             font-size: 16px;
+            color: $black;
         }
 
         @media (max-width: 640px) {

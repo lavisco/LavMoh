@@ -233,6 +233,14 @@
                             </li>
                             <li class="nav-item">
                                 <router-link
+                                    to="/admin/orderstates"
+                                    class="nav-link"
+                                >
+                                    Order States
+                                </router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link
                                     to="/admin/categories"
                                     class="nav-link"
                                 >

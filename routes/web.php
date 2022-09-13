@@ -80,7 +80,7 @@ Route::get('/emailTest', function() {
     // Mail::to('int.rushdi@gmail.com')->send(new SellerNewOrderMail($order));
     // Mail::to('int.rushdi@gmail.com')->send(new SellerOrderDeliveredMail($order));
     // Mail::to('int.rushdi@gmail.com')->send(new SellerOrderDispatchMail($order));
-    // Mail::to('int.rushdi@gmail.com')->send(new BuyerOrderDeliveredMail($order));
+    // Mail::to('islammohorima@gmail.com')->send(new BuyerOrderDeliveredMail($order));
     // Mail::to('int.rushdi@gmail.com')->send(new BuyerOrderProductionMail($order));
     // Mail::to('int.rushdi@gmail.com')->send(new BuyerOrderShippedMail($order));
 

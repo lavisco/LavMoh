@@ -24,7 +24,7 @@ class OrderStateRequest extends FormRequest
     public function rules()
     {
         return [
-            'state' => 'required|max:50',
+            'state' => 'required|max:200',
             'description' => 'max:255|nullable',
         ];
     }

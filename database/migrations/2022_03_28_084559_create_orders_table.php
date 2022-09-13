@@ -59,6 +59,8 @@ class CreateOrdersTable extends Migration
 			$table->foreignId('giftwrap_id')->nullable()->constrained();
             $table->foreignId('seller_id')->references('id')->on('users');
             $table->foreignId('buyer_id')->references('id')->on('users');
+
+            $table->foreignId('order_state_id')->constrained();
         });
     }
 

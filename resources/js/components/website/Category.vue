@@ -95,6 +95,7 @@
                         <div class="card-secondary-text">
                             {{ product.user.shop.name }}
                         </div>
+                        <button class="btn-secondary btn-sm btn-full mt-3">View</button>
                     </div>
                 </router-link>
             </div>

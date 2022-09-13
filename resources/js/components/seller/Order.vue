@@ -45,26 +45,11 @@
                                     v-model="statusFilter"
                                 >
                                     <option value="">all</option>
-                                    <option value="not acknowledged">
-                                        not acknowledged
-                                    </option>
-                                    <option value="acknowledged">
-                                        acknowledged
-                                    </option>
-                                    <option value="in production">
-                                        in production
-                                    </option>
-                                    <option value="ready for delivery">
-                                        ready for delivery
-                                    </option>
-                                    <option value="order dispatched">
-                                        order dispatched
-                                    </option>
-                                    <option value="delivery in progress">
-                                        delivery in progress
-                                    </option>
-                                    <option value="delivery completed">
-                                        delivery completed
+                                    <option
+                                        v-for="orderState in orderStates"
+                                        :value="orderState.id"
+                                    >
+                                        {{ orderState.state }}
                                     </option>
                                 </select>
                             </div>
@@ -83,20 +68,15 @@
                             <table class="table align-items-center table-hover">
                                 <thead>
                                     <tr>
-                                        <th scope="col">
-                                            Code
-                                        </th>
-                                        <th scope="col">
+                                        <th scope="col">Code</th>
+                                        <th scope="col" class="table-col-sm">
                                             Date
                                         </th>
                                         <th scope="col" class="table-col-lg">
                                             Items
                                         </th>
-                                        <th scope="col" class="table-col-sm">
-                                            Amount
-                                        </th>
-                                        <th scope="col">Status</th>
-                                        <th scope="col" class="table-col-sm">
+                                        <th scope="col">Amount</th>
+                                        <th scope="col">
                                             Update Status
                                         </th>
                                         <th scope="col"></th>
@@ -106,6 +86,36 @@
                                     <tr v-for="order in orders">
                                         <td>
                                             {{ order.code }}
+                                            <br />
+                                            <span
+                                                class="
+                                                    badge badge-pill
+                                                    bg-purple
+                                                    white
+                                                "
+                                                :class="{
+                                                    'bg-orange':
+                                                        order.order_state_id ===
+                                                        2,
+                                                    'bg-yellow':
+                                                        order.order_state_id ===
+                                                        3,
+                                                    'bg-purple':
+                                                        order.order_state_id ===
+                                                        4,
+                                                    'bg-brown':
+                                                        order.order_state_id ===
+                                                        5,
+                                                    'bg-blue':
+                                                        order.order_state_id ===
+                                                        6,
+                                                    'bg-green':
+                                                        order.order_state_id ===
+                                                        7,
+                                                }"
+                                            >
+                                                {{ order.order_state.state }}
+                                            </span>
                                         </td>
                                         <td>
                                             <div class="mb-2">
@@ -192,52 +202,23 @@
                                             {{ order.total }}
                                         </td>
                                         <td>
-                                            <span
-                                                class="
-                                                    badge badge-pill
-                                                    bg-purple
-                                                    white
-                                                "
-                                                :class="{
-                                                    'bg-danger':
-                                                        order.status ===
-                                                        'not acknowledged',
-                                                    'bg-success':
-                                                        order.status ===
-                                                        'acknowledged',
-                                                    'bg-warning':
-                                                        order.status ===
-                                                        'in production',
-                                                    'bg-orange':
-                                                        order.status ===
-                                                        'ready for delivery',
-                                                    'bg-dark-orange':
-                                                        order.status ===
-                                                            'order dispatched' ||
-                                                        order.status ===
-                                                            'delivery in progress',
-                                                    'bg-dark-green':
-                                                        order.status ===
-                                                        'delivery completed',
-                                                }"
-                                            >
-                                                {{ order.status }}
-                                            </span>
-                                        </td>
-                                        <td>
                                             <button
                                                 @click.prevent="
                                                     setCurrentStatus(order)
                                                 "
-                                                class="btn btn-sm"
+                                                class="btn btn-sm btn-fit-text"
                                                 title="Change status"
                                                 v-if="
                                                     statusUpdateActive(
-                                                        order.status
+                                                        order.order_state_id
                                                     ) == true
                                                 "
                                             >
-                                                {{ nextStatus(order.status) }}
+                                                {{
+                                                    nextStatus(
+                                                        order.order_state_id
+                                                    )
+                                                }}
                                             </button>
                                             <p v-else>Lavisco is shipping</p>
                                         </td>
@@ -285,28 +266,21 @@
                                     <span
                                         class="badge-special"
                                         :class="{
-                                            'bg-danger':
-                                                order.status ===
-                                                'not acknowledged',
-                                            'bg-success':
-                                                order.status === 'acknowledged',
-                                            'bg-warning':
-                                                order.status ===
-                                                'in production',
                                             'bg-orange':
-                                                order.status ===
-                                                'ready for delivery',
-                                            'bg-dark-orange':
-                                                order.status ===
-                                                    'order dispatched' ||
-                                                order.status ===
-                                                    'delivery in progress',
-                                            'bg-dark-green':
-                                                order.status ===
-                                                'delivery completed',
+                                                order.order_state_id === 2,
+                                            'bg-yellow':
+                                                order.order_state_id === 3,
+                                            'bg-purple':
+                                                order.order_state_id === 4,
+                                            'bg-brown':
+                                                order.order_state_id === 5,
+                                            'bg-blue':
+                                                order.order_state_id === 6,
+                                            'bg-green':
+                                                order.order_state_id === 7,
                                         }"
                                     >
-                                        {{ order.status }}
+                                        {{ order.order_state.state }}
                                     </span>
                                 </div>
 
@@ -389,8 +363,9 @@
                                 <div class="d-flex flex-row">
                                     <div
                                         v-if="
-                                            statusUpdateActive(order.status) ==
-                                            true
+                                            statusUpdateActive(
+                                                order.order_state_id
+                                            ) == true
                                         "
                                         class="mr-3"
                                     >
@@ -404,7 +379,9 @@
                                             class="btn btn-sm"
                                             title="Change status"
                                         >
-                                            {{ nextStatus(order.status) }}
+                                            {{
+                                                nextStatus(order.order_state_id)
+                                            }}
                                         </button>
                                     </div>
                                     <div>
@@ -938,6 +915,7 @@ export default {
     data: () => ({
         moment: moment,
         orders: [],
+        orderStates: [],
         searchText: null,
         statusFilter: "",
         loading: true,
@@ -947,7 +925,7 @@ export default {
         current_order_mode: false,
         form: new Form({
             id: "",
-            status: "",
+            order_state_id: "",
         }),
         pagination: { current_page: 1 },
     }),
@@ -996,45 +974,51 @@ export default {
                 .catch((error) => console.log(error));
         },
 
-        statusUpdateActive(status) {
-            if (
-                status == "not acknowledged" ||
-                status == "acknowledged" ||
-                status == "in production"
-            ) {
+        loadOrderStates() {
+            axios
+                .get("/api/seller/order_states")
+                .then(({ data }) => {
+                    this.orderStates = data;
+                })
+                .catch((error) => console.log(error));
+        },
+
+        statusUpdateActive(state_id) {
+            if (state_id == 2 || state_id == 3) {
                 return true;
             } else {
                 return false;
             }
         },
 
-        nextStatus(status) {
-            switch (status) {
-                case "not acknowledged":
-                    return "acknowledge";
+        nextStatus(state_id) {
+            switch (state_id) {
+                case 2:
+                    return "Start Production";
                     break;
-                case "acknowledged":
-                    return "in production";
-                    break;
-                case "in production":
-                    return "ready for delivery";
+                case 3:
+                    return "Ready for Delivery";
                     break;
             }
         },
 
         setCurrentStatus(order) {
-            switch (order.status) {
-                case "":
-                    this.form.status = "acknowledged";
+            /*
+            1 -Pending Order
+            2 -Accept & Start Production -org
+            3 -In Production -yel
+            4 -Ready for Delivery -pur
+            5 -Order Dispatched -brown
+            6 -Delivery in Progress -blu
+            7 -Order Delivered -grn
+            */
+
+            switch (order.order_state_id) {
+                case 2:
+                    this.form.order_state_id = 3;
                     break;
-                case "not acknowledged":
-                    this.form.status = "acknowledged";
-                    break;
-                case "acknowledged":
-                    this.form.status = "in production";
-                    break;
-                case "in production":
-                    this.form.status = "ready for delivery";
+                case 3:
+                    this.form.order_state_id = 4;
                     break;
             }
 
@@ -1050,6 +1034,7 @@ export default {
     },
     mounted() {
         this.loadOrders();
+        this.loadOrderStates();
         Fire.$on("reloadRecords", () => {
             this.pagination.current_page = 1;
             this.loadOrders();

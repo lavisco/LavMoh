@@ -182,7 +182,7 @@ Route::prefix('seller')->group(function () {
     Route::get('/giftboxes/details', [SellerGiftboxController::class, 'getDetails']);
     Route::apiResource('/giftboxes', SellerGiftboxController::class);
     Route::apiResource('/orders', SellerOrderController::class);
-    Route::apiResource('/order_states', SellerOrderStateController::class);
+    Route::get('/order_states', [SellerOrderStateController::class, 'index']);
     Route::get('/products/details', [SellerProductController::class, 'getDetails']);
     Route::get('/products/sub_categories/{categoryId}', [SellerProductController::class, 'getSubcategories']);
     //store new image for existing product

@@ -17,6 +17,12 @@ class OrderState extends Model
         'description',
     ];
 
+    //order:order_state M:1
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
     public function scopeFilter($query, array $filters)
     {
         $query->when($filters['searchText'] ?? false, fn($query, $searchText) =>

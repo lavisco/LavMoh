@@ -126,6 +126,13 @@ export let routes = [
         },
     },
     {
+        path: "/admin/orderstates",
+        component: require("./components/admin/OrderState.vue").default,
+        meta: {
+            title: "Order States",
+        },
+    },
+    {
         path: "/admin/permissions",
         component: require("./components/admin/Permission.vue").default,
         meta: {

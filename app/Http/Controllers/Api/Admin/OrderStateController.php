@@ -16,7 +16,7 @@ class OrderStateController extends Controller
 
     public function index()
     {
-        return OrderState::latest()->paginate(25);
+        return OrderState::latest()->get();
     }
 
     public function store(OrderStateRequest $request)

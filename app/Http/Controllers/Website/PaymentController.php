@@ -63,7 +63,7 @@ class PaymentController extends Controller
         $defaultProduct = Product::findOrFail($products[0]->id);
       
         $request->merge([
-            'status' => "pending order",
+            'order_state_id' => 1,
             'tax' => 0.00,
             'discount_price' => 0.00,
             'giftwrap_price' => 0.00,
@@ -267,9 +267,12 @@ pJ28AUyd0dWx1YWu1wIDAQAB
         {
             //Mail::to($order->email)->send(new OrderMail($order));
             $order->update([
-                'status' => 'accept & start production',
+                'order_state_id' => 2,
             ]);
+        }
 
+        if($signature_status == true)
+        {
             return view('payment.payment-response', compact('order', 'order_time'));
         } else
         {

@@ -229,62 +229,58 @@
 
             <section class="section-category">
                 <h1>Find the perfect gift for your Loved ones</h1>
-                <div class="row">
-                    <div class="col-12">
-                        <div class="gallery">
-                            <router-link
-                                :to="{
-                                    name: 'categories/category',
-                                    params: {
-                                        categoryId: category.id,
-                                        slug: category.slug,
-                                    },
-                                }"
-                                class="gallery-item"
-                                :class="`gallery-item--${index + 1}`"
-                                v-for="(category, index) in categories"
-                                :key="category.id"
-                            >
-                                <img
-                                    :src="category.path ? category.path : ''"
-                                    class="gallery-img"
-                                    alt="Image 1"
-                                />
-                                <div class="card-img-text">
-                                    {{ category.name }}
-                                </div>
-                            </router-link>
-                        </div>
-                        <div
-                            class="
-                                mt-4
-                                d-flex
-                                align-items-center
-                                justify-content-center
-                            "
+                <div class="row flex-wrap">
+                    <div
+                        class="col-md-3 pb-4"
+                        v-for="(category, index) in categories"
+                        :key="category.id"
+                    >
+                        <router-link
+                            :to="{
+                                name: 'categories/category',
+                                params: {
+                                    categoryId: category.id,
+                                    slug: category.slug,
+                                },
+                            }"
+                            class="gallery-item"
                         >
-                            <router-link
-                                class="view-more-link"
-                                to="/categories"
-                            >
-                                Browse All
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    aria-hidden="true"
-                                    role="img"
-                                    width="24"
-                                    height="24"
-                                    preserveAspectRatio="xMidYMid meet"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <path
-                                        fill="#666"
-                                        d="M12 11V8l4 4l-4 4v-3H8v-2h4zm0-9c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12S6.48 2 12 2zm0 18c4.42 0 8-3.58 8-8s-3.58-8-8-8s-8 3.58-8 8s3.58 8 8 8z"
-                                    />
-                                </svg>
-                            </router-link>
-                        </div>
+                            <img
+                                :src="category.path ? category.path : ''"
+                                class="gallery-img"
+                                alt="Image 1"
+                            />
+                            <div class="card-img-text">
+                                {{ category.name }}
+                            </div>
+                        </router-link>
                     </div>
+                </div>
+                <div
+                    class="
+                        mt-4
+                        d-flex
+                        align-items-center
+                        justify-content-center
+                    "
+                >
+                    <router-link class="view-more-link" to="/categories">
+                        Browse All
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            aria-hidden="true"
+                            role="img"
+                            width="24"
+                            height="24"
+                            preserveAspectRatio="xMidYMid meet"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                fill="#666"
+                                d="M12 11V8l4 4l-4 4v-3H8v-2h4zm0-9c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12S6.48 2 12 2zm0 18c4.42 0 8-3.58 8-8s-3.58-8-8-8s-8 3.58-8 8s3.58 8 8 8z"
+                            />
+                        </svg>
+                    </router-link>
                 </div>
             </section>
 
@@ -353,9 +349,7 @@
                                 over your competitors.
                             </h4>
                             <router-link to="/sell_on_lavisco">
-                                <button>
-                                    Become a Seller
-                                </button>
+                                <button>Become a Seller</button>
                             </router-link>
                         </div>
                     </div>

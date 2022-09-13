@@ -15,6 +15,6 @@ class OrderStateController extends Controller
 
     public function index()
     {
-        return OrderState::latest()->get();
+        return OrderState::where('id', '!=', 1)->latest()->get();
     }
 }

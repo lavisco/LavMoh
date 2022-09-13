@@ -444,8 +444,7 @@ h6,
 
     color: #32325d;
 }
-in 
-h1,
+in h1,
 .h1 {
     font-size: 1.625rem;
 }
@@ -2450,7 +2449,7 @@ textarea.form-control {
 
     display: inline-block;
 
-    padding: 0.650rem 1.50rem;
+    padding: 0.65rem 1.5rem;
 
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -4104,6 +4103,10 @@ input[type="button"].btn-block {
     background-color: rgba(94, 114, 228, 0.5);
 }
 
+.btn-fit-text {
+    width: max-content !important;
+}
+
 .custom-select {
     line-height: 1.5;
 
@@ -4115,7 +4118,7 @@ input[type="button"].btn-block {
 
     vertical-align: middle;
 
-    color: #8898aa;
+    color: #2d2e33;
     border: 1px solid #cad1d7;
     border-radius: 0.375rem;
     background: #fff

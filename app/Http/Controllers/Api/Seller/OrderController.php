@@ -17,8 +17,8 @@ class OrderController extends Controller
 
     public function index()
     {
-        return Order::where('seller_id', auth()->id())->where('status', '!=', 'pending order')
-                ->with(['buyer', 'order_products', 'order_products.product', 'order_products.order_product_variations.variation_option.variation', 'order_products.order_product_giftbox_variations.product', 'receipt', 'shipping'])
+        return Order::where('seller_id', auth()->id())->where('order_state_id', '!=', 1)
+                ->with(['buyer', 'order_state', 'order_products', 'order_products.product', 'order_products.order_product_variations.variation_option.variation', 'order_products.order_product_giftbox_variations.product', 'receipt', 'shipping'])
                 ->latest()
                 ->filterstatus(request(['statusFilter']))
                 ->filter(request(['searchText']))
@@ -34,7 +34,7 @@ class OrderController extends Controller
     {
         //$this->authorize('update', $order);
         $order->update([
-            'status' => request('status'),
+            'order_state_id' => request('order_state_id'),
         ]);
     }
 }

@@ -16,7 +16,7 @@ class OrderController extends Controller
     
     public function index()
     {
-        return Order::with(['buyer', 'seller', 'seller.shop', 'order_products', 'order_products.product', 'order_products.order_product_variations.variation_option.variation', 'receipt', 'shipping'])
+        return Order::with(['buyer', 'seller', 'seller.shop', 'order_state', 'order_products', 'order_products.product', 'order_products.order_product_variations.variation_option.variation', 'receipt', 'shipping'])
                 ->latest()
                 ->filterstatus(request(['statusFilter']))
                 ->filter(request(['searchText']))
@@ -41,7 +41,7 @@ class OrderController extends Controller
     public function updateStatus(Request $request, Order $order)
     {
         $order->update([
-            'status' => request('status'),
+            'order_state_id' => request('order_state_id'),
         ]);
     }
 

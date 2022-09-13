@@ -30,26 +30,11 @@
                                 v-model="statusFilter"
                             >
                                 <option value="">all</option>
-                                <option value="not acknowledged">
-                                    not acknowledged
-                                </option>
-                                <option value="acknowledged">
-                                    acknowledged
-                                </option>
-                                <option value="in production">
-                                    in production
-                                </option>
-                                <option value="ready for delivery">
-                                    ready for delivery
-                                </option>
-                                <option value="order dispatched">
-                                    order dispatched
-                                </option>
-                                <option value="delivery in progress">
-                                    delivery in progress
-                                </option>
-                                <option value="delivery completed">
-                                    delivery completed
+                                <option
+                                    v-for="orderState in orderStates"
+                                    :value="orderState.id"
+                                >
+                                    {{ orderState.state }}
                                 </option>
                             </select>
                         </div>
@@ -75,7 +60,7 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">Order</th>
-                                        <th scope="col" class="table-col-lg">
+                                        <th scope="col" class="table-col-sm">
                                             Date
                                         </th>
                                         <th scope="col" class="table-col-sm">
@@ -99,41 +84,36 @@
                                             <div
                                                 class="status-indicator"
                                                 :class="{
-                                                    'bg-danger':
-                                                        order.status ===
-                                                        'not acknowledged',
-                                                    'bg-success':
-                                                        order.status ===
-                                                        'acknowledged',
-                                                    'bg-warning':
-                                                        order.status ===
-                                                        'in production',
+                                                    'bg-grey':
+                                                        order.order_state_id ===
+                                                        1,
                                                     'bg-orange':
-                                                        order.status ===
-                                                        'ready for delivery',
-                                                    'bg-dark-orange':
-                                                        order.status ===
-                                                            'order dispatched' ||
-                                                        order.status ===
-                                                            'delivery in progress',
-                                                    'bg-dark-green':
-                                                        order.status ===
-                                                        'delivery completed',
+                                                        order.order_state_id ===
+                                                        2,
+                                                    'bg-yellow':
+                                                        order.order_state_id ===
+                                                        3,
+                                                    'bg-purple':
+                                                        order.order_state_id ===
+                                                        4,
+                                                    'bg-brown':
+                                                        order.order_state_id ===
+                                                        5,
+                                                    'bg-blue':
+                                                        order.order_state_id ===
+                                                        6,
+                                                    'bg-green':
+                                                        order.order_state_id ===
+                                                        7,
                                                 }"
                                             ></div>
                                             {{ order.code }}
                                         </td>
                                         <td>
                                             <div class="mb-2">
-                                                <div
-                                                    class="
-                                                        badge badge-pill
-                                                        bg-light
-                                                    "
-                                                >
+                                                <p class="text-sm mb-0">
                                                     Dispatch
-                                                </div>
-                                                <br />
+                                                </p>
                                                 {{
                                                     moment(order.delivery_date)
                                                         .subtract(
@@ -143,18 +123,11 @@
                                                         )
                                                         .format("DD-MM-YYYY")
                                                 }}
-                                                9:30am
                                             </div>
                                             <div>
-                                                <div
-                                                    class="
-                                                        badge badge-pill
-                                                        bg-light
-                                                    "
-                                                >
+                                                <p class="text-sm mb-0">
                                                     Delivery
-                                                </div>
-                                                <br />
+                                                </p>
                                                 {{
                                                     moment(
                                                         order.delivery_date
@@ -204,10 +177,11 @@
                                                 class="
                                                     custom-select
                                                     form-control
+                                                    btn-fit-text
                                                 "
                                                 name="status"
                                                 id="status"
-                                                v-model="order.status"
+                                                v-model="order.order_state_id"
                                                 @change.prevent="
                                                     setCurrentStatus(
                                                         order.id,
@@ -216,35 +190,10 @@
                                                 "
                                             >
                                                 <option
-                                                    value="not acknowledged"
+                                                    v-for="orderState in orderStates"
+                                                    :value="orderState.id"
                                                 >
-                                                    not acknowledged
-                                                </option>
-                                                <option value="acknowledged">
-                                                    acknowledged
-                                                </option>
-                                                <option value="in production">
-                                                    in production
-                                                </option>
-                                                <option
-                                                    value="ready for delivery"
-                                                >
-                                                    ready for delivery
-                                                </option>
-                                                <option
-                                                    value="order dispatched"
-                                                >
-                                                    order dispatched
-                                                </option>
-                                                <option
-                                                    value="delivery in progress"
-                                                >
-                                                    delivery in progress
-                                                </option>
-                                                <option
-                                                    value="delivery completed"
-                                                >
-                                                    delivery completed
+                                                    {{ orderState.state }}
                                                 </option>
                                             </select>
                                         </td>
@@ -369,10 +318,13 @@
                                     {{ current_order.code }}
                                 </div>
                             </div>
-                            <div class="row mb-3">
+                            <div
+                                class="row mb-3"
+                                v-if="current_order.order_state"
+                            >
                                 <div class="col-md-3 modal-label">Status</div>
                                 <div class="col-md-9">
-                                    {{ current_order.status }}
+                                    {{ current_order.order_state.state }}
                                 </div>
                             </div>
                             <div class="row mb-3" v-if="current_order.seller">
@@ -1445,6 +1397,7 @@ export default {
     data: () => ({
         moment: moment,
         orders: [],
+        orderStates: [],
         searchText: null,
         statusFilter: "",
         loading: true,
@@ -1493,6 +1446,8 @@ export default {
             shipping_price: "",
             discount_price: "",
 
+            order_state_id: "",
+
             shop_id: "",
             shipping_id: "",
             discount_id: "",
@@ -1529,7 +1484,7 @@ export default {
 
         setCurrentStatus(order, event) {
             if (confirm("Are you sure you want to change order status?")) {
-                this.form.status = event.target.value;
+                this.form.order_state_id = event.target.value;
                 this.form
                     .put("/api/admin/orders/updateStatus/" + order)
                     .then(() => {
@@ -1541,8 +1496,7 @@ export default {
 
         loadOrders() {
             axios
-                .get("/api/admin/orders?page=" +
-                        this.pagination.current_page, {
+                .get("/api/admin/orders?page=" + this.pagination.current_page, {
                     params: {
                         searchText: this.searchText,
                         statusFilter: this.statusFilter,
@@ -1553,6 +1507,15 @@ export default {
                     this.pagination.last_page = data.last_page;
                     this.pagination.current_page = data.current_page;
                     this.loading = false;
+                })
+                .catch((error) => console.log(error));
+        },
+
+        loadOrderStates() {
+            axios
+                .get("/api/admin/order_states")
+                .then(({ data }) => {
+                    this.orderStates = data;
                 })
                 .catch((error) => console.log(error));
         },
@@ -1581,6 +1544,7 @@ export default {
 
     mounted() {
         this.loadOrders();
+        this.loadOrderStates();
         Fire.$on("reloadRecords", () => {
             this.pagination.current_page = 1;
             this.loadOrders();

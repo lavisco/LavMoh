@@ -42,6 +42,7 @@ class Order extends Model
 
         'delivery_date',
         'status',
+        'order_state_id',
         'currency_code',
         'current_exchange_rate',
 
@@ -70,6 +71,12 @@ class Order extends Model
     public function buyer()
     {
         return $this->belongsTo(User::class, 'buyer_id');
+    }
+
+    //order:order_state M:1
+    public function order_state()
+    {
+        return $this->belongsTo(OrderState::class);
     }
 
     //discount:order 1:M
@@ -126,7 +133,7 @@ class Order extends Model
     {
         $query->when($filters['statusFilter'] ?? false, fn($query, $statusFilter) =>
             $query
-                ->where('status', $statusFilter)
+                ->where('order_state_id', $statusFilter)
             );
     }
 }

@@ -216,6 +216,16 @@ Route::prefix('seller')->group(function () {
 */
 
 Route::prefix('email')->group(function () {
+    //order
+    Route::get('/buyer_order_new/{order}', [EmailController::class, 'sendBuyerOrderMail']);
+    Route::get('/buyer_order_delivered/{order}', [EmailController::class, 'sendBuyerOrderDeliveredMail']);
+    Route::get('/buyer_order_production/{order}', [EmailController::class, 'sendBuyerOrderProductionMail']);
+    Route::get('/buyer_order_shipped/{order}', [EmailController::class, 'sendBuyerOrderShippedMail']);
+
+    Route::get('/seller_order_new/{email}/{order}', [EmailController::class, 'sendSellerOrderMail']);
+    Route::get('/seller_order_delivered/{email}/{order}', [EmailController::class, 'sendSellerOrderDeliveredMail']);
+    Route::get('/seller_order_dispatch/{email}/{order}', [EmailController::class, 'sendSellerOrderDispatchMail']);
+
     Route::get('/seller_welcome/{email}', [EmailController::class, 'sendSellerWelcomeMail']);
     Route::get('/store_active_application', [EmailController::class, 'sendStoreActiveApplicationMail']);
     Route::get('/store_active/{email}', [EmailController::class, 'sendStoreActiveMail']);

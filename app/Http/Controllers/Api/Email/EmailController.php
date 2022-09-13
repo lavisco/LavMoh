@@ -3,9 +3,15 @@
 namespace App\Http\Controllers\Api\Email;
 
 use App\Http\Controllers\Controller;
+use App\Mail\BuyerOrderDeliveredMail;
+use App\Mail\BuyerOrderProductionMail;
+use App\Mail\BuyerOrderShippedMail;
 use App\Mail\OrderMail;
 use App\Mail\PasswordResetMail;
 use App\Mail\ProductListingConfirmMail;
+use App\Mail\SellerNewOrderMail;
+use App\Mail\SellerOrderDeliveredMail;
+use App\Mail\SellerOrderDispatchMail;
 use App\Mail\SellerWelcomeMail;
 use App\Mail\StoreActiveApplicationMail;
 use App\Mail\StoreActiveMail;
@@ -84,13 +90,79 @@ class EmailController extends Controller
     }
 
     /** 
-    * Sends email informing seller a new order has been placed.
+    * Sends email informing buyer a new order has been placed.
     */
 
-    public function sendOrderMail()
+    public function sendBuyerOrderMail($order)
     {
-        Mail::to('mohorimaislamtamanna@gmail.com')->send(new OrderMail($order));
+        Mail::to($order->email)->send(new OrderMail($order));
 
         return Mail::failures() != 0 ? "Email has been sent successfully." : "Oops! There was some error sending the email.";
     }
+
+    /** 
+    * Sends email informing buyer an order has been delivered.
+    */
+
+    public function sendBuyerOrderDeliveredMail($order)
+    {
+        Mail::to($order->email)->send(new BuyerOrderDeliveredMail($order));
+
+        return Mail::failures() != 0 ? "Email has been sent successfully." : "Oops! There was some error sending the email.";
+    }
+
+    /** 
+    * Sends email informing buyer an order is being prepared.
+    */
+
+    public function sendBuyerOrderProductionMail($order)
+    {
+        Mail::to($order->email)->send(new BuyerOrderProductionMail($order));
+
+        return Mail::failures() != 0 ? "Email has been sent successfully." : "Oops! There was some error sending the email.";
+    }
+
+    /** 
+    * Sends email informing buyer an order has been shipped.
+    */
+
+    public function sendBuyerOrderShippedMail($order)
+    {
+        Mail::to($order->email)->send(new BuyerOrderShippedMail($order));
+
+        return Mail::failures() != 0 ? "Email has been sent successfully." : "Oops! There was some error sending the email.";
+    }
+
+    /** 
+    * Sends email informing seller a new order has been placed.
+    */
+
+    public function sendSellerOrderMail($email, $order)
+    {
+        Mail::to($email)->send(new SellerNewOrderMail($order));
+
+        return Mail::failures() != 0 ? "Email has been sent successfully." : "Oops! There was some error sending the email.";
+    }
+    /** 
+    * Sends email informing seller an order has been delivered.
+    */
+
+    public function sendSellerOrderDeliveredMail($email, $order)
+    {
+        Mail::to($email)->send(new SellerOrderDeliveredMail($order));
+
+        return Mail::failures() != 0 ? "Email has been sent successfully." : "Oops! There was some error sending the email.";
+    }
+    /** 
+    * Sends email informing seller an order has been dispatched.
+    */
+
+    public function sendSellerOrderDispatchMail($email, $order)
+    {
+        Mail::to($email)->send(new SellerOrderDispatchMail($order));
+
+        return Mail::failures() != 0 ? "Email has been sent successfully." : "Oops! There was some error sending the email.";
+    }
+
+
 }

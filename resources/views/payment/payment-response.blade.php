@@ -162,5 +162,6 @@
         </div>
     </div>
     <cart-clear></cart-clear>
+    <order-email order-id="{{ $order->id }}"></order-email>
 </div>
 @endsection

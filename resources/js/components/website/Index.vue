@@ -75,15 +75,15 @@
                                         product.base_price *
                                         currency.exchange_rate
                                     }}
-                                    <span v-show="product.has_variations == 1"
-                                        >+</span
-                                    >
+                                    <span v-show="product.has_variations == 1">
+                                        +
+                                    </span>
                                 </div>
 
                                 <button
                                     class="btn-secondary btn-sm btn-full mt-1"
                                 >
-                                    View
+                                    Buy now
                                 </button>
                             </div>
                         </router-link>

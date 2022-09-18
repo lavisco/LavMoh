@@ -122,6 +122,10 @@ Vue.component(
     "cart-clear",
     require("./components/website/checkout/CartClear.vue").default
 );
+Vue.component(
+    "order-email",
+    require("./components/website/checkout/OrderEmail.vue").default
+);
 
 //Fire is a new instance of vue which will be used as a bus
 window.Fire = new Vue();

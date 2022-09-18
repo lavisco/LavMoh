@@ -12,15 +12,15 @@
 <div class="card-row-compact-center mb-4">
     <div class="card-row-compact-center mr-3">
         <div class="num-active">1</div>
-        <h3>Order confirmed</h3>
+        <h3 class="green">Order confirmed</h3>
     </div>
     <div class="card-row-compact-center mr-3">
         <div class="num-default">2</div>
-        <h3>Dispatched</h3>
+        <h3 class="dk-grey">Dispatched</h3>
     </div>
     <div class="card-row-compact-center">
         <div class="num-default">3</div>
-        <h3>Delivered</h3>
+        <h3 class="dk-grey">Delivered</h3>
     </div>
 </div>
 
@@ -65,13 +65,13 @@
                         class="img-box mr-2"
                         src="{{ $order_product->product->product_image->path ? $order_product->product->product_image->path : '/images/lavisco/img-bg.jpg' }}"
                     />
-                    <div class="card-col mr-3">
+                    <div class="mr-3">
                         <h3>{{ $order_product->product->title }}</h3>
                         @isset($order_product->order_product_variations)
                         @foreach ($order_product->order_product_variations as
                         $variation)
                         <div class="text-sm grey">
-                            {{ $variation->variation_option->name }}
+                            {{ $variation->variation_option->name }},
                         </div>
                         @endforeach @endisset
                     </div>
@@ -95,7 +95,7 @@
     <tfoot class="card-footer">
         <tr>
             <td class="grey">Total</td>
-            <td class="card-price">Rs {{ $order->total }}</td>
+            <td class="card-price pink">Rs {{ $order->total }}</td>
         </tr>
     </tfoot>
 </table>

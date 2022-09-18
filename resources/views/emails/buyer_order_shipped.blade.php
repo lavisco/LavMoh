@@ -70,13 +70,13 @@
                         class="img-box mr-2"
                         src="{{ $order_product->product->product_image->path ? $order_product->product->product_image->path : '/images/lavisco/img-bg.jpg' }}"
                     />
-                    <div class="card-col mr-3">
+                    <div class="mr-3">
                         <h3>{{ $order_product->product->title }}</h3>
                         @isset($order_product->order_product_variations)
                         @foreach ($order_product->order_product_variations as
                         $variation)
                         <div class="text-sm grey">
-                            {{ $variation->variation_option->name }}
+                            {{ $variation->variation_option->name }},
                         </div>
                         @endforeach @endisset
                     </div>
@@ -104,7 +104,7 @@
     <tfoot class="card-footer">
         <tr>
             <td class="grey">Total</td>
-            <td class="card-price">Rs {{ $order->total }}</td>
+            <td class="card-price pink">Rs {{ $order->total }}</td>
         </tr>
     </tfoot>
 </table>

@@ -15,6 +15,7 @@ use App\Mail\SellerOrderDispatchMail;
 use App\Mail\SellerWelcomeMail;
 use App\Mail\StoreActiveApplicationMail;
 use App\Mail\StoreActiveMail;
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -31,7 +32,7 @@ class EmailController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:api')->except('sendSellerWelcomeMail');
+        $this->middleware('auth:api')->only(['sendStoreActiveApplicationMail', 'sendStoreActiveMail', 'sendProductListingConfirmedMail', 'sendPasswordResetMail']);
     }
 
     /** 
@@ -93,8 +94,10 @@ class EmailController extends Controller
     * Sends email informing buyer a new order has been placed.
     */
 
-    public function sendBuyerOrderMail($order)
+    public function sendBuyerOrderMail($orderId)
     {
+        $order = Order::with(['shop', 'order_products', 'order_products.product', 'order_products.product.product_image', 'order_products.order_product_variations.variation_option.variation'])->findOrFail($orderId);
+
         Mail::to($order->email)->send(new OrderMail($order));
 
         return Mail::failures() != 0 ? "Email has been sent successfully." : "Oops! There was some error sending the email.";
@@ -104,8 +107,10 @@ class EmailController extends Controller
     * Sends email informing buyer an order has been delivered.
     */
 
-    public function sendBuyerOrderDeliveredMail($order)
+    public function sendBuyerOrderDeliveredMail($orderId)
     {
+        $order = Order::with(['shop', 'order_products', 'order_products.product', 'order_products.product.product_image', 'order_products.order_product_variations.variation_option.variation'])->findOrFail($orderId);
+
         Mail::to($order->email)->send(new BuyerOrderDeliveredMail($order));
 
         return Mail::failures() != 0 ? "Email has been sent successfully." : "Oops! There was some error sending the email.";
@@ -115,8 +120,10 @@ class EmailController extends Controller
     * Sends email informing buyer an order is being prepared.
     */
 
-    public function sendBuyerOrderProductionMail($order)
+    public function sendBuyerOrderProductionMail($orderId)
     {
+        $order = Order::with(['shop', 'order_products', 'order_products.product', 'order_products.product.product_image', 'order_products.order_product_variations.variation_option.variation'])->findOrFail($orderId);
+
         Mail::to($order->email)->send(new BuyerOrderProductionMail($order));
 
         return Mail::failures() != 0 ? "Email has been sent successfully." : "Oops! There was some error sending the email.";
@@ -126,8 +133,10 @@ class EmailController extends Controller
     * Sends email informing buyer an order has been shipped.
     */
 
-    public function sendBuyerOrderShippedMail($order)
+    public function sendBuyerOrderShippedMail($orderId)
     {
+        $order = Order::with(['shop', 'order_products', 'order_products.product', 'order_products.product.product_image', 'order_products.order_product_variations.variation_option.variation'])->findOrFail($orderId);
+
         Mail::to($order->email)->send(new BuyerOrderShippedMail($order));
 
         return Mail::failures() != 0 ? "Email has been sent successfully." : "Oops! There was some error sending the email.";
@@ -137,9 +146,11 @@ class EmailController extends Controller
     * Sends email informing seller a new order has been placed.
     */
 
-    public function sendSellerOrderMail($email, $order)
+    public function sendSellerOrderMail($orderId)
     {
-        Mail::to($email)->send(new SellerNewOrderMail($order));
+        $order = Order::with(['shop', 'seller', 'order_products', 'order_products.product', 'order_products.product.product_image', 'order_products.order_product_variations.variation_option.variation'])->findOrFail($orderId);
+
+        Mail::to($order->seller->email)->send(new SellerNewOrderMail($order));
 
         return Mail::failures() != 0 ? "Email has been sent successfully." : "Oops! There was some error sending the email.";
     }
@@ -147,9 +158,11 @@ class EmailController extends Controller
     * Sends email informing seller an order has been delivered.
     */
 
-    public function sendSellerOrderDeliveredMail($email, $order)
+    public function sendSellerOrderDeliveredMail($orderId)
     {
-        Mail::to($email)->send(new SellerOrderDeliveredMail($order));
+        $order = Order::with(['shop', 'seller', 'order_products', 'order_products.product', 'order_products.product.product_image', 'order_products.order_product_variations.variation_option.variation'])->findOrFail($orderId);
+
+        Mail::to($order->seller->email)->send(new SellerOrderDeliveredMail($order));
 
         return Mail::failures() != 0 ? "Email has been sent successfully." : "Oops! There was some error sending the email.";
     }
@@ -157,12 +170,12 @@ class EmailController extends Controller
     * Sends email informing seller an order has been dispatched.
     */
 
-    public function sendSellerOrderDispatchMail($email, $order)
+    public function sendSellerOrderDispatchMail($orderId)
     {
-        Mail::to($email)->send(new SellerOrderDispatchMail($order));
+        $order = Order::with(['shop', 'seller', 'order_products', 'order_products.product', 'order_products.product.product_image', 'order_products.order_product_variations.variation_option.variation'])->findOrFail($orderId);
+
+        Mail::to($order->seller->email)->send(new SellerOrderDispatchMail($order));
 
         return Mail::failures() != 0 ? "Email has been sent successfully." : "Oops! There was some error sending the email.";
     }
-
-
 }

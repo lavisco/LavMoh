@@ -74,10 +74,10 @@ Route::get('/emailTest', function() {
     $order = Order::with(['shop', 'order_products', 'order_products.product', 'order_products.product.product_image', 'order_products.order_product_variations.variation_option.variation'])->findOrFail(40);  
 
     // $product = Product::with(['user', 'product_image', 'category'])->findOrFail(23);
-    $transaction = Transaction::with(['order'])->findOrFail(1);
+    // $transaction = Transaction::with(['order'])->findOrFail(1);
 
     // Mail::to('int.rushdi@gmail.com')->send(new OrderMail($order));
-    // Mail::to('int.rushdi@gmail.com')->send(new SellerNewOrderMail($order));
+    Mail::to('islammohorima@gmail.com')->send(new SellerNewOrderMail($order));
     // Mail::to('int.rushdi@gmail.com')->send(new SellerOrderDeliveredMail($order));
     // Mail::to('int.rushdi@gmail.com')->send(new SellerOrderDispatchMail($order));
     // Mail::to('islammohorima@gmail.com')->send(new BuyerOrderDeliveredMail($order));
@@ -93,7 +93,7 @@ Route::get('/emailTest', function() {
     // Mail::to('int.rushdi@gmail.com')->send(new SellerTransactionClearedMail($transaction));
     // Mail::to('int.rushdi@gmail.com')->send(new SellerTransactionRequestMail($transaction));
 
-    return new SellerTransactionRequestMail($transaction);
+    return new SellerNewOrderMail($order);
 });
 
 Route::get('/email/verify', function () {

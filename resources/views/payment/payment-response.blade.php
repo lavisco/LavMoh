@@ -129,13 +129,14 @@
                                     {{ $order_product->product->title }}
                                 </h6>
 
-                                @foreach
-                                ($order_product->order_product_variations as
-                                $variation)
-                                <div class="darkgrey text-xs">
-                                    {{ $variation->variation_option->name }}
+                                @if(count($order_product->order_product_variations)
+                                > 0)
+                                @foreach($order_product->order_product_variations
+                                as $vre)
+                                <div class="text-xs">
+                                    {{$vre->variation_option->name}}
                                 </div>
-                                @endforeach
+                                @endforeach @endif
                             </div>
                         </div>
                         <hr class="hide-content w-100" />

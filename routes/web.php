@@ -48,6 +48,7 @@ use Illuminate\Support\Facades\Mail;
 // })->name('paymenttest');
 
 Route::get('/payment', [PaymentController::class, 'showShipping'])->name('paymentShipping');
+Route::get('/payment-resp-test', [PaymentController::class, 'paymentResponseTest']);
 Route::post('/payment', [PaymentController::class, 'storeOrder'])->name('storeOrder');
 Route::post('/payment/response', [PaymentController::class, 'paymentResponse']);
 

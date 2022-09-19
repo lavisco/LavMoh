@@ -258,7 +258,7 @@ pJ28AUyd0dWx1YWu1wIDAQAB
         $responseVariables = explode('|', $payment); 
 
         //find order
-        $order = Order::with(['shop', 'order_products', 'order_products.product', 'order_products.product.product_image', 'order_products.order_product_variations.variation_option.variation', 'shipping'])->findOrFail($responseVariables[0]);
+        $order = Order::with(['order_products', 'order_products.product', 'order_products.product.product_image', 'order_products.order_product_variations.variation_option', 'shipping', 'shop'])->findOrFail($responseVariables[0]);
 
         //show date_time_transaction
         $order_time = $responseVariables[2];
@@ -290,5 +290,18 @@ pJ28AUyd0dWx1YWu1wIDAQAB
 
             return view('payment.payment-error');
         }
+    }
+    /*
+    * response page and data returned by payment gateway
+    */
+    public function paymentResponseTest(Request $request)
+    {
+        //find order
+        $order = Order::with(['order_products', 'order_products.product', 'order_products.product.product_image', 'order_products.order_product_variations.variation_option', 'shipping', 'shop'])->findOrFail(40);
+
+        //show date_time_transaction
+        $order_time = '22-05-2022';
+
+            return view('payment.payment-response', compact('order', 'order_time'));
     }
 }

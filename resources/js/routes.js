@@ -768,6 +768,13 @@ export let routes = [
         },
     },
 
+    {
+        path: "/payment/response",
+        meta: {
+            title: "Order Confirmed",
+        },
+    },
+
     /*
      404 Page not Found
     */

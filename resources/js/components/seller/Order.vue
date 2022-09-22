@@ -76,9 +76,7 @@
                                             Items
                                         </th>
                                         <th scope="col">Amount</th>
-                                        <th scope="col">
-                                            Update Status
-                                        </th>
+                                        <th scope="col">Update Status</th>
                                         <th scope="col"></th>
                                     </tr>
                                 </thead>
@@ -1026,10 +1024,21 @@ export default {
                 this.form
                     .put("/api/seller/orders/" + order.id)
                     .then(() => {
+                        if (order.order_state_id == 3) {
+                            this.sendBuyerOrderProductionMail(order.id);
+                        }
                         Fire.$emit("reloadRecords");
                     })
                     .catch((error) => console.log(error));
             }
+        },
+        sendBuyerOrderProductionMail(orderId) {
+            axios
+                .get("/api/email/buyer_order_production/" + orderId)
+                .then(() => {})
+                .catch((error) => {
+                    console.log(error);
+                });
         },
     },
     mounted() {

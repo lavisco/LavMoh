@@ -102,7 +102,7 @@ h6 {
 .title {
     font-style: normal;
     font-weight: bold;
-    font-size: 50px;
+    font-size: 54px;
     line-height: 64px;
     text-transform: capitalize;
     color: $white;
@@ -206,6 +206,7 @@ h6 {
     }
     h5 {
         font-size: 15px;
+        line-height: 1.8;
     }
     .instruction-card {
         h1 {
@@ -328,10 +329,11 @@ button {
 }
 
 .btn-sm-black {
-    background-color: #2f2f2f !important;
-    border-color: #2f2f2f !important;
+    background-color: $black !important;
+    border-color: $black !important;
     &:hover {
-        background-color: #616161 !important;
+        background-color: $lav-red !important;
+        border-color: $lav-red !important;
     }
 }
 
@@ -457,6 +459,26 @@ button.bg-black:hover {
     color: $lav-red;
     font-weight: 500;
     letter-spacing: 0.01rem;
+}
+
+.bag-sm {
+    border-radius: 8px;
+    padding: 0;
+    border: none;
+    background-color: $lav-red;
+    height: 42px;
+    width: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @media (max-width: 640px) {
+        height: 36px;
+        width: 36px;
+        svg {
+            width: 24px;
+            height: 24px;
+        }
+    }
 }
 
 /*---------------------colors---------------------*/
@@ -1191,10 +1213,8 @@ button.bg-black:hover {
     position: relative;
     background-size: cover;
     background-position: center;
-    border-radius: 12px;
+    border-radius: 32px;
     height: 660px;
-    padding-right: 15px;
-    padding-left: 15px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1202,29 +1222,20 @@ button.bg-black:hover {
 
     .slide-content {
         height: 100%;
-        width: 40%;
+        width: 50%;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
         justify-content: center;
         padding: 20px 74px;
-        background-color: #ffffff8d;
-        background: linear-gradient(
-            132.89deg,
-            rgb(255 255 255 / 50%) 7.1%,
-            rgb(255 255 255 / 47%) 105.23%
-        );
-        backdrop-filter: blur(10px);
-        /* Note: backdrop-filter has minimal browser support */
-        border-radius: 12px;
         .title,
         .sub-title {
-            color: $black;
             text-align: left;
         }
     }
 
     @media (max-width: 768px) {
+        height: 580px;
         .slide-content {
             align-items: center;
         }
@@ -1256,8 +1267,8 @@ button.bg-black:hover {
     }
 
     .gallery-top {
-        height: 660px;
-        border-radius: 12px;
+        height: 100%;
+        border-radius: 32px;
         width: 100%;
         background-color: $lav-pink;
     }
@@ -1291,16 +1302,14 @@ button.bg-black:hover {
         }
     }
     .swiper-pagination-bullet {
-        width: 30px;
-        height: 14px;
-        background: $black;
-        opacity: 0.7;
-        border-radius: 7px;
+        width: 16px;
+        height: 16px;
+        background: $white;
+        opacity: 0.6;
+        border-radius: 50%;
         transition: all 100ms ease;
     }
     .swiper-pagination-bullet-active {
-        background: $lav-pink !important;
-        width: 38px;
         opacity: 1;
     }
 }
@@ -1407,14 +1416,24 @@ button.bg-black:hover {
 .gallery-item {
     position: relative;
     background-color: #ecacff;
-    border-radius: 12px;
+    border-radius: 32px;
+    padding: 24px 32px 32px 32px;
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    justify-content: space-between;
     align-items: center;
-    padding: 10px;
-    height: 270px;
+    height: 360px;
     width: 100%;
+
+    h3 {
+        z-index: 2;
+        position: relative;
+        width: 100%;
+    }
+
+    .btn-sm-black {
+        z-index: 2;
+    }
 
     &:hover {
         box-shadow: 2px 4px 6px rgb(212 204 219 / 44%);
@@ -1430,7 +1449,7 @@ button.bg-black:hover {
     height: 100%;
     object-fit: cover;
     object-position: right;
-    border-radius: 12px;
+    border-radius: 32px;
 }
 
 .card-img-text {
@@ -1441,11 +1460,29 @@ button.bg-black:hover {
 
 /*---------------------sections---------------------*/
 section {
-    margin-left: 35px;
-    margin-right: 35px;
-    margin-top: 66px;
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-top: 80px;
     h1 {
         margin-bottom: 35px;
+    }
+}
+
+.section-occasion-recipient {
+    border-radius: 32px;
+    background-color: $lav-blue;
+    padding: 80px;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 460px;
+    @media (max-width: 768px) {
+        padding: 32px;
+        min-height: 600px;
+        flex-direction: column;
     }
 }
 
@@ -1649,7 +1686,7 @@ section {
     width: 100%;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 16px;
 
     .item-card {
         width: 260px !important;
@@ -1657,13 +1694,7 @@ section {
             width: 47% !important;
         }
         @media (max-width: 640px) {
-            height: 230px !important;
-        }
-    }
-    .card-body {
-        max-height: 20% !important;
-        @media (max-width: 640px) {
-            max-height: 35% !important;
+            height: 250px !important;
         }
     }
 }
@@ -1923,27 +1954,93 @@ section {
     }
 }
 
-.product-list > .card {
-    padding: 0px 0px 14px 0px !important;
-}
 .item-card {
-    background-position: center;
-    background-size: cover;
-    background-color: $lav-red;
-    width: 340px;
-    font-size: 16px;
-    padding: 5px;
+    padding: 0px;
+    position: relative;
+    height: 340px;
+    justify-content: flex-end;
+    border-radius: 12px;
 
     &:hover {
         box-shadow: 2px 4px 6px rgba(212, 204, 219, 0.444);
+        .card-body {
+            background: #ffffff;
+        }
+    }
+    .card-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        height: 100%;
+        width: 100%;
+        margin-bottom: 0;
+        border-radius: 12px;
+
+        img {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+        }
+    }
+    .card-body {
+        position: relative;
+        max-height: 80px;
+        width: 100%;
+        z-index: 2;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 8px;
+    }
+    .card-body-text {
+        width: calc(100% - 52px);
+        display: flex;
+        flex-direction: column;
+    }
+    .card-title {
+        margin-bottom: 0;
+        color: $black;
+        font-weight: 400;
+        font-size: 16px;
+        white-space: inherit;
+    }
+    .card-price {
+        font-weight: 600;
+        font-size: 16px;
+        color: $lav-red;
     }
 
-    .card-body {
-        padding: 0 10px 15px 10px;
+    @media (max-width: 640px) {
+        position: relative;
+        height: 280px;
+        width: 100%;
+        .card-body {
+            padding: 10px;
+            max-height: 68px;
+        }
+        .card-body-text {
+            width: calc(100% - 46px);
+        }
+        .card-title {
+            font-size: 14px;
+            width: 100%;
+        }
+        .card-price {
+            font-size: 14px;
+        }
+    }
+    @media (min-width: 640px) {
+        width: auto;
     }
 }
 .item-card-2 {
     background-color: $white;
+    padding: 0;
     width: 320px;
     //height: 472px;
     font-size: 15px;
@@ -2055,12 +2152,8 @@ section {
     .card-secondary-text {
         font-size: 12px;
     }
-    .card-button-container {
-        button {
-            padding: 8px 15px;
-            letter-spacing: 0.03rem;
-            font-size: 15px;
-        }
+    .card-img-text {
+        font-size: 18px;
     }
     .product-list > .card {
         margin-bottom: 12px;
@@ -2071,33 +2164,6 @@ section {
 
 .col-50 {
     width: 50%;
-}
-.item-card-occasion,
-.item-card-recipient {
-    padding: 10px;
-    width: 100%;
-    background-color: $white;
-    background-position: center;
-    background-size: cover;
-    align-items: center;
-    justify-content: space-between;
-    height: 480px;
-}
-.item-card-occasion {
-    .card-img-text {
-        color: #00a574;
-    }
-    .card-button-container {
-        background: #00a573f5;
-    }
-}
-.item-card-recipient {
-    .card-img-text {
-        color: #149bac;
-    }
-    .card-button-container {
-        background: #149aacf2;
-    }
 }
 
 .card-img-text {
@@ -2116,36 +2182,30 @@ section {
 
 .card-button-container {
     display: flex;
-    gap: 10px;
-    border-radius: 12px;
+    gap: 8px;
     flex-wrap: wrap;
     align-items: center;
     flex-direction: row;
-    justify-content: center;
-    padding: 16px 14px;
-
-    .bg-black {
-        color: #ffffff;
-        background: transparent;
-        border: 1px solid rgba(255, 255, 255, 0.467);
+    button {
+        padding: 5px 16px;
+        background: rgba(67, 67, 67, 0.39);
         border-radius: 12px;
-        padding: 5px 14px;
-        font-size: 15px;
-        letter-spacing: 0.01rem;
-    }
-}
+        color: $white;
+        font-weight: 600;
+        font-size: 14px;
+        border: none;
 
-@media (max-width: 768px) {
-    .card-img-text {
-        font-size: 18px;
+        &:hover {
+            background-color: $black;
+        }
     }
-    .card-button-container {
-        padding: 12px;
+
+    @media (max-width: 768px) {
         gap: 6px;
-
-        .bg-black {
-            padding: 4px 10px;
-            font-size: 14px;
+        button {
+            padding: 4px 13px;
+            letter-spacing: 0.03rem;
+            font-size: 12px;
         }
     }
 }
@@ -4096,79 +4156,8 @@ footer {
     height: auto !important;
     text-align: left !important;
 
-    a:hover{
+    a:hover {
         color: $lav-red !important;
-    }
-
-    .item-card {
-        padding: 6px;
-        position: relative;
-        height: 380px;
-        justify-content: flex-end;
-
-        &:hover {
-            .card-body {
-                background: #ffffff;
-            }
-        }
-        .card-img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 1;
-            height: 100%;
-            width: 100%;
-            margin-bottom: 0;
-            border-radius: 12px;
-
-            img {
-                object-fit: cover;
-                width: 100%;
-                height: 100%;
-                border-radius: 12px;
-            }
-        }
-        .card-body {
-            position: relative;
-            max-height: 33%;
-            z-index: 2;
-            padding: 10px 12px;
-            border-radius: 8px;
-            background: #fffffff0;
-        }
-        .card-title {
-            margin-bottom: 0;
-            color: $black;
-        }
-        .card-price {
-            font-weight: 700;
-            letter-spacing: 0.02rem;
-            font-size: 16px;
-            color: $black;
-        }
-
-        @media (max-width: 640px) {
-            padding: 4px;
-            position: relative;
-            height: 270px;
-            width: 100%;
-            .card-body {
-                max-height: 35%;
-                padding: 10px 13px;
-                border-radius: 8px;
-            }
-            .card-title {
-                font-size: 13px;
-            }
-            .card-price {
-                color: #ffffff;
-                font-weight: 600;
-                font-size: 15px;
-            }
-        }
-        @media (min-width: 640px) {
-            width: auto;
-        }
     }
 
     .swiper-pagination-bullet {

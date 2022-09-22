@@ -1,41 +1,41 @@
 <template>
     <div>
-        <div class="hero">
-            <!-- Swiper -->
-            <swiper
-                class="swiper gallery-top"
-                :options="swiperOptionTop"
-                ref="swiperTop"
-            >
-                <swiper-slide
-                    class="slide-1"
-                    v-for="homeslider in homesliders"
-                    :key="homeslider.id"
-                >
-                    <img
-                        :src="
-                            homeslider.path
-                                ? homeslider.path
-                                : '/images/lavisco/img-bg.jpg'
-                        "
-                    />
-                    <div class="slide-content">
-                        <h1 class="title mb-3">{{ homeslider.name }}</h1>
-                        <h1 class="sub-title mb-5">
-                            {{ homeslider.description }}
-                        </h1>
-                        <router-link :to="homeslider.link">
-                            <button>
-                                {{ homeslider.link_text }}
-                            </button>
-                        </router-link>
-                    </div>
-                </swiper-slide>
-                <div class="swiper-pagination" slot="pagination"></div>
-            </swiper>
-            <!-- Swiper end -->
-        </div>
         <div class="container-fluid">
+            <div class="hero">
+                <!-- Swiper -->
+                <swiper
+                    class="swiper gallery-top"
+                    :options="swiperOptionTop"
+                    ref="swiperTop"
+                >
+                    <swiper-slide
+                        class="slide-1"
+                        v-for="homeslider in homesliders"
+                        :key="homeslider.id"
+                    >
+                        <img
+                            :src="
+                                homeslider.path
+                                    ? homeslider.path
+                                    : '/images/lavisco/img-bg.jpg'
+                            "
+                        />
+                        <div class="slide-content">
+                            <h1 class="title mb-3">{{ homeslider.name }}</h1>
+                            <h1 class="sub-title mb-5">
+                                {{ homeslider.description }}
+                            </h1>
+                            <router-link :to="homeslider.link">
+                                <button class="btn-sm-black">
+                                    {{ homeslider.link_text }}
+                                </button>
+                            </router-link>
+                        </div>
+                    </swiper-slide>
+                    <div class="swiper-pagination" slot="pagination"></div>
+                </swiper>
+                <!-- Swiper end -->
+            </div>
             <section class="section-best-seller">
                 <h1>Our Best Selling Products</h1>
                 <swiper
@@ -66,60 +66,40 @@
                                 />
                             </div>
                             <div class="card-body">
-                                <div class="card-title">
-                                    {{ product.title }}
+                                <div class="card-body-text">
+                                    <div class="card-title">
+                                        {{ product.title }}
+                                    </div>
+                                    <div class="card-price">
+                                        {{ currency.symbol }}
+                                        {{
+                                            product.base_price *
+                                            currency.exchange_rate
+                                        }}
+                                        <span
+                                            v-show="product.has_variations == 1"
+                                        >
+                                            +
+                                        </span>
+                                    </div>
                                 </div>
-                                <div class="card-price">
-                                    {{ currency.symbol }}
-                                    {{
-                                        product.base_price *
-                                        currency.exchange_rate
-                                    }}
-                                    <span v-show="product.has_variations == 1">
-                                        +
-                                    </span>
-                                </div>
-
-                                <button
-                                    class="btn-secondary btn-sm btn-full mt-1"
-                                >
-                                    Buy now
+                                <button class="bag-sm" type="button">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="29"
+                                        height="29"
+                                        preserveAspectRatio="xMidYMid meet"
+                                        viewBox="0 0 1024 1024"
+                                    >
+                                        <path
+                                            fill="white"
+                                            d="M832 312H696v-16c0-101.6-82.4-184-184-184s-184 82.4-184 184v16H192c-17.7 0-32 14.3-32 32v536c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V344c0-17.7-14.3-32-32-32zm-432-16c0-61.9 50.1-112 112-112s112 50.1 112 112v16H400v-16zm392 544H232V384h96v88c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-88h224v88c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-88h96v456z"
+                                        />
+                                    </svg>
                                 </button>
                             </div>
                         </router-link>
                     </swiper-slide>
-                    <div class="swiper-button-prev" slot="button-prev">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            aria-hidden="true"
-                            role="img"
-                            width="24"
-                            height="24"
-                            preserveAspectRatio="xMidYMid meet"
-                            viewBox="0 0 24 24"
-                        >
-                            <path
-                                fill="#666"
-                                d="M12 2c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12S6.48 2 12 2zm0 9V8l-4 4l4 4v-3h4v-2h-4z"
-                            />
-                        </svg>
-                    </div>
-                    <div class="swiper-button-next" slot="button-next">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            aria-hidden="true"
-                            role="img"
-                            width="24"
-                            height="24"
-                            preserveAspectRatio="xMidYMid meet"
-                            viewBox="0 0 24 24"
-                        >
-                            <path
-                                fill="#666"
-                                d="M12 2c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12S6.48 2 12 2zm0 9H8v2h4v3l4-4l-4-4v3z"
-                            />
-                        </svg>
-                    </div>
                 </swiper>
                 <div class="d-flex justify-content-center mt-4">
                     <router-link class="view-more-link" to="/products">
@@ -142,86 +122,83 @@
                 </div>
             </section>
 
-            <section class="section-special">
-                <h1>Gifts and Crafts for Every Occasion & Recipient</h1>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div
-                            class="
-                                card
-                                item-card item-card-occasion
-                                mb-md-0 mb-5
-                            "
-                            v-bind:style="{
-                                'background-image': 'url(' + img_occasion + ')',
+            <section
+                class="section-occasion-recipient"
+                v-bind:style="{
+                    'background-image': 'url(' + img_occasion + ')',
+                }"
+            >
+                <div class="col-md-6 px-0 d-flex flex-column">
+                    <h1 class="text-left white">
+                        Gifts and Crafts for any Occasion
+                    </h1>
+                    <h5 class="text-left white mb-4 mb-md-5">
+                        Our collection contains a wide array of gifts suitable
+                        for any major occasion.
+                    </h5>
+                    <div class="card-button-container" v-if="occasions[0]">
+                        <a
+                            href=""
+                            v-for="occasion in occasions"
+                            :key="occasion.id"
+                        >
+                            <router-link
+                                :to="{
+                                    name: 'occasions/occasion',
+                                    params: {
+                                        occasionId: occasion.id,
+                                        slug: occasion.slug,
+                                    },
+                                }"
+                            >
+                                <button>
+                                    {{ occasion.name }}
+                                </button>
+                            </router-link>
+                        </a>
+                    </div>
+                </div>
+                <div class="w-100 d-flex justify-content-end align-self-end">
+                    <router-link class="view-more-link" to="/occasions">
+                        <button class="btn-sm-black">Browse All</button>
+                    </router-link>
+                </div>
+            </section>
+
+            <section
+                class="section-occasion-recipient bg-purple"
+                v-bind:style="{
+                    'background-image': 'url(' + img_recipient + ')',
+                }"
+            >
+                <div class="col-md-6 px-0 d-flex flex-column">
+                    <h1 class="text-left white">Gifts for any Recipient</h1>
+                    <h5 class="text-left white mb-4 mb-md-5">
+                        You’ll surely find a gift on Lavisco that’s perfect for
+                        your friend, family or anyone else.
+                    </h5>
+                    <div class="card-button-container" v-if="recipients[0]">
+                        <router-link
+                            v-for="recipient in recipients"
+                            :key="recipient.id"
+                            :to="{
+                                name: 'recipients/recipient',
+                                params: {
+                                    recipientId: recipient.id,
+                                    slug: recipient.slug,
+                                },
                             }"
                         >
-                            <div class="card-img-text">
-                                <router-link to="/occasions">
-                                    Order by Occasion
-                                </router-link>
-                            </div>
-                            <div
-                                class="card-button-container"
-                                v-if="occasions[0]"
-                            >
-                                <a
-                                    href=""
-                                    v-for="occasion in occasions"
-                                    :key="occasion.id"
-                                >
-                                    <router-link
-                                        :to="{
-                                            name: 'occasions/occasion',
-                                            params: {
-                                                occasionId: occasion.id,
-                                                slug: occasion.slug,
-                                            },
-                                        }"
-                                    >
-                                        <button class="bg-black">
-                                            {{ occasion.name }}
-                                        </button>
-                                    </router-link>
-                                </a>
-                            </div>
-                        </div>
+                            <button>
+                                {{ recipient.name }}
+                            </button>
+                        </router-link>
                     </div>
-                    <div class="col-md-6">
-                        <div
-                            class="card item-card item-card-recipient"
-                            v-bind:style="{
-                                'background-image':
-                                    'url(' + img_recipient + ')',
-                            }"
-                        >
-                            <div class="card-img-text">
-                                <router-link to="/recipients">
-                                    Order by Recipient
-                                </router-link>
-                            </div>
-                            <div
-                                class="card-button-container"
-                                v-if="recipients[0]"
-                            >
-                                <router-link
-                                    v-for="recipient in recipients"
-                                    :key="recipient.id"
-                                    :to="{
-                                        name: 'recipients/recipient',
-                                        params: {
-                                            recipientId: recipient.id,
-                                            slug: recipient.slug,
-                                        },
-                                    }"
-                                >
-                                    <button class="bg-black">
-                                        {{ recipient.name }}
-                                    </button>
-                                </router-link>
-                            </div>
-                        </div>
-                    </div>
+                </div>
+                <div class="w-100 d-flex justify-content-end align-self-end">
+                    <router-link class="view-more-link" to="/recipients">
+                        <button class="btn-sm-black">Browse All</button>
+                    </router-link>
                 </div>
             </section>
 
@@ -248,8 +225,11 @@
                                 class="gallery-img"
                                 alt="Image 1"
                             />
-                            <div class="card-img-text">
+                            <h3 class="white">
                                 {{ category.name }}
+                            </h3>
+                            <div class="w-100 d-flex justify-content-end">
+                                <button class="btn-sm-black">Browse</button>
                             </div>
                         </router-link>
                     </div>
@@ -397,10 +377,10 @@ export default {
         swiperOption: {
             slidesPerView: 5,
             spaceBetween: 20,
-            navigation: {
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
-            },
+            // navigation: {
+            //     nextEl: ".swiper-button-next",
+            //     prevEl: ".swiper-button-prev",
+            // },
             autoplay: {
                 delay: 4600,
                 disableOnInteraction: false,

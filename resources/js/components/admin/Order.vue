@@ -1483,15 +1483,77 @@ export default {
         },
 
         setCurrentStatus(order, event) {
+            /*
+            1 -Pending Order
+            2 -Accept & Start Production -org
+            3 -In Production -yel
+            4 -Ready for Delivery -pur
+            5 -Order Dispatched -brown*
+            6 -Delivery in Progress -blu*
+            7 -Order Delivered -grn*
+            */
+
             if (confirm("Are you sure you want to change order status?")) {
                 this.form.order_state_id = event.target.value;
                 this.form
                     .put("/api/admin/orders/updateStatus/" + order)
                     .then(() => {
+                        switch (this.form.order_state_id) {
+                            case 5:
+                                this.sendSellerOrderDispatchMail(order);
+                                break;
+                            case 6:
+                                this.sendBuyerOrderShippedMail(order);
+                                break;
+                            case 7:
+                                this.sendBuyerOrderDeliveredMail(order);
+                                this.sendSellerOrderDeliveredMail(order);
+                                break;
+                        }
                         Fire.$emit("reloadRecords");
                     })
                     .catch((error) => console.log(error));
             }
+        },
+
+        /*
+         * Emails
+         */
+
+        sendBuyerOrderDeliveredMail(orderId) {
+            axios
+                .get("/api/email/buyer_order_delivered/" + orderId)
+                .then(() => {})
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
+
+        sendBuyerOrderShippedMail(orderId) {
+            axios
+                .get("/api/email/buyer_order_shipped/" + orderId)
+                .then(() => {})
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
+
+        sendSellerOrderDeliveredMail(orderId) {
+            axios
+                .get("/api/email/seller_order_delivered/" + orderId)
+                .then(() => {})
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
+
+        sendSellerOrderDispatchMail(orderId) {
+            axios
+                .get("/api/email/seller_order_dispatch/" + orderId)
+                .then(() => {})
+                .catch((error) => {
+                    console.log(error);
+                });
         },
 
         loadOrders() {

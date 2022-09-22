@@ -72,7 +72,7 @@
                     <Transition name="pages">
                         <router-view></router-view>
                     </Transition>
-                    <div>@yield('content')</div>
+                    <!-- <div>@yield('content')</div> -->
                 </div>
                 <!-- footer section starts -->
                 <footer-component></footer-component>

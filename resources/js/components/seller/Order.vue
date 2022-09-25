@@ -44,7 +44,7 @@
                                     id="status"
                                     v-model="statusFilter"
                                 >
-                                    <option value="">all</option>
+                                    <option value="">Filter by status</option>
                                     <option
                                         v-for="orderState in orderStates"
                                         :value="orderState.id"
@@ -69,6 +69,9 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">Code</th>
+                                        <th scope="col" class="table-col-sm">
+                                            Date Placed
+                                        </th>
                                         <th scope="col" class="table-col-sm">
                                             Date
                                         </th>
@@ -114,6 +117,13 @@
                                             >
                                                 {{ order.order_state.state }}
                                             </span>
+                                        </td>
+                                        <td>
+                                            {{
+                                                moment(order.created_at).format(
+                                                    "DD-MM-YYYY"
+                                                )
+                                            }}
                                         </td>
                                         <td>
                                             <div class="mb-2">
@@ -507,6 +517,17 @@
                             </div>
                             <div
                                 class="row mb-3"
+                                v-if="parent_product.custom_text"
+                            >
+                                <div class="col-md-3 modal-label">
+                                    Custom Message
+                                </div>
+                                <div class="col-md-9">
+                                    {{ parent_product.custom_text }}
+                                </div>
+                            </div>
+                            <div
+                                class="row mb-3"
                                 v-if="
                                     parent_product
                                         .order_product_giftbox_variations
@@ -827,6 +848,17 @@
                                 <div class="col-md-3 modal-label">Quantity</div>
                                 <div class="col-md-9">
                                     {{ parent_product.quantity }}
+                                </div>
+                            </div>
+                            <div
+                                class="row mb-3"
+                                v-if="parent_product.custom_text"
+                            >
+                                <div class="col-md-3 modal-label">
+                                    Custom Message
+                                </div>
+                                <div class="col-md-9">
+                                    {{ parent_product.custom_text }}
                                 </div>
                             </div>
                             <div

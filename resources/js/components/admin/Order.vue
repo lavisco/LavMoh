@@ -1499,13 +1499,13 @@ export default {
                     .put("/api/admin/orders/updateStatus/" + order)
                     .then(() => {
                         switch (this.form.order_state_id) {
-                            case 5:
+                            case "5":
                                 this.sendSellerOrderDispatchMail(order);
                                 break;
-                            case 6:
+                            case "6":
                                 this.sendBuyerOrderShippedMail(order);
                                 break;
-                            case 7:
+                            case "7":
                                 this.sendBuyerOrderDeliveredMail(order);
                                 this.sendSellerOrderDeliveredMail(order);
                                 break;

@@ -88,8 +88,8 @@ class PaymentController extends Controller
         $total = $this->storeOrderProduct($products, $exchange_rate, $order->id);
 
         $order->update([
-            'total' => $total,
-            'subtotal' => $total-$shipping->price,
+            'total' => $total+$shipping->price,
+            'subtotal' => $total,
         ]);
 
         // store receipt & transaction

@@ -57,12 +57,15 @@
                                             Date Placed
                                         </th>
                                         <th scope="col" class="table-col-sm">
-                                            Date
+                                            Delivery Date
                                         </th>
                                         <th scope="col" class="table-col-lg">
                                             Items
                                         </th>
                                         <th scope="col">Amount</th>
+                                        <th scope="col">Store</th>
+                                        <th scope="col">Shipping</th>
+
                                         <th scope="col"></th>
                                     </tr>
                                 </thead>
@@ -109,31 +112,11 @@
                                             }}
                                         </td>
                                         <td>
-                                            <div class="mb-2">
-                                                <div class="text-xxs">
-                                                    Dispatch
-                                                </div>
-                                                {{
-                                                    moment(order.delivery_date)
-                                                        .subtract(
-                                                            order.shipping
-                                                                .delivery_time,
-                                                            "days"
-                                                        )
-                                                        .format("DD-MM-YYYY")
-                                                }}
-                                            </div>
-                                            <div>
-                                                <div class="text-xxs">
-                                                    Delivery
-                                                </div>
-
-                                                {{
-                                                    moment(
-                                                        order.delivery_date
-                                                    ).format("DD-MM-YYYY")
-                                                }}
-                                            </div>
+                                            {{
+                                                moment(
+                                                    order.delivery_date
+                                                ).format("DD-MM-YYYY")
+                                            }}
                                         </td>
                                         <td>
                                             <div
@@ -185,6 +168,12 @@
                                         <td>
                                             {{ order.currency_code }}
                                             {{ order.total }}
+                                        </td>
+                                        <td>
+                                            {{ order.seller.shop.name }}
+                                        </td>
+                                        <td>
+                                            {{ order.shipping.type }}
                                         </td>
                                         <td class="text-right">
                                             <a
@@ -716,14 +705,11 @@ export default {
 
         loadOrders() {
             axios
-                .get(
-                    "/api/buyer/orders?page=" + this.pagination.current_page,
-                    {
-                        params: {
-                            searchText: this.searchText,
-                        },
-                    }
-                )
+                .get("/api/buyer/orders?page=" + this.pagination.current_page, {
+                    params: {
+                        searchText: this.searchText,
+                    },
+                })
                 .then(({ data }) => {
                     this.orders = data.data;
                     this.pagination.last_page = data.last_page;
@@ -732,7 +718,6 @@ export default {
                 })
                 .catch((error) => console.log(error));
         },
-
     },
     mounted() {
         this.loadOrders();

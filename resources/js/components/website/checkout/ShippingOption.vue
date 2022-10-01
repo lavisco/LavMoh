@@ -206,7 +206,7 @@
             <div class="row-content">
                 <div class="form-group">
                     <label class="col-form-label" for="self_delivery"
-                        >Billing and Shipping information will be the same.
+                        >If you select 'yes', then billing and shipping information will be the same.
                         <strong class="text-danger"> * </strong>
                     </label>
                     <div class="custom-control custom-radio">

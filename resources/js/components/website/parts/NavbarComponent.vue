@@ -112,16 +112,8 @@
                             w-100
                         "
                     >
-                        <div
-                            class="
-                                d-flex
-                                justify-content-between
-                                align-items-center
-                                w-100
-                                mb-4
-                            "
-                        >
-                            <router-link to="/" class="navbar-brand mr-4">
+                        <div class="dashboard-side-nav-logo">
+                            <router-link to="/" class="navbar-brand">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 805.67 156.56"
@@ -190,51 +182,34 @@
                                     </g>
                                 </svg>
                             </router-link>
-                            <a
-                                class="close"
+                            <button
+                                class="navbar-close"
                                 id="close-sidenav"
                                 @click.prevent="displayMenu"
                             >
                                 <svg
-                                    width="34"
-                                    height="34"
-                                    viewBox="0 0 34 34"
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
                                     fill="none"
                                     xmlns="http://www.w3.org/2000/svg"
                                 >
-                                    <rect
-                                        width="34"
-                                        height="34"
-                                        rx="17"
-                                        fill="#333333"
+                                    <path
+                                        d="M10.5858 12L6.34315 7.75736L7.75736 6.34315L12 10.5858L16.2426 6.34315L17.6569 7.75736L13.4142 12L17.6569 16.2426L16.2426 17.6569L12 13.4142L7.75736 17.6569L6.34315 16.2426L10.5858 12Z"
+                                        fill="#8D8788"
                                     />
-                                    <g clip-path="url(#clip0_355_858)">
-                                        <path
-                                            d="M21.5803 10.9735L23.0266 12.4199C23.2275 12.6208 23.328 12.8618 23.328 13.1431C23.328 13.4243 23.2275 13.6653 23.0266 13.8662L19.8929 17L23.0266 20.1338C23.2275 20.3347 23.328 20.5757 23.328 20.8569C23.328 21.1382 23.2275 21.3792 23.0266 21.5801L21.5803 23.0265C21.3794 23.2274 21.1383 23.3278 20.8571 23.3278C20.5759 23.3278 20.3348 23.2274 20.1339 23.0265L17.0002 19.8927L13.8664 23.0265C13.6655 23.2274 13.4244 23.3278 13.1432 23.3278C12.862 23.3278 12.6209 23.2274 12.42 23.0265L10.9737 21.5801C10.7728 21.3792 10.6724 21.1382 10.6724 20.8569C10.6724 20.5757 10.7728 20.3347 10.9737 20.1338L14.1074 17L10.9737 13.8662C10.7728 13.6653 10.6724 13.4243 10.6724 13.1431C10.6724 12.8618 10.7728 12.6208 10.9737 12.4199L12.42 10.9735C12.6209 10.7726 12.862 10.6722 13.1432 10.6722C13.4244 10.6722 13.6655 10.7726 13.8664 10.9735L17.0002 14.1073L20.1339 10.9735C20.3348 10.7726 20.5759 10.6722 20.8571 10.6722C21.1383 10.6722 21.3794 10.7726 21.5803 10.9735Z"
-                                            fill="#f7f7f7"
-                                        />
-                                    </g>
-                                    <defs>
-                                        <clipPath id="clip0_355_858">
-                                            <rect
-                                                width="15"
-                                                height="15"
-                                                fill="#333333"
-                                                transform="translate(9.5 9.5)"
-                                            />
-                                        </clipPath>
-                                    </defs>
                                 </svg>
-                            </a>
+                            </button>
                         </div>
 
-                        <a
-                            @click="displayMenu"
-                            href="/categories"
-                            class="w-100 mt-3"
-                        >
-                            <h6 class="dropdown-header">
-                                All Categories
+                        <div class="dashboard-side-nav-links">
+                            <h6
+                                class="dropdown-header"
+                                data-toggle="collapse"
+                                data-target="#collapseCat"
+                                aria-expanded="true"
+                            >
+                                Browse Categories
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     width="21"
@@ -244,143 +219,151 @@
                                 >
                                     <path
                                         fill="#4e4e4e"
-                                        d="M8.47 4.22a.75.75 0 0 0 0 1.06L15.19 12l-6.72 6.72a.75.75 0 1 0 1.06 1.06l7.25-7.25a.75.75 0 0 0 0-1.06L9.53 4.22a.75.75 0 0 0-1.06 0Z"
+                                        d="M4.22 8.47a.75.75 0 0 1 1.06 0L12 15.19l6.72-6.72a.75.75 0 1 1 1.06 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L4.22 9.53a.75.75 0 0 1 0-1.06Z"
                                     />
                                 </svg>
                             </h6>
-                        </a>
-                        <router-link
-                            @click.native="displayMenu"
-                            v-for="category in categories"
-                            :key="category.id"
-                            :to="{
-                                name: 'categories/category',
-                                params: {
-                                    categoryId: category.id,
-                                    slug: category.slug,
-                                },
-                            }"
-                            class="w-100 mt-2"
-                        >
-                            <h6 class="dropdown-header">
-                                {{ category.name }}
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="21"
-                                    height="21"
-                                    preserveAspectRatio="xMidYMid meet"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <path
-                                        fill="#4e4e4e"
-                                        d="M8.47 4.22a.75.75 0 0 0 0 1.06L15.19 12l-6.72 6.72a.75.75 0 1 0 1.06 1.06l7.25-7.25a.75.75 0 0 0 0-1.06L9.53 4.22a.75.75 0 0 0-1.06 0Z"
-                                    />
-                                </svg>
-                            </h6>
-                        </router-link>
-
-                        <h6
-                            class="dropdown-header mt-2"
-                            data-toggle="collapse"
-                            data-target="#collapseRec"
-                        >
-                            Browse Recipients
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="21"
-                                height="21"
-                                preserveAspectRatio="xMidYMid meet"
-                                viewBox="0 0 24 24"
-                            >
-                                <path
-                                    fill="#4e4e4e"
-                                    d="M4.22 8.47a.75.75 0 0 1 1.06 0L12 15.19l6.72-6.72a.75.75 0 1 1 1.06 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L4.22 9.53a.75.75 0 0 1 0-1.06Z"
-                                />
-                            </svg>
-                        </h6>
-                        <div class="collapse w-100" id="collapseRec">
-                            <a
-                                @click="displayMenu"
-                                class="dropdown-item"
-                                href="/recipients"
-                            >
-                                All Recipients
-                                <span class="dropdown-item-arrow"> > </span>
-                            </a>
-                            <div
-                                class="w-100"
-                            >
-                                <router-link
-                                    @click.native="displayMenu"
+                            <div class="collapse show w-100" id="collapseCat">
+                                <a
+                                    @click="displayMenu"
                                     class="dropdown-item"
-                                    v-for="recipient in recipients"
-                                    :key="recipient.id"
-                                    :to="{
-                                        name: 'recipients/recipient',
-                                        params: {
-                                            recipientId: recipient.id,
-                                            slug: recipient.slug,
-                                        },
-                                    }"
+                                    href="/categories"
                                 >
-                                    {{ recipient.name }}
+                                    All Categories
                                     <span class="dropdown-item-arrow"> > </span>
-                                </router-link>
+                                </a>
+                                <div class="w-100">
+                                    <router-link
+                                        @click.native="displayMenu"
+                                        class="dropdown-item"
+                                        v-for="category in categories"
+                                        :key="category.id"
+                                        :to="{
+                                            name: 'categories/category',
+                                            params: {
+                                                categoryId: category.id,
+                                                slug: category.slug,
+                                            },
+                                        }"
+                                    >
+                                        {{ category.name }}
+                                        <span class="dropdown-item-arrow">
+                                            >
+                                        </span>
+                                    </router-link>
+                                </div>
                             </div>
-                        </div>
 
-                        <h6
-                            class="dropdown-header mt-2"
-                            data-toggle="collapse"
-                            data-target="#collapseOcc"
-                        >
-                            Browse Occasions
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="21"
-                                height="21"
-                                preserveAspectRatio="xMidYMid meet"
-                                viewBox="0 0 24 24"
+                            <h6
+                                class="dropdown-header mt-2"
+                                data-toggle="collapse"
+                                data-target="#collapseRec"
                             >
-                                <path
-                                    fill="#4e4e4e"
-                                    d="M4.22 8.47a.75.75 0 0 1 1.06 0L12 15.19l6.72-6.72a.75.75 0 1 1 1.06 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L4.22 9.53a.75.75 0 0 1 0-1.06Z"
-                                />
-                            </svg>
-                        </h6>
-                        <div class="collapse w-100" id="collapseOcc">
-                            <a
-                                @click="displayMenu"
-                                class="dropdown-item"
-                                href="/occasions"
-                            >
-                                All Occasions
-                                <span class="dropdown-item-arrow"> > </span>
-                            </a>
-                            <div
-                                class="w-100"
-                            >
-                                <router-link
-                                    @click.native="displayMenu"
-                                    class="dropdown-item"
-                                    v-for="occasion in occasions"
-                                    :key="occasion.id"
-                                    :to="{
-                                        name: 'occasions/occasion',
-                                        params: {
-                                            occasionId: occasion.id,
-                                            slug: occasion.slug,
-                                        },
-                                    }"
+                                Browse Recipients
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="21"
+                                    height="21"
+                                    preserveAspectRatio="xMidYMid meet"
+                                    viewBox="0 0 24 24"
                                 >
-                                    {{ occasion.name }}
+                                    <path
+                                        fill="#4e4e4e"
+                                        d="M4.22 8.47a.75.75 0 0 1 1.06 0L12 15.19l6.72-6.72a.75.75 0 1 1 1.06 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L4.22 9.53a.75.75 0 0 1 0-1.06Z"
+                                    />
+                                </svg>
+                            </h6>
+                            <div class="collapse w-100" id="collapseRec">
+                                <a
+                                    @click="displayMenu"
+                                    class="dropdown-item"
+                                    href="/recipients"
+                                >
+                                    All Recipients
                                     <span class="dropdown-item-arrow"> > </span>
-                                </router-link>
+                                </a>
+                                <div class="w-100">
+                                    <router-link
+                                        @click.native="displayMenu"
+                                        class="dropdown-item"
+                                        v-for="recipient in recipients"
+                                        :key="recipient.id"
+                                        :to="{
+                                            name: 'recipients/recipient',
+                                            params: {
+                                                recipientId: recipient.id,
+                                                slug: recipient.slug,
+                                            },
+                                        }"
+                                    >
+                                        {{ recipient.name }}
+                                        <span class="dropdown-item-arrow">
+                                            >
+                                        </span>
+                                    </router-link>
+                                </div>
+                            </div>
+
+                            <h6
+                                class="dropdown-header mt-2"
+                                data-toggle="collapse"
+                                data-target="#collapseOcc"
+                            >
+                                Browse Occasions
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="21"
+                                    height="21"
+                                    preserveAspectRatio="xMidYMid meet"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        fill="#4e4e4e"
+                                        d="M4.22 8.47a.75.75 0 0 1 1.06 0L12 15.19l6.72-6.72a.75.75 0 1 1 1.06 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L4.22 9.53a.75.75 0 0 1 0-1.06Z"
+                                    />
+                                </svg>
+                            </h6>
+                            <div class="collapse w-100" id="collapseOcc">
+                                <a
+                                    @click="displayMenu"
+                                    class="dropdown-item"
+                                    href="/occasions"
+                                >
+                                    All Occasions
+                                    <span class="dropdown-item-arrow"> > </span>
+                                </a>
+                                <div class="w-100">
+                                    <router-link
+                                        @click.native="displayMenu"
+                                        class="dropdown-item"
+                                        v-for="occasion in occasions"
+                                        :key="occasion.id"
+                                        :to="{
+                                            name: 'occasions/occasion',
+                                            params: {
+                                                occasionId: occasion.id,
+                                                slug: occasion.slug,
+                                            },
+                                        }"
+                                    >
+                                        {{ occasion.name }}
+                                        <span class="dropdown-item-arrow">
+                                            >
+                                        </span>
+                                    </router-link>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="d-flex align-items-center w-100 mb-2 mt-auto pt-4">
+                    <div
+                        class="
+                            d-flex
+                            align-items-center
+                            dashboard-side-nav-links
+                            mt-auto
+                        "
+                    >
                         <router-link
                             @click.native="displayMenu"
                             to="/select_login"
@@ -621,23 +604,23 @@
                                     </router-link>
                                 </h6>
                                 <div class="col-12">
-                                        <router-link
-                                            class="dropdown-item"
-                                            v-for="category in categories"
-                                            :key="category.id"
-                                            :to="{
-                                                name: 'categories/category',
-                                                params: {
-                                                    categoryId: category.id,
-                                                    slug: category.slug,
-                                                },
-                                            }"
-                                        >
-                                            {{ category.name }}
-                                            <span class="dropdown-item-arrow">
-                                                >
-                                            </span>
-                                        </router-link>
+                                    <router-link
+                                        class="dropdown-item"
+                                        v-for="category in categories"
+                                        :key="category.id"
+                                        :to="{
+                                            name: 'categories/category',
+                                            params: {
+                                                categoryId: category.id,
+                                                slug: category.slug,
+                                            },
+                                        }"
+                                    >
+                                        {{ category.name }}
+                                        <span class="dropdown-item-arrow">
+                                            >
+                                        </span>
+                                    </router-link>
                                 </div>
                             </div>
                         </div>
@@ -747,7 +730,9 @@
                             d="M854.6 289.1a362.49 362.49 0 0 0-79.9-115.7a370.83 370.83 0 0 0-118.2-77.8C610.7 76.6 562.1 67 512 67c-50.1 0-98.7 9.6-144.5 28.5c-44.3 18.3-84 44.5-118.2 77.8A363.6 363.6 0 0 0 169.4 289c-19.5 45-29.4 92.8-29.4 142c0 70.6 16.9 140.9 50.1 208.7c26.7 54.5 64 107.6 111 158.1c80.3 86.2 164.5 138.9 188.4 153a43.9 43.9 0 0 0 22.4 6.1c7.8 0 15.5-2 22.4-6.1c23.9-14.1 108.1-66.8 188.4-153c47-50.4 84.3-103.6 111-158.1C867.1 572 884 501.8 884 431.1c0-49.2-9.9-97-29.4-142zM512 880.2c-65.9-41.9-300-207.8-300-449.1c0-77.9 31.1-151.1 87.6-206.3C356.3 169.5 431.7 139 512 139s155.7 30.5 212.4 85.9C780.9 280 812 353.2 812 431.1c0 241.3-234.1 407.2-300 449.1zm0-617.2c-97.2 0-176 78.8-176 176s78.8 176 176 176s176-78.8 176-176s-78.8-176-176-176zm79.2 255.2A111.6 111.6 0 0 1 512 551c-29.9 0-58-11.7-79.2-32.8A111.6 111.6 0 0 1 400 439c0-29.9 11.7-58 32.8-79.2C454 338.6 482.1 327 512 327c29.9 0 58 11.6 79.2 32.8C612.4 381 624 409.1 624 439c0 29.9-11.6 58-32.8 79.2z"
                         />
                     </svg>
-                    Currently delivering to <strong class="red">{{ locationActive }}</strong>. Click to change.
+                    Currently delivering to
+                    <strong class="red">{{ locationActive }}</strong
+                    >. Click to change.
                 </a>
                 <div
                     class="dropdown-menu"

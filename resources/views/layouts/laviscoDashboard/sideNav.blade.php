@@ -9,16 +9,8 @@
             seller-nav
         "
     >
-        <div
-            class="
-                d-flex
-                justify-content-between
-                align-items-center
-                w-100
-                mb-4
-            "
-        >
-            <router-link to="/seller/dashboard" class="navbar-brand ml-2">
+        <div class="dashboard-side-nav-logo">
+            <router-link to="/seller/dashboard" class="navbar-brand">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 805.67 156.56"
@@ -103,205 +95,211 @@
             </button>
         </div>
 
-        <router-link
-            to="/seller/dashboard"
-            class="dashboard-link"
-            id="seller-dashboard-main"
-        >
-            <div class="dashboard-link-icon">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true"
-                    role="img"
-                    width="1em"
-                    height="1em"
-                    preserveAspectRatio="xMidYMid meet"
-                    viewBox="0 0 24 24"
-                >
-                    <path
-                        fill="#666"
-                        d="M6.75 2.5A4.25 4.25 0 0 1 11 6.75V11H6.75a4.25 4.25 0 1 1 0-8.5zM9 9V6.75A2.25 2.25 0 1 0 6.75 9H9zm-2.25 4H11v4.25A4.25 4.25 0 1 1 6.75 13zm0 2A2.25 2.25 0 1 0 9 17.25V15H6.75zm10.5-12.5a4.25 4.25 0 1 1 0 8.5H13V6.75a4.25 4.25 0 0 1 4.25-4.25zm0 6.5A2.25 2.25 0 1 0 15 6.75V9h2.25zM13 13h4.25A4.25 4.25 0 1 1 13 17.25V13zm2 2v2.25A2.25 2.25 0 1 0 17.25 15H15z"
-                    />
-                </svg>
-            </div>
-            Dashboard
-        </router-link>
+        <div class="dashboard-side-nav-links">
+            <router-link
+                to="/seller/dashboard"
+                class="dashboard-link"
+                id="seller-dashboard-main"
+            >
+                <div class="dashboard-link-icon">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                        role="img"
+                        width="1em"
+                        height="1em"
+                        preserveAspectRatio="xMidYMid meet"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            fill="#666"
+                            d="M6.75 2.5A4.25 4.25 0 0 1 11 6.75V11H6.75a4.25 4.25 0 1 1 0-8.5zM9 9V6.75A2.25 2.25 0 1 0 6.75 9H9zm-2.25 4H11v4.25A4.25 4.25 0 1 1 6.75 13zm0 2A2.25 2.25 0 1 0 9 17.25V15H6.75zm10.5-12.5a4.25 4.25 0 1 1 0 8.5H13V6.75a4.25 4.25 0 0 1 4.25-4.25zm0 6.5A2.25 2.25 0 1 0 15 6.75V9h2.25zM13 13h4.25A4.25 4.25 0 1 1 13 17.25V13zm2 2v2.25A2.25 2.25 0 1 0 17.25 15H15z"
+                        />
+                    </svg>
+                </div>
+                Dashboard
+            </router-link>
 
-        <router-link
-            to="/seller/shop"
-            class="dashboard-link"
-            id="seller-dashboard-store"
-        >
-            <div class="dashboard-link-icon">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true"
-                    role="img"
-                    width="1em"
-                    height="1em"
-                    preserveAspectRatio="xMidYMid meet"
-                    viewBox="0 0 24 24"
-                >
-                    <path
-                        fill="#8D8788"
-                        d="M21 13.242V20h1v2H2v-2h1v-6.758A4.496 4.496 0 0 1 1 9.5c0-.827.224-1.624.633-2.303L4.345 2.5a1 1 0 0 1 .866-.5H18.79a1 1 0 0 1 .866.5l2.702 4.682A4.496 4.496 0 0 1 21 13.242zm-2 .73a4.496 4.496 0 0 1-3.75-1.36A4.496 4.496 0 0 1 12 14.001a4.496 4.496 0 0 1-3.25-1.387A4.496 4.496 0 0 1 5 13.973V20h14v-6.027zM5.789 4L3.356 8.213a2.5 2.5 0 0 0 4.466 2.216c.335-.837 1.52-.837 1.856 0a2.5 2.5 0 0 0 4.644 0c.335-.837 1.52-.837 1.856 0a2.5 2.5 0 1 0 4.457-2.232L18.21 4H5.79z"
-                    />
-                </svg>
-            </div>
-            Store
-        </router-link>
-        <router-link
-            to="/seller/sellerprofile"
-            class="dashboard-link"
-            id="seller-dashboard-profile"
-        >
-            <div class="dashboard-link-icon">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true"
-                    role="img"
-                    width="24"
-                    height="24"
-                    preserveAspectRatio="xMidYMid meet"
-                    viewBox="0 0 24 24"
-                >
-                    <path
-                        fill="#666"
-                        d="M12 14v2a6 6 0 0 0-6 6H4a8 8 0 0 1 8-8zm0-1c-3.315 0-6-2.685-6-6s2.685-6 6-6s6 2.685 6 6s-2.685 6-6 6zm0-2c2.21 0 4-1.79 4-4s-1.79-4-4-4s-4 1.79-4 4s1.79 4 4 4zm2.595 7.812a3.51 3.51 0 0 1 0-1.623l-.992-.573l1-1.732l.992.573A3.496 3.496 0 0 1 17 14.645V13.5h2v1.145c.532.158 1.012.44 1.405.812l.992-.573l1 1.732l-.992.573a3.51 3.51 0 0 1 0 1.622l.992.573l-1 1.732l-.992-.573a3.496 3.496 0 0 1-1.405.812V22.5h-2v-1.145a3.496 3.496 0 0 1-1.405-.812l-.992.573l-1-1.732l.992-.572zM18 19.5a1.5 1.5 0 1 0 0-3a1.5 1.5 0 0 0 0 3z"
-                    />
-                </svg>
-            </div>
-            Account
-        </router-link>
+            <router-link
+                to="/seller/shop"
+                class="dashboard-link"
+                id="seller-dashboard-store"
+            >
+                <div class="dashboard-link-icon">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                        role="img"
+                        width="1em"
+                        height="1em"
+                        preserveAspectRatio="xMidYMid meet"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            fill="#8D8788"
+                            d="M21 13.242V20h1v2H2v-2h1v-6.758A4.496 4.496 0 0 1 1 9.5c0-.827.224-1.624.633-2.303L4.345 2.5a1 1 0 0 1 .866-.5H18.79a1 1 0 0 1 .866.5l2.702 4.682A4.496 4.496 0 0 1 21 13.242zm-2 .73a4.496 4.496 0 0 1-3.75-1.36A4.496 4.496 0 0 1 12 14.001a4.496 4.496 0 0 1-3.25-1.387A4.496 4.496 0 0 1 5 13.973V20h14v-6.027zM5.789 4L3.356 8.213a2.5 2.5 0 0 0 4.466 2.216c.335-.837 1.52-.837 1.856 0a2.5 2.5 0 0 0 4.644 0c.335-.837 1.52-.837 1.856 0a2.5 2.5 0 1 0 4.457-2.232L18.21 4H5.79z"
+                        />
+                    </svg>
+                </div>
+                Store
+            </router-link>
 
-        <router-link
-            to="/seller/products"
-            class="dashboard-link"
-            id="seller-dashboard-product"
-        >
-            <div class="dashboard-link-icon">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true"
-                    role="img"
-                    width="1em"
-                    height="1em"
-                    preserveAspectRatio="xMidYMid meet"
-                    viewBox="0 0 24 24"
-                >
-                    <path
-                        fill="#666"
-                        d="M15.5 2a3.5 3.5 0 0 1 3.437 4.163l-.015.066a4.502 4.502 0 0 1 .303 8.428l-1.086 6.507a1 1 0 0 1-.986.836H6.847a1 1 0 0 1-.986-.836l-1.029-6.17a3 3 0 0 1-.829-5.824L4 9a6 6 0 0 1 8.574-5.421A3.496 3.496 0 0 1 15.5 2zM9 15H6.86l.834 5H9v-5zm4 0h-2v5h2v-5zm4.139 0H15v5h1.305l.834-5zM10 5C7.858 5 6.109 6.684 6.005 8.767L6 8.964l.003.17a2 2 0 0 1-1.186 1.863l-.15.059A1.001 1.001 0 0 0 5 13h12.5a2.5 2.5 0 1 0-.956-4.81l-.175.081a2 2 0 0 1-2.663-.804l-.07-.137A4 4 0 0 0 10 5zm5.5-1a1.5 1.5 0 0 0-1.287.729a6.006 6.006 0 0 1 1.24 1.764a4.45 4.45 0 0 1 1.446-.453A1.5 1.5 0 0 0 15.5 4z"
-                    />
-                </svg>
-            </div>
-            Products
-        </router-link>
+            <router-link
+                to="/seller/sellerprofile"
+                class="dashboard-link"
+                id="seller-dashboard-profile"
+            >
+                <div class="dashboard-link-icon">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                        role="img"
+                        width="24"
+                        height="24"
+                        preserveAspectRatio="xMidYMid meet"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            fill="#666"
+                            d="M12 14v2a6 6 0 0 0-6 6H4a8 8 0 0 1 8-8zm0-1c-3.315 0-6-2.685-6-6s2.685-6 6-6s6 2.685 6 6s-2.685 6-6 6zm0-2c2.21 0 4-1.79 4-4s-1.79-4-4-4s-4 1.79-4 4s1.79 4 4 4zm2.595 7.812a3.51 3.51 0 0 1 0-1.623l-.992-.573l1-1.732l.992.573A3.496 3.496 0 0 1 17 14.645V13.5h2v1.145c.532.158 1.012.44 1.405.812l.992-.573l1 1.732l-.992.573a3.51 3.51 0 0 1 0 1.622l.992.573l-1 1.732l-.992-.573a3.496 3.496 0 0 1-1.405.812V22.5h-2v-1.145a3.496 3.496 0 0 1-1.405-.812l-.992.573l-1-1.732l.992-.572zM18 19.5a1.5 1.5 0 1 0 0-3a1.5 1.5 0 0 0 0 3z"
+                        />
+                    </svg>
+                </div>
+                Account
+            </router-link>
 
-        <router-link
-            to="/seller/orders"
-            class="dashboard-link"
-            id="seller-dashboard-order"
-        >
-            <div class="dashboard-link-icon">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true"
-                    role="img"
-                    width="24"
-                    height="24"
-                    preserveAspectRatio="xMidYMid meet"
-                    viewBox="0 0 24 24"
-                >
-                    <path
-                        fill="#666"
-                        d="M8.965 18a3.5 3.5 0 0 1-6.93 0H1V6a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2h3l3 4.056V18h-2.035a3.5 3.5 0 0 1-6.93 0h-5.07zM15 7H3v8.05a3.5 3.5 0 0 1 5.663.95h5.674c.168-.353.393-.674.663-.95V7zm2 6h4v-.285L18.992 10H17v3zm.5 6a1.5 1.5 0 1 0 0-3.001a1.5 1.5 0 0 0 0 3.001zM7 17.5a1.5 1.5 0 1 0-3 0a1.5 1.5 0 0 0 3 0z"
-                    />
-                </svg>
-            </div>
-            Orders
-        </router-link>
-        <router-link
-            to="/seller/transactions"
-            class="dashboard-link"
-            id="seller-dashboard-transaction"
-        >
-            <div class="dashboard-link-icon">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true"
-                    role="img"
-                    width="24"
-                    height="24"
-                    preserveAspectRatio="xMidYMid meet"
-                    viewBox="0 0 24 24"
-                >
-                    <path
-                        fill="#666"
-                        d="M14 2a8 8 0 0 1 3.292 15.293A8 8 0 1 1 6.706 6.707A8.003 8.003 0 0 1 14 2zm-4 6a6 6 0 1 0 0 12a6 6 0 0 0 0-12zm1 1v1h2v2H9a.5.5 0 0 0-.09.992L9 13h2a2.5 2.5 0 1 1 0 5v1H9v-1H7v-2h4a.5.5 0 0 0 .09-.992L11 15H9a2.5 2.5 0 1 1 0-5V9h2zm3-5a5.985 5.985 0 0 0-4.484 2.013a8 8 0 0 1 8.47 8.471A6 6 0 0 0 14 4z"
-                    />
-                </svg>
-            </div>
-            Transactions
-        </router-link>
-        <router-link to="/coming_soon" class="dashboard-link">
-            <div class="dashboard-link-icon">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true"
-                    role="img"
-                    width="1em"
-                    height="1em"
-                    preserveAspectRatio="xMidYMid meet"
-                    viewBox="0 0 24 24"
-                >
-                    <path
-                        fill="#666"
-                        d="M12 2c5.522 0 10 3.978 10 8.889a5.558 5.558 0 0 1-5.556 5.555h-1.966c-.922 0-1.667.745-1.667 1.667c0 .422.167.811.422 1.1c.267.3.434.689.434 1.122C13.667 21.256 12.9 22 12 22C6.478 22 2 17.522 2 12S6.478 2 12 2zm-1.189 16.111a3.664 3.664 0 0 1 3.667-3.667h1.966A3.558 3.558 0 0 0 20 10.89C20 7.139 16.468 4 12 4a8 8 0 0 0-.676 15.972a3.648 3.648 0 0 1-.513-1.86zM7.5 12a1.5 1.5 0 1 1 0-3a1.5 1.5 0 0 1 0 3zm9 0a1.5 1.5 0 1 1 0-3a1.5 1.5 0 0 1 0 3zM12 9a1.5 1.5 0 1 1 0-3a1.5 1.5 0 0 1 0 3z"
-                    />
-                </svg>
-            </div>
-            Custom Requests
-        </router-link>
-        <router-link to="/coming_soon" class="dashboard-link">
-            <div class="dashboard-link-icon">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true"
-                    role="img"
-                    width="24"
-                    height="24"
-                    preserveAspectRatio="xMidYMid meet"
-                    viewBox="0 0 24 24"
-                >
-                    <path
-                        fill="#666"
-                        d="M15 2a4 4 0 0 1 3.464 6.001L23 8v2h-2v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V10H1V8l4.536.001A4 4 0 0 1 12 3.355A3.983 3.983 0 0 1 15 2zm-4 8H5v9h6v-9zm8 0h-6v9h6v-9zM9 4a2 2 0 0 0-.15 3.995L9 8h2V6a2 2 0 0 0-1.697-1.977l-.154-.018L9 4zm6 0a2 2 0 0 0-1.995 1.85L13 6v2h2a2 2 0 0 0 1.995-1.85L17 6a2 2 0 0 0-2-2z"
-                    />
-                </svg>
-            </div>
-            Giftboxes
-        </router-link>
+            <router-link
+                to="/seller/products"
+                class="dashboard-link"
+                id="seller-dashboard-product"
+            >
+                <div class="dashboard-link-icon">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                        role="img"
+                        width="1em"
+                        height="1em"
+                        preserveAspectRatio="xMidYMid meet"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            fill="#666"
+                            d="M15.5 2a3.5 3.5 0 0 1 3.437 4.163l-.015.066a4.502 4.502 0 0 1 .303 8.428l-1.086 6.507a1 1 0 0 1-.986.836H6.847a1 1 0 0 1-.986-.836l-1.029-6.17a3 3 0 0 1-.829-5.824L4 9a6 6 0 0 1 8.574-5.421A3.496 3.496 0 0 1 15.5 2zM9 15H6.86l.834 5H9v-5zm4 0h-2v5h2v-5zm4.139 0H15v5h1.305l.834-5zM10 5C7.858 5 6.109 6.684 6.005 8.767L6 8.964l.003.17a2 2 0 0 1-1.186 1.863l-.15.059A1.001 1.001 0 0 0 5 13h12.5a2.5 2.5 0 1 0-.956-4.81l-.175.081a2 2 0 0 1-2.663-.804l-.07-.137A4 4 0 0 0 10 5zm5.5-1a1.5 1.5 0 0 0-1.287.729a6.006 6.006 0 0 1 1.24 1.764a4.45 4.45 0 0 1 1.446-.453A1.5 1.5 0 0 0 15.5 4z"
+                        />
+                    </svg>
+                </div>
+                Products
+            </router-link>
 
-        <router-link to="/seller/statistics" class="dashboard-link">
-            <div class="dashboard-link-icon">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true"
-                    role="img"
-                    width="24"
-                    height="24"
-                    preserveAspectRatio="xMidYMid meet"
-                    viewBox="0 0 24 24"
-                >
-                    <path
-                        fill="#666"
-                        d="m4.406 14.523l3.402-3.402l2.828 2.829l3.157-3.157L12 9h5v5l-1.793-1.793l-4.571 4.571l-2.828-2.828l-2.475 2.474a8 8 0 1 0-.927-1.9zm-1.538 1.558l-.01-.01l.004-.004A9.965 9.965 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10s-4.477 10-10 10c-4.07 0-7.57-2.43-9.132-5.919z"
-                    />
-                </svg>
-            </div>
-            Statistics
-        </router-link>
+            <router-link
+                to="/seller/orders"
+                class="dashboard-link"
+                id="seller-dashboard-order"
+            >
+                <div class="dashboard-link-icon">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                        role="img"
+                        width="24"
+                        height="24"
+                        preserveAspectRatio="xMidYMid meet"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            fill="#666"
+                            d="M8.965 18a3.5 3.5 0 0 1-6.93 0H1V6a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2h3l3 4.056V18h-2.035a3.5 3.5 0 0 1-6.93 0h-5.07zM15 7H3v8.05a3.5 3.5 0 0 1 5.663.95h5.674c.168-.353.393-.674.663-.95V7zm2 6h4v-.285L18.992 10H17v3zm.5 6a1.5 1.5 0 1 0 0-3.001a1.5 1.5 0 0 0 0 3.001zM7 17.5a1.5 1.5 0 1 0-3 0a1.5 1.5 0 0 0 3 0z"
+                        />
+                    </svg>
+                </div>
+                Orders
+            </router-link>
+
+            <router-link
+                to="/seller/transactions"
+                class="dashboard-link"
+                id="seller-dashboard-transaction"
+            >
+                <div class="dashboard-link-icon">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                        role="img"
+                        width="24"
+                        height="24"
+                        preserveAspectRatio="xMidYMid meet"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            fill="#666"
+                            d="M14 2a8 8 0 0 1 3.292 15.293A8 8 0 1 1 6.706 6.707A8.003 8.003 0 0 1 14 2zm-4 6a6 6 0 1 0 0 12a6 6 0 0 0 0-12zm1 1v1h2v2H9a.5.5 0 0 0-.09.992L9 13h2a2.5 2.5 0 1 1 0 5v1H9v-1H7v-2h4a.5.5 0 0 0 .09-.992L11 15H9a2.5 2.5 0 1 1 0-5V9h2zm3-5a5.985 5.985 0 0 0-4.484 2.013a8 8 0 0 1 8.47 8.471A6 6 0 0 0 14 4z"
+                        />
+                    </svg>
+                </div>
+                Transactions
+            </router-link>
+
+            <router-link to="/coming_soon" class="dashboard-link">
+                <div class="dashboard-link-icon">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                        role="img"
+                        width="1em"
+                        height="1em"
+                        preserveAspectRatio="xMidYMid meet"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            fill="#666"
+                            d="M12 2c5.522 0 10 3.978 10 8.889a5.558 5.558 0 0 1-5.556 5.555h-1.966c-.922 0-1.667.745-1.667 1.667c0 .422.167.811.422 1.1c.267.3.434.689.434 1.122C13.667 21.256 12.9 22 12 22C6.478 22 2 17.522 2 12S6.478 2 12 2zm-1.189 16.111a3.664 3.664 0 0 1 3.667-3.667h1.966A3.558 3.558 0 0 0 20 10.89C20 7.139 16.468 4 12 4a8 8 0 0 0-.676 15.972a3.648 3.648 0 0 1-.513-1.86zM7.5 12a1.5 1.5 0 1 1 0-3a1.5 1.5 0 0 1 0 3zm9 0a1.5 1.5 0 1 1 0-3a1.5 1.5 0 0 1 0 3zM12 9a1.5 1.5 0 1 1 0-3a1.5 1.5 0 0 1 0 3z"
+                        />
+                    </svg>
+                </div>
+                Custom Requests
+            </router-link>
+
+            <router-link to="/coming_soon" class="dashboard-link">
+                <div class="dashboard-link-icon">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                        role="img"
+                        width="24"
+                        height="24"
+                        preserveAspectRatio="xMidYMid meet"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            fill="#666"
+                            d="M15 2a4 4 0 0 1 3.464 6.001L23 8v2h-2v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V10H1V8l4.536.001A4 4 0 0 1 12 3.355A3.983 3.983 0 0 1 15 2zm-4 8H5v9h6v-9zm8 0h-6v9h6v-9zM9 4a2 2 0 0 0-.15 3.995L9 8h2V6a2 2 0 0 0-1.697-1.977l-.154-.018L9 4zm6 0a2 2 0 0 0-1.995 1.85L13 6v2h2a2 2 0 0 0 1.995-1.85L17 6a2 2 0 0 0-2-2z"
+                        />
+                    </svg>
+                </div>
+                Giftboxes
+            </router-link>
+
+            <router-link to="/seller/statistics" class="dashboard-link">
+                <div class="dashboard-link-icon">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                        role="img"
+                        width="24"
+                        height="24"
+                        preserveAspectRatio="xMidYMid meet"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            fill="#666"
+                            d="m4.406 14.523l3.402-3.402l2.828 2.829l3.157-3.157L12 9h5v5l-1.793-1.793l-4.571 4.571l-2.828-2.828l-2.475 2.474a8 8 0 1 0-.927-1.9zm-1.538 1.558l-.01-.01l.004-.004A9.965 9.965 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10s-4.477 10-10 10c-4.07 0-7.57-2.43-9.132-5.919z"
+                        />
+                    </svg>
+                </div>
+                Statistics
+            </router-link>
+        </div>
     </div>
     @endif @if(auth()->user()->role_id == 3)
     <div
@@ -313,15 +311,7 @@
             seller-nav
         "
     >
-        <div
-            class="
-                d-flex
-                justify-content-between justify-content-lg-center
-                align-items-center
-                w-100
-                mb-4
-            "
-        >
+        <div class="dashboard-side-nav-logo">
             <router-link to="/buyer/dashboard" class="navbar-brand">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -407,63 +397,65 @@
             </button>
         </div>
 
-        <router-link to="/buyer/dashboard" class="dashboard-link">
-            <div class="dashboard-link-icon">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true"
-                    role="img"
-                    width="1em"
-                    height="1em"
-                    preserveAspectRatio="xMidYMid meet"
-                    viewBox="0 0 24 24"
-                >
-                    <path
-                        fill="#666"
-                        d="M6.75 2.5A4.25 4.25 0 0 1 11 6.75V11H6.75a4.25 4.25 0 1 1 0-8.5zM9 9V6.75A2.25 2.25 0 1 0 6.75 9H9zm-2.25 4H11v4.25A4.25 4.25 0 1 1 6.75 13zm0 2A2.25 2.25 0 1 0 9 17.25V15H6.75zm10.5-12.5a4.25 4.25 0 1 1 0 8.5H13V6.75a4.25 4.25 0 0 1 4.25-4.25zm0 6.5A2.25 2.25 0 1 0 15 6.75V9h2.25zM13 13h4.25A4.25 4.25 0 1 1 13 17.25V13zm2 2v2.25A2.25 2.25 0 1 0 17.25 15H15z"
-                    />
-                </svg>
-            </div>
-            Dashboard
-        </router-link>
-        <router-link to="/buyer/buyerprofile" class="dashboard-link">
-            <div class="dashboard-link-icon">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true"
-                    role="img"
-                    width="24"
-                    height="24"
-                    preserveAspectRatio="xMidYMid meet"
-                    viewBox="0 0 24 24"
-                >
-                    <path
-                        fill="#666"
-                        d="M12 14v2a6 6 0 0 0-6 6H4a8 8 0 0 1 8-8zm0-1c-3.315 0-6-2.685-6-6s2.685-6 6-6s6 2.685 6 6s-2.685 6-6 6zm0-2c2.21 0 4-1.79 4-4s-1.79-4-4-4s-4 1.79-4 4s1.79 4 4 4zm2.595 7.812a3.51 3.51 0 0 1 0-1.623l-.992-.573l1-1.732l.992.573A3.496 3.496 0 0 1 17 14.645V13.5h2v1.145c.532.158 1.012.44 1.405.812l.992-.573l1 1.732l-.992.573a3.51 3.51 0 0 1 0 1.622l.992.573l-1 1.732l-.992-.573a3.496 3.496 0 0 1-1.405.812V22.5h-2v-1.145a3.496 3.496 0 0 1-1.405-.812l-.992.573l-1-1.732l.992-.572zM18 19.5a1.5 1.5 0 1 0 0-3a1.5 1.5 0 0 0 0 3z"
-                    />
-                </svg>
-            </div>
-            Account
-        </router-link>
-        <router-link to="/buyer/orders" class="dashboard-link">
-            <div class="dashboard-link-icon">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true"
-                    role="img"
-                    width="24"
-                    height="24"
-                    preserveAspectRatio="xMidYMid meet"
-                    viewBox="0 0 24 24"
-                >
-                    <path
-                        fill="#666"
-                        d="M8.965 18a3.5 3.5 0 0 1-6.93 0H1V6a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2h3l3 4.056V18h-2.035a3.5 3.5 0 0 1-6.93 0h-5.07zM15 7H3v8.05a3.5 3.5 0 0 1 5.663.95h5.674c.168-.353.393-.674.663-.95V7zm2 6h4v-.285L18.992 10H17v3zm.5 6a1.5 1.5 0 1 0 0-3.001a1.5 1.5 0 0 0 0 3.001zM7 17.5a1.5 1.5 0 1 0-3 0a1.5 1.5 0 0 0 3 0z"
-                    />
-                </svg>
-            </div>
-            Orders
-        </router-link>
+        <div class="dashboard-side-nav-links">
+            <router-link to="/buyer/dashboard" class="dashboard-link">
+                <div class="dashboard-link-icon">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                        role="img"
+                        width="1em"
+                        height="1em"
+                        preserveAspectRatio="xMidYMid meet"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            fill="#666"
+                            d="M6.75 2.5A4.25 4.25 0 0 1 11 6.75V11H6.75a4.25 4.25 0 1 1 0-8.5zM9 9V6.75A2.25 2.25 0 1 0 6.75 9H9zm-2.25 4H11v4.25A4.25 4.25 0 1 1 6.75 13zm0 2A2.25 2.25 0 1 0 9 17.25V15H6.75zm10.5-12.5a4.25 4.25 0 1 1 0 8.5H13V6.75a4.25 4.25 0 0 1 4.25-4.25zm0 6.5A2.25 2.25 0 1 0 15 6.75V9h2.25zM13 13h4.25A4.25 4.25 0 1 1 13 17.25V13zm2 2v2.25A2.25 2.25 0 1 0 17.25 15H15z"
+                        />
+                    </svg>
+                </div>
+                Dashboard
+            </router-link>
+            <router-link to="/buyer/buyerprofile" class="dashboard-link">
+                <div class="dashboard-link-icon">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                        role="img"
+                        width="24"
+                        height="24"
+                        preserveAspectRatio="xMidYMid meet"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            fill="#666"
+                            d="M12 14v2a6 6 0 0 0-6 6H4a8 8 0 0 1 8-8zm0-1c-3.315 0-6-2.685-6-6s2.685-6 6-6s6 2.685 6 6s-2.685 6-6 6zm0-2c2.21 0 4-1.79 4-4s-1.79-4-4-4s-4 1.79-4 4s1.79 4 4 4zm2.595 7.812a3.51 3.51 0 0 1 0-1.623l-.992-.573l1-1.732l.992.573A3.496 3.496 0 0 1 17 14.645V13.5h2v1.145c.532.158 1.012.44 1.405.812l.992-.573l1 1.732l-.992.573a3.51 3.51 0 0 1 0 1.622l.992.573l-1 1.732l-.992-.573a3.496 3.496 0 0 1-1.405.812V22.5h-2v-1.145a3.496 3.496 0 0 1-1.405-.812l-.992.573l-1-1.732l.992-.572zM18 19.5a1.5 1.5 0 1 0 0-3a1.5 1.5 0 0 0 0 3z"
+                        />
+                    </svg>
+                </div>
+                Account
+            </router-link>
+            <router-link to="/buyer/orders" class="dashboard-link">
+                <div class="dashboard-link-icon">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                        role="img"
+                        width="24"
+                        height="24"
+                        preserveAspectRatio="xMidYMid meet"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            fill="#666"
+                            d="M8.965 18a3.5 3.5 0 0 1-6.93 0H1V6a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2h3l3 4.056V18h-2.035a3.5 3.5 0 0 1-6.93 0h-5.07zM15 7H3v8.05a3.5 3.5 0 0 1 5.663.95h5.674c.168-.353.393-.674.663-.95V7zm2 6h4v-.285L18.992 10H17v3zm.5 6a1.5 1.5 0 1 0 0-3.001a1.5 1.5 0 0 0 0 3.001zM7 17.5a1.5 1.5 0 1 0-3 0a1.5 1.5 0 0 0 3 0z"
+                        />
+                    </svg>
+                </div>
+                Orders
+            </router-link>
+        </div>
     </div>
     @endif
 </nav>

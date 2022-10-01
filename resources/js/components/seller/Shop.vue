@@ -461,7 +461,7 @@
                             <div
                                 class="
                                     d-flex
-                                    justify-content-center
+                                    justify-content-end
                                     align-items-center
                                     mt-5
                                 "

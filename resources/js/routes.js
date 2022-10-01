@@ -278,7 +278,7 @@ export let routes = [
         path: "/buyer/dashboard",
         component: require("./components/buyer/Dashboard.vue").default,
         meta: {
-            title: "Your Profile",
+            title: "Overview",
         },
     },
     {

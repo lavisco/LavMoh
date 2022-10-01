@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Buyer;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -18,7 +19,11 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        return Order::where('buyer_id', auth()->id())->where('order_state_id', '!=', 1)
+        ->with(['order_state', 'order_products', 'order_products.product', 'order_products.order_product_variations.variation_option.variation', 'order_products.order_product_giftbox_variations.product', 'shipping'])
+        ->latest()
+        ->filter(request(['searchText']))
+        ->paginate(20);
     }
 
     /**

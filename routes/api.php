@@ -38,6 +38,7 @@ use App\Http\Controllers\Api\Admin\TransactionStateController;
 use App\Http\Controllers\Api\Admin\VariationController;
 use App\Http\Controllers\Api\Admin\VariationOptionController;
 use App\Http\Controllers\Api\Buyer\BuyerProfileController as BuyerBuyerProfileController;
+use App\Http\Controllers\Api\Buyer\DashboardController as BuyerDashboardController;
 use App\Http\Controllers\Api\Buyer\OrderController as BuyerOrderController;
 use App\Http\Controllers\Api\Email\EmailController;
 use App\Http\Controllers\Api\Seller\CustomProductInquiryController as SellerCustomProductInquiryController;
@@ -164,8 +165,9 @@ Route::prefix('admin')->group(function () {
 */
 
 Route::prefix('buyer')->group(function () {
+    Route::get('/dashboard', [BuyerDashboardController::class, 'index']);
     Route::apiResource('/buyerprofile', BuyerBuyerProfileController::class);
-    //Route::apiResource('/orders', BuyerOrderController::class);
+    Route::apiResource('/orders', BuyerOrderController::class);
 });
 
 /*

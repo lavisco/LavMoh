@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Api\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\OrderRequest;
 use App\Models\Order;
+use App\Models\OrderProduct;
+use App\Models\OrderProductVariation;
+use App\Models\Receipt;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -47,6 +51,16 @@ class OrderController extends Controller
 
     public function destroy(Order $order)
     {
+        //delete order record if payment fails
+        Transaction::where('order_id', $order->id)->delete();
+        Receipt::where('order_id', $order->id)->delete();
+        $orderProducts = OrderProduct::where('order_id', $order->id)->get();
+
+        foreach ($orderProducts as $orderProduct) {
+            OrderProductVariation::where('order_product_id', $orderProduct->id)->delete();
+            $orderProduct->delete();
+        }
+       
         $order->delete();
     }
 }

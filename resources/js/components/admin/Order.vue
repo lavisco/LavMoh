@@ -242,6 +242,17 @@
                                                     >
                                                         Edit
                                                     </a>
+                                                    <a
+                                                        class="dropdown-item"
+                                                        href=""
+                                                        @click.prevent="
+                                                            deleteOrder(
+                                                                order.id
+                                                            )
+                                                        "
+                                                    >
+                                                        Delete
+                                                    </a>
                                                 </div>
                                             </div>
                                         </td>

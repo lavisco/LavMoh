@@ -129,10 +129,8 @@
                 }"
             >
                 <div class="col-md-6 px-0 d-flex flex-column">
-                    <h1 class="text-left white">
-                        Gifts and Crafts for any Occasion
-                    </h1>
-                    <h5 class="text-left white mb-4 mb-md-5">
+                    <h1>Gifts and Crafts for any Occasion</h1>
+                    <h5 class="mb-4 mb-md-5">
                         Our collection contains a wide array of gifts suitable
                         for any major occasion.
                     </h5>
@@ -172,8 +170,8 @@
                 }"
             >
                 <div class="col-md-6 px-0 d-flex flex-column">
-                    <h1 class="text-left white">Gifts for any Recipient</h1>
-                    <h5 class="text-left white mb-4 mb-md-5">
+                    <h1>Gifts for any Recipient</h1>
+                    <h5 class="mb-4 mb-md-5">
                         You’ll surely find a gift on Lavisco that’s perfect for
                         your friend, family or anyone else.
                     </h5>
@@ -262,87 +260,98 @@
                 </div>
             </section>
 
-            <section class="section-instruction">
-                <h1>How Lavisco Works</h1>
-                <div class="row">
-                    <div class="col-md-3 mb-md-0 mb-5">
-                        <div class="card instruction-card instruction-card-1">
-                            <h1>1</h1>
-                            <img :src="icon_cake" />
-                            <p>
-                                Browse through our wide range of products for
-                                any occasion and pick your choice.
-                            </p>
-                        </div>
+            <section
+                class="
+                    section-occasion-recipient section-instruction
+                    align-items-start
+                "
+                v-bind:style="{
+                    'background-image': 'url(' + img_instruction + ')',
+                }"
+            >
+                <div class="col-md-5 px-0 d-flex flex-column">
+                    <h1>How Lavisco Works</h1>
+                    <h5 class="mb-4 mb-md-5">As easy as 1, 2, 3.</h5>
+                </div>
+                <div class="col-md-7 px-0 d-flex flex-column">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="instruction-num">1</div>
+                        <h4>
+                            Browse through our wide range of products for any
+                            occasion and pick your choice.
+                        </h4>
                     </div>
-                    <div class="col-md-3 mb-md-0 mb-5">
-                        <div class="card instruction-card instruction-card-2">
-                            <h1>2</h1>
-                            <img :src="icon_surprise" />
-                            <div>
-                                <p>
-                                    Get creative and add a personal touch to
-                                    your products by choosing custom options.
-                                </p>
-                                <span class="text-sm"
-                                    >Skip this step if you don't want to
-                                    personalise</span
-                                >
-                            </div>
-                        </div>
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="instruction-num">2</div>
+                        <h4>
+                            Get creative and add a personal touch to your
+                            products by choosing custom options.
+                        </h4>
                     </div>
-                    <div class="col-md-3 mb-md-0 mb-5">
-                        <div class="card instruction-card instruction-card-3">
-                            <h1>3</h1>
-                            <img :src="icon_money" />
-                            <p>
-                                Choose from one of the many easy payment options
-                                & finalize your order!
-                            </p>
-                        </div>
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="instruction-num">3</div>
+                        <h4>
+                            Choose from one of the many easy payment options &
+                            finalize your order!
+                        </h4>
                     </div>
-                    <div class="col-md-3">
-                        <div class="card instruction-card instruction-card-4">
-                            <h1>4</h1>
-                            <img :src="icon_delivery" />
-                            <p>
-                                Sit back & relax!!! <br />
-                                We will deliver your order right to your door
-                                step with no hassle.
-                            </p>
+                    <div class="d-flex align-items-center">
+                        <div class="instruction-num">
+                            <svg
+                                width="37"
+                                height="38"
+                                viewBox="0 0 37 38"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <g clip-path="url(#clip0_678_1405)">
+                                    <path
+                                        d="M34.0794 1.7165C33.4273 1.3536 32.7099 1.12282 31.9685 1.03736C31.2271 0.95189 30.4761 1.01342 29.7584 1.21842C29.0408 1.42342 28.3706 1.76787 27.7862 2.23208C27.2018 2.69629 26.7146 3.27114 26.3526 3.92378L15.8048 22.9057L9.76818 16.8691C9.24408 16.3265 8.61716 15.8937 7.92399 15.5959C7.23082 15.2981 6.48529 15.1414 5.7309 15.1348C4.97651 15.1283 4.22837 15.272 3.53013 15.5577C2.83189 15.8434 2.19754 16.2653 1.66409 16.7987C1.13063 17.3322 0.708763 17.9665 0.423091 18.6647C0.137419 19.363 -0.00633329 20.1111 0.000222145 20.8655C0.00677758 21.6199 0.16351 22.3654 0.461273 23.0586C0.759036 23.7518 1.19187 24.3787 1.73451 24.9028L13.0976 36.2659C14.1714 37.3425 15.6202 37.9334 17.1144 37.9334L17.9013 37.8766C18.7721 37.7547 19.6028 37.4325 20.3279 36.9351C21.053 36.4377 21.6528 35.7788 22.08 35.0102L36.2839 9.44338C36.6465 8.79128 36.8771 8.07415 36.9626 7.33292C37.0481 6.59169 36.9867 5.84088 36.782 5.12336C36.5773 4.40585 36.2333 3.73568 35.7696 3.15113C35.3059 2.56658 34.7315 2.07909 34.0794 1.7165Z"
+                                        fill="white"
+                                        fill-opacity="0.5"
+                                    />
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_678_1405">
+                                        <rect
+                                            width="37"
+                                            height="37"
+                                            fill="white"
+                                            transform="translate(0 0.5)"
+                                        />
+                                    </clipPath>
+                                </defs>
+                            </svg>
                         </div>
+                        <h4>
+                            Sit back & relax! We will deliver your order right
+                            to your door step with no hassle.
+                        </h4>
                     </div>
                 </div>
             </section>
 
-            <section class="section-shortcuts mb-5">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="card bg-light-grey p-5 mb-4 mb-md-0">
-                            <h1 class="mb-2 text-left">
-                                Become a Seller on Lavisco
-                            </h1>
-                            <h4 class="mb-4">
-                                Join a one of a kind marketplace and get an edge
-                                over your competitors.
-                            </h4>
-                            <router-link to="/sell_on_lavisco">
-                                <button>Become a Seller</button>
-                            </router-link>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card bg-light-grey p-5">
-                            <h1 class="mb-2 text-left">Start buying today</h1>
-                            <h4 class="mb-4">
-                                Sign up with Lavisco as a buyer to unlock
-                                exclusive drops and discounts!
-                            </h4>
-                            <a href="/register">
-                                <button class="btn-secondary">Sign up</button>
-                            </a>
-                        </div>
-                    </div>
+            <section class="section-shortcuts">
+                <div class="shortcut-card">
+                    <h1>Become a Seller on Lavisco</h1>
+                    <h5 class="mb-4">
+                        Join a one of a kind marketplace and get an edge over
+                        your competitors.
+                    </h5>
+                    <router-link to="/sell_on_lavisco">
+                        <button class="btn-sm-black">Become a Seller</button>
+                    </router-link>
+                </div>
+
+                <div class="shortcut-card">
+                    <h1>Start buying today</h1>
+                    <h5 class="mb-4">
+                        Sign up with Lavisco as a buyer to unlock exclusive
+                        drops and discounts!
+                    </h5>
+                    <a href="/register">
+                        <button class="btn-sm-black">Sign up</button>
+                    </a>
                 </div>
             </section>
         </div>
@@ -374,6 +383,7 @@ export default {
         icon_surprise: "",
         img_occasion: "",
         img_recipient: "",
+        img_instruction: "",
         swiperOption: {
             slidesPerView: 5,
             spaceBetween: 20,
@@ -441,6 +451,7 @@ export default {
                     this.icon_surprise = response.data.icon_surprise;
                     this.img_occasion = response.data.img_occasion;
                     this.img_recipient = response.data.img_recipient;
+                    this.img_instruction = response.data.img_instruction;
                 })
                 .catch((error) => console.log(error));
         },

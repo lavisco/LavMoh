@@ -51,6 +51,7 @@ class HomeController extends Controller
             'icon_surprise' => Storage::disk('s3')->temporaryUrl('public/images/surprise.png', '+2 minutes'),
             'img_occasion' => Storage::disk('s3')->temporaryUrl('public/images/occasion-banner.jpg', '+2 minutes'),
             'img_recipient' => Storage::disk('s3')->temporaryUrl('public/images/recipient-banner.jpg', '+2 minutes'),
+            'img_instruction' => Storage::disk('s3')->temporaryUrl('public/images/instruction-banner.jpg', '+2 minutes'),
         ]);
     }
 

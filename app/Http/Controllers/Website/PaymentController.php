@@ -87,8 +87,10 @@ class PaymentController extends Controller
         */
         $total = $this->storeOrderProduct($products, $exchange_rate, $order->id);
 
+        $newtotal = $total+$shipping->price;
+
         $order->update([
-            'total' => $total+$shipping->price,
+            'total' => $newtotal,
             'subtotal' => $total,
         ]);
 
@@ -101,7 +103,7 @@ class PaymentController extends Controller
         * payment proccessing
         */
         $data = $request;
-        $plaintext = $order->id.'|'.$total;
+        $plaintext = $order->id.'|'.$newtotal;
 
         $publickey = "-----BEGIN PUBLIC KEY-----
 MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC6nVc/ykIWsT1ktI8/49nfBUOQ

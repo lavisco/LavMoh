@@ -437,6 +437,7 @@ export default {
 
         saveShopCartTotal(shop) {
             this.$store.dispatch("saveShopCartTotal", this.cartTotal(shop));
+            this.$store.dispatch("saveShippingPrice", 0.00);
             this.$store.dispatch("addProductToCurrentCart", shop);
             $("#addRecord").modal("show");
             //this.$router.push("/shipping");

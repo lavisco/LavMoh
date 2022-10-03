@@ -96,7 +96,7 @@ class PaymentController extends Controller
 
         // store receipt & transaction
         $this->storeReceipt($request, $order->id);
-        $this->storeTransaction($request, $total, $defaultProduct->user_id, $order->id);
+        $this->storeTransaction($request, $newtotal, $defaultProduct->user_id, $order->id);
 
         
         /*

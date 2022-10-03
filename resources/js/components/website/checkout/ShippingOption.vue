@@ -206,7 +206,8 @@
             <div class="row-content">
                 <div class="form-group">
                     <label class="col-form-label" for="self_delivery"
-                        >If you select 'yes', then billing and shipping information will be the same.
+                        >If you select 'yes', then billing and shipping
+                        information will be the same.
                         <strong class="text-danger"> * </strong>
                     </label>
                     <div class="custom-control custom-radio">
@@ -475,6 +476,7 @@
                             id="shipping_id"
                             v-model="form.shipping_id"
                             name="shipping_id"
+                            @change.prevent="setShipping()"
                         >
                             <option value="" disabled selected hidden>
                                 Select Shipping Method
@@ -660,8 +662,14 @@ export default {
         },
 
         setShipping() {
-            this.form.shipping_id = JSON.stringify(this.form.shipping.id);
-            this.form.shipping_price = this.form.shipping.price;
+            // this.form.shipping_id = JSON.stringify(this.form.shipping.id);
+            // this.form.shipping_price = this.form.shipping.price;
+
+            this.shippings.map((shipping) => {
+                if (shipping.id === this.form.shipping_id) {
+                    this.$store.dispatch("saveShippingPrice", shipping.price);
+                }
+            });
         },
     },
 

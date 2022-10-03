@@ -12,6 +12,7 @@ export default new Vuex.Store({
         cart: [], //{product id, product quantity}
         currentCart: [], //cart being currently processed
         total: "",
+        shipping_price: 0.0,
         currency: {
             code: "LKR",
             exchange_rate: 1.0,
@@ -23,6 +24,10 @@ export default new Vuex.Store({
     getters: {
         currentOrder(state) {
             return state.order;
+        },
+
+        currentShippingPrice(state) {
+            return state.shipping_price;
         },
 
         selectedCurrency(state) {
@@ -110,6 +115,10 @@ export default new Vuex.Store({
 
         saveLocation(context, district) {
             context.commit("storeLocation", district);
+        },
+
+        saveShippingPrice(context, shipping_price) {
+            context.commit("storeShippingPrice", shipping_price);
         },
 
         //cart methods
@@ -288,6 +297,13 @@ export default new Vuex.Store({
             state.location = district;
         },
 
+        storeShippingPrice(state, shipping_price) {
+            state.shipping_price = shipping_price;
+            state.total = (
+                parseFloat(state.total) + parseFloat(state.shipping_price)
+            ).toFixed(2);
+        },
+
         //alter cart state
         pushProductToCart(state, { product, form }) {
             //pass multiple parameters to a mutation using destructuring e.g.{ product, form }
@@ -422,6 +438,7 @@ export default new Vuex.Store({
             });
 
             state.currentCart = [];
+            state.shipping_price = 0.0;
         },
 
         deleteProductsFromCurrentCart(state) {

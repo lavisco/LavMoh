@@ -12,7 +12,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-green">
-                    <h4 class="white mb-0" id="successModalTitle">
+                    <h4 class="mb-0" id="successModalTitle">
                         {{ msgTitle }}
                     </h4>
                     <button

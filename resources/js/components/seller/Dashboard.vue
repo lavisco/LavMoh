@@ -296,11 +296,11 @@
                     <div class="modal-body">
                         <div class="d-flex flex-md-row flex-column">
                             <div class="col-md-3 shop-setup-menu">
-                                <h3 class="text-left white">Activation Form</h3>
-                                <h6 class="mb-4 white">
+                                <h3 class="text-left white mb-4">Activation Form</h3>
+                                <p class="mb-4 white">
                                     Please fill out the form to setup your shop.
                                     Start selling today!
-                                </h6>
+                                </p>
 
                                 <h4 :class="{ pink: part1, white: part2 }">
                                     <div class="form-number mr-2">1</div>
@@ -316,7 +316,7 @@
                                     class="
                                         btn-sm btn-sm-cart btn-sm-black btn-full
                                         white
-                                        mt-3
+                                        mt-4
                                     "
                                     @click.prevent="logout"
                                 >

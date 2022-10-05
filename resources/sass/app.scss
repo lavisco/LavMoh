@@ -2394,6 +2394,22 @@ footer {
     }
 }
 
+/*-------------------------custom phone dial code------------------------------*/
+
+.iti{
+    display: block !important;
+    width: 100%;
+}
+
+.iti__country-list{
+    z-index: 3 !important;
+}
+
+#phone-code{
+    padding-left: 90px !important;
+}
+
+
 /*-------------------------website search------------------------------*/
 
 .home-search-input {

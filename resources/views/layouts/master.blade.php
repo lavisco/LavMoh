@@ -43,6 +43,7 @@
             }}/vendor/@fortawesome/fontawesome-free/css/all.min.css"
             rel="stylesheet"
         />
+        <link rel="stylesheet" href="https://cdn.tutorialjinni.com/intl-tel-input/17.0.8/css/intlTelInput.css"/>
 
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script
@@ -93,5 +94,6 @@
                 }
             }
         </script>
+        <script src="https://cdn.tutorialjinni.com/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
     </body>
 </html>

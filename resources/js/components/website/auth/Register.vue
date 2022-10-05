@@ -59,103 +59,13 @@
                         Phone
                         <strong class="text-danger"> * </strong>
                     </label>
-                    <div class="input-form input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text bg-light-grey">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    aria-hidden="true"
-                                    role="img"
-                                    width="30px"
-                                    height="30px"
-                                    preserveAspectRatio="xMidYMid meet"
-                                    viewBox="0 0 72 72"
-                                >
-                                    <path fill="#d22f27" d="M5 17h62v38H5z" />
-                                    <path fill="#5c9e31" d="M5 17h11v38H5z" />
-                                    <path fill="#e27022" d="M16 17h10v38H16z" />
-                                    <path
-                                        fill="none"
-                                        stroke="#f1b31c"
-                                        stroke-miterlimit="10"
-                                        stroke-width="2"
-                                        d="M26 18v36M7 19h58v34H7z"
-                                    />
-                                    <path
-                                        fill="none"
-                                        stroke="#f1b31c"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M50 45h2l1-2l-3-6m-9 8h2l1-2l-3-6m-4-11a7.07 7.07 0 0 0-1 4v12"
-                                    />
-                                    <path
-                                        fill="#f1b31c"
-                                        stroke="#f1b31c"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M44 41c3 0 3-2 7-2l5 2c-1-2 2-3 1-6H42s-3 2-3 5h3Z"
-                                    />
-                                    <path
-                                        fill="none"
-                                        stroke="#f1b31c"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M54 45h2l1-2l-3-6m-19 0l4 3m17-9a2 2 0 0 1 0 4m-4-4a2 2 0 0 1 0-4"
-                                    />
-                                    <rect
-                                        width="4"
-                                        height="5"
-                                        x="42"
-                                        y="30"
-                                        fill="#f1b31c"
-                                        rx="1"
-                                        ry="1"
-                                    />
-                                    <rect
-                                        width="4"
-                                        height="5"
-                                        x="42"
-                                        y="30"
-                                        fill="none"
-                                        stroke="#f1b31c"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        rx="1"
-                                        ry="1"
-                                    />
-                                    <path
-                                        fill="none"
-                                        stroke="#f1b31c"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M52 31h4m4-7l1-1m-30 1l-1-1m13 9l-3-1m3 2l-3 1m20 14l1 1m-30-1l-1 1"
-                                    />
-                                    <path
-                                        fill="none"
-                                        stroke="#fff"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M5 17h62v38H5z"
-                                    />
-                                </svg>
-                                +94
-                            </span>
-                        </div>
-                        <input
-                            id="phone"
-                            v-model="form.phone"
-                            type="text"
-                            name="phone"
-                            class="form-control"
-                            placeholder="Phone"
-                        />
-                    </div>
+                    <input
+                        id="phone-code"
+                        v-model="form.phone"
+                        type="text"
+                        name="phone"
+                        class="form-control"
+                    />
                     <HasError :form="form" field="phone" />
                 </div>
 
@@ -223,7 +133,7 @@
         <success-modal
             id="success-modal"
             msgTitle="Successfully Registered"
-            msg="You are now a Lavisco Seller! You'll be redirected to the login page."
+            msg="Welcome to the Lavisco club. You'll be redirected to the login page shortly."
             gotoRoute="login"
         />
     </div>
@@ -249,6 +159,7 @@ export default {
             name: "",
             email: "",
             phone: "",
+            dial_code: "",
             password: "",
             password_confirmation: "",
         }),
@@ -257,6 +168,12 @@ export default {
     methods: {
         createUser() {
             this.form.name = `${this.form.first_name} ${this.form.last_name}`;
+
+            //.iti__selected-dial-code is the class name of the div that contains the dial code
+            this.form.dial_code = document.querySelector(
+                ".iti__selected-dial-code"
+            ).innerHTML;
+
             this.submitButtonText = "In Progress...";
             this.submitButtonDisabled = true;
             this.form
@@ -272,8 +189,23 @@ export default {
                     console.log(error);
                 });
         },
+
+        initPhoneDialCode() {
+            var input = document.querySelector("#phone-code");
+            window.intlTelInput(input, {
+                separateDialCode: true,
+                initialCountry: "lk",
+            });
+
+            /*
+            the cdn & stylesheet for this function is placed in layouts > master.blade.php containing https://cdn.tutorialjinni.com
+            .iti__selected-dial-code is the class name of the div that contains the dial code
+            */
+        },
     },
 
-    mounted() {},
+    mounted() {
+        this.initPhoneDialCode();
+    },
 };
 </script>

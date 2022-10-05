@@ -155,6 +155,10 @@ h6 {
     gap: 16px;
 }
 
+.skinny-txt{
+    font-weight: 400;
+}
+
 @media (max-width: 991.98px) {
     .title {
         font-size: 40px;
@@ -1365,31 +1369,33 @@ section {
     justify-content: space-between;
     align-items: center;
     min-height: 460px;
-    h1, h5 {
+    h1,
+    h5 {
         text-align: left;
-        color: $white
+        color: $white;
     }
     @media (max-width: 768px) {
         padding: 40px 32px;
         min-height: 600px;
         flex-direction: column;
-        h1, h5 {
+        h1,
+        h5 {
             text-align: center;
         }
     }
 }
 
-.section-instruction{
-    h4{
+.section-instruction {
+    h4 {
         text-align: left;
         color: white;
     }
-     @media (max-width: 768px) {
+    @media (max-width: 768px) {
         justify-content: flex-start;
-        h4{
+        h4 {
             font-size: 14px !important;
             font-weight: 500;
-        } 
+        }
     }
 }
 
@@ -1412,19 +1418,19 @@ section {
     }
 }
 
-.section-shortcuts{
+.section-shortcuts {
     display: flex;
     flex-direction: row;
     margin-bottom: 80px;
     gap: 24px;
-    
+
     @media (max-width: 991.98px) {
         flex-direction: column;
         gap: 62px;
     }
 }
 
-.shortcut-card{
+.shortcut-card {
     min-height: 100%;
     width: calc(50% - 12px);
     border-radius: 32px;
@@ -1436,9 +1442,10 @@ section {
     flex-direction: column;
     align-items: center;
 
-    h1, h5 {
+    h1,
+    h5 {
         text-align: center;
-        color: $white
+        color: $white;
     }
     @media (max-width: 991.98px) {
         width: 100%;
@@ -1755,7 +1762,7 @@ section {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        padding: 6px 28px;
+        padding: 8px 24px;
         margin-bottom: 0;
     }
 
@@ -2239,8 +2246,6 @@ section {
     }
 }
 
-
-
 /*---------------------footer---------------------*/
 footer {
     width: 100%;
@@ -2396,19 +2401,18 @@ footer {
 
 /*-------------------------custom phone dial code------------------------------*/
 
-.iti{
+.iti {
     display: block !important;
     width: 100%;
 }
 
-.iti__country-list{
+.iti__country-list {
     z-index: 3 !important;
 }
 
-#phone-code{
+#phone-code {
     padding-left: 90px !important;
 }
-
 
 /*-------------------------website search------------------------------*/
 
@@ -3918,6 +3922,7 @@ footer {
         color: $dark-grey !important;
         text-align: center;
         margin-bottom: 0;
+        border-top: 2px solid #e5e5e5;
     }
     .row-content {
         padding: 6px 28px;
@@ -4055,6 +4060,68 @@ footer {
         .cart-total {
             width: auto;
         }
+    }
+}
+
+.card-big {
+    border-radius: 32px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.card-big-header {
+    border-top-left-radius: 32px;
+    border-top-right-radius: 32px;
+    background-color: $lav-red;
+    padding: 40px;
+    color: white;
+    width: 100%;
+    h1,
+    h6 {
+        color: white;
+        text-align: left;
+    }
+    h1 {
+        margin-bottom: 32px;
+    }
+}
+.card-big-body {
+    border-bottom-left-radius: 32px;
+    border-bottom-right-radius: 32px;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    background-color: #fafafa;
+}
+.card-big-col {
+    padding: 40px;
+    h3 {
+        margin-bottom: 32px;
+        text-align: left;
+    }
+    h6 {
+        margin-bottom: 16px;
+    }
+    &-2{
+        border-left: 2px solid #efefef;
+    }
+}
+@media (max-width: 992px) {
+    .card-big-body {
+        flex-direction: column;
+    }
+    .card-big-col {
+        padding: 32px 24px;
+        h3 {
+            margin-bottom: 24px;
+        }
+        &-2{
+            border-top: 2px solid #efefef;
+            border-left: none;
+        }
+    }
+    .card-big-header {
+        padding: 32px 24px;
     }
 }
 /*---------------product swiper------------------------*/

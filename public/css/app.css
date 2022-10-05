@@ -10172,6 +10172,10 @@ h6 {
   gap: 16px;
 }
 
+.skinny-txt {
+  font-weight: 400;
+}
+
 @media (max-width: 991.98px) {
   .title {
     font-size: 40px;
@@ -11408,7 +11412,8 @@ section h1 {
   align-items: center;
   min-height: 460px;
 }
-.section-occasion-recipient h1, .section-occasion-recipient h5 {
+.section-occasion-recipient h1,
+.section-occasion-recipient h5 {
   text-align: left;
   color: #ffffff;
 }
@@ -11418,7 +11423,8 @@ section h1 {
     min-height: 600px;
     flex-direction: column;
   }
-  .section-occasion-recipient h1, .section-occasion-recipient h5 {
+  .section-occasion-recipient h1,
+.section-occasion-recipient h5 {
     text-align: center;
   }
 }
@@ -11482,7 +11488,8 @@ section h1 {
   flex-direction: column;
   align-items: center;
 }
-.shortcut-card h1, .shortcut-card h5 {
+.shortcut-card h1,
+.shortcut-card h5 {
   text-align: center;
   color: #ffffff;
 }
@@ -11824,7 +11831,7 @@ section h1 {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 6px 28px;
+  padding: 8px 24px;
   margin-bottom: 0;
 }
 @media (max-width: 768px) {
@@ -13972,6 +13979,7 @@ footer {
   color: #4e4e4e !important;
   text-align: center;
   margin-bottom: 0;
+  border-top: 2px solid #e5e5e5;
 }
 .cart-items-card .row-content {
   padding: 6px 28px;
@@ -14107,6 +14115,73 @@ footer {
   }
   .cart-table .cart-total {
     width: auto;
+  }
+}
+.card-big {
+  border-radius: 32px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.card-big-header {
+  border-top-left-radius: 32px;
+  border-top-right-radius: 32px;
+  background-color: #dd1e50;
+  padding: 40px;
+  color: white;
+  width: 100%;
+}
+.card-big-header h1,
+.card-big-header h6 {
+  color: white;
+  text-align: left;
+}
+.card-big-header h1 {
+  margin-bottom: 32px;
+}
+
+.card-big-body {
+  border-bottom-left-radius: 32px;
+  border-bottom-right-radius: 32px;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  background-color: #fafafa;
+}
+
+.card-big-col {
+  padding: 40px;
+}
+.card-big-col h3 {
+  margin-bottom: 32px;
+  text-align: left;
+}
+.card-big-col h6 {
+  margin-bottom: 16px;
+}
+.card-big-col-2 {
+  border-left: 2px solid #efefef;
+}
+
+@media (max-width: 992px) {
+  .card-big-body {
+    flex-direction: column;
+  }
+
+  .card-big-col {
+    padding: 32px 24px;
+  }
+  .card-big-col h3 {
+    margin-bottom: 24px;
+  }
+  .card-big-col-2 {
+    border-top: 2px solid #efefef;
+    border-left: none;
+  }
+
+  .card-big-header {
+    padding: 32px 24px;
   }
 }
 /*---------------product swiper------------------------*/

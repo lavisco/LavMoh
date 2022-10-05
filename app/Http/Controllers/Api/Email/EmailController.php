@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Mail\BuyerOrderDeliveredMail;
 use App\Mail\BuyerOrderProductionMail;
 use App\Mail\BuyerOrderShippedMail;
+use App\Mail\BuyerRecipientNewOrderMail;
 use App\Mail\OrderMail;
 use App\Mail\PasswordResetMail;
 use App\Mail\ProductListingConfirmMail;
@@ -99,6 +100,19 @@ class EmailController extends Controller
         $order = Order::with(['shop', 'order_products', 'order_products.product', 'order_products.product.product_image', 'order_products.order_product_variations.variation_option.variation'])->findOrFail($orderId);
 
         Mail::to($order->email)->send(new OrderMail($order));
+
+        return Mail::failures() != 0 ? "Email has been sent successfully." : "Oops! There was some error sending the email.";
+    }
+
+    /** 
+    * Sends email informing buyer a new order has been placed.
+    */
+
+    public function sendBuyerRecipientOrderMail($orderId)
+    {
+        $order = Order::with(['shop', 'order_products', 'order_products.product', 'order_products.product.product_image', 'order_products.order_product_variations.variation_option.variation'])->findOrFail($orderId);
+
+        Mail::to($order->recipient_email)->send(new BuyerRecipientNewOrderMail($order));
 
         return Mail::failures() != 0 ? "Email has been sent successfully." : "Oops! There was some error sending the email.";
     }

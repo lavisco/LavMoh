@@ -232,7 +232,7 @@ pJ28AUyd0dWx1YWu1wIDAQAB
     */
 
     /*
-    * response page and data returned by payment gateway
+    * payment response page and data returned by payment gateway
     */
     public function paymentResponse(Request $request)
     {
@@ -267,7 +267,6 @@ pJ28AUyd0dWx1YWu1wIDAQAB
 
         if($signature_status == true)
         {
-            //Mail::to($order->email)->send(new OrderMail($order));
             $order->update([
                 'order_state_id' => 2,
             ]);
@@ -275,7 +274,9 @@ pJ28AUyd0dWx1YWu1wIDAQAB
 
         if($signature_status == true)
         {
+            //return payment successful page
             return view('payment.payment-response', compact('order', 'order_time'));
+
         } else
         {
             //delete order record if payment fails
@@ -290,20 +291,22 @@ pJ28AUyd0dWx1YWu1wIDAQAB
            
             $order->delete();
 
+            //return payment failed page
             return view('payment.payment-error');
         }
     }
+
     /*
-    * response page and data returned by payment gateway
+    * test method for get route /payment-resp-test - payment response page and data returned by payment gateway
     */
     public function paymentResponseTest(Request $request)
     {
         //find order
-        $order = Order::with(['order_products', 'order_products.product', 'order_products.product.product_image', 'order_products.order_product_variations.variation_option', 'shipping', 'shop'])->findOrFail(40);
+        $order = Order::with(['order_products', 'order_products.product', 'order_products.product.product_image', 'order_products.order_product_variations.variation_option', 'shipping', 'shop'])->findOrFail(41);
 
         //show date_time_transaction
         $order_time = '22-05-2022';
 
-            return view('payment.payment-response', compact('order', 'order_time'));
+        return view('payment.payment-response', compact('order', 'order_time'));
     }
 }

@@ -4,7 +4,7 @@
 
 <script>
 export default {
-    props: ["orderId"],
+    props: ["orderId", "orderEmail", "orderRecipientemail"],
     data: () => ({}),
 
     methods: {
@@ -15,6 +15,16 @@ export default {
                 .catch((error) => {
                     console.log(error);
                 });
+        },
+        sendBuyerRecipientOrderMail() {
+            if (this.orderEmail != this.orderRecipientemail) {
+                axios
+                    .get("/api/email/buyer_recipient_order_new/" + this.orderId)
+                    .then(() => {})
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            }
         },
         sendSellerOrderMail() {
             axios
@@ -29,6 +39,7 @@ export default {
     mounted() {
         this.sendBuyerOrderMail();
         this.sendSellerOrderMail();
+        this.sendBuyerRecipientOrderMail();
     },
 };
 </script>

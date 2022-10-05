@@ -163,6 +163,10 @@
         </div>
     </div>
     <cart-clear></cart-clear>
-    <order-email order-id="{{ $order->id }}"></order-email>
+    <order-email
+        order-id="{{ $order->id }}"
+        order-email="{{ $order->email }}"
+        order-recipientemail="{{ $order->recipient_email }}"
+    ></order-email>
 </div>
 @endsection

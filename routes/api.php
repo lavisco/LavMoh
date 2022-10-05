@@ -219,6 +219,7 @@ Route::prefix('seller')->group(function () {
 
 Route::prefix('email')->group(function () {
     //order
+    Route::get('/buyer_recipient_order_new/{orderId}', [EmailController::class, 'sendBuyerRecipientOrderMail']);
     Route::get('/buyer_order_new/{orderId}', [EmailController::class, 'sendBuyerOrderMail']);
     Route::get('/buyer_order_delivered/{orderId}', [EmailController::class, 'sendBuyerOrderDeliveredMail']);
     Route::get('/buyer_order_production/{orderId}', [EmailController::class, 'sendBuyerOrderProductionMail']);

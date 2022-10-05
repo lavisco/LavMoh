@@ -440,6 +440,8 @@
                 </div>
             </div>
         </div>
+
+        
         <!-- Shipping Method -->
         <div class="cart-items-card my-5">
             <h4 class="text-left header">Delivery & Shipping Details</h4>

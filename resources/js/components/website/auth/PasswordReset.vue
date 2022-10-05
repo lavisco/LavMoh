@@ -4,10 +4,14 @@
         <h1>Password Reset Email</h1>
         <h5>Provide your email to send the password reset link</h5>
 
-        <div class="alert alert-success" v-if="success" role="alert">
-            {{ msg }}
-        </div>
-        <div class="alert alert-info" v-if="!success" role="alert">
+        <div
+            class="alert"
+            :class="{
+                'alert-success': success === true,
+                'alert-info': success === false,
+            }"
+            v-if="success != null"
+        >
             {{ msg }}
         </div>
 
@@ -48,7 +52,7 @@ export default {
     },
 
     data: () => ({
-        success: "",
+        success: null,
         msg: "",
         form: new Form({
             id: "",

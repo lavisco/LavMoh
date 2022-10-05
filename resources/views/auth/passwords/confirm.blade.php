@@ -1,4 +1,4 @@
-@extends('layouts.master') @section('content')
+@extends('layouts.masterNonVue') @section('content')
 <div class="container-fluid login">
     <h1 class="pb-2">Confirm Password</h1>
     <h5>Please confirm your password before continuing</h5>

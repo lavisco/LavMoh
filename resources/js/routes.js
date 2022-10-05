@@ -775,6 +775,19 @@ export let routes = [
         },
     },
 
+    {
+        path: "/password/reset/*",
+        meta: {
+            title: "Password Reset",
+        },
+    },
+    {
+        path: "/password/reset",
+        meta: {
+            title: "Password Reset",
+        },
+    },
+
     /*
      404 Page not Found
     */

@@ -1,4 +1,4 @@
-@extends('layouts.master') @section('content')
+@extends('layouts.masterNonVue') @section('content')
 <div class="container-fluid login mb-5">
     <h1 class="pb-2">Verify Your Email Address</h1>
     @if (session('message'))

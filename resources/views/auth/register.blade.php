@@ -1,4 +1,4 @@
-@extends('layouts.master') @section('content')
+@extends('layouts.masterNonVue') @section('content')
 <div class="container-fluid login">
     <h1>Sign Up</h1>
     <h5>To unlock exclusive drops and discounts!</h5>

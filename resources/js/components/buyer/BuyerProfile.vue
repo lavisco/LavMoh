@@ -542,6 +542,7 @@ export default {
 
     data: () => ({
         buyerprofile: {},
+        user: {},
         loading: true,
         form: new Form({
             id: "",
@@ -573,8 +574,21 @@ export default {
             axios
                 .get("/api/buyer/buyerprofile")
                 .then(({ data }) => {
-                    this.buyerprofile = data;
-                    this.form.fill(this.buyerprofile);
+                    this.buyerprofile = data.buyerprofile;
+                    this.user = data.user;
+                    if (this.buyerprofile) {
+                        this.form.fill(this.buyerprofile);
+                    } else {
+                        this.form.first_name = this.user.name
+                            .trim()
+                            .split(/\s+/)[0];
+                        this.form.last_name = this.user.name
+                            .trim()
+                            .split(/\s+/)[1];
+                        this.form.email = this.user.email;
+                        this.form.phone = this.user.phone;
+                    }
+
                     this.loading = false;
                 })
                 .catch((error) => console.log(error));

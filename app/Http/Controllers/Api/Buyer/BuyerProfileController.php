@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Buyer;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BuyerProfileRequest;
 use App\Models\BuyerProfile;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class BuyerProfileController extends Controller
@@ -17,7 +18,10 @@ class BuyerProfileController extends Controller
     public function index()
     {
         ///$this->authorize('viewAny', BuyerProfile::class);
-        return BuyerProfile::where('user_id', auth()->id())->first();
+        return response()->json([
+            'buyerprofile' => BuyerProfile::where('user_id', auth()->id())->first(),
+            'user' => User::where('id', auth()->id())->first(),
+        ]);
     }
 
     public function store(BuyerProfileRequest $request)

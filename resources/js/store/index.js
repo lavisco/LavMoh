@@ -299,9 +299,6 @@ export default new Vuex.Store({
 
         storeShippingPrice(state, shipping_price) {
             state.shipping_price = shipping_price;
-            state.total = (
-                parseFloat(state.total) + parseFloat(state.shipping_price)
-            ).toFixed(2);
         },
 
         //alter cart state

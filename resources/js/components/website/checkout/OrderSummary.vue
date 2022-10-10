@@ -7,7 +7,7 @@
         <h4 class="row-content">
             <span class="darkgrey">Subtotal</span>
             {{ currency.symbol }}
-            {{ ((total - shipping_price) * currency.exchange_rate).toFixed(2) }}
+            {{ (subtotal * currency.exchange_rate).toFixed(2) }}
         </h4>
 
         <h4 class="row-content">
@@ -45,18 +45,21 @@ export default {
         currency() {
             return this.$store.getters.selectedCurrency;
         },
-        total() {
+        subtotal() {
             return this.$store.getters.shopCartTotal;
+        },
+        total() {
+            let total = this.$store.getters.shopCartTotal;
+            let shipping_price = this.$store.getters.currentShippingPrice;
+            return (parseFloat(total) + parseFloat(shipping_price)).toFixed(2);
         },
         shipping_price() {
             return this.$store.getters.currentShippingPrice;
         },
     },
 
-    methods: {
-    },
+    methods: {},
 
-    mounted() {
-    },
+    mounted() {},
 };
 </script>

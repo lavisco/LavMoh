@@ -5,33 +5,33 @@
                 <div class="col-md-9 row order-2 order-md-1">
                     <div class="col-md-3 col-6 d-flex flex-column">
                         <h5>Sell on Lavisco</h5>
-                        <router-link to="/merchant/login">Seller Sign In</router-link>
-                        <router-link to="/sell_on_lavisco">
+                        <a href="/merchant/login">Seller Sign In</a>
+                        <a href="/sell_on_lavisco">
                             Onboarding
-                        </router-link>
-                        <router-link to="/sellers">
+                        </a>
+                        <a href="/sellers">
                             Partner Vendors
-                        </router-link>
+                        </a>
                     </div>
                     <div class="col-md-3 col-6 d-flex flex-column">
                         <h5>About Lavisco</h5>
-                        <router-link to="/about">About us</router-link>
-                        <router-link to="/coming_soon">FAQ</router-link>
+                        <a href="/about">About us</a>
+                        <a href="/coming_soon">FAQ</a>
                     </div>
                     <div class="col-md-3 col-6 d-flex flex-column mt-5 mt-md-0">
                         <h5>Shop on Lavisco</h5>
-                        <router-link to="/terms_and_conditions">
+                        <a href="/terms_and_conditions">
                             Terms & Conditions
-                        </router-link>
-                        <router-link to="/privacy_policy">Privacy</router-link>
-                        <router-link to="/delivery_policy">
+                        </a>
+                        <a href="/privacy_policy">Privacy</a>
+                        <a href="/delivery_policy">
                             Delivery
-                        </router-link>
-                        <router-link to="/payment_policy">Payment</router-link>
+                        </a>
+                        <a href="/payment_policy">Payment</a>
                     </div>
                     <div class="col-md-3 col-6 d-flex flex-column mt-5 mt-md-0">
                         <h5>Help</h5>
-                        <router-link to="/contact_us">Contact Us</router-link>
+                        <a href="/contact_us">Contact Us</a>
                     </div>
                 </div>
                 <div
@@ -44,7 +44,7 @@
                         order-1 order-md-2
                     "
                 >
-                    <router-link class="mb-4" to="/">
+                    <a class="mb-4" href="/">
                         <svg
                             class="footer-logo"
                             xmlns="http://www.w3.org/2000/svg"
@@ -114,7 +114,7 @@
                                 </g>
                             </g>
                         </svg>
-                    </router-link>
+                    </a>
                     <h5 class="mb-1">support@lavisco.lk</h5>
                     <h5 class="mb-3">+94 77 700 9826</h5>
                     <div

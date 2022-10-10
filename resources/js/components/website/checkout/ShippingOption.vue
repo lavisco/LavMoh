@@ -2,247 +2,7 @@
     <div class="input-form-compact">
         <!-- Contact Info -->
         <div class="cart-items-card">
-            <h4 class="text-left header">Your Contact Details</h4>
-            <div class="row-content">
-                <div class="row">
-                    <div class="form-group col-md-6">
-                        <label class="col-form-label" for="first_name"
-                            >First Name
-                            <strong class="text-danger"> * </strong>
-                        </label>
-                        <input
-                            id="first_name"
-                            v-model="form.first_name"
-                            type="text"
-                            name="first_name"
-                            class="form-control"
-                        />
-                        <span class="error-msg">
-                            <strong>{{ error_msg_first_name }}</strong>
-                        </span>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="col-form-label" for="last_name"
-                            >Last Name
-                            <strong class="text-danger"> * </strong>
-                        </label>
-                        <input
-                            id="last_name"
-                            v-model="form.last_name"
-                            type="text"
-                            name="last_name"
-                            class="form-control"
-                        />
-                        <span class="error-msg">
-                            <strong>{{ error_msg_last_name }}</strong>
-                        </span>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="form-group col-md-6">
-                        <label class="col-form-label" for="email"
-                            >Email
-                            <strong class="text-danger"> * </strong>
-                        </label>
-                        <input
-                            id="email"
-                            v-model="form.email"
-                            type="email"
-                            name="email"
-                            class="form-control"
-                        />
-                        <span class="error-msg">
-                            <strong>{{ error_msg_email }}</strong>
-                        </span>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="col-form-label" for="phone"
-                            >Phone
-                            <strong class="text-danger"> * </strong>
-                        </label>
-                        <input
-                            id="phone"
-                            v-model="form.phone"
-                            type="text"
-                            name="phone"
-                            class="form-control"
-                        />
-                        <span class="error-msg">
-                            <strong>{{ error_msg_phone }}</strong>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Billing Address -->
-        <div class="cart-items-card mt-5">
-            <h4 class="text-left header">Your Address</h4>
-
-            <div class="row-content">
-                <p class="note">This is the billing address.</p>
-
-                <div class="form-group">
-                    <label class="col-form-label" for="billing_address_line_one"
-                        >Billing Address Line 1
-                        <strong class="text-danger"> * </strong>
-                    </label>
-                    <input
-                        id="billing_address_line_one"
-                        v-model="form.billing_address_line_one"
-                        type="text"
-                        name="billing_address_line_one"
-                        class="form-control"
-                    />
-                    <span class="error-msg">
-                        <strong>{{
-                            error_msg_billing_address_line_one
-                        }}</strong>
-                    </span>
-                </div>
-                <div class="form-group">
-                    <label class="col-form-label" for="billing_address_line_two"
-                        >Billing Address Line 2
-                    </label>
-                    <input
-                        id="billing_address_line_two"
-                        v-model="form.billing_address_line_two"
-                        type="text"
-                        name="billing_address_line_two"
-                        class="form-control"
-                    />
-                    <span class="error-msg">
-                        <strong>{{
-                            error_msg_billing_address_line_two
-                        }}</strong>
-                    </span>
-                </div>
-                <div class="row">
-                    <div class="form-group col-md-6">
-                        <label class="col-form-label" for="billing_state"
-                            >Billing Province/ State
-                        </label>
-                        <input
-                            id="billing_state"
-                            v-model="form.billing_state"
-                            type="text"
-                            name="billing_state"
-                            class="form-control"
-                        />
-                        <span class="error-msg">
-                            <strong>{{ error_msg_billing_state }}</strong>
-                        </span>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="col-form-label" for="billing_district"
-                            >Billing District
-                            <strong class="text-danger"> * </strong>
-                        </label>
-                        <select
-                            class="
-                                custom-select
-                                form-control form-control-alternative
-                            "
-                            id="billing_district"
-                            v-model="form.billing_district"
-                            name="billing_district"
-                        >
-                            <option value="" disabled selected hidden>
-                                Select Billing District
-                            </option>
-                            <option
-                                v-for="district in districts"
-                                :value="district.name"
-                            >
-                                {{ district.name }}
-                            </option>
-                        </select>
-                        <span class="error-msg">
-                            <strong>{{ error_msg_billing_district }}</strong>
-                        </span>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-md-6">
-                        <label class="col-form-label" for="billing_city"
-                            >Billing City
-                            <strong class="text-danger"> * </strong>
-                        </label>
-                        <input
-                            id="billing_city"
-                            v-model="form.billing_city"
-                            type="text"
-                            name="billing_city"
-                            class="form-control"
-                        />
-                        <span class="error-msg">
-                            <strong>{{ error_msg_billing_city }}</strong>
-                        </span>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="col-form-label" for="billing_zipcode"
-                            >Billing Zip Code
-                        </label>
-                        <input
-                            id="billing_zipcode"
-                            v-model="form.billing_zipcode"
-                            type="text"
-                            name="billing_zipcode"
-                            class="form-control"
-                        />
-                        <span class="error-msg">
-                            <strong>{{ error_msg_billing_zipcode }}</strong>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Self delivery -->
-        <div class="cart-items-card mt-5">
-            <h4 class="text-left header">Are you the recipient?</h4>
-
-            <div class="row-content">
-                <div class="form-group">
-                    <label class="col-form-label" for="self_delivery"
-                        >If you select 'yes', then billing and shipping
-                        information will be the same.
-                        <strong class="text-danger"> * </strong>
-                    </label>
-                    <div class="custom-control custom-radio">
-                        <input
-                            type="radio"
-                            id="self_delivery1"
-                            name="self_delivery"
-                            class="custom-control-input"
-                            v-model="self_delivery"
-                            :value="true"
-                        />
-                        <label class="custom-control-label" for="self_delivery1"
-                            >Yes
-                        </label>
-                    </div>
-                    <div class="custom-control custom-radio">
-                        <input
-                            type="radio"
-                            id="self_delivery2"
-                            name="self_delivery"
-                            class="custom-control-input"
-                            v-model="self_delivery"
-                            :value="false"
-                        />
-                        <label class="custom-control-label" for="self_delivery2"
-                            >No
-                        </label>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Recipient Contact info -->
-        <div class="cart-items-card mt-5" v-show="self_delivery === false">
-            <h4 class="text-left header">Recipient's Contact Details</h4>
+            <h4 class="text-left header">Contact Details</h4>
 
             <div class="row-content">
                 <div class="row">
@@ -318,9 +78,9 @@
             </div>
         </div>
 
-        <!-- Recipient Address -->
-        <div class="cart-items-card mt-5" v-show="self_delivery === false">
-            <h4 class="text-left header">Recipient's Shipping Address</h4>
+        <!-- Billing Address -->
+        <div class="cart-items-card mt-5">
+            <h4 class="text-left header">Shipping Address</h4>
 
             <div class="row-content">
                 <p class="note">
@@ -441,7 +201,247 @@
             </div>
         </div>
 
-        
+        <!-- Self delivery -->
+        <div class="cart-items-card mt-5">
+            <h4 class="text-left header">Are you the recipient?</h4>
+
+            <div class="row-content">
+                <div class="form-group">
+                    <label class="col-form-label" for="self_delivery">
+                        If you select 'yes', then shipping and billing
+                        information will be the same.
+                        <strong class="text-danger"> * </strong>
+                    </label>
+                    <div class="custom-control custom-radio">
+                        <input
+                            type="radio"
+                            id="self_delivery1"
+                            name="self_delivery"
+                            class="custom-control-input"
+                            v-model="self_delivery"
+                            :value="true"
+                        />
+                        <label class="custom-control-label" for="self_delivery1"
+                            >Yes
+                        </label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input
+                            type="radio"
+                            id="self_delivery2"
+                            name="self_delivery"
+                            class="custom-control-input"
+                            v-model="self_delivery"
+                            :value="false"
+                        />
+                        <label class="custom-control-label" for="self_delivery2"
+                            >No
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recipient Contact info -->
+        <div class="cart-items-card mt-5" v-show="self_delivery === false">
+            <h4 class="text-left header">Billing Contact Details</h4>
+
+            <div class="row-content">
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="col-form-label" for="first_name"
+                            >First Name
+                            <strong class="text-danger"> * </strong>
+                        </label>
+                        <input
+                            id="first_name"
+                            v-model="form.first_name"
+                            type="text"
+                            name="first_name"
+                            class="form-control"
+                        />
+                        <span class="error-msg">
+                            <strong>{{ error_msg_first_name }}</strong>
+                        </span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="col-form-label" for="last_name"
+                            >Last Name
+                            <strong class="text-danger"> * </strong>
+                        </label>
+                        <input
+                            id="last_name"
+                            v-model="form.last_name"
+                            type="text"
+                            name="last_name"
+                            class="form-control"
+                        />
+                        <span class="error-msg">
+                            <strong>{{ error_msg_last_name }}</strong>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="col-form-label" for="email"
+                            >Email
+                            <strong class="text-danger"> * </strong>
+                        </label>
+                        <input
+                            id="email"
+                            v-model="form.email"
+                            type="email"
+                            name="email"
+                            class="form-control"
+                        />
+                        <span class="error-msg">
+                            <strong>{{ error_msg_email }}</strong>
+                        </span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="col-form-label" for="phone"
+                            >Phone
+                            <strong class="text-danger"> * </strong>
+                        </label>
+                        <input
+                            id="phone"
+                            v-model="form.phone"
+                            type="text"
+                            name="phone"
+                            class="form-control"
+                        />
+                        <span class="error-msg">
+                            <strong>{{ error_msg_phone }}</strong>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recipient Address -->
+        <div class="cart-items-card mt-5" v-show="self_delivery === false">
+            <h4 class="text-left header">Billing Address</h4>
+
+            <div class="row-content">
+                <p class="note">This is the billing address.</p>
+
+                <div class="form-group">
+                    <label class="col-form-label" for="billing_address_line_one"
+                        >Billing Address Line 1
+                        <strong class="text-danger"> * </strong>
+                    </label>
+                    <input
+                        id="billing_address_line_one"
+                        v-model="form.billing_address_line_one"
+                        type="text"
+                        name="billing_address_line_one"
+                        class="form-control"
+                    />
+                    <span class="error-msg">
+                        <strong>{{
+                            error_msg_billing_address_line_one
+                        }}</strong>
+                    </span>
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label" for="billing_address_line_two"
+                        >Billing Address Line 2
+                    </label>
+                    <input
+                        id="billing_address_line_two"
+                        v-model="form.billing_address_line_two"
+                        type="text"
+                        name="billing_address_line_two"
+                        class="form-control"
+                    />
+                    <span class="error-msg">
+                        <strong>{{
+                            error_msg_billing_address_line_two
+                        }}</strong>
+                    </span>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="col-form-label" for="billing_state"
+                            >Billing Province/ State
+                        </label>
+                        <input
+                            id="billing_state"
+                            v-model="form.billing_state"
+                            type="text"
+                            name="billing_state"
+                            class="form-control"
+                        />
+                        <span class="error-msg">
+                            <strong>{{ error_msg_billing_state }}</strong>
+                        </span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="col-form-label" for="billing_district"
+                            >Billing District
+                            <strong class="text-danger"> * </strong>
+                        </label>
+                        <select
+                            class="
+                                custom-select
+                                form-control form-control-alternative
+                            "
+                            id="billing_district"
+                            v-model="form.billing_district"
+                            name="billing_district"
+                        >
+                            <option value="" disabled selected hidden>
+                                Select Billing District
+                            </option>
+                            <option
+                                v-for="district in districts"
+                                :value="district.name"
+                            >
+                                {{ district.name }}
+                            </option>
+                        </select>
+                        <span class="error-msg">
+                            <strong>{{ error_msg_billing_district }}</strong>
+                        </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="col-form-label" for="billing_city"
+                            >Billing City
+                            <strong class="text-danger"> * </strong>
+                        </label>
+                        <input
+                            id="billing_city"
+                            v-model="form.billing_city"
+                            type="text"
+                            name="billing_city"
+                            class="form-control"
+                        />
+                        <span class="error-msg">
+                            <strong>{{ error_msg_billing_city }}</strong>
+                        </span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="col-form-label" for="billing_zipcode"
+                            >Billing Zip Code
+                        </label>
+                        <input
+                            id="billing_zipcode"
+                            v-model="form.billing_zipcode"
+                            type="text"
+                            name="billing_zipcode"
+                            class="form-control"
+                        />
+                        <span class="error-msg">
+                            <strong>{{ error_msg_billing_zipcode }}</strong>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Shipping Method -->
         <div class="cart-items-card my-5">
             <h4 class="text-left header">Delivery & Shipping Details</h4>
@@ -600,16 +600,16 @@ export default {
     watch: {
         self_delivery(after, before) {
             if (this.self_delivery === true) {
-                this.form.recipient_first_name = this.form.first_name;
-                this.form.recipient_last_name = this.form.last_name;
-                this.form.recipient_email = this.form.email;
-                this.form.recipient_phone = this.form.phone;
-                this.form.address_line_one = this.form.billing_address_line_one;
-                this.form.address_line_two = this.form.billing_address_line_two;
-                this.form.zipcode = this.form.billing_zipcode;
-                this.form.state = this.form.billing_state;
-                this.form.district = this.form.billing_district;
-                this.form.city = this.form.billing_city;
+                this.form.first_name = this.form.recipient_first_name;
+                this.form.last_name = this.form.recipient_last_name;
+                this.form.email = this.form.recipient_email;
+                this.form.phone = this.form.recipient_phone;
+                this.form.billing_address_line_one = this.form.address_line_one;
+                this.form.billing_address_line_two = this.form.address_line_two;
+                this.form.billing_zipcode = this.form.zipcode;
+                this.form.billing_state = this.form.state;
+                this.form.billing_district = this.form.district;
+                this.form.billing_city = this.form.city;
             }
         },
     },

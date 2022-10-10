@@ -166,7 +166,7 @@
                                             </div>
                                         </td>
                                         <td>
-                                            {{ order.currency_code }}
+                                            Rs.
                                             {{ order.total }}
                                         </td>
                                         <td>

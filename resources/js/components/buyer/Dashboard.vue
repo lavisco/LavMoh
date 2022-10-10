@@ -7,15 +7,10 @@
                     <div class="col-md-3 mb-4 mb-md-0">
                         <div class="dashboard-card dashboard-card-sm h-100">
                             <h4 class="mb-2">
-                                {{
-                                    buyerprofile.first_name +
-                                    " " +
-                                    buyerprofile.last_name
-                                }}
+                                {{ user.name }}
                             </h4>
-                            <p class="mb-2">{{ buyerprofile.phone }}</p>
-                            <p class="mb-2">{{ buyerprofile.address }}</p>
-                            <p class="mb-2">{{ buyerprofile.country }}</p>
+                            <p class="mb-2">{{ user.email }}</p>
+                            <p class="mb-2">{{ user.phone }}</p>
                         </div>
                     </div>
 
@@ -35,7 +30,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
             <div class="col my-4 no-padding-sm">
@@ -74,7 +68,7 @@
                                     <thead>
                                         <tr>
                                             <th scope="col">Code</th>
-                                            <th scope="col">Dispatch</th>
+                                            <th scope="col">Delivery Date</th>
                                             <th scope="col">Amount</th>
                                         </tr>
                                     </thead>
@@ -90,7 +84,7 @@
                                                     ).format("DD-MM-YYYY")
                                                 }}
                                             </td>
-                                            <td>{{ order.total }}</td>
+                                            <td>Rs. {{ order.total }}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -105,8 +99,12 @@
 </template>
 
 <script>
+import moment from "moment";
+
 export default {
     data: () => ({
+        moment: moment,
+        user: {},
         buyerprofile: {},
         orders: "",
         orderCount: "",
@@ -118,6 +116,7 @@ export default {
                 .get("/api/buyer/dashboard")
                 .then(({ data }) => {
                     this.buyerprofile = data.buyerprofile;
+                    this.user = data.user;
                     this.orders = data.orders.data;
                     this.orderCount = data.orderCount;
                 })

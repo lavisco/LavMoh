@@ -11243,7 +11243,7 @@ button.bg-black:hover {
 
 /*---------------------hero---------------------*/
 .hero-default {
-  background-color: #f0eaff;
+  background-color: #dd1e50;
   height: 430px !important;
   align-items: flex-start !important;
   padding: 0 !important;
@@ -11305,7 +11305,7 @@ button.bg-black:hover {
   height: 100%;
   border-radius: 32px;
   width: 100%;
-  background-color: #f94270;
+  background-color: #dd1e50;
 }
 .hero .swiper {
   z-index: 1;

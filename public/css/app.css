@@ -10063,7 +10063,7 @@ main {
 
 /*---------------------text---------------------*/
 h1 {
-  color: #4e4e4e;
+  color: #333333;
   font-style: normal;
   font-weight: 600;
   font-size: 34px;
@@ -10073,7 +10073,7 @@ h1 {
 }
 
 h2 {
-  color: #4e4e4e;
+  color: #333333;
   font-style: normal;
   font-weight: 600;
   font-size: 30px;
@@ -10083,7 +10083,7 @@ h2 {
 }
 
 h3 {
-  color: #4e4e4e;
+  color: #333333;
   font-style: normal;
   font-weight: 600;
   font-size: 24px;
@@ -10097,7 +10097,7 @@ h4 {
   font-weight: 600;
   line-height: 1.7;
   font-style: normal;
-  color: #4e4e4e;
+  color: #333333;
   letter-spacing: 0.01em;
 }
 
@@ -10106,7 +10106,7 @@ h5 {
   line-height: 1.8;
   text-align: center;
   font-weight: 600;
-  color: #4e4e4e;
+  color: #333333;
   letter-spacing: 0.01rem;
 }
 
@@ -10114,14 +10114,14 @@ h6 {
   font-size: 16px;
   font-weight: 600;
   font-style: normal;
-  color: #4e4e4e;
+  color: #333333;
 }
 
 .title {
   font-style: normal;
   font-weight: bold;
-  font-size: 54px;
-  line-height: 64px;
+  font-size: 62px;
+  line-height: 80px;
   text-transform: capitalize;
   color: #ffffff;
   width: 100%;
@@ -10131,7 +10131,7 @@ h6 {
   text-align: center;
   font-weight: 600;
   font-size: 26px;
-  line-height: 36px;
+  line-height: 44px;
   color: #ffffff;
   text-transform: none;
   max-height: 110px;
@@ -11262,7 +11262,7 @@ button.bg-black:hover {
 }
 .hero .slide-content {
   height: 100%;
-  width: 50%;
+  width: 60%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -11705,7 +11705,7 @@ section h1 {
 @media (max-width: 768px) {
   .card-container {
     flex-direction: row;
-    gap: 6%;
+    gap: 5%;
   }
 }
 
@@ -12019,20 +12019,11 @@ section h1 {
   background: rgba(255, 255, 255, 0.95);
   border-radius: 8px;
 }
-.item-card .card-body-text {
-  width: calc(100% - 52px);
-  display: flex;
-  flex-direction: column;
-}
 .item-card .card-title {
   margin-bottom: 0;
-  color: #333333;
-  font-weight: 400;
-  font-size: 16px;
   white-space: inherit;
 }
 .item-card .card-price {
-  font-weight: 600;
   font-size: 16px;
   color: #dd1e50;
 }
@@ -12046,16 +12037,6 @@ section h1 {
     padding: 10px;
     max-height: 68px;
   }
-  .item-card .card-body-text {
-    width: calc(100% - 46px);
-  }
-  .item-card .card-title {
-    font-size: 14px;
-    width: 100%;
-  }
-  .item-card .card-price {
-    font-size: 14px;
-  }
 }
 @media (min-width: 640px) {
   .item-card {
@@ -12064,18 +12045,15 @@ section h1 {
 }
 
 .item-card-2 {
-  background-color: #ffffff;
+  background-color: #FAFAFA;
   padding: 0;
   width: 320px;
-  font-size: 15px;
-  border: 1px solid #e6e6eb82;
-  border-radius: 7px;
+  border-radius: 8px;
+  transition: all 150ms ease;
 }
 .item-card-2:hover {
   box-shadow: 2px 4px 6px rgba(212, 204, 219, 0.16);
-}
-.item-card-2 a:hover {
-  color: #dd1e50 !important;
+  background-color: #F7F7F7;
 }
 .item-card-2 .card-tag {
   position: absolute;
@@ -12092,21 +12070,26 @@ section h1 {
   line-height: 12px;
   text-transform: uppercase;
 }
+.item-card-2 .card-body {
+  padding: 16px;
+}
+
+.card-body-text {
+  width: calc(100% - 52px);
+  display: flex;
+  flex-direction: column;
+}
 
 .card-title {
-  font-weight: 500;
-  font-size: 15px;
+  font-weight: 400;
+  font-size: 16px;
   letter-spacing: 0.02rem;
   line-height: 25px;
-  color: #ffffff;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   margin-bottom: 5px;
   height: 25px;
-}
-.card-title a:hover {
-  color: #333333;
 }
 
 .card-title-2 {
@@ -12119,13 +12102,13 @@ section h1 {
 }
 
 .card-price {
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 600;
 }
 
 .card-secondary-text {
   font-size: 13px;
-  color: #4e4e4e;
+  color: #707070;
   width: 100%;
   white-space: nowrap;
   overflow: hidden;
@@ -12136,15 +12119,14 @@ section h1 {
   height: 270px;
   width: 100%;
   background-color: #ffffff;
-  margin-bottom: 12px;
-  border-radius: 7px;
+  border-radius: 8px;
 }
 .card-img img {
   -o-object-fit: cover;
      object-fit: cover;
   width: 100%;
   height: 100%;
-  border-radius: 7px;
+  border-radius: 8px;
 }
 
 .card-img-2 {
@@ -12161,9 +12143,24 @@ section h1 {
     width: 47%;
     border: none;
   }
+  .item-card-2 .card-body {
+    padding: 12px 8px 14px 8px;
+  }
+
+  .card-body-text {
+    width: calc(100% - 46px);
+  }
+
+  .card-title {
+    font-size: 14px;
+    width: 100%;
+  }
+
+  .card-price {
+    font-size: 16px;
+  }
 
   .card-img-2 {
-    margin-bottom: 9px;
     height: 200px;
   }
 
@@ -12173,13 +12170,8 @@ section h1 {
     margin-bottom: 0;
   }
 
-  .card-price {
-    font-size: 16px;
-    font-weight: 600;
-  }
-
   .card-secondary-text {
-    font-size: 12px;
+    font-size: 11px;
   }
 
   .card-img-text {
@@ -12187,7 +12179,7 @@ section h1 {
   }
 
   .product-list > .card {
-    margin-bottom: 12px;
+    margin-bottom: 16px;
   }
 }
 /*---------------------section-special---------------------*/
@@ -14455,10 +14447,6 @@ footer {
 }
 .giftbox-card .item-card-2 .card-img-2 {
   height: 230px;
-}
-.giftbox-card .item-card-2 .card-price {
-  font-size: 16px;
-  font-weight: 700;
 }
 @media (max-width: 768px) {
   .giftbox-card {

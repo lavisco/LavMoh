@@ -34,7 +34,7 @@
                         </p>
                         <div v-if="shop.products">
                             <h6>Top selling products</h6>
-                            <div class="d-flex topseller-products">
+                            <div class="d-flex topseller-products mt-3">
                                 <img
                                     :src="productImg(product.product_image)"
                                     class="topseller-product-img"
@@ -56,7 +56,7 @@
                                 },
                             }"
                         >
-                            <button class="btn btn-primary mt-4 btn-md-full">
+                            <button class="mt-4 btn-md-full">
                                 View Seller
                             </button>
                         </router-link>

@@ -47,6 +47,11 @@ class Product extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function shop()
+    {
+        return $this->hasOneThrough(Shop::class, User::class);
+    }
+
     //product:category M:1
     public function category()
     {

@@ -29,6 +29,17 @@ class District extends Model
         return $this->hasMany(City::class);
     }
 
+    
+    /**
+     * Many to many Pivot table relationships
+     */
+    
+    //users:districts M:M
+    public function users()
+    {
+        return $this->belongsToMany(User::class)->withTimestamps();
+    }
+
     //scope for searching in table
     public function scopeFilter($query, array $filters)
     {

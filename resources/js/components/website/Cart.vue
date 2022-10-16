@@ -36,9 +36,7 @@
                     mb-4
                 "
             >
-                <h1 class="text-left mb-0">
-                    Your Cart
-                </h1>
+                <h1 class="text-left mb-0">Your Cart</h1>
 
                 <router-link class="view-more-link" to="/products">
                     Keep Shopping
@@ -89,7 +87,7 @@
                                     : '/images/lavisco/img-bg.jpg'
                             "
                         />
-                        {{ shop[0].shop }} ({{shop.length}} items)
+                        {{ shop[0].shop }} ({{ shop.length }} items)
                     </h4>
                     <div class="row-content">
                         <div v-for="product in shop">
@@ -121,6 +119,8 @@
                                                             productId:
                                                                 product.id,
                                                             slug: product.slug,
+                                                            location:
+                                                                locationActive,
                                                         },
                                                     }"
                                                 >
@@ -400,6 +400,9 @@ export default {
         shopProducts() {
             return this.$store.getters.cartProductsByShop;
         },
+        locationActive() {
+            return this.$store.getters.selectedLocation;
+        },
     },
 
     methods: {
@@ -437,7 +440,7 @@ export default {
 
         saveShopCartTotal(shop) {
             this.$store.dispatch("saveShopCartTotal", this.cartTotal(shop));
-            this.$store.dispatch("saveShippingPrice", 0.00);
+            this.$store.dispatch("saveShippingPrice", 0.0);
             this.$store.dispatch("addProductToCurrentCart", shop);
             $("#addRecord").modal("show");
             //this.$router.push("/shipping");

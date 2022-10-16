@@ -39,6 +39,7 @@
                         params: {
                             productId: product.id,
                             slug: product.slug,
+                            location: locationActive,
                         },
                     }"
                 >
@@ -93,6 +94,7 @@
                         params: {
                             occasionId: occasion.id,
                             slug: occasion.slug,
+                            location: locationActive,
                         },
                     }"
                 >
@@ -133,6 +135,9 @@ export default {
     computed: {
         currency() {
             return this.$store.getters.selectedCurrency;
+        },
+        locationActive() {
+            return this.$store.getters.selectedLocation;
         },
     },
 

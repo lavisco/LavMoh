@@ -110,6 +110,17 @@
                                                         class="dropdown-item"
                                                         href=""
                                                         @click.prevent="
+                                                            openLocationModal(
+                                                                shop
+                                                            )
+                                                        "
+                                                    >
+                                                        Edit Locations
+                                                    </a>
+                                                    <a
+                                                        class="dropdown-item"
+                                                        href=""
+                                                        @click.prevent="
                                                             editModal(shop)
                                                         "
                                                     >
@@ -799,6 +810,139 @@
                 </div>
             </div>
         </div>
+
+        <!-- Location Modal -->
+        <div
+            class="modal fade"
+            id="locationModal"
+            tabindex="-1"
+            aria-labelledby="locationModalLabel"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content bg-secondary">
+                    <!-- Modal Header -->
+                    <div class="modal-header bg-neutral">
+                        <h4 class="modal-title">
+                            Update Shop Delivery Location
+                        </h4>
+                        <button
+                            type="button"
+                            class="close"
+                            data-dismiss="modal"
+                            aria-label="Close"
+                        >
+                            <i
+                                class="fas fa-times-circle"
+                                aria-hidden="true"
+                            ></i>
+                        </button>
+                    </div>
+
+                    <!-- Form start -->
+
+                    <form
+                        class="input-form"
+                        @submit.prevent="setShopLocation()"
+                    >
+                        <div class="modal-body">
+                            <div class="form-group row">
+                                <label
+                                    class="col-md-3 col-form-label"
+                                    for="name"
+                                    >Name
+                                    <strong class="text-danger"> *</strong>
+                                </label>
+
+                                <div class="col-md-9">
+                                    <input
+                                        id="name"
+                                        v-model="form.name"
+                                        type="text"
+                                        name="name"
+                                        class="
+                                            form-control
+                                            form-control-alternative
+                                        "
+                                        placeholder="Name"
+                                        disabled
+                                    />
+                                    <HasError :form="form" field="name" />
+                                </div>
+                            </div>
+
+                            <!-- Shipping -->
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label" for="">
+                                    Districts this shop delivers product to.
+                                    <strong class="text-danger"> *</strong>
+                                </label>
+
+                                <div class="col-md-9">
+                                    <div
+                                        class="
+                                            table-responsive
+                                            form-table
+                                            mt-md-2
+                                        "
+                                    >
+                                        <table
+                                            class="
+                                                table
+                                                align-items-center
+                                                table-hover
+                                            "
+                                        >
+                                            <thead>
+                                                <tr>
+                                                    <th
+                                                        scope="col"
+                                                        class="tiny-col"
+                                                    ></th>
+                                                    <th scope="col">Name</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr
+                                                    v-for="district in allDistricts"
+                                                    :key="district.id"
+                                                >
+                                                    <th scope="row">
+                                                        <input
+                                                            type="checkbox"
+                                                            name="shop_districts"
+                                                            v-model="
+                                                                form.shop_districts
+                                                            "
+                                                            :value="district.id"
+                                                        />
+                                                    </th>
+                                                    <td>
+                                                        {{ district.name }}
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer pt-0">
+                            <button type="submit" class="btn btn-primary">
+                                <i
+                                    class="fas fa-pen-nib mr-2"
+                                    aria-hidden="true"
+                                ></i>
+                                Update
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Form end -->
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -822,6 +966,7 @@ export default {
         countries: [],
         provinces: [],
         districts: [],
+        allDistricts: [],
         cities: [],
         areas: [],
         searchText: null,
@@ -844,6 +989,7 @@ export default {
             user: "",
             slug: "",
             shop_shipping: [],
+            shop_districts: [],
             shippings: [],
         }),
         pagination: { current_page: 1 },
@@ -968,6 +1114,21 @@ export default {
                 .catch((error) => console.log(error));
         },
 
+        loadAllDistricts() {
+            axios
+                .get("/api/locations/districts")
+                .then(({ data }) => {
+                    this.allDistricts = data;
+                    this.form.shop_districts = [];
+                    if (this.form.user.districts != null) {
+                        this.form.user.districts.forEach((value) => {
+                            this.form.shop_districts.push(value.id);
+                        });
+                    }
+                })
+                .catch((error) => console.log(error));
+        },
+
         loadCities() {
             axios
                 .get("/api/locations/cities/" + this.form.district)
@@ -1025,6 +1186,26 @@ export default {
                         if (this.form.status == 1) {
                             this.sendStoreActiveMail(shop.user.email);
                         }
+                        Fire.$emit("reloadRecords");
+                    })
+                    .catch((error) => console.log(error));
+            }
+        },
+
+        openLocationModal(shop) {
+            this.form.clear();
+            this.form.reset();
+            this.form.fill(shop);
+            this.loadAllDistricts();
+            $("#locationModal").modal("show");
+        },
+
+        setShopLocation() {
+            if (confirm("Are you sure you want to update shop locations?")) {
+                this.form
+                    .put("/api/admin/shops/storeLocations/" + this.form.id)
+                    .then(() => {
+                        $("#locationModal").modal("hide");
                         Fire.$emit("reloadRecords");
                     })
                     .catch((error) => console.log(error));

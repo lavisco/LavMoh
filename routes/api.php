@@ -142,6 +142,7 @@ Route::prefix('admin')->group(function () {
     Route::apiResource('/sitetexts', SitetextController::class);
     Route::apiResource('/shippings', ShippingController::class);
     Route::put('/shops/updateState/{shop}', [ShopController::class, 'updateState']);
+    Route::put('/shops/storeLocations/{shop}', [ShopController::class, 'storeLocations']);
     Route::get('/shops/shippings', [ShopController::class, 'getShippings']);
     Route::apiResource('/shops', ShopController::class);
     Route::apiResource('/sub_categories', SubCategoryController::class);
@@ -251,18 +252,27 @@ Route::get('/search/{searchText}', [WebsiteHomeController::class, 'searchSuggest
 Route::get('/searchIndex/{searchText}', [WebsiteHomeController::class, 'searchIndex']);
 //pages
 Route::get('/categories/products/{id}/{location}', [WebsiteCategoryController::class, 'getLocationWiseProducts']);
-Route::get('/categories/sub_category/{id}', [WebsiteCategoryController::class, 'filterSubCategory']);
+Route::get('/categories/sub_category/{id}/{location}', [WebsiteCategoryController::class, 'filterSubCategory']);
+Route::get('/categories/{id}/{location}', [WebsiteCategoryController::class, 'show']);
 Route::apiResource('/categories', WebsiteCategoryController::class);
+
 Route::post('/contact', [ContactController::class, 'store']);
 Route::get('/currencies', [WebsiteCurrencyController::class, 'index']);
 Route::put('/custom_product_inquiries/{productId}', [WebsiteCustomProductInquiryController::class, 'update']);
+
+Route::get('/occasions/{id}/{location}', [WebsiteOccasionController::class, 'show']);
 Route::apiResource('/occasions', WebsiteOccasionController::class);
+
 Route::get('/orders/shippings/{shopId}', [WebsiteOrderController::class, 'getShippings']);
 Route::apiResource('/orders', WebsiteOrderController::class);
 
 Route::get('/products/prices/{productIds}', [WebsiteProductController::class, 'getPrice']);
+Route::get('/products/{id}/{location}', [WebsiteProductController::class, 'show']);
 Route::apiResource('/products', WebsiteProductController::class);
+
+Route::get('/recipients/{id}/{location}', [WebsiteRecipientController::class, 'show']);
 Route::apiResource('/recipients', WebsiteRecipientController::class);
+
 Route::apiResource('/sellerprofiles', WebsiteSellerProfileController::class);
 Route::apiResource('/shops', WebsiteShopController::class);
 Route::get('/sub_categories/products/{id}/{location}', [WebsiteSubCategoryController::class, 'getLocationWiseProducts']);

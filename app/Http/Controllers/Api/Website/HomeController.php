@@ -24,20 +24,27 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $products = Product::whereHas('user.shop', function($q) {
-                        return $q->where('status', 1);
-                    })
-                    ->select('id', 'title', 'base_price', 'user_id', 'category_id', 'product_state_id', 'slug', 'has_variations')
+        $location = request('location');
+        $products = Product::select('id', 'title', 'base_price', 'user_id', 'category_id', 'product_state_id', 'slug', 'has_variations')
                     ->where('product_state_id', '1')
                     ->with(['user' => function($query){
                         $query->select('id', 'name');
-                    }, 'user.shop' => function ($query){
-                        $query->select('id', 'name', 'user_id');
+                        }, 'user.shop' => function ($query){
+                            $query->select('id', 'name', 'user_id');
                     },
                     'category:id,name',
                     'product_image'
                     ])
-                    ->latest()->take(10)->get();
+                    ->where(function($q) use($location) {
+                        $q->where('category_id', '=', '1')
+                        ->whereRelation('user.shop', 'status', 1)
+                        ->whereRelation('user.districts', 'name', $location);
+                    })
+                    ->orWhere(function($q){ 
+                        $q->where('category_id', '!=', '1')
+                            ->whereRelation('user.shop', 'status', 1);
+                    })
+                    ->latest()->take(15)->get();
 
         return response()->json([
             'products' => $products,

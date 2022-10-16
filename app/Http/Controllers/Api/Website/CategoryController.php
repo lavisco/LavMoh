@@ -30,70 +30,101 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($categoryId)
+    public function show($categoryId, $location)
     {
         $category = Category::findOrFail($categoryId);
 
         $sortParameter = request('sortValue');
 
-        $query = Product::
-                    whereHas('user.shop', function($q) {
-                        return $q->where('status', 1);
-                    })
+        $products = Product::
+                    whereRelation('user.shop', 'status', 1)
                     ->where('category_id', $categoryId)
                     ->where('product_state_id', '1')
-                    ->with(['category:id,name', 'user.shop', 'product_image']);
+                    ->with(['category:id,name', 'user.shop', 'product_image'])
+                    ->when($categoryId == '1', function ($query) use($location) {
+                        $query->whereRelation('user.districts', 'name', $location);
+                    })
+                    ->when($sortParameter == 'base_price_low', function ($query) {
+                        return $query->oldest('base_price');
+                    })
+                    ->when($sortParameter == 'base_price', function ($query) {
+                        return $query->latest('base_price');
+                    })
+                    ->when($sortParameter == 'created_at', function ($query) {
+                        return $query->latest();
+                    })
+                    ->paginate(25);
 
         return response()->json([
-            'products' => $sortParameter == 'base_price_low' ? $query->oldest('base_price')->paginate(25) : $query->latest(request('sortValue'))->paginate(25),
+            'products' => $products,
             'category' => $category,
             'sub_categories' => SubCategory::where('category_id', $categoryId)->get(),
         ]);
     }
 
-    public function filterSubCategory($categoryId)
+    //temporary sub-category filter
+
+    public function filterSubCategory($categoryId, $location)
     {
         $subCategory = SubCategory::findOrFail(request('subCategoryValue'));
 
         $sortParameter = request('sortValue');
 
-        $query = $subCategory->products()
-                    ->whereHas('user.shop', function($q) {
-                        return $q->where('status', 1);
-                    })
+        $products = $subCategory->products()
+                    ->whereRelation('user.shop', 'status', 1)
                     ->where('category_id', $categoryId)
                     ->where('product_state_id', '1')
-                    ->with(['category:id,name', 'user.shop', 'product_image']);
+                    ->with(['category:id,name', 'user.shop', 'product_image'])
+                    ->when($categoryId == '1', function ($query) use($location) {
+                        $query->whereRelation('user.districts', 'name', $location);
+                    })
+                    ->when($sortParameter == 'base_price_low', function ($query) {
+                        return $query->oldest('base_price');
+                    })
+                    ->when($sortParameter == 'base_price', function ($query) {
+                        return $query->latest('base_price');
+                    })
+                    ->when($sortParameter == 'created_at', function ($query) {
+                        return $query->latest();
+                    })
+                    ->paginate(25);
 
         return response()->json([
-            'products' => $sortParameter == 'base_price_low' ? $query->oldest('base_price')->paginate(25) : $query->latest(request('sortValue'))->paginate(25),
+            'products' => $products,
         ]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    //not being used
+
     public function getLocationWiseProducts($id, $location)
     {
+        // $products = Product::where('category_id', $id)
+        //     ->where('product_state_id', '1')
+        //     ->whereHas('user.shop', function($q) {
+        //         return $q->where('status', 1);
+        //     })
+        //     ->whereHas('user', function($query) use($location){
+        //         $query->whereHas('shop', function($query) use($location) {
+        //             $query->where('district', $location);
+        //         });
+        //     })
+        //     ->with(['user' => function($q) use($location) {
+        //         $q->whereHas('shop', function($query) use($location) {
+        //                 $query->where('district', $location);
+        //         });
+        //     }])
+        //     ->with(['user.shop', 'product_image'])->latest()->paginate(25);
+
+
         $products = Product::where('category_id', $id)
             ->where('product_state_id', '1')
             ->whereHas('user.shop', function($q) {
                 return $q->where('status', 1);
             })
-            ->whereHas('user', function($query) use($location){
-                $query->whereHas('shop', function($query) use($location) {
-                    $query->where('district', $location);
-                });
+            ->whereHas('user.districts', function($q) use($location) {
+                return $q->where('name', $location);
             })
-            ->with(['user' => function($q) use($location) {
-                $q->whereHas('shop', function($query) use($location) {
-                        $query->where('district', $location);
-                });
-            }])
-            ->with(['user.shop', 'product_image'])->latest()->paginate(25);
+            ->with(['user.shop', 'user.districts', 'product_image'])->latest()->paginate(25);
 
         return response()->json([
             'products' => $products,

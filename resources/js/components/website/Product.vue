@@ -160,10 +160,10 @@
                         </div>
                     </div>
 
-                    <!-- location -->
+                    <!-- not available tag -->
                     <div
                         class="mt-4 info-location-box"
-                        v-if="product.category.name == 'Cakes'"
+                        v-if="availability == false"
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -182,9 +182,9 @@
                             />
                         </svg>
                         <div>
-                            This item is available only in
+                            This item is not available in
                             <strong>
-                                {{ product.user.shop.district }}
+                                {{ locationActive }}
                             </strong>
                         </div>
                     </div>
@@ -296,7 +296,7 @@
                     </div>
 
                     <!-- quantity -->
-                    <div class="mt-4">
+                    <div class="mt-4" v-if="availability != false">
                         <h6>Quantity</h6>
                         <div class="product-card-counter">
                             <div
@@ -324,7 +324,7 @@
 
                     <!-- buttons -->
                     <div class="mt-4">
-                        <div class="d-md-flex">
+                        <div class="d-md-flex" v-if="availability != false">
                             <button
                                 class="
                                     checkout-btn
@@ -627,14 +627,17 @@
                                 d-flex
                                 justify-content-center
                                 align-items-center
-                                flex-column
-                                flex-md-row
+                                flex-column flex-md-row
                                 mt-4
                             "
                         >
                             <button
                                 type="button"
-                                class="btn-secondary btn-full mr-md-2 mb-md-0 mb-2"
+                                class="
+                                    btn-secondary btn-full
+                                    mr-md-2
+                                    mb-md-0 mb-2
+                                "
                                 data-dismiss="modal"
                             >
                                 Keep shopping
@@ -658,6 +661,7 @@
 export default {
     data: () => ({
         product: [],
+        availability: "not-applicable",
         custom: false,
         loading: true,
         sliderImgList: [],
@@ -676,7 +680,12 @@ export default {
 
     beforeRouteEnter: function (to, from, next) {
         axios
-            .get("/api/products/" + to.params.productId)
+            .get(
+                "/api/products/" +
+                    to.params.productId +
+                    "/" +
+                    to.params.location
+            )
             .then((response) => {
                 next((vm) => {
                     vm.setData(response);
@@ -687,7 +696,12 @@ export default {
 
     beforeRouteUpdate: function (to, from, next) {
         axios
-            .get("/api/products/" + to.params.productId)
+            .get(
+                "/api/products/" +
+                    to.params.productId +
+                    "/" +
+                    to.params.location
+            )
             .then((response) => {
                 this.setData(response);
                 next();
@@ -698,6 +712,16 @@ export default {
     watch: {
         total_price(after, before) {
             this.form.total_price = this.total_price;
+        },
+        locationActive(after, before) {
+            this.$router.push({
+                name: "products/product",
+                params: {
+                    productId: this.product.id,
+                    slug: this.product.slug,
+                    location: this.locationActive,
+                },
+            });
         },
     },
 
@@ -723,9 +747,30 @@ export default {
                 parseFloat(var3price)
             ).toFixed(2);
         },
+        locationActive() {
+            return this.$store.getters.selectedLocation;
+        },
     },
 
     methods: {
+        setData(response) {
+            this.product = response.data.product;
+
+            if (this.product.category_id == "1") {
+                this.availability = response.data.availability;
+            }
+
+            //for products in category- custom
+            // if (this.product.sub_categories.length > 0) {
+            //     this.customCategory();
+            // }
+            this.loading = false;
+
+            for (let key in this.product.product_images) {
+                this.sliderImgList.push(this.product.product_images[key].path);
+            }
+        },
+
         /*
          *   Product Image Slider
          */
@@ -767,20 +812,6 @@ export default {
                 document.getElementById(name).style.display = "none";
             } else {
                 document.getElementById(name).style.display = "inline-block";
-            }
-        },
-
-        setData(response) {
-            this.product = response.data;
-
-            //for products in category- custom
-            // if (this.product.sub_categories.length > 0) {
-            //     this.customCategory();
-            // }
-            this.loading = false;
-
-            for (let key in this.product.product_images) {
-                this.sliderImgList.push(this.product.product_images[key].path);
             }
         },
 

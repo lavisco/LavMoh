@@ -51,6 +51,7 @@
                         params: {
                             productId: product.id,
                             slug: product.slug,
+                            location: locationActive,
                         },
                     }"
                 >

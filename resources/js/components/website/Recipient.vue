@@ -13,17 +13,20 @@
         </div>
 
         <div class="sort-section">
-            <select
-                class="custom-select form-control form-control-alternative"
-                id="filter"
-                name="filter"
-                v-model="sortValue"
-            >
-                <option value="" disabled selected hidden>Sort by</option>
-                <option value="base_price_low">Price low to high</option>
-                <option value="base_price">Price high to low</option>
-                <option value="created_at">Latest</option>
-            </select>
+            <div class="filter-select">
+                <label>Sort by</label>
+                <select
+                    class="custom-select form-control form-control-alternative"
+                    id="filter"
+                    name="filter"
+                    v-model="sortValue"
+                >
+                    <option value="" disabled selected hidden>Sort by</option>
+                    <option value="base_price_low">Price low to high</option>
+                    <option value="base_price">Price high to low</option>
+                    <option value="created_at">Latest</option>
+                </select>
+            </div>
         </div>
 
         <section class="section-best-seller mb-5 mt-4">
@@ -48,6 +51,7 @@
                         params: {
                             productId: product.id,
                             slug: product.slug,
+                            location: locationActive,
                         },
                     }"
                 >
@@ -136,7 +140,14 @@ export default {
 
     beforeRouteEnter: function (to, from, next) {
         axios
-            .get("/api/recipients/" + to.params.recipientId + "?page=" + 1)
+            .get(
+                "/api/recipients/" +
+                    to.params.recipientId +
+                    "/" +
+                    to.params.location +
+                    "?page=" +
+                    1
+            )
             .then((response) => {
                 next((vm) => {
                     vm.setData(response);
@@ -146,7 +157,14 @@ export default {
 
     beforeRouteUpdate: function (to, from, next) {
         axios
-            .get("/api/recipients/" + to.params.recipientId + "?page=" + 1)
+            .get(
+                "/api/recipients/" +
+                    to.params.recipientId +
+                    "/" +
+                    to.params.location +
+                    "?page=" +
+                    1
+            )
             .then((response) => {
                 this.setData(response);
                 next();
@@ -157,11 +175,25 @@ export default {
         sortValue(after, before) {
             Fire.$emit("reloadRecords");
         },
+        locationActive(after, before) {
+            this.sortValue = "created_at";
+            this.$router.push({
+                name: "recipients/recipient",
+                params: {
+                    recipientId: this.recipient.id,
+                    slug: this.recipient.slug,
+                    location: this.locationActive,
+                },
+            });
+        },
     },
 
     computed: {
         currency() {
             return this.$store.getters.selectedCurrency;
+        },
+        locationActive() {
+            return this.$store.getters.selectedLocation;
         },
     },
 
@@ -171,6 +203,7 @@ export default {
             this.recipient = response.data.recipient;
             this.pagination.last_page = response.data.products.last_page;
             this.pagination.current_page = response.data.products.current_page;
+            this.sortValue = "created_at";
             this.loading = false;
         },
         loadData() {
@@ -178,6 +211,8 @@ export default {
                 .get(
                     "/api/recipients/" +
                         this.$route.params.recipientId +
+                        "/" +
+                        this.locationActive +
                         "?page=" +
                         this.pagination.current_page,
                     {

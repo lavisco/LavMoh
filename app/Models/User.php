@@ -135,6 +135,16 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class, 'role_id');
     }
 
+    /**
+     * Many to many Pivot table relationships
+     */
+    
+    //users:districts M:M
+    public function districts()
+    {
+        return $this->belongsToMany(District::class)->withTimestamps();
+    }
+
     public function scopeFilter($query, array $filters)
     {
         $query->when($filters['searchText'] ?? false, fn($query, $searchText) =>

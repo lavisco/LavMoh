@@ -37,6 +37,7 @@
                         params: {
                             productId: product.id,
                             slug: product.slug,
+                            location: locationActive,
                         },
                     }"
                     class="card item-card"
@@ -94,6 +95,7 @@
                         params: {
                             categoryId: category.id,
                             slug: category.slug,
+                            location: locationActive,
                         },
                     }"
                 >
@@ -134,6 +136,9 @@ export default {
     computed: {
         currency() {
             return this.$store.getters.selectedCurrency;
+        },
+        locationActive() {
+            return this.$store.getters.selectedLocation;
         },
     },
 

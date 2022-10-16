@@ -11,11 +11,6 @@ use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $sortParameter = request('sortValue');
@@ -29,15 +24,19 @@ class ProductController extends Controller
         return $sortParameter == 'base_price_low' ? $query->oldest('base_price')->paginate(25) : $query->latest(request('sortValue'))->paginate(25);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($productId)
+    public function show($productId, $location)
     {
-        return Product::with(['user.shop', 'category:id,name,slug', 'sub_categories:id,name', 'product_images', 'product_image', 'variations', 'variations.variation_options', 'variations.variation_options.variation:id,name', 'giftbox_products.childProduct.product_image'])->findOrFail($productId);
+        $product = Product::with(['user.shop', 'category:id,name,slug', 'sub_categories:id,name', 'product_images', 'product_image', 'variations', 'variations.variation_options', 'variations.variation_options.variation:id,name', 'giftbox_products.childProduct.product_image'])->findOrFail($productId);
+
+        $availability = $product->where(function($q) use($location) {
+                            $q->whereRelation('user.shop', 'status', 1)
+                            ->whereRelation('user.districts', 'name', $location);
+                        })->exists();
+
+        return response()->json([
+            'product' => $product,
+            'availability' => $availability,
+        ]);
     }
 
     public function getPrice($productIds)

@@ -243,6 +243,7 @@
                                             params: {
                                                 categoryId: category.id,
                                                 slug: category.slug,
+                                                location: locationActive,
                                             },
                                         }"
                                     >
@@ -293,6 +294,7 @@
                                             params: {
                                                 recipientId: recipient.id,
                                                 slug: recipient.slug,
+                                                location: locationActive,
                                             },
                                         }"
                                     >
@@ -343,6 +345,7 @@
                                             params: {
                                                 occasionId: occasion.id,
                                                 slug: occasion.slug,
+                                                location: locationActive,
                                             },
                                         }"
                                     >
@@ -613,6 +616,7 @@
                                             params: {
                                                 categoryId: category.id,
                                                 slug: category.slug,
+                                                location: locationActive,
                                             },
                                         }"
                                     >
@@ -648,6 +652,7 @@
                                             params: {
                                                 recipientId: recipient.id,
                                                 slug: recipient.slug,
+                                                location: locationActive,
                                             },
                                         }"
                                     >
@@ -683,6 +688,7 @@
                                             params: {
                                                 occasionId: occasion.id,
                                                 slug: occasion.slug,
+                                                location: locationActive,
                                             },
                                         }"
                                     >
@@ -785,12 +791,6 @@ export default {
     }),
 
     computed: {
-        // chunkedRecipients() {
-        //     return _.chunk(this.recipients, 6);
-        // },
-        // chunkedOccasions() {
-        //     return _.chunk(this.occasions, 6);
-        // },
         chunkedDistricts() {
             return _.chunk(this.districts, 13);
         },

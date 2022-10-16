@@ -15,7 +15,11 @@
                 </div>
                 <div class="col-md-4">
                     <h3 class="pink text-left mb-4">Sub Links</h3>
-                    <h4><a class="grey mb-3" href="/categories">Browse by Nature</a></h4>
+                    <h4>
+                        <a class="grey mb-3" href="/categories"
+                            >Browse by Nature</a
+                        >
+                    </h4>
                     <ul>
                         <li v-for="category in categories" :key="category.id">
                             <router-link
@@ -23,6 +27,8 @@
                                     name: 'categories/category',
                                     params: {
                                         categoryId: category.id,
+                                        slug: category.slug,
+                                        location: locationActive,
                                     },
                                 }"
                             >
@@ -31,7 +37,9 @@
                         </li>
                     </ul>
                     <h4>
-                        <a class="grey mb-3" href="/recipients"> Browse by Recipient</a>
+                        <a class="grey mb-3" href="/recipients">
+                            Browse by Recipient</a
+                        >
                     </h4>
                     <ul>
                         <li v-for="recipient in recipients" :key="recipient.id">
@@ -48,7 +56,9 @@
                         </li>
                     </ul>
                     <h4>
-                        <a class="grey mb-3" href="/occasions">Browse by Occasion</a>
+                        <a class="grey mb-3" href="/occasions"
+                            >Browse by Occasion</a
+                        >
                     </h4>
                     <ul>
                         <li v-for="occasion in occasions" :key="occasion.id">

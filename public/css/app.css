@@ -12045,7 +12045,7 @@ section h1 {
 }
 
 .item-card-2 {
-  background-color: #FAFAFA;
+  background-color: #fafafa;
   padding: 0;
   width: 320px;
   border-radius: 8px;
@@ -12053,7 +12053,7 @@ section h1 {
 }
 .item-card-2:hover {
   box-shadow: 2px 4px 6px rgba(212, 204, 219, 0.16);
-  background-color: #F7F7F7;
+  background-color: #f7f7f7;
 }
 .item-card-2 .card-tag {
   position: absolute;
@@ -12591,6 +12591,9 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.page-link:hover {
+  color: #dd1e50;
 }
 
 .page-item.disabled .page-link {

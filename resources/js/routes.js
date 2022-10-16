@@ -522,7 +522,7 @@ export let routes = [
         },
     },
     {
-        path: "/categories/:categoryId/:slug",
+        path: "/categories/:categoryId/:location/:slug",
         name: "categories/category",
         component: require("./components/website/Category.vue").default,
         meta: {
@@ -580,7 +580,7 @@ export let routes = [
         },
     },
     {
-        path: "/products/:productId/:slug",
+        path: "/products/:productId/:location/:slug",
         name: "products/product",
         component: require("./components/website/Product.vue").default,
         meta: {
@@ -596,7 +596,7 @@ export let routes = [
         },
     },
     {
-        path: "/occasions/:occasionId/:slug",
+        path: "/occasions/:occasionId/:location/:slug",
         name: "occasions/occasion",
         component: require("./components/website/Occasion.vue").default,
         meta: {
@@ -620,7 +620,7 @@ export let routes = [
         },
     },
     {
-        path: "/recipients/:recipientId/:slug",
+        path: "/recipients/:recipientId/:location/:slug",
         name: "recipients/recipient",
         component: require("./components/website/Recipient.vue").default,
         meta: {

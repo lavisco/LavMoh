@@ -12,7 +12,7 @@
             class="category-link"
             v-for="category in categories"
             :key="category.id"
-            :href="`/categories/${category.id}/${category.slug}`"
+            :href="`/categories/${category.id}/${locationActive}/${category.slug}`"
         >
             {{ category.name }}
         </a>
@@ -24,6 +24,12 @@ export default {
     data: () => ({
         categories: [],
     }),
+
+    computed: {
+        locationActive() {
+            return this.$store.getters.selectedLocation;
+        },
+    },
 
     methods: {
         loadData() {

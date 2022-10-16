@@ -37,6 +37,7 @@
                         params: {
                             productId: product.id,
                             slug: product.slug,
+                            location: locationActive,
                         },
                     }"
                 >
@@ -53,7 +54,14 @@
                         <div class="card-title">
                             {{ product.title }}
                         </div>
-                        <div class="d-flex flex-row justify-content-between align-items-end">
+                        <div
+                            class="
+                                d-flex
+                                flex-row
+                                justify-content-between
+                                align-items-end
+                            "
+                        >
                             <div class="card-body-text">
                                 <div class="card-price mb-md-1">
                                     {{ currency.symbol }}
@@ -133,6 +141,9 @@ export default {
     computed: {
         currency() {
             return this.$store.getters.selectedCurrency;
+        },
+        locationActive() {
+            return this.$store.getters.selectedLocation;
         },
     },
 

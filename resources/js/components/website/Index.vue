@@ -49,6 +49,7 @@
                                 params: {
                                     productId: product.id,
                                     slug: product.slug,
+                                    location: locationActive,
                                 },
                             }"
                             class="card item-card"
@@ -146,6 +147,7 @@
                                     params: {
                                         occasionId: occasion.id,
                                         slug: occasion.slug,
+                                        location: locationActive,
                                     },
                                 }"
                             >
@@ -184,6 +186,7 @@
                                 params: {
                                     recipientId: recipient.id,
                                     slug: recipient.slug,
+                                    location: locationActive,
                                 },
                             }"
                         >
@@ -214,6 +217,7 @@
                                 params: {
                                     categoryId: category.id,
                                     slug: category.slug,
+                                    location: locationActive,
                                 },
                             }"
                             class="gallery-item"
@@ -433,12 +437,23 @@ export default {
         currency() {
             return this.$store.getters.selectedCurrency;
         },
+        locationActive() {
+            return this.$store.getters.selectedLocation;
+        },
+    },
+
+    watch: {
+        locationActive(after, before) {
+            Fire.$emit("reloadRecords");
+        },
     },
 
     methods: {
         loadData() {
             axios
-                .get("/api/home")
+                .get("/api/home", {
+                    params: { location: this.locationActive },
+                })
                 .then((response) => {
                     this.products = response.data.products;
                     this.occasions = response.data.occasions;

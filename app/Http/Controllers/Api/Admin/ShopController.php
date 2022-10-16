@@ -22,7 +22,7 @@ class ShopController extends Controller
     {
         ///$this->authorize('viewAny', Shop::class);
 
-        return Shop::with(['user', 'shippings:id'])->latest()->filter(request(['searchText']))->paginate(25);
+        return Shop::with(['user', 'user.districts', 'shippings:id'])->latest()->filter(request(['searchText']))->paginate(25);
     }
 
     public function store(ShopRequest $request)
@@ -115,5 +115,13 @@ class ShopController extends Controller
         return response()->json([
             'shippings' => Shipping::latest()->get(),
         ]);
+    }
+
+    public function storeLocations(Shop $shop)
+    {
+        //sync to pivot tables
+        $shop->user->districts()->sync(request('shop_districts'));
+
+        return ['message' => "Update Successful"];
     }
 }

@@ -228,7 +228,7 @@
                                 class="w-100 mt-2"
                                 v-for="category in categories"
                                 :key="category.id"
-                                :href="`/categories/${category.id}/${category.slug}`"
+                                :href="`/categories/${category.id}/${locationActive}/${category.slug}`"
                             >
                                 <h6 class="dropdown-header">
                                     {{ category.name }}
@@ -281,7 +281,7 @@
                                         class="dropdown-item"
                                         v-for="category in categories"
                                         :key="category.id"
-                                        :href="`/categories/${category.id}/${category.slug}`"
+                                        :href="`/categories/${category.id}/${locationActive}/${category.slug}`"
                                     >
                                         {{ category.name }}
                                         <span class="dropdown-item-arrow">
@@ -324,7 +324,7 @@
                                         class="dropdown-item"
                                         v-for="recipient in recipients"
                                         :key="recipient.id"
-                                        :href="`/recipients/${recipient.id}/${recipient.slug}`"
+                                        :href="`/recipients/${recipient.id}/${locationActive}/${recipient.slug}`"
                                     >
                                         {{ recipient.name }}
                                         <span class="dropdown-item-arrow">
@@ -367,7 +367,7 @@
                                         class="dropdown-item"
                                         v-for="occasion in occasions"
                                         :key="occasion.id"
-                                        :href="`/occasions/${occasion.id}/${occasion.slug}`"
+                                        :href="`/occasions/${occasion.id}/${locationActive}/${occasion.slug}`"
                                     >
                                         {{ occasion.name }}
                                         <span class="dropdown-item-arrow">
@@ -623,7 +623,7 @@
                                 <div class="col-12">
                                     <a
                                         class="dropdown-item"
-                                        :href="`/categories/${category.id}/${category.slug}`"
+                                        :href="`/categories/${category.id}/${locationActive}/${category.slug}`"
                                         v-for="category in categories"
                                         :key="category.id"
                                     >
@@ -652,7 +652,7 @@
                                         class="dropdown-item"
                                         v-for="recipient in recipients"
                                         :key="recipient.id"
-                                        :href="`/recipients/${recipient.id}/${recipient.slug}`"
+                                        :href="`/recipients/${recipient.id}/${locationActive}/${recipient.slug}`"
                                     >
                                         {{ recipient.name }}
                                         <span class="dropdown-item-arrow">
@@ -679,7 +679,7 @@
                                         class="dropdown-item"
                                         v-for="occasion in occasions"
                                         :key="occasion.id"
-                                        :href="`/occasions/${occasion.id}/${occasion.slug}`"
+                                        :href="`/occasions/${occasion.id}/${locationActive}/${occasion.slug}`"
                                     >
                                         {{ occasion.name }}
                                         <span class="dropdown-item-arrow">

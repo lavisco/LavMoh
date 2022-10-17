@@ -40,7 +40,7 @@ class RecipientController extends Controller
                         $q->where('category_id', '=', '1')
                         ->whereRelation('recipients', 'name', $recipientName)
                         ->whereRelation('user.shop', 'status', 1)
-                        ->whereRelation('user.districts', 'name', $location);
+                        ->whereRelation('user.cities', 'name', $location);
                     })
                     ->orWhere(function($q) use ($recipientName) {
                         $q->where('category_id', '!=', '1')

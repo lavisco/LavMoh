@@ -39,7 +39,7 @@ class OccasionController extends Controller
                         $q->where('category_id', '=', '1')
                         ->whereRelation('occasions', 'name', $occasionName)
                         ->whereRelation('user.shop', 'status', 1)
-                        ->whereRelation('user.districts', 'name', $location);
+                        ->whereRelation('user.cities', 'name', $location);
                     })
                     ->orWhere(function($q) use ($occasionName) {
                         $q->where('category_id', '!=', '1')

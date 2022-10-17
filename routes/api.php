@@ -287,5 +287,6 @@ Route::get('/locations/countries', [LocationController::class, 'indexCountry']);
 Route::get('/locations/provinces', [LocationController::class, 'indexProvince']);
 Route::get('/locations/districts/{province}', [LocationController::class, 'getDistrict']);
 Route::get('/locations/districts', [LocationController::class, 'indexDistrict']);
-Route::get('/locations/cities/{district}', [LocationController::class, 'indexCity']);
+Route::get('/locations/cities/{district}', [LocationController::class, 'getCity']);
+Route::get('/locations/cities', [LocationController::class, 'indexCity']);
 Route::get('/locations/areas/{city}', [LocationController::class, 'indexArea']);

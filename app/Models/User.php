@@ -139,6 +139,12 @@ class User extends Authenticatable
      * Many to many Pivot table relationships
      */
     
+    //users:cities M:M
+    public function cities()
+    {
+        return $this->belongsToMany(City::class)->withTimestamps();
+    }
+
     //users:districts M:M
     public function districts()
     {

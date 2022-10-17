@@ -167,23 +167,27 @@
                             <strong>{{ locationActive }}</strong>
                         </p>
                         <div class="d-flex flex-row">
-                            <div
-                                class="col-6 px-1"
-                                v-for="districts in chunkedDistricts"
+                            <select
+                                class="
+                                    custom-select
+                                    form-control form-control-alternative
+                                "
+                                id="filter"
+                                name="filter"
+                                @change.prevent="saveLocation(cityName)"
+                                v-model="cityName"
                             >
-                                <a
-                                    class="btn-sm btn mb-2"
-                                    @click.prevent="saveLocation(district.name)"
-                                    v-for="district in districts"
-                                    :key="district.id"
-                                    :class="{
-                                        active:
-                                            locationActive === district.name,
-                                    }"
+                                <option value="" disabled selected hidden>
+                                    Select City
+                                </option>
+                                <option
+                                    v-for="city in cities"
+                                    :key="city.id"
+                                    :value="city.name"
                                 >
-                                    {{ district.name }}
-                                </a>
-                            </div>
+                                    {{ city.name }}
+                                </option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -201,10 +205,11 @@ export default {
         searchText: null,
         loading: true,
         //location data
-        districts: [],
+        cities: [],
         //filter data
         sortValue: "created_at",
         subCategoryValue: "",
+        cityName: "",
         pagination: { current_page: 1 },
     }),
 
@@ -279,8 +284,8 @@ export default {
         currency() {
             return this.$store.getters.selectedCurrency;
         },
-        chunkedDistricts() {
-            return _.chunk(this.districts, 13);
+        chunkedCities() {
+            return _.chunk(this.cities, 13);
         },
         locationActive() {
             return this.$store.getters.selectedLocation;
@@ -308,17 +313,17 @@ export default {
                 this.category.name == "Cake" ||
                 this.category.name == "Fresh Flowers"
             ) {
-                this.loadDistricts();
+                this.loadCities();
                 $("#locationPopup").modal("show");
             }
         },
 
-        saveLocation(district) {
-            this.$store.dispatch("saveLocation", district);
+        saveLocation(city) {
+            this.$store.dispatch("saveLocation", city);
 
             $("#locationPopup").modal("hide");
 
-            this.$router.push({
+            this.$router.replace({
                 name: "categories/category",
                 params: {
                     categoryId: this.category.id,
@@ -328,11 +333,11 @@ export default {
             });
         },
 
-        loadDistricts() {
+        loadCities() {
             axios
-                .get("/api/locations/districts")
+                .get("/api/locations/cities")
                 .then(({ data }) => {
-                    this.districts = data;
+                    this.cities = data;
                 })
                 .catch((error) => console.log(error));
         },

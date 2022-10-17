@@ -33,6 +33,16 @@ class City extends Model
         return $this->hasMany(Area::class);
     }
 
+    /**
+     * Many to many Pivot table relationships
+     */
+    
+    //users:cities M:M
+    public function users()
+    {
+        return $this->belongsToMany(User::class)->withTimestamps();
+    }
+
     //scope for searching in table
     public function scopeFilter($query, array $filters)
     {

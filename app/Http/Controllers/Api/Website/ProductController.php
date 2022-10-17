@@ -30,7 +30,7 @@ class ProductController extends Controller
 
         $availability = $product->where(function($q) use($location) {
                             $q->whereRelation('user.shop', 'status', 1)
-                            ->whereRelation('user.districts', 'name', $location);
+                            ->whereRelation('user.cities', 'name', $location);
                         })->exists();
 
         return response()->json([

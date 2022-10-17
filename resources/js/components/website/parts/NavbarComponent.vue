@@ -478,7 +478,7 @@
                         aria-haspopup="true"
                         aria-expanded="false"
                         class="nav-link nav-link-account mr-2 mr-sm-3"
-                        @click.prevent="loadDistricts()"
+                        @click.prevent="loadCities()"
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -524,18 +524,18 @@
                                 "
                                 id="filter"
                                 name="filter"
-                                @change.prevent="saveLocation(districtName)"
-                                v-model="districtName"
+                                @change.prevent="saveLocation(cityName)"
+                                v-model="cityName"
                             >
                                 <option value="" disabled selected hidden>
-                                    Select District
+                                    Select City
                                 </option>
                                 <option
-                                    v-for="district in districts"
-                                    :key="district.id"
-                                    :value="district.name"
+                                    v-for="city in cities"
+                                    :key="city.id"
+                                    :value="city.name"
                                 >
-                                    {{ district.name }}
+                                    {{ city.name }}
                                 </option>
                             </select>
                         </div>
@@ -722,7 +722,7 @@
                     aria-haspopup="true"
                     aria-expanded="false"
                     class=""
-                    @click.prevent="loadDistricts()"
+                    @click.prevent="loadCities()"
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -757,18 +757,18 @@
                             "
                             id="filter"
                             name="filter"
-                            @change.prevent="saveLocation(districtName)"
-                            v-model="districtName"
+                            @change.prevent="saveLocation(cityName)"
+                            v-model="cityName"
                         >
                             <option value="" disabled selected hidden>
-                                Select District
+                                Select City
                             </option>
                             <option
-                                v-for="district in districts"
-                                :key="district.id"
-                                :value="district.name"
+                                v-for="city in cities"
+                                :key="city.id"
+                                :value="city.name"
                             >
-                                {{ district.name }}
+                                {{ city.name }}
                             </option>
                         </select>
                     </div>
@@ -785,14 +785,14 @@ export default {
         occasions: [],
         categories: [],
         currencies: [],
-        districts: [],
+        cities: [],
         user: "",
-        districtName: "",
+        cityName: "",
     }),
 
     computed: {
-        chunkedDistricts() {
-            return _.chunk(this.districts, 13);
+        chunkedCities() {
+            return _.chunk(this.cities, 13);
         },
         currencyActive() {
             return this.$store.getters.selectedCurrency;
@@ -806,8 +806,8 @@ export default {
         saveCurrency(currency) {
             this.$store.dispatch("saveCurrency", currency);
         },
-        saveLocation(district) {
-            this.$store.dispatch("saveLocation", district);
+        saveLocation(city) {
+            this.$store.dispatch("saveLocation", city);
             $("#dropdownLocation").dropdown("hide");
         },
         displayMenu() {
@@ -832,13 +832,15 @@ export default {
                 .catch((error) => console.log(error));
         },
 
-        loadDistricts() {
-            axios
-                .get("/api/locations/districts")
-                .then(({ data }) => {
-                    this.districts = data;
-                })
-                .catch((error) => console.log(error));
+        loadCities() {
+            if (this.cities == "") {
+                axios
+                    .get("/api/locations/cities")
+                    .then(({ data }) => {
+                        this.cities = data;
+                    })
+                    .catch((error) => console.log(error));
+            }
         },
     },
     mounted() {

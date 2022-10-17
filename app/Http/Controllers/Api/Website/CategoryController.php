@@ -42,7 +42,7 @@ class CategoryController extends Controller
                     ->where('product_state_id', '1')
                     ->with(['category:id,name', 'user.shop', 'product_image'])
                     ->when($categoryId == '1', function ($query) use($location) {
-                        $query->whereRelation('user.districts', 'name', $location);
+                        $query->whereRelation('user.cities', 'name', $location);
                     })
                     ->when($sortParameter == 'base_price_low', function ($query) {
                         return $query->oldest('base_price');
@@ -76,7 +76,7 @@ class CategoryController extends Controller
                     ->where('product_state_id', '1')
                     ->with(['category:id,name', 'user.shop', 'product_image'])
                     ->when($categoryId == '1', function ($query) use($location) {
-                        $query->whereRelation('user.districts', 'name', $location);
+                        $query->whereRelation('user.cities', 'name', $location);
                     })
                     ->when($sortParameter == 'base_price_low', function ($query) {
                         return $query->oldest('base_price');
@@ -121,10 +121,10 @@ class CategoryController extends Controller
             ->whereHas('user.shop', function($q) {
                 return $q->where('status', 1);
             })
-            ->whereHas('user.districts', function($q) use($location) {
+            ->whereHas('user.cities', function($q) use($location) {
                 return $q->where('name', $location);
             })
-            ->with(['user.shop', 'user.districts', 'product_image'])->latest()->paginate(25);
+            ->with(['user.shop', 'user.cities', 'product_image'])->latest()->paginate(25);
 
         return response()->json([
             'products' => $products,

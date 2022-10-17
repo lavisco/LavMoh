@@ -874,7 +874,7 @@
                             <!-- Shipping -->
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label" for="">
-                                    Districts this shop delivers product to.
+                                    Cities this shop delivers product to.
                                     <strong class="text-danger"> *</strong>
                                 </label>
 
@@ -904,21 +904,21 @@
                                             </thead>
                                             <tbody>
                                                 <tr
-                                                    v-for="district in allDistricts"
-                                                    :key="district.id"
+                                                    v-for="city in allCities"
+                                                    :key="city.id"
                                                 >
                                                     <th scope="row">
                                                         <input
                                                             type="checkbox"
-                                                            name="shop_districts"
+                                                            name="shop_cities"
                                                             v-model="
-                                                                form.shop_districts
+                                                                form.shop_cities
                                                             "
-                                                            :value="district.id"
+                                                            :value="city.id"
                                                         />
                                                     </th>
                                                     <td>
-                                                        {{ district.name }}
+                                                        {{ city.name }}
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -966,8 +966,8 @@ export default {
         countries: [],
         provinces: [],
         districts: [],
-        allDistricts: [],
         cities: [],
+        allCities: [],
         areas: [],
         searchText: null,
         form: new Form({
@@ -989,7 +989,7 @@ export default {
             user: "",
             slug: "",
             shop_shipping: [],
-            shop_districts: [],
+            shop_cities: [],
             shippings: [],
         }),
         pagination: { current_page: 1 },
@@ -1114,15 +1114,15 @@ export default {
                 .catch((error) => console.log(error));
         },
 
-        loadAllDistricts() {
+        loadallCities() {
             axios
-                .get("/api/locations/districts")
+                .get("/api/locations/cities")
                 .then(({ data }) => {
-                    this.allDistricts = data;
-                    this.form.shop_districts = [];
-                    if (this.form.user.districts != null) {
-                        this.form.user.districts.forEach((value) => {
-                            this.form.shop_districts.push(value.id);
+                    this.allCities = data;
+                    this.form.shop_cities = [];
+                    if (this.form.user.cities != null) {
+                        this.form.user.cities.forEach((value) => {
+                            this.form.shop_cities.push(value.id);
                         });
                     }
                 })
@@ -1196,7 +1196,7 @@ export default {
             this.form.clear();
             this.form.reset();
             this.form.fill(shop);
-            this.loadAllDistricts();
+            this.loadallCities();
             $("#locationModal").modal("show");
         },
 

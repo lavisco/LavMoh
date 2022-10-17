@@ -26,7 +26,6 @@ class HomeController extends Controller
     {
         $location = request('location');
         $products = Product::select('id', 'title', 'base_price', 'user_id', 'category_id', 'product_state_id', 'slug', 'has_variations')
-                    ->where('product_state_id', '1')
                     ->with(['user' => function($query){
                         $query->select('id', 'name');
                         }, 'user.shop' => function ($query){
@@ -37,11 +36,13 @@ class HomeController extends Controller
                     ])
                     ->where(function($q) use($location) {
                         $q->where('category_id', '=', '1')
-                        ->whereRelation('user.shop', 'status', 1)
-                        ->whereRelation('user.districts', 'name', $location);
+                            ->where('product_state_id', '1')
+                            ->whereRelation('user.shop', 'status', 1)
+                            ->whereRelation('user.cities', 'name', $location);
                     })
                     ->orWhere(function($q){ 
                         $q->where('category_id', '!=', '1')
+                            ->where('product_state_id', '1')
                             ->whereRelation('user.shop', 'status', 1);
                     })
                     ->latest()->take(15)->get();

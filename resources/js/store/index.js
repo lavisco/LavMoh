@@ -113,8 +113,8 @@ export default new Vuex.Store({
             context.commit("storeCurrency", currency);
         },
 
-        saveLocation(context, district) {
-            context.commit("storeLocation", district);
+        saveLocation(context, city) {
+            context.commit("storeLocation", city);
         },
 
         saveShippingPrice(context, shipping_price) {
@@ -293,8 +293,8 @@ export default new Vuex.Store({
             state.currency = currency;
         },
 
-        storeLocation(state, district) {
-            state.location = district;
+        storeLocation(state, city) {
+            state.location = city;
         },
 
         storeShippingPrice(state, shipping_price) {

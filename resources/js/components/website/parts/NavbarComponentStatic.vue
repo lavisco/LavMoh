@@ -492,7 +492,7 @@
                         aria-haspopup="true"
                         aria-expanded="false"
                         class="nav-link nav-link-account mr-2 mr-sm-3"
-                        @click.prevent="loadDistricts()"
+                        @click.prevent="loadCities()"
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -527,31 +527,22 @@
                         id="dropdownLocation"
                         @click.prevent="preventDropdownClose($event)"
                     >
-                        <h6 class="dropdown-header">
-                            Select product delivery location
+                        <h6 class="dropdown-header mb-2">
+                            Select product delivery city
                         </h6>
-                        <div class="col-12 px-3 pt-2 pb-3">
-                            <select
-                                class="
-                                    custom-select
-                                    form-control form-control-alternative
-                                "
-                                id="filter"
-                                name="filter"
-                                @change.prevent="saveLocation(districtName)"
-                                v-model="districtName"
+
+                        <location-search v-model="searchText" />
+
+                        <div class="col-12 p-3">
+                            <a
+                                class="btn btn-sm mb-2"
+                                v-for="city in cities"
+                                :key="city.id"
+                                :value="city.name"
+                                @click.prevent="saveLocation(city.name)"
                             >
-                                <option value="" disabled selected hidden>
-                                    Select District
-                                </option>
-                                <option
-                                    v-for="district in districts"
-                                    :key="district.id"
-                                    :value="district.name"
-                                >
-                                    {{ district.name }}
-                                </option>
-                            </select>
+                                {{ city.name }}
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -711,7 +702,7 @@
                     aria-haspopup="true"
                     aria-expanded="false"
                     class=""
-                    @click.prevent="loadDistricts()"
+                    @click.prevent="loadCities()"
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -746,18 +737,18 @@
                             "
                             id="filter"
                             name="filter"
-                            @change.prevent="saveLocation(districtName)"
-                            v-model="districtName"
+                            @change.prevent="saveLocation(cityName)"
+                            v-model="cityName"
                         >
                             <option value="" disabled selected hidden>
-                                Select District
+                                Select City
                             </option>
                             <option
-                                v-for="district in districts"
-                                :key="district.id"
-                                :value="district.name"
+                                v-for="city in cities"
+                                :key="city.id"
+                                :value="city.name"
                             >
-                                {{ district.name }}
+                                {{ city.name }}
                             </option>
                         </select>
                     </div>
@@ -768,27 +759,21 @@
 </template>
 
 <script>
+import _ from "lodash";
+
 export default {
     data: () => ({
         recipients: [],
         occasions: [],
         categories: [],
         currencies: [],
-        districts: [],
+        cities: [],
+        searchText: null,
         user: "",
-        districtName: "",
+        cityName: "",
     }),
 
     computed: {
-        // chunkedRecipients() {
-        //     return _.chunk(this.recipients, 6);
-        // },
-        // chunkedOccasions() {
-        //     return _.chunk(this.occasions, 6);
-        // },
-        chunkedDistricts() {
-            return _.chunk(this.districts, 13);
-        },
         currencyActive() {
             return this.$store.getters.selectedCurrency;
         },
@@ -797,12 +782,18 @@ export default {
         },
     },
 
+    watch: {
+        searchText: _.debounce(function (after, before) {
+            this.loadCities();
+        }, 700),
+    },
+
     methods: {
         saveCurrency(currency) {
             this.$store.dispatch("saveCurrency", currency);
         },
-        saveLocation(district) {
-            this.$store.dispatch("saveLocation", district);
+        saveLocation(city) {
+            this.$store.dispatch("saveLocation", city);
             $("#dropdownLocation").dropdown("hide");
         },
         displayMenu() {
@@ -827,11 +818,13 @@ export default {
                 .catch((error) => console.log(error));
         },
 
-        loadDistricts() {
+        loadCities() {
             axios
-                .get("/api/locations/districts")
+                .get("/api/locations/cities", {
+                    params: { searchText: this.searchText },
+                })
                 .then(({ data }) => {
-                    this.districts = data;
+                    this.cities = data;
                 })
                 .catch((error) => console.log(error));
         },

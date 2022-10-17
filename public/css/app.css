@@ -11007,8 +11007,8 @@ button.bg-black:hover {
   margin-top: 0px;
   left: 50%;
   transform: translate(-50%, 0);
-  border: 1px solid #dd1e50;
-  border-radius: 12px;
+  border: none !important;
+  border-radius: 12px !important;
   padding: 10px;
 }
 .navbar-main-menu .dropdown-menu-col-1 {
@@ -12545,6 +12545,23 @@ footer {
 }
 .home-search-input button svg path {
   fill: #4e4e4e;
+}
+
+#location-search-input {
+  height: 44px;
+  border-radius: 6px;
+  padding: 0;
+}
+#location-search-input input[type=text] {
+  font-size: 14px;
+  padding: 6px 8px;
+  border-radius: 12px;
+}
+#location-search-input .input-group-text {
+  background-color: transparent;
+  border: none;
+  padding: 8px;
+  padding-right: 2px;
 }
 
 .search-suggestion {

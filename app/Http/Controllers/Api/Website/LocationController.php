@@ -31,7 +31,7 @@ class LocationController extends Controller
     }
     public function indexCity()
     {
-        return City::select('id', 'name')->orderBy('name')->get();
+        return City::select('id', 'name')->orderBy('name')->filter(request(['searchText']))->get();
     }
     public function getCity($district)
     {

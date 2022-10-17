@@ -513,31 +513,22 @@
                         id="dropdownLocation"
                         @click.prevent="preventDropdownClose($event)"
                     >
-                        <h6 class="dropdown-header">
-                            Select product delivery location
+                        <h6 class="dropdown-header mb-2">
+                            Select product delivery city
                         </h6>
-                        <div class="col-12 px-3 pt-2 pb-3">
-                            <select
-                                class="
-                                    custom-select
-                                    form-control form-control-alternative
-                                "
-                                id="filter"
-                                name="filter"
-                                @change.prevent="saveLocation(cityName)"
-                                v-model="cityName"
+
+                        <location-search v-model="searchText" />
+
+                        <div class="col-12 p-3">
+                            <a
+                                class="btn btn-sm mb-2"
+                                v-for="city in cities"
+                                :key="city.id"
+                                :value="city.name"
+                                @click.prevent="saveLocation(city.name)"
                             >
-                                <option value="" disabled selected hidden>
-                                    Select City
-                                </option>
-                                <option
-                                    v-for="city in cities"
-                                    :key="city.id"
-                                    :value="city.name"
-                                >
-                                    {{ city.name }}
-                                </option>
-                            </select>
+                                {{ city.name }}
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -779,6 +770,8 @@
 </template>
 
 <script>
+import _ from "lodash";
+
 export default {
     data: () => ({
         recipients: [],
@@ -786,6 +779,7 @@ export default {
         categories: [],
         currencies: [],
         cities: [],
+        searchText: null,
         user: "",
         cityName: "",
     }),
@@ -800,6 +794,12 @@ export default {
         locationActive() {
             return this.$store.getters.selectedLocation;
         },
+    },
+
+    watch: {
+        searchText: _.debounce(function (after, before) {
+            this.loadCities();
+        }, 700),
     },
 
     methods: {
@@ -833,14 +833,14 @@ export default {
         },
 
         loadCities() {
-            if (this.cities == "") {
-                axios
-                    .get("/api/locations/cities")
-                    .then(({ data }) => {
-                        this.cities = data;
-                    })
-                    .catch((error) => console.log(error));
-            }
+            axios
+                .get("/api/locations/cities", {
+                    params: { searchText: this.searchText },
+                })
+                .then(({ data }) => {
+                    this.cities = data;
+                })
+                .catch((error) => console.log(error));
         },
     },
     mounted() {

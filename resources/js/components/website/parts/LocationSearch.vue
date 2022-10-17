@@ -1,0 +1,38 @@
+<template>
+    <div class="col-12">
+        <div class="input-group home-search-input" id="location-search-input">
+            <div class="input-group-prepend">
+                <span class="input-group-text">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                        role="img"
+                        width="20"
+                        height="20"
+                        preserveAspectRatio="xMidYMid meet"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            fill="#6e6e6e"
+                            d="m20.71 19.29l-3.4-3.39A7.92 7.92 0 0 0 19 11a8 8 0 1 0-8 8a7.92 7.92 0 0 0 4.9-1.69l3.39 3.4a1 1 0 0 0 1.42 0a1 1 0 0 0 0-1.42ZM5 11a6 6 0 1 1 6 6a6 6 0 0 1-6-6Z"
+                        />
+                    </svg>
+                </span>
+            </div>
+            <input
+                class="form-control"
+                placeholder="Search Kandy, Colombo..."
+                type="text"
+                :value="value"
+                @input="$emit('input', $event.target.value)"
+            />
+        </div>
+    </div>
+</template>
+
+<script>
+export default {
+    props: ["value"],
+    mounted() {},
+};
+</script>

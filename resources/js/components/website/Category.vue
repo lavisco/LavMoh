@@ -164,30 +164,21 @@
                     <div class="modal-body">
                         <p class="mb-4">
                             Displaying products available in
-                            <strong>{{ locationActive }}</strong>
+                            <strong class="red">{{ locationActive }}</strong>
                         </p>
-                        <div class="d-flex flex-row">
-                            <select
-                                class="
-                                    custom-select
-                                    form-control form-control-alternative
-                                "
-                                id="filter"
-                                name="filter"
-                                @change.prevent="saveLocation(cityName)"
-                                v-model="cityName"
-                            >
-                                <option value="" disabled selected hidden>
-                                    Select City
-                                </option>
-                                <option
+                        <div class="d-flex flex-column">
+                            <location-search v-model="searchText" class="px-0" />
+                            <div class="col-12 mt-4 px-0">
+                                <a
+                                    class="btn btn-sm mb-2"
                                     v-for="city in cities"
                                     :key="city.id"
                                     :value="city.name"
+                                    @click.prevent="saveLocation(city.name)"
                                 >
                                     {{ city.name }}
-                                </option>
-                            </select>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -197,6 +188,8 @@
 </template>
 
 <script>
+import _ from "lodash";
+
 export default {
     data: () => ({
         category: [],
@@ -247,6 +240,10 @@ export default {
     },
 
     watch: {
+        searchText: _.debounce(function (after, before) {
+            this.loadCities();
+        }, 600),
+
         sortValue(after, before) {
             this.subCategoryValue == ""
                 ? Fire.$emit("reloadRecords")
@@ -335,7 +332,9 @@ export default {
 
         loadCities() {
             axios
-                .get("/api/locations/cities")
+                .get("/api/locations/cities", {
+                    params: { searchText: this.searchText },
+                })
                 .then(({ data }) => {
                     this.cities = data;
                 })

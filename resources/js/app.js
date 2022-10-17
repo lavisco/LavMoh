@@ -58,6 +58,11 @@ Vue.component(
 );
 
 Vue.component(
+    "location-search",
+    require("./components/website/parts/LocationSearch.vue").default
+);
+
+Vue.component(
     "fail-modal",
     require("./components/website/parts/FailModal.vue").default
 );

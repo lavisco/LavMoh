@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\FallbackController;
+use App\Http\Controllers\Website\ExcelController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Website\HomeController;
@@ -125,6 +126,15 @@ Route::group(['middleware' => 'auth'],function () {
     // add email verified middleware to route e.g. ->middleware(['is_buyer', 'verified']);
 
 });
+
+Route::get('/export/users/buyer', [ExcelController::class, 'exportBuyerUsers']);
+Route::get('/export/users/seller', [ExcelController::class, 'exportSellerUsers']);
+Route::get('/export/users', [ExcelController::class, 'exportAllUsers']);
+Route::get('/export/orders', [ExcelController::class, 'exportOrders']);
+Route::get('/export/products', [ExcelController::class, 'exportProducts']);
+Route::get('/export/shops', [ExcelController::class, 'exportShops']);
+Route::get('/export/transactions', [ExcelController::class, 'exportTransactions']);
+
 
 /*
 |--------------------------------------------------------------------------

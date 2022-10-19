@@ -3,9 +3,6 @@
 namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
-use Exception;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 
 class HomeController extends Controller
 {

@@ -11,7 +11,7 @@ use App\Exports\UsersExport;
 use App\Exports\UsersSellerExport;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Excel;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ExcelController extends Controller
 {

@@ -18,6 +18,12 @@ class ShopExport implements FromCollection, WithMapping, WithHeadings
 
     public function map($row): array
     {
+        // row will be the shop and user->cities will be the relationship
+        $cities = array();
+        foreach ($row->user->cities as $city) {
+            $cities[] = $city->name;
+        }
+        
         return [
             $row->id,
             $row->name,
@@ -34,6 +40,7 @@ class ShopExport implements FromCollection, WithMapping, WithHeadings
             $row->user->name,
             $row->user->phone,
             $row->user->email,
+            implode(", ",$cities)
         ];
     }
 
@@ -55,6 +62,7 @@ class ShopExport implements FromCollection, WithMapping, WithHeadings
             'User name',
             'User phone',
             'User email',
+            'Cities',
         ];
     }
 }

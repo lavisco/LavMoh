@@ -867,7 +867,36 @@
                                         placeholder="Name"
                                         disabled
                                     />
-                                    <HasError :form="form" field="name" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label"
+                                    >Search
+                                </label>
+
+                                <div class="col-md-9">
+                                    <div
+                                        class="
+                                            input-group input-group-alternative
+                                        "
+                                    >
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"
+                                                ><i
+                                                    class="ni ni-zoom-split-in"
+                                                ></i
+                                            ></span>
+                                        </div>
+                                        <input
+                                            class="
+                                                form-control
+                                                form-control-alternative
+                                            "
+                                            placeholder="Search"
+                                            type="text"
+                                            v-model="searchCityText"
+                                        />
+                                    </div>
                                 </div>
                             </div>
 
@@ -949,6 +978,7 @@
 <script>
 import Form from "vform";
 import { HasError, AlertError } from "vform/src/components/bootstrap4";
+import _ from "lodash";
 
 export default {
     components: {
@@ -970,6 +1000,7 @@ export default {
         allCities: [],
         areas: [],
         searchText: null,
+        searchCityText: null,
         form: new Form({
             id: "",
             name: "",
@@ -996,9 +1027,12 @@ export default {
     }),
 
     watch: {
-        searchText(after, before) {
+        searchText: _.debounce(function (after, before) {
             this.loadShops();
-        },
+        }, 700),
+        searchCityText: _.debounce(function (after, before) {
+            this.refreshallCities();
+        }, 700),
     },
 
     methods: {
@@ -1129,6 +1163,17 @@ export default {
                 .catch((error) => console.log(error));
         },
 
+        refreshallCities() {
+            axios
+                .get("/api/locations/cities", {
+                    params: { searchText: this.searchCityText },
+                })
+                .then(({ data }) => {
+                    this.allCities = data;
+                })
+                .catch((error) => console.log(error));
+        },
+
         loadCities() {
             axios
                 .get("/api/locations/cities/" + this.form.district)
@@ -1193,6 +1238,7 @@ export default {
         },
 
         openLocationModal(shop) {
+            this.searchCityText = null;
             this.form.clear();
             this.form.reset();
             this.form.fill(shop);

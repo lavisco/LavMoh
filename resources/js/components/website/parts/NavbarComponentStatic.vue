@@ -701,7 +701,7 @@
                     data-toggle="dropdown"
                     aria-haspopup="true"
                     aria-expanded="false"
-                    class=""
+                    class="link"
                     @click.prevent="loadCities()"
                 >
                     <svg

@@ -533,7 +533,7 @@
 
                         <location-search v-model="searchText" />
 
-                        <div class="col-12 p-3">
+                        <div class="col-12 dropdown-location-container">
                             <a
                                 class="btn btn-sm mb-2"
                                 v-for="city in cities"
@@ -726,31 +726,22 @@
                     id="dropdownLocation"
                     @click.prevent="preventDropdownClose($event)"
                 >
-                    <h6 class="dropdown-header">
-                        Select product delivery location
+                    <h6 class="dropdown-header mb-2">
+                        Select product delivery city
                     </h6>
-                    <div class="col-12 px-3 pt-2 pb-3">
-                        <select
-                            class="
-                                custom-select
-                                form-control form-control-alternative
-                            "
-                            id="filter"
-                            name="filter"
-                            @change.prevent="saveLocation(cityName)"
-                            v-model="cityName"
+
+                    <location-search v-model="searchText" />
+
+                    <div class="col-12 dropdown-location-container">
+                        <a
+                            class="btn btn-sm mb-2"
+                            v-for="city in cities"
+                            :key="city.id"
+                            :value="city.name"
+                            @click.prevent="saveLocation(city.name)"
                         >
-                            <option value="" disabled selected hidden>
-                                Select City
-                            </option>
-                            <option
-                                v-for="city in cities"
-                                :key="city.id"
-                                :value="city.name"
-                            >
-                                {{ city.name }}
-                            </option>
-                        </select>
+                            {{ city.name }}
+                        </a>
                     </div>
                 </div>
             </div>

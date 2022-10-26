@@ -867,7 +867,7 @@ button.bg-black:hover {
     font-weight: 400;
     vertical-align: middle;
     margin-bottom: 16px;
-    a:hover {
+    link:hover {
         color: $lav-red;
         svg {
             path {
@@ -1189,6 +1189,35 @@ button.bg-black:hover {
         font-weight: 600;
         color: #a0a0a0;
     }
+}
+
+.dropdown-location-container {
+    overflow-y: scroll;
+    height: 500px;
+    margin: 16px 0 12px 0;
+    @media (max-width: 768px) {
+        height: 350px;
+    }
+}
+
+.dropdown-location-container::-webkit-scrollbar {
+    width: 10px;
+    height: 12px;
+}
+
+.dropdown-location-container::-webkit-scrollbar-track {
+    background: #f7f7f7;
+    border-radius: 2px;
+    margin-block: 0.1em;
+}
+
+.dropdown-location-container::-webkit-scrollbar-thumb {
+    background: #8e8e8e;
+    border-radius: 2px;
+}
+
+.dropdown-location-container::-webkit-scrollbar-thumb:hover {
+    background: #3d3d3d;
 }
 
 /*---------------------hero---------------------*/

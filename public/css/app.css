@@ -10935,10 +10935,10 @@ button.bg-black:hover {
   vertical-align: middle;
   margin-bottom: 16px;
 }
-.mobile-location-picker link:hover {
-  color: #dd1e50;
+.mobile-location-picker .link:hover {
+  color: #dd1e50 !important;
 }
-.mobile-location-picker link:hover svg path {
+.mobile-location-picker .link:hover svg path {
   fill: #dd1e50;
 }
 .mobile-location-picker svg path {

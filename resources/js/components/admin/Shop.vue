@@ -932,12 +932,31 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                <tr>
+                                                    <th scope="row">
+                                                        <input
+                                                            id="all_cities_checkbox"
+                                                            type="checkbox"
+                                                            name="all_cities"
+                                                            v-model="
+                                                                selectAllCities
+                                                            "
+                                                            @change="
+                                                                selectsAllCities()
+                                                            "
+                                                        />
+                                                    </th>
+                                                    <td>Select all cities</td>
+                                                </tr>
                                                 <tr
                                                     v-for="city in allCities"
                                                     :key="city.id"
                                                 >
                                                     <th scope="row">
                                                         <input
+                                                            class="
+                                                                shop_cities_checkbox
+                                                            "
                                                             type="checkbox"
                                                             name="shop_cities"
                                                             v-model="
@@ -1001,6 +1020,7 @@ export default {
         areas: [],
         searchText: null,
         searchCityText: null,
+        selectAllCities: false,
         form: new Form({
             id: "",
             name: "",
@@ -1036,6 +1056,17 @@ export default {
     },
 
     methods: {
+        selectsAllCities() {
+            if (this.selectAllCities == true) {
+                this.form.shop_cities = [];
+                this.allCities.forEach((city) => {
+                    this.form.shop_cities.push(city.id);
+                });
+            } else {
+                this.form.shop_cities = [];
+            }
+        },
+
         fileSelected(e) {
             let file = e.target.files[0];
             let reader = new FileReader();
@@ -1239,6 +1270,7 @@ export default {
 
         openLocationModal(shop) {
             this.searchCityText = null;
+            this.selectAllCities = false;
             this.form.clear();
             this.form.reset();
             this.form.fill(shop);

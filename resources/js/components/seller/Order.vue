@@ -69,11 +69,8 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">Code</th>
-                                        <th scope="col" class="table-col-sm">
-                                            Date Placed
-                                        </th>
-                                        <th scope="col" class="table-col-sm">
-                                            Date
+                                        <th scope="col" class="table-col-lg">
+                                            Date Timeline
                                         </th>
                                         <th scope="col" class="table-col-lg">
                                             Items
@@ -84,6 +81,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                
                                     <tr v-for="order in orders">
                                         <td>
                                             {{ order.code }}
@@ -119,15 +117,18 @@
                                             </span>
                                         </td>
                                         <td>
-                                            {{
+                                            <div class="timeline-card">
+                                                <div class="name">
+                                                    Ordered
+                                                </div>
+                                                {{
                                                 moment(order.created_at).format(
-                                                    "DD-MM-YYYY"
-                                                )
-                                            }}
-                                        </td>
-                                        <td>
-                                            <div class="mb-2">
-                                                <div class="text-xxs">
+                                                        "DD-MM-YYYY"
+                                                    )
+                                                }}
+                                            </div>
+                                            <div class="timeline-card">
+                                                <div class="name">
                                                     Dispatch
                                                 </div>
                                                 {{
@@ -140,11 +141,10 @@
                                                         .format("DD-MM-YYYY")
                                                 }}
                                             </div>
-                                            <div>
-                                                <div class="text-xxs">
+                                            <div class="timeline-card">
+                                                <div class="name">
                                                     Delivery
                                                 </div>
-
                                                 {{
                                                     moment(
                                                         order.delivery_date
@@ -292,6 +292,57 @@
                                     </span>
                                 </div>
 
+<div
+                                    class="
+                                        d-flex
+                                        flex-row
+                                        align-items-center
+                                        justify-content-between
+                                        mb-3
+                                    "
+                                >
+                                    <div class="mr-3 text-center">
+                                        <div class="mobile-card-chip">
+                                            Ordered on
+                                        </div>
+                                        <div class="mobile-card-body">
+                                            {{
+                                                moment(
+                                                    order.created_at
+                                                ).format("DD-MM-YYYY")
+                                            }}
+                                        </div>
+                                    </div>
+                                    <div class="mr-3 text-center">
+                                        <div class="mobile-card-chip">
+                                            Dispatch
+                                        </div>
+                                        <div class="mobile-card-body">
+                                            {{
+                                                moment(order.delivery_date)
+                                                    .subtract(
+                                                        order.shipping
+                                                            .delivery_time,
+                                                        "days"
+                                                    )
+                                                    .format("DD-MM-YYYY")
+                                            }}
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="mobile-card-chip">
+                                            Delivery
+                                        </div>
+                                        <div class="mobile-card-body">
+                                            {{
+                                                moment(
+                                                    order.delivery_date
+                                                ).format("DD-MM-YYYY")
+                                            }}
+                                        </div>
+                                    </div>
+                                </div>
+                                
                                 <div
                                     class="
                                         d-flex
@@ -329,45 +380,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div
-                                    class="
-                                        d-flex
-                                        flex-row
-                                        align-items-center
-                                        justify-content-between
-                                        mb-3
-                                    "
-                                >
-                                    <div class="mr-3">
-                                        <div class="mobile-card-sub-title">
-                                            Dispatch Date
-                                        </div>
-                                        <div class="mobile-card-body">
-                                            {{
-                                                moment(order.delivery_date)
-                                                    .subtract(
-                                                        order.shipping
-                                                            .delivery_time,
-                                                        "days"
-                                                    )
-                                                    .format("DD-MM-YYYY")
-                                            }}
-                                            9:30am
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="mobile-card-sub-title">
-                                            Delivery Date
-                                        </div>
-                                        <div class="mobile-card-body">
-                                            {{
-                                                moment(
-                                                    order.delivery_date
-                                                ).format("DD-MM-YYYY")
-                                            }}
-                                        </div>
-                                    </div>
-                                </div>
+                                
                                 <div class="d-flex flex-row">
                                     <div
                                         v-if="

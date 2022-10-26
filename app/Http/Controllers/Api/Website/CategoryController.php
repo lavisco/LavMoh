@@ -36,12 +36,14 @@ class CategoryController extends Controller
 
         $sortParameter = request('sortValue');
 
+        //add category = 8
+
         $products = Product::
                     whereRelation('user.shop', 'status', 1)
                     ->where('category_id', $categoryId)
                     ->where('product_state_id', '1')
                     ->with(['category:id,name', 'user.shop', 'product_image'])
-                    ->when($categoryId == '1', function ($query) use($location) {
+                    ->when($categoryId == '1' || $categoryId == '8', function ($query) use($location) {
                         $query->whereRelation('user.cities', 'name', $location);
                     })
                     ->when($sortParameter == 'base_price_low', function ($query) {
@@ -75,7 +77,7 @@ class CategoryController extends Controller
                     ->where('category_id', $categoryId)
                     ->where('product_state_id', '1')
                     ->with(['category:id,name', 'user.shop', 'product_image'])
-                    ->when($categoryId == '1', function ($query) use($location) {
+                    ->when($categoryId == '1' || $categoryId == '8', function ($query) use($location) {
                         $query->whereRelation('user.cities', 'name', $location);
                     })
                     ->when($sortParameter == 'base_price_low', function ($query) {

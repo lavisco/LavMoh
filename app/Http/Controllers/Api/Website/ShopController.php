@@ -30,17 +30,17 @@ class ShopController extends Controller
         $shop = Shop::findOrFail($shopId);
         $sortParameter = request('sortValue');
 
-        $products = Product::where('user_id', $shop->user_id)
-                        ->where('product_state_id', '1')
-                        ->with(['category:id,name', 'user.shop', 'product_image'])
-                        ->where(function($q) use($location) {
+        $products = Product::with(['category:id,name', 'user.shop', 'product_image'])
+                        ->where(function($q) use($location, $shop) {
                             $q->where('category_id', '=', '1')
-                            ->whereRelation('user.shop', 'status', 1)
+                            ->where('user_id', $shop->user_id)
+                            ->where('product_state_id', '1')
                             ->whereRelation('user.cities', 'name', $location);
                         })
-                        ->orWhere(function($q) {
+                        ->orWhere(function($q) use($shop) {
                             $q->where('category_id', '!=', '1')
-                                ->whereRelation('user.shop', 'status', 1);
+                                ->where('product_state_id', '1')
+                                ->where('user_id', $shop->user_id);
                         })
                         ->when($sortParameter == 'base_price_low', function ($query) {
                             return $query->oldest('base_price');
@@ -54,17 +54,17 @@ class ShopController extends Controller
                         ->latest()
                         ->paginate(10);
 
-        $productslimited = Product::where('user_id', $shop->user_id)
-                        ->where('product_state_id', '1')
-                        ->with(['product_image'])
-                        ->where(function($q) use($location) {
+        $productslimited = Product::with(['product_image'])
+                        ->where(function($q) use($location, $shop) {
                             $q->where('category_id', '=', '1')
-                            ->whereRelation('user.shop', 'status', 1)
+                            ->where('user_id', $shop->user_id)
+                            ->where('product_state_id', '1')
                             ->whereRelation('user.cities', 'name', $location);
                         })
-                        ->orWhere(function($q) {
+                        ->orWhere(function($q) use($shop) {
                             $q->where('category_id', '!=', '1')
-                                ->whereRelation('user.shop', 'status', 1);
+                                ->where('product_state_id', '1')
+                                ->where('user_id', $shop->user_id);
                         })
                         ->latest()
                         ->take(10)

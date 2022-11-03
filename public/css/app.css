@@ -13250,12 +13250,12 @@ footer {
   background-color: #fff;
   color: #dd1e50;
   border: none;
-  box-shadow: rgba(226, 226, 226, 0.596) 0 0 0 1px;
+  box-shadow: none;
   border-radius: 12px;
 }
 .search-input .form-control {
   background-color: #fff !important;
-  box-shadow: rgba(226, 226, 226, 0.596) 0 0 0 1px !important;
+  box-shadow: none !important;
   color: #333333;
 }
 .search-input .form-control:focus {

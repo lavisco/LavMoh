@@ -3230,12 +3230,12 @@ footer {
         background-color: #fff;
         color: $lav-red;
         border: none;
-        box-shadow: rgba(226, 226, 226, 0.596) 0 0 0 1px;
+        box-shadow: none;
         border-radius: 12px;
     }
     .form-control {
         background-color: #fff !important;
-        box-shadow: rgba(226, 226, 226, 0.596) 0 0 0 1px !important;
+        box-shadow: none !important;
         color: $black;
         &:focus {
             background-color: $white !important;

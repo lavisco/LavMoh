@@ -957,7 +957,7 @@
                                                     <div
                                                         class="
                                                             mb-2
-                                                            large-img-upload-box
+                                                            small-img-upload-box
                                                         "
                                                     >
                                                         <img

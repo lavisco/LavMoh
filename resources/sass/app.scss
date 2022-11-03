@@ -55,8 +55,8 @@ main {
 h1 {
     color: $black;
     font-style: normal;
-    font-weight: 600;
-    font-size: 34px;
+    font-weight: 700;
+    font-size: 40px;
     line-height: 60px;
     text-align: center;
     text-transform: capitalize;
@@ -88,7 +88,7 @@ h4 {
     letter-spacing: 0.01em;
 }
 h5 {
-    font-size: 18px;
+    font-size: 16px;
     line-height: 1.8;
     text-align: center;
     font-weight: 600;
@@ -1223,7 +1223,7 @@ button.bg-black:hover {
 /*---------------------hero---------------------*/
 .hero-default {
     background-color: $lav-red;
-    height: 430px !important;
+    height: 440px !important;
     align-items: flex-start !important;
     padding: 0 !important;
 }
@@ -1329,6 +1329,82 @@ button.bg-black:hover {
     }
     .swiper-pagination-bullet-active {
         opacity: 1;
+    }
+}
+
+.seller-slide-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background: $light-grey;
+    text-align: left;
+    border-radius: 32px;
+    margin-top: -60px;
+    z-index: 10;
+    position: relative;
+    padding: 80px;
+    margin-left: 40px;
+    margin-right: 40px;
+    gap: 40px;
+
+    h1,
+    p {
+        color: $black;
+        margin-bottom: 0 !important;
+    }
+
+    p {
+        max-height: 100px;
+        max-width: 700px;
+        overflow: hidden;
+    }
+
+    h5 {
+        color: $dark-grey;
+        text-align: left;
+        margin-bottom: 16px;
+    }
+
+    .seller-slide-logo {
+        height: 280px;
+        min-width: 280px;
+        width: 280px;
+        border-radius: 24px;
+        background-size: cover;
+        background-position: center;
+    }
+
+    .seller-slide-logo-sm {
+        height: 60px;
+        width: 60px;
+        min-width: 60px;
+        border-radius: 12px;
+        background-size: cover;
+        background-position: center;
+        display: none;
+        margin-right: 16px;
+    }
+}
+
+@media (max-width: 768px) {
+    .seller-slide-content {
+        margin-left: 0;
+        margin-right: 0;
+        padding: 30px 24px;
+
+        h1,
+        p,
+        h5 {
+            text-align: left;
+        }
+
+        .seller-slide-logo {
+            display: none;
+        }
+
+        .seller-slide-logo-sm {
+            display: block;
+        }
     }
 }
 
@@ -2514,17 +2590,17 @@ footer {
     }
 }
 
-#location-search-input{
+#location-search-input {
     height: 44px;
     border-radius: 6px;
     padding: 0;
-    
+
     input[type="text"] {
         font-size: 14px;
         padding: 6px 8px;
         border-radius: 12px;
     }
-    .input-group-text{
+    .input-group-text {
         background-color: transparent;
         border: none;
         padding: 8px;
@@ -2609,9 +2685,6 @@ footer {
     background-color: #fafafa;
     .card {
         background-color: transparent;
-    }
-    .breadcrumb {
-        background-color: #fafafa;
     }
 }
 .dashboard-side-nav {
@@ -3380,7 +3453,7 @@ footer {
     font-weight: 400 !important;
 }
 
-.timeline-card{
+.timeline-card {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -3388,7 +3461,7 @@ footer {
     width: max-content;
     margin-bottom: 8px;
 
-    .name{
+    .name {
         width: 80px;
         font-size: 12px;
         text-align: center;
@@ -3399,7 +3472,7 @@ footer {
     }
 }
 
-.mobile-card-chip{
+.mobile-card-chip {
     width: 90px;
     font-size: 11px;
     text-align: center;
@@ -3671,6 +3744,15 @@ footer {
 .large-img-upload-box {
     position: relative;
 }
+
+.small-img-upload-box {
+    position: relative;
+    width: 250px;
+
+    .display-banner {
+        width: 250px !important;
+    }
+}
 .display-banner {
     z-index: 1;
     width: 100%;
@@ -3783,10 +3865,18 @@ footer {
 }
 
 .breadcrumb {
-    background-color: $white;
-    font-size: 14px;
-    padding: 0 1rem;
+    background-color: transparent;
+    font-size: 13px;
+    padding: 0;
 }
+
+.breadcrumb-item + .breadcrumb-item::before {
+    float: left;
+    padding-right: 0.5rem;
+    color: #6c757d;
+    content: ">";
+}
+
 .badge {
     font-weight: 400;
     font-size: 0.8rem;

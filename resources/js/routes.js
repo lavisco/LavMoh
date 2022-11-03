@@ -669,7 +669,7 @@ export let routes = [
         },
     },
     {
-        path: "/shop/:shopId/:slug",
+        path: "/shop/:shopId/:location/:slug",
         name: "shop",
         component: require("./components/website/Seller.vue").default,
         meta: {

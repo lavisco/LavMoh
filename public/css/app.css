@@ -10065,8 +10065,8 @@ main {
 h1 {
   color: #333333;
   font-style: normal;
-  font-weight: 600;
-  font-size: 34px;
+  font-weight: 700;
+  font-size: 40px;
   line-height: 60px;
   text-align: center;
   text-transform: capitalize;
@@ -10102,7 +10102,7 @@ h4 {
 }
 
 h5 {
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.8;
   text-align: center;
   font-weight: 600;
@@ -11275,7 +11275,7 @@ button.bg-black:hover {
 /*---------------------hero---------------------*/
 .hero-default {
   background-color: #dd1e50;
-  height: 430px !important;
+  height: 440px !important;
   align-items: flex-start !important;
   padding: 0 !important;
 }
@@ -11377,6 +11377,73 @@ button.bg-black:hover {
   opacity: 1;
 }
 
+.seller-slide-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: #FAFAFA;
+  text-align: left;
+  border-radius: 32px;
+  margin-top: -60px;
+  z-index: 10;
+  position: relative;
+  padding: 80px;
+  margin-left: 40px;
+  margin-right: 40px;
+  gap: 40px;
+}
+.seller-slide-content h1,
+.seller-slide-content p {
+  color: #333333;
+  margin-bottom: 0 !important;
+}
+.seller-slide-content p {
+  max-height: 100px;
+  max-width: 700px;
+  overflow: hidden;
+}
+.seller-slide-content h5 {
+  color: #4e4e4e;
+  text-align: left;
+  margin-bottom: 16px;
+}
+.seller-slide-content .seller-slide-logo {
+  height: 280px;
+  min-width: 280px;
+  width: 280px;
+  border-radius: 24px;
+  background-size: cover;
+  background-position: center;
+}
+.seller-slide-content .seller-slide-logo-sm {
+  height: 60px;
+  width: 60px;
+  min-width: 60px;
+  border-radius: 12px;
+  background-size: cover;
+  background-position: center;
+  display: none;
+  margin-right: 16px;
+}
+
+@media (max-width: 768px) {
+  .seller-slide-content {
+    margin-left: 0;
+    margin-right: 0;
+    padding: 30px 24px;
+  }
+  .seller-slide-content h1,
+.seller-slide-content p,
+.seller-slide-content h5 {
+    text-align: left;
+  }
+  .seller-slide-content .seller-slide-logo {
+    display: none;
+  }
+  .seller-slide-content .seller-slide-logo-sm {
+    display: block;
+  }
+}
 .gallery-item {
   position: relative;
   background-color: #ecacff;
@@ -12675,9 +12742,6 @@ footer {
 .main-content .card {
   background-color: transparent;
 }
-.main-content .breadcrumb {
-  background-color: #fafafa;
-}
 
 .dashboard-side-nav {
   position: fixed;
@@ -13718,6 +13782,14 @@ footer {
   position: relative;
 }
 
+.small-img-upload-box {
+  position: relative;
+  width: 250px;
+}
+.small-img-upload-box .display-banner {
+  width: 250px !important;
+}
+
 .display-banner {
   z-index: 1;
   width: 100%;
@@ -13833,9 +13905,16 @@ footer {
 }
 
 .breadcrumb {
-  background-color: #ffffff;
-  font-size: 14px;
-  padding: 0 1rem;
+  background-color: transparent;
+  font-size: 13px;
+  padding: 0;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  float: left;
+  padding-right: 0.5rem;
+  color: #6c757d;
+  content: ">";
 }
 
 .badge {

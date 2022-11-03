@@ -109,6 +109,7 @@
                         params: {
                             shopId: shop.id,
                             slug: shop.slug,
+                            location: locationActive,
                         },
                     }"
                 >

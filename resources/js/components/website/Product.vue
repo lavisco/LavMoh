@@ -531,6 +531,7 @@
                                                         .id,
                                                     slug: product.user.shop
                                                         .slug,
+                                                    location: locationActive,
                                                 },
                                             }"
                                         >

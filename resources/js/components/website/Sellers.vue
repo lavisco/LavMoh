@@ -53,6 +53,7 @@
                                 params: {
                                     shopId: shop.id,
                                     slug: shop.slug,
+                                    location: locationActive,
                                 },
                             }"
                         >
@@ -90,6 +91,15 @@ export default {
     watch: {
         searchText(after, before) {
             Fire.$emit("reloadRecords");
+        },
+    },
+
+    computed: {
+        currency() {
+            return this.$store.getters.selectedCurrency;
+        },
+        locationActive() {
+            return this.$store.getters.selectedLocation;
         },
     },
 

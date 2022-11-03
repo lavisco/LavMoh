@@ -10266,7 +10266,8 @@ button:hover {
 }
 button:focus {
   background-color: #333333;
-  border: 1px solid #333333;
+  border: 1px solid #ffffff;
+  box-shadow: 0 0 0 0.1rem rgba(83, 83, 83, 0.16);
   outline: none;
 }
 @media (max-width: 768px) {
@@ -10289,6 +10290,11 @@ button:focus {
   background-color: #333333;
   border-color: #333333;
   color: #ffffff;
+}
+.btn:focus {
+  border: 1px solid #ffffff;
+  box-shadow: 0 0 0 0.1rem rgba(83, 83, 83, 0.16);
+  outline: none;
 }
 
 .btn-primary {
@@ -10343,6 +10349,7 @@ button:focus {
 
 .btn-grey {
   background-color: #c5c5c5 !important;
+  border-color: #c5c5c5 !important;
 }
 .btn-grey:hover {
   background-color: #adadad !important;
@@ -12958,9 +12965,6 @@ footer {
   .main-dashboard-content .search-input .form-control {
     padding: 8px 20px !important;
   }
-  .main-dashboard-content .btn-sm, .main-dashboard-content .btn-group-sm > .btn {
-    font-size: 15px;
-  }
   .main-dashboard-content .custom-select {
     font-size: 15px;
     padding: 7px 12px;
@@ -13300,8 +13304,7 @@ footer {
 
 .dashboard-card {
   background: #ffffff;
-  border: 1px solid #f0f0f0;
-  border-radius: 6px;
+  border-radius: 12px;
   color: #4e4e4e;
   padding: 40px;
 }
@@ -13334,16 +13337,15 @@ footer {
 
 .dashboard-info-card {
   background-color: #fff !important;
-  border: 1px solid #f0f0f0;
   padding: 30px;
   padding-bottom: 23px;
-  border-radius: 8px;
+  border-radius: 12px;
 }
 
 .dashboard-var-card {
   background-color: #f8f7f7;
-  border: 1px solid #f0f0f0;
   padding: 10px 18px;
+  border-radius: 12px;
 }
 .dashboard-var-card .btn {
   border: none;
@@ -13569,6 +13571,45 @@ footer {
   color: #ffffff;
 }
 
+/*------------------------------dashboard shop page------------------------------*/
+.dashboard-shop {
+  display: flex;
+  gap: 32px;
+  flex-direction: row;
+  padding: 0 15px;
+}
+.dashboard-shop .col-left {
+  width: 250px;
+}
+.dashboard-shop .col-right {
+  width: calc(100% - 282px);
+}
+.dashboard-shop .shop-banner {
+  background-color: #dd1e50;
+  border-radius: 12px;
+  padding: 30px;
+  min-height: 250px;
+}
+.dashboard-shop .shop-banner h1,
+.dashboard-shop .shop-banner h5,
+.dashboard-shop .shop-banner p {
+  text-align: left;
+  color: #ffffff !important;
+}
+
+@media (max-width: 768px) {
+  .dashboard-shop {
+    display: flex;
+    gap: 24px;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+  }
+  .dashboard-shop .col-left,
+.dashboard-shop .col-right {
+    width: 100%;
+  }
+}
 /*------------------------------hide content------------------------------*/
 .hide-content {
   display: none !important;
@@ -13798,7 +13839,7 @@ footer {
      object-fit: cover;
   -o-object-position: center;
      object-position: center;
-  border-radius: 8px;
+  border-radius: 12px;
 }
 
 .img-upload-btn {

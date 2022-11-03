@@ -4,6 +4,7 @@
             class="hero hero-default hero-seller"
             v-bind:style="{ 'background-image': 'url(' + shop.path + ')' }"
         ></div>
+
         <div class="seller-slide-content">
             <div
                 class="seller-slide-logo"

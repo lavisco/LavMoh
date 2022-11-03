@@ -19,7 +19,6 @@
                             <div class="input-form-compact">
                                 <div class="card dashboard-info-card">
                                     <h4 class="mb-3">Seller Information</h4>
-                                    <hr class="mt-0" />
                                     <div class="form-group row">
                                         <div class="col-md-6">
                                             <label
@@ -71,7 +70,6 @@
                                 <!-- Contact -->
                                 <div class="card dashboard-info-card mt-4">
                                     <h4 class="mb-3">Contact Details</h4>
-                                    <hr class="mt-0" />
                                     <div class="form-group row">
                                         <div class="col-md-6">
                                             <label
@@ -125,7 +123,6 @@
                                 <!-- Address -->
                                 <div class="card dashboard-info-card mt-4">
                                     <h4 class="mb-3">Your Address</h4>
-                                    <hr class="mt-0" />
                                     <p class="mb-4 note">
                                         Please make sure you add the most recent
                                         address.
@@ -310,7 +307,6 @@
                                     <h4 class="mb-3">
                                         Earnings Deposit Account Information
                                     </h4>
-                                    <hr class="mt-0" />
                                     <p class="mb-4 note">
                                         Please make sure the details you provide
                                         is accurate and updated. All payments
@@ -499,7 +495,7 @@
                                     mt-5
                                 "
                             >
-                                <button type="submit" class="btn">
+                                <button type="submit">
                                     <i
                                         class="fas fa-pen-nib mr-2"
                                         aria-hidden="true"

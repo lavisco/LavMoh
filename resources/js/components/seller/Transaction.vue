@@ -45,7 +45,7 @@
                             <div class="col-lg-8 text-md-right">
                                 <button
                                     type="button"
-                                    class="btn btn-primary mobile-add-btn btn-md-full"
+                                    class="mobile-add-btn btn-md-full"
                                     @click.prevent="requestWithdrawal"
                                 >
                                     Request
@@ -73,12 +73,8 @@
                                         <th scope="col" class="table-col-sm">
                                             Total Amount
                                         </th>
-                                        <th>
-                                            Bank Charge
-                                        </th>
-                                        <th>
-                                            Lavisco Commission
-                                        </th>
+                                        <th>Bank Charge</th>
+                                        <th>Lavisco Commission</th>
                                         <th class="table-col-sm">
                                             Amount Payable
                                         </th>
@@ -162,85 +158,10 @@
                                         mb-2
                                     "
                                 >
-                                    <div class="mr-3 mb-3">
-                                        <div class="mobile-card-title mb-1">
-                                            {{ transaction.code }}
-                                        </div>
-                                        <span
-                                            class="
-                                                badge badge-pill
-                                                bg-red
-                                                white
-                                                text-xxs
-                                            "
-                                        >
-                                            {{ transaction.status }}
-                                        </span>
-                                    </div>
-
-                                    <div class="mobile-card-dropdown">
-                                        <button
-                                            type="button"
-                                            class="btn btn-sm mobile-btn-sm"
-                                            data-toggle="dropdown"
-                                            aria-haspopup="true"
-                                            aria-expanded="false"
-                                        >
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                aria-hidden="true"
-                                                role="img"
-                                                width="23px"
-                                                height="23px"
-                                                preserveAspectRatio="xMidYMid meet"
-                                                viewBox="0 0 16 16"
-                                            >
-                                                <g
-                                                    fill="none"
-                                                    stroke="#df4e6b"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                                    stroke-width="1.5"
-                                                >
-                                                    <circle
-                                                        cx="8"
-                                                        cy="2.5"
-                                                        r=".75"
-                                                    />
-                                                    <circle
-                                                        cx="8"
-                                                        cy="8"
-                                                        r=".75"
-                                                    />
-                                                    <circle
-                                                        cx="8"
-                                                        cy="13.5"
-                                                        r=".75"
-                                                    />
-                                                </g>
-                                            </svg>
-                                        </button>
-                                        <div
-                                            class="
-                                                dropdown-menu
-                                                dropdown-menu-right
-                                            "
-                                        >
-                                            <button
-                                                class="
-                                                    dropdown-item
-                                                    mobile-dropdown-item
-                                                "
-                                                type="button"
-                                                @click.prevent="
-                                                    newModal(transaction)
-                                                "
-                                            >
-                                                View
-                                            </button>
-                                        </div>
-                                    </div>
+                                    {{ transaction.code }}
+                                    <span class="badge-special bg-red">
+                                        {{ transaction.status }}
+                                    </span>
                                 </div>
                                 <div
                                     class="mb-3"
@@ -249,18 +170,29 @@
                                     <div class="mobile-card-sub-title">
                                         Update Status
                                     </div>
-                                    <button
-                                        class="btn btn-sm mobile-btn-sm"
-                                        type="button"
-                                        @click.prevent="
-                                            setRequestedTransactions(
-                                                transaction,
-                                                index
-                                            )
-                                        "
-                                    >
-                                        Withdraw
-                                    </button>
+                                    <div class="d-flex flex-row">
+                                        <button
+                                            class="btn btn-sm mr-2"
+                                            type="button"
+                                            @click.prevent="
+                                                setRequestedTransactions(
+                                                    transaction,
+                                                    index
+                                                )
+                                            "
+                                        >
+                                            Withdraw
+                                        </button>
+                                        <button
+                                            class="btn btn-sm"
+                                            type="button"
+                                            @click.prevent="
+                                                newModal(transaction)
+                                            "
+                                        >
+                                            View
+                                        </button>
+                                    </div>
                                 </div>
                                 <div
                                     class="
@@ -604,10 +536,13 @@ export default {
 
         loadTransactions() {
             axios
-                .get("/api/seller/transactions?page=" +
-                        this.pagination.current_page, {
-                    params: { searchText: this.searchText },
-                })
+                .get(
+                    "/api/seller/transactions?page=" +
+                        this.pagination.current_page,
+                    {
+                        params: { searchText: this.searchText },
+                    }
+                )
                 .then(({ data }) => {
                     this.transactions = data.data;
                     this.pagination.last_page = data.last_page;

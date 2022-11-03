@@ -22,7 +22,6 @@
                     <div class="card dashboard-info-card">
                         <!-- Header -->
                         <h4 class="mb-3">Add a new product</h4>
-                        <hr class="mt-0" />
                         <p class="mb-3 mb-md-4 note">
                             Setup your product details and other specifications
                             as you require. Remember to tell all about your item
@@ -425,7 +424,7 @@
                     <div class="card dashboard-info-card mt-4">
                         <!-- Header -->
                         <h4 class="mb-3">Product Photos</h4>
-                        <hr class="mt-0" />
+                        
                         <p class="mb-3 mb-md-4 note">
                             Add atleast 3 photos showcasing your product. The
                             Primary photo is the first image customers see on
@@ -528,7 +527,7 @@
                     <div class="card dashboard-info-card mt-4">
                         <!-- Header -->
                         <h4 class="mb-3">Inventory & Pricing</h4>
-                        <hr class="mt-0" />
+                        
                         <div class="form-group row mb-md-1">
                             <label
                                 class="col-md-3 col-form-label"
@@ -649,7 +648,7 @@
                     <div class="card dashboard-info-card mt-4">
                         <!-- Header -->
                         <h4 class="mb-3">Variations</h4>
-                        <hr class="mt-0" />
+                        
                         <p class="mb-3 mb-md-4 note">
                             Add available options like color or size, and give
                             your customers the opportunity to customize their
@@ -1236,7 +1235,7 @@
                     <div class="card dashboard-info-card mt-4">
                         <!-- Header -->
                         <h4 class="mb-3">Shipping</h4>
-                        <hr class="mt-0" />
+                        
                         <p class="mb-3 mb-md-4 note">
                             Set clear and realistic shipping expectations for
                             shoppers
@@ -1288,7 +1287,7 @@
                     <div class="input-form text-center mt-4">
                         <button
                             type="button"
-                            class="btn btn-grey mr-3"
+                            class="btn-grey mr-3"
                             @click="cancel()"
                         >
                             <i class="fas fa-times mr-2" aria-hidden="true"></i>
@@ -1296,7 +1295,6 @@
                         </button>
                         <button
                             type="submit"
-                            class="btn"
                             :disabled="submitButtonDisabled"
                         >
                             <i class="fas fa-save mr-2" aria-hidden="true"></i>

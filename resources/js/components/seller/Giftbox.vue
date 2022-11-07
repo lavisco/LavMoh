@@ -126,7 +126,7 @@
                                         <td class="text-right">
                                             <div class="d-flex">
                                                 <router-link
-                                                    class="btn btn-sm mr-3"
+                                                    class="btn-sm mr-3"
                                                     :to="{
                                                         name: 'seller/giftboxes/listing/edit',
                                                         params: {
@@ -138,7 +138,7 @@
                                                     Edit
                                                 </router-link>
                                                 <a
-                                                    class="btn btn-sm"
+                                                    class="btn-sm"
                                                     href="#"
                                                     @click.prevent="
                                                         newModal(product)
@@ -217,7 +217,7 @@
                                     <div class="mobile-card-dropdown">
                                         <button
                                             type="button"
-                                            class="btn btn-sm mobile-btn-sm"
+                                            class="btn-sm mobile-btn-sm"
                                             data-toggle="dropdown"
                                             aria-haspopup="true"
                                             aria-expanded="false"

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Seller;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
+use App\Http\Requests\ProductSellerRequest;
 use App\Http\Requests\ProductUpdateRequest;
 use App\Models\Category;
 use App\Models\Occasion;
@@ -56,7 +57,7 @@ class ProductController extends Controller
         ]);
     }
     
-    public function store(ProductRequest $request)
+    public function store(ProductSellerRequest $request)
     {
         //$this->authorize('create', Product::class);
         
@@ -83,6 +84,7 @@ class ProductController extends Controller
         $this->storeVariation($request, $product->id);
 
         //product images
+        $this->uploadPrimaryImage($request, $product->id);
         $this->uploadImage($request, $product->id);
     }
 
@@ -159,16 +161,25 @@ class ProductController extends Controller
         }
     }
 
+    public function uploadPrimaryImage($request, $productId)
+    {
+        ProductImage::create([
+            'image_path' => $this->storeImage($request->image_path_primary, $request->photoNamePrimary),
+            'title' => $request->photoNamePrimary,
+            'primary_image' => true,
+            'product_id' => $productId,
+        ]);
+    }
+
     public function uploadImage($request, $productId)
     {
         for ($i=0; $i < count($request->image_path); $i++) { 
-                $primary = $request->image_path[$i] == $request->image_path[0] ? true : false;
-                ProductImage::create([
-                    'image_path' => $this->storeImage($request->image_path[$i], $request->photoName[$i]),
-                    'title' => $request->photoName[$i],
-                    'primary_image' => $primary,
-                    'product_id' => $productId,
-                ]);
+            ProductImage::create([
+                'image_path' => $this->storeImage($request->image_path[$i], $request->photoName[$i]),
+                'title' => $request->photoName[$i],
+                'primary_image' => false,
+                'product_id' => $productId,
+            ]);
         }
     }
 

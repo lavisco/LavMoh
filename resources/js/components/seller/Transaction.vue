@@ -113,7 +113,7 @@
                                         <td class="text-right">
                                             <div class="d-flex">
                                                 <a
-                                                    class="btn btn-sm mr-3"
+                                                    class="btn-sm mr-3"
                                                     @click.prevent="
                                                         setRequestedTransactions(
                                                             transaction,
@@ -129,7 +129,7 @@
                                                     Withdraw
                                                 </a>
                                                 <a
-                                                    class="btn btn-sm"
+                                                    class="btn-sm"
                                                     @click.prevent="
                                                         newModal(transaction)
                                                     "
@@ -172,7 +172,7 @@
                                     </div>
                                     <div class="d-flex flex-row">
                                         <button
-                                            class="btn btn-sm mr-2"
+                                            class="btn-sm mr-2"
                                             type="button"
                                             @click.prevent="
                                                 setRequestedTransactions(
@@ -184,7 +184,7 @@
                                             Withdraw
                                         </button>
                                         <button
-                                            class="btn btn-sm"
+                                            class="btn-sm"
                                             type="button"
                                             @click.prevent="
                                                 newModal(transaction)

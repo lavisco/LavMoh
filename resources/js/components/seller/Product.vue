@@ -128,7 +128,7 @@
                                         <td class="text-right">
                                             <div class="d-flex">
                                                 <router-link
-                                                    class="btn btn-sm mr-3"
+                                                    class="btn-sm mr-3"
                                                     :to="{
                                                         name: 'seller/products/listing/edit',
                                                         params: {
@@ -156,7 +156,7 @@
                                                     Edit
                                                 </router-link>
                                                 <a
-                                                    class="btn btn-sm"
+                                                    class="btn-sm"
                                                     href="#"
                                                     @click.prevent="
                                                         newModal(product)
@@ -274,7 +274,7 @@
                                         </div>
                                         <div class="d-flex flex-row">
                                             <router-link
-                                                class="btn btn-sm mr-2"
+                                                class="btn-sm mr-2"
                                                 :to="{
                                                     name: 'seller/products/listing/edit',
                                                     params: {
@@ -301,7 +301,7 @@
                                                 Edit
                                             </router-link>
                                             <a
-                                                class="btn btn-sm"
+                                                class="btn-sm"
                                                 href="#"
                                                 @click.prevent="
                                                     newModal(product)

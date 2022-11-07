@@ -134,6 +134,9 @@ export default {
         sortValue(after, before) {
             Fire.$emit("reloadRecords");
         },
+        locationActive(after, before) {
+            Fire.$emit("reloadRecords");
+        },
     },
 
     computed: {
@@ -149,7 +152,10 @@ export default {
         loadProducts() {
             axios
                 .get("/api/products?page=" + this.pagination.current_page, {
-                    params: { sortValue: this.sortValue },
+                    params: {
+                        sortValue: this.sortValue,
+                        location: this.locationActive,
+                    },
                 })
                 .then(({ data }) => {
                     this.products = data.data;

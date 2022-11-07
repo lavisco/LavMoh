@@ -78,7 +78,7 @@
                             <router-link to="/seller/products/listing">
                                 <button
                                     type="button"
-                                    class="btn btn-sm mobile-add-btn"
+                                    class="btn-sm mobile-add-btn"
                                 >
                                     <i class="fas fa-plus mr-2"></i>
                                     Add Product
@@ -113,7 +113,7 @@
                                     <button
                                         type="button"
                                         class="
-                                            btn btn-sm btn-primary
+                                            btn-sm btn-primary
                                             mobile-add-btn
                                         "
                                     >

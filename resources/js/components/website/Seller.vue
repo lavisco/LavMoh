@@ -1,7 +1,7 @@
 <template>
     <div class="container-fluid">
         <div
-            class="hero hero-default hero-seller"
+            class="hero hero-seller"
             v-bind:style="{ 'background-image': 'url(' + shop.bigpath + ')' }"
         ></div>
 

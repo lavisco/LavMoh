@@ -303,21 +303,27 @@ button {
     font-weight: 600;
     border-radius: 6px;
     text-align: center;
-    &:hover,
-    &:focus {
+    &:hover {
+        color: $white;
+        background-color: #4e4e4e;
+        border-color: #4e4e4e;
+
         svg {
             path {
                 fill: $white;
             }
         }
     }
-    &:hover {
-        color: $white;
-    }
     &:focus {
         background-color: #f7f7f7;
         border-color: #4e4e4e;
         color: $black;
+
+        svg {
+            path {
+                fill: $black;
+            }
+        }
     }
     @media (max-width: 768px) {
         font-size: 15px;
@@ -1232,9 +1238,15 @@ button.bg-black:hover {
 }
 
 /*---------------------hero---------------------*/
+.hero-seller {
+    height: 460px !important;
+    background-color: $lav-red;
+    align-items: flex-start !important;
+    padding: 0 !important;
+}
 .hero-default {
     background-color: $lav-red;
-    height: 440px !important;
+    height: 360px !important;
     align-items: flex-start !important;
     padding: 0 !important;
 }
@@ -1342,8 +1354,6 @@ button.bg-black:hover {
         opacity: 1;
     }
 }
-
-
 
 .seller-slide-content {
     display: flex;
@@ -2991,11 +3001,11 @@ footer {
 }
 
 .dashboard-footer {
-    color: #f8f7f7;
-    background-color: $dark-grey;
-    padding: 10px 20px;
+    color: $black;
     font-size: 12px;
     letter-spacing: 0.02rem;
+    padding: 8px 20px;
+    border-top: 2px solid #f0f0f0;
 }
 
 .dashboard-link-sm {
@@ -3690,30 +3700,37 @@ footer {
 }
 
 /*---------------image-upload---------------*/
+
 .image-upload-box {
-    width: 200px;
-    height: 200px;
-    border-radius: 8px;
-    border: 2px dotted #676767;
-    background: #ffffff;
-    object-fit: cover;
-    object-position: center;
     cursor: pointer;
     position: relative;
-    padding: 0;
+    width: 180px;
+    height: 180px;
+    background-color: #fff;
+    border: 2px solid #ededed;
+    border-radius: 12px;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 
-    &:hover {
-        background-color: #e6e6e6;
+    p {
+        text-align: center;
     }
 
+    &:hover,
     &:focus {
-        border-color: $lav-pink;
+        background-color: #fafafa;
+        border: 2px solid $lav-red;
         outline: none;
     }
-}
 
-.image-upload-box-primary {
-    border: 2px solid #676767;
+    &-primary {
+        width: 250px;
+        height: 250px;
+    }
 }
 
 .image-upload-filename {
@@ -3833,7 +3850,7 @@ footer {
     width: 250px;
     height: 250px;
     background-color: #fff;
-    border: 2px solid #EDEDED;
+    border: 2px solid #ededed;
     border-radius: 12px;
     background-size: cover;
     background-position: center;
@@ -3842,8 +3859,14 @@ footer {
     align-items: center;
     justify-content: center;
 
-    p{
+    p {
         text-align: center;
+    }
+
+    &:hover,
+    &:focus {
+        background-color: #fafafa;
+        border: 2px solid $lav-red;
     }
 }
 
@@ -3985,11 +4008,11 @@ footer {
     width: 100%;
     margin-bottom: 120px;
 
-    .header{
+    .header {
         margin-bottom: 32px;
     }
 
-    h1{
+    h1 {
         text-align: left !important;
     }
 

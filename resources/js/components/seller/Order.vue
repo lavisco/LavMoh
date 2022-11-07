@@ -214,7 +214,7 @@
                                                 @click.prevent="
                                                     setCurrentStatus(order)
                                                 "
-                                                class="btn btn-sm btn-fit-text"
+                                                class="btn-sm btn-fit-text"
                                                 title="Change status"
                                                 v-if="
                                                     statusUpdateActive(
@@ -232,7 +232,7 @@
                                         </td>
                                         <td class="text-right">
                                             <a
-                                                class="btn btn-sm"
+                                                class="btn-sm"
                                                 href="#"
                                                 @click.prevent="
                                                     viewModal(order)
@@ -397,7 +397,7 @@
                                             @click.prevent="
                                                 setCurrentStatus(order)
                                             "
-                                            class="btn btn-sm"
+                                            class="btn-sm"
                                             title="Change status"
                                         >
                                             {{
@@ -410,7 +410,7 @@
                                             Actions
                                         </div>
                                         <a
-                                            class="btn btn-sm"
+                                            class="btn-sm"
                                             href="#"
                                             @click.prevent="viewModal(order)"
                                         >

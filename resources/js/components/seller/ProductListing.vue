@@ -152,7 +152,7 @@
                             </label>
                             <div class="col-md-9">
                                 <button
-                                    class="btn btn-sm"
+                                    class="btn-sm"
                                     type="button"
                                     @click.prevent="
                                         subcategoryModal('occasionMode')
@@ -183,7 +183,7 @@
                             </label>
                             <div class="col-md-9">
                                 <button
-                                    class="btn btn-sm"
+                                    class="btn-sm"
                                     type="button"
                                     @click.prevent="
                                         subcategoryModal('recipientMode')
@@ -424,7 +424,7 @@
                     <div class="card dashboard-info-card mt-4">
                         <!-- Header -->
                         <h4 class="mb-3">Product Photos</h4>
-                        
+
                         <p class="mb-3 mb-md-4 note">
                             Add atleast 3 photos showcasing your product. The
                             Primary photo is the first image customers see on
@@ -432,19 +432,108 @@
                         </p>
 
                         <div class="form-group row">
-                            <div class="col">
+                            <label
+                                class="col-md-3 col-form-label"
+                                for="category_id"
+                            >
+                                Primary Photo
+                                <strong class="text-danger"> *</strong>
+                                <p class="text-xs mt-2">
+                                    The primary photo is the first image
+                                    customers see on the website.
+                                </p>
+                            </label>
+
+                            <div class="col-md-9">
+                                <div>
+                                    <input
+                                        type="file"
+                                        style="display: none"
+                                        @change.prevent="fileSelectedPrimary"
+                                        ref="fileInputPrimary"
+                                        name="product_image_path"
+                                    />
+
+                                    <button
+                                        class="
+                                            image-upload-box
+                                            image-upload-box-primary
+                                        "
+                                        :style="{
+                                            'background-image':
+                                                'url(' + urlPrimary + ')',
+                                        }"
+                                        @click.prevent="
+                                            $refs.fileInputPrimary.click()
+                                        "
+                                    >
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="48"
+                                            height="48"
+                                            preserveAspectRatio="xMidYMid meet"
+                                            viewBox="0 0 20 20"
+                                            v-show="!form.image_path_primary"
+                                        >
+                                            <path
+                                                fill="#dd1e50"
+                                                d="M10 5.5a4.5 4.5 0 1 1-9 0a4.5 4.5 0 0 1 9 0Zm-4-2a.5.5 0 0 0-1 0V5H3.5a.5.5 0 0 0 0 1H5v1.5a.5.5 0 0 0 1 0V6h1.5a.5.5 0 0 0 0-1H6V3.5Zm8 .5h-3.207a5.466 5.466 0 0 0-.393-1H14a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-3.6c.317.162.651.294 1 .393V14c0 .373.102.722.28 1.02l4.669-4.588a1.5 1.5 0 0 1 2.102 0l4.67 4.588A1.99 1.99 0 0 0 16 14V6a2 2 0 0 0-2-2Zm0 3.5a1.5 1.5 0 1 1-3 0a1.5 1.5 0 0 1 3 0Zm-1 0a.5.5 0 1 0-1 0a.5.5 0 0 0 1 0Zm-8.012 8.226A1.99 1.99 0 0 0 6 16h8c.37 0 .715-.1 1.012-.274l-4.662-4.58a.5.5 0 0 0-.7 0l-4.662 4.58Z"
+                                            />
+                                        </svg>
+                                        <p class="text-xs mt-3 mb-0">
+                                            {{
+                                                form.photoNamePrimary
+                                                    ? ``
+                                                    : `Select image by`
+                                            }}
+                                            <br />
+                                            <strong>{{
+                                                form.photoNamePrimary
+                                                    ? ``
+                                                    : `clicking here`
+                                            }}</strong>
+                                        </p>
+                                    </button>
+
+                                    <HasError
+                                        :form="form"
+                                        :field="`image_path_primary`"
+                                    />
+
+                                    <p
+                                        class="text-xs mt-1"
+                                        v-show="form.photoNamePrimary"
+                                    >
+                                        {{ form.photoNamePrimary }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label
+                                class="col-md-3 col-form-label"
+                                for="category_id"
+                            >
+                                Secondary Photos
+                                <strong class="text-danger"> *</strong>
+                                <p class="text-xs mt-2">
+                                    Add atleast 2 photos showcasing your
+                                    product.
+                                </p>
+                            </label>
+                            <div class="col-md-9">
                                 <div
                                     class="
                                         d-flex
                                         align-items-start
-                                        justify-content-center
                                         flex-row flex-wrap
                                         gap
                                     "
                                 >
                                     <div
                                         class="img-full"
-                                        v-for="(n, index) in 6"
+                                        v-for="(n, index) in 5"
                                     >
                                         <div>
                                             <input
@@ -462,9 +551,11 @@
 
                                             <button
                                                 class="image-upload-box"
-                                                :class="{
-                                                    'image-upload-box-primary':
-                                                        index == 0,
+                                                :style="{
+                                                    'background-image':
+                                                        'url(' +
+                                                        url[index] +
+                                                        ')',
                                                 }"
                                                 @click.prevent="
                                                     $refs.fileInput[
@@ -472,26 +563,34 @@
                                                     ].click()
                                                 "
                                             >
-                                                <img
-                                                    v-if="url[index]"
-                                                    :src="url[index]"
-                                                    class="banner-container"
-                                                />
                                                 <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    width="48"
+                                                    height="48"
+                                                    preserveAspectRatio="xMidYMid meet"
+                                                    viewBox="0 0 20 20"
                                                     v-show="
                                                         !form.image_path[index]
                                                     "
-                                                    width="45"
-                                                    height="45"
-                                                    viewBox="0 0 58 58"
-                                                    fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg"
                                                 >
                                                     <path
-                                                        d="M36.25 29C36.25 30.9228 35.4862 32.7669 34.1265 34.1265C32.7669 35.4862 30.9228 36.25 29 36.25C27.0772 36.25 25.2331 35.4862 23.8735 34.1265C22.5138 32.7669 21.75 30.9228 21.75 29C21.75 27.0772 22.5138 25.2331 23.8735 23.8735C25.2331 22.5138 27.0772 21.75 29 21.75C30.9228 21.75 32.7669 22.5138 34.1265 23.8735C35.4862 25.2331 36.25 27.0772 36.25 29ZM19.1255 10.2587C19.5768 9.3548 20.271 8.59445 21.1303 8.06301C21.9896 7.53156 22.9799 7.25003 23.9902 7.25H34.0098C35.0201 7.25003 36.0104 7.53156 36.8697 8.06301C37.729 8.59445 38.4232 9.3548 38.8745 10.2587L40.9951 14.5H43.5C45.4228 14.5 47.2669 15.2638 48.6265 16.6235C49.9862 17.9831 50.75 19.8272 50.75 21.75V39.875C50.75 41.7978 49.9862 43.6419 48.6265 45.0015C47.2669 46.3612 45.4228 47.125 43.5 47.125H14.5C12.5772 47.125 10.7331 46.3612 9.37348 45.0015C8.01384 43.6419 7.25 41.7978 7.25 39.875V21.75C7.25 19.8272 8.01384 17.9831 9.37348 16.6235C10.7331 15.2638 12.5772 14.5 14.5 14.5H17.0049L19.1255 10.2587ZM39.875 29C39.875 26.1158 38.7292 23.3497 36.6898 21.3102C34.6503 19.2708 31.8842 18.125 29 18.125C26.1158 18.125 23.3497 19.2708 21.3102 21.3102C19.2708 23.3497 18.125 26.1158 18.125 29C18.125 31.8842 19.2708 34.6503 21.3102 36.6898C23.3497 38.7292 26.1158 39.875 29 39.875C31.8842 39.875 34.6503 38.7292 36.6898 36.6898C38.7292 34.6503 39.875 31.8842 39.875 29Z"
-                                                        fill="#4e4e4e"
+                                                        fill="#dd1e50"
+                                                        d="M10 5.5a4.5 4.5 0 1 1-9 0a4.5 4.5 0 0 1 9 0Zm-4-2a.5.5 0 0 0-1 0V5H3.5a.5.5 0 0 0 0 1H5v1.5a.5.5 0 0 0 1 0V6h1.5a.5.5 0 0 0 0-1H6V3.5Zm8 .5h-3.207a5.466 5.466 0 0 0-.393-1H14a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-3.6c.317.162.651.294 1 .393V14c0 .373.102.722.28 1.02l4.669-4.588a1.5 1.5 0 0 1 2.102 0l4.67 4.588A1.99 1.99 0 0 0 16 14V6a2 2 0 0 0-2-2Zm0 3.5a1.5 1.5 0 1 1-3 0a1.5 1.5 0 0 1 3 0Zm-1 0a.5.5 0 1 0-1 0a.5.5 0 0 0 1 0Zm-8.012 8.226A1.99 1.99 0 0 0 6 16h8c.37 0 .715-.1 1.012-.274l-4.662-4.58a.5.5 0 0 0-.7 0l-4.662 4.58Z"
                                                     />
                                                 </svg>
+                                                <p class="text-xs mt-3 mb-0">
+                                                    {{
+                                                        form.photoName[index]
+                                                            ? ``
+                                                            : `Select image by`
+                                                    }}
+                                                    <br />
+                                                    <strong>{{
+                                                        form.photoName[index]
+                                                            ? ``
+                                                            : `clicking here`
+                                                    }}</strong>
+                                                </p>
                                             </button>
 
                                             <HasError
@@ -500,21 +599,10 @@
                                             />
 
                                             <p
-                                                class="
-                                                    image-upload-filename
-                                                    my-0
-                                                "
+                                                class="text-xs mt-1"
+                                                v-show="form.photoName[index]"
                                             >
-                                                {{
-                                                    form.photoName[index]
-                                                        ? form.photoName[index]
-                                                        : `Select Image`
-                                                }}
-                                                {{
-                                                    index == 0
-                                                        ? `: Primary (shows up on thumbnail)`
-                                                        : ""
-                                                }}
+                                                {{ form.photoName[index] }}
                                             </p>
                                         </div>
                                     </div>
@@ -527,7 +615,7 @@
                     <div class="card dashboard-info-card mt-4">
                         <!-- Header -->
                         <h4 class="mb-3">Inventory & Pricing</h4>
-                        
+
                         <div class="form-group row mb-md-1">
                             <label
                                 class="col-md-3 col-form-label"
@@ -648,7 +736,7 @@
                     <div class="card dashboard-info-card mt-4">
                         <!-- Header -->
                         <h4 class="mb-3">Variations</h4>
-                        
+
                         <p class="mb-3 mb-md-4 note">
                             Add available options like color or size, and give
                             your customers the opportunity to customize their
@@ -1186,7 +1274,7 @@
                                                             <button
                                                                 type="button"
                                                                 class="
-                                                                    btn btn-sm
+                                                                    btn-sm
                                                                 "
                                                                 @click.prevent="
                                                                     addRow(
@@ -1221,7 +1309,7 @@
                                 v-show="showAddVariationBtn()"
                             >
                                 <button
-                                    class="btn btn-sm"
+                                    class="btn-sm"
                                     type="button"
                                     @click.prevent="setVariationMode"
                                 >
@@ -1235,7 +1323,7 @@
                     <div class="card dashboard-info-card mt-4">
                         <!-- Header -->
                         <h4 class="mb-3">Shipping</h4>
-                        
+
                         <p class="mb-3 mb-md-4 note">
                             Set clear and realistic shipping expectations for
                             shoppers
@@ -1293,10 +1381,7 @@
                             <i class="fas fa-times mr-2" aria-hidden="true"></i>
                             Cancel
                         </button>
-                        <button
-                            type="submit"
-                            :disabled="submitButtonDisabled"
-                        >
+                        <button type="submit" :disabled="submitButtonDisabled">
                             <i class="fas fa-save mr-2" aria-hidden="true"></i>
                             {{ submitButtonText }}
                         </button>
@@ -1427,6 +1512,7 @@ export default {
         recipients: [],
         sellers: [],
         url: [],
+        urlPrimary: "",
         occasionName: [],
         recipientName: [],
         has_weight: "",
@@ -1455,6 +1541,8 @@ export default {
             category_id: "",
             image_path: [],
             photoName: [],
+            image_path_primary: "",
+            photoNamePrimary: "",
 
             //pivot table arrays
             product_occasion: [],
@@ -1515,6 +1603,22 @@ export default {
         /*
          * Image
          */
+
+        fileSelectedPrimary(e) {
+            let file = e.target.files[0];
+            let reader = new FileReader();
+            let limit = 1024 * 1024 * 2;
+            if (file["size"] > limit) {
+                alert("File size has crossed maximum limit, which is 2mb!");
+                return false;
+            }
+            reader.onloadend = (file) => {
+                this.form.image_path_primary = reader.result;
+                this.form.photoNamePrimary = e.target.files[0].name;
+                this.urlPrimary = URL.createObjectURL(e.target.files[0]);
+            };
+            reader.readAsDataURL(file);
+        },
 
         fileSelected(e, imagenum) {
             let file = e.target.files[0];

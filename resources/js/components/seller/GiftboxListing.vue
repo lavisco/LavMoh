@@ -85,7 +85,7 @@
                             </label>
                             <div class="col-md-9">
                                 <button
-                                    class="btn btn-sm"
+                                    class="btn-sm"
                                     type="button"
                                     @click.prevent="
                                         subcategoryModal('occasionMode')
@@ -116,7 +116,7 @@
                             </label>
                             <div class="col-md-9">
                                 <button
-                                    class="btn btn-sm"
+                                    class="btn-sm"
                                     type="button"
                                     @click.prevent="
                                         subcategoryModal('recipientMode')

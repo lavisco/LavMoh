@@ -10329,16 +10329,21 @@ button:focus {
   border-radius: 6px;
   text-align: center;
 }
-.btn-sm:hover svg path, .btn-group-sm > .btn:hover svg path, .btn-sm:focus svg path, .btn-group-sm > .btn:focus svg path {
-  fill: #ffffff;
-}
 .btn-sm:hover, .btn-group-sm > .btn:hover {
   color: #ffffff;
+  background-color: #4e4e4e;
+  border-color: #4e4e4e;
+}
+.btn-sm:hover svg path, .btn-group-sm > .btn:hover svg path {
+  fill: #ffffff;
 }
 .btn-sm:focus, .btn-group-sm > .btn:focus {
   background-color: #f7f7f7;
   border-color: #4e4e4e;
   color: #333333;
+}
+.btn-sm:focus svg path, .btn-group-sm > .btn:focus svg path {
+  fill: #333333;
 }
 @media (max-width: 768px) {
   .btn-sm, .btn-group-sm > .btn {
@@ -11283,9 +11288,16 @@ button.bg-black:hover {
 }
 
 /*---------------------hero---------------------*/
+.hero-seller {
+  height: 460px !important;
+  background-color: #dd1e50;
+  align-items: flex-start !important;
+  padding: 0 !important;
+}
+
 .hero-default {
   background-color: #dd1e50;
-  height: 440px !important;
+  height: 360px !important;
   align-items: flex-start !important;
   padding: 0 !important;
 }
@@ -13023,11 +13035,11 @@ footer {
   }
 }
 .dashboard-footer {
-  color: #f8f7f7;
-  background-color: #4e4e4e;
-  padding: 10px 20px;
+  color: #333333;
   font-size: 12px;
   letter-spacing: 0.02rem;
+  padding: 8px 20px;
+  border-top: 2px solid #f0f0f0;
 }
 
 .dashboard-link-sm {
@@ -13707,29 +13719,31 @@ footer {
 
 /*---------------image-upload---------------*/
 .image-upload-box {
-  width: 200px;
-  height: 200px;
-  border-radius: 8px;
-  border: 2px dotted #676767;
-  background: #ffffff;
-  -o-object-fit: cover;
-     object-fit: cover;
-  -o-object-position: center;
-     object-position: center;
   cursor: pointer;
   position: relative;
-  padding: 0;
+  width: 180px;
+  height: 180px;
+  background-color: #fff;
+  border: 2px solid #ededed;
+  border-radius: 12px;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
-.image-upload-box:hover {
-  background-color: #e6e6e6;
+.image-upload-box p {
+  text-align: center;
 }
-.image-upload-box:focus {
-  border-color: #f94270;
+.image-upload-box:hover, .image-upload-box:focus {
+  background-color: #fafafa;
+  border: 2px solid #dd1e50;
   outline: none;
 }
-
 .image-upload-box-primary {
-  border: 2px solid #676767;
+  width: 250px;
+  height: 250px;
 }
 
 .image-upload-filename {
@@ -13869,7 +13883,7 @@ footer {
   width: 250px;
   height: 250px;
   background-color: #fff;
-  border: 2px solid #EDEDED;
+  border: 2px solid #ededed;
   border-radius: 12px;
   background-size: cover;
   background-position: center;
@@ -13880,6 +13894,10 @@ footer {
 }
 .logo-upload-box p {
   text-align: center;
+}
+.logo-upload-box:hover, .logo-upload-box:focus {
+  background-color: #fafafa;
+  border: 2px solid #dd1e50;
 }
 
 .product-display-card {

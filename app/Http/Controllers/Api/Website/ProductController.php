@@ -14,6 +14,7 @@ class ProductController extends Controller
     public function index()
     {
         $sortParameter = request('sortValue');
+        $location = request('location');
 
         $query = Product::whereHas('user.shop', function($q) {
                         return $q->where('status', 1);
@@ -21,7 +22,31 @@ class ProductController extends Controller
                     ->where('product_state_id', '1')
                     ->with(['category:id,name', 'user.shop', 'product_image']);
 
-        return $sortParameter == 'base_price_low' ? $query->oldest('base_price')->paginate(25) : $query->latest(request('sortValue'))->paginate(25);
+        $products = Product::with(['category:id,name', 'user.shop', 'product_image'])
+                    ->where(function($q) use($location) {
+                        $q->where('category_id', '=', '1')
+                            ->where('product_state_id', '1')
+                            ->whereRelation('user.shop', 'status', 1)
+                            ->whereRelation('user.cities', 'name', $location);
+                    })
+                    ->orWhere(function($q){ 
+                        $q->where('category_id', '!=', '1')
+                            ->where('product_state_id', '1')
+                            ->whereRelation('user.shop', 'status', 1);
+                    })
+                    ->when($sortParameter == 'base_price_low', function ($query) {
+                        return $query->oldest('base_price');
+                    })
+                    ->when($sortParameter == 'base_price', function ($query) {
+                        return $query->latest('base_price');
+                    })
+                    ->when($sortParameter == 'created_at', function ($query) {
+                        return $query->latest();
+                    })
+                    ->latest()
+                    ->paginate(25);
+
+        return $products;
     }
 
     public function show($productId, $location)

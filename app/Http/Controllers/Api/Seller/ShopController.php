@@ -32,6 +32,7 @@ class ShopController extends Controller
     {
         ///$this->authorize('update', $shop);
         $this->updateImage($request, $shop->banner);
+        $this->updateBigImage($request, $shop->banner_big);
 
         $request->merge([
             'country' => "Sri Lanka",
@@ -71,6 +72,22 @@ class ShopController extends Controller
     {
         if($request->banner != $currentImage){
             $request->merge(['banner' => $this->storeImage($request->banner, $request->photoName)]);
+
+            $existingImage = storage_path('app/public/').$currentImage;
+            if(file_exists($existingImage)){
+                @unlink($existingImage);
+            }
+        }
+    }
+
+    /**
+     * Update big banner image in storage(delete existing image and save the newly upload one), & save the path to db.
+     */
+
+    public function updateBigImage($request, $currentImage)
+    {
+        if($request->banner_big != $currentImage){
+            $request->merge(['banner_big' => $this->storeImage($request->banner_big, $request->photoNameBig)]);
 
             $existingImage = storage_path('app/public/').$currentImage;
             if(file_exists($existingImage)){

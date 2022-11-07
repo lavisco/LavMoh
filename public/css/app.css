@@ -10332,6 +10332,9 @@ button:focus {
 .btn-sm:hover svg path, .btn-group-sm > .btn:hover svg path, .btn-sm:focus svg path, .btn-group-sm > .btn:focus svg path {
   fill: #ffffff;
 }
+.btn-sm:hover, .btn-group-sm > .btn:hover {
+  color: #ffffff;
+}
 .btn-sm:focus, .btn-group-sm > .btn:focus {
   background-color: #f7f7f7;
   border-color: #4e4e4e;
@@ -13860,6 +13863,25 @@ footer {
   height: 32px;
 }
 
+.logo-upload-box {
+  cursor: pointer;
+  position: relative;
+  width: 250px;
+  height: 250px;
+  background-color: #fff;
+  border: 2px solid #EDEDED;
+  border-radius: 12px;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.logo-upload-box p {
+  text-align: center;
+}
+
 .product-display-card {
   border: 1px solid rgba(51, 51, 51, 0.125);
 }
@@ -14003,20 +14025,30 @@ footer {
 
 .seller-card {
   width: 100%;
-  background-color: #f7f7f780;
-  box-shadow: 0px 0px 11px -5px #d3d3d3;
+  margin-bottom: 120px;
+}
+.seller-card .header {
+  margin-bottom: 32px;
+}
+.seller-card h1 {
+  text-align: left !important;
+}
+.seller-card .seller-logo {
+  height: 90px;
+  min-width: 90px;
+  border-radius: 12px;
+  background-size: cover;
+  background-position: center;
+  margin-right: 16px;
 }
 .seller-card .seller-card-about {
   max-height: 50px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.seller-card img {
-  border-radius: 12px;
-}
 .seller-card .topseller-products {
   width: 100%;
-  gap: 20px;
+  gap: 16px;
 }
 .seller-card .topseller-product-img {
   width: 25%;
@@ -14026,7 +14058,12 @@ footer {
 }
 @media (max-width: 768px) {
   .seller-card {
-    padding: 14px;
+    margin-bottom: 90px;
+  }
+  .seller-card .seller-logo {
+    height: 40px;
+    min-width: 40px;
+    margin-right: 12px;
   }
   .seller-card .product-seller-img {
     height: 250px;

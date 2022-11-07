@@ -17,36 +17,27 @@
             <img src="/images/lavisco/loading.gif" />
         </section>
         <section v-else class="section-best-seller mb-5">
-            <div class="card seller-card mb-5" v-for="shop in shops">
-                <div class="row">
-                    <div class="col-md-4 mb-3 mb-md-0">
-                        <img
-                            :src="shop.path"
-                            class="product-seller-img"
-                            :alt="shop.name"
-                        />
-                    </div>
-                    <div class="col-md-8">
-                        <h1 class="mb-0 text-left">{{ shop.name }}</h1>
-                        <span v-html="shopRating(shop.rating)"></span>
-                        <p class="my-4 seller-card-about">
-                            {{ shop.about }}
-                        </p>
-                        <div v-if="shop.products">
-                            <h6>Top selling products</h6>
-                            <div class="d-flex topseller-products mt-3">
-                                <img
-                                    :src="productImg(product.product_image)"
-                                    class="topseller-product-img"
-                                    :alt="product.title"
-                                    :title="product.title"
-                                    v-for="product in shop.products
-                                        .latest_products"
-                                    :key="product.id"
-                                />
-                            </div>
+            <div class="seller-card" v-for="shop in shops">
+                <div class="d-flex flex-row align-items-md-center header">
+                    <div
+                        class="seller-logo"
+                        v-bind:style="{
+                            'background-image': 'url(' + shop.path + ')',
+                        }"
+                    ></div>
+                    <div
+                        class="
+                            d-flex
+                            flex-column flex-md-row
+                            align-items-md-center
+                            justify-content-between
+                            w-100
+                        "
+                    >
+                        <div>
+                            <h1 class="mb-0">{{ shop.name }}</h1>
+                            <span v-html="shopRating(shop.rating)"></span>
                         </div>
-
                         <router-link
                             :to="{
                                 name: 'shop',
@@ -57,9 +48,62 @@
                                 },
                             }"
                         >
-                            <button class="mt-4 btn-md-full">
-                                View Seller
-                            </button>
+                            <button class="btn-sm mt-3 mt-md-0">View Seller</button>
+                        </router-link>
+                    </div>
+                </div>
+                <div v-if="shop.products">
+                    <h4 class="text-left">Latest Products</h4>
+                    <div class="d-flex card-container-display mt-3">
+                        <router-link
+                            :to="{
+                                name: 'products/product',
+                                params: {
+                                    productId: product.id,
+                                    slug: product.slug,
+                                    location: locationActive,
+                                },
+                            }"
+                            class="card item-card"
+                            v-for="product in shop.products.latest_products"
+                            :key="product.id"
+                        >
+                            <div class="card-img">
+                                <img :src="productImg(product.product_image)" />
+                            </div>
+                            <div class="card-body">
+                                <div class="card-body-text">
+                                    <div class="card-title">
+                                        {{ product.title }}
+                                    </div>
+                                    <div class="card-price">
+                                        {{ currency.symbol }}
+                                        {{
+                                            product.base_price *
+                                            currency.exchange_rate
+                                        }}
+                                        <span
+                                            v-show="product.has_variations == 1"
+                                        >
+                                            +
+                                        </span>
+                                    </div>
+                                </div>
+                                <button class="bag-sm" type="button">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="29"
+                                        height="29"
+                                        preserveAspectRatio="xMidYMid meet"
+                                        viewBox="0 0 1024 1024"
+                                    >
+                                        <path
+                                            fill="white"
+                                            d="M832 312H696v-16c0-101.6-82.4-184-184-184s-184 82.4-184 184v16H192c-17.7 0-32 14.3-32 32v536c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V344c0-17.7-14.3-32-32-32zm-432-16c0-61.9 50.1-112 112-112s112 50.1 112 112v16H400v-16zm392 544H232V384h96v88c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-88h224v88c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-88h96v456z"
+                                        />
+                                    </svg>
+                                </button>
+                            </div>
                         </router-link>
                     </div>
                 </div>

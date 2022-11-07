@@ -137,7 +137,12 @@
                                         <tr>
                                             <th scope="col"></th>
                                             <th scope="col">Title</th>
-                                            <th scope="col" class="hide-content-sm">Price</th>
+                                            <th
+                                                scope="col"
+                                                class="hide-content-sm"
+                                            >
+                                                Price
+                                            </th>
                                             <th scope="col"></th>
                                         </tr>
                                     </thead>
@@ -164,7 +169,9 @@
                                                     {{ product.base_price }}
                                                 </div>
                                             </td>
-                                            <td class="hide-content-sm">{{ product.base_price }}</td>
+                                            <td class="hide-content-sm">
+                                                {{ product.base_price }}
+                                            </td>
                                             <td class="text-right">
                                                 <router-link
                                                     :to="{
@@ -296,7 +303,9 @@
                     <div class="modal-body">
                         <div class="d-flex flex-md-row flex-column">
                             <div class="col-md-3 shop-setup-menu">
-                                <h3 class="text-left white mb-4">Activation Form</h3>
+                                <h3 class="text-left white mb-4">
+                                    Activation Form
+                                </h3>
                                 <p class="mb-4 white">
                                     Please fill out the form to setup your shop.
                                     Start selling today!
@@ -939,7 +948,12 @@
                                                     <label
                                                         class="col-form-label"
                                                         for="banner"
-                                                        >Upload banner
+                                                        >Upload logo
+                                                        <strong
+                                                            class="text-danger"
+                                                        >
+                                                            *
+                                                        </strong>
                                                         <p
                                                             class="
                                                                 text-xs
@@ -947,59 +961,70 @@
                                                                 mb-1
                                                             "
                                                         >
-                                                            Banner image must be
-                                                            under 2MB.
-                                                            Recommended
-                                                            resolution is 1920 x
-                                                            1080px.
+                                                            Image must be under
+                                                            2MB.
                                                         </p>
                                                     </label>
                                                     <div
                                                         class="
                                                             mb-2
-                                                            small-img-upload-box
+                                                            logo-upload-box
+                                                        "
+                                                        :style="{
+                                                            'background-image':
+                                                                'url(' +
+                                                                url +
+                                                                ')',
+                                                        }"
+                                                        @click.prevent="
+                                                            $refs.fileInput.click()
                                                         "
                                                     >
-                                                        <img
-                                                            v-if="url"
-                                                            :src="url"
-                                                            class="
-                                                                display-banner
-                                                            "
-                                                        />
-                                                        <img
-                                                            v-if="!url"
-                                                            src="/images/lavisco/img-bg.jpg"
-                                                            class="
-                                                                display-banner
-                                                            "
-                                                        />
-                                                        <button
-                                                            @click.prevent="
-                                                                $refs.fileInput.click()
-                                                            "
-                                                            class="
-                                                                img-upload-btn
-                                                            "
-                                                            title="Upload Image"
+                                                        <svg
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            width="48"
+                                                            height="48"
+                                                            preserveAspectRatio="xMidYMid meet"
+                                                            viewBox="0 0 20 20"
+                                                            v-show="!url"
                                                         >
-                                                            <svg
-                                                                xmlns="http://www.w3.org/2000/svg"
-                                                                xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                                aria-hidden="true"
-                                                                role="img"
-                                                                width="1em"
-                                                                height="1em"
-                                                                preserveAspectRatio="xMidYMid meet"
-                                                                viewBox="0 0 24 24"
-                                                                title="Upload Image"
-                                                            >
-                                                                <path
-                                                                    fill="white"
-                                                                    d="M21 6.25A3.25 3.25 0 0 0 17.75 3H6.25A3.25 3.25 0 0 0 3 6.25v12.283c0 1.303 1.57 1.962 2.5 1.048l4.03-3.96a.634.634 0 0 0 .02-.021l1.925-1.885l.083-.071a.75.75 0 0 1 .966.07l2.08 2.037l1.06-1.06l-2.09-2.048l-.129-.116a2.25 2.25 0 0 0-3.02.116l-4.452 4.36h.01L4.5 18.46V6.25c0-.966.784-1.75 1.75-1.75h11.5c.967 0 1.75.784 1.75 1.75v4.982c.48-.19.994-.263 1.5-.22V6.25Zm-3.496 2.502a2.252 2.252 0 1 0-4.505 0a2.252 2.252 0 0 0 4.505 0Zm-3.005 0a.752.752 0 1 1 1.505 0a.752.752 0 0 1-1.505 0Zm-1.302 9.82l5.902-5.902a2.285 2.285 0 1 1 3.233 3.232l-5.903 5.902a2.684 2.684 0 0 1-1.247.707l-1.83.457a.985.985 0 0 1-.15.027c-.59.204-2.979.574-3.827-.088c-.574-.448-.46-1.334-.218-1.818c.04-.078-.02-.18-.105-.166c-.66.103-1.243.45-1.827.799c-.783.468-1.57.936-2.549.815c-.979-.122-1.468-.726-1.71-1.255c-.099-.216.18-.401.388-.287c.469.255 1.106.496 1.631.38c.375-.084.904-.458 1.496-.877c1.066-.753 2.337-1.653 3.292-1.268c.84.337 1.46 1.15 1.03 2.113c-.052.118 0 .264.127.293c.423.097.778.066 1.133-.105l.428-1.712c.118-.472.362-.903.706-1.247Z"
-                                                                />
-                                                            </svg>
-                                                        </button>
+                                                            <path
+                                                                fill="#dd1e50"
+                                                                d="M10 5.5a4.5 4.5 0 1 1-9 0a4.5 4.5 0 0 1 9 0Zm-4-2a.5.5 0 0 0-1 0V5H3.5a.5.5 0 0 0 0 1H5v1.5a.5.5 0 0 0 1 0V6h1.5a.5.5 0 0 0 0-1H6V3.5Zm8 .5h-3.207a5.466 5.466 0 0 0-.393-1H14a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-3.6c.317.162.651.294 1 .393V14c0 .373.102.722.28 1.02l4.669-4.588a1.5 1.5 0 0 1 2.102 0l4.67 4.588A1.99 1.99 0 0 0 16 14V6a2 2 0 0 0-2-2Zm0 3.5a1.5 1.5 0 1 1-3 0a1.5 1.5 0 0 1 3 0Zm-1 0a.5.5 0 1 0-1 0a.5.5 0 0 0 1 0Zm-8.012 8.226A1.99 1.99 0 0 0 6 16h8c.37 0 .715-.1 1.012-.274l-4.662-4.58a.5.5 0 0 0-.7 0l-4.662 4.58Z"
+                                                            />
+                                                        </svg>
+                                                        <svg
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            width="48"
+                                                            height="48"
+                                                            preserveAspectRatio="xMidYMid meet"
+                                                            viewBox="0 0 20 20"
+                                                            v-show="url"
+                                                        >
+                                                            <path
+                                                                fill="#333333"
+                                                                d="M5.5 10a4.5 4.5 0 1 0 0-9a4.5 4.5 0 0 0 0 9Zm-2-5h-.005A.5.5 0 0 1 3 4.372V3a.5.5 0 0 1 1 0v.195a2.75 2.75 0 1 1-.55 4.139a.5.5 0 0 1 .745-.667A1.75 1.75 0 1 0 4.597 4H5a.5.5 0 0 1 0 1H3.5ZM3 10.4c.317.162.651.294 1 .393V14c0 .373.102.722.28 1.02l4.669-4.588a1.5 1.5 0 0 1 2.102 0l4.67 4.588A1.99 1.99 0 0 0 16 14V6a2 2 0 0 0-2-2h-3.207a5.466 5.466 0 0 0-.393-1H14a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-3.6Zm11-2.9a1.5 1.5 0 1 1-3 0a1.5 1.5 0 0 1 3 0Zm-1 0a.5.5 0 1 0-1 0a.5.5 0 0 0 1 0Zm-8.012 8.226A1.99 1.99 0 0 0 6 16h8c.37 0 .715-.1 1.012-.274l-4.662-4.58a.5.5 0 0 0-.7 0l-4.662 4.58Z"
+                                                            />
+                                                        </svg>
+                                                        <p
+                                                            class="
+                                                                text-xs
+                                                                mt-4
+                                                                mb-0
+                                                            "
+                                                        >
+                                                            {{
+                                                                form.photoName
+                                                                    ? ``
+                                                                    : `Select image by`
+                                                            }}
+                                                            <br />
+                                                            <strong>{{
+                                                                form.photoName
+                                                                    ? ``
+                                                                    : `clicking here`
+                                                            }}</strong>
+                                                        </p>
                                                     </div>
                                                     <input
                                                         type="file"
@@ -1010,12 +1035,11 @@
                                                         ref="fileInput"
                                                         name="banner"
                                                     />
-
                                                     <p class="text-xs mt-0">
                                                         {{
                                                             form.photoName
-                                                                ? form.photoName
-                                                                : `Upload image`
+                                                                ? `You have selected ${form.photoName}. To change image, click on the above box.`
+                                                                : `Click on the above box to select image.`
                                                         }}
                                                     </p>
                                                     <HasError

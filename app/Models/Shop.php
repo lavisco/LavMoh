@@ -18,6 +18,7 @@ class Shop extends Model
         'name',
         'slug',
         'banner',
+        'banner_big',
         'url',
         'about',
         'rating',
@@ -32,11 +33,16 @@ class Shop extends Model
         'user_id',
     ];
 
-    protected $appends = ['path'];
+    protected $appends = ['path', 'bigpath'];
 
     public function getPathAttribute()
     {
         return $this->banner ? Storage::disk('s3')->temporaryUrl('public/' . $this->banner, '+2 minutes') : "/images/lavisco/img-bg.jpg";
+    }
+
+    public function getBigpathAttribute()
+    {
+        return $this->banner_big ? Storage::disk('s3')->temporaryUrl('public/' . $this->banner_big, '+2 minutes') : "/images/lavisco/img-bg.jpg";
     }
 
     //shop:user M:1

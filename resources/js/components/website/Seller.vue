@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div
             class="hero hero-default hero-seller"
-            v-bind:style="{ 'background-image': 'url(' + shop.path + ')' }"
+            v-bind:style="{ 'background-image': 'url(' + shop.bigpath + ')' }"
         ></div>
 
         <div class="seller-slide-content">

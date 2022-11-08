@@ -35,6 +35,7 @@ class ProductExport implements FromCollection, WithMapping, WithHeadings
             $row->category->name,
             $row->product_state->state,
             $row->user->name,
+            $row->user->shop->name,
         ];
     }
 
@@ -56,6 +57,7 @@ class ProductExport implements FromCollection, WithMapping, WithHeadings
             'Category',
             'State',
             'User',
+            'Shop',
         ];
     }
 }

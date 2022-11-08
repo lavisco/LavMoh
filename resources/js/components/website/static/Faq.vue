@@ -19,7 +19,7 @@
                             aria-expanded="true"
                             aria-controls="collapseOne"
                         >
-                            <h3 class="text-left mb-0">What is lavisco.lk?</h3>
+                            <h4 class="text-left mb-0">What is lavisco.lk?</h4>
                         </div>
 
                         <div
@@ -44,9 +44,9 @@
                             aria-expanded="true"
                             aria-controls="collapseTwo"
                         >
-                            <h3 class="text-left mb-0">
+                            <h4 class="text-left mb-0">
                                 What can I sell on Lavisco.lk?
-                            </h3>
+                            </h4>
                         </div>
 
                         <div
@@ -71,9 +71,9 @@
                             aria-expanded="true"
                             aria-controls="collapseThree"
                         >
-                            <h3 class="text-left mb-0">
+                            <h4 class="text-left mb-0">
                                 How can I sell on lavisco.lk?
-                            </h3>
+                            </h4>
                         </div>
 
                         <div
@@ -101,9 +101,9 @@
                             aria-expanded="true"
                             aria-controls="collapseFour"
                         >
-                            <h3 class="text-left mb-0">
+                            <h4 class="text-left mb-0">
                                 How can I list my product on lavisco.lk?
-                            </h3>
+                            </h4>
                         </div>
 
                         <div
@@ -145,10 +145,10 @@
                             aria-expanded="true"
                             aria-controls="collapseFive"
                         >
-                            <h3 class="text-left mb-0">
+                            <h4 class="text-left mb-0">
                                 Do I have to pay to signup as a seller on
                                 lavisco.lk?
-                            </h3>
+                            </h4>
                         </div>
 
                         <div
@@ -174,9 +174,9 @@
                             aria-expanded="true"
                             aria-controls="collapseSix"
                         >
-                            <h3 class="text-left mb-0">
+                            <h4 class="text-left mb-0">
                                 Do I have to pay a fee when I get an order?
-                            </h3>
+                            </h4>
                         </div>
 
                         <div
@@ -234,9 +234,9 @@
                             aria-expanded="true"
                             aria-controls="collapseSeven"
                         >
-                            <h3 class="text-left mb-0">
+                            <h4 class="text-left mb-0">
                                 How will I know when I get an order
-                            </h3>
+                            </h4>
                         </div>
 
                         <div
@@ -264,9 +264,9 @@
                             aria-expanded="true"
                             aria-controls="collapseEight"
                         >
-                            <h3 class="text-left mb-0">
+                            <h4 class="text-left mb-0">
                                 How will the delivery work?
-                            </h3>
+                            </h4>
                         </div>
 
                         <div

@@ -6,27 +6,19 @@
                     <div class="col-md-3 col-6 d-flex flex-column">
                         <h5>Sell on Lavisco</h5>
                         <a href="/merchant/login">Seller Sign In</a>
-                        <a href="/sell_on_lavisco">
-                            Onboarding
-                        </a>
-                        <a href="/sellers">
-                            Partner Vendors
-                        </a>
+                        <a href="/sell_on_lavisco"> Onboarding </a>
+                        <a href="/sellers"> Partner Vendors </a>
                     </div>
                     <div class="col-md-3 col-6 d-flex flex-column">
                         <h5>About Lavisco</h5>
                         <a href="/about">About us</a>
-                        <a href="/coming_soon">FAQ</a>
+                        <a href="/faq">FAQ</a>
                     </div>
                     <div class="col-md-3 col-6 d-flex flex-column mt-5 mt-md-0">
                         <h5>Shop on Lavisco</h5>
-                        <a href="/terms_and_conditions">
-                            Terms & Conditions
-                        </a>
+                        <a href="/terms_and_conditions"> Terms & Conditions </a>
                         <a href="/privacy_policy">Privacy</a>
-                        <a href="/delivery_policy">
-                            Delivery
-                        </a>
+                        <a href="/delivery_policy"> Delivery </a>
                         <a href="/payment_policy">Payment</a>
                     </div>
                     <div class="col-md-3 col-6 d-flex flex-column mt-5 mt-md-0">

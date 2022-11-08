@@ -11620,6 +11620,18 @@ section h1 {
   }
 }
 
+.accordion .card {
+  padding: 0;
+}
+.accordion .card-header {
+  margin-bottom: 0px;
+  border-bottom: 3px solid #9f9f9f20;
+  padding: 16px 24px;
+}
+.accordion .card-header:last-child {
+  border-bottom: 3px solid transparent;
+}
+
 /*---------------------seller-onboarding---------------------*/
 .seller-hero-img {
   position: relative;

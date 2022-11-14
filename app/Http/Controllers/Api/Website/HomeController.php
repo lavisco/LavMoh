@@ -45,7 +45,7 @@ class HomeController extends Controller
                             ->where('product_state_id', '1')
                             ->whereRelation('user.shop', 'status', 1);
                     })
-                    ->latest()->take(15)->get();
+                    ->latest()->take(10)->get();
 
         return response()->json([
             'products' => $products,

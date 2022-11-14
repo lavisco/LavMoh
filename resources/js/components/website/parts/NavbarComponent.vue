@@ -186,6 +186,7 @@
                                 class="navbar-close"
                                 id="close-sidenav"
                                 @click.prevent="displayMenu"
+                                name="close side nav"
                             >
                                 <svg
                                     width="24"
@@ -371,7 +372,7 @@
                             @click.native="displayMenu"
                             to="/select_login"
                         >
-                            <button class="mr-3 btn-sm btn bg-red white">
+                            <button class="mr-3 btn-sm btn bg-red white" name="login">
                                 Login
                             </button>
                         </router-link>
@@ -380,7 +381,7 @@
                             @click.native="displayMenu"
                             to="/sell_on_lavisco"
                         >
-                            <button class="btn-sm btn">Sell on Lavisco</button>
+                            <button class="btn-sm btn" name="sell on lavisco">Sell on Lavisco</button>
                         </router-link>
                     </div>
                 </div>

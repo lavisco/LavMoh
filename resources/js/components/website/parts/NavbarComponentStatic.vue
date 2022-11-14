@@ -185,6 +185,7 @@
                                 class="navbar-close"
                                 id="close-sidenav"
                                 @click.prevent="displayMenu"
+                                name="close side nav"
                             >
                                 <svg
                                     width="24"
@@ -388,13 +389,13 @@
                         "
                     >
                         <a href="/select_login">
-                            <button class="mr-3 btn-sm btn bg-red white">
+                            <button class="mr-3 btn-sm btn bg-red white" name="login">
                                 Login
                             </button>
                         </a>
 
                         <a href="/sell_on_lavisco">
-                            <button class="btn-sm btn">Sell on Lavisco</button>
+                            <button class="btn-sm btn" name="sell on lavisco">Sell on Lavisco</button>
                         </a>
                     </div>
                 </div>

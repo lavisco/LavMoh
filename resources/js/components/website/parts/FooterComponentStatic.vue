@@ -130,6 +130,7 @@
                                 height="33"
                                 preserveAspectRatio="xMidYMid meet"
                                 viewBox="0 0 1536 1536"
+                                title="lavisco facebook"
                             >
                                 <path
                                     fill="#e7e7e7"
@@ -147,6 +148,7 @@
                                 height="33"
                                 preserveAspectRatio="xMidYMid meet"
                                 viewBox="0 0 1536 1536"
+                                title="lavisco instagram"
                             >
                                 <path
                                     fill="#e7e7e7"

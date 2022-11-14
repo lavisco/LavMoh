@@ -19,6 +19,7 @@
                                     ? homeslider.path
                                     : '/images/lavisco/img-bg.jpg'
                             "
+                            :alt="homeslider.name"
                         />
                         <div class="slide-content">
                             <h1 class="title mb-3">{{ homeslider.name }}</h1>
@@ -26,7 +27,7 @@
                                 {{ homeslider.description }}
                             </h1>
                             <router-link :to="homeslider.link">
-                                <button class="btn-sm-black">
+                                <button class="btn-sm-black" :name="homeslider.link_text">
                                     {{ homeslider.link_text }}
                                 </button>
                             </router-link>
@@ -64,6 +65,7 @@
                                     :class="{
                                         'img-cover': !product.product_image,
                                     }"
+                                    :alt="product.title"
                                 />
                             </div>
                             <div class="card-body">
@@ -84,7 +86,7 @@
                                         </span>
                                     </div>
                                 </div>
-                                <button class="bag-sm" type="button">
+                                <button class="bag-sm" type="button" name="add to cart">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         width="29"
@@ -151,7 +153,7 @@
                                     },
                                 }"
                             >
-                                <button>
+                                <button :name="occasion.name">
                                     {{ occasion.name }}
                                 </button>
                             </router-link>
@@ -160,7 +162,7 @@
                 </div>
                 <div class="w-100 d-flex justify-content-end align-self-end">
                     <router-link class="view-more-link" to="/occasions">
-                        <button class="btn-sm-black">Browse All</button>
+                        <button class="btn-sm-black" name="browse occasions">Browse All</button>
                     </router-link>
                 </div>
             </section>
@@ -190,7 +192,7 @@
                                 },
                             }"
                         >
-                            <button>
+                            <button :name="recipient.name">
                                 {{ recipient.name }}
                             </button>
                         </router-link>
@@ -198,7 +200,7 @@
                 </div>
                 <div class="w-100 d-flex justify-content-end align-self-end">
                     <router-link class="view-more-link" to="/recipients">
-                        <button class="btn-sm-black">Browse All</button>
+                        <button class="btn-sm-black" name="browse recipients">Browse All</button>
                     </router-link>
                 </div>
             </section>
@@ -225,13 +227,13 @@
                             <img
                                 :src="category.path ? category.path : ''"
                                 class="gallery-img"
-                                alt="Image 1"
+                                :alt="category.name"
                             />
                             <h3 class="white">
                                 {{ category.name }}
                             </h3>
                             <div class="w-100 d-flex justify-content-end">
-                                <button class="btn-sm-black">Browse</button>
+                                <button class="btn-sm-black" name="browse category">Browse</button>
                             </div>
                         </router-link>
                     </div>
@@ -343,7 +345,7 @@
                         your competitors.
                     </h5>
                     <router-link to="/sell_on_lavisco">
-                        <button class="btn-sm-black">Become a Seller</button>
+                        <button class="btn-sm-black" name="seller registration">Become a Seller</button>
                     </router-link>
                 </div>
 
@@ -354,7 +356,7 @@
                         drops and discounts!
                     </h5>
                     <a href="/register">
-                        <button class="btn-sm-black">Sign up</button>
+                        <button class="btn-sm-black" name="buyer registration">Sign up</button>
                     </a>
                 </div>
             </section>
@@ -381,10 +383,6 @@ export default {
         recipients: [],
         categories: [],
         homesliders: [],
-        icon_cake: "",
-        icon_delivery: "",
-        icon_money: "",
-        icon_surprise: "",
         img_occasion: "",
         img_recipient: "",
         img_instruction: "",
@@ -460,10 +458,6 @@ export default {
                     this.recipients = response.data.recipients;
                     this.categories = response.data.categories;
                     this.homesliders = response.data.homesliders;
-                    this.icon_cake = response.data.icon_cake;
-                    this.icon_delivery = response.data.icon_delivery;
-                    this.icon_money = response.data.icon_money;
-                    this.icon_surprise = response.data.icon_surprise;
                     this.img_occasion = response.data.img_occasion;
                     this.img_recipient = response.data.img_recipient;
                     this.img_instruction = response.data.img_instruction;

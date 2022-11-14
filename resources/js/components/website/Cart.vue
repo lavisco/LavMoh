@@ -250,6 +250,7 @@
                     <button
                         class="checkout-btn"
                         @click.prevent="saveShopCartTotal(shop)"
+                        name="Proceed to Checkout"
                     >
                         Proceed to Checkout
                     </button>
@@ -316,6 +317,7 @@
                             class="checkout-btn btn-full"
                             data-dismiss="modal"
                             @click.prevent="guestLogin()"
+                            name="Continue as Guest"
                         >
                             Continue as Guest
                         </button>
@@ -357,6 +359,7 @@
                                 <button
                                     type="submit"
                                     class="checkout-btn btn-full btn-secondary"
+                                    name="Login"
                                 >
                                     Login
                                 </button>

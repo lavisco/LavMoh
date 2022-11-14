@@ -28,7 +28,10 @@
                                 :key="product_image.id"
                                 @click.prevent="setSliderImg(index)"
                             >
-                                <img :src="product_image.path" />
+                                <img
+                                    :src="product_image.path"
+                                    alt="product image"
+                                />
                             </div>
                         </div>
                         <div class="img-container">
@@ -49,6 +52,7 @@
                                                     sliderImgList.length
                                             ]
                                         "
+                                        alt="product image"
                                     />
                                 </div>
                             </transition-group>
@@ -334,6 +338,7 @@
                                 "
                                 type="submit"
                                 @click.prevent="addProductToCart(product)"
+                                 name="add to cart"
                             >
                                 Add to Cart
                             </button>
@@ -514,7 +519,7 @@
                                                 : '/images/lavisco/img-bg.jpg'
                                         "
                                         class="product-seller-img mr-md-4 mr-3"
-                                        alt=""
+                                        :alt="product.user.shop.name"
                                     />
                                     <div>
                                         <h5 class="mb-2">
@@ -537,6 +542,7 @@
                                         >
                                             <button
                                                 class="btn-secondary btn-sm"
+                                                 name="View Seller"
                                             >
                                                 View Seller
                                             </button>
@@ -612,6 +618,7 @@
                                         ? product.product_image.path
                                         : '/images/lavisco/img-bg.jpg'
                                 "
+                                :alt="product.title"
                             />
                             <div>
                                 {{ product.title }}
@@ -640,6 +647,7 @@
                                     mb-md-0 mb-2
                                 "
                                 data-dismiss="modal"
+                                 name="Keep shopping"
                             >
                                 Keep shopping
                             </button>
@@ -647,6 +655,7 @@
                                 type="button"
                                 @click.prevent="goToCart()"
                                 class="btn-full"
+                                 name="go to cart"
                             >
                                 Go to Cart
                             </button>

@@ -51,6 +51,7 @@
                                                 ? order.shop.path
                                                 : '/images/lavisco/img-bg.jpg'
                                         "
+                                        :alt="order.shop.name"
                                     />
                                     {{ order.shop.name }}
                                 </div>
@@ -109,6 +110,7 @@
                                                   .product_image.path
                                             : '/images/lavisco/img-bg.jpg'
                                     "
+                                    :alt="order_product.product.title"
                                 />
                                 <div>
                                     <h6 class="text-left">

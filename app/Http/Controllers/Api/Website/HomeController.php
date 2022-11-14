@@ -53,13 +53,9 @@ class HomeController extends Controller
             'recipients' => Recipient::where('status', 1)->select('id', 'name', 'slug')->latest()->get(),
             'categories' => Category::where('status', 1)->where('id', '!=', '11')->latest()->get(),
             'homesliders' => HomeSlider::orderBy('order')->get(),
-            'icon_cake' => Storage::disk('s3')->temporaryUrl('public/images/cake.png', '+2 minutes'),
-            'icon_delivery' => Storage::disk('s3')->temporaryUrl('public/images/door-delivery.png', '+2 minutes'),
-            'icon_money' => Storage::disk('s3')->temporaryUrl('public/images/send-money.png', '+2 minutes'),
-            'icon_surprise' => Storage::disk('s3')->temporaryUrl('public/images/surprise.png', '+2 minutes'),
-            'img_occasion' => Storage::disk('s3')->temporaryUrl('public/images/occasion-banner.jpg', '+2 minutes'),
-            'img_recipient' => Storage::disk('s3')->temporaryUrl('public/images/recipient-banner.jpg', '+2 minutes'),
-            'img_instruction' => Storage::disk('s3')->temporaryUrl('public/images/instruction-banner.jpg', '+2 minutes'),
+            'img_occasion' => Storage::disk('s3')->temporaryUrl('public/images/occasion-card.webp', '+2 minutes'),
+            'img_recipient' => Storage::disk('s3')->temporaryUrl('public/images/recipient-card.webp', '+2 minutes'),
+            'img_instruction' => Storage::disk('s3')->temporaryUrl('public/images/instruction-banner.webp', '+2 minutes'),
         ]);
     }
 

@@ -62,13 +62,21 @@
                                     ? product.product_image.path
                                     : '/images/lavisco/img-bg.jpg'
                             "
+                            :alt="product.title"
                         />
                     </div>
                     <div class="card-body">
                         <div class="card-title">
                             {{ product.title }}
                         </div>
-                        <div class="d-flex flex-row justify-content-between align-items-end">
+                        <div
+                            class="
+                                d-flex
+                                flex-row
+                                justify-content-between
+                                align-items-end
+                            "
+                        >
                             <div class="card-body-text">
                                 <div class="card-price mb-md-1">
                                     {{ currency.symbol }}
@@ -88,7 +96,11 @@
                                     }}
                                 </div>
                             </div>
-                            <button class="bag-sm" type="button">
+                            <button
+                                class="bag-sm"
+                                type="button"
+                                name="add to cart"
+                            >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     width="29"
@@ -140,6 +152,7 @@
                             class="btn-modal-close close"
                             data-dismiss="modal"
                             aria-label="Close"
+                            name="close"
                         >
                             <i
                                 class="fas fa-times-circle"

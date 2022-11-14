@@ -53,6 +53,7 @@
                             :class="{
                                 'img-cover': !product.product_image,
                             }"
+                            :alt="product.title"
                         />
                     </div>
                     <div class="card-body">
@@ -70,7 +71,7 @@
                                 </span>
                             </div>
                         </div>
-                        <button class="bag-sm" type="button">
+                        <button class="bag-sm" type="button" name="add to cart">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="29"

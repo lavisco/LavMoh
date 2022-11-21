@@ -1243,6 +1243,10 @@ button.bg-black:hover {
     background-color: $lav-red;
     align-items: flex-start !important;
     padding: 0 !important;
+
+    @media (max-width: 768px) {
+        height: 300px !important;
+    }
 }
 .hero-default {
     background-color: $lav-red;

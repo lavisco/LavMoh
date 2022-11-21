@@ -429,7 +429,7 @@
                                 <label
                                     class="col-md-3 col-form-label"
                                     for="banner"
-                                    >Upload banner
+                                    >Upload logo
                                 </label>
 
                                 <div class="col-md-9">
@@ -457,11 +457,50 @@
                                     <p class="image-upload-filename mt-2">
                                         {{
                                             this.form.banner
-                                                ? this.form.photoName
-                                                : `Choose file`
+                                                ? (this.form.photoName ? this.form.photoName : this.form.banner)
+                                                : `Choose logo image`
                                         }}
                                     </p>
                                     <HasError :form="form" field="banner" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label
+                                    class="col-md-3 col-form-label"
+                                    for="banner_big"
+                                    >Upload banner
+                                </label>
+
+                                <div class="col-md-9">
+                                    <input
+                                        type="file"
+                                        style="display: none"
+                                        @change.prevent="fileSelectedBig"
+                                        ref="fileInputBig"
+                                        name="banner_big"
+                                    />
+
+                                    <button
+                                        class="image-upload-box"
+                                        @click.prevent="$refs.fileInputBig.click()"
+                                    >
+                                        <i
+                                            v-show="!this.form.banner_big"
+                                            class="fas fa-plus"
+                                        ></i>
+                                        <i
+                                            v-show="this.form.banner_big"
+                                            class="fas fa-check"
+                                        ></i>
+                                    </button>
+                                    <p class="image-upload-filename mt-2">
+                                        {{
+                                            this.form.banner_big
+                                                ? (this.form.photoNameBig ? this.form.photoNameBig : this.form.banner_big)
+                                                : `Choose banner image`
+                                        }}
+                                    </p>
+                                    <HasError :form="form" field="banner_big" />
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -1021,10 +1060,12 @@ export default {
         searchText: null,
         searchCityText: null,
         selectAllCities: false,
+        url_big: "",
         form: new Form({
             id: "",
             name: "",
             banner: "",
+            banner_big: "",
             url: "",
             about: "",
             rating: "",
@@ -1078,6 +1119,22 @@ export default {
             reader.onloadend = (file) => {
                 this.form.banner = reader.result;
                 this.form.photoName = e.target.files[0].name;
+            };
+            reader.readAsDataURL(file);
+        },
+
+        fileSelectedBig(e) {
+            let file = e.target.files[0];
+            let reader = new FileReader();
+            let limit = 1024 * 1024 * 2;
+            if (file["size"] > limit) {
+                alert("File size has crossed maximum limit, which is 2mb!");
+                return false;
+            }
+            reader.onloadend = (file) => {
+                this.form.banner_big = reader.result;
+                this.form.photoNameBig = e.target.files[0].name;
+                this.url_big = URL.createObjectURL(e.target.files[0]);
             };
             reader.readAsDataURL(file);
         },

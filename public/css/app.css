@@ -11294,6 +11294,11 @@ button.bg-black:hover {
   align-items: flex-start !important;
   padding: 0 !important;
 }
+@media (max-width: 768px) {
+  .hero-seller {
+    height: 300px !important;
+  }
+}
 
 .hero-default {
   background-color: #dd1e50;

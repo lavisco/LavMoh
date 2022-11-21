@@ -31,7 +31,8 @@ class ShopController extends Controller
 
         $request->merge([
             'slug' => Str::slug($request->name),
-            'banner' => $this->storeImage($request->banner, $request->photoName)
+            'banner' => $this->storeImage($request->banner, $request->photoName),
+            'banner_big' => $this->storeImage($request->banner_big, $request->photoNameBig)
         ]);
         return Shop::create($request->all());
     }
@@ -51,6 +52,7 @@ class ShopController extends Controller
         ]);
 
         $this->updateImage($request, $shop->banner);
+        $this->updateBigImage($request, $shop->banner_big);
         $shop->update($request->all());
 
         //sync to pivot tables
@@ -90,6 +92,22 @@ class ShopController extends Controller
     {
         if($request->banner != $currentImage){
             $request->merge(['banner' => $this->storeImage($request->banner, $request->photoName)]);
+
+            $existingImage = storage_path('app/public/').$currentImage;
+            if(file_exists($existingImage)){
+                @unlink($existingImage);
+            }
+        }
+    }
+
+    /**
+     * Update big banner image in storage(delete existing image and save the newly upload one), & save the path to db.
+     */
+
+    public function updateBigImage($request, $currentImage)
+    {
+        if($request->banner_big != $currentImage){
+            $request->merge(['banner_big' => $this->storeImage($request->banner_big, $request->photoNameBig)]);
 
             $existingImage = storage_path('app/public/').$currentImage;
             if(file_exists($existingImage)){

@@ -182,6 +182,12 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         ///$this->authorize('delete', $product);
+        ProductImage::where('product_id', $product->id)->delete();
+        $product->occasions()->detach();
+        $product->recipients()->detach();
+        $product->sub_categories()->detach();
+        VariationOption::where('product_id', $product->id)->delete();
+        Variation::where('product_id', $product->id)->delete();
         $product->delete();
     }
 

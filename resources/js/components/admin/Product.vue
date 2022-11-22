@@ -149,6 +149,15 @@
                                                         class="dropdown-item"
                                                         href=""
                                                         @click.prevent="
+                                                            editThumbnail(product)
+                                                        "
+                                                    >
+                                                        Add thumbnail
+                                                    </a>
+                                                    <a
+                                                        class="dropdown-item"
+                                                        href=""
+                                                        @click.prevent="
                                                             deleteProduct(
                                                                 product.id
                                                             )
@@ -179,6 +188,102 @@
                 </div>
             </div>
         </div>
+
+        <!-- Modal -->
+        <div
+            class="modal fade"
+            id="addRecord"
+            tabindex="-1"
+            aria-labelledby="addRecordLabel"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content bg-secondary">
+                    <!-- Modal Header -->
+                    <div class="modal-header bg-neutral">
+                        <h4
+                            class="modal-title text-uppercase"
+                            id="addRecordLabel"
+                        >
+                            New Thumbnail
+                        </h4>
+                        <button
+                            type="button"
+                            class="close"
+                            data-dismiss="modal"
+                            aria-label="Close"
+                        >
+                            <i
+                                class="fas fa-times-circle"
+                                aria-hidden="true"
+                            ></i>
+                        </button>
+                    </div>
+
+                    <!-- Form start -->
+
+                    <form
+                        class="input-form"
+                        @submit.prevent="createThumbnail()"
+                    >
+                        <div class="modal-body">
+                            <div class="form-group row">
+                                <label
+                                    class="col-md-3 col-form-label"
+                                    for="thumbnail"
+                                    >Upload thumbnail
+                                </label>
+
+                                <div class="col-md-9">
+                                    <input
+                                        type="file"
+                                        style="display: none"
+                                        @change.prevent="fileSelected"
+                                        ref="fileInput"
+                                        name="thumbnail"
+                                    />
+
+                                    <button
+                                        class="image-upload-box"
+                                        @click.prevent="$refs.fileInput.click()"
+                                    >
+                                        <i
+                                            v-show="!this.form.thumbnail"
+                                            class="fas fa-plus"
+                                        ></i>
+                                        <i
+                                            v-show="this.form.thumbnail"
+                                            class="fas fa-check"
+                                        ></i>
+                                    </button>
+                                    <p class="image-upload-filename mt-2">
+                                        {{
+                                            this.form.thumbnail
+                                                ? this.form.photoName
+                                                    ? this.form.photoName
+                                                    : this.form.thumbnail
+                                                : `Choose thumbnail image`
+                                        }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer pt-0">
+                            <button type="submit" class="btn btn-primary">
+                                <i
+                                    class="fas fa-pen-nib mr-2"
+                                    aria-hidden="true"
+                                ></i>
+                                Create
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Form end -->
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -202,22 +307,8 @@ export default {
         productimage: "",
         form: new Form({
             id: "",
-            sku: "",
             title: "",
-            description: "",
-            length: "",
-            width: "",
-            height: "",
-            dimensions_unit: "",
-            weight: "",
-            weight_unit: "",
-            base_price: "",
-            processing_time: "",
-            has_custom_text: "",
-            has_custom_image: "",
-            has_variations: "",
-            has_inventory: "",
-            quantity: "",
+            thumbnail: "",
             product_state_id: "",
             category_id: "",
             user_id: "",
@@ -232,8 +323,40 @@ export default {
     },
 
     methods: {
+        editThumbnail(product) {
+            this.form.clear();
+            this.form.reset();
+            this.form.fill(product);
+            $("#addRecord").modal("show");
+        },
+
+        fileSelected(e) {
+            let file = e.target.files[0];
+            let reader = new FileReader();
+            let limit = 1024 * 1024 * 2;
+            if (file["size"] > limit) {
+                alert("File size has crossed maximum limit, which is 2mb!");
+                return false;
+            }
+            reader.onloadend = (file) => {
+                this.form.thumbnail = reader.result;
+                this.form.photoName = e.target.files[0].name;
+            };
+            reader.readAsDataURL(file);
+        },
+
         newModal() {
             this.$router.push("/admin/products/listing");
+        },
+
+        createThumbnail() {
+            this.form
+                .post("/api/admin/product_thumbnails")
+                .then(() => {
+                    $("#addRecord").modal("hide");
+                    Fire.$emit("reloadRecords");
+                })
+                .catch((error) => console.log(error));
         },
 
         loadProducts() {
@@ -249,6 +372,7 @@ export default {
                     this.pagination.last_page = data.last_page;
                     this.pagination.current_page = data.current_page;
                     this.loading = false;
+                    this.form.clear();
                 })
                 .catch((error) => console.log(error));
         },

@@ -21,6 +21,7 @@ use App\Http\Controllers\Api\Admin\PermissionController;
 use App\Http\Controllers\Api\Admin\ProductController;
 use App\Http\Controllers\Api\Admin\ProductImageController;
 use App\Http\Controllers\Api\Admin\ProductStateController;
+use App\Http\Controllers\Api\Admin\ProductThumbnailController;
 use App\Http\Controllers\Api\Admin\ProductVariationController;
 use App\Http\Controllers\Api\Admin\ProductVideoController;
 use App\Http\Controllers\Api\Admin\ProvinceController;
@@ -129,6 +130,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/products/sub_categories/{categoryId}', [ProductController::class, 'getSubcategories']);
     Route::apiResource('/products', ProductController::class);
     Route::apiResource('/product_images', ProductImageController::class);
+    Route::apiResource('/product_thumbnails', ProductThumbnailController::class);
     Route::apiResource('/product_variations', ProductVariationController::class);
     Route::apiResource('/product_videos', ProductVideoController::class);
     Route::apiResource('/productstates', ProductStateController::class);

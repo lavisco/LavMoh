@@ -102,6 +102,12 @@ class Product extends Model
     {
         return $this->hasOne(ProductImage::class)->where('primary_image', 1);
     }
+    
+    //product_images:product M:1
+    public function product_thumbnail()
+    {
+        return $this->hasOne(ProductThumbnail::class);
+    }
 
     //product_variations:product M:1!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     public function product_variations()

@@ -61,6 +61,40 @@ class ProductImageController extends Controller
                 ]);
             }
         }
+
+         //create thumbnail if doesnt exist
+        // $this->uploadThumbnailImage($request, $product->id);
+    }
+
+        /**
+     * Store a image thumbnail in storage, and save the path to db.
+     */
+
+    
+    public function uploadThumbnailImage($request, $productId)
+    {
+        if (ProductThumbnail::where('product_id', $productId)->doesntExist()) {
+            $primaryImage = ProductImage::where('product_id', $productId)->where('primary_image', 1)->first();
+            
+            for ($i=0; $i < count($request->image_path); $i++) { 
+                if($request->image_path[$i] == $primaryImage->image_path){
+                    ProductImage::create([
+                        'image_path' => $this->storeThumbnailImage($request->image_path[$i], $primaryImage->title),
+                        'product_id' => $productId,
+                    ]);
+                }
+            }
+        }
+        
+    }
+    
+    public function storeThumbnailImage($image, $name)
+    {
+        if ($image) {
+            $file_name = 'thumbnail'.time().'_'.$name;
+            $img = Image::make($image)->encode('webp');
+            Storage::disk('s3')->put('/public/products/'.$file_name, $img->stream());
+        }
     }
 
     public function destroy(ProductImage $productimage)

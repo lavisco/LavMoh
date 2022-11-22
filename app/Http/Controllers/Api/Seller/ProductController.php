@@ -10,6 +10,7 @@ use App\Models\Category;
 use App\Models\Occasion;
 use App\Models\Product;
 use App\Models\ProductImage;
+use App\Models\ProductThumbnail;
 use App\Models\Recipient;
 use App\Models\Shipping;
 use App\Models\SubCategory;
@@ -169,6 +170,14 @@ class ProductController extends Controller
             'primary_image' => true,
             'product_id' => $productId,
         ]);
+
+        /**
+         * thumbnail creation
+         */
+        ProductThumbnail::create([
+            'image_path' => $this->storeThumbnailImage($request->image_path_primary, $request->photoNamePrimary),
+            'product_id' => $productId,
+        ]);
     }
 
     public function uploadImage($request, $productId)
@@ -222,6 +231,23 @@ class ProductController extends Controller
         if ($image) {
             $file_name = time().'_'.$name;
             $img = Image::make($image)->encode();
+            Storage::disk('s3')->put('/public/products/'.$file_name, $img->stream());
+            $productPhoto = 'products/'.$file_name;
+        }
+
+        return $productPhoto;
+    }
+
+    /**
+     * Store a newly created image in storage, and save the path to db.
+     */
+    
+    public function storeThumbnailImage($image, $name)
+    {
+        $productPhoto=null;
+        if ($image) {
+            $file_name = 'thumbnail'.time().'_'.$name;
+            $img = Image::make($image)->encode()->resize(300, null);
             Storage::disk('s3')->put('/public/products/'.$file_name, $img->stream());
             $productPhoto = 'products/'.$file_name;
         }

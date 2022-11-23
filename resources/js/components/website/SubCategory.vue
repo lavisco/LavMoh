@@ -1,14 +1,38 @@
 <template>
     <div class="container-fluid">
-        <div
-            class="hero hero-default"
-            v-bind:style="{ 'background-image': 'url(' + category.path + ')' }"
-        >
+        <div class="hero hero-default">
             <div class="slide-content">
                 <h1 class="title mb-3">Browse {{ sub_category.name }}</h1>
                 <h1 class="sub-title">
-                    {{ category.name }}
+                    {{ sub_category.category.name }}
                 </h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item">
+                            <router-link to="/categories">
+                                Categories
+                            </router-link>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <router-link
+                                :to="{
+                                    name: 'categories/category',
+                                    params: {
+                                        categoryId: sub_category.category.id,
+                                        slug: sub_category.category.slug,
+                                        location: locationActive,
+                                    },
+                                }"
+                            >
+                                {{ sub_category.category.name }}
+                            </router-link>
+                        </li>
+                        <li class="breadcrumb-item">
+                            {{ sub_category.name }}
+                        </li>
+                    </ol>
+                </nav>
             </div>
         </div>
 
@@ -130,39 +154,6 @@
 
             <!-- Pagination end -->
         </section>
-
-        <!-- Modal -->
-        <div
-            class="modal fade"
-            id="locationPopup"
-            tabindex="-1"
-            aria-labelledby="locationPopupLabel"
-            aria-hidden="true"
-        >
-            <div class="modal-dialog modal-dialog-centered modal-md">
-                <div class="modal-content">
-                    <!-- Modal Header -->
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="locationPopupLabel">
-                            Showing products available in
-                            <strong>{{ locationActive }}</strong>
-                        </h4>
-                        <button
-                            type="button"
-                            class="btn-modal-close close"
-                            data-dismiss="modal"
-                            aria-label="Close"
-                            name="close"
-                        >
-                            <i
-                                class="fas fa-times-circle"
-                                aria-hidden="true"
-                            ></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </template>
 
@@ -170,7 +161,6 @@
 export default {
     data: () => ({
         sub_category: [],
-        category: {},
         products: [],
         searchText: null,
         loading: true,
@@ -182,7 +172,12 @@ export default {
     beforeRouteEnter: function (to, from, next) {
         axios
             .get(
-                "/api/sub_categories/" + to.params.subCategoryId + "?page=" + 1
+                "/api/sub_categories/" +
+                    to.params.subCategoryId +
+                    "/" +
+                    to.params.location +
+                    "?page=" +
+                    1
             )
             .then((response) => {
                 next((vm) => {
@@ -194,7 +189,12 @@ export default {
     beforeRouteUpdate: function (to, from, next) {
         axios
             .get(
-                "/api/sub_categories/" + to.params.subCategoryId + "?page=" + 1
+                "/api/sub_categories/" +
+                    to.params.subCategoryId +
+                    "/" +
+                    to.params.location +
+                    "?page=" +
+                    1
             )
             .then((response) => {
                 this.setData(response);
@@ -207,8 +207,15 @@ export default {
             Fire.$emit("reloadRecords");
         },
         locationActive(after, before) {
-            this.pagination.current_page = 1;
-            this.loadLocalizedProducts();
+            this.sortValue = "created_at";
+            this.$router.push({
+                name: "sub_category",
+                params: {
+                    subCategoryId: this.sub_category.id,
+                    slug: this.sub_category.slug,
+                    location: this.locationActive,
+                },
+            });
         },
     },
 
@@ -225,22 +232,19 @@ export default {
         setData(response) {
             this.sub_category = response.data.sub_category;
             this.products = response.data.products.data;
-            this.category = this.products[0].category;
+
             this.pagination.last_page = response.data.products.last_page;
             this.pagination.current_page = response.data.products.current_page;
-            //this.loadLocalizedProducts();
+            this.sortValue = "created_at";
             this.loading = false;
         },
-
-        filterData() {
-            this.loadData();
-        },
-
         loadData() {
             axios
                 .get(
                     "/api/sub_categories/" +
                         this.$route.params.subCategoryId +
+                        "/" +
+                        this.locationActive +
                         "?page=" +
                         this.pagination.current_page,
                     {
@@ -256,33 +260,6 @@ export default {
                         response.data.products.current_page;
                 })
                 .catch((error) => console.log(error));
-        },
-
-        loadLocalizedProducts() {
-            if (
-                this.category.name == "Cakes" ||
-                this.category.name == "Cake" ||
-                this.category.name == "Fresh Flowers"
-            ) {
-                axios
-                    .get(
-                        "/api/sub_categories/products/" +
-                            this.$route.params.subCategoryId +
-                            "/" +
-                            this.locationActive +
-                            "?page=" +
-                            this.pagination.current_page
-                    )
-                    .then((response) => {
-                        this.products = response.data.products.data;
-                        this.pagination.last_page =
-                            response.data.products.last_page;
-                        this.pagination.current_page =
-                            response.data.products.current_page;
-                        $("#locationPopup").modal("show");
-                    })
-                    .catch((error) => console.log(error));
-            }
         },
     },
     mounted() {

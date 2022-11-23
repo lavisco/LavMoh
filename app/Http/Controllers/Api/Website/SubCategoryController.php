@@ -9,48 +9,41 @@ use Illuminate\Http\Request;
 
 class SubCategoryController extends Controller
 {
-    public function show($subCategoryId)
+    public function show($subCategoryId, $location)
     {
-        $subCategory = SubCategory::findOrFail($subCategoryId);
+        $subCategory = SubCategory::with('category')->findOrFail($subCategoryId);
+        $subCategoryName = $subCategory->name;
 
         $sortParameter = request('sortValue');
 
-        $query = $subCategory->products()
-                    ->whereHas('user.shop', function($q) {
-                        return $q->where('status', 1);
+        $products = Product::where('product_state_id', '1')
+                    ->with(['category:id,name', 'user.shop', 'product_image'])
+                    ->where(function($q) use($location, $subCategoryName) {
+                        $q->where('category_id', '=', '1')
+                        ->whereRelation('sub_categories', 'name', $subCategoryName)
+                        ->whereRelation('user.shop', 'status', 1)
+                        ->whereRelation('user.cities', 'name', $location);
                     })
-                    ->where('product_state_id', '1')
-                    ->with(['category:id,name,slug', 'user.shop', 'product_image']);
-
-        return response()->json([
-            'products' => $sortParameter == 'base_price_low' ? $query->oldest('base_price')->paginate(25) : $query->latest(request('sortValue'))->paginate(25),
-            'sub_category' => $subCategory,
-        ]);
-    }
-
-    public function getLocationWiseProducts($id, $location)
-    {
-        $subCategory = SubCategory::findOrFail($id);
-
-        $products = $subCategory->products()->where('product_state_id', '1')
-            ->whereHas('user.shop', function($q) {
-                return $q->where('status', 1);
-            })
-            ->whereHas('user', function($query) use($location){
-                $query->whereHas('shop', function($query) use($location) {
-                    $query->where('district', $location);
-                });
-            })
-            ->with(['user' => function($q) use($location) {
-                $q->whereHas('shop', function($query) use($location) {
-                        $query->where('district', $location);
-                });
-            }])
-            ->with(['user.shop', 'product_image'])->latest()->paginate(25);
+                    ->orWhere(function($q) use ($subCategoryName) {
+                        $q->where('category_id', '!=', '1')
+                            ->whereRelation('user.shop', 'status', 1)
+                           ->whereRelation('sub_categories', 'name', $subCategoryName);
+                    })
+                    ->when($sortParameter == 'base_price_low', function ($query) {
+                        return $query->oldest('base_price');
+                    })
+                    ->when($sortParameter == 'base_price', function ($query) {
+                        return $query->latest('base_price');
+                    })
+                    ->when($sortParameter == 'created_at', function ($query) {
+                        return $query->latest();
+                    })
+                    ->latest()
+                    ->paginate(25);
 
         return response()->json([
             'products' => $products,
-            'loc' => $location,
+            'sub_category' => $subCategory,
         ]);
     }
 }

@@ -11306,6 +11306,124 @@ button.bg-black:hover {
   align-items: flex-start !important;
   padding: 0 !important;
 }
+.hero-default .breadcrumb,
+.hero-default .breadcrumb-item + .breadcrumb-item::before {
+  color: #ffffff;
+}
+.hero-default .breadcrumb-item a:hover {
+  color: #ffffff !important;
+  text-decoration: underline !important;
+}
+
+.hero-with-slider {
+  background-color: #dd1e50;
+  height: 360px;
+  padding: 0;
+  width: 100%;
+  position: relative;
+  border-radius: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+.hero-with-slider .slide-content {
+  height: 100%;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 20px 74px;
+}
+.hero-with-slider .slide-content .title,
+.hero-with-slider .slide-content .sub-title {
+  text-align: left;
+}
+.hero-with-slider .breadcrumb,
+.hero-with-slider .breadcrumb-item + .breadcrumb-item::before {
+  color: #ffffff;
+}
+.hero-with-slider .breadcrumb-item a:hover {
+  color: #ffffff !important;
+  text-decoration: underline !important;
+}
+@media (max-width: 768px) {
+  .hero-with-slider {
+    flex-direction: column !important;
+  }
+  .hero-with-slider .slide-content {
+    width: 100% !important;
+    padding: 24px 40px;
+  }
+  .hero-with-slider .slide-content .title,
+.hero-with-slider .slide-content .sub-title {
+    text-align: left !important;
+  }
+  .hero-with-slider .hero-mini-slider {
+    width: 100% !important;
+    padding: 0 24px 32px 24px !important;
+  }
+}
+.hero-with-slider .hero-mini-slider {
+  width: 60%;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding-right: 74px;
+}
+.hero-with-slider .swiper {
+  background-color: transparent;
+}
+.hero-with-slider .swiper-button-next svg path,
+.hero-with-slider .swiper-button-prev svg path {
+  fill: #fff;
+}
+.hero-with-slider .swiper-button-next {
+  right: 2px !important;
+}
+.hero-with-slider .swiper-button-prev {
+  left: 2px !important;
+}
+.hero-with-slider .swiper-button-next svg,
+.hero-with-slider .swiper-button-prev svg {
+  width: auto;
+  height: auto;
+}
+.hero-with-slider .card-chip {
+  border-radius: 12px;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.hero-with-slider .card-chip img {
+  width: 100%;
+  height: 120px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.hero-with-slider .card-chip .name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #dd1e50;
+  width: 100%;
+  height: 34px;
+  background-color: #ffffff;
+  text-align: center;
+  padding: 6px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+.hero-with-slider .card-chip:hover {
+  box-shadow: 2px 4px 6px rgba(68, 68, 68, 0.16);
+}
+.hero-with-slider .card-chip:hover .name {
+  color: #a9133b;
+}
 
 .hero {
   position: relative;

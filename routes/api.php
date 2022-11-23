@@ -279,6 +279,7 @@ Route::apiResource('/sellerprofiles', WebsiteSellerProfileController::class);
 Route::get('/shops/{id}/{location}', [WebsiteShopController::class, 'show']);
 Route::apiResource('/shops', WebsiteShopController::class);
 Route::get('/sub_categories/products/{id}/{location}', [WebsiteSubCategoryController::class, 'getLocationWiseProducts']);
+Route::get('/sub_categories/{id}/{location}', [WebsiteSubCategoryController::class, 'show']);
 Route::apiResource('/sub_categories', WebsiteSubCategoryController::class);
 Route::apiResource('/transactions', WebsiteTransactionController::class);
 //sitetext

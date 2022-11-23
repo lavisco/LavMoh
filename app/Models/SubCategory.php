@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 
 class SubCategory extends Model
 {
@@ -15,11 +16,26 @@ class SubCategory extends Model
 
     protected $fillable = [
         'name',
+        'banner',
         'groupName',
         'status',
         'slug',
         'category_id',
     ];
+
+    /*
+    |--------------------------------------------------------------------------
+    | Banner Image Path
+    |--------------------------------------------------------------------------
+    */
+    protected $appends = ['path'];
+
+    public function getPathAttribute()
+    {
+        return $this->banner ? 
+            Storage::disk('s3')->temporaryUrl('public/' . $this->banner, '+2 minutes') 
+            : "/images/lavisco/img-bg.jpg";
+    }
 
     //sub_categories:category M:1
     public function category()

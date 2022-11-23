@@ -695,13 +695,15 @@ export let routes = [
         },
     },
     {
-        path: "/sub_category/:subCategoryId/:slug",
+        path: "/sub_category/:subCategoryId/:location/:slug",
         name: "sub_category",
         component: require("./components/website/SubCategory.vue").default,
         meta: {
             title: "Sub Category",
         },
     },
+
+    
 
     /*
      Website Policies Routes

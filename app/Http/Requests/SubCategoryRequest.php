@@ -27,6 +27,7 @@ class SubCategoryRequest extends FormRequest
             'name' => 'required|max:100',
             'groupName' => 'nullable|max:100',
             'status' => 'required|boolean',
+            'banner' => 'nullable',
         ];
     }
 }

@@ -1,14 +1,84 @@
 <template>
     <div class="container-fluid">
-        <div
-            class="hero hero-default"
-            v-bind:style="{ 'background-image': 'url(' + category.path + ')' }"
-        >
+        <div class="hero-with-slider">
             <div class="slide-content">
                 <h1 class="title mb-3">Browse {{ category.name }}</h1>
                 <h1 class="sub-title">
                     {{ category.description }}
                 </h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item">
+                            <router-link to="/categories">
+                                Categories
+                            </router-link>
+                        </li>
+                        <li class="breadcrumb-item">
+                            {{ category.name }}
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+            <div class="hero-mini-slider">
+                <swiper
+                    class="swiper swiper-index-product"
+                    :options="swiperOption"
+                >
+                    <swiper-slide
+                        v-for="sub_category in sub_categories"
+                        :key="sub_category.id"
+                    >
+                        <router-link
+                            :to="{
+                                name: 'sub_category',
+                                params: {
+                                    subCategoryId: sub_category.id,
+                                    slug: sub_category.slug,
+                                    location: locationActive,
+                                },
+                            }"
+                            class="card-chip"
+                        >
+                            <img :src="sub_category.path" />
+                            <div class="name">{{ sub_category.name }}</div>
+                        </router-link>
+                    </swiper-slide>
+                    <div class="swiper-button-next">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="32"
+                            height="32"
+                            preserveAspectRatio="xMidYMid meet"
+                            viewBox="0 0 24 24"
+                        >
+                            <g transform="translate(24 0) scale(-1 1)">
+                                <path
+                                    fill="white"
+                                    fill-rule="evenodd"
+                                    d="M12 21a9 9 0 1 0 0-18a9 9 0 0 0 0 18zm1.707-11.293a1 1 0 0 0-1.414-1.414l-3 3a1 1 0 0 0 0 1.414l3 3a1 1 0 0 0 1.414-1.414L11.414 12l2.293-2.293z"
+                                    clip-rule="evenodd"
+                                />
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="swiper-button-prev">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="32"
+                            height="32"
+                            preserveAspectRatio="xMidYMid meet"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                fill="white"
+                                fill-rule="evenodd"
+                                d="M12 21a9 9 0 1 0 0-18a9 9 0 0 0 0 18zm1.707-11.293a1 1 0 0 0-1.414-1.414l-3 3a1 1 0 0 0 0 1.414l3 3a1 1 0 0 0 1.414-1.414L11.414 12l2.293-2.293z"
+                                clip-rule="evenodd"
+                            />
+                        </svg>
+                    </div>
+                </swiper>
             </div>
         </div>
 
@@ -113,7 +183,11 @@
                                     }}
                                 </div>
                             </div>
-                            <button class="bag-sm" type="button" name="add to cart">
+                            <button
+                                class="bag-sm"
+                                type="button"
+                                name="add to cart"
+                            >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     width="29"
@@ -202,7 +276,10 @@
                             <strong class="red">{{ locationActive }}</strong>
                         </p>
                         <div class="d-flex flex-column">
-                            <location-search v-model="searchText" class="px-0" />
+                            <location-search
+                                v-model="searchText"
+                                class="px-0"
+                            />
                             <div class="col-12 mt-4 px-0">
                                 <a
                                     class="btn btn-sm mb-2"
@@ -223,9 +300,19 @@
 </template>
 
 <script>
+import { Swiper, SwiperSlide, directive } from "vue-awesome-swiper";
+import "swiper/css/swiper.css";
 import _ from "lodash";
 
 export default {
+    components: {
+        Swiper,
+        SwiperSlide,
+    },
+    directives: {
+        swiper: directive,
+    },
+
     data: () => ({
         category: [],
         sub_categories: [],
@@ -239,6 +326,32 @@ export default {
         subCategoryValue: "",
         cityName: "",
         pagination: { current_page: 1 },
+        swiperOption: {
+            slidesPerView: 6,
+            spaceBetween: 10,
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            breakpoints: {
+                1024: {
+                    slidesPerView: 5,
+                    spaceBetween: 20,
+                },
+                768: {
+                    slidesPerView: 3,
+                    spaceBetween: 10,
+                },
+                640: {
+                    slidesPerView: 2,
+                    spaceBetween: 10,
+                },
+                320: {
+                    slidesPerView: 2,
+                    spaceBetween: 10,
+                },
+            },
+        },
     }),
 
     beforeRouteEnter: function (to, from, next) {
@@ -292,10 +405,7 @@ export default {
         },
 
         locationActive(after, before) {
-            if (
-                this.category.id == 1 ||
-                this.category.id == 8
-            ) {
+            if (this.category.id == 1 || this.category.id == 8) {
                 this.sortValue = "created_at";
                 this.subCategoryValue = "";
 

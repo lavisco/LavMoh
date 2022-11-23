@@ -19,9 +19,9 @@
                             <table class="table align-items-center table-hover">
                                 <thead>
                                     <tr>
+                                        <th scope="col">Banner</th>
                                         <th scope="col">Name</th>
                                         <th scope="col">Category</th>
-                                        <th scope="col">Group</th>
                                         <th scope="col">Status</th>
                                         <th scope="col">Slug</th>
                                         <th scope="col"></th>
@@ -29,11 +29,18 @@
                                 </thead>
                                 <tbody>
                                     <tr v-for="sub_category in sub_categories">
+                                        <td>
+                                            <img
+                                                width="150px"
+                                                height="150px"
+                                                class="banner-container"
+                                                :src="sub_category.path"
+                                            />
+                                        </td>
                                         <th>{{ sub_category.name }}</th>
                                         <td>
                                             {{ sub_category.category.name }}
                                         </td>
-                                        <td>{{ sub_category.groupName }}</td>
                                         <td>
                                             <span
                                                 v-if="sub_category.status == 1"
@@ -228,6 +235,45 @@
                             <div class="form-group row">
                                 <label
                                     class="col-md-3 col-form-label"
+                                    for="banner"
+                                    >Upload banner
+                                </label>
+
+                                <div class="col-md-9">
+                                    <input
+                                        type="file"
+                                        style="display: none"
+                                        @change.prevent="fileSelected"
+                                        ref="fileInput"
+                                        name="banner"
+                                    />
+
+                                    <button
+                                        class="image-upload-box"
+                                        @click.prevent="$refs.fileInput.click()"
+                                    >
+                                        <i
+                                            v-show="!this.form.banner"
+                                            class="fas fa-plus"
+                                        ></i>
+                                        <i
+                                            v-show="this.form.banner"
+                                            class="fas fa-check"
+                                        ></i>
+                                    </button>
+                                    <p class="image-upload-filename mt-2">
+                                        {{
+                                            this.form.banner
+                                                ? this.form.photoName
+                                                : `Choose file`
+                                        }}
+                                    </p>
+                                    <HasError :form="form" field="banner" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label
+                                    class="col-md-3 col-form-label"
                                     for="status"
                                 >
                                     Status
@@ -372,6 +418,7 @@ export default {
         form: new Form({
             id: "",
             name: "",
+            banner: "",
             groupName: "",
             status: "",
             category_id: "",
@@ -386,6 +433,20 @@ export default {
     },
 
     methods: {
+        fileSelected(e) {
+            let file = e.target.files[0];
+            let reader = new FileReader();
+            let limit = 1024 * 1024 * 2;
+            if (file["size"] > limit) {
+                alert("File size has crossed maximum limit, which is 2mb!");
+                return false;
+            }
+            reader.onloadend = (file) => {
+                this.form.banner = reader.result;
+                this.form.photoName = e.target.files[0].name;
+            };
+            reader.readAsDataURL(file);
+        },
         newModal() {
             this.editMode = false;
             this.form.clear();

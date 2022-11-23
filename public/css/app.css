@@ -11314,6 +11314,11 @@ button.bg-black:hover {
   color: #ffffff !important;
   text-decoration: underline !important;
 }
+@media (max-width: 768px) {
+  .hero-default {
+    height: 240px !important;
+  }
+}
 
 .hero-with-slider {
   background-color: #dd1e50;
@@ -11354,11 +11359,12 @@ button.bg-black:hover {
   }
   .hero-with-slider .slide-content {
     width: 100% !important;
-    padding: 24px 40px;
+    align-items: center;
+    padding: 24px;
   }
   .hero-with-slider .slide-content .title,
 .hero-with-slider .slide-content .sub-title {
-    text-align: left !important;
+    text-align: center !important;
   }
   .hero-with-slider .hero-mini-slider {
     width: 100% !important;

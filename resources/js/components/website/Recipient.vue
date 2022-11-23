@@ -2,7 +2,6 @@
     <div class="container-fluid">
         <div
             class="hero hero-default"
-            v-bind:style="{ 'background-image': 'url(' + recipient.path + ')' }"
         >
             <div class="slide-content">
                 <h1 class="title mb-3">Gift your {{ recipient.name }}</h1>

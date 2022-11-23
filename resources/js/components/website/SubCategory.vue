@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="hero hero-default">
             <div class="slide-content">
-                <h1 class="title mb-3">Browse {{ sub_category.name }}</h1>
+                <h1 class="title mb-3">{{ sub_category.name }} cake</h1>
                 <h1 class="sub-title">
                     {{ sub_category.category.name }}
                 </h1>

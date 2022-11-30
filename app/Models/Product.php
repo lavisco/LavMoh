@@ -108,6 +108,12 @@ class Product extends Model
     {
         return $this->hasOne(ProductThumbnail::class);
     }
+    
+    //top_product:product 1:1
+    public function top_product()
+    {
+        return $this->hasOne(TopProduct::class);
+    }
 
     //product_variations:product M:1!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     public function product_variations()

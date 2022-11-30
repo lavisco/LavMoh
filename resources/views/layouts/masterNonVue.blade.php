@@ -6,9 +6,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         <!-- Site Metas -->
-        <meta name="keywords" content="" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
+        <meta name="keywords" content="sri lanka cake, cakes in sri lanka, cakes in srilanka, srilanka cakes, gift in srilanka, srilanka gifts, flower in sri lanka" />
+        <meta name="description" content="Buy locally. Support small businesses." />
+        <meta name="author" content="Lavisco" />
 
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}" />

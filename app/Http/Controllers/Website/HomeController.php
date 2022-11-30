@@ -3,12 +3,32 @@
 namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 
 class HomeController extends Controller
 {
     public function websiteIndex()
     {
-        return view('layouts.master');
+        $tags = [
+            'og:name' => 'Lavisco',
+            'og:image' => '/images/lavisco/logo.jpg',
+            'og:description' => 'Buy locally. Support small businesses.',
+            'og:keywords' => 'sri lanka cake, cakes in sri lanka, cakes in srilanka, srilanka cakes, gift in srilanka, srilanka gifts, flower in sri lanka'
+        ];
+
+        return view('layouts.master', compact('tags'));
+    }
+
+    public function websiteProductIndex(Product $productId)
+    {
+        $tags = [
+            'og:name' => $productId->title,
+            'og:image' => $productId->product_thumbnail->path,
+            'og:description' => $productId->short_description,
+            'og:keywords' => $productId->title.', sri lanka cake, cakes in sri lanka, cakes in srilanka, srilanka cakes, gift in srilanka, srilanka gifts, flower in sri lanka'
+        ];
+
+        return view('layouts.master', compact('tags'));
     }
 
     public function nonVueWebsiteIndex()

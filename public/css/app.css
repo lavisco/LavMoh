@@ -11345,6 +11345,11 @@ button.bg-black:hover {
 .hero-with-slider .slide-content .sub-title {
   text-align: left;
 }
+.hero-with-slider .slide-content .sub-title {
+  text-align: left;
+  font-size: 18px;
+  line-height: 28px;
+}
 .hero-with-slider .breadcrumb,
 .hero-with-slider .breadcrumb-item + .breadcrumb-item::before {
   color: #ffffff;

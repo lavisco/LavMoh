@@ -6,9 +6,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         <!-- Site Metas -->
-        <meta name="keywords" content="" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
+        <meta name="author" content="Lavisco" />
+
+        @foreach($tags as $key => $value)
+            <meta property="{{$key}}" content="{{$value}}">
+        @endforeach
 
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}" />
@@ -43,7 +45,10 @@
             }}/vendor/@fortawesome/fontawesome-free/css/all.min.css"
             rel="stylesheet"
         />
-        <link rel="stylesheet" href="https://cdn.tutorialjinni.com/intl-tel-input/17.0.8/css/intlTelInput.css"/>
+        <link
+            rel="stylesheet"
+            href="https://cdn.tutorialjinni.com/intl-tel-input/17.0.8/css/intlTelInput.css"
+        />
 
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script
@@ -59,7 +64,7 @@
 
             gtag("config", "G-SYY3G21Q5S");
         </script>
-        
+
     </head>
     <body>
         <div id="app">

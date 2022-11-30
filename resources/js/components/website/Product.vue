@@ -1,13 +1,5 @@
 <template>
     <div class="container-fluid mb-5 product-page">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item">
-                    <router-link to="/products"> Products </router-link>
-                </li>
-            </ol>
-        </nav>
         <div
             v-if="loading"
             class="my-5 d-flex align-items-center justify-content-center"
@@ -15,6 +7,14 @@
             <img src="/images/lavisco/loading.gif" />
         </div>
         <div v-else class="col">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item">
+                        <router-link to="/products"> Products </router-link>
+                    </li>
+                </ol>
+            </nav>
             <div class="row">
                 <div class="col-md-7">
                     <!-- Swiper -->
@@ -338,7 +338,7 @@
                                 "
                                 type="submit"
                                 @click.prevent="addProductToCart(product)"
-                                 name="add to cart"
+                                name="add to cart"
                             >
                                 Add to Cart
                             </button>
@@ -542,7 +542,7 @@
                                         >
                                             <button
                                                 class="btn-secondary btn-sm"
-                                                 name="View Seller"
+                                                name="View Seller"
                                             >
                                                 View Seller
                                             </button>
@@ -647,7 +647,7 @@
                                     mb-md-0 mb-2
                                 "
                                 data-dismiss="modal"
-                                 name="Keep shopping"
+                                name="Keep shopping"
                             >
                                 Keep shopping
                             </button>
@@ -655,7 +655,7 @@
                                 type="button"
                                 @click.prevent="goToCart()"
                                 class="btn-full"
-                                 name="go to cart"
+                                name="go to cart"
                             >
                                 Go to Cart
                             </button>

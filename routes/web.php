@@ -72,31 +72,6 @@ Route::post('/guest-logout', [LoginController::class, 'logoutGuest']);
 */
 
 //Route::get('/emailTest', [EmailController::class, 'sendWelcomeEmail']);
-Route::get('/emailTest', function() {  
-    $order = Order::with(['shop', 'order_products', 'order_products.product', 'order_products.product.product_image', 'order_products.order_product_variations.variation_option.variation'])->findOrFail(40);  
-
-    // $product = Product::with(['user', 'product_image', 'category'])->findOrFail(23);
-    // $transaction = Transaction::with(['order'])->findOrFail(1);
-
-    // Mail::to('int.rushdi@gmail.com')->send(new OrderMail($order));
-    Mail::to('islammohorima@gmail.com')->send(new SellerNewOrderMail($order));
-    // Mail::to('int.rushdi@gmail.com')->send(new SellerOrderDeliveredMail($order));
-    // Mail::to('int.rushdi@gmail.com')->send(new SellerOrderDispatchMail($order));
-    // Mail::to('islammohorima@gmail.com')->send(new BuyerOrderDeliveredMail($order));
-    // Mail::to('int.rushdi@gmail.com')->send(new BuyerOrderProductionMail($order));
-    // Mail::to('int.rushdi@gmail.com')->send(new BuyerOrderShippedMail($order));
-
-    // Mail::to('islammohorima@gmail.com')->send(new BuyerOrderShippingMail($order));
-
-    // Mail::to('int.rushdi@gmail.com')->send(new SellerProductDelistedMail($product));
-    // Mail::to('int.rushdi@gmail.com')->send(new SellerProductReviewingMail($product));
-    // Mail::to('int.rushdi@gmail.com')->send(new SellerProductReviseMail($product));
-
-    // Mail::to('int.rushdi@gmail.com')->send(new SellerTransactionClearedMail($transaction));
-    // Mail::to('int.rushdi@gmail.com')->send(new SellerTransactionRequestMail($transaction));
-
-    return new SellerNewOrderMail($order);
-});
 
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
@@ -147,6 +122,7 @@ Route::get('/employee/{path}', [HomeController::class, 'employeeIndex'])->where(
 Route::get('/merchant/{path}', [HomeController::class, 'websiteIndex'])->where('path', '.*');
 
 //main route entry for website
+Route::get('/products/{productId}/{location}/{slug}', [HomeController::class, 'websiteProductIndex']);
 Route::get('/{path}', [HomeController::class, 'websiteIndex'])->where('path', '.*');
 
 /*

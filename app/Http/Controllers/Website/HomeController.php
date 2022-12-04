@@ -21,9 +21,10 @@ class HomeController extends Controller
 
     public function websiteProductIndex(Product $productId)
     {
+        $product_img = $productId->product_thumbnail ? $productId->product_thumbnail->path : $productId->product_image->path;
         $tags = [
             'og:name' => $productId->title,
-            'og:image' => $productId->product_thumbnail->path,
+            'og:image' => $product_img,
             'og:description' => $productId->short_description,
             'og:keywords' => $productId->title.', sri lanka cake, cakes in sri lanka, cakes in srilanka, srilanka cakes, gift in srilanka, srilanka gifts, flower in sri lanka'
         ];

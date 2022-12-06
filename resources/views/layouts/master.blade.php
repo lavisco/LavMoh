@@ -5,11 +5,17 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+        <!-- Google Metas -->
+        <meta
+            name="google-site-verification"
+            content="DCi4K5tMWaWwK6p2UUIGmerGoUFGKHzIoBqhffxD2fg"
+        />
+
         <!-- Site Metas -->
         <meta name="author" content="Lavisco" />
 
         @foreach($tags as $key => $value)
-            <meta property="{{$key}}" content="{{$value}}">
+        <meta property="{{ $key }}" content="{{ $value }}" />
         @endforeach
 
         <!-- CSRF Token -->
@@ -64,7 +70,6 @@
 
             gtag("config", "G-SYY3G21Q5S");
         </script>
-
     </head>
     <body>
         <div id="app">

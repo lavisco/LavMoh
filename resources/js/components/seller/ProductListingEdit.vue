@@ -16,6 +16,9 @@
                                 Products
                             </router-link>
                         </li>
+                        <li class="breadcrumb-item active">
+                            {{ form.title }}
+                        </li>
                     </ol>
                 </nav>
 
@@ -506,6 +509,16 @@
                                                             : `clicking here`
                                                     }}</strong>
                                                 </p>
+                                            </button>
+
+                                            <button
+                                                class="btn-sm my-2"
+                                                @click.prevent="
+                                                    deleteImage(image.id)
+                                                "
+                                                v-if="index > 2"
+                                            >
+                                                Delete
                                             </button>
 
                                             <HasError
@@ -1466,9 +1479,7 @@
                                                         <td colspan="5">
                                                             <button
                                                                 type="button"
-                                                                class="
-                                                                    btn-sm
-                                                                "
+                                                                class="btn-sm"
                                                                 @click.prevent="
                                                                     addNewOptionRow(
                                                                         index
@@ -2788,6 +2799,21 @@ export default {
                     this.submitButtonDisabled = false;
                     $("#fail-modal").modal("show");
                 });
+        },
+
+        /*
+         * Delete
+         */
+
+        deleteImage(id) {
+            if (confirm("Are you sure you want to delete this image?")) {
+                axios
+                    .delete("/api/seller/product_images/" + id)
+                    .then(() => {
+                        this.loadProduct();
+                    })
+                    .catch((error) => console.log(error));
+            }
         },
     },
     mounted() {

@@ -535,7 +535,13 @@
                                         class="mr-md-3 img-full"
                                         v-for="(image, index) in images"
                                     >
-                                        <div>
+                                        <div
+                                            class="
+                                                d-flex
+                                                flex-column
+                                                align-items-center
+                                            "
+                                        >
                                             <input
                                                 type="file"
                                                 style="display: none"
@@ -547,11 +553,6 @@
                                                 "
                                                 ref="fileInput"
                                                 name="product_image_path"
-                                            />
-
-                                            <HasError
-                                                :form="form"
-                                                :field="`image_path.${index}`"
                                             />
 
                                             <button
@@ -577,6 +578,16 @@
                                                 />
                                             </button>
 
+                                            <button
+                                                class="btn btn-sm mr-0 my-2"
+                                                @click.prevent="
+                                                    deleteImage(image.id)
+                                                "
+                                                v-if="index > 2"
+                                            >
+                                                Delete
+                                            </button>
+
                                             <p
                                                 class="
                                                     image-upload-filename
@@ -590,6 +601,11 @@
                                                         : ""
                                                 }}
                                             </p>
+
+                                            <HasError
+                                                :form="form"
+                                                :field="`image_path.${index}`"
+                                            />
                                         </div>
                                     </div>
 
@@ -2541,6 +2557,21 @@ export default {
                     this.submitButtonDisabled = false;
                     $("#fail-modal").modal("show");
                 });
+        },
+
+        /*
+         * Delete
+         */
+
+        deleteImage(id) {
+            if (confirm("Are you sure you want to delete this image?")) {
+                axios
+                    .delete("/api/admin/product_images/" + id)
+                    .then(() => {
+                        this.loadProduct();
+                    })
+                    .catch((error) => console.log(error));
+            }
         },
     },
     mounted() {

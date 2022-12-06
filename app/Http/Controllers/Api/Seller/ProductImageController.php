@@ -65,6 +65,8 @@ class ProductImageController extends Controller
 
             if ($request->image_path[$i] != $productImage->image_path) {
 
+                Storage::disk('s3')->delete('public/'.$productImage->image_path);
+
                 $file_name = time().'_'.$request->image_title[$i];
                 $image = $request->image_path[$i];
 
@@ -88,8 +90,10 @@ class ProductImageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ProductImage $productimage)
+    public function destroy($id)
     {
+        $productimage = ProductImage::findOrFail($id);
+        Storage::disk('s3')->delete('public/'.$productimage->image_path);
         $productimage->delete();
     }
 

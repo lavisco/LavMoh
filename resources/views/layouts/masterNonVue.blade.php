@@ -10,6 +10,12 @@
         <meta name="description" content="Buy locally. Support small businesses." />
         <meta name="author" content="Lavisco" />
 
+        <!-- Google Metas -->
+        <meta
+            name="google-site-verification"
+            content="DCi4K5tMWaWwK6p2UUIGmerGoUFGKHzIoBqhffxD2fg"
+        />
+
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}" />
 

@@ -261,6 +261,14 @@ export let routes = [
         },
     },
     {
+        path: "/admin/topproducts",
+        name: "admin/topproducts",
+        component: require("./components/admin/TopProduct.vue").default,
+        meta: {
+            title: "Top Products",
+        },
+    },
+    {
         path: "/admin/transactions",
         component: require("./components/admin/Transaction.vue").default,
         meta: {

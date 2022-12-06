@@ -444,6 +444,14 @@
                                     Home Sliders
                                 </router-link>
                             </li>
+                            <li class="nav-item">
+                                <router-link
+                                    to="/admin/topproducts"
+                                    class="nav-link"
+                                >
+                                    Top Products
+                                </router-link>
+                            </li>
                         </ul>
                     </div>
                 </li>

@@ -26,6 +26,7 @@ class HomeController extends Controller
     {
         $location = request('location');
         $products = Product::select('id', 'title', 'base_price', 'user_id', 'category_id', 'product_state_id', 'slug', 'has_variations')
+        ->has('top_product')
                     ->with(['user' => function($query){
                         $query->select('id', 'name');
                         }, 'user.shop' => function ($query){

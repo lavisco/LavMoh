@@ -34,6 +34,7 @@ use App\Http\Controllers\Api\Admin\ShippingController;
 use App\Http\Controllers\Api\Admin\ShopController;
 use App\Http\Controllers\Api\Admin\SitetextController;
 use App\Http\Controllers\Api\Admin\SubCategoryController;
+use App\Http\Controllers\Api\Admin\TopProductController;
 use App\Http\Controllers\Api\Admin\TransactionController;
 use App\Http\Controllers\Api\Admin\TransactionStateController;
 use App\Http\Controllers\Api\Admin\VariationController;
@@ -148,6 +149,8 @@ Route::prefix('admin')->group(function () {
     Route::get('/shops/shippings', [ShopController::class, 'getShippings']);
     Route::apiResource('/shops', ShopController::class);
     Route::apiResource('/sub_categories', SubCategoryController::class);
+    Route::get('/topProducts/products', [TopProductController::class, 'getProducts']);
+    Route::apiResource('/topProducts', TopProductController::class);
     Route::apiResource('/transactions', TransactionController::class);
     Route::apiResource('/transaction_states', TransactionStateController::class);
     Route::apiResource('/variations', VariationController::class);

@@ -18264,6 +18264,14 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
     object-position: center;
     z-index: -1;
 }
+.banner-container-xs {
+    width: 70px;
+    height: 70px;
+    border-radius: 8px;
+    object-fit: cover;
+    object-position: center;
+    z-index: -1;
+}
 
 .image-upload-box {
     width: 130px;

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TopProductRequest;
+use App\Models\Product;
 use App\Models\TopProduct;
 use Illuminate\Http\Request;
 
@@ -16,7 +17,7 @@ class TopProductController extends Controller
 
     public function index()
     {
-        return TopProduct::latest()->filter(request(['searchText']))->paginate(25);
+        return TopProduct::with(['product', 'product.product_image'])->latest()->filter(request(['searchText']))->paginate(25);
     }
 
     public function store(TopProductRequest $request)
@@ -41,5 +42,10 @@ class TopProductController extends Controller
     {
         ///$this->authorize('delete', $topProduct);
         $topProduct->delete();
+    }
+        
+    public function getProducts()
+    {
+        return Product::with('product_image')->filter(request(['searchText']))->get();
     }
 }

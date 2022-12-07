@@ -25,28 +25,19 @@ class HomeController extends Controller
     public function index()
     {
         $location = request('location');
-        $products = Product::select('id', 'title', 'base_price', 'user_id', 'category_id', 'product_state_id', 'slug', 'has_variations')
-        ->has('top_product')
-                    ->with(['user' => function($query){
-                        $query->select('id', 'name');
-                        }, 'user.shop' => function ($query){
-                            $query->select('id', 'name', 'user_id');
-                    },
-                    'category:id,name',
-                    'product_image'
-                    ])
+        $products = Product::with('product_image')
                     ->where(function($q) use($location) {
-                        $q->where('category_id', '=', '1')
+                        $q->has('top_product')->where('category_id', '=', '1')
                             ->where('product_state_id', '1')
                             ->whereRelation('user.shop', 'status', 1)
                             ->whereRelation('user.cities', 'name', $location);
                     })
                     ->orWhere(function($q){ 
-                        $q->where('category_id', '!=', '1')
+                        $q->has('top_product')->where('category_id', '!=', '1')
                             ->where('product_state_id', '1')
                             ->whereRelation('user.shop', 'status', 1);
                     })
-                    ->latest()->take(10)->get();
+                    ->get();
 
         return response()->json([
             'products' => $products,

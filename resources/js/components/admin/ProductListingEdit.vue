@@ -2296,7 +2296,7 @@ export default {
         },
 
         resetImages() {
-            //new image data
+            //new image data,
             this.url = [];
             this.form.image_path_new = [];
             this.form.photoName = [];

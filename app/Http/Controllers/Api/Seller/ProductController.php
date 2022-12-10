@@ -247,7 +247,10 @@ class ProductController extends Controller
         $productPhoto=null;
         if ($image) {
             $file_name = 'thumbnail'.time().'_'.$name;
-            $img = Image::make($image)->encode()->resize(300, null);
+            $img = Image::make($image)->encode()->resize(300, 300, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
             Storage::disk('s3')->put('/public/products/'.$file_name, $img->stream());
             $productPhoto = 'products/'.$file_name;
         }

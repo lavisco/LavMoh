@@ -30,7 +30,7 @@ class ProductController extends Controller
     {
         ///$this->authorize('viewAny', Product::class);
 
-        return Product::with(['product_image', 'user.shop', 'category:id,name', 'sub_categories'])->latest()->filter(request(['searchText']))->paginate(25);
+        return Product::with(['product_thumbnail', 'product_image', 'user.shop', 'category:id,name', 'sub_categories'])->latest()->filter(request(['searchText']))->paginate(25);
     }
 
     public function store(ProductRequest $request)

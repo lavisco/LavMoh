@@ -24,19 +24,28 @@ class ProductThumbnailController extends Controller
     public function store(Request $request)
     {
         $file_name = 'thumbnail'.time().'_'.$request->photoName;
-        $img = Image::make($request->thumbnail)->encode()->resize(300, null);
-        Storage::disk('s3')->put('/public/products/'.$file_name, $img->stream());
+        //$img = Image::make($request->thumbnail)->encode()->resize(300, null);
+
+        // resize the image so that the largest side fits within the limit; the smaller
+        // side will be scaled to maintain the original aspect ratio
+        $img = Image::make($request->thumbnail)->encode()->resize(300, 300, function ($constraint) {
+            $constraint->aspectRatio();
+            $constraint->upsize();
+        });
 
         if (ProductThumbnail::where('product_id', $request->id)->doesntExist()){
+            Storage::disk('s3')->put('/public/products/'.$file_name, $img->stream());
             ProductThumbnail::create([
                 'image_path' => 'products/'.$file_name,
                 'product_id' => $request->id,
             ]);
         } else {
             $thumbnail = ProductThumbnail::where('product_id', $request->id)->first();
+            Storage::disk('s3')->delete('public/'.$thumbnail->image_path);
             $thumbnail->update([
                 'image_path' => 'products/'.$file_name,
             ]);
+            Storage::disk('s3')->put('/public/products/'.$file_name, $img->stream());
         }
     }
 

@@ -356,7 +356,7 @@ export default {
                 .post("/api/admin/product_thumbnails")
                 .then(() => {
                     $("#addRecord").modal("hide");
-                    Fire.$emit("reloadRecords");
+                    //Fire.$emit("reloadRecords");
                 })
                 .catch((error) => console.log(error));
         },

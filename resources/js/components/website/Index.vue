@@ -418,7 +418,7 @@ export default {
         },
         swiperOptionTop: {
             loop: true,
-            loopedSlides: 3, // looped slides should be the same
+            loopedSlides: 10, // looped slides should be the same
             spaceBetween: 10,
             pagination: {
                 el: ".swiper-pagination",

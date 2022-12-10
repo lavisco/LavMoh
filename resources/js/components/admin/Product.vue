@@ -335,7 +335,7 @@ export default {
         fileSelected(e) {
             let file = e.target.files[0];
             let reader = new FileReader();
-            let limit = 1024 * 1024 * 2;
+            let limit = 1024 * 1024 * 4;
             if (file["size"] > limit) {
                 alert("File size has crossed maximum limit, which is 2mb!");
                 return false;

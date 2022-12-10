@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Occasion;
 use App\Models\Product;
 use App\Models\ProductImage;
+use App\Models\ProductThumbnail;
 use App\Models\Recipient;
 use App\Models\SubCategory;
 use App\Models\Variation;
@@ -183,6 +184,7 @@ class ProductController extends Controller
     {
         ///$this->authorize('delete', $product);
         ProductImage::where('product_id', $product->id)->delete();
+        ProductThumbnail::where('product_id', $product->id)->delete();
         $product->occasions()->detach();
         $product->recipients()->detach();
         $product->sub_categories()->detach();

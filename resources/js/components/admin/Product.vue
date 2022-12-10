@@ -149,7 +149,9 @@
                                                         class="dropdown-item"
                                                         href=""
                                                         @click.prevent="
-                                                            editThumbnail(product)
+                                                            editThumbnail(
+                                                                product
+                                                            )
                                                         "
                                                     >
                                                         Add thumbnail
@@ -205,7 +207,7 @@
                             class="modal-title text-uppercase"
                             id="addRecordLabel"
                         >
-                            New Thumbnail
+                            New Thumbnail for {{ form.id }} - {{ form.title }}
                         </h4>
                         <button
                             type="button"
@@ -248,20 +250,20 @@
                                         @click.prevent="$refs.fileInput.click()"
                                     >
                                         <i
-                                            v-show="!this.form.thumbnail"
+                                            v-show="!form.thumbnail"
                                             class="fas fa-plus"
                                         ></i>
                                         <i
-                                            v-show="this.form.thumbnail"
+                                            v-show="form.thumbnail"
                                             class="fas fa-check"
                                         ></i>
                                     </button>
                                     <p class="image-upload-filename mt-2">
                                         {{
-                                            this.form.thumbnail
-                                                ? this.form.photoName
-                                                    ? this.form.photoName
-                                                    : this.form.thumbnail
+                                            form.thumbnail
+                                                ? form.photoName
+                                                    ? form.photoName
+                                                    : form.thumbnail
                                                 : `Choose thumbnail image`
                                         }}
                                     </p>

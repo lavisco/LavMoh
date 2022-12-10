@@ -247,7 +247,7 @@ class ProductController extends Controller
         $productPhoto=null;
         if ($image) {
             $file_name = 'thumbnail'.time().'_'.$name;
-            $img = Image::make($image)->encode()->resize(300, 300, function ($constraint) {
+            $img = Image::make($image)->encode()->resize(600, 600, function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
             });

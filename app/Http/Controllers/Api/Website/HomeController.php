@@ -25,7 +25,7 @@ class HomeController extends Controller
     public function index()
     {
         $location = request('location');
-        $products = Product::with('product_image')
+        $products = Product::with(['product_thumbnail', 'product_image'])
                     ->where(function($q) use($location) {
                         $q->has('top_product')->where('category_id', '=', '1')
                             ->where('product_state_id', '1')

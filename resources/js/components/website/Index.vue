@@ -58,12 +58,12 @@
                             <div class="card-img">
                                 <img
                                     :src="
-                                        product.product_image
-                                            ? product.product_image.path
+                                        product.product_thumbnail
+                                            ? product.product_thumbnail.path
                                             : '/images/lavisco/img-bg.jpg'
                                     "
                                     :class="{
-                                        'img-cover': !product.product_image,
+                                        'img-cover': !product.product_thumbnail,
                                     }"
                                     :alt="product.title"
                                 />

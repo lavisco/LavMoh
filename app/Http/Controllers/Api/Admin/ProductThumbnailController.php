@@ -28,7 +28,7 @@ class ProductThumbnailController extends Controller
 
         // resize the image so that the largest side fits within the limit; the smaller
         // side will be scaled to maintain the original aspect ratio
-        $img = Image::make($request->thumbnail)->encode()->resize(300, 300, function ($constraint) {
+        $img = Image::make($request->thumbnail)->encode()->resize(600, 600, function ($constraint) {
             $constraint->aspectRatio();
             $constraint->upsize();
         });
